@@ -330,23 +330,24 @@ export function Solutions() {
                   )}
                   {/* premium product thumbnail */}
                   <span
-                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary shadow-sm ring-1 transition-all duration-300 ${
+                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary ring-1 transition-all duration-300 ${
                       isActive
-                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_6px_14px_-6px_rgba(15,23,42,0.4)]"
-                        : "ring-white/80 group-hover:scale-[1.04]"
+                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
+                        : "shadow-sm ring-white/80 group-hover:scale-[1.05]"
                     }`}
-                    style={{ width: 30, height: 30 }}
+                    style={{ width: 38, height: 38 }}
                   >
                     <img
                       src={c.img}
                       alt=""
                       aria-hidden
-                      width={30}
-                      height={30}
+                      width={38}
+                      height={38}
                       className="h-full w-full object-cover object-[center_38%]"
                     />
                   </span>
-                  <span className="relative z-10">{c.nav}</span>
+                  <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>{c.nav}</span>
+
                   {/* hover underline hint */}
                   <span
                     aria-hidden
@@ -390,12 +391,16 @@ export function Solutions() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="flex h-full flex-col"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{
+                  opacity: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+                  y: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+                }}
+                className="flex h-full flex-col will-change-[opacity,transform]"
               >
+
                 <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-primary">
                   Featured Category
                 </span>
@@ -459,16 +464,20 @@ export function Solutions() {
           </div>
 
           {/* Featured image */}
-          <div className="order-1 lg:order-2">
+          <div className="order-1 lg:order-2 lg:-mt-2">
             <div className="relative aspect-4/3 overflow-hidden rounded-[1.25rem] bg-secondary shadow-[0_40px_80px_-40px_rgba(15,23,42,0.35)] ring-1 ring-black/5 lg:aspect-16/11">
-              <AnimatePresence>
+              {/* True crossfade: outgoing + incoming images stay mounted together */}
+              <AnimatePresence initial={false}>
                 <motion.div
                   key={active.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{
+                    opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                    scale: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                  }}
+                  className="absolute inset-0 will-change-[opacity,transform]"
                 >
                   {/* Ken Burns: very slow, almost imperceptible zoom */}
                   <motion.img
@@ -486,6 +495,7 @@ export function Solutions() {
               <div className="pointer-events-none absolute inset-0 rounded-[1.25rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
+
 
         </div>
       </div>
