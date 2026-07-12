@@ -25,10 +25,20 @@ function Index() {
         <BrandsMarquee />
         <Solutions />
         <WhyAbuFarha />
+        <div className="bg-white">
+          <div className="mx-auto max-w-5xl px-6">
+            <PulseDivider className="py-2" />
+          </div>
+        </div>
         <Stats />
         <Projects />
         <GlobalPresence />
         <Process />
+        <div className="bg-secondary/50">
+          <div className="mx-auto max-w-5xl px-6">
+            <PulseDivider className="py-2" />
+          </div>
+        </div>
         <FinalCTA />
       </main>
       <Footer />
