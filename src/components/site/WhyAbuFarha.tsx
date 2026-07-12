@@ -5,12 +5,12 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import {
-  ClipboardList,
-  Truck,
-  Wrench,
-  GraduationCap,
-  ShieldCheck,
-  Headset,
+  Activity,
+  Stethoscope,
+  DraftingCompass,
+  Boxes,
+  BadgeCheck,
+  Handshake,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
