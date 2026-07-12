@@ -250,7 +250,7 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, customerType: "" }));
               }}
             >
-              <SelectTrigger className="h-12">
+              <SelectTrigger className={selectCls}>
                 <SelectValue placeholder="Select your profile" />
               </SelectTrigger>
               <SelectContent>
@@ -307,7 +307,7 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, interest: "" }));
               }}
             >
-              <SelectTrigger className="h-12">
+              <SelectTrigger className={selectCls}>
                 <SelectValue placeholder="Select a solution" />
               </SelectTrigger>
               <SelectContent>
@@ -331,7 +331,7 @@ export function ContactForm() {
               </Label>
               <Input
                 type="email"
-                className="h-12"
+                className={inputCls}
                 placeholder="you@organization.com"
                 value={values.email ?? ""}
                 onChange={(e) => setField("email", e.target.value)}
@@ -346,7 +346,7 @@ export function ContactForm() {
               </Label>
               <Input
                 type="tel"
-                className="h-12"
+                className={inputCls}
                 placeholder="+20 100 000 0000"
                 value={values.whatsapp ?? ""}
                 onChange={(e) => setField("whatsapp", e.target.value)}
@@ -363,7 +363,7 @@ export function ContactForm() {
             </Label>
             <Textarea
               rows={4}
-              className="resize-none"
+              className="resize-none border-border bg-secondary/30 transition-all duration-200 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
               placeholder="Tell us about your project, requirements or timeline…"
               value={values.message ?? ""}
               onChange={(e) => setField("message", e.target.value)}
