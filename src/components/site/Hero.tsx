@@ -42,18 +42,18 @@ export function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary">
             Trusted Healthcare Technology Partner
           </span>
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
             Advanced Medical
             <br /> Technology for
             <br />
             <span className="text-primary">Better Patient Outcomes</span>
           </h1>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
             We supply, install, commission and maintain world-class medical equipment and turnkey
             hospital solutions for healthcare providers across Africa and the Middle East.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href="#solutions"
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
