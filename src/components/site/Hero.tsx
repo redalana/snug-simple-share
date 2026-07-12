@@ -52,7 +52,7 @@ export function Hero() {
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[104px] lg:pt-[112px]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[96px] lg:pt-[104px]"
     >
       {/* ── The scene: one full-bleed editorial photograph ───────────────
           On desktop the image fills the whole canvas, bleeding off the right,
