@@ -172,7 +172,11 @@ export function GlobalPresence() {
                       <span className="font-bold text-white">{p.equipment}</span>
                     </div>
                   </div>
-                  <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink/80" />
+                  {flip ? (
+                    <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[6px] border-x-transparent border-b-ink/80" />
+                  ) : (
+                    <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink/80" />
+                  )}
                 </div>
               </div>
             );
