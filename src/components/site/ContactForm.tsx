@@ -163,7 +163,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-secondary/40 py-24">
+    <section id="contact" className="relative overflow-hidden bg-white py-20">
       {/* subtle healthcare identity — ECG line, <4% opacity, slow breathing */}
       <motion.svg
         aria-hidden
@@ -216,7 +216,7 @@ export function ContactForm() {
           </svg>
 
           <div className="relative">
-            <Eyebrow index="07">Request a Consultation</Eyebrow>
+            <Eyebrow index="06">Request a Consultation</Eyebrow>
             <h2 className="mt-6 font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.7rem]">
               Tell us who you are,
               <br />

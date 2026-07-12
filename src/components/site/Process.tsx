@@ -205,7 +205,7 @@ export function Process() {
             className="absolute bottom-0 left-[26px] top-0 w-[3px] origin-top rounded-full bg-gradient-to-b from-primary to-primary/50 lg:hidden"
           />
 
-          <div className="relative space-y-10 pl-14 lg:space-y-16 lg:pl-0">
+          <div className="relative space-y-8 pl-14 lg:space-y-12 lg:pl-0">
             {/* mobile node markers */}
             {STEPS.map((step, i) => (
               <div key={step.n} className="relative">
