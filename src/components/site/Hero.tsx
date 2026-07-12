@@ -12,10 +12,10 @@ import heroImg from "@/assets/hero-cathlab.jpg";
 import heroImgMobile from "@/assets/hero-cathlab-mobile.jpg";
 
 const stats = [
-  { icon: ShieldCheck, value: "OEM", label: "Certified Equipment" },
-  { icon: Building2, value: "End-to-End", label: "Supply & Installation" },
-  { icon: Calendar, value: "24/7", label: "Technical Support" },
-  { icon: Globe2, value: "MENA", label: "& Africa Coverage" },
+  { icon: ShieldCheck, value: "Certified Equipment", label: "OEM & Refurbished Systems" },
+  { icon: Building2, value: "Complete Solutions", label: "Supply • Installation • Training" },
+  { icon: Calendar, value: "Lifetime Support", label: "Warranty • Maintenance • Spare Parts" },
+  { icon: Globe2, value: "Regional Coverage", label: "Africa & Middle East" },
 ];
 
 export function Hero() {
