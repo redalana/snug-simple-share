@@ -112,7 +112,7 @@ export function Hero() {
             </p>
 
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
+            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
               <a
                 href="#solutions"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
