@@ -382,7 +382,7 @@ export function Solutions() {
 
         {/* Explorer */}
         <div
-          className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12"
+          className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.55fr)_minmax(0,1.05fr)] lg:gap-14"
           onMouseEnter={pause}
           onMouseLeave={scheduleResume}
         >
