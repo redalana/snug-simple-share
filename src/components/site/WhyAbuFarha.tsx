@@ -32,8 +32,8 @@ type Capability = {
   region: { x: number; y: number; w: number; h: number };
 };
 
-/** image box within the 100x100 composition space (desktop) */
-const IMG = { x0: 30, x1: 70, y0: 8, y1: 82 };
+/** image box within the 100x100 composition space (desktop) — enlarged ~18% */
+const IMG = { x0: 27, x1: 73, y0: 5, y1: 87 };
 const imgW = IMG.x1 - IMG.x0;
 const imgH = IMG.y1 - IMG.y0;
 
