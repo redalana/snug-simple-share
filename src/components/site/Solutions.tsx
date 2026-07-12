@@ -281,64 +281,65 @@ export function Solutions() {
         </div>
 
         {/* Explorer */}
-        <div className="grid items-stretch gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12">
           {/* Content */}
           <div className="order-2 flex flex-col lg:order-1">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="flex h-full flex-col"
               >
-                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+                <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-primary">
                   Featured Category
                 </span>
-                <h3 className="mt-3 font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.4rem]">
+                <h3 className="mt-3.5 font-display text-[2.35rem] font-black leading-[0.98] tracking-[-0.03em] text-ink sm:text-[3rem]">
                   {active.title}
                 </h3>
-                <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground">
+                <p className="mt-5 max-w-[34ch] text-[16.5px] leading-[1.7] text-muted-foreground/90">
                   {active.desc}
                 </p>
 
-                <ul className="mt-6 space-y-3">
+                {/* Premium feature rows */}
+                <ul className="mt-8 flex flex-col gap-5">
                   {active.capabilities.map((cap) => (
-                    <li key={cap} className="flex items-start gap-3 text-sm text-ink">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <Check className="h-3 w-3" strokeWidth={3} />
+                    <li key={cap} className="flex items-center gap-3.5 text-[15px] font-medium text-ink">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
+                        <Check className="h-[15px] w-[15px]" strokeWidth={2.75} />
                       </span>
-                      {cap}
+                      <span className="leading-snug">{cap}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* Contextual meta */}
-                <div className="mt-7 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+                {/* Engineered information panel */}
+                <div className="mt-9 grid overflow-hidden rounded-2xl border border-border/80 bg-secondary/30 sm:grid-cols-3 sm:divide-x sm:divide-border/70">
                   {active.meta.map((m) => (
-                    <div key={m.label} className="bg-background p-4">
-                      <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                    <div key={m.label} className="px-5 py-5 not-last:border-b not-last:border-border/70 sm:border-b-0">
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
                         {m.label}
                       </div>
-                      <div className="mt-1.5 text-[13px] font-semibold leading-snug text-ink">
+                      <div className="mt-2 text-[13.5px] font-bold leading-snug text-ink">
                         {m.value}
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-9 flex flex-wrap gap-3">
                   <a
                     href="#contact"
-                    className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-dark"
+                    className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_12px_28px_-10px_var(--color-primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_18px_38px_-12px_var(--color-primary)] hover:-translate-y-0.5"
                   >
                     Explore {active.nav}
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-ink/30"
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 px-7 py-3.5 text-sm font-semibold text-ink/80 transition-all duration-300 hover:border-ink/25 hover:bg-secondary/40 hover:text-ink"
                   >
                     Talk to a Specialist
                   </a>
@@ -349,7 +350,7 @@ export function Solutions() {
 
           {/* Featured image */}
           <div className="order-1 lg:order-2">
-            <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-secondary ring-1 ring-black/5 lg:aspect-16/10">
+            <div className="relative aspect-4/3 overflow-hidden rounded-[1.25rem] bg-secondary shadow-[0_40px_80px_-40px_rgba(15,23,42,0.35)] ring-1 ring-black/5 lg:aspect-16/11">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={active.id}
@@ -357,15 +358,15 @@ export function Solutions() {
                   alt={active.title}
                   loading="lazy"
                   width={1600}
-                  height={1000}
-                  initial={{ opacity: 0, scale: 1.04 }}
+                  height={1100}
+                  initial={{ opacity: 0, scale: 1.06 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.01 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-[center_38%]"
                 />
               </AnimatePresence>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+              <div className="pointer-events-none absolute inset-0 rounded-[1.25rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
         </div>
