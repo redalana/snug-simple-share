@@ -14,7 +14,7 @@ import heroImgMobile from "@/assets/hero-cathlab-mobile.jpg";
 const stats = [
   { icon: ShieldCheck, value: "Certified Equipment", label: "OEM & Refurbished Systems" },
   { icon: Building2, value: "Complete Solutions", label: "Supply • Installation • Training" },
-  { icon: Calendar, value: "Lifetime Support", label: "Warranty • Maintenance • Spare Parts" },
+  { icon: Calendar, value: "Warranty & Support", label: "Maintenance • Spare Parts" },
   { icon: Globe2, value: "Regional Coverage", label: "Africa & Middle East" },
 ];
 
@@ -107,7 +107,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-6 sm:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-6">
             {stats.map((s) => (
               <div key={s.label} className="flex items-center gap-3">
                 <s.icon className="h-6 w-6 shrink-0 text-primary" />
