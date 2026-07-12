@@ -25,7 +25,7 @@ export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
 
   return (
-    <section id="coverage" className="bg-secondary/50 py-20">
+    <section id="coverage" className="bg-secondary/50 py-20 lg:py-24">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Header row */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -33,7 +33,7 @@ export function GlobalPresence() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
               Global Reach
             </span>
-            <h2 className="mt-3 font-display text-[2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
+            <h2 className="mt-3 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Proudly serving healthcare
               <br />
               providers worldwide.

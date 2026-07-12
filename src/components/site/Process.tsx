@@ -147,7 +147,7 @@ export function Process() {
   const glowTop = useTransform(fill, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20">
+    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20 lg:py-24">
       {/* faint engineering grid — healthcare identity, <4% */}
       <div
         aria-hidden
@@ -168,7 +168,7 @@ export function Process() {
               How We Work
             </Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
+          <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
             A clear path from first
             <br />
             call to <span className="text-primary">ongoing support</span>.

@@ -7,12 +7,12 @@ import p3 from "@/assets/project-3.jpg";
 
 export function Projects() {
   return (
-    <section id="projects" className="bg-white py-20">
+    <section id="projects" className="bg-white py-20 lg:py-24">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <Eyebrow index="02">Featured Projects</Eyebrow>
-            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
+            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Delivering Excellence Across Africa &amp; the Middle East
             </h2>
           </div>

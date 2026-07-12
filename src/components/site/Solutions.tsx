@@ -268,7 +268,7 @@ export function Solutions() {
 
 
   return (
-    <section id="solutions" className="relative overflow-hidden bg-background py-14 lg:py-[4.5rem]">
+    <section id="solutions" className="relative overflow-hidden bg-background py-20 lg:py-24">
       {/* subtle technical grid */}
       <div
         aria-hidden
@@ -287,7 +287,7 @@ export function Solutions() {
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <Eyebrow index="01">Explore Our Categories</Eyebrow>
-            <h2 className="mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
+            <h2 className="mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Advanced Medical Technologies for Every Specialty
             </h2>
           </div>
