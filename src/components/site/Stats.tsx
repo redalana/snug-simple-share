@@ -2,9 +2,8 @@ import { Calendar, Building2, Globe2, Boxes } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 
 const STATS = [
-  { icon: Calendar, target: 25, suffix: "+", label: "Years Experience" },
+  { icon: Calendar, target: 25, suffix: "+", label: "Years of Experience" },
   { icon: Building2, target: 250, suffix: "+", label: "Hospitals Served" },
-  { icon: Globe2, target: 40, suffix: "+", label: "Countries Covered" },
   { icon: Boxes, target: 1500, suffix: "+", label: "Equipment Installed" },
 ];
 
