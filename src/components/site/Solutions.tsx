@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, HeartPulse, ScanLine, Bone, Zap, type LucideIcon } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 import cathlab from "@/assets/hero-cathlab.jpg";
 import mri from "@/assets/sol-mri.jpg";
 import petct from "@/assets/sol-petct.jpg";
