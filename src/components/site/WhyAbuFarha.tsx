@@ -482,7 +482,7 @@ export function WhyAbuFarha() {
           </div>
 
           {/* left column cards */}
-          <div className="absolute left-0 top-0 flex h-full w-[24%] flex-col justify-around">
+          <div className="absolute left-0 top-0 flex h-full w-[25%] flex-col justify-around">
             {CAPS.filter((c) => c.side === "left").map((c, i) => (
               <motion.div
                 key={c.id}
