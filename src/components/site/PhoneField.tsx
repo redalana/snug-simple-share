@@ -87,27 +87,25 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
     });
   }, [query]);
 
-  const rowVirtualizer = useVirtualizer({
-    count: filtered.length,
-    getScrollElement: () => listRef.current,
-    estimateSize: () => 44,
-    overscan: 8,
-  });
+  const scrollActiveIntoView = (idx: number) => {
+    requestAnimationFrame(() => {
+      const el = listRef.current?.querySelector<HTMLElement>(`[data-idx="${idx}"]`);
+      el?.scrollIntoView({ block: "nearest" });
+    });
+  };
 
   useEffect(() => {
     setActiveIndex(0);
-    rowVirtualizer.scrollToIndex(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    listRef.current?.scrollTo({ top: 0 });
   }, [query]);
 
   useEffect(() => {
     if (open) {
       const t = setTimeout(() => searchRef.current?.focus(), 60);
       const idx = filtered.findIndex((c) => c.iso2 === country.iso2);
-      if (idx >= 0) {
-        setActiveIndex(idx);
-        rowVirtualizer.scrollToIndex(idx, { align: "center" });
-      }
+      const target = idx >= 0 ? idx : 0;
+      setActiveIndex(target);
+      scrollActiveIntoView(target);
       return () => clearTimeout(t);
     }
     setQuery("");
@@ -125,14 +123,14 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
       e.preventDefault();
       setActiveIndex((i) => {
         const next = Math.min(i + 1, filtered.length - 1);
-        rowVirtualizer.scrollToIndex(next);
+        scrollActiveIntoView(next);
         return next;
       });
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((i) => {
         const next = Math.max(i - 1, 0);
-        rowVirtualizer.scrollToIndex(next);
+        scrollActiveIntoView(next);
         return next;
       });
     } else if (e.key === "Enter") {
