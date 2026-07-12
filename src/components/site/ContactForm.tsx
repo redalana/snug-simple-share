@@ -2,7 +2,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import { toast } from "sonner";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Send,
+  Check,
+  ShieldCheck,
+  Wrench,
+  Building2,
+  Headset,
+} from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -81,12 +90,33 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
+const STATS = [
+  { value: "250+", label: "Hospitals Served" },
+  { value: "40+", label: "Countries" },
+  { value: "1,500+", label: "Equipment Installed" },
+  { value: "25+", label: "Years of Experience" },
+];
+
+const TRUST = [
+  { icon: ShieldCheck, label: "OEM Certified Equipment" },
+  { icon: Wrench, label: "Factory-Trained Engineers" },
+  { icon: Building2, label: "Turnkey Hospital Projects" },
+  { icon: Headset, label: "24/7 Technical Support" },
+];
+
 const fieldMotion = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
-  transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const },
+  initial: { opacity: 0, y: 12, height: 0 },
+  animate: { opacity: 1, y: 0, height: "auto" },
+  exit: { opacity: 0, y: -8, height: 0 },
+  transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
 };
+
+const inputCls =
+  "h-12 border-border bg-secondary/30 transition-all duration-200 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:shadow-[0_6px_20px_-8px_var(--primary)]";
+const selectCls =
+  "h-12 border-border bg-secondary/30 transition-all duration-200 hover:bg-secondary/50 focus:border-primary focus:ring-4 focus:ring-primary/10 data-[state=open]:border-primary data-[state=open]:ring-4 data-[state=open]:ring-primary/10";
+
+
 
 export function ContactForm() {
   const [customerType, setCustomerType] = useState("");
@@ -129,13 +159,38 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="bg-secondary/40 py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-        {/* Left — framing copy */}
+    <section id="contact" className="relative overflow-hidden bg-secondary/40 py-24">
+      {/* subtle healthcare identity — ECG line, <5% opacity */}
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-40 w-full -translate-y-1/2 text-primary opacity-[0.04]"
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 120"
+      >
+        <path
+          d="M0 60h360l18-40 22 80 20-64 16 28h84l16-24 20 48 18-40h606"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+      </svg>
+      {/* faint medical grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--color-ink) 1px, transparent 1px), linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        {/* Left — framing copy + trust */}
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow index="07">Request a Consultation</Eyebrow>
           <h2 className="mt-6 font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.7rem]">
             Tell us who you are,
+
             <br />
             <span className="text-primary">we&apos;ll tailor the rest.</span>
           </h2>
@@ -144,14 +199,45 @@ export function ContactForm() {
             or lead a government project — this form adapts to you. No generic
             enquiries, just a focused conversation.
           </p>
+
+          {/* premium statistics */}
+          <dl className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-8">
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <dt className="font-display text-[1.7rem] font-extrabold leading-none tracking-tight text-ink">
+                  {s.value}
+                </dt>
+                <dd className="mt-1.5 text-[13px] font-medium text-muted-foreground">
+                  {s.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          {/* trust indicators */}
+          <ul className="mt-8 grid max-w-md gap-y-3 border-t border-border pt-8 sm:grid-cols-2">
+            {TRUST.map((t) => (
+              <li key={t.label} className="flex items-center gap-2.5">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Check className="h-3 w-3" strokeWidth={3} />
+                </span>
+                <span className="text-[13px] font-semibold text-ink">{t.label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Right — the adaptive form */}
-        <form
+
+        <motion.form
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           onSubmit={onSubmit}
           noValidate
-          className="rounded-3xl border border-border bg-white p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] sm:p-9"
+          className="relative rounded-[1.75rem] border border-white/60 bg-white/80 p-6 shadow-[0_40px_100px_-45px_rgba(15,23,42,0.35),0_2px_8px_-2px_rgba(15,23,42,0.06)] ring-1 ring-black/5 backdrop-blur-xl sm:p-9"
         >
+
           {/* I am a... */}
           <div className="space-y-2">
             <Label className="text-[13px] font-semibold text-ink">
@@ -164,7 +250,7 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, customerType: "" }));
               }}
             >
-              <SelectTrigger className="h-12">
+              <SelectTrigger className={selectCls}>
                 <SelectValue placeholder="Select your profile" />
               </SelectTrigger>
               <SelectContent>
@@ -181,30 +267,33 @@ export function ContactForm() {
           </div>
 
           {/* Dynamic profile fields */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false} mode="wait">
             {customerType && (
               <motion.div
                 key={customerType}
                 {...fieldMotion}
-                className="mt-5 grid gap-5 sm:grid-cols-2"
+                className="overflow-hidden"
               >
-                {dynFields.map((f) => (
-                  <div
-                    key={f.name}
-                    className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
-                  >
-                    <Label className="text-[13px] font-semibold text-ink">{f.label}</Label>
-                    <Input
-                      className="h-12"
-                      placeholder={f.placeholder}
-                      value={values[f.name] ?? ""}
-                      onChange={(e) => setField(f.name, e.target.value)}
-                    />
-                  </div>
-                ))}
+                <div className="grid gap-5 pt-5 sm:grid-cols-2">
+                  {dynFields.map((f) => (
+                    <div
+                      key={f.name}
+                      className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
+                    >
+                      <Label className="text-[13px] font-semibold text-ink">{f.label}</Label>
+                      <Input
+                        className={inputCls}
+                        placeholder={f.placeholder}
+                        value={values[f.name] ?? ""}
+                        onChange={(e) => setField(f.name, e.target.value)}
+                      />
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
+
 
           {/* I'm interested in */}
           <div className="mt-5 space-y-2">
@@ -218,7 +307,7 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, interest: "" }));
               }}
             >
-              <SelectTrigger className="h-12">
+              <SelectTrigger className={selectCls}>
                 <SelectValue placeholder="Select a solution" />
               </SelectTrigger>
               <SelectContent>
@@ -242,7 +331,7 @@ export function ContactForm() {
               </Label>
               <Input
                 type="email"
-                className="h-12"
+                className={inputCls}
                 placeholder="you@organization.com"
                 value={values.email ?? ""}
                 onChange={(e) => setField("email", e.target.value)}
@@ -257,7 +346,7 @@ export function ContactForm() {
               </Label>
               <Input
                 type="tel"
-                className="h-12"
+                className={inputCls}
                 placeholder="+20 100 000 0000"
                 value={values.whatsapp ?? ""}
                 onChange={(e) => setField("whatsapp", e.target.value)}
@@ -274,7 +363,7 @@ export function ContactForm() {
             </Label>
             <Textarea
               rows={4}
-              className="resize-none"
+              className="resize-none border-border bg-secondary/30 transition-all duration-200 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
               placeholder="Tell us about your project, requirements or timeline…"
               value={values.message ?? ""}
               onChange={(e) => setField("message", e.target.value)}
@@ -284,19 +373,35 @@ export function ContactForm() {
             )}
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={submitting}
-            className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60 sm:w-auto"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 24 }}
+            className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors hover:bg-primary-dark disabled:opacity-60"
           >
-            {submitting ? "Sending…" : "Send Consultation Request"}
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-            <MessageCircle className="h-3.5 w-3.5 text-primary" />
-            We typically respond within one business day.
-          </p>
-        </form>
+            {submitting ? "Sending…" : "Talk to a Medical Equipment Expert"}
+            {submitting ? (
+              <Send className="h-4 w-4 animate-pulse" />
+            ) : (
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            )}
+          </motion.button>
+
+          {/* response assurance */}
+          <div className="mt-5 grid gap-2.5 border-t border-border pt-5 sm:grid-cols-2">
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Clock className="h-3.5 w-3.5 shrink-0 text-primary" />
+              Typical response within one business day.
+            </p>
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" />
+              Goes directly to our healthcare solutions team.
+            </p>
+          </div>
+        </motion.form>
+
       </div>
     </section>
   );
