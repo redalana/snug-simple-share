@@ -94,12 +94,6 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
-const STATS = [
-  { target: 250, suffix: "+", label: "Hospitals Served" },
-  { target: 40, suffix: "+", label: "Countries" },
-  { target: 1500, suffix: "+", label: "Equipment Installed" },
-  { target: 25, suffix: "+", label: "Years of Experience" },
-];
 
 const TRUST = [
   { icon: ShieldCheck, label: "OEM Certified Equipment" },
