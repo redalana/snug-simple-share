@@ -7,6 +7,8 @@ import img02 from "@/assets/experience-02-engineers.jpg";
 import img03 from "@/assets/experience-03-headquarters.jpg";
 import img04 from "@/assets/experience-04-hospitals.jpg";
 import img05 from "@/assets/experience-05-partnership.jpg";
+import img06 from "@/assets/experience-06-warehouse.jpg";
+import img07 from "@/assets/experience-07-stroke.jpg";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -23,39 +25,62 @@ const CHAPTERS: Chapter[] = [
   {
     num: "01",
     title: ["Meet Our Physicians", "& Clinical Experts"],
-    copy: "Discuss real clinical challenges, treatment pathways and technology implementation with experienced physicians and clinical specialists.",
+    copy: "Discuss real stroke cases, treatment pathways and clinical workflows with experienced physicians and clinical specialists.",
     image: img01,
     alt: "AbuFarha physicians reviewing a medical scan together in clinical discussion",
   },
   {
     num: "02",
     title: ["Meet Our Biomedical", "Engineering Team"],
-    copy: "See how every system is inspected, tested, calibrated and prepared by AbuFarha biomedical engineers before reaching hospitals.",
+    copy: "Observe how advanced medical systems are inspected, tested, calibrated and commissioned before reaching hospitals.",
     image: img02,
     alt: "AbuFarha biomedical engineer calibrating a medical device in the workshop",
   },
   {
     num: "03",
-    title: ["Tour Our Headquarters,", "Engineering Facilities &", "Equipment Warehouse"],
-    copy: "Walk through our headquarters, engineering laboratories, technical workshops and equipment warehouse to understand how we support hospitals beyond installation.",
+    title: ["Tour AbuFarha", "Headquarters"],
+    copy: "Experience the people, culture and facilities behind every successful partnership.",
     image: img03,
-    alt: "Panoramic view of the AbuFarha headquarters, engineering facility and medical equipment warehouse",
+    alt: "Panoramic view of the AbuFarha headquarters in Amman, Jordan",
     wide: true,
   },
   {
     num: "04",
+    title: ["Explore Our Engineering", "Facilities & Warehouse"],
+    copy: "Walk through our biomedical engineering laboratories, refurbishment facilities and medical equipment warehouse. See how every system is documented, inspected, prepared and supported before installation.",
+    image: img06,
+    alt: "AbuFarha medical equipment warehouse and biomedical engineering facility with technicians",
+  },
+  {
+    num: "05",
+    title: ["Explore Comprehensive", "Stroke Programs"],
+    copy: "Understand how successful hospitals build sustainable stroke programs through technology, physician education, biomedical engineering and standardized clinical workflows.",
+    image: img07,
+    alt: "Clinical team reviewing neurovascular imaging inside a comprehensive stroke program center",
+  },
+  {
+    num: "06",
     title: ["Visit Hospitals Using", "Our Technologies"],
-    copy: "Observe selected hospitals using these technologies in daily clinical practice and experience complete clinical workflows in real healthcare environments.",
+    copy: "Visit selected hospitals using these technologies in daily clinical practice. Observe real neurovascular procedures, imaging workflows and multidisciplinary collaboration.",
     image: img04,
     alt: "Advanced medical imaging equipment in use in a real hospital clinical environment",
   },
   {
-    num: "05",
+    num: "07",
     title: ["Exchange Knowledge &", "Build Future Partnerships"],
-    copy: "Meet our leadership team to discuss hospital development, future clinical programs and long-term collaboration opportunities.",
+    copy: "Meet our leadership team, discuss hospital development strategies, explore future collaboration opportunities and build long-term relationships built on shared clinical experience.",
     image: img05,
     alt: "AbuFarha leadership meeting with healthcare executives to build a partnership",
   },
+];
+
+const TRUST_DETAILS = [
+  "Since 1999",
+  "Amman, Jordan",
+  "Biomedical Engineering Facilities",
+  "Medical Equipment Warehouse",
+  "Clinical Training Center",
+  "Regional Technical Support",
 ];
 
 function ChapterBlock({ chapter, index }: { chapter: Chapter; index: number }) {
@@ -103,7 +128,7 @@ function ChapterBlock({ chapter, index }: { chapter: Chapter; index: number }) {
       >
         <span className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.28em] text-primary">
           <span className="h-px w-8 bg-primary/50" />
-          Experience {chapter.num}
+          During Your Visit {chapter.num}
         </span>
         <h3 className="mt-6 font-display text-[2.15rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-ink sm:text-[2.35rem]">
           {chapter.title.map((line) => (
@@ -186,24 +211,42 @@ export function ExperienceAbuFarha() {
               Experience AbuFarha
             </Eyebrow>
           </div>
-          <h2 className="mt-7 font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[3.4rem] lg:text-[3.6rem]">
-            Come and Experience
-            <span className="block text-primary">AbuFarha Firsthand.</span>
+          <h2 className="mt-7 font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[3.4rem] lg:text-[3.9rem]">
+            See How Great Clinical
+            <span className="block text-primary">Partnerships Are Built.</span>
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-[19px] leading-[1.75] text-muted-foreground">
-            We believe trust is built face-to-face. Healthcare leaders, physicians
-            and biomedical engineers are invited to visit our headquarters in
-            Amman, Jordan and experience our people, engineering capabilities and
-            clinical expertise before making important technology decisions.
+            Healthcare leaders, physicians, biomedical engineers and hospital
+            executives are invited to visit our headquarters in Amman, Jordan to
+            experience every stage of a successful medical technology partnership —
+            from engineering preparation to real clinical implementation.
           </p>
         </motion.div>
 
-        {/* The five chapters */}
+        {/* The seven chapters */}
         <div className="mt-28 space-y-32 lg:mt-36 lg:space-y-44">
           {CHAPTERS.map((chapter, i) => (
             <ChapterBlock key={chapter.num} chapter={chapter} index={i} />
           ))}
         </div>
+
+        {/* Editorial statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-12% 0px" }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="mx-auto mt-36 max-w-5xl text-center lg:mt-48"
+        >
+          <p className="font-display text-[2.1rem] font-extrabold leading-[1.18] tracking-[-0.025em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
+            We believe transparency builds trust. That is why we invite healthcare
+            professionals to experience our{" "}
+            <span className="text-primary">facilities</span>,{" "}
+            <span className="text-primary">engineering capabilities</span> and{" "}
+            <span className="text-primary">clinical partnerships</span> before
+            making critical investment decisions.
+          </p>
+        </motion.div>
 
         {/* Final invitation */}
         <motion.div
@@ -216,14 +259,17 @@ export function ExperienceAbuFarha() {
           <span className="text-[13px] font-bold uppercase tracking-[0.3em] text-primary">
             A Personal Invitation
           </span>
-          <h3 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[3rem]">
-            Experience Before You Invest.
+          <h3 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.2rem]">
+            You're Invited.
           </h3>
           <p className="mx-auto mt-7 max-w-2xl text-[19px] leading-[1.75] text-muted-foreground">
-            The best partnerships begin with shared knowledge, engineering
-            excellence and mutual trust. We welcome healthcare professionals to
-            visit AbuFarha headquarters in Amman and experience firsthand how
-            successful clinical partnerships are built.
+            Whether you are planning a Comprehensive Stroke Program, expanding
+            imaging services or evaluating future medical technology investments,
+            we welcome you to visit AbuFarha headquarters in Amman, Jordan. Meet
+            our physicians, meet our biomedical engineers, tour our headquarters,
+            explore our engineering facilities and medical equipment warehouse,
+            visit hospitals using our technologies, and discover how lasting
+            clinical partnerships are built.
           </p>
           <div className="mt-11 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
@@ -237,9 +283,22 @@ export function ExperienceAbuFarha() {
               href="#contact"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-8 py-3.5 text-[15px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
             >
-              Arrange a Technical Meeting
+              Arrange a Technical Consultation
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
+          </div>
+
+          {/* Trust strip */}
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
+            {TRUST_DETAILS.map((detail) => (
+              <span
+                key={detail}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-white/60 px-4 py-2 text-[13px] font-semibold text-muted-foreground"
+              >
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/70" />
+                {detail}
+              </span>
+            ))}
           </div>
         </motion.div>
       </div>
