@@ -1,8 +1,24 @@
+import { motion } from "framer-motion";
 import { PhoneCall, FileText, ArrowRight } from "lucide-react";
 
 export function FinalCTA() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-primary py-16 text-primary-foreground">
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark py-20 text-primary-foreground"
+    >
+      {/* premium ambient glows */}
+      <div className="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-black/20 blur-3xl" />
+      {/* subtle grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-1/2 h-32 w-full -translate-y-1/2 text-white/15"
@@ -11,19 +27,25 @@ export function FinalCTA() {
       >
         <path d="M0 60h440l24-42 32 84 22-56 20 14h642" fill="none" stroke="currentColor" strokeWidth="2" />
       </svg>
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 text-center lg:flex-row lg:justify-between lg:text-left">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 text-center lg:flex-row lg:justify-between lg:text-left"
+      >
         <div>
-          <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">
             Let&apos;s Build Better Healthcare Together
           </h2>
-          <p className="mt-3 max-w-xl text-white/85">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85">
             Talk to our experts about your next department, project or turnkey hospital solution.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           <a
             href="#"
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-primary transition-all hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-primary shadow-[0_18px_40px_-16px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_50px_-16px_rgba(0,0,0,0.6)]"
           >
             Request a Quote
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -41,7 +63,8 @@ export function FinalCTA() {
             <FileText className="h-4 w-4" /> Company Profile
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+
