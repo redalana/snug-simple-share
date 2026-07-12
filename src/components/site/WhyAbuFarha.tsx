@@ -32,8 +32,8 @@ type Capability = {
   region: { x: number; y: number; w: number; h: number };
 };
 
-/** image box within the 100x100 composition space (desktop) */
-const IMG = { x0: 30, x1: 70, y0: 8, y1: 82 };
+/** image box within the 100x100 composition space (desktop) — enlarged ~18% */
+const IMG = { x0: 27, x1: 73, y0: 5, y1: 87 };
 const imgW = IMG.x1 - IMG.x0;
 const imgH = IMG.y1 - IMG.y0;
 
@@ -42,7 +42,7 @@ const CAPS: Capability[] = [
     id: "planning",
     icon: ClipboardList,
     title: "Planning",
-    desc: "Every project starts on the drawing board, not the catalogue.",
+    desc: "Designed for flawless clinical workflow.",
     points: [
       "Hospital workflow analysis",
       "Room layout optimization",
@@ -50,13 +50,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 16,
-    region: { x: 8, y: 8, w: 34, h: 26 },
+    // ceiling monitors / imaging displays
+    region: { x: 22, y: 6, w: 34, h: 20 },
   },
   {
     id: "training",
     icon: GraduationCap,
     title: "Clinical Training",
-    desc: "Clinical and technical staff, confident from day one.",
+    desc: "Confident clinical teams from day one.",
     points: [
       "Structured onboarding programs",
       "Hands-on clinical enablement",
@@ -64,13 +65,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 44,
-    region: { x: 6, y: 30, w: 30, h: 26 },
+    // control room glass
+    region: { x: 6, y: 30, w: 26, h: 26 },
   },
   {
     id: "installation",
     icon: Wrench,
     title: "Installation",
-    desc: "Certified engineers commission every system to spec.",
+    desc: "Every system commissioned to exact spec.",
     points: [
       "Professional installation",
       "Calibration & acceptance testing",
@@ -78,13 +80,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 72,
-    region: { x: 30, y: 46, w: 40, h: 30 },
+    // procedure table
+    region: { x: 32, y: 56, w: 38, h: 26 },
   },
   {
     id: "procurement",
     icon: Truck,
     title: "Procurement",
-    desc: "Direct OEM supply chains, transparent sourcing.",
+    desc: "Direct OEM supply, transparent pricing.",
     points: [
       "World-leading manufacturers",
       "Right specification, right price",
@@ -92,13 +95,14 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 16,
-    region: { x: 56, y: 10, w: 34, h: 24 },
+    // gantry / C-arm
+    region: { x: 54, y: 12, w: 32, h: 30 },
   },
   {
     id: "support",
     icon: Headset,
     title: "Lifetime Support",
-    desc: "A control room that never stops answering.",
+    desc: "Round-the-clock response that never stops.",
     points: [
       "24/7 response",
       "Spare-parts assurance",
@@ -106,7 +110,8 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 44,
-    region: { x: 58, y: 30, w: 32, h: 26 },
+    // side monitors / console
+    region: { x: 62, y: 30, w: 30, h: 24 },
   },
   {
     id: "maintenance",
@@ -120,7 +125,8 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 72,
-    region: { x: 60, y: 54, w: 30, h: 30 },
+    // floor equipment / cabling
+    region: { x: 58, y: 58, w: 30, h: 26 },
   },
 ];
 
@@ -135,7 +141,7 @@ function regionCenter(c: Capability) {
 }
 
 function cardAnchor(c: Capability) {
-  return { x: c.side === "left" ? 25 : 75, y: c.cardY };
+  return { x: c.side === "left" ? 26 : 74, y: c.cardY };
 }
 
 /* ------------------------------------------------------------------ */
@@ -312,26 +318,26 @@ function CapCard({
       onMouseLeave={onLeave}
       onFocus={onEnter}
       onBlur={onLeave}
-      className={`group flex w-full items-start gap-3.5 rounded-2xl border bg-white p-4 text-left transition-all duration-300 ${
+      className={`group flex w-full items-center gap-4 rounded-2xl border bg-white p-4.5 text-left transition-all duration-300 ${
         isActive
           ? "-translate-y-0.5 border-primary/40 shadow-[0_26px_55px_-30px_rgba(15,23,42,0.5)] ring-1 ring-primary/15"
           : "border-border shadow-[0_2px_12px_-6px_rgba(15,23,42,0.14)] hover:-translate-y-0.5"
       } ${cap.side === "left" ? "lg:flex-row-reverse lg:text-right" : ""}`}
     >
       <span
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
+        className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${
           isActive
-            ? "bg-primary text-white shadow-[0_14px_26px_-12px_var(--primary)]"
-            : "bg-secondary text-primary ring-1 ring-border"
+            ? "bg-primary text-white shadow-[0_16px_30px_-12px_var(--primary)]"
+            : "bg-secondary text-primary ring-1 ring-border group-hover:bg-primary/10"
         }`}
       >
-        <cap.icon className="h-[18px] w-[18px]" strokeWidth={1.7} />
+        <cap.icon className="h-[22px] w-[22px]" strokeWidth={1.7} />
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[14.5px] font-bold tracking-tight text-ink">
+        <span className="block font-display text-[16px] font-extrabold leading-tight tracking-tight text-ink">
           {cap.title}
         </span>
-        <span className="mt-1 block text-[12px] leading-[1.55] text-muted-foreground">
+        <span className="mt-1.5 block text-[12.5px] leading-[1.5] text-muted-foreground">
           {cap.desc}
         </span>
       </span>
@@ -441,6 +447,7 @@ export function WhyAbuFarha() {
                     markerEnd="url(#eco-dot)"
                     className="transition-[stroke-opacity,stroke-width] duration-300"
                   />
+                  {/* card-side node */}
                   <circle
                     cx={a.x}
                     cy={a.y}
@@ -449,6 +456,34 @@ export function WhyAbuFarha() {
                     fillOpacity={isActive ? 1 : 0.4}
                     vectorEffect="non-scaling-stroke"
                   />
+                  {/* terminal node inside the equipment — ambient pulse */}
+                  <circle
+                    cx={t.x}
+                    cy={t.y}
+                    r={0.85}
+                    fill="var(--color-primary)"
+                    fillOpacity={isActive ? 1 : 0.5}
+                    vectorEffect="non-scaling-stroke"
+                  />
+                  {!reduce && (
+                    <motion.circle
+                      cx={t.x}
+                      cy={t.y}
+                      r={0.85}
+                      fill="none"
+                      stroke="var(--color-primary)"
+                      strokeWidth={0.4}
+                      vectorEffect="non-scaling-stroke"
+                      initial={false}
+                      animate={{ r: [0.85, 2.6], opacity: [0.55, 0] }}
+                      transition={{
+                        duration: 2.4,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: (a.y / 100) * 1.2,
+                      }}
+                    />
+                  )}
                 </g>
               );
             })}
@@ -476,7 +511,7 @@ export function WhyAbuFarha() {
           </div>
 
           {/* left column cards */}
-          <div className="absolute left-0 top-0 flex h-full w-[24%] flex-col justify-around">
+          <div className="absolute left-0 top-0 flex h-full w-[25%] flex-col justify-around">
             {CAPS.filter((c) => c.side === "left").map((c, i) => (
               <motion.div
                 key={c.id}
@@ -500,7 +535,7 @@ export function WhyAbuFarha() {
           </div>
 
           {/* right column cards */}
-          <div className="absolute right-0 top-0 flex h-full w-[24%] flex-col justify-around">
+          <div className="absolute right-0 top-0 flex h-full w-[25%] flex-col justify-around">
             {CAPS.filter((c) => c.side === "right").map((c, i) => (
               <motion.div
                 key={c.id}
