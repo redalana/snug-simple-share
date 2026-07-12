@@ -208,11 +208,11 @@ export function Solutions() {
   const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
 
   return (
-    <section id="solutions" className="relative overflow-hidden bg-background py-16 lg:py-20">
+    <section id="solutions" className="relative overflow-hidden bg-background py-14 lg:py-[4.5rem]">
       {/* subtle technical grid */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.2]"
         style={{
           backgroundImage:
             "linear-gradient(to right, var(--color-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)",
