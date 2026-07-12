@@ -59,29 +59,68 @@ export function GlobalPresence() {
           </a>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-secondary/40">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-white">
+          {/* dotted map field */}
           <div
-            className="absolute inset-0 opacity-[0.5]"
+            className="absolute inset-0 opacity-[0.35]"
             style={{
               backgroundImage:
                 "radial-gradient(var(--muted-foreground) 1px, transparent 1.4px)",
               backgroundSize: "18px 18px",
             }}
           />
+          {/* stylized Africa + Middle East landmass */}
+          <svg
+            aria-hidden
+            viewBox="0 0 100 75"
+            className="absolute inset-0 h-full w-full"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M38 14 L50 12 L58 15 L60 20 L66 20 L70 24 L68 30 L72 33 L70 38 L64 40 L62 47 L58 52 L56 62 L52 70 L48 66 L47 56 L42 50 L40 44 L36 40 L34 33 L37 27 L40 22 Z"
+              fill="var(--primary)"
+              fillOpacity="0.07"
+              stroke="var(--primary)"
+              strokeOpacity="0.22"
+              strokeWidth="0.5"
+              strokeLinejoin="round"
+            />
+          </svg>
+
           {PINS.map((p, i) => (
-            <div key={p.label} className="absolute" style={{ top: p.top, left: p.left }}>
-              <span className="absolute -inset-2 animate-ping rounded-full bg-primary/40" style={{ animationDelay: `${i * 0.25}s` }} />
-              <motion.span
+            <div
+              key={p.label}
+              className="absolute z-10"
+              style={{ top: p.top, left: p.left }}
+              onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
+            >
+              <span
+                className="absolute -inset-2 animate-ping rounded-full bg-primary/40"
+                style={{ animationDelay: `${i * 0.25}s` }}
+              />
+              <motion.button
+                type="button"
+                aria-label={p.label}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, type: "spring", stiffness: 260 }}
-                className="relative block h-3 w-3 rounded-full bg-primary ring-4 ring-primary/20"
+                className="relative block h-3 w-3 cursor-pointer rounded-full bg-primary ring-4 ring-primary/20 transition-transform hover:scale-125"
               />
+              <div
+                className={`pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-[11px] font-semibold text-white shadow-lg transition-all duration-200 ${
+                  active === i ? "opacity-100" : "translate-y-1 opacity-0"
+                }`}
+              >
+                {p.label}
+                <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-ink" />
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
   );
+
 }
