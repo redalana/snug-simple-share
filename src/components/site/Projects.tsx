@@ -40,12 +40,15 @@ export function Projects() {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
+            <span className="absolute left-7 top-7 z-10 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground shadow-lg">
+              Featured Project
+            </span>
             <div className="relative z-10 p-7">
               <span className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-white/70">
                 <MapPin className="h-3.5 w-3.5 text-primary" /> Riyadh, Saudi Arabia
               </span>
-              <h3 className="font-display text-2xl font-extrabold">King Fahad Cardiac Center</h3>
-              <p className="mt-1 text-sm text-white/75">
+              <h3 className="font-display text-2xl font-extrabold sm:text-3xl">King Fahad Cardiac Center</h3>
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-white/75">
                 Philips Allura Xper FD10 Cath Lab — full supply, installation &amp; commissioning.
               </p>
               <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
