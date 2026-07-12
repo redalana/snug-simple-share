@@ -2,7 +2,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import { toast } from "sonner";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Send,
+  Check,
+  ShieldCheck,
+  Wrench,
+  Building2,
+  Headset,
+} from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
