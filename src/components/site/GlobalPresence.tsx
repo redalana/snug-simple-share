@@ -25,7 +25,9 @@ const COVERAGE = [
 export function GlobalPresence() {
   const [active, setActive] = useState<number | null>(null);
 
+  return (
     <section id="coverage" className="bg-white py-20">
+
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
