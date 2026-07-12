@@ -379,9 +379,14 @@ export function Solutions() {
 
 
         {/* Explorer */}
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12">
+        <div
+          className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12"
+          onMouseEnter={pause}
+          onMouseLeave={scheduleResume}
+        >
           {/* Content */}
           <div className="order-2 flex flex-col lg:order-1">
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
