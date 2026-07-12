@@ -100,16 +100,17 @@ export function Hero() {
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
               Trusted Healthcare Technology Partner
             </span>
-            <h1 className="mt-7 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-5xl lg:text-[3.55rem]">
+            <h1 className="mt-6 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[3.25rem] lg:text-[3.9rem]">
               Advanced Medical
               <br /> Technology for
               <br />
               <span className="text-primary">Better Patient Outcomes</span>
             </h1>
-            <p className="mt-6 max-w-md text-[17px] leading-[1.7] text-muted-foreground">
+            <p className="mt-5 max-w-md text-[18px] leading-[1.65] text-muted-foreground">
               We supply, install, commission, train and support world-class medical
               equipment for hospitals and clinics across Africa and the Middle East.
             </p>
+
 
             <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
               <a
