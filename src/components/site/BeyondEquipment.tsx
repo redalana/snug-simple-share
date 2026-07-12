@@ -327,7 +327,7 @@ export function BeyondEquipment() {
                   <p className="mt-4 text-[16px] leading-[1.7] text-muted-foreground/90">
                     {active.desc}
                   </p>
-                  <ul className="mt-6 flex flex-col gap-3.5">
+                  <ul className="mt-6 flex flex-col gap-3">
                     {active.points.map((p, i) => (
                       <motion.li
                         key={p}
@@ -336,14 +336,24 @@ export function BeyondEquipment() {
                         transition={{ duration: 0.35, delay: 0.1 + i * 0.08, ease: EASE }}
                         className="flex items-center gap-3 text-[15.5px] font-medium text-ink"
                       >
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
                         {p}
                       </motion.li>
                     ))}
                   </ul>
+                  <div className="mt-6 rounded-xl border-l-2 border-primary/60 bg-secondary/40 px-4 py-3.5">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/70">
+                      Hospital Outcome
+                    </div>
+                    <p className="mt-1.5 text-[14px] font-medium leading-[1.6] text-ink">
+                      {active.outcome}
+                    </p>
+                  </div>
                   <a
                     href="#contact"
-                    className="group mt-8 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
+                    className="group mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     Learn More
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
