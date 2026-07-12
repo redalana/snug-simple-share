@@ -1,215 +1,336 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, useState } from "react";
 import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+} from "framer-motion";
+import {
+  ClipboardList,
   Globe,
-  Package,
+  Building2,
   Wrench,
   Cpu,
   GraduationCap,
-  Clock,
-  ArrowUpRight,
+  ShieldCheck,
+  Headset,
+  type LucideIcon,
 } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
+import cathLab from "@/assets/why-cathlab.jpg";
 
-const JOURNEY = [
+type Node = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  details: string[];
+  side: "left" | "right";
+  /** node anchor position in the 100x100 composition space */
+  x: number;
+  y: number;
+};
+
+const NODES: Node[] = [
   {
-    icon: Globe,
-    phase: "Source",
-    title: "Global Procurement",
-    desc: "Direct access to world-leading manufacturers and OEM supply chains.",
+    icon: ClipboardList,
+    title: "Planning & Consulting",
+    desc: "Workflow analysis and equipment planning.",
+    details: ["Hospital workflow analysis", "Equipment planning", "Room layout consultation"],
+    side: "left",
+    x: 6,
+    y: 13,
   },
   {
-    icon: Package,
-    phase: "Plan",
-    title: "Turnkey Solutions",
-    desc: "Complete hospital projects from design and planning to operation.",
+    icon: Globe,
+    title: "Global Procurement",
+    desc: "Direct OEM supply-chain access.",
+    details: ["World-leading manufacturers", "OEM supply chains", "Transparent sourcing"],
+    side: "left",
+    x: 2,
+    y: 38,
+  },
+  {
+    icon: Building2,
+    title: "Turnkey Projects",
+    desc: "Complete hospital delivery.",
+    details: ["Design to operation", "Single accountable partner", "On-time delivery"],
+    side: "left",
+    x: 2,
+    y: 62,
   },
   {
     icon: Wrench,
-    phase: "Deploy",
     title: "Installation & Commissioning",
-    desc: "Professional installation, calibration and acceptance testing.",
+    desc: "Calibration and acceptance testing.",
+    details: ["Professional installation", "Calibration", "Acceptance testing"],
+    side: "left",
+    x: 6,
+    y: 87,
   },
   {
     icon: Cpu,
-    phase: "Engineer",
     title: "Biomedical Engineering",
-    desc: "Expert technical engineering team for every equipment class.",
+    desc: "Expert engineering, every class.",
+    details: ["Certified engineers", "Every equipment class", "Spare-parts management"],
+    side: "right",
+    x: 94,
+    y: 13,
   },
   {
     icon: GraduationCap,
-    phase: "Enable",
     title: "Clinical Training",
-    desc: "Structured training for medical and technical staff.",
+    desc: "For medical and technical staff.",
+    details: ["Structured programs", "Clinical & technical staff", "Ongoing enablement"],
+    side: "right",
+    x: 98,
+    y: 38,
   },
   {
-    icon: Clock,
-    phase: "Sustain",
-    title: "After Sales Support",
-    desc: "Reliable maintenance and service support, 24/7.",
+    icon: ShieldCheck,
+    title: "Preventive Maintenance",
+    desc: "Scheduled, proactive care.",
+    details: ["Scheduled servicing", "Uptime assurance", "Compliance reporting"],
+    side: "right",
+    x: 98,
+    y: 62,
+  },
+  {
+    icon: Headset,
+    title: "After-Sales Support",
+    desc: "Reliable service, 24/7.",
+    details: ["24/7 support", "Rapid response", "Lifetime partnership"],
+    side: "right",
+    x: 94,
+    y: 87,
   },
 ];
 
 export function WhyAbuFarha() {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+
   const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start 75%", "end 55%"],
+    target: sectionRef,
+    offset: ["start 80%", "start 30%"],
   });
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 24,
-    restDelta: 0.001,
-  });
-  const lineScale = useTransform(progress, [0, 1], [0, 1]);
+  const draw = useSpring(scrollYProgress, { stiffness: 80, damping: 22 });
+
+  // parallax on mouse movement
+  const px = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
+  const py = useSpring(useMotionValue(0), { stiffness: 60, damping: 18 });
+  const imgX = useTransform(px, [-0.5, 0.5], [-14, 14]);
+  const imgY = useTransform(py, [-0.5, 0.5], [-12, 12]);
+
+  const handleMove = (e: React.MouseEvent) => {
+    const el = stageRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const handleLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
 
   return (
-    <section id="why" className="relative overflow-hidden bg-white py-24">
-      {/* faint signature ground line motif */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
+    <section id="why" ref={sectionRef} className="relative overflow-hidden bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Focal statement */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Eyebrow index="02" align="center">
-              Why Partner with AbuFarha
+              Why Hospitals Choose AbuFarha
             </Eyebrow>
           </div>
-          <h2 className="mt-6 font-display text-[2.3rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[3.4rem]">
-            One partner, from planning
-            <br className="hidden sm:block" /> to{" "}
-            <span className="relative whitespace-nowrap text-primary">
-              lifetime support
-              <motion.span
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-primary/30"
-              />
-            </span>
-            .
+          <h2 className="mt-6 font-display text-[2.2rem] font-extrabold leading-[1.06] tracking-[-0.02em] text-ink sm:text-[3rem]">
+            Not equipment.
+            <br />A complete <span className="text-primary">hospital ecosystem</span>.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-[1.75] text-muted-foreground">
-            Most hospitals juggle a dozen vendors. We replace that chain with a
-            single accountable partner — one continuous journey from first
-            drawing to lifelong service.
+            Every capability connects to one clinical outcome — from first
+            drawing to lifetime support.
           </p>
         </div>
 
-        {/* The journey */}
-        <div ref={trackRef} className="relative mt-20">
-          {/* central connecting spine (desktop) */}
-          <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-border lg:block" />
-          <motion.div
-            style={{ scaleY: lineScale }}
-            className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 origin-top bg-gradient-to-b from-primary via-primary to-primary/40 lg:block"
-          />
-          {/* mobile spine */}
-          <div className="pointer-events-none absolute left-[27px] top-0 h-full w-px bg-border lg:hidden" />
-          <motion.div
-            style={{ scaleY: lineScale }}
-            className="pointer-events-none absolute left-[27px] top-0 h-full w-px origin-top bg-gradient-to-b from-primary to-primary/40 lg:hidden"
-          />
-
-          <div className="space-y-6 lg:space-y-0">
-            {JOURNEY.map((step, i) => {
-              const left = i % 2 === 0;
+        {/* ============ DESKTOP: radial ecosystem ============ */}
+        <div
+          ref={stageRef}
+          onMouseMove={handleMove}
+          onMouseLeave={handleLeave}
+          className="relative mx-auto mt-16 hidden aspect-[16/10] w-full max-w-5xl lg:block"
+        >
+          {/* connecting lines */}
+          <svg
+            className="absolute inset-0 h-full w-full"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            {NODES.map((n, i) => {
+              const isActive = active === i;
               return (
-                <div
-                  key={step.title}
-                  className="relative lg:grid lg:grid-cols-2 lg:items-center lg:gap-16"
-                >
-                  {/* node marker */}
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-[20px] top-6 z-10 flex h-3.5 w-3.5 -translate-x-1/2 items-center justify-center lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2"
-                  >
-                    <span className="absolute h-3.5 w-3.5 rounded-full bg-primary/20" />
-                    <span className="h-2 w-2 rounded-full bg-primary ring-4 ring-white" />
-                  </motion.div>
-
-                  {/* spacer for alternating layout */}
-                  {!left && <div className="hidden lg:block" />}
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    className={`group pl-12 lg:py-10 lg:pl-0 ${
-                      left ? "lg:pr-12 lg:text-right" : "lg:pl-12"
-                    }`}
-                  >
-                    <div
-                      className={`relative overflow-hidden rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_-24px_rgba(0,0,0,0.25)] ${
-                        left ? "lg:ml-auto" : ""
-                      }`}
-                    >
-                      {/* hover wash */}
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                      <div
-                        className={`relative flex items-center gap-4 ${
-                          left ? "lg:flex-row-reverse" : ""
-                        }`}
-                      >
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary ring-1 ring-border transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:ring-primary">
-                          <step.icon className="h-5 w-5" strokeWidth={1.75} />
-                        </div>
-                        <div className={left ? "lg:text-right" : ""}>
-                          <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary/70">
-                            {String(i + 1).padStart(2, "0")} · {step.phase}
-                          </span>
-                          <h3 className="mt-0.5 font-display text-lg font-bold tracking-tight text-ink transition-colors group-hover:text-primary">
-                            {step.title}
-                          </h3>
-                        </div>
-                      </div>
-
-                      {/* progressive reveal on hover */}
-                      <div className="relative grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr]">
-                        <div className="overflow-hidden">
-                          <p
-                            className={`mt-4 text-sm leading-relaxed text-muted-foreground ${
-                              left ? "lg:text-right" : ""
-                            }`}
-                          >
-                            {step.desc}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
+                <motion.line
+                  key={n.title}
+                  x1={n.x}
+                  y1={n.y}
+                  x2={50}
+                  y2={50}
+                  stroke="var(--color-primary)"
+                  strokeOpacity={isActive ? 0.9 : 0.28}
+                  strokeWidth={isActive ? 1.1 : 0.5}
+                  vectorEffect="non-scaling-stroke"
+                  style={{ pathLength: draw }}
+                  className="transition-[stroke-width,stroke-opacity] duration-300"
+                />
               );
             })}
-          </div>
+          </svg>
+
+          {/* center image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-1/2 top-1/2 z-10 h-[54%] w-[42%] -translate-x-1/2 -translate-y-1/2"
+          >
+            <motion.div
+              style={{ x: imgX, y: imgY }}
+              className="relative h-full w-full overflow-hidden rounded-3xl shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] ring-1 ring-black/5"
+            >
+              <img
+                src={cathLab}
+                alt="Modern hospital cardiac catheterization lab delivered by AbuFarha"
+                width={1024}
+                height={1024}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* capability nodes */}
+          {NODES.map((n, i) => {
+            const isActive = active === i;
+            return (
+              <motion.div
+                key={n.title}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.25 + i * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive(null)}
+                style={{ left: `${n.x}%`, top: `${n.y}%` }}
+                className={`absolute z-20 flex w-[230px] -translate-y-1/2 items-center gap-3 ${
+                  n.side === "left"
+                    ? "-translate-x-2 flex-row-reverse text-right"
+                    : "-translate-x-[calc(100%-3.5rem)] text-left"
+                }`}
+              >
+                {/* icon */}
+                <div
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-primary ring-1 transition-all duration-300 ${
+                    isActive
+                      ? "scale-110 rotate-6 ring-primary shadow-[0_16px_30px_-14px_rgba(0,0,0,0.4)]"
+                      : "ring-border"
+                  }`}
+                >
+                  <n.icon className="h-6 w-6" strokeWidth={1.6} />
+                </div>
+
+                {/* label */}
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className={`font-display text-[15px] font-bold leading-tight tracking-tight transition-colors ${
+                      isActive ? "text-primary" : "text-ink"
+                    }`}
+                  >
+                    {n.title}
+                  </h3>
+                  <p className="mt-0.5 truncate text-[12px] leading-snug text-muted-foreground">
+                    {n.desc}
+                  </p>
+                </div>
+
+                {/* tooltip */}
+                <motion.div
+                  initial={false}
+                  animate={{
+                    opacity: isActive ? 1 : 0,
+                    y: isActive ? 0 : 6,
+                    pointerEvents: isActive ? "auto" : "none",
+                  }}
+                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  className={`absolute top-full z-30 mt-3 w-56 rounded-2xl border border-border bg-white p-4 text-left shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)] ${
+                    n.side === "left" ? "right-0" : "left-0"
+                  }`}
+                >
+                  <p className="font-display text-sm font-bold text-ink">{n.title}</p>
+                  <ul className="mt-2 space-y-1.5">
+                    {n.details.map((d) => (
+                      <li key={d} className="flex items-start gap-2 text-[12px] text-muted-foreground">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* closing anchor — the promise fulfilled */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-16 flex max-w-xl flex-col items-center gap-5 text-center"
-        >
-          <p className="font-display text-lg font-bold tracking-tight text-ink">
-            Six capabilities. One accountable partner.
-          </p>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.4)]"
+        {/* ============ MOBILE / TABLET: stacked ecosystem ============ */}
+        <div className="mt-14 lg:hidden">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden rounded-3xl shadow-[0_30px_70px_-40px_rgba(0,0,0,0.5)] ring-1 ring-black/5"
           >
-            Start a conversation
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </motion.div>
+            <img
+              src={cathLab}
+              alt="Modern hospital cardiac catheterization lab delivered by AbuFarha"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-[16/10] w-full object-cover"
+            />
+          </motion.div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {NODES.map((n, i) => (
+              <motion.div
+                key={n.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="flex items-start gap-3 rounded-2xl border border-border bg-white p-4"
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary ring-1 ring-border">
+                  <n.icon className="h-5 w-5" strokeWidth={1.6} />
+                </div>
+                <div>
+                  <h3 className="font-display text-sm font-bold tracking-tight text-ink">
+                    {n.title}
+                  </h3>
+                  <p className="mt-0.5 text-[12px] leading-snug text-muted-foreground">
+                    {n.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
