@@ -6,7 +6,7 @@ import { Solutions } from "@/components/site/Solutions";
 import { BeyondEquipment } from "@/components/site/BeyondEquipment";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { WhyAbuFarha } from "@/components/site/WhyAbuFarha";
-import { Process } from "@/components/site/Process";
+import { ReadinessAssessment } from "@/components/site/ReadinessAssessment";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Footer } from "@/components/site/Footer";
@@ -32,8 +32,8 @@ function Index() {
         <GlobalPresence />
         {/* Why should customers choose AbuFarha? */}
         <WhyAbuFarha />
-        {/* How do we deliver? */}
-        <Process />
+        {/* Is your hospital ready for advanced medical technology? */}
+        <ReadinessAssessment />
         {/* How can customers start working with us? */}
         <FinalCTA />
         <ContactForm />
