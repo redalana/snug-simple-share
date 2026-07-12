@@ -6,6 +6,7 @@ import {
   Cpu,
   GraduationCap,
   Clock,
+  ArrowUpRight,
 } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 
@@ -21,33 +22,72 @@ const FEATURES = [
 export function WhyAbuFarha() {
   return (
     <section id="why" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
-          <Eyebrow align="center" index="02">Why Partner with AbuFarha</Eyebrow>
-          <h2 className="mx-auto mt-5 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
-            A Single Partner from Planning to Lifetime Support
+      <div className="mx-auto grid max-w-7xl gap-x-16 gap-y-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        {/* Left — the statement. Typography-led, sticky, deliberately spare. */}
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Eyebrow index="02">Why Partner with AbuFarha</Eyebrow>
+          <h2 className="mt-6 font-display text-[2.15rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.9rem]">
+            One partner,
+            <br />
+            from first plan to
+            <br />
+            <span className="text-primary">lifetime support.</span>
           </h2>
+          <p className="mt-6 max-w-sm text-[15px] leading-[1.75] text-muted-foreground">
+            Most hospitals juggle a dozen vendors. We replace that chain with a
+            single accountable partner — engineering, procurement and service
+            under one roof.
+          </p>
+          <a
+            href="#contact"
+            className="group mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary"
+          >
+            Start a conversation
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+
+          {/* signature vertical measure — a subtle brand detail, not decoration */}
+          <div className="mt-10 hidden items-center gap-3 lg:flex">
+            <span className="font-display text-sm font-extrabold tabular-nums text-ink">
+              06
+            </span>
+            <span className="h-px w-16 bg-border" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+              Capabilities
+            </span>
+          </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Right — the capabilities index. A precise list, not a grid of cards. */}
+        <div>
           {FEATURES.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-30px_rgba(15,23,42,0.4)]"
+              className={`group flex items-start gap-6 py-6 transition-colors ${
+                i !== 0 ? "border-t border-border" : ""
+              }`}
             >
-              <span className="pointer-events-none absolute -right-2 -top-4 font-display text-[5.5rem] font-extrabold leading-none text-ink/[0.04] transition-colors duration-300 group-hover:text-primary/10">
+              <span className="mt-1 font-display text-sm font-extrabold tabular-nums text-muted-foreground/60 transition-colors group-hover:text-primary">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/10 transition-all duration-300 group-hover:from-primary group-hover:to-primary-dark group-hover:text-white group-hover:ring-primary group-hover:shadow-[0_16px_30px_-14px_var(--primary)]">
-                <f.icon className="h-6 w-6" strokeWidth={1.75} />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary ring-1 ring-border transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:ring-primary">
+                <f.icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
-              <h3 className="relative font-display text-lg font-bold tracking-tight text-ink">{f.title}</h3>
-              <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-primary to-primary-dark transition-transform duration-300 group-hover:scale-x-100" />
+              <div className="flex-1">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-display text-lg font-bold tracking-tight text-ink transition-colors group-hover:text-primary">
+                    {f.title}
+                  </h3>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 -translate-x-1 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+                </div>
+                <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted-foreground">
+                  {f.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
