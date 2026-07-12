@@ -17,14 +17,10 @@ const BRANDS = [
 export function BrandsMarquee() {
   const loop = [...BRANDS, ...BRANDS];
   return (
-    <section id="brands" className="border-y border-border bg-white py-10">
+    <section id="brands" className="border-y border-border bg-white py-12">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-6 flex items-center justify-center gap-4">
-          <span className="h-px w-10 bg-border" />
-          <p className="text-center text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">
-            Trusted by World-Leading Manufacturers
-          </p>
-          <span className="h-px w-10 bg-border" />
+        <div className="mb-8">
+          <Eyebrow align="center">Trusted by World-Leading Manufacturers</Eyebrow>
         </div>
       </div>
       <div className="marquee-mask relative overflow-hidden">
