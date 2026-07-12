@@ -250,15 +250,8 @@ export function ContactForm() {
               enquiries, just a focused conversation.
             </p>
 
-            {/* premium statistics with count-up */}
-            <dl className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-7 border-t border-border pt-8">
-              {STATS.map((s) => (
-                <StatItem key={s.label} {...s} />
-              ))}
-            </dl>
-
             {/* trust indicators */}
-            <ul className="mt-8 grid max-w-md gap-y-3.5 border-t border-border pt-8 sm:grid-cols-2">
+            <ul className="mt-10 grid max-w-md gap-y-3.5 border-t border-border pt-8 sm:grid-cols-2">
               {TRUST.map((t) => (
                 <li
                   key={t.label}
