@@ -113,22 +113,6 @@ const inputCls =
 const selectCls =
   "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/50 focus:border-primary focus:ring-4 focus:ring-primary/10 data-[state=open]:border-primary data-[state=open]:ring-4 data-[state=open]:ring-primary/10";
 
-function StatItem({ target, suffix, label }: { target: number; suffix: string; label: string }) {
-  const { ref, value } = useCountUp(target);
-  return (
-    <div className="group cursor-default">
-      <dt className="font-display text-[1.7rem] font-extrabold leading-none tracking-tight text-ink transition-colors duration-300 group-hover:text-primary">
-        <span ref={ref}>{value.toLocaleString()}</span>
-        {suffix}
-      </dt>
-      <dd className="mt-2 text-[13px] font-medium text-muted-foreground">
-        <span className="relative inline-block after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 group-hover:after:scale-x-100">
-          {label}
-        </span>
-      </dd>
-    </div>
-  );
-}
 
 export function ContactForm() {
   const reduceMotion = useReducedMotion();
