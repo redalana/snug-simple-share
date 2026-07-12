@@ -30,13 +30,13 @@ export function Footer() {
             Your trusted partner in advanced medical equipment and turnkey hospital solutions across
             Africa and the Middle East.
           </p>
-          <div className="mt-5 flex gap-2">
+          <div className="mt-6 flex gap-2.5">
             {[Linkedin, Facebook, Youtube, Instagram].map((Icon, i) => (
               <a
                 key={i}
                 href="#"
                 aria-label="Social link"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-primary"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-[0_12px_24px_-10px_var(--primary)]"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -49,10 +49,13 @@ export function Footer() {
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white">
               {col.title}
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-5 space-y-3 text-sm">
               {col.links.map((l) => (
                 <li key={l}>
-                  <a href="#" className="transition-colors hover:text-primary">
+                  <a
+                    href="#"
+                    className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-primary"
+                  >
                     {l}
                   </a>
                 </li>
