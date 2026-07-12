@@ -39,7 +39,8 @@ export function FinalCTA() {
             Let&apos;s Build Better Healthcare Together
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85">
-            Talk to our experts about your next department, project or turnkey hospital solution.
+            Talk to our experts about equipping your next department or complete
+            medical technology project.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
