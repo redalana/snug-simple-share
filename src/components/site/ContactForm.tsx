@@ -390,13 +390,11 @@ export function ContactForm() {
               <Label htmlFor="whatsapp" className="text-[13px] font-semibold text-ink">
                 WhatsApp <span className="text-primary">*</span>
               </Label>
-              <Input
+              <PhoneField
                 id="whatsapp"
-                type="tel"
-                className={inputCls}
-                placeholder="+20 100 000 0000"
                 value={values.whatsapp ?? ""}
-                onChange={(e) => setField("whatsapp", e.target.value)}
+                onChange={(v) => setField("whatsapp", v)}
+                hasError={!!errors.whatsapp}
               />
               {errors.whatsapp && (
                 <p role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
