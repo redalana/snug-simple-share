@@ -1,17 +1,19 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const PINS = [
+  { top: "30%", left: "50%", label: "Libya" },
   { top: "34%", left: "56%", label: "Egypt" },
   { top: "40%", left: "63%", label: "Saudi Arabia" },
   { top: "44%", left: "66%", label: "UAE" },
-  { top: "30%", left: "50%", label: "Libya" },
+  { top: "38%", left: "70%", label: "Qatar" },
+  { top: "48%", left: "46%", label: "Nigeria" },
   { top: "52%", left: "58%", label: "Sudan" },
   { top: "62%", left: "60%", label: "Kenya" },
   { top: "70%", left: "55%", label: "Tanzania" },
-  { top: "48%", left: "46%", label: "Nigeria" },
-  { top: "38%", left: "70%", label: "Qatar" },
 ];
+
 
 const COVERAGE = [
   { value: "40+", label: "Countries" },
