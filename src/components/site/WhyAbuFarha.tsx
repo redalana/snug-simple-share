@@ -259,44 +259,86 @@ export function WhyAbuFarha() {
                   </p>
 
                 </div>
-
-
-                {/* tooltip */}
-                <motion.div
-                  initial={false}
-                  animate={{
-                    opacity: isActive ? 1 : 0,
-                    y: isActive ? 0 : 8,
-                    scale: isActive ? 1 : 0.96,
-                    pointerEvents: isActive ? "auto" : "none",
-                  }}
-                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ transformOrigin: "top" }}
-                  className={`absolute top-full z-30 mt-3 w-60 overflow-hidden rounded-2xl border border-border bg-white text-left shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] ${
-                    n.side === "left" ? "right-0" : "left-0"
-                  }`}
-                >
-                  <span className="absolute inset-x-0 top-0 h-[3px] bg-primary" />
-                  <div className="p-4">
-                    <p className="font-display text-sm font-bold text-ink">{n.title}</p>
-                    <ul className="mt-2.5 space-y-2">
-                      {n.details.map((d) => (
-                        <li
-                          key={d}
-                          className="flex items-start gap-2.5 text-[12.5px] leading-[1.5] text-muted-foreground"
-                        >
-                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-
               </motion.div>
             );
           })}
+
+          {/* single shared information panel */}
+          <div className="absolute bottom-0 left-1/2 z-30 w-[380px] -translate-x-1/2">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-white/95 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.4)] backdrop-blur">
+              <span className="absolute inset-x-0 top-0 h-[3px] bg-primary" />
+              <div className="p-5">
+                <AnimatePresence mode="wait" initial={false}>
+                  {active === null ? (
+                    <motion.div
+                      key="default"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      className="flex items-center gap-4"
+                    >
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary ring-1 ring-border">
+                        <Building2 className="h-5 w-5" strokeWidth={1.6} />
+                      </div>
+                      <div className="text-left">
+                        <p className="font-display text-[15px] font-bold text-ink">
+                          Eight integrated capabilities
+                        </p>
+                        <p className="mt-1 text-[12.5px] leading-[1.55] text-muted-foreground">
+                          Hover any capability to explore how it fits the whole.
+                        </p>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={NODES[active].title}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      className="text-left"
+                    >
+                      <div className="flex items-center gap-4">
+                        <motion.div
+                          initial={{ scale: 0.85, rotate: -6 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white ring-1 ring-primary"
+                        >
+                          {(() => {
+                            const Icon = NODES[active].icon;
+                            return <Icon className="h-5 w-5" strokeWidth={1.6} />;
+                          })()}
+                        </motion.div>
+                        <div>
+                          <p className="font-display text-[15px] font-bold text-ink">
+                            {NODES[active].title}
+                          </p>
+                          <p className="mt-0.5 text-[12.5px] leading-[1.5] text-muted-foreground">
+                            {NODES[active].desc}
+                          </p>
+                        </div>
+                      </div>
+                      <ul className="mt-4 grid gap-2 border-t border-border pt-4">
+                        {NODES[active].details.map((d) => (
+                          <li
+                            key={d}
+                            className="flex items-start gap-2.5 text-[12.5px] leading-[1.5] text-muted-foreground"
+                          >
+                            <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                            {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
+
 
         {/* ============ MOBILE / TABLET: stacked ecosystem ============ */}
         <div className="mt-14 lg:hidden">
