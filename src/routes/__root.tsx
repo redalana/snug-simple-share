@@ -78,18 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AbuFarha Medical Equipment | Advanced Medical Technology & Turnkey Hospital Solutions" },
+      { title: "AbuFarha Medical Equipment | Advanced Medical Technology Solutions" },
       {
         name: "description",
         content:
-          "AbuFarha supplies, installs, commissions and maintains world-class medical equipment and turnkey hospital solutions across Africa and the Middle East. 25+ years, 250+ hospitals, 40+ countries.",
+          "AbuFarha supplies, installs, commissions, trains and supports world-class medical equipment across Africa and the Middle East. 25+ years, 250+ hospitals, 40+ countries.",
       },
       { name: "author", content: "AbuFarha Medical Equipment" },
       { property: "og:title", content: "AbuFarha Medical Equipment | Advanced Medical Technology" },
       {
         property: "og:description",
         content:
-          "World-class medical equipment and turnkey hospital solutions across Africa and the Middle East.",
+          "Supply, installation, commissioning, training and lifetime support for world-class medical equipment across Africa and the Middle East.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

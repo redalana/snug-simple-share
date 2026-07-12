@@ -1,10 +1,9 @@
-import { Calendar, Building2, Globe2, Boxes } from "lucide-react";
+import { Calendar, Building2, Boxes } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 
 const STATS = [
-  { icon: Calendar, target: 25, suffix: "+", label: "Years Experience" },
+  { icon: Calendar, target: 25, suffix: "+", label: "Years of Experience" },
   { icon: Building2, target: 250, suffix: "+", label: "Hospitals Served" },
-  { icon: Globe2, target: 40, suffix: "+", label: "Countries Covered" },
   { icon: Boxes, target: 1500, suffix: "+", label: "Equipment Installed" },
 ];
 
@@ -43,7 +42,7 @@ export function Stats() {
           strokeWidth="2"
         />
       </svg>
-      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 lg:grid-cols-4">
+      <div className="relative mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 sm:grid-cols-3">
         {STATS.map((s) => (
           <Stat key={s.label} {...s} />
         ))}

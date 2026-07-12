@@ -19,7 +19,7 @@ import { Eyebrow } from "./Eyebrow";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useCountUp } from "@/hooks/use-count-up";
+
 import {
   Select,
   SelectContent,
@@ -94,17 +94,11 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
-const STATS = [
-  { target: 250, suffix: "+", label: "Hospitals Served" },
-  { target: 40, suffix: "+", label: "Countries" },
-  { target: 1500, suffix: "+", label: "Equipment Installed" },
-  { target: 25, suffix: "+", label: "Years of Experience" },
-];
 
 const TRUST = [
   { icon: ShieldCheck, label: "OEM Certified Equipment" },
   { icon: Wrench, label: "Factory-Trained Engineers" },
-  { icon: Building2, label: "Turnkey Hospital Projects" },
+  { icon: Building2, label: "Full Lifecycle Support" },
   { icon: Headset, label: "24/7 Technical Support" },
 ];
 
@@ -119,22 +113,6 @@ const inputCls =
 const selectCls =
   "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/50 focus:border-primary focus:ring-4 focus:ring-primary/10 data-[state=open]:border-primary data-[state=open]:ring-4 data-[state=open]:ring-primary/10";
 
-function StatItem({ target, suffix, label }: { target: number; suffix: string; label: string }) {
-  const { ref, value } = useCountUp(target);
-  return (
-    <div className="group cursor-default">
-      <dt className="font-display text-[1.7rem] font-extrabold leading-none tracking-tight text-ink transition-colors duration-300 group-hover:text-primary">
-        <span ref={ref}>{value.toLocaleString()}</span>
-        {suffix}
-      </dt>
-      <dd className="mt-2 text-[13px] font-medium text-muted-foreground">
-        <span className="relative inline-block after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 group-hover:after:scale-x-100">
-          {label}
-        </span>
-      </dd>
-    </div>
-  );
-}
 
 export function ContactForm() {
   const reduceMotion = useReducedMotion();
@@ -250,15 +228,8 @@ export function ContactForm() {
               enquiries, just a focused conversation.
             </p>
 
-            {/* premium statistics with count-up */}
-            <dl className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-7 border-t border-border pt-8">
-              {STATS.map((s) => (
-                <StatItem key={s.label} {...s} />
-              ))}
-            </dl>
-
             {/* trust indicators */}
-            <ul className="mt-8 grid max-w-md gap-y-3.5 border-t border-border pt-8 sm:grid-cols-2">
+            <ul className="mt-10 grid max-w-md gap-y-3.5 border-t border-border pt-8 sm:grid-cols-2">
               {TRUST.map((t) => (
                 <li
                   key={t.label}

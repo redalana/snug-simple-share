@@ -3,10 +3,8 @@ import { ArrowRight, Globe } from "lucide-react";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 
 const STATS = [
-  { value: "40+", label: "Countries" },
-  { value: "310+", label: "Projects" },
-  { value: "250+", label: "Hospitals" },
-  { value: "1,500+", label: "Equipment Installed" },
+  { value: "40+", label: "Countries Served" },
+  { value: "310+", label: "Projects Delivered" },
 ];
 
 // Cropped viewBox focused on Africa & the Middle East (matches the design spec).
@@ -203,8 +201,8 @@ export function GlobalPresence() {
                   Africa &amp; the Middle East
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
-                  Twenty-five years of on-ground partnerships with leading hospital groups across the
-                  region.
+                  Local engineers and regional support teams keep every installation
+                  running — wherever your facility operates.
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
