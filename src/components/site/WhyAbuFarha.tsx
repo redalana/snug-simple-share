@@ -171,11 +171,11 @@ function InfoPanel({
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
               <p className="font-display text-[15px] font-bold text-ink">
-                Six phases. One partner.
+                Why AbuFarha?
               </p>
               <p className="mt-1.5 text-[12.5px] leading-[1.6] text-muted-foreground">
-                Hover a capability to trace how it shapes the room — from first
-                drawing to lifetime support.
+                Hover a strength to see the expertise behind every system —
+                not just the equipment, but the capability around it.
               </p>
             </motion.div>
           ) : (
