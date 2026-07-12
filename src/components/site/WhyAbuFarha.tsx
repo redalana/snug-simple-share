@@ -318,26 +318,26 @@ function CapCard({
       onMouseLeave={onLeave}
       onFocus={onEnter}
       onBlur={onLeave}
-      className={`group flex w-full items-start gap-3.5 rounded-2xl border bg-white p-4 text-left transition-all duration-300 ${
+      className={`group flex w-full items-center gap-4 rounded-2xl border bg-white p-4.5 text-left transition-all duration-300 ${
         isActive
           ? "-translate-y-0.5 border-primary/40 shadow-[0_26px_55px_-30px_rgba(15,23,42,0.5)] ring-1 ring-primary/15"
           : "border-border shadow-[0_2px_12px_-6px_rgba(15,23,42,0.14)] hover:-translate-y-0.5"
       } ${cap.side === "left" ? "lg:flex-row-reverse lg:text-right" : ""}`}
     >
       <span
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
+        className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${
           isActive
-            ? "bg-primary text-white shadow-[0_14px_26px_-12px_var(--primary)]"
-            : "bg-secondary text-primary ring-1 ring-border"
+            ? "bg-primary text-white shadow-[0_16px_30px_-12px_var(--primary)]"
+            : "bg-secondary text-primary ring-1 ring-border group-hover:bg-primary/10"
         }`}
       >
-        <cap.icon className="h-[18px] w-[18px]" strokeWidth={1.7} />
+        <cap.icon className="h-[22px] w-[22px]" strokeWidth={1.7} />
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[14.5px] font-bold tracking-tight text-ink">
+        <span className="block font-display text-[16px] font-extrabold leading-tight tracking-tight text-ink">
           {cap.title}
         </span>
-        <span className="mt-1 block text-[12px] leading-[1.55] text-muted-foreground">
+        <span className="mt-1.5 block text-[12.5px] leading-[1.5] text-muted-foreground">
           {cap.desc}
         </span>
       </span>
