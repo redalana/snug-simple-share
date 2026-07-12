@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
 import p3 from "@/assets/project-3.jpg";
@@ -8,12 +9,10 @@ export function Projects() {
   return (
     <section id="projects" className="bg-secondary/50 py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Featured Projects
-            </span>
-            <h2 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
+            <Eyebrow>Featured Projects</Eyebrow>
+            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
               Delivering Excellence Across Africa &amp; the Middle East
             </h2>
           </div>

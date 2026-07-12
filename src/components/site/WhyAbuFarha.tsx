@@ -7,6 +7,7 @@ import {
   GraduationCap,
   Clock,
 } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 
 const FEATURES = [
   { icon: Globe, title: "Global Procurement", desc: "Direct access to world-leading manufacturers and OEM supply chains." },
@@ -22,14 +23,8 @@ export function WhyAbuFarha() {
     <section id="why" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-primary/40" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Why Partner with AbuFarha
-            </span>
-            <span className="h-px w-8 bg-primary/40" />
-          </div>
-          <h2 className="mx-auto mt-5 max-w-2xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem]">
+          <Eyebrow align="center">Why Partner with AbuFarha</Eyebrow>
+          <h2 className="mx-auto mt-5 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
             A Single Partner from Planning to Lifetime Support
           </h2>
         </div>
