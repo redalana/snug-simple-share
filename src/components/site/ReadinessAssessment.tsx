@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import {
   Building2,
   Stethoscope,
@@ -26,6 +31,7 @@ import {
   ClipboardList,
   Gauge,
   AlertTriangle,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
@@ -192,28 +198,31 @@ const GROUPS: Group[] = [
 
 const STATUS_META: Record<
   Status,
-  { label: string; icon: LucideIcon; text: string; dot: string; ring: string }
+  { label: string; icon: LucideIcon; text: string; dot: string; badge: string }
 > = {
   ready: {
     label: "Ready",
     icon: CheckCircle2,
     text: "text-emerald-600",
     dot: "bg-emerald-500",
-    ring: "ring-emerald-500/20",
+    badge:
+      "text-emerald-600 ring-emerald-500/20 bg-emerald-500/[0.06] group-hover:bg-emerald-500/[0.12]",
   },
   review: {
     label: "Needs Review",
     icon: AlertCircle,
     text: "text-primary",
     dot: "bg-primary",
-    ring: "ring-primary/20",
+    badge:
+      "text-primary ring-primary/20 bg-primary/[0.06] group-hover:bg-primary/[0.12]",
   },
   unknown: {
     label: "Unknown",
     icon: HelpCircle,
     text: "text-muted-foreground",
     dot: "bg-muted-foreground/50",
-    ring: "ring-border",
+    badge:
+      "text-muted-foreground ring-border bg-secondary/60 group-hover:bg-secondary",
   },
 };
 
@@ -231,24 +240,31 @@ function NoteRow({
   icon: Icon,
   text,
   tone,
+  delay,
 }: {
   label: string;
   icon: LucideIcon;
   text: string;
   tone?: "risk";
+  delay: number;
 }) {
   return (
-    <div className="flex gap-2.5">
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: EASE, delay }}
+      className="flex gap-2.5"
+    >
       <Icon
-        className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+        className={`mt-0.5 h-4 w-4 shrink-0 ${
           tone === "risk" ? "text-primary" : "text-muted-foreground"
         }`}
         strokeWidth={2}
       />
-      <p className="text-[12.5px] leading-snug text-ink/75">
+      <p className="text-[13.5px] leading-[1.6] text-ink/75">
         <span className="font-semibold text-ink">{label}</span> {text}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -264,28 +280,28 @@ function AssessmentItem({ item }: { item: Item }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center gap-3 py-3.5 text-left transition-colors hover:bg-secondary/40"
+        className="flex w-full min-h-11 items-center gap-3 rounded-lg py-3.5 text-left transition-colors duration-300 hover:bg-secondary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         <span className="relative flex h-2 w-2 shrink-0 items-center justify-center">
           <span className={`h-2 w-2 rounded-full ${meta.dot}`} />
           {item.status === "review" && (
             <span
-              className={`absolute inset-0 rounded-full ${meta.dot} opacity-60 motion-safe:animate-ping`}
+              className={`absolute inset-0 rounded-full ${meta.dot} opacity-0 transition-opacity duration-300 group-hover:opacity-60 motion-safe:group-hover:animate-ping`}
             />
           )}
         </span>
 
         <ItemIcon
-          className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-ink"
+          className="h-[18px] w-[18px] shrink-0 text-muted-foreground transition-all duration-300 group-hover:-rotate-6 group-hover:text-ink"
           strokeWidth={1.8}
         />
 
-        <span className="flex-1 text-[14px] font-semibold text-ink">
+        <span className="flex-1 text-[15px] font-semibold leading-tight text-ink">
           {item.label}
         </span>
 
         <span
-          className={`hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] ring-1 sm:inline-flex ${meta.text} ${meta.ring}`}
+          className={`hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] ring-1 transition-all duration-300 group-hover:scale-[1.04] sm:inline-flex ${meta.badge}`}
         >
           <StatusIcon className="h-3.5 w-3.5" strokeWidth={2.2} />
           {meta.label}
@@ -293,7 +309,7 @@ function AssessmentItem({ item }: { item: Item }) {
 
         <ChevronDown
           className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 ${
-            open ? "rotate-180" : ""
+            open ? "rotate-180 text-primary" : ""
           }`}
         />
       </button>
@@ -304,13 +320,13 @@ function AssessmentItem({ item }: { item: Item }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE }}
+            transition={{ duration: 0.42, ease: EASE }}
             className="overflow-hidden"
           >
-            <div className="mb-4 ml-[26px] space-y-2 rounded-xl bg-secondary/60 px-4 py-3.5 ring-1 ring-border/60">
-              <NoteRow icon={AlertCircle} label="Why it matters —" text={item.why} />
-              <NoteRow icon={FileSearch} label="What we evaluate —" text={item.evaluates} />
-              <NoteRow icon={AlertTriangle} label="Common risk —" text={item.risk} tone="risk" />
+            <div className="mb-4 ml-[28px] space-y-2.5 rounded-xl bg-secondary/60 px-4 py-4 ring-1 ring-border/60">
+              <NoteRow icon={AlertCircle} label="Why it matters —" text={item.why} delay={0.05} />
+              <NoteRow icon={FileSearch} label="What we evaluate —" text={item.evaluates} delay={0.11} />
+              <NoteRow icon={AlertTriangle} label="Common risk —" text={item.risk} tone="risk" delay={0.17} />
             </div>
           </motion.div>
         )}
@@ -322,36 +338,53 @@ function AssessmentItem({ item }: { item: Item }) {
 function AssessmentGroup({
   group,
   defaultOpen,
+  index,
 }: {
   group: Group;
   defaultOpen: boolean;
+  index: number;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const active = useInView(ref, { margin: "-35% 0px -35% 0px" });
   const Icon = group.icon;
   const readyCount = group.items.filter((i) => i.status === "ready").length;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)]">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12% 0px" }}
+      transition={{ duration: 0.55, ease: EASE, delay: index * 0.1 }}
+      animate={
+        reduce
+          ? undefined
+          : { opacity: active ? 1 : 0.62, scale: active ? 1 : 0.992 }
+      }
+      className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)] transition-shadow duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.3)]"
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-secondary/40"
+        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors duration-300 hover:bg-secondary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/[0.07] text-primary ring-1 ring-primary/10">
           <Icon className="h-5 w-5" strokeWidth={1.8} />
         </span>
         <span className="flex-1">
-          <span className="block font-display text-[15px] font-extrabold tracking-tight text-ink">
+          <span className="block font-display text-[16.5px] font-extrabold tracking-tight text-ink">
             {group.title}
           </span>
-          <span className="mt-0.5 block text-[12px] font-medium text-muted-foreground">
+          <span className="mt-0.5 block text-[12.5px] font-medium text-muted-foreground">
             {readyCount} of {group.items.length} confirmed ready
           </span>
         </span>
         <ChevronDown
           className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
-            open ? "rotate-180" : ""
+            open ? "rotate-180 text-primary" : ""
           }`}
         />
       </button>
@@ -373,11 +406,13 @@ function AssessmentGroup({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
 export function ReadinessAssessment() {
+  const reduce = useReducedMotion();
+
   return (
     <section
       id="readiness"
@@ -399,16 +434,22 @@ export function ReadinessAssessment() {
       />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-15% 0px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="max-w-2xl"
+        >
           <Eyebrow index="06">Hospital Readiness</Eyebrow>
-          <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
+          <h2 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
             Hospital Readiness Assessment
           </h2>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.75] text-muted-foreground">
+          <p className="mt-5 max-w-xl text-[16px] leading-[1.75] text-muted-foreground">
             Before investing in advanced medical technology, make sure your
             hospital is ready for a successful implementation.
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
           {/* LEFT — interactive assessment */}
@@ -418,6 +459,7 @@ export function ReadinessAssessment() {
                 key={group.id}
                 group={group}
                 defaultOpen={i === 0}
+                index={i}
               />
             ))}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-1 pt-1 text-[12px] font-medium text-muted-foreground">
@@ -433,58 +475,91 @@ export function ReadinessAssessment() {
           </div>
 
           {/* RIGHT — editorial + deliverables + CTA */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-12% 0px" }}
+            transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
+            className="lg:sticky lg:top-24 lg:self-start"
+          >
             <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
               Hospital Readiness
             </span>
-            <h3 className="mt-2.5 font-display text-[1.7rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
+            <h3 className="mt-2.5 font-display text-[1.85rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-ink">
               Is Your Hospital Ready for Advanced Medical Technology?
             </h3>
-            <p className="mt-3.5 text-[14px] leading-[1.7] text-muted-foreground">
-              Most installation delays are caused by infrastructure limitations
-              rather than the equipment itself. Our biomedical engineers assess
-              utilities, room readiness and clinical workflow before equipment
-              selection — helping hospitals avoid costly modifications and
-              project delays.
+            <p className="mt-4 text-[15px] leading-[1.75] text-muted-foreground">
+              In practice, most installation delays come from the building, not
+              the equipment — the room, the slab, the power supply and the
+              workflow around it. We assess utilities, room readiness and
+              clinical flow before any system is specified, so hospitals avoid
+              late modifications and go live on schedule.
             </p>
 
-            <div className="mt-6 rounded-2xl border border-border bg-secondary/40 p-5">
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-ink">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+              }}
+              className="mt-7 rounded-2xl border border-border bg-secondary/40 p-5"
+            >
+              <span className="text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink">
                 Engineering Review Includes
               </span>
               <ul className="mt-4 space-y-3">
                 {DELIVERABLES.map((d) => {
                   const Icon = d.icon;
                   return (
-                    <li key={d.label} className="flex items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-primary ring-1 ring-primary/10">
+                    <motion.li
+                      key={d.label}
+                      variants={{
+                        hidden: { opacity: 0, x: reduce ? 0 : -14 },
+                        show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } },
+                      }}
+                      className="group flex items-center gap-3"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-primary ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105">
                         <Icon className="h-4 w-4" strokeWidth={1.8} />
                       </span>
-                      <span className="text-[13.5px] font-semibold text-ink">
+                      <span className="text-[14px] font-semibold text-ink">
                         {d.label}
                       </span>
-                    </li>
+                    </motion.li>
                   );
                 })}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="mt-6 flex flex-col gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-8% 0px" }}
+              transition={{ duration: 0.55, ease: EASE, delay: 0.1 }}
+              className="mt-7 flex flex-col gap-3"
+            >
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)]"
+                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
               >
                 Request a Free Hospital Readiness Assessment
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[14px] font-bold text-ink transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[14px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
               >
                 Talk to a Biomedical Engineer
               </a>
-            </div>
-          </div>
+              <p className="mt-1 flex items-start gap-2 text-[12px] leading-[1.55] text-muted-foreground">
+                <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" strokeWidth={2} />
+                Every readiness assessment is performed by AbuFarha biomedical
+                engineers before any equipment recommendation.
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
