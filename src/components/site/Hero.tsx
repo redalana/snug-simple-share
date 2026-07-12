@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { ArrowRight, PhoneCall, ShieldCheck, Calendar, Building2, Globe2 } from "lucide-react";
 import heroImg from "@/assets/hero-cathlab.jpg";
+import heroImgMobile from "@/assets/hero-cathlab-mobile.jpg";
 
 const stats = [
   { icon: ShieldCheck, value: "OEM", label: "Certified Equipment" },
@@ -31,16 +32,16 @@ export function Hero() {
   const sx = useSpring(mx, spring);
   const sy = useSpring(my, spring);
 
-  // Differential depth: room < monitors < equipment.
-  const roomX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
-  const roomY = useTransform(sy, [-0.5, 0.5], [-5, 5]);
-  const monX = useTransform(sx, [-0.5, 0.5], [-9, 9]);
-  const monY = useTransform(sy, [-0.5, 0.5], [-9, 9]);
-  const equipX = useTransform(sx, [-0.5, 0.5], [-13, 13]);
-  const equipY = useTransform(sy, [-0.5, 0.5], [-13, 13]);
-  // Almost-invisible 3D camera.
-  const rotY = useTransform(sx, [-0.5, 0.5], [-1, 1]);
-  const rotX = useTransform(sy, [-0.5, 0.5], [1, -1]);
+  // Tiny differential parallax: room < monitors < equipment (subtle, premium).
+  const roomX = useTransform(sx, [-0.5, 0.5], [-3, 3]);
+  const roomY = useTransform(sy, [-0.5, 0.5], [-3, 3]);
+  const monX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
+  const monY = useTransform(sy, [-0.5, 0.5], [-5, 5]);
+  const equipX = useTransform(sx, [-0.5, 0.5], [-8, 8]);
+  const equipY = useTransform(sy, [-0.5, 0.5], [-8, 8]);
+  // Soft 3D camera — max ~4deg for an elegant Apple-like tilt.
+  const rotY = useTransform(sx, [-0.5, 0.5], [-4, 4]);
+  const rotX = useTransform(sy, [-0.5, 0.5], [4, -4]);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (reduce) return;
@@ -139,77 +140,64 @@ export function Hero() {
             <div className="absolute inset-0 rounded-[3rem] bg-[radial-gradient(closest-side,rgba(219,234,254,0.7),rgba(255,255,255,0.4)_55%,transparent)] blur-2xl" />
           </motion.div>
 
-          {/* floating wrapper */}
+          {/* gentle breathing wrapper — subtle scale, no floating */}
           <motion.div
-            animate={reduce ? undefined : { y: [4, -4, 4] }}
-            transition={{ duration: 12, ease: "easeInOut", repeat: Infinity }}
+            animate={reduce ? undefined : { scale: [1, 1.012, 1] }}
+            transition={{ duration: 9, ease: "easeInOut", repeat: Infinity }}
           >
-            {/* scroll drift */}
+            {/* scroll drift (very subtle camera movement) */}
             <motion.div style={{ y, scale }}>
-              {/* 3D camera tilt + reveal */}
+              {/* 3D camera tilt + fade-in reveal */}
               <motion.div
-                initial={{ opacity: 0, scale: 1.06, clipPath: "inset(8% 8% 8% 8% round 1.5rem)" }}
-                animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0% 0% 0% round 1.5rem)" }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
-                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_40px_80px_-30px_rgba(15,23,42,0.45)] ring-1 ring-black/5 will-change-transform"
+                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_36px_80px_-34px_rgba(15,23,42,0.32)] ring-1 ring-black/5 will-change-transform"
               >
-                {/* equipment layer (moves most) */}
+                {/* equipment layer (moves most) — desktop / tablet */}
                 <motion.img
                   src={heroImg}
-                  alt="Advanced hospital cardiology cath lab with angiography imaging system"
-                  width={1600}
-                  height={1200}
+                  alt="Bright modern hospital catheterization lab with advanced angiography imaging system"
+                  width={1536}
+                  height={1024}
                   fetchPriority="high"
-                  style={{ x: equipX, y: equipY, scale: 1.06 }}
-                  className="h-[360px] w-full object-cover will-change-transform lg:h-[560px]"
+                  style={{ x: equipX, y: equipY, scale: 1.05 }}
+                  className="hidden h-[420px] w-full object-cover will-change-transform sm:block lg:h-[640px]"
+                />
+                {/* dedicated mobile crop — focuses on the Cath Lab system */}
+                <motion.img
+                  src={heroImgMobile}
+                  alt="Bright modern hospital catheterization lab with advanced angiography imaging system"
+                  width={1024}
+                  height={1280}
+                  fetchPriority="high"
+                  style={{ x: equipX, y: equipY, scale: 1.05 }}
+                  className="block h-[440px] w-full object-cover will-change-transform sm:hidden"
                 />
 
-                {/* monitor "alive" layer — subtle brightness + parallax over the displays */}
+                {/* monitor "alive" layer — subtle blue glow + parallax over the displays */}
                 <motion.div
                   aria-hidden
                   style={{ x: monX, y: monY }}
-                  className="pointer-events-none absolute right-[6%] top-[10%] h-[34%] w-[42%]"
+                  className="pointer-events-none absolute right-[6%] top-[18%] h-[30%] w-[40%]"
                 >
                   <motion.div
-                    animate={reduce ? undefined : { opacity: [0.15, 0.4, 0.15] }}
-                    transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
-                    className="h-full w-full rounded-lg bg-[radial-gradient(ellipse_at_center,rgba(191,219,254,0.55),transparent_70%)] mix-blend-screen"
+                    animate={reduce ? undefined : { opacity: [0.12, 0.3, 0.12] }}
+                    transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
+                    className="h-full w-full rounded-lg bg-[radial-gradient(ellipse_at_center,rgba(147,197,253,0.5),transparent_70%)] mix-blend-screen"
                   />
                 </motion.div>
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-transparent" />
-                <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] shadow-[inset_0_0_120px_rgba(15,23,42,0.35)] ring-1 ring-inset ring-black/10" />
-
-                {/* recurring cinematic light sweep */}
-                {!reduce && (
-                  <motion.div
-                    aria-hidden
-                    initial={{ x: "-140%" }}
-                    animate={{ x: ["-140%", "220%"] }}
-                    transition={{
-                      duration: 2.2,
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      repeatDelay: 7,
-                      delay: 1,
-                    }}
-                    className="pointer-events-none absolute inset-y-0 w-1/4 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                  />
-                )}
+                {/* soft ambient light reflection (top-left) */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent" />
+                {/* very soft depth grounding at the base — kept light */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent" />
+                {/* crisp edge definition */}
+                <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/5" />
               </motion.div>
             </motion.div>
           </motion.div>
-
-          <div className="absolute -bottom-5 left-6 z-10 hidden rounded-2xl border border-border bg-white/95 px-5 py-3.5 shadow-xl backdrop-blur sm:block">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Cath Lab Systems
-            </div>
-            <div className="font-display text-sm font-bold text-ink">
-              Advanced interventional cardiology
-            </div>
-          </div>
         </motion.div>
 
       </div>
