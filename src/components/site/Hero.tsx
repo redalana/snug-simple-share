@@ -19,18 +19,41 @@ const stats = [
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
+  // Pointer position (-0.5 .. 0.5), smoothed with springs for premium feel.
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const spring = { stiffness: 120, damping: 22, mass: 0.4 };
+  const sx = useSpring(mx, spring);
+  const sy = useSpring(my, spring);
+
+  // Differential depth: room < monitors < equipment.
+  const roomX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
+  const roomY = useTransform(sy, [-0.5, 0.5], [-5, 5]);
+  const monX = useTransform(sx, [-0.5, 0.5], [-9, 9]);
+  const monY = useTransform(sy, [-0.5, 0.5], [-9, 9]);
+  const equipX = useTransform(sx, [-0.5, 0.5], [-13, 13]);
+  const equipY = useTransform(sy, [-0.5, 0.5], [-13, 13]);
+  // Almost-invisible 3D camera.
+  const rotY = useTransform(sx, [-0.5, 0.5], [-1, 1]);
+  const rotX = useTransform(sy, [-0.5, 0.5], [1, -1]);
+
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.setProperty("--px", `${px * 14}px`);
-    el.style.setProperty("--py", `${py * 14}px`);
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
   };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
+
+
 
   return (
     <section
