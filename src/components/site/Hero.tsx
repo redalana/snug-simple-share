@@ -31,16 +31,16 @@ export function Hero() {
   const sx = useSpring(mx, spring);
   const sy = useSpring(my, spring);
 
-  // Differential depth: room < monitors < equipment.
-  const roomX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
-  const roomY = useTransform(sy, [-0.5, 0.5], [-5, 5]);
-  const monX = useTransform(sx, [-0.5, 0.5], [-9, 9]);
-  const monY = useTransform(sy, [-0.5, 0.5], [-9, 9]);
-  const equipX = useTransform(sx, [-0.5, 0.5], [-13, 13]);
-  const equipY = useTransform(sy, [-0.5, 0.5], [-13, 13]);
-  // Almost-invisible 3D camera.
-  const rotY = useTransform(sx, [-0.5, 0.5], [-1, 1]);
-  const rotX = useTransform(sy, [-0.5, 0.5], [1, -1]);
+  // Tiny differential parallax: room < monitors < equipment (subtle, premium).
+  const roomX = useTransform(sx, [-0.5, 0.5], [-3, 3]);
+  const roomY = useTransform(sy, [-0.5, 0.5], [-3, 3]);
+  const monX = useTransform(sx, [-0.5, 0.5], [-5, 5]);
+  const monY = useTransform(sy, [-0.5, 0.5], [-5, 5]);
+  const equipX = useTransform(sx, [-0.5, 0.5], [-8, 8]);
+  const equipY = useTransform(sy, [-0.5, 0.5], [-8, 8]);
+  // Soft 3D camera — max ~4deg for an elegant Apple-like tilt.
+  const rotY = useTransform(sx, [-0.5, 0.5], [-4, 4]);
+  const rotX = useTransform(sy, [-0.5, 0.5], [4, -4]);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (reduce) return;
