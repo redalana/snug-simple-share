@@ -184,6 +184,15 @@
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
+@keyframes conn-flow {
+  to { stroke-dashoffset: -14; }
+}
+
+.conn-flow {
+  animation: conn-flow 3.2s linear infinite;
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
