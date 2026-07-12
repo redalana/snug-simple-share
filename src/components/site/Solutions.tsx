@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -24,6 +24,10 @@ import carm from "@/assets/sol-carm.jpg";
 import xray from "@/assets/sol-xray.jpg";
 import dexa from "@/assets/sol-dexa.jpg";
 import eswl from "@/assets/sol-eswl.jpg";
+
+const AUTOPLAY_MS = 3000;
+const RESUME_DELAY_MS = 2000;
+
 
 type Meta = { label: string; value: string };
 
