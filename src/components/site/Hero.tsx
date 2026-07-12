@@ -153,7 +153,7 @@ export function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
-                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_36px_80px_-34px_rgba(15,23,42,0.32)] ring-1 ring-black/5 will-change-transform"
+                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_36px_80px_-34px_rgba(15,23,42,0.32)] ring-1 ring-black/5 will-change-transform lg:ring-0 lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_10%,black_26%)] lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_10%,black_26%)]"
               >
                 {/* equipment layer (moves most) — desktop / tablet */}
                 <motion.img
