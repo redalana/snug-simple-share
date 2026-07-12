@@ -134,7 +134,7 @@ export function Hero() {
             </div>
 
 
-            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
+            <div className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
               {stats.map((s) => (
                 <div key={s.label} className="flex items-center gap-3">
                   <s.icon className="h-6 w-6 shrink-0 text-primary" />
