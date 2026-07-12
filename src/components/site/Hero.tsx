@@ -11,10 +11,10 @@ import { ArrowRight, PhoneCall, ShieldCheck, Calendar, Building2, Globe2 } from 
 import heroImg from "@/assets/hero-cathlab.jpg";
 
 const stats = [
-  { icon: Calendar, value: "25+", label: "Years Experience" },
-  { icon: Building2, value: "250+", label: "Hospitals Served" },
-  { icon: Globe2, value: "40+", label: "Countries" },
-  { icon: ShieldCheck, value: "OEM", label: "Quality Guaranteed" },
+  { icon: ShieldCheck, value: "OEM", label: "Certified Equipment" },
+  { icon: Building2, value: "End-to-End", label: "Supply & Installation" },
+  { icon: Calendar, value: "24/7", label: "Technical Support" },
+  { icon: Globe2, value: "MENA", label: "& Africa Coverage" },
 ];
 
 export function Hero() {
