@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, HeartPulse, ScanLine, Bone, Zap, type LucideIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import cathlab from "@/assets/hero-cathlab.jpg";
 import mri from "@/assets/sol-mri.jpg";
@@ -7,24 +7,27 @@ import petct from "@/assets/sol-petct.jpg";
 import ct from "@/assets/sol-ct.jpg";
 import carm from "@/assets/sol-carm.jpg";
 import mammo from "@/assets/sol-mammo.jpg";
+import des from "@/assets/sol-des.jpg";
+import xray from "@/assets/sol-xray.jpg";
+import dexa from "@/assets/sol-dexa.jpg";
+import eswl from "@/assets/sol-eswl.jpg";
 
-type Sol = { title: string; desc: string; img?: string; span?: string; icon?: LucideIcon };
+type Sol = { title: string; desc: string; img: string; span?: string; featured?: boolean };
 
 const SOLUTIONS: Sol[] = [
-  { title: "Cath Lab Systems", desc: "Advanced imaging for interventional cardiology procedures.", img: cathlab, span: "lg:col-span-2 lg:row-span-2" },
-  { title: "MRI Scanners", desc: "High-field magnetic resonance imaging.", img: mri },
+  { title: "Cath Lab", desc: "Interventional cardiology imaging.", img: cathlab, span: "lg:col-span-2 lg:row-span-2", featured: true },
+  { title: "MRI Scanners", desc: "High-field magnetic resonance.", img: mri },
   { title: "PET/CT Scanners", desc: "Molecular & functional imaging.", img: petct },
   { title: "CT Scanners", desc: "Fast, high-resolution diagnostics.", img: ct },
   { title: "C-Arm Systems", desc: "Mobile surgical fluoroscopy.", img: carm },
-  { title: "Mammography Systems", desc: "Digital & 3D women's imaging.", img: mammo, span: "lg:col-span-2" },
-  { title: "Drug-Eluting Stents (DES)", desc: "Interventional cardiology consumables.", icon: HeartPulse },
-  { title: "X-Ray Systems", desc: "Digital radiography solutions.", icon: ScanLine },
-  { title: "Bone Densitometers (DEXA)", desc: "Precise bone density assessment.", icon: Bone },
-  { title: "Lithotripsy (ESWL)", desc: "Non-invasive stone treatment.", icon: Zap },
+  { title: "Mammography", desc: "Digital & 3D women's imaging.", img: mammo, span: "lg:col-span-2" },
+  { title: "Stents (DES)", desc: "Cardiology consumables.", img: des },
+  { title: "X-Ray Systems", desc: "Digital radiography.", img: xray },
+  { title: "Bone Density (DEXA)", desc: "Precise bone assessment.", img: dexa },
+  { title: "Lithotripsy (ESWL)", desc: "Non-invasive stone treatment.", img: eswl },
 ];
 
 function Card({ s }: { s: Sol }) {
-  const Icon = s.icon;
   return (
     <motion.a
       href="#contact"
@@ -32,54 +35,37 @@ function Card({ s }: { s: Sol }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5 }}
-      className={`group relative flex min-h-[180px] flex-col justify-end overflow-hidden rounded-2xl border border-border bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_54px_-24px_rgba(15,23,42,0.5)] ${s.span ?? ""}`}
+      className={`group relative flex min-h-[180px] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_54px_-24px_rgba(15,23,42,0.5)] ${s.span ?? ""}`}
     >
-      {s.img ? (
-        <>
-          <img
-            src={s.img}
-            alt={s.title}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        </>
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-br from-white to-secondary" />
-          <div
-            className="absolute inset-0 opacity-[0.4] transition-opacity duration-500 group-hover:opacity-70"
-            style={{
-              backgroundImage: "radial-gradient(var(--primary) 1px, transparent 1.4px)",
-              backgroundSize: "16px 16px",
-              maskImage: "linear-gradient(to top left, black, transparent 70%)",
-              WebkitMaskImage: "linear-gradient(to top left, black, transparent 70%)",
-            }}
-          />
-          {Icon && (
-            <Icon
-              className="absolute -right-3 -top-3 h-24 w-24 text-primary/10 transition-transform duration-500 group-hover:scale-110 group-hover:text-primary/[0.16]"
-              strokeWidth={1.25}
-            />
-          )}
-          {Icon && (
-            <span className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/10 transition-all duration-300 group-hover:from-primary group-hover:to-primary-dark group-hover:text-white">
-              <Icon className="h-5 w-5" strokeWidth={1.75} />
-            </span>
-          )}
-          <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-primary to-primary-dark transition-transform duration-300 group-hover:scale-x-100" />
-        </>
+      <img
+        src={s.img}
+        alt={s.title}
+        loading="lazy"
+        width={1024}
+        height={768}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      {/* subtle inset edge for a unified premium frame */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+
+      {s.featured && (
+        <span className="absolute left-5 top-5 z-10 inline-flex items-center rounded-full bg-primary px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground shadow-lg">
+          Featured
+        </span>
       )}
-      <div className={`relative z-10 p-5 ${s.img ? "" : "text-ink"}`}>
-        <h3 className="font-display text-lg font-bold">{s.title}</h3>
-        <p className={`mt-1 text-sm ${s.img ? "text-white/75" : "text-muted-foreground"}`}>{s.desc}</p>
+
+      <div className={`relative z-10 ${s.featured ? "p-6 sm:p-7" : "p-5"}`}>
+        <h3 className={`font-display font-bold leading-tight ${s.featured ? "text-2xl sm:text-3xl" : "text-lg"}`}>
+          {s.title}
+        </h3>
+        <p className={`mt-1.5 text-white/75 ${s.featured ? "max-w-sm text-[15px]" : "text-sm"}`}>
+          {s.desc}
+        </p>
       </div>
-      <span
-        className={`absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 group-hover:bg-primary group-hover:text-white ${
-          s.img ? "bg-white/15 text-white backdrop-blur" : "bg-primary/10 text-primary opacity-0 group-hover:opacity-100"
-        }`}
-      >
+
+      <span className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition-all duration-300 group-hover:bg-primary group-hover:text-white">
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
       </span>
     </motion.a>
