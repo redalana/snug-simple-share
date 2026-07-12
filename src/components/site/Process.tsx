@@ -147,7 +147,7 @@ export function Process() {
   const glowTop = useTransform(fill, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="relative overflow-hidden bg-secondary/50 py-24">
+    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20">
       {/* faint engineering grid — healthcare identity, <4% */}
       <div
         aria-hidden
@@ -165,21 +165,21 @@ export function Process() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Eyebrow align="center" index="05">
-              Our Process
+              How We Work
             </Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
-            One partner, from first
+            A clear path from first
             <br />
-            drawing to <span className="text-primary">lifetime support</span>.
+            call to <span className="text-primary">ongoing support</span>.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-[15px] leading-[1.75] text-muted-foreground">
-            Every hospital project follows a proven six-phase journey — scroll to
-            follow the path from consultation to a partnership that never ends.
+            Every project follows the same seven-step journey — scroll to follow
+            it from consultation through to technical support.
           </p>
         </div>
 
-        <div ref={trackRef} className="relative mx-auto mt-20 max-w-5xl">
+        <div ref={trackRef} className="relative mx-auto mt-16 max-w-5xl">
           {/* central spine — desktop */}
           <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-border lg:block" />
           {/* scroll-driven progress fill */}
