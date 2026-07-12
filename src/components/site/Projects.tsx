@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Building2, Layers } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
@@ -30,7 +30,7 @@ export function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-lg"
+            className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:shadow-[0_40px_80px_-32px_rgba(15,23,42,0.55)]"
           >
             <img
               src={p1}
@@ -50,7 +50,15 @@ export function Projects() {
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-white/75">
                 Philips Allura Xper FD10 Cath Lab — full supply, installation &amp; commissioning.
               </p>
-              <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary">
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">
+                  <Building2 className="h-3.5 w-3.5 text-primary" /> Cath Lab
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">
+                  <Layers className="h-3.5 w-3.5 text-primary" /> Turnkey Installation
+                </span>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
                 View Case Study
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
@@ -60,8 +68,8 @@ export function Projects() {
           {/* Two smaller */}
           <div className="grid gap-4">
             {[
-              { img: p2, name: "Aster Hospital", loc: "Dubai, UAE", dept: "Multiple Departments" },
-              { img: p3, name: "Nile Medical Center", loc: "Cairo, Egypt", dept: "MRI & CT Systems" },
+              { img: p2, name: "Aster Hospital", loc: "Dubai, UAE", type: "Multi-Modality", scope: "8 Departments Equipped" },
+              { img: p3, name: "Nile Medical Center", loc: "Cairo, Egypt", type: "Diagnostic Imaging", scope: "MRI & CT Installation" },
             ].map((proj) => (
               <motion.a
                 href="#contact"
@@ -70,7 +78,7 @@ export function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-border bg-white p-3 transition-all hover:-translate-y-1 hover:shadow-lg"
+                className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-border bg-white p-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
               >
                 <div className="h-28 w-40 shrink-0 overflow-hidden rounded-xl">
                   <img
@@ -80,14 +88,21 @@ export function Projects() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
-                <div>
-                  <h3 className="font-display text-lg font-bold text-ink">{proj.name}</h3>
-                  <p className="mt-0.5 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                <div className="min-w-0">
+                  <p className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                     <MapPin className="h-3.5 w-3.5 text-primary" /> {proj.loc}
                   </p>
-                  <p className="mt-1 text-sm text-muted-foreground">{proj.dept}</p>
+                  <h3 className="font-display text-lg font-bold text-ink transition-colors group-hover:text-primary">{proj.name}</h3>
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
+                      <Building2 className="h-3 w-3" /> {proj.type}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                      <Layers className="h-3 w-3 text-primary" /> {proj.scope}
+                    </span>
+                  </div>
                 </div>
-                <ArrowRight className="ml-auto mr-3 h-5 w-5 text-primary transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-auto mr-3 h-5 w-5 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
               </motion.a>
             ))}
           </div>
