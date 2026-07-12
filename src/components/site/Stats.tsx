@@ -42,7 +42,7 @@ export function Stats() {
           strokeWidth="2"
         />
       </svg>
-      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 lg:grid-cols-4">
+      <div className="relative mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 sm:grid-cols-3">
         {STATS.map((s) => (
           <Stat key={s.label} {...s} />
         ))}
