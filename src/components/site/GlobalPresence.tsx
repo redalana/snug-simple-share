@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 
 const PINS = [
   { top: "30%", left: "50%", label: "Libya" },
