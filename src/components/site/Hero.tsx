@@ -123,41 +123,86 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Image */}
+        {/* Image — layered "4D" depth experience */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           onMouseMove={onMove}
+          onMouseLeave={onLeave}
           className="relative"
+          style={{ perspective: 1200 }}
         >
+          {/* ambient radial glow (deepest layer, moves least) */}
           <motion.div
-            style={{ y, scale }}
-            className="relative overflow-hidden rounded-[1.5rem] shadow-[0_40px_80px_-30px_rgba(15,23,42,0.45)] ring-1 ring-black/5"
+            aria-hidden
+            style={{ x: roomX, y: roomY }}
+            className="pointer-events-none absolute -inset-10 -z-10"
           >
-            <img
-              src={heroImg}
-              alt="Advanced hospital cardiology cath lab with angiography imaging system"
-              width={1600}
-              height={1200}
-              fetchPriority="high"
-              className="h-[360px] w-full object-cover transition-transform duration-500 will-change-transform lg:h-[560px]"
-              style={{ transform: "translate3d(var(--px,0), var(--py,0), 0)" }}
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-transparent" />
-            <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] shadow-[inset_0_0_120px_rgba(15,23,42,0.35)] ring-1 ring-inset ring-black/10" />
-            {/* light sweep */}
-            <motion.div
-              aria-hidden
-              initial={{ x: "-120%" }}
-              animate={{ x: "180%" }}
-              transition={{ duration: 2.4, delay: 1, ease: "easeInOut" }}
-              className="pointer-events-none absolute inset-y-0 w-1/3 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
-            />
+            <div className="absolute inset-0 rounded-[3rem] bg-[radial-gradient(closest-side,rgba(219,234,254,0.7),rgba(255,255,255,0.4)_55%,transparent)] blur-2xl" />
           </motion.div>
 
-          <div className="absolute -bottom-5 left-6 hidden rounded-2xl border border-border bg-white/95 px-5 py-3.5 shadow-xl backdrop-blur sm:block">
+          {/* floating wrapper */}
+          <motion.div
+            animate={reduce ? undefined : { y: [4, -4, 4] }}
+            transition={{ duration: 12, ease: "easeInOut", repeat: Infinity }}
+          >
+            {/* scroll drift */}
+            <motion.div style={{ y, scale }}>
+              {/* 3D camera tilt + reveal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 1.06, clipPath: "inset(8% 8% 8% 8% round 1.5rem)" }}
+                animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0% 0% 0% round 1.5rem)" }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
+                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_40px_80px_-30px_rgba(15,23,42,0.45)] ring-1 ring-black/5 will-change-transform"
+              >
+                {/* equipment layer (moves most) */}
+                <motion.img
+                  src={heroImg}
+                  alt="Advanced hospital cardiology cath lab with angiography imaging system"
+                  width={1600}
+                  height={1200}
+                  fetchPriority="high"
+                  style={{ x: equipX, y: equipY, scale: 1.06 }}
+                  className="h-[360px] w-full object-cover will-change-transform lg:h-[560px]"
+                />
+
+                {/* monitor "alive" layer — subtle brightness + parallax over the displays */}
+                <motion.div
+                  aria-hidden
+                  style={{ x: monX, y: monY }}
+                  className="pointer-events-none absolute right-[6%] top-[10%] h-[34%] w-[42%]"
+                >
+                  <motion.div
+                    animate={reduce ? undefined : { opacity: [0.15, 0.4, 0.15] }}
+                    transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
+                    className="h-full w-full rounded-lg bg-[radial-gradient(ellipse_at_center,rgba(191,219,254,0.55),transparent_70%)] mix-blend-screen"
+                  />
+                </motion.div>
+
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] shadow-[inset_0_0_120px_rgba(15,23,42,0.35)] ring-1 ring-inset ring-black/10" />
+
+                {/* recurring cinematic light sweep */}
+                {!reduce && (
+                  <motion.div
+                    aria-hidden
+                    initial={{ x: "-140%" }}
+                    animate={{ x: ["-140%", "220%"] }}
+                    transition={{
+                      duration: 2.2,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatDelay: 7,
+                      delay: 1,
+                    }}
+                    className="pointer-events-none absolute inset-y-0 w-1/4 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  />
+                )}
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          <div className="absolute -bottom-5 left-6 z-10 hidden rounded-2xl border border-border bg-white/95 px-5 py-3.5 shadow-xl backdrop-blur sm:block">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Cath Lab Systems
             </div>
@@ -166,6 +211,7 @@ export function Hero() {
             </div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );
