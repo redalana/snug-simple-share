@@ -424,11 +424,21 @@ export function BeyondEquipment() {
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {a.points.map((p) => (
                       <li key={p} className="flex items-center gap-2.5 text-[13.5px] font-medium text-ink">
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
                         {p}
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-4 rounded-xl border-l-2 border-primary/60 bg-secondary/40 px-4 py-3">
+                    <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-muted-foreground/70">
+                      Hospital Outcome
+                    </div>
+                    <p className="mt-1 text-[13px] font-medium leading-[1.55] text-ink">
+                      {a.outcome}
+                    </p>
+                  </div>
                   <a
                     href="#contact"
                     className="group mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
