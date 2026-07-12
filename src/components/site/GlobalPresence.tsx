@@ -77,7 +77,7 @@ export function GlobalPresence() {
               backgroundSize: "18px 18px",
             }}
           />
-          {/* stylized Africa + Middle East landmass */}
+          {/* stylized Africa + Middle East landmass + coverage links */}
           <svg
             aria-hidden
             viewBox="0 0 100 75"
@@ -93,7 +93,28 @@ export function GlobalPresence() {
               strokeWidth="0.5"
               strokeLinejoin="round"
             />
+            {/* coverage links radiating from HQ (Egypt) */}
+            {LINKS.map((l, i) => {
+              const mx = (HQ.x + l.x) / 2;
+              const my = (HQ.y + l.y) / 2 - Math.abs(l.x - HQ.x) * 0.28 - 3;
+              return (
+                <motion.path
+                  key={i}
+                  d={`M ${HQ.x} ${HQ.y} Q ${mx} ${my} ${l.x} ${l.y}`}
+                  fill="none"
+                  stroke="var(--primary)"
+                  strokeOpacity="0.35"
+                  strokeWidth="0.4"
+                  strokeDasharray="1.4 1.4"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  whileInView={{ pathLength: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 1.1, delay: 0.3 + i * 0.12, ease: "easeInOut" }}
+                />
+              );
+            })}
           </svg>
+
 
           {PINS.map((p, i) => (
             <div
