@@ -62,7 +62,7 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[104px] lg:pt-[112px]"
     >
       <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="mx-auto grid max-w-[100rem] items-center gap-10 px-6 py-12 lg:grid-cols-[37%_63%] lg:gap-8 lg:py-16 lg:px-10">
+      <div className="mx-auto grid max-w-[100rem] items-center gap-10 px-6 py-12 lg:grid-cols-[40%_60%] lg:gap-0 lg:py-16 lg:px-10">
         {/* Copy */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -128,7 +128,7 @@ export function Hero() {
         <motion.div
           onMouseMove={onMove}
           onMouseLeave={onLeave}
-          className="relative"
+          className="relative lg:-ml-24"
           style={{ perspective: 1200 }}
         >
           {/* ambient radial glow (deepest layer, moves least) */}
@@ -153,7 +153,7 @@ export function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
-                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_36px_80px_-34px_rgba(15,23,42,0.32)] ring-1 ring-black/5 will-change-transform"
+                className="relative overflow-hidden rounded-[1.5rem] shadow-[0_36px_80px_-34px_rgba(15,23,42,0.32)] ring-1 ring-black/5 will-change-transform lg:ring-0 lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_10%,black_26%)] lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_10%,black_26%)]"
               >
                 {/* equipment layer (moves most) — desktop / tablet */}
                 <motion.img
