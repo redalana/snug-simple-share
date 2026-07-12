@@ -222,12 +222,16 @@ export function ContactForm() {
         </div>
 
 
-        {/* Right — the adaptive form */}
-        <form
+        <motion.form
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           onSubmit={onSubmit}
           noValidate
-          className="rounded-3xl border border-border bg-white p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] sm:p-9"
+          className="relative rounded-[1.75rem] border border-white/60 bg-white/80 p-6 shadow-[0_40px_100px_-45px_rgba(15,23,42,0.35),0_2px_8px_-2px_rgba(15,23,42,0.06)] ring-1 ring-black/5 backdrop-blur-xl sm:p-9"
         >
+
           {/* I am a... */}
           <div className="space-y-2">
             <Label className="text-[13px] font-semibold text-ink">
