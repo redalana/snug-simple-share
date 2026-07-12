@@ -35,7 +35,7 @@ export function FinalCTA() {
         className="relative mx-auto flex max-w-[100rem] flex-col items-center gap-8 px-6 lg:px-10 text-center lg:flex-row lg:justify-between lg:text-left"
       >
         <div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.55rem] lg:leading-[1.08]">
             Let&apos;s Build Better Healthcare Together
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85">
