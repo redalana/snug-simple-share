@@ -451,6 +451,7 @@ export function ContactForm() {
             ))}
           </ul>
         </motion.form>
+        </div>
       </div>
     </section>
   );
