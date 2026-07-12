@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -24,6 +24,10 @@ import carm from "@/assets/sol-carm.jpg";
 import xray from "@/assets/sol-xray.jpg";
 import dexa from "@/assets/sol-dexa.jpg";
 import eswl from "@/assets/sol-eswl.jpg";
+
+const AUTOPLAY_MS = 3000;
+const RESUME_DELAY_MS = 2000;
+
 
 type Meta = { label: string; value: string };
 
@@ -204,8 +208,64 @@ const CATEGORIES: Category[] = [
 ];
 
 export function Solutions() {
-  const [activeId, setActiveId] = useState(CATEGORIES[0].id);
-  const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [cycleKey, setCycleKey] = useState(0);
+  const active = CATEGORIES[activeIndex];
+  const activeId = active.id;
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Autoplay: advance to next category every AUTOPLAY_MS while not paused.
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(() => {
+      setActiveIndex((i) => (i + 1) % CATEGORIES.length);
+      setCycleKey((k) => k + 1);
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(t);
+  }, [activeIndex, paused, cycleKey]);
+
+  // Preload every category image so switches are instant, no flash.
+  useEffect(() => {
+    CATEGORIES.forEach((c) => {
+      const img = new Image();
+      img.src = c.img;
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    };
+  }, []);
+
+  const pause = useCallback(() => {
+    if (resumeTimer.current) {
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = null;
+    }
+    setPaused(true);
+  }, []);
+
+  const scheduleResume = useCallback(() => {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      setPaused(false);
+      setCycleKey((k) => k + 1);
+    }, RESUME_DELAY_MS);
+  }, []);
+
+  const selectCategory = useCallback((index: number) => {
+    if (resumeTimer.current) {
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = null;
+    }
+    setActiveIndex(index);
+    setPaused(false);
+    setCycleKey((k) => k + 1);
+  }, []);
+
+
 
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-14 lg:py-[4.5rem]">
@@ -241,38 +301,75 @@ export function Solutions() {
         </div>
 
         {/* Category navigation */}
-        <div className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden">
+        <div
+          className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
+          onMouseEnter={pause}
+          onMouseLeave={scheduleResume}
+        >
           <div className="flex min-w-max gap-1 border-b border-border lg:min-w-0">
-            {CATEGORIES.map((c) => {
-              const Icon = c.icon;
+            {CATEGORIES.map((c, i) => {
               const isActive = c.id === activeId;
               return (
                 <button
                   key={c.id}
-                  onClick={() => setActiveId(c.id)}
-                  className={`group relative flex shrink-0 items-center gap-2.5 px-5 py-4 text-[13px] font-semibold tracking-[0.01em] transition-colors duration-300 ${
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-ink"
+                  onClick={() => selectCategory(i)}
+                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[13px] tracking-[0.01em] transition-colors duration-300 ${
+                    isActive
+                      ? "font-semibold text-primary"
+                      : "font-medium text-muted-foreground hover:text-ink"
                   }`}
                 >
-                  <Icon
-                    className={`h-[18px] w-[18px] transition-transform duration-300 ${
-                      isActive ? "scale-110" : "group-hover:scale-105"
+                  {/* soft active background tint */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="cat-tint"
+                      aria-hidden
+                      className="absolute inset-0 rounded-t-lg bg-primary/[0.04]"
+                      transition={{ type: "spring", stiffness: 480, damping: 42 }}
+                    />
+                  )}
+                  {/* premium product thumbnail */}
+                  <span
+                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary shadow-sm ring-1 transition-all duration-300 ${
+                      isActive
+                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_6px_14px_-6px_rgba(15,23,42,0.4)]"
+                        : "ring-white/80 group-hover:scale-[1.04]"
                     }`}
-                    strokeWidth={2}
-                  />
-                  {c.nav}
+                    style={{ width: 30, height: 30 }}
+                  >
+                    <img
+                      src={c.img}
+                      alt=""
+                      aria-hidden
+                      width={30}
+                      height={30}
+                      className="h-full w-full object-cover object-[center_38%]"
+                    />
+                  </span>
+                  <span className="relative z-10">{c.nav}</span>
+                  {/* hover underline hint */}
                   <span
                     aria-hidden
-                    className={`absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-ink/15 transition-opacity duration-300 ${
-                      isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
-                    }`}
+                    className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   {isActive && (
                     <motion.span
                       layoutId="cat-underline"
-                      className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary"
+                      className="absolute inset-x-3 -bottom-px z-20 h-0.5 overflow-hidden rounded-full bg-primary/25"
                       transition={{ type: "spring", stiffness: 480, damping: 42 }}
-                    />
+                    >
+                      {/* autoplay progress fill */}
+                      {!paused && (
+                        <motion.span
+                          key={cycleKey}
+                          className="block h-full w-full origin-left rounded-full bg-primary"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                        />
+                      )}
+                      {paused && <span className="block h-full w-full rounded-full bg-primary" />}
+                    </motion.span>
                   )}
                 </button>
               );
@@ -280,10 +377,16 @@ export function Solutions() {
           </div>
         </div>
 
+
         {/* Explorer */}
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12">
+        <div
+          className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12"
+          onMouseEnter={pause}
+          onMouseLeave={scheduleResume}
+        >
           {/* Content */}
           <div className="order-2 flex flex-col lg:order-1">
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -305,15 +408,22 @@ export function Solutions() {
 
                 {/* Premium feature rows */}
                 <ul className="mt-8 flex flex-col gap-5">
-                  {active.capabilities.map((cap) => (
-                    <li key={cap} className="flex items-center gap-3.5 text-[15px] font-medium text-ink">
+                  {active.capabilities.map((cap, i) => (
+                    <motion.li
+                      key={cap}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.15 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                      className="flex items-center gap-3.5 text-[15px] font-medium text-ink"
+                    >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                         <Check className="h-[15px] w-[15px]" strokeWidth={2.75} />
                       </span>
                       <span className="leading-snug">{cap}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
+
 
                 {/* Engineered information panel */}
                 <div className="mt-9 grid overflow-hidden rounded-2xl border border-border/80 bg-secondary/30 sm:grid-cols-3 sm:divide-x sm:divide-border/70">
@@ -351,24 +461,32 @@ export function Solutions() {
           {/* Featured image */}
           <div className="order-1 lg:order-2">
             <div className="relative aspect-4/3 overflow-hidden rounded-[1.25rem] bg-secondary shadow-[0_40px_80px_-40px_rgba(15,23,42,0.35)] ring-1 ring-black/5 lg:aspect-16/11">
-              <AnimatePresence mode="wait">
-                <motion.img
+              <AnimatePresence>
+                <motion.div
                   key={active.id}
-                  src={active.img}
-                  alt={active.title}
-                  loading="lazy"
-                  width={1600}
-                  height={1100}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-[center_38%]"
-                />
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  {/* Ken Burns: very slow, almost imperceptible zoom */}
+                  <motion.img
+                    src={active.img}
+                    alt={active.title}
+                    width={1600}
+                    height={1100}
+                    initial={{ scale: 1.0 }}
+                    animate={{ scale: 1.03 }}
+                    transition={{ duration: 12, ease: "linear" }}
+                    className="absolute inset-0 h-full w-full object-cover object-[center_38%]"
+                  />
+                </motion.div>
               </AnimatePresence>
               <div className="pointer-events-none absolute inset-0 rounded-[1.25rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
+
         </div>
       </div>
     </section>
