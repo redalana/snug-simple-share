@@ -34,7 +34,7 @@ type Advantage = {
 const ADVANTAGES: Advantage[] = [
   {
     id: "biomed",
-    label: "Biomedical Engineering",
+    label: "Engineering-Led Delivery",
     title: "Biomedical Engineering",
     desc: "Every successful installation starts with engineering — not equipment delivery.",
     points: ["Site readiness assessment", "Clinical workflow planning", "Infrastructure & utility validation"],
@@ -45,7 +45,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "oem",
-    label: "OEM Partnerships",
+    label: "Authorised Supply",
     title: "OEM Partnerships",
     desc: "We supply technologies backed by globally recognised medical manufacturers.",
     points: ["Original medical equipment", "Manufacturer standards", "Certified product portfolio"],
@@ -56,7 +56,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "install",
-    label: "Installation & Commissioning",
+    label: "Commissioning",
     title: "Installation & Commissioning",
     desc: "Every system is installed, calibrated and verified before clinical use.",
     points: ["Installation", "Calibration", "Acceptance testing"],
@@ -67,7 +67,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "training",
-    label: "Clinical Training",
+    label: "Clinical Enablement",
     title: "Clinical Training",
     desc: "Technology delivers value only when clinical teams can use it confidently.",
     points: ["Physician training", "Clinical applications", "Workflow optimisation"],
@@ -78,7 +78,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "maintenance",
-    label: "Preventive Maintenance",
+    label: "Service & Uptime",
     title: "Preventive Maintenance",
     desc: "Prevent issues before they interrupt patient care.",
     points: ["Scheduled service visits", "Performance testing", "Preventive inspections"],
@@ -89,7 +89,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "parts",
-    label: "Original Spare Parts",
+    label: "Parts & Logistics",
     title: "Original Spare Parts",
     desc: "Reliable access to genuine replacement parts keeps critical systems operational.",
     points: ["Genuine components", "Fast regional availability", "OEM compatibility"],
@@ -100,7 +100,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "warranty",
-    label: "Warranty Programs",
+    label: "Service Coverage",
     title: "Warranty Programs",
     desc: "Flexible warranty coverage designed around healthcare operations.",
     points: ["Extended coverage", "Service protection", "Priority support"],
@@ -111,7 +111,7 @@ const ADVANTAGES: Advantage[] = [
   },
   {
     id: "support",
-    label: "Lifetime Technical Support",
+    label: "Lifecycle Support",
     title: "Lifetime Technical Support",
     desc: "Our relationship continues long after installation.",
     points: ["Remote assistance", "On-site engineering", "Long-term support"],
