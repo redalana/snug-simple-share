@@ -7,6 +7,7 @@ import {
   GraduationCap,
   Clock,
 } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 
 const FEATURES = [
   { icon: Globe, title: "Global Procurement", desc: "Direct access to world-leading manufacturers and OEM supply chains." },
