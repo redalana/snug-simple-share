@@ -104,7 +104,7 @@ const STATS = [
 const TRUST = [
   { icon: ShieldCheck, label: "OEM Certified Equipment" },
   { icon: Wrench, label: "Factory-Trained Engineers" },
-  { icon: Building2, label: "Turnkey Hospital Projects" },
+  { icon: Building2, label: "Full Lifecycle Support" },
   { icon: Headset, label: "24/7 Technical Support" },
 ];
 
