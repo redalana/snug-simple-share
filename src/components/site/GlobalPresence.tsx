@@ -125,7 +125,7 @@ export function GlobalPresence() {
               onMouseLeave={() => setActive(null)}
             >
               <span
-                className="absolute -inset-2 animate-ping rounded-full bg-primary/40"
+                className={`absolute animate-ping rounded-full bg-primary/40 ${p.hq ? "-inset-3" : "-inset-2"}`}
                 style={{ animationDelay: `${i * 0.25}s` }}
               />
               <motion.button
@@ -135,21 +135,34 @@ export function GlobalPresence() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, type: "spring", stiffness: 260 }}
-                className="relative block h-3 w-3 cursor-pointer rounded-full bg-primary ring-4 ring-primary/20 transition-transform hover:scale-125"
+                className={`relative block cursor-pointer rounded-full bg-primary transition-transform hover:scale-125 ${
+                  p.hq ? "h-4 w-4 ring-4 ring-primary/30" : "h-3 w-3 ring-4 ring-primary/20"
+                }`}
               />
               <div
                 className={`pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-[11px] font-semibold text-white shadow-lg transition-all duration-200 ${
-                  active === i ? "opacity-100" : "translate-y-1 opacity-0"
+                  active === i || p.hq ? "opacity-100" : "translate-y-1 opacity-0"
                 }`}
               >
-                {p.label}
+                {p.hq ? `${p.label} · HQ` : p.label}
                 <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-ink" />
               </div>
             </div>
           ))}
+
+          {/* legend */}
+          <div className="absolute bottom-4 left-4 flex items-center gap-4 rounded-full border border-border bg-white/85 px-3.5 py-1.5 text-[11px] font-medium text-muted-foreground shadow-sm backdrop-blur">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-primary/30" /> Headquarters
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-primary/70" /> Active coverage
+            </span>
+          </div>
         </div>
       </div>
     </section>
   );
+
 
 }
