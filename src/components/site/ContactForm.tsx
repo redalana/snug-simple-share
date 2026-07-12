@@ -193,7 +193,34 @@ export function ContactForm() {
             or lead a government project — this form adapts to you. No generic
             enquiries, just a focused conversation.
           </p>
+
+          {/* premium statistics */}
+          <dl className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-8">
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <dt className="font-display text-[1.7rem] font-extrabold leading-none tracking-tight text-ink">
+                  {s.value}
+                </dt>
+                <dd className="mt-1.5 text-[13px] font-medium text-muted-foreground">
+                  {s.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          {/* trust indicators */}
+          <ul className="mt-8 grid max-w-md gap-y-3 border-t border-border pt-8 sm:grid-cols-2">
+            {TRUST.map((t) => (
+              <li key={t.label} className="flex items-center gap-2.5">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Check className="h-3 w-3" strokeWidth={3} />
+                </span>
+                <span className="text-[13px] font-semibold text-ink">{t.label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+
 
         {/* Right — the adaptive form */}
         <form
