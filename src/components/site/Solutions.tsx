@@ -330,23 +330,24 @@ export function Solutions() {
                   )}
                   {/* premium product thumbnail */}
                   <span
-                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary shadow-sm ring-1 transition-all duration-300 ${
+                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary ring-1 transition-all duration-300 ${
                       isActive
-                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_6px_14px_-6px_rgba(15,23,42,0.4)]"
-                        : "ring-white/80 group-hover:scale-[1.04]"
+                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
+                        : "shadow-sm ring-white/80 group-hover:scale-[1.05]"
                     }`}
-                    style={{ width: 30, height: 30 }}
+                    style={{ width: 38, height: 38 }}
                   >
                     <img
                       src={c.img}
                       alt=""
                       aria-hidden
-                      width={30}
-                      height={30}
+                      width={38}
+                      height={38}
                       className="h-full w-full object-cover object-[center_38%]"
                     />
                   </span>
-                  <span className="relative z-10">{c.nav}</span>
+                  <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>{c.nav}</span>
+
                   {/* hover underline hint */}
                   <span
                     aria-hidden
