@@ -2,27 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
-
-const PINS = [
-  { top: "30%", left: "50%", label: "Libya" },
-  { top: "34%", left: "56%", label: "Egypt", hq: true },
-  { top: "40%", left: "63%", label: "Saudi Arabia" },
-  { top: "44%", left: "66%", label: "UAE" },
-  { top: "38%", left: "70%", label: "Qatar" },
-  { top: "48%", left: "46%", label: "Nigeria" },
-  { top: "52%", left: "58%", label: "Sudan" },
-  { top: "62%", left: "60%", label: "Kenya" },
-  { top: "70%", left: "55%", label: "Tanzania" },
-];
-
-// viewBox is 100 x 75 (4:3). Convert pin %s: x = left, y = top * 0.75.
-const HQ = { x: 56, y: 34 * 0.75 };
-const LINKS = PINS.filter((p) => !p.hq).map((p) => ({
-  x: parseFloat(p.left),
-  y: parseFloat(p.top) * 0.75,
-}));
-
-
+import { COUNTRIES, PINS, MAP_W, MAP_H, type Pin } from "./africaMapData";
 
 const COVERAGE = [
   { value: "40+", label: "Countries" },
@@ -31,12 +11,13 @@ const COVERAGE = [
   { value: "25+", label: "Years of Partnership" },
 ];
 
+const PIN_BY_NAME = new Map(PINS.map((p) => [p.name, p]));
+
 export function GlobalPresence() {
-  const [active, setActive] = useState<number | null>(null);
+  const [active, setActive] = useState<Pin | null>(null);
 
   return (
     <section id="coverage" className="bg-white py-20">
-
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
           <Eyebrow index="04">Global Presence</Eyebrow>
@@ -66,102 +47,152 @@ export function GlobalPresence() {
           </a>
         </div>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-white">
-          {/* dotted map field */}
+        {/* Real geographic map — dark premium enterprise style */}
+        <div className="relative aspect-[41/30] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-ink to-[oklch(0.22_0.03_264)] shadow-[0_40px_80px_-40px_rgba(15,23,42,0.7)]">
+          {/* red ambient lighting behind active regions */}
+          <div className="pointer-events-none absolute left-[45%] top-[38%] h-2/3 w-2/3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_var(--primary),transparent_65%)] opacity-25 blur-2xl" />
+          {/* subtle coordinate grid */}
           <div
-            className="absolute inset-0 opacity-[0.35]"
+            className="pointer-events-none absolute inset-0 opacity-[0.12]"
             style={{
               backgroundImage:
-                "radial-gradient(var(--muted-foreground) 1px, transparent 1.4px)",
-              backgroundSize: "18px 18px",
+                "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
             }}
           />
-          {/* stylized Africa + Middle East landmass + coverage links */}
+
           <svg
-            aria-hidden
-            viewBox="0 0 100 75"
+            viewBox={`0 0 ${MAP_W} ${MAP_H}`}
             className="absolute inset-0 h-full w-full"
-            preserveAspectRatio="none"
+            role="img"
+            aria-label="Map of AbuFarha coverage across Africa, the Middle East and Central Asia"
           >
-            <path
-              d="M38 14 L50 12 L58 15 L60 20 L66 20 L70 24 L68 30 L72 33 L70 38 L64 40 L62 47 L58 52 L56 62 L52 70 L48 66 L47 56 L42 50 L40 44 L36 40 L34 33 L37 27 L40 22 Z"
-              fill="var(--primary)"
-              fillOpacity="0.07"
-              stroke="var(--primary)"
-              strokeOpacity="0.22"
-              strokeWidth="0.5"
-              strokeLinejoin="round"
-            />
-            {/* coverage links radiating from HQ (Egypt) */}
-            {LINKS.map((l, i) => {
-              const mx = (HQ.x + l.x) / 2;
-              const my = (HQ.y + l.y) / 2 - Math.abs(l.x - HQ.x) * 0.28 - 3;
+            <defs>
+              <filter id="pinGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="6" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* inactive countries — dark gray */}
+            {COUNTRIES.filter((c) => !c.sup).map((c) => (
+              <path
+                key={c.name}
+                d={c.d}
+                fill="oklch(1 0 0 / 6%)"
+                stroke="oklch(1 0 0 / 12%)"
+                strokeWidth={0.6}
+              />
+            ))}
+
+            {/* supported countries — glowing red */}
+            {COUNTRIES.filter((c) => c.sup).map((c) => {
+              const pin = PIN_BY_NAME.get(c.name);
+              const isActive = active?.name === c.name;
               return (
-                <motion.path
-                  key={i}
-                  d={`M ${HQ.x} ${HQ.y} Q ${mx} ${my} ${l.x} ${l.y}`}
-                  fill="none"
+                <path
+                  key={c.name}
+                  d={c.d}
+                  fill={
+                    isActive
+                      ? "color-mix(in oklab, var(--primary) 68%, transparent)"
+                      : "color-mix(in oklab, var(--primary) 34%, transparent)"
+                  }
                   stroke="var(--primary)"
-                  strokeOpacity="0.35"
-                  strokeWidth="0.4"
-                  strokeDasharray="1.4 1.4"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 1.1, delay: 0.3 + i * 0.12, ease: "easeInOut" }}
+                  strokeOpacity={0.85}
+                  strokeWidth={0.8}
+                  style={{
+                    filter: isActive ? "drop-shadow(0 0 6px var(--primary))" : undefined,
+                    transition: "fill 0.25s ease",
+                    cursor: pin ? "pointer" : "default",
+                  }}
+                  onMouseEnter={() => pin && setActive(pin)}
+                  onMouseLeave={() => setActive(null)}
                 />
               );
             })}
           </svg>
 
-
-          {PINS.map((p, i) => (
-            <div
-              key={p.label}
-              className="absolute z-10"
-              style={{ top: p.top, left: p.left }}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-            >
-              <span
-                className={`absolute animate-ping rounded-full bg-primary/40 ${p.hq ? "-inset-3" : "-inset-2"}`}
-                style={{ animationDelay: `${i * 0.25}s` }}
-              />
-              <motion.button
-                type="button"
-                aria-label={p.label}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, type: "spring", stiffness: 260 }}
-                className={`relative block cursor-pointer rounded-full bg-primary transition-transform hover:scale-125 ${
-                  p.hq ? "h-4 w-4 ring-4 ring-primary/30" : "h-3 w-3 ring-4 ring-primary/20"
-                }`}
-              />
+          {/* glowing pulsing pins + tooltips (HTML overlay for crisp pulse) */}
+          {PINS.map((p) => {
+            const left = (p.x / MAP_W) * 100;
+            const top = (p.y / MAP_H) * 100;
+            const isActive = active?.name === p.name;
+            const flip = top < 32; // near top edge → show tooltip below the pin
+            return (
               <div
-                className={`pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-[11px] font-semibold text-white shadow-lg transition-all duration-200 ${
-                  active === i || p.hq ? "opacity-100" : "translate-y-1 opacity-0"
-                }`}
+                key={p.name}
+                className="absolute z-10"
+                style={{ left: `${left}%`, top: `${top}%`, transform: "translate(-50%, -50%)" }}
+                onMouseEnter={() => setActive(p)}
+                onMouseLeave={() => setActive(null)}
               >
-                {p.hq ? `${p.label} · HQ` : p.label}
-                <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-ink" />
+                <span
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
+                    p.hq ? "h-4 w-4" : "h-3 w-3"
+                  }`}
+                  style={{ animationDelay: `${(p.x % 7) * 0.2}s` }}
+                />
+                <button
+                  type="button"
+                  aria-label={p.name}
+                  className={`relative block cursor-pointer rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
+                    p.hq ? "h-3.5 w-3.5 ring-2 ring-white/70" : "h-2.5 w-2.5 ring-1 ring-white/50"
+                  }`}
+                />
+
+                {/* elegant floating glassmorphism tooltip */}
+                <div
+                  className={`pointer-events-none absolute left-1/2 z-20 w-52 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
+                    flip ? "top-full mt-3" : "bottom-full mb-3"
+                  } ${isActive ? "opacity-100" : "translate-y-1 opacity-0"}`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-display text-sm font-bold text-white">{p.name}</span>
+                    {p.hq && (
+                      <span className="rounded-full bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary-foreground">
+                        HQ
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-2.5 space-y-1.5 text-[11px]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/55">Projects completed</span>
+                      <span className="font-bold text-white">{p.projects}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/55">Hospitals served</span>
+                      <span className="font-bold text-white">{p.hospitals}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/55">Equipment installed</span>
+                      <span className="font-bold text-white">{p.equipment}</span>
+                    </div>
+                  </div>
+                  {flip ? (
+                    <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[6px] border-x-transparent border-b-ink/80" />
+                  ) : (
+                    <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink/80" />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* legend */}
-          <div className="absolute bottom-4 left-4 flex items-center gap-4 rounded-full border border-border bg-white/85 px-3.5 py-1.5 text-[11px] font-medium text-muted-foreground shadow-sm backdrop-blur">
+          <div className="absolute bottom-4 left-4 flex items-center gap-4 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[11px] font-medium text-white/70 shadow-sm backdrop-blur-md">
             <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-primary/30" /> Headquarters
+              <span className="h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white/50" /> Headquarters
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-primary/70" /> Active coverage
+              <span className="h-2 w-2 rounded-full bg-primary/80" /> Active coverage
             </span>
           </div>
         </div>
       </div>
     </section>
   );
-
-
 }
