@@ -334,7 +334,7 @@ export function WhyAbuFarha() {
                   <h3 className="font-display text-sm font-bold tracking-tight text-ink">
                     {n.title}
                   </h3>
-                  <p className="mt-0.5 text-[12px] leading-snug text-muted-foreground">
+                  <p className="mt-1.5 text-[12.5px] leading-[1.55] text-muted-foreground">
                     {n.desc}
                   </p>
                 </div>
