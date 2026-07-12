@@ -8,6 +8,7 @@ import {
   parseCountry,
   FlagImage,
 } from "react-international-phone";
+import "react-international-phone/style.css";
 import { AsYouType, getCountryCallingCode } from "libphonenumber-js";
 import type { CountryCode } from "libphonenumber-js";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
