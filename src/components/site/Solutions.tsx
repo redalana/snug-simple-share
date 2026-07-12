@@ -30,7 +30,7 @@ function Card({ s }: { s: Sol }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5 }}
-      className={`group relative flex min-h-[180px] flex-col justify-end overflow-hidden rounded-2xl border border-border bg-ink text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_50px_-24px_rgba(15,23,42,0.5)] ${s.span ?? ""}`}
+      className={`group relative flex min-h-[180px] flex-col justify-end overflow-hidden rounded-2xl border border-border bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_54px_-24px_rgba(15,23,42,0.5)] ${s.span ?? ""}`}
     >
       {s.img ? (
         <>
