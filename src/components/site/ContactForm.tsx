@@ -153,13 +153,38 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="bg-secondary/40 py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-        {/* Left — framing copy */}
+    <section id="contact" className="relative overflow-hidden bg-secondary/40 py-24">
+      {/* subtle healthcare identity — ECG line, <5% opacity */}
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-40 w-full -translate-y-1/2 text-primary opacity-[0.04]"
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 120"
+      >
+        <path
+          d="M0 60h360l18-40 22 80 20-64 16 28h84l16-24 20 48 18-40h606"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+      </svg>
+      {/* faint medical grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--color-ink) 1px, transparent 1px), linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        {/* Left — framing copy + trust */}
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow index="07">Request a Consultation</Eyebrow>
           <h2 className="mt-6 font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.7rem]">
             Tell us who you are,
+
             <br />
             <span className="text-primary">we&apos;ll tailor the rest.</span>
           </h2>
