@@ -88,12 +88,10 @@ export function Solutions() {
   return (
     <section id="solutions" className="bg-secondary/50 py-20">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Explore Our Solutions
-            </span>
-            <h2 className="mt-3 max-w-xl font-display text-3xl font-extrabold text-ink sm:text-4xl">
+            <Eyebrow>Explore Our Solutions</Eyebrow>
+            <h2 className="mt-4 max-w-xl font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
               Advanced Solutions for Every Department
             </h2>
           </div>
