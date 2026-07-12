@@ -313,10 +313,10 @@ export function Solutions() {
                 <button
                   key={c.id}
                   onClick={() => selectCategory(i)}
-                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[13px] tracking-[0.01em] transition-colors duration-300 ${
+                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[13px] tracking-[0.01em] transition-all duration-300 ${
                     isActive
-                      ? "font-semibold text-primary"
-                      : "font-medium text-muted-foreground hover:text-ink"
+                      ? "font-semibold text-ink"
+                      : "font-medium text-muted-foreground/70 hover:text-ink"
                   }`}
                 >
                   {/* soft active background tint */}
@@ -333,7 +333,7 @@ export function Solutions() {
                     className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary ring-1 transition-all duration-300 ${
                       isActive
                         ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
-                        : "shadow-sm ring-white/80 group-hover:scale-[1.05]"
+                        : "opacity-70 shadow-sm ring-white/80 grayscale-[0.15] group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-[1.05]"
                     }`}
                     style={{ width: 38, height: 38 }}
                   >
@@ -351,28 +351,29 @@ export function Solutions() {
                   {/* hover underline hint */}
                   <span
                     aria-hidden
-                    className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   {isActive && (
                     <motion.span
                       layoutId="cat-underline"
-                      className="absolute inset-x-3 -bottom-px z-20 h-0.5 overflow-hidden rounded-full bg-primary/25"
+                      className="absolute inset-x-3 -bottom-[3px] z-20 h-0.5 overflow-hidden rounded-full bg-ink/10"
                       transition={{ type: "spring", stiffness: 480, damping: 42 }}
                     >
-                      {/* autoplay progress fill */}
+                      {/* editorial autoplay progress line */}
                       {!paused && (
                         <motion.span
                           key={cycleKey}
                           className="block h-full w-full origin-left rounded-full bg-primary"
                           initial={{ scaleX: 0 }}
                           animate={{ scaleX: 1 }}
-                          transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                          transition={{ duration: AUTOPLAY_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
                         />
                       )}
                       {paused && <span className="block h-full w-full rounded-full bg-primary" />}
                     </motion.span>
                   )}
                 </button>
+
               );
             })}
           </div>
