@@ -14,7 +14,7 @@ import brainHero from "@/assets/stroke-brain-hero.jpg";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-type Callout = {
+type Node = {
   num: string;
   icon: LucideIcon;
   category: string;
@@ -23,13 +23,13 @@ type Callout = {
   side: "left" | "right";
 };
 
-const CALLOUTS: Callout[] = [
+const NODES: Node[] = [
   {
     num: "01",
     icon: Stethoscope,
     category: "Clinical Expertise",
     title: "Expert Stroke Physicians",
-    copy: "Discuss complex stroke cases with experienced physicians and clinical specialists.",
+    copy: "Meet experienced stroke physicians and discuss real clinical workflows.",
     side: "left",
   },
   {
@@ -45,7 +45,7 @@ const CALLOUTS: Callout[] = [
     icon: Network,
     category: "Programs",
     title: "Comprehensive Stroke Programs",
-    copy: "Learn how hospitals integrate imaging, intervention, engineering and clinical workflows.",
+    copy: "Discover how technology, physicians, engineering and workflow come together to create sustainable stroke services.",
     side: "left",
   },
   {
@@ -53,15 +53,15 @@ const CALLOUTS: Callout[] = [
     icon: Cpu,
     category: "Technology",
     title: "Advanced Neurovascular Technology",
-    copy: "Experience state-of-the-art biplane angiography and stroke treatment technologies.",
+    copy: "Experience advanced biplane angiography and stroke treatment technologies.",
     side: "right",
   },
   {
     num: "05",
     icon: Building2,
     category: "Real Practice",
-    title: "Hospitals Using Our Technologies",
-    copy: "Observe real stroke workflows inside hospitals using these systems every day.",
+    title: "Visit Hospitals Using Our Technologies",
+    copy: "Observe real stroke treatment workflows inside hospitals using these technologies every day.",
     side: "right",
   },
   {
@@ -69,7 +69,7 @@ const CALLOUTS: Callout[] = [
     icon: Boxes,
     category: "Facilities",
     title: "Engineering Facilities & Warehouse",
-    copy: "Tour our headquarters, laboratories and warehouse to see how every system is prepared before installation.",
+    copy: "Tour our engineering laboratories, refurbishment facilities and warehouse to understand how every system is prepared before installation.",
     side: "right",
   },
 ];
@@ -78,23 +78,25 @@ const VISIT_POINTS = [
   "Meet our physicians",
   "Meet our biomedical engineering team",
   "Tour our headquarters",
-  "Explore our engineering facilities",
+  "Explore our engineering laboratories",
   "Visit our medical equipment warehouse",
   "Explore comprehensive stroke programs",
   "Visit hospitals using our technologies",
   "Exchange knowledge & discuss collaboration",
 ];
 
-function CalloutPanel({ callout, index }: { callout: Callout; index: number }) {
-  const Icon = callout.icon;
-  const isLeft = callout.side === "left";
+function NodePanel({ node, index }: { node: Node; index: number }) {
+  const Icon = node.icon;
+  const isLeft = node.side === "left";
   return (
     <motion.div
       initial={{ opacity: 0, x: isLeft ? -28 : 28 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-12% 0px" }}
       transition={{ duration: 0.7, ease: EASE, delay: 0.12 * index }}
-      className={`group relative ${isLeft ? "lg:text-right" : "lg:text-left"}`}
+      className={`group relative rounded-2xl border border-border/70 bg-white/60 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-30px_rgba(15,23,42,0.5)] ${
+        isLeft ? "lg:text-right" : "lg:text-left"
+      }`}
     >
       <div
         className={`flex items-center gap-3 ${
@@ -105,18 +107,18 @@ function CalloutPanel({ callout, index }: { callout: Callout; index: number }) {
           <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
         </span>
         <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
-          {callout.num} · {callout.category}
+          {node.num} · {node.category}
         </span>
       </div>
-      <h3 className="mt-4 font-display text-[1.4rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
-        {callout.title}
+      <h3 className="mt-4 font-display text-[1.35rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
+        {node.title}
       </h3>
       <p
         className={`mt-2.5 text-[15px] leading-[1.6] text-muted-foreground ${
           isLeft ? "lg:ml-auto" : ""
         } max-w-xs`}
       >
-        {callout.copy}
+        {node.copy}
       </p>
     </motion.div>
   );
@@ -124,6 +126,11 @@ function CalloutPanel({ callout, index }: { callout: Callout; index: number }) {
 
 export function ExperienceAbuFarha() {
   const reduce = useReducedMotion();
+
+  // Connector-line targets: y positions (in the 0-100 SVG space) for the
+  // three nodes on each side, all converging on the brain center (50, 50).
+  const leftY = [22, 50, 78];
+  const rightY = [22, 50, 78];
 
   return (
     <section id="experience" className="relative overflow-hidden bg-white py-24 lg:py-32">
@@ -155,29 +162,67 @@ export function ExperienceAbuFarha() {
             </Eyebrow>
           </div>
           <h2 className="mt-7 font-display text-[2.6rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.4rem] lg:text-[3.9rem]">
-            Every Minute Matters.
-            <span className="block text-primary">Every Decision Changes Lives.</span>
+            A Stroke Program Saves Lives
+            <span className="block text-primary">Because Every Part Works Together.</span>
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-[19px] leading-[1.75] text-muted-foreground">
-            A successful stroke program is never built around a single medical
-            device. It requires advanced neurovascular technology, experienced
-            physicians, biomedical engineers, standardized workflows, clinical
-            education and long-term support. AbuFarha helps hospitals bring all
-            of these together.
+            Successful stroke treatment is never built around a single medical
+            device. It depends on an integrated ecosystem — advanced
+            neurovascular technology, experienced physicians, biomedical
+            engineers, standardized workflows and long-term support. AbuFarha
+            helps hospitals bring all of these together.
           </p>
         </motion.div>
 
-        {/* Hero visual + callouts */}
-        <div className="relative mt-20 grid items-center gap-10 lg:mt-28 lg:grid-cols-12 lg:gap-6">
-          {/* Left callouts */}
-          <div className="flex flex-col gap-12 lg:col-span-3 lg:gap-16">
-            {CALLOUTS.filter((c) => c.side === "left").map((c, i) => (
-              <CalloutPanel key={c.num} callout={c} index={i} />
+        {/* Hero visual + connected ecosystem */}
+        <div className="relative mt-20 grid items-center gap-8 lg:mt-28 lg:grid-cols-12 lg:gap-4">
+          {/* Connector lines (desktop only) */}
+          <svg
+            aria-hidden
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+          >
+            <defs>
+              <linearGradient id="connLine" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.05" />
+                <stop offset="50%" stopColor="var(--color-primary)" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0.05" />
+              </linearGradient>
+            </defs>
+            {leftY.map((y, i) => (
+              <path
+                key={`l-${i}`}
+                d={`M 24 ${y} C 38 ${y}, 42 50, 50 50`}
+                fill="none"
+                stroke="url(#connLine)"
+                strokeWidth="0.25"
+                strokeDasharray="1.5 2"
+                className={reduce ? undefined : "conn-flow"}
+              />
+            ))}
+            {rightY.map((y, i) => (
+              <path
+                key={`r-${i}`}
+                d={`M 76 ${y} C 62 ${y}, 58 50, 50 50`}
+                fill="none"
+                stroke="url(#connLine)"
+                strokeWidth="0.25"
+                strokeDasharray="1.5 2"
+                className={reduce ? undefined : "conn-flow"}
+              />
+            ))}
+          </svg>
+
+          {/* Left nodes */}
+          <div className="relative z-10 flex flex-col gap-10 lg:col-span-3 lg:gap-14">
+            {NODES.filter((c) => c.side === "left").map((c, i) => (
+              <NodePanel key={c.num} node={c} index={i} />
             ))}
           </div>
 
           {/* Center brain image */}
-          <div className="relative lg:col-span-6">
+          <div className="relative z-10 lg:col-span-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -188,22 +233,22 @@ export function ExperienceAbuFarha() {
               {/* soft radial glow */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full opacity-60 blur-3xl"
+                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full opacity-50 blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle at 55% 45%, color-mix(in oklab, var(--primary) 16%, transparent), transparent 65%)",
+                    "radial-gradient(circle at 55% 45%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 65%)",
                 }}
               />
               <motion.img
                 src={brainHero}
-                alt="Semi-transparent human head in side profile revealing the brain, with cerebral arteries glowing red and one blocked artery highlighted, set against a softly blurred cath lab"
+                alt="Semi-transparent human head in side profile revealing a realistic brain, with cerebral arteries and one artery blocked by a clot highlighted in soft red, set against a faintly blurred cath lab"
                 width={1024}
-                height={1024}
+                height={1280}
                 className="w-full select-none object-contain"
                 animate={
                   reduce
                     ? undefined
-                    : { scale: [1, 1.018, 1], opacity: [1, 0.97, 1] }
+                    : { scale: [1, 1.014, 1], opacity: [1, 0.98, 1] }
                 }
                 transition={
                   reduce
@@ -212,18 +257,40 @@ export function ExperienceAbuFarha() {
                 }
                 draggable={false}
               />
+              {/* Heartbeat pulse over the blocked artery */}
+              {!reduce && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute"
+                  style={{ left: "56%", top: "35%" }}
+                >
+                  <motion.span
+                    className="block h-6 w-6 rounded-full"
+                    style={{
+                      background:
+                        "radial-gradient(circle, color-mix(in oklab, var(--primary) 55%, transparent), transparent 70%)",
+                    }}
+                    animate={{ scale: [1, 2.4, 1], opacity: [0.55, 0, 0.55] }}
+                    transition={{
+                      duration: 1.6,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                    }}
+                  />
+                </span>
+              )}
             </motion.div>
           </div>
 
-          {/* Right callouts */}
-          <div className="flex flex-col gap-12 lg:col-span-3 lg:gap-16">
-            {CALLOUTS.filter((c) => c.side === "right").map((c, i) => (
-              <CalloutPanel key={c.num} callout={c} index={i} />
+          {/* Right nodes */}
+          <div className="relative z-10 flex flex-col gap-10 lg:col-span-3 lg:gap-14">
+            {NODES.filter((c) => c.side === "right").map((c, i) => (
+              <NodePanel key={c.num} node={c} index={i} />
             ))}
           </div>
         </div>
 
-        {/* Bottom invitation */}
+        {/* Invitation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -270,7 +337,7 @@ export function ExperienceAbuFarha() {
               href="#contact"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-8 py-3.5 text-[15px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
             >
-              Talk to Our Stroke Program Team
+              Talk With Our Stroke Team
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
