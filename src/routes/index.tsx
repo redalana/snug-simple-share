@@ -41,6 +41,7 @@ function Index() {
           </div>
         </div>
         <FinalCTA />
+        <ContactForm />
       </main>
       <Footer />
     </div>
