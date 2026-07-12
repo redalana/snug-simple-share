@@ -331,7 +331,7 @@ export function BeyondEquipment() {
                   </ul>
                   <a
                     href="#contact"
-                    className="group mt-8 inline-flex items-center gap-2 text-sm font-bold text-primary"
+                    className="group mt-8 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     Learn More
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -408,7 +408,7 @@ export function BeyondEquipment() {
                   </ul>
                   <a
                     href="#contact"
-                    className="group mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary"
+                    className="group mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     Learn More
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
