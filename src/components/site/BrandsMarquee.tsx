@@ -1,3 +1,5 @@
+import { Eyebrow } from "./Eyebrow";
+
 const BRANDS = [
   "PHILIPS",
   "Siemens Healthineers",
