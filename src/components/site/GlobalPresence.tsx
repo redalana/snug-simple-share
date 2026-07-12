@@ -121,6 +121,7 @@ export function GlobalPresence() {
             const left = (p.x / MAP_W) * 100;
             const top = (p.y / MAP_H) * 100;
             const isActive = active?.name === p.name;
+            const flip = top < 32; // near top edge → show tooltip below the pin
             return (
               <div
                 key={p.name}
