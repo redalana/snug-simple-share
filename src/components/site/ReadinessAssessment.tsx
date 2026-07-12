@@ -1,10 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
   Stethoscope,
@@ -14,6 +9,23 @@ import {
   AlertCircle,
   HelpCircle,
   ChevronDown,
+  Ruler,
+  Layers,
+  Zap,
+  Wind,
+  ShieldAlert,
+  Route,
+  UserCheck,
+  Cpu,
+  Network,
+  CalendarClock,
+  Package,
+  Headset,
+  GraduationCap,
+  FileSearch,
+  ClipboardList,
+  Gauge,
+  AlertTriangle,
   type LucideIcon,
 } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
@@ -23,11 +35,11 @@ type Status = "ready" | "review" | "unknown";
 type Item = {
   id: string;
   label: string;
+  icon: LucideIcon;
   status: Status;
-  /** one-line explanation shown on hover */
-  hint: string;
-  /** short engineering note revealed on click */
-  note: string;
+  why: string;
+  evaluates: string;
+  risk: string;
 };
 
 type Group = {
@@ -46,37 +58,47 @@ const GROUPS: Group[] = [
       {
         id: "room",
         label: "Installation Room Dimensions",
+        icon: Ruler,
         status: "ready",
-        hint: "Room must fit the system envelope plus service clearance.",
-        note: "Advanced imaging systems need defined clear floor area, ceiling height and access-corridor width for delivery. We verify dimensions against OEM drawings before commissioning.",
+        why: "The system envelope, service clearance and access route must fit the room.",
+        evaluates: "We compare room and corridor dimensions against OEM installation drawings.",
+        risk: "Undersized rooms force late redesign or block delivery entirely.",
       },
       {
         id: "floor",
         label: "Structural Floor Capacity",
+        icon: Layers,
         status: "review",
-        hint: "Heavy systems impose concentrated point loads on the slab.",
-        note: "Gantries and shielded doors concentrate weight on small footprints. A structural review confirms the slab and load path can carry static and dynamic loads safely.",
+        why: "Gantries and shielded doors impose concentrated point loads on the slab.",
+        evaluates: "We review slab thickness and load path with structural drawings.",
+        risk: "Insufficient capacity means reinforcement work after equipment ships.",
       },
       {
         id: "power",
         label: "Electrical Infrastructure",
+        icon: Zap,
         status: "review",
-        hint: "Peak draw, grounding and isolation must meet OEM spec.",
-        note: "Systems demand stable three-phase supply, dedicated grounding and often a UPS or line conditioner. We assess panel capacity and transient behaviour before install.",
+        why: "Systems need stable three-phase supply, clean grounding and isolation.",
+        evaluates: "We assess panel capacity, grounding and transient behaviour under load.",
+        risk: "Unstable supply causes faults, downtime and voided warranties.",
       },
       {
         id: "hvac",
         label: "HVAC & Cooling",
+        icon: Wind,
         status: "unknown",
-        hint: "Heat load and humidity must stay within tolerance.",
-        note: "Electronics reject significant heat and require controlled temperature and humidity. Under-sized cooling causes thermal shutdowns and shortens component life.",
+        why: "Electronics reject significant heat and need controlled temperature and humidity.",
+        evaluates: "We calculate heat load and verify cooling and humidity tolerance.",
+        risk: "Under-sized cooling triggers thermal shutdowns and shortens component life.",
       },
       {
         id: "shielding",
         label: "Radiation Shielding",
+        icon: ShieldAlert,
         status: "unknown",
-        hint: "Shielding calculated by a qualified physicist.",
-        note: "Room shielding is designed from workload, occupancy and adjacent-area use. A physics survey defines lead-equivalent barriers before construction, not after.",
+        why: "Barriers must be sized from workload, occupancy and adjacent-area use.",
+        evaluates: "A physics survey defines lead-equivalent shielding before construction.",
+        risk: "Retrofitting shielding after build-out is disruptive and costly.",
       },
     ],
   },
@@ -88,30 +110,38 @@ const GROUPS: Group[] = [
       {
         id: "workflow",
         label: "Clinical Workflow Planning",
+        icon: Route,
         status: "ready",
-        hint: "Patient and staff flow mapped around the new system.",
-        note: "Room layout should follow real clinical movement — patient prep, procedure and recovery — so the technology supports the workflow rather than disrupting it.",
+        why: "Room layout should follow real patient, staff and equipment movement.",
+        evaluates: "We map prep, procedure and recovery flow around the new system.",
+        risk: "Poor flow creates bottlenecks and unsafe crossovers during procedures.",
       },
       {
         id: "physician",
         label: "Physician Readiness",
+        icon: UserCheck,
         status: "review",
-        hint: "Operators confident on the specific platform.",
-        note: "Adoption depends on the clinical team's familiarity with the exact protocols and interface. Early involvement reduces the learning curve after go-live.",
+        why: "Adoption depends on the team's familiarity with the specific platform.",
+        evaluates: "We confirm operator experience and protocol alignment early.",
+        risk: "A steep learning curve delays go-live and reduces utilisation.",
       },
       {
         id: "biomed",
         label: "Biomedical Engineering Review",
+        icon: Cpu,
         status: "ready",
-        hint: "In-house or partner engineering support identified.",
-        note: "A named biomedical contact owning acceptance testing, safety checks and first-line response keeps uptime predictable from day one.",
+        why: "A named engineering owner keeps uptime and safety predictable.",
+        evaluates: "We define acceptance testing, safety checks and first-line response.",
+        risk: "Without ownership, faults escalate before anyone responds.",
       },
       {
         id: "pacs",
         label: "PACS / RIS Integration",
+        icon: Network,
         status: "unknown",
-        hint: "Images and orders must flow into hospital systems.",
-        note: "DICOM and HL7 connectivity to PACS and RIS is validated before go-live so results reach clinicians without manual handling.",
+        why: "Images and orders must flow into hospital systems automatically.",
+        evaluates: "We validate DICOM and HL7 connectivity to PACS and RIS.",
+        risk: "Broken integration forces manual handling and reporting delays.",
       },
     ],
   },
@@ -123,30 +153,38 @@ const GROUPS: Group[] = [
       {
         id: "pm",
         label: "Preventive Maintenance Strategy",
+        icon: CalendarClock,
         status: "review",
-        hint: "Scheduled servicing planned before install, not after.",
-        note: "A defined PM schedule keeps the system calibrated and compliant. Planning it up front avoids reactive downtime and preserves warranty terms.",
+        why: "Scheduled servicing keeps the system calibrated and compliant.",
+        evaluates: "We define a PM schedule before install to protect warranty terms.",
+        risk: "Reactive-only maintenance leads to avoidable downtime.",
       },
       {
         id: "spares",
         label: "Spare Parts Availability",
+        icon: Package,
         status: "unknown",
-        hint: "Critical parts sourcing and lead times understood.",
-        note: "Knowing which components are consumable versus long-lead lets the hospital hold the right critical spares and avoid extended outages.",
+        why: "Critical and long-lead parts must be identified in advance.",
+        evaluates: "We separate consumables from long-lead items and set stock levels.",
+        risk: "A single long-lead part can cause an extended outage.",
       },
       {
         id: "support",
         label: "Technical Support Planning",
+        icon: Headset,
         status: "ready",
-        hint: "Response path and escalation defined in advance.",
-        note: "Clear first-line, remote and on-site escalation with agreed response times means faults are contained before they affect the schedule.",
+        why: "A clear escalation path contains faults before they hit the schedule.",
+        evaluates: "We agree first-line, remote and on-site response times.",
+        risk: "Undefined support turns minor faults into major disruptions.",
       },
       {
         id: "training",
         label: "Staff Training",
+        icon: GraduationCap,
         status: "review",
-        hint: "Clinical and technical staff trained to competency.",
-        note: "Structured training for operators and biomedical staff — on safety, daily operation and troubleshooting — protects both patients and the investment.",
+        why: "Operators and biomedical staff need competency in safety and daily use.",
+        evaluates: "We structure training around operation and troubleshooting.",
+        risk: "Under-trained staff risk patient safety and equipment misuse.",
       },
     ],
   },
@@ -179,35 +217,46 @@ const STATUS_META: Record<
   },
 };
 
+const DELIVERABLES: { icon: LucideIcon; label: string }[] = [
+  { icon: FileSearch, label: "Site Survey Report" },
+  { icon: ClipboardList, label: "Utility & Infrastructure Checklist" },
+  { icon: Route, label: "Clinical Workflow Review" },
+  { icon: Gauge, label: "Installation & Risk Assessment" },
+];
+
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-function useCountUp(target: number, active: boolean, duration = 1400) {
-  const [value, setValue] = useState(0);
-  const reduce = useReducedMotion();
-  useEffect(() => {
-    if (!active) return;
-    if (reduce) {
-      setValue(target);
-      return;
-    }
-    let raf = 0;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(Math.round(eased * target));
-      if (t < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [active, target, duration, reduce]);
-  return value;
+function NoteRow({
+  label,
+  icon: Icon,
+  text,
+  tone,
+}: {
+  label: string;
+  icon: LucideIcon;
+  text: string;
+  tone?: "risk";
+}) {
+  return (
+    <div className="flex gap-2.5">
+      <Icon
+        className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+          tone === "risk" ? "text-primary" : "text-muted-foreground"
+        }`}
+        strokeWidth={2}
+      />
+      <p className="text-[12.5px] leading-snug text-ink/75">
+        <span className="font-semibold text-ink">{label}</span> {text}
+      </p>
+    </div>
+  );
 }
 
 function AssessmentItem({ item }: { item: Item }) {
   const [open, setOpen] = useState(false);
   const meta = STATUS_META[item.status];
   const StatusIcon = meta.icon;
+  const ItemIcon = item.icon;
 
   return (
     <div className="group border-t border-border/70 first:border-t-0">
@@ -217,16 +266,19 @@ function AssessmentItem({ item }: { item: Item }) {
         aria-expanded={open}
         className="flex w-full items-center gap-3 py-3.5 text-left transition-colors hover:bg-secondary/40"
       >
-        <span
-          className={`relative flex h-2.5 w-2.5 shrink-0 items-center justify-center`}
-        >
-          <span className={`h-2.5 w-2.5 rounded-full ${meta.dot}`} />
+        <span className="relative flex h-2 w-2 shrink-0 items-center justify-center">
+          <span className={`h-2 w-2 rounded-full ${meta.dot}`} />
           {item.status === "review" && (
             <span
               className={`absolute inset-0 rounded-full ${meta.dot} opacity-60 motion-safe:animate-ping`}
             />
           )}
         </span>
+
+        <ItemIcon
+          className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-ink"
+          strokeWidth={1.8}
+        />
 
         <span className="flex-1 text-[14px] font-semibold text-ink">
           {item.label}
@@ -246,13 +298,6 @@ function AssessmentItem({ item }: { item: Item }) {
         />
       </button>
 
-      {/* hover hint — desktop only, hidden once expanded */}
-      {!open && (
-        <p className="mb-3 hidden max-h-0 overflow-hidden pl-[22px] text-[12.5px] leading-relaxed text-muted-foreground opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100 lg:block">
-          {item.hint}
-        </p>
-      )}
-
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -262,9 +307,11 @@ function AssessmentItem({ item }: { item: Item }) {
             transition={{ duration: 0.4, ease: EASE }}
             className="overflow-hidden"
           >
-            <p className="mb-4 rounded-xl bg-secondary/60 px-4 py-3 pl-[22px] text-[13px] leading-[1.7] text-ink/75 ring-1 ring-border/60">
-              {item.note}
-            </p>
+            <div className="mb-4 ml-[26px] space-y-2 rounded-xl bg-secondary/60 px-4 py-3.5 ring-1 ring-border/60">
+              <NoteRow icon={AlertCircle} label="Why it matters —" text={item.why} />
+              <NoteRow icon={FileSearch} label="What we evaluate —" text={item.evaluates} />
+              <NoteRow icon={AlertTriangle} label="Common risk —" text={item.risk} tone="risk" />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -330,61 +377,6 @@ function AssessmentGroup({
   );
 }
 
-function ReadinessScore() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20% 0px" });
-  const reduce = useReducedMotion();
-  const score = useCountUp(78, inView);
-  const R = 52;
-  const C = 2 * Math.PI * R;
-  const shown = reduce ? 78 : score;
-  const offset = C - (shown / 100) * C;
-
-  return (
-    <div ref={ref} className="flex items-center gap-5">
-      <div className="relative h-[132px] w-[132px] shrink-0">
-        <svg viewBox="0 0 132 132" className="h-full w-full -rotate-90">
-          <circle
-            cx="66"
-            cy="66"
-            r={R}
-            fill="none"
-            stroke="var(--color-border)"
-            strokeWidth="9"
-          />
-          <motion.circle
-            cx="66"
-            cy="66"
-            r={R}
-            fill="none"
-            stroke="var(--color-primary)"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeDasharray={C}
-            initial={{ strokeDashoffset: C }}
-            animate={inView ? { strokeDashoffset: offset } : { strokeDashoffset: C }}
-            transition={{ duration: 1.4, ease: EASE }}
-          />
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-display text-3xl font-extrabold tabular-nums text-ink">
-            {shown}%
-          </span>
-        </div>
-      </div>
-      <div>
-        <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-          Overall Readiness
-        </span>
-        <p className="mt-1.5 max-w-[16rem] text-[13px] leading-[1.65] text-muted-foreground">
-          A sample profile. Most hospitals discover gaps they had not planned
-          for — before a single system is ordered.
-        </p>
-      </div>
-    </div>
-  );
-}
-
 export function ReadinessAssessment() {
   return (
     <section
@@ -440,37 +432,47 @@ export function ReadinessAssessment() {
             </div>
           </div>
 
-          {/* RIGHT — editorial + score + CTA */}
+          {/* RIGHT — editorial + deliverables + CTA */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
               Hospital Readiness
             </span>
-            <h3 className="mt-3 font-display text-[1.7rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
+            <h3 className="mt-2.5 font-display text-[1.7rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
               Is Your Hospital Ready for Advanced Medical Technology?
             </h3>
-            <p className="mt-4 text-[14px] leading-[1.75] text-muted-foreground">
-              Most delays and cost overruns are decided long before an order is
-              placed — in the room, the slab, the power supply and the workflow.
-              Evaluating infrastructure and clinical readiness first turns an
-              installation into a predictable project.
+            <p className="mt-3.5 text-[14px] leading-[1.7] text-muted-foreground">
+              Most installation delays are caused by infrastructure limitations
+              rather than the equipment itself. Our biomedical engineers assess
+              utilities, room readiness and clinical workflow before equipment
+              selection — helping hospitals avoid costly modifications and
+              project delays.
             </p>
 
-            <div className="mt-8 rounded-2xl border border-border bg-secondary/40 p-5">
-              <ReadinessScore />
+            <div className="mt-6 rounded-2xl border border-border bg-secondary/40 p-5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-ink">
+                Engineering Review Includes
+              </span>
+              <ul className="mt-4 space-y-3">
+                {DELIVERABLES.map((d) => {
+                  const Icon = d.icon;
+                  return (
+                    <li key={d.label} className="flex items-center gap-3">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-primary ring-1 ring-primary/10">
+                        <Icon className="h-4 w-4" strokeWidth={1.8} />
+                      </span>
+                      <span className="text-[13.5px] font-semibold text-ink">
+                        {d.label}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
 
-            <p className="mt-6 text-[13.5px] leading-[1.75] text-ink/75">
-              Every successful installation begins long before equipment
-              arrives. Our biomedical engineers evaluate infrastructure,
-              workflow and clinical requirements before equipment selection —
-              reducing project delays and helping hospitals go live with
-              confidence.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3">
+            <div className="mt-6 flex flex-col gap-3">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all hover:bg-primary-dark"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)]"
               >
                 Request a Free Hospital Readiness Assessment
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
