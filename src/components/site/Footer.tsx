@@ -23,7 +23,7 @@ const COLS = [
 export function Footer() {
   return (
     <footer className="bg-ink text-white/70">
-      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:px-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-[100rem] gap-x-8 gap-y-10 px-6 lg:px-10 py-14 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
         <div>
           <Logo light />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">

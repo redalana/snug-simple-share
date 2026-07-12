@@ -54,7 +54,7 @@ export function GlobalPresence() {
           <div className="pointer-events-none absolute -left-10 -top-10 h-72 w-72 rounded-full bg-[radial-gradient(circle,_var(--primary),transparent_70%)] opacity-20 blur-2xl" />
           <div className="pointer-events-none absolute left-[52%] top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_var(--primary),transparent_70%)] opacity-20 blur-2xl" />
 
-          <div className="relative grid gap-4 lg:grid-cols-[1.25fr_1fr] lg:gap-5">
+          <div className="relative grid gap-4 lg:grid-cols-[1.55fr_1fr] lg:gap-6">
             {/* Left: interactive map panel */}
             <div className="relative aspect-[41/30] overflow-hidden rounded-2xl border border-white/10 bg-[oklch(0.16_0.02_264)]">
               {/* dotted grid */}

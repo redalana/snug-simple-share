@@ -22,7 +22,7 @@ export function Projects() {
           </a>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* Featured large */}
           <motion.a
             href="#contact"
