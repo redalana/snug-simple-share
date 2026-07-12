@@ -1,4 +1,4 @@
-import { Calendar, Building2, Globe2, Boxes } from "lucide-react";
+import { Calendar, Building2, Boxes } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 
 const STATS = [
