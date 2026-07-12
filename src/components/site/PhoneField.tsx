@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Check, ChevronDown, Search } from "lucide-react";
-import { useVirtualizer } from "@tanstack/react-virtual";
+
 import {
   usePhoneInput,
   defaultCountries,
