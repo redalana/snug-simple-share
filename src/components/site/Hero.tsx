@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { ArrowRight, PhoneCall, ShieldCheck, Calendar, Building2, Globe2 } from "lucide-react";
 import heroImg from "@/assets/hero-cathlab.jpg";
+import heroImgMobile from "@/assets/hero-cathlab-mobile.jpg";
 
 const stats = [
   { icon: ShieldCheck, value: "OEM", label: "Certified Equipment" },
