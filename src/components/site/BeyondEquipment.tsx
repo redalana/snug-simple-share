@@ -237,12 +237,12 @@ export function BeyondEquipment() {
 
         {/* ============ DESKTOP / TABLET ============ */}
         <div
-          className="mt-12 hidden gap-8 lg:grid lg:grid-cols-[1.55fr_1fr] lg:gap-14"
+          className="mt-12 hidden gap-8 lg:grid lg:grid-cols-[1.72fr_1fr] lg:gap-9"
           onMouseEnter={pause}
           onMouseLeave={scheduleResume}
         >
           {/* Interactive equipment stage */}
-          <div className="relative self-start overflow-hidden rounded-3xl border border-border bg-secondary/40 shadow-[0_50px_120px_-45px_rgba(15,23,42,0.5)]">
+          <div className="relative -mb-6 self-start overflow-hidden rounded-3xl bg-secondary/40 shadow-[0_60px_140px_-40px_rgba(15,23,42,0.55)] ring-1 ring-inset ring-white/60">
             <motion.div
               className="relative aspect-[13/11] w-full will-change-transform"
               animate={reduce ? undefined : { scale: [1, 1.02, 1] }}
