@@ -248,16 +248,17 @@ export function WhyAbuFarha() {
                 {/* label */}
                 <div className="min-w-0 flex-1">
                   <h3
-                    className={`font-display text-[15px] font-bold leading-tight tracking-tight transition-colors ${
+                    className={`font-display text-[15px] font-bold leading-snug tracking-tight transition-colors ${
                       isActive ? "text-primary" : "text-ink"
                     }`}
                   >
                     {n.title}
                   </h3>
-                  <p className="mt-0.5 truncate text-[12px] leading-snug text-muted-foreground">
+                  <p className="mt-2 flex min-h-[2.6rem] items-start text-[12.5px] leading-[1.55] text-muted-foreground">
                     {n.desc}
                   </p>
                 </div>
+
 
                 {/* tooltip */}
                 <motion.div
