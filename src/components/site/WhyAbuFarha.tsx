@@ -44,8 +44,8 @@ export function WhyAbuFarha() {
               transition={{ duration: 0.45, delay: i * 0.05 }}
               className="group relative overflow-hidden rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-28px_rgba(15,23,42,0.35)]"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                <f.icon className="h-6 w-6" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-105 group-hover:shadow-[0_12px_24px_-12px_var(--primary)]">
+                <f.icon className="h-6 w-6" strokeWidth={1.75} />
               </div>
               <h3 className="font-display text-lg font-bold text-ink">{f.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
