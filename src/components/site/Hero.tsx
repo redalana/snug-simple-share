@@ -39,39 +39,40 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-primary">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
             Trusted Healthcare Technology Partner
           </span>
-          <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
+          <h1 className="mt-7 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-5xl lg:text-[3.55rem]">
             Advanced Medical
             <br /> Technology for
             <br />
             <span className="text-primary">Better Patient Outcomes</span>
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md text-[17px] leading-[1.7] text-muted-foreground">
             We supply, install, commission and maintain world-class medical equipment and turnkey
             hospital solutions for healthcare providers across Africa and the Middle East.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
             <a
               href="#solutions"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Explore Products
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-7 py-4 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full px-4 py-3.5 text-sm font-bold text-ink transition-colors hover:text-primary"
+              className="group inline-flex items-center gap-2 rounded-full px-3 py-4 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
             >
-              <PhoneCall className="h-4 w-4 text-primary" /> Talk to an Expert
+              <PhoneCall className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
+              Talk to an Expert
             </a>
           </div>
 
