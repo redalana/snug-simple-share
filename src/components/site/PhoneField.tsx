@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Check, ChevronDown, Search } from "lucide-react";
-import { useVirtualizer } from "@tanstack/react-virtual";
+
 import {
   usePhoneInput,
   defaultCountries,
@@ -17,7 +17,9 @@ import { cn } from "@/lib/utils";
 
 type ParsedCountry = ReturnType<typeof parseCountry>;
 
-const COUNTRIES: ParsedCountry[] = defaultCountries.map(parseCountry);
+const COUNTRIES: ParsedCountry[] = defaultCountries
+  .map(parseCountry)
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 function detectCountry(): string {
   try {
@@ -85,27 +87,25 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
     });
   }, [query]);
 
-  const rowVirtualizer = useVirtualizer({
-    count: filtered.length,
-    getScrollElement: () => listRef.current,
-    estimateSize: () => 44,
-    overscan: 8,
-  });
+  const scrollActiveIntoView = (idx: number) => {
+    requestAnimationFrame(() => {
+      const el = listRef.current?.querySelector<HTMLElement>(`[data-idx="${idx}"]`);
+      el?.scrollIntoView({ block: "nearest" });
+    });
+  };
 
   useEffect(() => {
     setActiveIndex(0);
-    rowVirtualizer.scrollToIndex(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    listRef.current?.scrollTo({ top: 0 });
   }, [query]);
 
   useEffect(() => {
     if (open) {
       const t = setTimeout(() => searchRef.current?.focus(), 60);
       const idx = filtered.findIndex((c) => c.iso2 === country.iso2);
-      if (idx >= 0) {
-        setActiveIndex(idx);
-        rowVirtualizer.scrollToIndex(idx, { align: "center" });
-      }
+      const target = idx >= 0 ? idx : 0;
+      setActiveIndex(target);
+      scrollActiveIntoView(target);
       return () => clearTimeout(t);
     }
     setQuery("");
@@ -123,14 +123,14 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
       e.preventDefault();
       setActiveIndex((i) => {
         const next = Math.min(i + 1, filtered.length - 1);
-        rowVirtualizer.scrollToIndex(next);
+        scrollActiveIntoView(next);
         return next;
       });
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((i) => {
         const next = Math.max(i - 1, 0);
-        rowVirtualizer.scrollToIndex(next);
+        scrollActiveIntoView(next);
         return next;
       });
     } else if (e.key === "Enter") {
@@ -206,31 +206,21 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
                       No countries found
                     </p>
                   ) : (
-                    <div
-                      style={{ height: rowVirtualizer.getTotalSize(), position: "relative", width: "100%" }}
-                    >
-                      {rowVirtualizer.getVirtualItems().map((vi) => {
-                        const c = filtered[vi.index];
+                    <div>
+                      {filtered.map((c, index) => {
                         const isSelected = c.iso2 === country.iso2;
-                        const isActive = vi.index === activeIndex;
+                        const isActive = index === activeIndex;
                         return (
                           <button
                             key={c.iso2}
                             type="button"
                             role="option"
+                            data-idx={index}
                             aria-selected={isSelected}
                             onClick={() => selectCountry(c.iso2)}
-                            onMouseEnter={() => setActiveIndex(vi.index)}
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              width: "100%",
-                              height: vi.size,
-                              transform: `translateY(${vi.start}px)`,
-                            }}
+                            onMouseEnter={() => setActiveIndex(index)}
                             className={cn(
-                              "flex items-center gap-3 rounded-lg px-2.5 text-left text-sm transition-colors duration-100",
+                              "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors duration-100",
                               isActive ? "bg-primary/8" : "bg-transparent",
                               isSelected && "font-semibold",
                             )}
