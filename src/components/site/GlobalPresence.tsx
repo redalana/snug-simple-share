@@ -77,14 +77,15 @@ export function GlobalPresence() {
               </filter>
             </defs>
 
-            {/* inactive countries — dark gray */}
+            {/* inactive countries — legible real geography */}
             {COUNTRIES.filter((c) => !c.sup).map((c) => (
               <path
                 key={c.name}
                 d={c.d}
-                fill="oklch(1 0 0 / 6%)"
-                stroke="oklch(1 0 0 / 12%)"
-                strokeWidth={0.6}
+                fill="oklch(1 0 0 / 9%)"
+                stroke="oklch(1 0 0 / 24%)"
+                strokeWidth={0.9}
+                strokeLinejoin="round"
               />
             ))}
 
