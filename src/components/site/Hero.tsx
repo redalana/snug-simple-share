@@ -54,37 +54,41 @@ export function Hero() {
       onMouseLeave={onLeave}
       className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[96px] lg:pt-[104px]"
     >
-      {/* ── The scene: one full-bleed editorial photograph ───────────────
-          On desktop the image fills the whole canvas, bleeding off the right,
-          top and bottom edges, then dissolving into the page surface on the
-          left so the copy sits inside the photograph's own daylight — one
-          composition, never two columns. */}
+      {/* ── The scene: one editorial photograph, aligned to the global grid ─
+          The image lives inside the exact same container as every other
+          section (max-w-[100rem] with matching gutters), so its right edge
+          respects the shared right margin. It still bleeds top and bottom and
+          dissolves into the page surface on the left — one composition, never
+          two columns — but never hugs the viewport edge. */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <motion.div style={{ y, scale }} className="absolute inset-0">
-          {/* breathing wrapper — almost invisible */}
-          <motion.div
-            animate={reduce ? undefined : { scale: [1, 1.012, 1] }}
-            transition={{ duration: 12, ease: "easeInOut", repeat: Infinity }}
-            className="absolute inset-0"
-          >
-            <motion.img
-              src={heroImg}
-              alt="Bright modern hospital catheterization lab with an advanced C-arm angiography imaging system and monitors"
-              width={1536}
-              height={1024}
-              fetchPriority="high"
-              style={{ x: sceneX, y: sceneY, scale: 1.08 }}
-              className="absolute right-0 top-0 h-full w-[68%] object-cover object-[70%_center] will-change-transform"
-            />
+        <div className="mx-auto h-full max-w-[100rem] px-6 lg:px-10">
+          <motion.div style={{ y, scale }} className="relative h-full">
+            {/* breathing wrapper — almost invisible */}
+            <motion.div
+              animate={reduce ? undefined : { scale: [1, 1.012, 1] }}
+              transition={{ duration: 12, ease: "easeInOut", repeat: Infinity }}
+              className="absolute inset-0 overflow-hidden rounded-[1.25rem]"
+            >
+              <motion.img
+                src={heroImg}
+                alt="Bright modern hospital catheterization lab with an advanced C-arm angiography imaging system and monitors"
+                width={1536}
+                height={1024}
+                fetchPriority="high"
+                style={{ x: sceneX, y: sceneY, scale: 1.08 }}
+                className="absolute right-0 top-0 h-full w-[66%] object-cover object-[70%_center] will-change-transform"
+              />
+              {/* soft dissolve of the photo's left edge into the page surface —
+                  a gentle wash, not a hard card boundary or heavy gradient */}
+              <div className="absolute inset-y-0 right-[34%] w-[34%] bg-gradient-to-r from-background via-background/85 to-transparent" />
+              <div className="absolute inset-y-0 left-0 w-[34%] bg-background" />
+              {/* barely-there daylight settling at the base for grounding */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/50 to-transparent" />
+            </motion.div>
           </motion.div>
-          {/* soft dissolve of the photo's left edge into the page surface —
-              a gentle wash, not a hard card boundary or heavy gradient */}
-          <div className="absolute inset-y-0 right-[32%] w-[34%] bg-gradient-to-r from-background via-background/85 to-transparent" />
-          <div className="absolute inset-y-0 left-0 w-[36%] bg-background" />
-          {/* barely-there daylight settling at the base for grounding */}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/60 to-transparent" />
-        </motion.div>
+        </div>
       </div>
+
 
       <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
