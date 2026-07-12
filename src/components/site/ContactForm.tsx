@@ -217,7 +217,7 @@ export function ContactForm() {
 
           <div className="relative">
             <Eyebrow index="06">Request a Consultation</Eyebrow>
-            <h2 className="mt-6 font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.7rem]">
+            <h2 className="mt-6 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Tell us who you are,
               <br />
               <span className="text-primary">we&apos;ll tailor the rest.</span>

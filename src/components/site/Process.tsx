@@ -168,7 +168,7 @@ export function Process() {
               How We Work
             </Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
+          <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
             A clear path from first
             <br />
             call to <span className="text-primary">ongoing support</span>.

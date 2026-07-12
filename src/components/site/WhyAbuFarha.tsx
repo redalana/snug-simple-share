@@ -397,7 +397,7 @@ export function WhyAbuFarha() {
               The Hospital Ecosystem
             </Eyebrow>
           </div>
-          <h2 className="mt-6 font-display text-[2.3rem] font-extrabold leading-[1.04] tracking-[-0.025em] text-ink sm:text-[3.15rem]">
+          <h2 className="mt-6 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
             We don&apos;t supply equipment.
             <br />
             We <span className="text-primary">engineer the room</span> around it.
