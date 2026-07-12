@@ -241,7 +241,7 @@ export function Solutions() {
         </div>
 
         {/* Category navigation */}
-        <div className="-mx-6 mb-8 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden">
           <div className="flex min-w-max gap-1 border-b border-border lg:min-w-0">
             {CATEGORIES.map((c) => {
               const Icon = c.icon;
@@ -250,17 +250,28 @@ export function Solutions() {
                 <button
                   key={c.id}
                   onClick={() => setActiveId(c.id)}
-                  className={`relative flex shrink-0 items-center gap-2 px-4 py-3 text-sm font-semibold transition-colors ${
+                  className={`group relative flex shrink-0 items-center gap-2.5 px-5 py-4 text-[13px] font-semibold tracking-[0.01em] transition-colors duration-300 ${
                     isActive ? "text-primary" : "text-muted-foreground hover:text-ink"
                   }`}
                 >
-                  <Icon className="h-4 w-4" strokeWidth={2} />
+                  <Icon
+                    className={`h-[18px] w-[18px] transition-transform duration-300 ${
+                      isActive ? "scale-110" : "group-hover:scale-105"
+                    }`}
+                    strokeWidth={2}
+                  />
                   {c.nav}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-ink/15 transition-opacity duration-300 ${
+                      isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+                    }`}
+                  />
                   {isActive && (
                     <motion.span
                       layoutId="cat-underline"
-                      className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-primary"
-                      transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                      className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary"
+                      transition={{ type: "spring", stiffness: 480, damping: 42 }}
                     />
                   )}
                 </button>
