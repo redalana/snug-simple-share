@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  Check,
   Wrench,
   Handshake,
   Cog,
@@ -19,8 +20,12 @@ type Advantage = {
   id: string;
   label: string;
   title: string;
+  /** Value statement — max 2 lines. */
   desc: string;
+  /** Three evidence-based proof points. */
   points: string[];
+  /** One practical hospital outcome. */
+  outcome: string;
   icon: LucideIcon;
   /** Hotspot position over the equipment image, in % of the frame. */
   x: number;
@@ -30,30 +35,33 @@ type Advantage = {
 const ADVANTAGES: Advantage[] = [
   {
     id: "biomed",
-    label: "In-House Capability",
+    label: "Engineering-Led Delivery",
     title: "Biomedical Engineering",
-    desc: "Our own certified biomedical engineers stand behind every system — not a call center, but the people who know your equipment down to the board level.",
-    points: ["Factory-certified engineers", "Board-level diagnostics", "Regional response teams"],
+    desc: "Every successful installation starts with engineering — not equipment delivery.",
+    points: ["Site readiness assessment", "Clinical workflow planning", "Infrastructure & utility validation"],
+    outcome: "Reduces implementation delays and ensures every system is ready for clinical operation from day one.",
     icon: Wrench,
     x: 24,
     y: 34,
   },
   {
     id: "oem",
-    label: "Authorised Channel",
+    label: "Authorised Supply",
     title: "OEM Partnerships",
-    desc: "Direct, authorised relationships with the world's leading manufacturers mean genuine technology, current firmware and a supported lifecycle — never grey-market risk.",
-    points: ["Authorised distribution", "Genuine firmware & upgrades", "Manufacturer-backed roadmap"],
+    desc: "We supply technologies backed by globally recognised medical manufacturers.",
+    points: ["Original medical equipment", "Manufacturer standards", "Certified product portfolio"],
+    outcome: "Ensures long-term reliability, compatibility and manufacturer-backed performance.",
     icon: Handshake,
     x: 55,
     y: 40,
   },
   {
     id: "install",
-    label: "Turnkey Delivery",
+    label: "Commissioning",
     title: "Installation & Commissioning",
-    desc: "From site planning to first clinical scan, we deliver systems calibrated to specification and validated for safety before your team ever touches a patient.",
-    points: ["Site & shielding planning", "Full calibration to spec", "Acceptance testing & sign-off"],
+    desc: "Every system is installed, calibrated and verified before clinical use.",
+    points: ["Installation", "Calibration", "Acceptance testing"],
+    outcome: "Reduces commissioning time and ensures equipment performs to specification.",
     icon: Cog,
     x: 53,
     y: 80,
@@ -62,48 +70,53 @@ const ADVANTAGES: Advantage[] = [
     id: "training",
     label: "Clinical Enablement",
     title: "Clinical Training",
-    desc: "Applications specialists train your clinicians and technologists on real protocols, so your investment reaches full clinical value from week one.",
-    points: ["On-site applications training", "Protocol optimisation", "Ongoing refresher programs"],
+    desc: "Technology delivers value only when clinical teams can use it confidently.",
+    points: ["Physician training", "Clinical applications", "Workflow optimisation"],
+    outcome: "Improves user confidence and supports more efficient clinical workflows.",
     icon: GraduationCap,
     x: 90,
     y: 56,
   },
   {
     id: "maintenance",
-    label: "Planned Uptime",
+    label: "Service & Uptime",
     title: "Preventive Maintenance",
-    desc: "Scheduled, documented maintenance keeps systems inside manufacturer tolerance — protecting image quality, patient safety and your uptime commitments.",
-    points: ["Scheduled service contracts", "Documented QA reporting", "Predictive fault detection"],
+    desc: "Prevent issues before they interrupt patient care.",
+    points: ["Scheduled service visits", "Performance testing", "Preventive inspections"],
+    outcome: "Minimises unexpected downtime and extends equipment lifespan.",
     icon: ShieldCheck,
     x: 78,
     y: 26,
   },
   {
     id: "parts",
-    label: "Genuine Supply",
+    label: "Parts & Logistics",
     title: "Original Spare Parts",
-    desc: "Stocked, traceable OEM parts sourced through authorised channels — so a fault means hours of downtime, not weeks of waiting on customs and grey suppliers.",
-    points: ["Genuine OEM components", "Regional parts inventory", "Full traceability"],
+    desc: "Reliable access to genuine replacement parts keeps critical systems operational.",
+    points: ["Genuine components", "Fast regional availability", "OEM compatibility"],
+    outcome: "Reduces repair time and protects long-term equipment performance.",
     icon: Boxes,
     x: 39,
     y: 24,
   },
   {
     id: "warranty",
-    label: "Protected Investment",
+    label: "Service Coverage",
     title: "Warranty Programs",
-    desc: "Structured warranty and extended-cover programs give your finance and clinical teams predictable costs and guaranteed response — for years, not months.",
-    points: ["Extended coverage options", "Guaranteed response SLAs", "Predictable service budgeting"],
+    desc: "Flexible warranty coverage designed around healthcare operations.",
+    points: ["Extended coverage", "Service protection", "Priority support"],
+    outcome: "Provides predictable service costs and greater operational confidence.",
     icon: BadgeCheck,
     x: 84,
     y: 33,
   },
   {
     id: "support",
-    label: "Long-Term Partnership",
+    label: "Lifecycle Support",
     title: "Lifetime Technical Support",
-    desc: "We stay long after commissioning. As your systems evolve, so does our support — the reason hospitals return to AbuFarha for their next generation of technology.",
-    points: ["Dedicated account engineers", "Lifecycle upgrade planning", "24/7 escalation support"],
+    desc: "Our relationship continues long after installation.",
+    points: ["Remote assistance", "On-site engineering", "Long-term support"],
+    outcome: "Hospitals receive continuous technical guidance throughout the equipment lifecycle.",
     icon: LifeBuoy,
     x: 74,
     y: 50,
@@ -315,7 +328,7 @@ export function BeyondEquipment() {
                   <p className="mt-4 text-[16px] leading-[1.7] text-muted-foreground/90">
                     {active.desc}
                   </p>
-                  <ul className="mt-6 flex flex-col gap-3.5">
+                  <ul className="mt-6 flex flex-col gap-3">
                     {active.points.map((p, i) => (
                       <motion.li
                         key={p}
@@ -324,14 +337,24 @@ export function BeyondEquipment() {
                         transition={{ duration: 0.35, delay: 0.1 + i * 0.08, ease: EASE }}
                         className="flex items-center gap-3 text-[15.5px] font-medium text-ink"
                       >
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
                         {p}
                       </motion.li>
                     ))}
                   </ul>
+                  <div className="mt-6 rounded-xl border-l-2 border-primary/60 bg-secondary/40 px-4 py-3.5">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/70">
+                      Hospital Outcome
+                    </div>
+                    <p className="mt-1.5 text-[14px] font-medium leading-[1.6] text-ink">
+                      {active.outcome}
+                    </p>
+                  </div>
                   <a
                     href="#contact"
-                    className="group mt-8 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
+                    className="group mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     Learn More
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -401,11 +424,21 @@ export function BeyondEquipment() {
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {a.points.map((p) => (
                       <li key={p} className="flex items-center gap-2.5 text-[13.5px] font-medium text-ink">
-                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
                         {p}
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-4 rounded-xl border-l-2 border-primary/60 bg-secondary/40 px-4 py-3">
+                    <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-muted-foreground/70">
+                      Hospital Outcome
+                    </div>
+                    <p className="mt-1 text-[13px] font-medium leading-[1.55] text-ink">
+                      {a.outcome}
+                    </p>
+                  </div>
                   <a
                     href="#contact"
                     className="group mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
