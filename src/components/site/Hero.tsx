@@ -89,7 +89,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content, resting in the negative space of the scene ─────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-10 lg:px-10 lg:py-16">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-9 lg:px-10 lg:py-14">
         <div className="lg:max-w-[46%]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -100,42 +100,41 @@ export function Hero() {
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
               Trusted Healthcare Technology Partner
             </span>
-            <h1 className="mt-6 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[3.25rem] lg:text-[3.9rem]">
+            <h1 className="mt-5 font-display text-[2.5rem] font-extrabold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3rem] lg:text-[3.5rem]">
               Advanced Medical
               <br /> Technology for
               <br />
               <span className="text-primary">Better Patient Outcomes</span>
             </h1>
-            <p className="mt-5 max-w-md text-[18px] leading-[1.65] text-muted-foreground">
+            <p className="mt-5 max-w-md text-[17px] leading-[1.65] text-muted-foreground">
               We supply, install, commission, train and support world-class medical
               equipment for hospitals and clinics across Africa and the Middle East.
             </p>
-
-
-            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
+            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-3">
               <a
                 href="#solutions"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Explore Products
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-7 py-4 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="group inline-flex items-center gap-2 rounded-full px-3 py-4 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
+                className="group inline-flex items-center gap-2 rounded-full px-3 py-3.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
               >
                 <PhoneCall className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
                 Talk to an Expert
               </a>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
+
+            <div className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
               {stats.map((s) => (
                 <div key={s.label} className="flex items-center gap-3">
                   <s.icon className="h-6 w-6 shrink-0 text-primary" />
