@@ -3,7 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 import { Solutions } from "@/components/site/Solutions";
-import { Projects } from "@/components/site/Projects";
+import { BeyondEquipment } from "@/components/site/BeyondEquipment";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { WhyAbuFarha } from "@/components/site/WhyAbuFarha";
 import { Process } from "@/components/site/Process";
@@ -26,8 +26,8 @@ function Index() {
         <BrandsMarquee />
         {/* What technologies do we supply? */}
         <Solutions />
-        {/* What have we successfully delivered? */}
-        <Projects />
+        {/* What makes AbuFarha different from every other supplier? */}
+        <BeyondEquipment />
         {/* Where do we operate? */}
         <GlobalPresence />
         {/* Why should customers choose AbuFarha? */}
