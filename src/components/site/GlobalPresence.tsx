@@ -25,7 +25,7 @@ export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
 
   return (
-    <section id="coverage" className="bg-white py-20">
+    <section id="coverage" className="bg-secondary/50 py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header row */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

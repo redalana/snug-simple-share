@@ -5,12 +5,12 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import {
-  ClipboardList,
-  Truck,
-  Wrench,
-  GraduationCap,
-  ShieldCheck,
-  Headset,
+  Activity,
+  Stethoscope,
+  DraftingCompass,
+  Boxes,
+  BadgeCheck,
+  Handshake,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
@@ -39,14 +39,14 @@ const imgH = IMG.y1 - IMG.y0;
 
 const CAPS: Capability[] = [
   {
-    id: "planning",
-    icon: ClipboardList,
-    title: "Planning",
-    desc: "Designed for flawless clinical workflow.",
+    id: "biomedical",
+    icon: Activity,
+    title: "Biomedical Engineering",
+    desc: "In-house biomedical engineering depth.",
     points: [
-      "Hospital workflow analysis",
-      "Room layout optimization",
-      "Equipment specification",
+      "Certified biomedical engineers",
+      "Equipment-level technical mastery",
+      "Independent, honest judgment",
     ],
     side: "left",
     cardY: 16,
@@ -54,14 +54,14 @@ const CAPS: Capability[] = [
     region: { x: 22, y: 6, w: 34, h: 20 },
   },
   {
-    id: "training",
-    icon: GraduationCap,
-    title: "Clinical Training",
-    desc: "Confident clinical teams from day one.",
+    id: "clinical",
+    icon: Stethoscope,
+    title: "Clinical Understanding",
+    desc: "We speak your clinical language.",
     points: [
-      "Structured onboarding programs",
-      "Hands-on clinical enablement",
-      "Certification support",
+      "Real clinical workflow insight",
+      "Specialty-specific knowledge",
+      "Solutions built around patient care",
     ],
     side: "left",
     cardY: 44,
@@ -69,14 +69,14 @@ const CAPS: Capability[] = [
     region: { x: 6, y: 30, w: 26, h: 26 },
   },
   {
-    id: "installation",
-    icon: Wrench,
-    title: "Installation",
-    desc: "Every system commissioned to exact spec.",
+    id: "engineering",
+    icon: DraftingCompass,
+    title: "Engineering Capability",
+    desc: "The room engineered around the system.",
     points: [
-      "Professional installation",
-      "Calibration & acceptance testing",
-      "Clinical-standard commissioning",
+      "Infrastructure & load planning",
+      "Power, shielding & layout",
+      "Built to clinical standards",
     ],
     side: "left",
     cardY: 72,
@@ -84,14 +84,14 @@ const CAPS: Capability[] = [
     region: { x: 32, y: 56, w: 38, h: 26 },
   },
   {
-    id: "procurement",
-    icon: Truck,
-    title: "Procurement",
-    desc: "Direct OEM supply, transparent pricing.",
+    id: "integration",
+    icon: Boxes,
+    title: "Equipment Integration",
+    desc: "Systems that work as one.",
     points: [
-      "World-leading manufacturers",
-      "Right specification, right price",
-      "End-to-end logistics",
+      "Multi-vendor integration",
+      "A unified clinical environment",
+      "Seamless imaging & data flow",
     ],
     side: "right",
     cardY: 16,
@@ -99,14 +99,14 @@ const CAPS: Capability[] = [
     region: { x: 54, y: 12, w: 32, h: 30 },
   },
   {
-    id: "support",
-    icon: Headset,
-    title: "Lifetime Support",
-    desc: "Round-the-clock response that never stops.",
+    id: "oem",
+    icon: BadgeCheck,
+    title: "OEM Partnership",
+    desc: "Direct, certified manufacturer access.",
     points: [
-      "24/7 response",
-      "Spare-parts assurance",
-      "A partnership that never ends",
+      "Authorized OEM channels",
+      "Genuine parts & specification",
+      "Factory-trained engineers",
     ],
     side: "right",
     cardY: 44,
@@ -114,14 +114,14 @@ const CAPS: Capability[] = [
     region: { x: 62, y: 30, w: 30, h: 24 },
   },
   {
-    id: "maintenance",
-    icon: ShieldCheck,
-    title: "Maintenance",
-    desc: "Proactive care that protects uptime.",
+    id: "partnership",
+    icon: Handshake,
+    title: "Long-Term Partnership",
+    desc: "A relationship that outlasts the sale.",
     points: [
-      "Scheduled preventive servicing",
-      "Rapid service access",
-      "Compliance reporting",
+      "A lifetime technical relationship",
+      "Uptime you can rely on",
+      "Growth alongside your hospital",
     ],
     side: "right",
     cardY: 72,
@@ -171,11 +171,11 @@ function InfoPanel({
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
               <p className="font-display text-[15px] font-bold text-ink">
-                Six phases. One partner.
+                Why AbuFarha?
               </p>
               <p className="mt-1.5 text-[12.5px] leading-[1.6] text-muted-foreground">
-                Hover a capability to trace how it shapes the room — from first
-                drawing to lifetime support.
+                Hover a strength to see the expertise behind every system —
+                not just the equipment, but the capability around it.
               </p>
             </motion.div>
           ) : (
@@ -373,7 +373,7 @@ export function WhyAbuFarha() {
   };
 
   return (
-    <section id="why" className="relative overflow-hidden bg-white py-24">
+    <section id="why" className="relative overflow-hidden bg-white py-20">
       {/* blueprint / engineering grid — < 3% */}
       <div
         aria-hidden
@@ -393,7 +393,7 @@ export function WhyAbuFarha() {
         {/* headline */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
-            <Eyebrow index="02" align="center">
+            <Eyebrow index="04" align="center">
               The Hospital Ecosystem
             </Eyebrow>
           </div>
@@ -403,13 +403,14 @@ export function WhyAbuFarha() {
             We <span className="text-primary">engineer the room</span> around it.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-[1.75] text-muted-foreground">
-            One Cath Lab. Six disciplines converging on a single clinical
-            outcome — this is what a complete healthcare environment looks like.
+            Choosing a supplier is easy. Choosing a partner with biomedical
+            depth, clinical understanding and engineering capability is what
+            protects your investment for years.
           </p>
         </div>
 
         {/* ============ DESKTOP: orbital ecosystem ============ */}
-        <div className="relative mx-auto mt-20 hidden aspect-[16/11] w-full max-w-6xl lg:block">
+        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-6xl lg:block">
           {/* engineering connection lines */}
           <svg
             className="absolute inset-0 h-full w-full"
@@ -627,7 +628,7 @@ export function WhyAbuFarha() {
                     </span>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-                        Capability
+                        Why AbuFarha
                       </p>
                       <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
                         {c.title}
@@ -655,7 +656,7 @@ export function WhyAbuFarha() {
 
           {/* swipe hint */}
           <div className="mt-2 flex items-center justify-center gap-1.5 text-[12px] font-medium text-muted-foreground">
-            Swipe to explore the ecosystem
+            Swipe to explore our strengths
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
           </div>
         </div>

@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import {
   MessagesSquare,
-  PencilRuler,
+  ClipboardCheck,
   PackageSearch,
   Wrench,
   GraduationCap,
+  ShieldCheck,
   LifeBuoy,
   type LucideIcon,
 } from "lucide-react";
@@ -23,43 +24,50 @@ const STEPS: Step[] = [
   {
     n: "01",
     title: "Consultation",
-    desc: "Understanding your clinical needs.",
-    detail: "We sit with your clinical and biomedical teams to map real workflows before a single product is proposed.",
+    desc: "We start with a conversation.",
+    detail: "We meet your clinical and biomedical teams to understand goals, constraints and timelines.",
     icon: MessagesSquare,
   },
   {
     n: "02",
-    title: "Planning",
-    desc: "Tailored solution & room design.",
-    detail: "Room layouts, load planning and equipment selection engineered around your department, not a catalogue.",
-    icon: PencilRuler,
+    title: "Needs Assessment",
+    desc: "We define the requirement.",
+    detail: "Clinical workflows, room conditions and technical requirements are documented in detail.",
+    icon: ClipboardCheck,
   },
   {
     n: "03",
-    title: "Procurement",
-    desc: "Sourcing the best OEM equipment.",
-    detail: "Direct OEM supply chains and transparent sourcing — the right technology at the right specification.",
+    title: "Equipment Selection",
+    desc: "We specify the right systems.",
+    detail: "The correct equipment and configuration are selected and sourced through OEM channels.",
     icon: PackageSearch,
   },
   {
     n: "04",
-    title: "Installation",
-    desc: "Professional install & commissioning.",
-    detail: "Certified engineers handle installation, calibration and acceptance testing to clinical standards.",
+    title: "Installation & Commissioning",
+    desc: "We install and validate.",
+    detail: "Engineers handle installation, calibration and acceptance testing before handover.",
     icon: Wrench,
   },
   {
     n: "05",
-    title: "Training",
-    desc: "Clinical & technical staff training.",
-    detail: "Structured programs bring clinical and technical staff to full confidence on day one.",
+    title: "Clinical Training",
+    desc: "We train your teams.",
+    detail: "Clinical and technical staff are trained on operation, safety and daily use.",
     icon: GraduationCap,
   },
   {
     n: "06",
-    title: "After Sales",
-    desc: "Lifetime service & maintenance.",
-    detail: "Preventive maintenance, rapid response and spare-parts assurance — a partnership that never ends.",
+    title: "Preventive Maintenance",
+    desc: "We service on schedule.",
+    detail: "Planned servicing keeps every system compliant, calibrated and running.",
+    icon: ShieldCheck,
+  },
+  {
+    n: "07",
+    title: "Technical Support",
+    desc: "We stay available.",
+    detail: "Ongoing response, spare parts and remote assistance whenever you need us.",
     icon: LifeBuoy,
   },
 ];
@@ -139,7 +147,7 @@ export function Process() {
   const glowTop = useTransform(fill, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="relative overflow-hidden bg-secondary/50 py-24">
+    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20">
       {/* faint engineering grid — healthcare identity, <4% */}
       <div
         aria-hidden
@@ -157,21 +165,21 @@ export function Process() {
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Eyebrow align="center" index="05">
-              Our Process
+              How We Work
             </Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
-            One partner, from first
+            A clear path from first
             <br />
-            drawing to <span className="text-primary">lifetime support</span>.
+            call to <span className="text-primary">ongoing support</span>.
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-[15px] leading-[1.75] text-muted-foreground">
-            Every hospital project follows a proven six-phase journey — scroll to
-            follow the path from consultation to a partnership that never ends.
+            Every project follows the same seven-step journey — scroll to follow
+            it from consultation through to technical support.
           </p>
         </div>
 
-        <div ref={trackRef} className="relative mx-auto mt-20 max-w-5xl">
+        <div ref={trackRef} className="relative mx-auto mt-16 max-w-5xl">
           {/* central spine — desktop */}
           <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-border lg:block" />
           {/* scroll-driven progress fill */}
@@ -197,7 +205,7 @@ export function Process() {
             className="absolute bottom-0 left-[26px] top-0 w-[3px] origin-top rounded-full bg-gradient-to-b from-primary to-primary/50 lg:hidden"
           />
 
-          <div className="relative space-y-10 pl-14 lg:space-y-16 lg:pl-0">
+          <div className="relative space-y-8 pl-14 lg:space-y-12 lg:pl-0">
             {/* mobile node markers */}
             {STEPS.map((step, i) => (
               <div key={step.n} className="relative">
