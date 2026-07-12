@@ -9,6 +9,7 @@ import { Projects } from "@/components/site/Projects";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
 import { FinalCTA } from "@/components/site/FinalCTA";
+import { ContactForm } from "@/components/site/ContactForm";
 import { Footer } from "@/components/site/Footer";
 import { PulseDivider } from "@/components/site/PulseDivider";
 
@@ -40,6 +41,7 @@ function Index() {
           </div>
         </div>
         <FinalCTA />
+        <ContactForm />
       </main>
       <Footer />
     </div>

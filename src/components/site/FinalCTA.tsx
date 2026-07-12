@@ -4,7 +4,7 @@ import { PhoneCall, FileText, ArrowRight } from "lucide-react";
 export function FinalCTA() {
   return (
     <section
-      id="contact"
+      id="cta"
       className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark py-20 text-primary-foreground"
     >
       {/* premium ambient glows */}
