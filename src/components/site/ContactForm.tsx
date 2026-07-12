@@ -261,30 +261,33 @@ export function ContactForm() {
           </div>
 
           {/* Dynamic profile fields */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false} mode="wait">
             {customerType && (
               <motion.div
                 key={customerType}
                 {...fieldMotion}
-                className="mt-5 grid gap-5 sm:grid-cols-2"
+                className="overflow-hidden"
               >
-                {dynFields.map((f) => (
-                  <div
-                    key={f.name}
-                    className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
-                  >
-                    <Label className="text-[13px] font-semibold text-ink">{f.label}</Label>
-                    <Input
-                      className="h-12"
-                      placeholder={f.placeholder}
-                      value={values[f.name] ?? ""}
-                      onChange={(e) => setField(f.name, e.target.value)}
-                    />
-                  </div>
-                ))}
+                <div className="grid gap-5 pt-5 sm:grid-cols-2">
+                  {dynFields.map((f) => (
+                    <div
+                      key={f.name}
+                      className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
+                    >
+                      <Label className="text-[13px] font-semibold text-ink">{f.label}</Label>
+                      <Input
+                        className={inputCls}
+                        placeholder={f.placeholder}
+                        value={values[f.name] ?? ""}
+                        onChange={(e) => setField(f.name, e.target.value)}
+                      />
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
+
 
           {/* I'm interested in */}
           <div className="mt-5 space-y-2">
