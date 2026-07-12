@@ -10,6 +10,7 @@ import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { Footer } from "@/components/site/Footer";
+import { PulseDivider } from "@/components/site/PulseDivider";
 
 export const Route = createFileRoute("/")({
   component: Index,
