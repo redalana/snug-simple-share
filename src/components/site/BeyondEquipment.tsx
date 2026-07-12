@@ -146,11 +146,11 @@ export function BeyondEquipment() {
         {/* Heading */}
         <div className="max-w-3xl">
           <Eyebrow index="03">Beyond the Equipment</Eyebrow>
-          <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
+          <h2 className="mt-4 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.9rem]">
             Why leading healthcare providers trust
             <br className="hidden sm:block" /> AbuFarha long after installation.
           </h2>
-          <p className="mt-5 max-w-2xl text-[16px] leading-[1.7] text-muted-foreground/90">
+          <p className="mt-5 max-w-2xl text-[17px] leading-[1.7] text-muted-foreground/90">
             Anyone can deliver a machine. We deliver a medical technology partnership —
             engineered, supported and accountable for the entire life of your equipment.
           </p>
@@ -309,10 +309,10 @@ export function BeyondEquipment() {
                   <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
                     {active.label}
                   </span>
-                  <h3 className="mt-3 font-display text-[1.9rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink">
+                  <h3 className="mt-3 font-display text-[2.1rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink">
                     {active.title}
                   </h3>
-                  <p className="mt-4 text-[15px] leading-[1.7] text-muted-foreground/90">
+                  <p className="mt-4 text-[16px] leading-[1.7] text-muted-foreground/90">
                     {active.desc}
                   </p>
                   <ul className="mt-6 flex flex-col gap-3.5">
@@ -322,7 +322,7 @@ export function BeyondEquipment() {
                         initial={{ opacity: 0, x: -6 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.35, delay: 0.1 + i * 0.08, ease: EASE }}
-                        className="flex items-center gap-3 text-[14.5px] font-medium text-ink"
+                        className="flex items-center gap-3 text-[15.5px] font-medium text-ink"
                       >
                         <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                         {p}
