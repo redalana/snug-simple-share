@@ -39,7 +39,7 @@ export function GlobalPresence() {
 
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
-          <Eyebrow>Global Presence</Eyebrow>
+          <Eyebrow index="04">Global Presence</Eyebrow>
           <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
             Serving Hospitals Across Africa &amp; the Middle East
           </h2>

@@ -10,6 +10,7 @@ import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { Footer } from "@/components/site/Footer";
+import { PulseDivider } from "@/components/site/PulseDivider";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -24,10 +25,20 @@ function Index() {
         <BrandsMarquee />
         <Solutions />
         <WhyAbuFarha />
+        <div className="bg-white">
+          <div className="mx-auto max-w-5xl px-6">
+            <PulseDivider className="py-2" />
+          </div>
+        </div>
         <Stats />
         <Projects />
         <GlobalPresence />
         <Process />
+        <div className="bg-secondary/50">
+          <div className="mx-auto max-w-5xl px-6">
+            <PulseDivider className="py-2" />
+          </div>
+        </div>
         <FinalCTA />
       </main>
       <Footer />

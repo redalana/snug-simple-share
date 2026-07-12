@@ -23,7 +23,7 @@ export function WhyAbuFarha() {
     <section id="why" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
-          <Eyebrow align="center">Why Partner with AbuFarha</Eyebrow>
+          <Eyebrow align="center" index="02">Why Partner with AbuFarha</Eyebrow>
           <h2 className="mx-auto mt-5 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
             A Single Partner from Planning to Lifetime Support
           </h2>

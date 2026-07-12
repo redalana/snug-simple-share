@@ -23,7 +23,7 @@ export function Process() {
     <section id="process" className="bg-secondary/50 py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 text-center">
-          <Eyebrow align="center">Our Process</Eyebrow>
+          <Eyebrow align="center" index="05">Our Process</Eyebrow>
           <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.6rem]">
             From Consultation to Lifetime Support
           </h2>
