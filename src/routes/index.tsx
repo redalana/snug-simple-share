@@ -26,8 +26,8 @@ function Index() {
         <BrandsMarquee />
         {/* What technologies do we supply? */}
         <Solutions />
-        {/* What makes AbuFarha different from every other supplier? */}
-        <BeyondEquipment />
+        {/* What makes AbuFarha different — experience the partnership firsthand */}
+        <ExperienceAbuFarha />
         {/* Where do we operate? */}
         <GlobalPresence />
         {/* Why should customers choose AbuFarha? */}
