@@ -38,10 +38,8 @@ export function GlobalPresence() {
 
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-            Global Presence
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
+          <Eyebrow>Global Presence</Eyebrow>
+          <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
             Serving Hospitals Across Africa &amp; the Middle East
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
