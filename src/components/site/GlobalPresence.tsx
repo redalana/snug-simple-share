@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 const PINS = [
   { top: "30%", left: "50%", label: "Libya" },
-  { top: "34%", left: "56%", label: "Egypt" },
+  { top: "34%", left: "56%", label: "Egypt", hq: true },
   { top: "40%", left: "63%", label: "Saudi Arabia" },
   { top: "44%", left: "66%", label: "UAE" },
   { top: "38%", left: "70%", label: "Qatar" },
@@ -13,6 +13,14 @@ const PINS = [
   { top: "62%", left: "60%", label: "Kenya" },
   { top: "70%", left: "55%", label: "Tanzania" },
 ];
+
+// viewBox is 100 x 75 (4:3). Convert pin %s: x = left, y = top * 0.75.
+const HQ = { x: 56, y: 34 * 0.75 };
+const LINKS = PINS.filter((p) => !p.hq).map((p) => ({
+  x: parseFloat(p.left),
+  y: parseFloat(p.top) * 0.75,
+}));
+
 
 
 const COVERAGE = [
