@@ -79,8 +79,8 @@ export function Hero() {
             <span className="text-primary">Better Patient Outcomes</span>
           </h1>
           <p className="mt-6 max-w-md text-[17px] leading-[1.7] text-muted-foreground">
-            We supply, install, commission and maintain world-class medical equipment and turnkey
-            hospital solutions for healthcare providers across Africa and the Middle East.
+            We supply, install, commission, train and support world-class medical
+            equipment for hospitals and clinics across Africa and the Middle East.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
