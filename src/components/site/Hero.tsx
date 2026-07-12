@@ -128,7 +128,7 @@ export function Hero() {
         <motion.div
           onMouseMove={onMove}
           onMouseLeave={onLeave}
-          className="relative"
+          className="relative lg:-ml-24"
           style={{ perspective: 1200 }}
         >
           {/* ambient radial glow (deepest layer, moves least) */}
