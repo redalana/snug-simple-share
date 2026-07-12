@@ -27,8 +27,8 @@ export function Footer() {
         <div>
           <Logo light />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-            Your trusted partner in advanced medical equipment and turnkey hospital solutions across
-            Africa and the Middle East.
+            Your trusted partner for supplying, installing, commissioning and
+            supporting advanced medical equipment across Africa and the Middle East.
           </p>
           <div className="mt-6 flex gap-2.5">
             {[Linkedin, Facebook, Youtube, Instagram].map((Icon, i) => (
