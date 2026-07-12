@@ -88,9 +88,9 @@ const schema = z.object({
   whatsapp: z
     .string()
     .trim()
-    .min(6, "Enter a valid WhatsApp number")
-    .max(20)
-    .regex(/^[+\d\s()-]+$/, "Enter a valid WhatsApp number"),
+    .min(1, "Enter your WhatsApp number")
+    .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number for the selected country"),
+
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
