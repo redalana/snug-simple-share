@@ -201,8 +201,8 @@ export function GlobalPresence() {
                   Africa &amp; the Middle East
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
-                  Twenty-five years of on-ground partnerships with leading hospital groups across the
-                  region.
+                  Local engineers and regional support teams keep every installation
+                  running — wherever your facility operates.
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
