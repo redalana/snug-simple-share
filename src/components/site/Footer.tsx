@@ -23,7 +23,7 @@ const COLS = [
 export function Footer() {
   return (
     <footer className="bg-ink text-white/70">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:px-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
         <div>
           <Logo light />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
@@ -66,7 +66,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-6 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto flex max-w-[100rem] flex-col items-start gap-4 px-6 lg:px-10 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-primary" /> +20 109 111 2200</span>
             <span className="flex items-center gap-1.5"><Mail className="h-4 w-4 text-primary" /> info@abufarhamedical.com</span>

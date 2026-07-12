@@ -41,7 +41,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50">
       {/* Top utility bar */}
       <div className="hidden bg-ink text-white/70 lg:block">
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-6 text-xs">
+        <div className="mx-auto flex h-9 max-w-[100rem] items-center justify-between px-6 lg:px-10 text-xs">
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-1.5">
               <Globe className="h-3.5 w-3.5 text-primary" /> Serving Africa &amp; Middle East
@@ -69,7 +69,7 @@ export function Header() {
             : "bg-white"
         }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-6 px-6">
+        <div className="mx-auto flex h-[72px] max-w-[100rem] items-center justify-between gap-6 px-6 lg:px-10">
           <Link to="/">
             <Logo />
           </Link>
@@ -122,7 +122,7 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden border-t border-border bg-white xl:hidden"
           >
-            <div className="mx-auto max-w-7xl px-6 py-4">
+            <div className="mx-auto max-w-[100rem] px-6 lg:px-10 py-4">
               {NAV.map((item) => (
                 <a
                   key={item.label}

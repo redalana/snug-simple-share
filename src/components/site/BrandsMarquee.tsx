@@ -22,7 +22,7 @@ export function BrandsMarquee() {
   const loop = [...BRANDS, ...BRANDS];
   return (
     <section id="brands" className="border-y border-border bg-white py-12">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mb-8">
           <Eyebrow align="center">Trusted by World-Leading Manufacturers</Eyebrow>
         </div>

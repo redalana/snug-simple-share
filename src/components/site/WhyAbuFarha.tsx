@@ -389,7 +389,7 @@ export function WhyAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* headline */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
