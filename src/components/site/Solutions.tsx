@@ -460,16 +460,20 @@ export function Solutions() {
           </div>
 
           {/* Featured image */}
-          <div className="order-1 lg:order-2">
+          <div className="order-1 lg:order-2 lg:-mt-2">
             <div className="relative aspect-4/3 overflow-hidden rounded-[1.25rem] bg-secondary shadow-[0_40px_80px_-40px_rgba(15,23,42,0.35)] ring-1 ring-black/5 lg:aspect-16/11">
-              <AnimatePresence>
+              {/* True crossfade: outgoing + incoming images stay mounted together */}
+              <AnimatePresence initial={false}>
                 <motion.div
                   key={active.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{
+                    opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                    scale: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                  }}
+                  className="absolute inset-0 will-change-[opacity,transform]"
                 >
                   {/* Ken Burns: very slow, almost imperceptible zoom */}
                   <motion.img
@@ -487,6 +491,7 @@ export function Solutions() {
               <div className="pointer-events-none absolute inset-0 rounded-[1.25rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
+
 
         </div>
       </div>
