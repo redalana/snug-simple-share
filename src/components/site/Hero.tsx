@@ -89,7 +89,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content, resting in the negative space of the scene ─────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-24">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-10 lg:px-10 lg:py-16">
         <div className="lg:max-w-[46%]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
