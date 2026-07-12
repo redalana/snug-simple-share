@@ -248,40 +248,51 @@ export function WhyAbuFarha() {
                 {/* label */}
                 <div className="min-w-0 flex-1">
                   <h3
-                    className={`font-display text-[15px] font-bold leading-tight tracking-tight transition-colors ${
+                    className={`font-display text-[15px] font-bold leading-snug tracking-tight transition-colors ${
                       isActive ? "text-primary" : "text-ink"
                     }`}
                   >
                     {n.title}
                   </h3>
-                  <p className="mt-0.5 truncate text-[12px] leading-snug text-muted-foreground">
+                  <p className="mt-2 min-h-[2.6rem] text-[12.5px] leading-[1.55] text-muted-foreground">
                     {n.desc}
                   </p>
+
                 </div>
+
 
                 {/* tooltip */}
                 <motion.div
                   initial={false}
                   animate={{
                     opacity: isActive ? 1 : 0,
-                    y: isActive ? 0 : 6,
+                    y: isActive ? 0 : 8,
+                    scale: isActive ? 1 : 0.96,
                     pointerEvents: isActive ? "auto" : "none",
                   }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
-                  className={`absolute top-full z-30 mt-3 w-56 rounded-2xl border border-border bg-white p-4 text-left shadow-[0_24px_60px_-24px_rgba(0,0,0,0.35)] ${
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ transformOrigin: "top" }}
+                  className={`absolute top-full z-30 mt-3 w-60 overflow-hidden rounded-2xl border border-border bg-white text-left shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] ${
                     n.side === "left" ? "right-0" : "left-0"
                   }`}
                 >
-                  <p className="font-display text-sm font-bold text-ink">{n.title}</p>
-                  <ul className="mt-2 space-y-1.5">
-                    {n.details.map((d) => (
-                      <li key={d} className="flex items-start gap-2 text-[12px] text-muted-foreground">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="absolute inset-x-0 top-0 h-[3px] bg-primary" />
+                  <div className="p-4">
+                    <p className="font-display text-sm font-bold text-ink">{n.title}</p>
+                    <ul className="mt-2.5 space-y-2">
+                      {n.details.map((d) => (
+                        <li
+                          key={d}
+                          className="flex items-start gap-2.5 text-[12.5px] leading-[1.5] text-muted-foreground"
+                        >
+                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
+
               </motion.div>
             );
           })}
@@ -323,7 +334,7 @@ export function WhyAbuFarha() {
                   <h3 className="font-display text-sm font-bold tracking-tight text-ink">
                     {n.title}
                   </h3>
-                  <p className="mt-0.5 text-[12px] leading-snug text-muted-foreground">
+                  <p className="mt-1.5 text-[12.5px] leading-[1.55] text-muted-foreground">
                     {n.desc}
                   </p>
                 </div>
