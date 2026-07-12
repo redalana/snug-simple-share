@@ -373,19 +373,35 @@ export function ContactForm() {
             )}
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={submitting}
-            className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60 sm:w-auto"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 24 }}
+            className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors hover:bg-primary-dark disabled:opacity-60"
           >
-            {submitting ? "Sending…" : "Send Consultation Request"}
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-            <MessageCircle className="h-3.5 w-3.5 text-primary" />
-            We typically respond within one business day.
-          </p>
-        </form>
+            {submitting ? "Sending…" : "Talk to a Medical Equipment Expert"}
+            {submitting ? (
+              <Send className="h-4 w-4 animate-pulse" />
+            ) : (
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            )}
+          </motion.button>
+
+          {/* response assurance */}
+          <div className="mt-5 grid gap-2.5 border-t border-border pt-5 sm:grid-cols-2">
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Clock className="h-3.5 w-3.5 shrink-0 text-primary" />
+              Typical response within one business day.
+            </p>
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-primary" />
+              Goes directly to our healthcare solutions team.
+            </p>
+          </div>
+        </motion.form>
+
       </div>
     </section>
   );
