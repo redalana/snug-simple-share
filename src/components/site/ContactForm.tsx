@@ -90,12 +90,27 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
+const STATS = [
+  { value: "250+", label: "Hospitals Served" },
+  { value: "40+", label: "Countries" },
+  { value: "1,500+", label: "Equipment Installed" },
+  { value: "25+", label: "Years of Experience" },
+];
+
+const TRUST = [
+  { icon: ShieldCheck, label: "OEM Certified Equipment" },
+  { icon: Wrench, label: "Factory-Trained Engineers" },
+  { icon: Building2, label: "Turnkey Hospital Projects" },
+  { icon: Headset, label: "24/7 Technical Support" },
+];
+
 const fieldMotion = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
-  transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const },
+  initial: { opacity: 0, y: 12, height: 0 },
+  animate: { opacity: 1, y: 0, height: "auto" },
+  exit: { opacity: 0, y: -8, height: 0 },
+  transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
 };
+
 
 export function ContactForm() {
   const [customerType, setCustomerType] = useState("");
