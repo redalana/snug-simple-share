@@ -17,7 +17,9 @@ import { cn } from "@/lib/utils";
 
 type ParsedCountry = ReturnType<typeof parseCountry>;
 
-const COUNTRIES: ParsedCountry[] = defaultCountries.map(parseCountry);
+const COUNTRIES: ParsedCountry[] = defaultCountries
+  .map(parseCountry)
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 function detectCountry(): string {
   try {
