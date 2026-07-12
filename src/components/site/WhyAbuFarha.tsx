@@ -141,7 +141,7 @@ function regionCenter(c: Capability) {
 }
 
 function cardAnchor(c: Capability) {
-  return { x: c.side === "left" ? 25 : 75, y: c.cardY };
+  return { x: c.side === "left" ? 26 : 74, y: c.cardY };
 }
 
 /* ------------------------------------------------------------------ */
