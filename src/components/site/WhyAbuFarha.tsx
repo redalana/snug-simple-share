@@ -447,6 +447,7 @@ export function WhyAbuFarha() {
                     markerEnd="url(#eco-dot)"
                     className="transition-[stroke-opacity,stroke-width] duration-300"
                   />
+                  {/* card-side node */}
                   <circle
                     cx={a.x}
                     cy={a.y}
@@ -455,6 +456,34 @@ export function WhyAbuFarha() {
                     fillOpacity={isActive ? 1 : 0.4}
                     vectorEffect="non-scaling-stroke"
                   />
+                  {/* terminal node inside the equipment — ambient pulse */}
+                  <circle
+                    cx={t.x}
+                    cy={t.y}
+                    r={0.85}
+                    fill="var(--color-primary)"
+                    fillOpacity={isActive ? 1 : 0.5}
+                    vectorEffect="non-scaling-stroke"
+                  />
+                  {!reduce && (
+                    <motion.circle
+                      cx={t.x}
+                      cy={t.y}
+                      r={0.85}
+                      fill="none"
+                      stroke="var(--color-primary)"
+                      strokeWidth={0.4}
+                      vectorEffect="non-scaling-stroke"
+                      initial={false}
+                      animate={{ r: [0.85, 2.6], opacity: [0.55, 0] }}
+                      transition={{
+                        duration: 2.4,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: (a.y / 100) * 1.2,
+                      }}
+                    />
+                  )}
                 </g>
               );
             })}
