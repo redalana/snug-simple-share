@@ -52,7 +52,7 @@ export function Hero() {
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[104px] lg:pt-[112px]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[96px] lg:pt-[104px]"
     >
       {/* ── The scene: one full-bleed editorial photograph ───────────────
           On desktop the image fills the whole canvas, bleeding off the right,
@@ -89,7 +89,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content, resting in the negative space of the scene ─────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-24">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-10 lg:px-10 lg:py-16">
         <div className="lg:max-w-[46%]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -100,18 +100,19 @@ export function Hero() {
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
               Trusted Healthcare Technology Partner
             </span>
-            <h1 className="mt-7 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-5xl lg:text-[3.55rem]">
+            <h1 className="mt-6 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.02em] text-ink sm:text-[3.25rem] lg:text-[3.9rem]">
               Advanced Medical
               <br /> Technology for
               <br />
               <span className="text-primary">Better Patient Outcomes</span>
             </h1>
-            <p className="mt-6 max-w-md text-[17px] leading-[1.7] text-muted-foreground">
+            <p className="mt-5 max-w-md text-[18px] leading-[1.65] text-muted-foreground">
               We supply, install, commission, train and support world-class medical
               equipment for hospitals and clinics across Africa and the Middle East.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-3">
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
               <a
                 href="#solutions"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
@@ -134,7 +135,7 @@ export function Hero() {
               </a>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-6">
+            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
               {stats.map((s) => (
                 <div key={s.label} className="flex items-center gap-3">
                   <s.icon className="h-6 w-6 shrink-0 text-primary" />
