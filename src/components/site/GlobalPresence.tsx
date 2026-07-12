@@ -146,9 +146,9 @@ export function GlobalPresence() {
 
                 {/* elegant floating glassmorphism tooltip */}
                 <div
-                  className={`pointer-events-none absolute bottom-full left-1/2 z-20 mb-3 w-52 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
-                    isActive ? "opacity-100" : "translate-y-1 opacity-0"
-                  }`}
+                  className={`pointer-events-none absolute left-1/2 z-20 w-52 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
+                    flip ? "top-full mt-3" : "bottom-full mb-3"
+                  } ${isActive ? "opacity-100" : "translate-y-1 opacity-0"}`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-display text-sm font-bold text-white">{p.name}</span>
