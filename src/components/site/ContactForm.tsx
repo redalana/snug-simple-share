@@ -274,6 +274,12 @@ export function ContactForm() {
           </div>
         </div>
 
+        <div className="relative lg:pl-2">
+        {/* soft ambient radial glow behind the card for premium elevation */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(60%_50%_at_50%_20%,var(--primary)_0%,transparent_70%)] opacity-[0.06] blur-2xl"
+        />
         <motion.form
           initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
           whileInView={{ opacity: 1, y: 0 }}
