@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import { toast } from "sonner";
+import { PhoneField } from "./PhoneField";
 import {
   ArrowRight,
   Clock,
@@ -86,9 +88,9 @@ const schema = z.object({
   whatsapp: z
     .string()
     .trim()
-    .min(6, "Enter a valid WhatsApp number")
-    .max(20)
-    .regex(/^[+\d\s()-]+$/, "Enter a valid WhatsApp number"),
+    .min(1, "Enter your WhatsApp number")
+    .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number for the selected country"),
+
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
@@ -272,6 +274,12 @@ export function ContactForm() {
           </div>
         </div>
 
+        <div className="relative lg:pl-2">
+        {/* soft ambient radial glow behind the card for premium elevation */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(60%_50%_at_50%_20%,var(--primary)_0%,transparent_70%)] opacity-[0.06] blur-2xl"
+        />
         <motion.form
           initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -388,13 +396,11 @@ export function ContactForm() {
               <Label htmlFor="whatsapp" className="text-[13px] font-semibold text-ink">
                 WhatsApp <span className="text-primary">*</span>
               </Label>
-              <Input
+              <PhoneField
                 id="whatsapp"
-                type="tel"
-                className={inputCls}
-                placeholder="+20 100 000 0000"
                 value={values.whatsapp ?? ""}
-                onChange={(e) => setField("whatsapp", e.target.value)}
+                onChange={(v) => setField("whatsapp", v)}
+                hasError={!!errors.whatsapp}
               />
               {errors.whatsapp && (
                 <p role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
@@ -445,6 +451,7 @@ export function ContactForm() {
             ))}
           </ul>
         </motion.form>
+        </div>
       </div>
     </section>
   );
