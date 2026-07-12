@@ -206,31 +206,21 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
                       No countries found
                     </p>
                   ) : (
-                    <div
-                      style={{ height: rowVirtualizer.getTotalSize(), position: "relative", width: "100%" }}
-                    >
-                      {rowVirtualizer.getVirtualItems().map((vi) => {
-                        const c = filtered[vi.index];
+                    <div>
+                      {filtered.map((c, index) => {
                         const isSelected = c.iso2 === country.iso2;
-                        const isActive = vi.index === activeIndex;
+                        const isActive = index === activeIndex;
                         return (
                           <button
                             key={c.iso2}
                             type="button"
                             role="option"
+                            data-idx={index}
                             aria-selected={isSelected}
                             onClick={() => selectCountry(c.iso2)}
-                            onMouseEnter={() => setActiveIndex(vi.index)}
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              width: "100%",
-                              height: vi.size,
-                              transform: `translateY(${vi.start}px)`,
-                            }}
+                            onMouseEnter={() => setActiveIndex(index)}
                             className={cn(
-                              "flex items-center gap-3 rounded-lg px-2.5 text-left text-sm transition-colors duration-100",
+                              "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors duration-100",
                               isActive ? "bg-primary/8" : "bg-transparent",
                               isSelected && "font-semibold",
                             )}
