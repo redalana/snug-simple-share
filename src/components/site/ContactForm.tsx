@@ -111,6 +111,12 @@ const fieldMotion = {
   transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
 };
 
+const inputCls =
+  "h-12 border-border bg-secondary/30 transition-all duration-200 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:shadow-[0_6px_20px_-8px_var(--primary)]";
+const selectCls =
+  "h-12 border-border bg-secondary/30 transition-all duration-200 hover:bg-secondary/50 focus:border-primary focus:ring-4 focus:ring-primary/10 data-[state=open]:border-primary data-[state=open]:ring-4 data-[state=open]:ring-primary/10";
+
+
 
 export function ContactForm() {
   const [customerType, setCustomerType] = useState("");
