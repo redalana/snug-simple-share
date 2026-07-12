@@ -42,7 +42,7 @@ const CAPS: Capability[] = [
     id: "planning",
     icon: ClipboardList,
     title: "Planning",
-    desc: "Every project starts on the drawing board, not the catalogue.",
+    desc: "Designed for flawless clinical workflow.",
     points: [
       "Hospital workflow analysis",
       "Room layout optimization",
@@ -50,13 +50,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 16,
-    region: { x: 8, y: 8, w: 34, h: 26 },
+    // ceiling monitors / imaging displays
+    region: { x: 22, y: 6, w: 34, h: 20 },
   },
   {
     id: "training",
     icon: GraduationCap,
     title: "Clinical Training",
-    desc: "Clinical and technical staff, confident from day one.",
+    desc: "Confident clinical teams from day one.",
     points: [
       "Structured onboarding programs",
       "Hands-on clinical enablement",
@@ -64,13 +65,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 44,
-    region: { x: 6, y: 30, w: 30, h: 26 },
+    // control room glass
+    region: { x: 6, y: 30, w: 26, h: 26 },
   },
   {
     id: "installation",
     icon: Wrench,
     title: "Installation",
-    desc: "Certified engineers commission every system to spec.",
+    desc: "Every system commissioned to exact spec.",
     points: [
       "Professional installation",
       "Calibration & acceptance testing",
@@ -78,13 +80,14 @@ const CAPS: Capability[] = [
     ],
     side: "left",
     cardY: 72,
-    region: { x: 30, y: 46, w: 40, h: 30 },
+    // procedure table
+    region: { x: 32, y: 56, w: 38, h: 26 },
   },
   {
     id: "procurement",
     icon: Truck,
     title: "Procurement",
-    desc: "Direct OEM supply chains, transparent sourcing.",
+    desc: "Direct OEM supply, transparent pricing.",
     points: [
       "World-leading manufacturers",
       "Right specification, right price",
@@ -92,13 +95,14 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 16,
-    region: { x: 56, y: 10, w: 34, h: 24 },
+    // gantry / C-arm
+    region: { x: 54, y: 12, w: 32, h: 30 },
   },
   {
     id: "support",
     icon: Headset,
     title: "Lifetime Support",
-    desc: "A control room that never stops answering.",
+    desc: "Round-the-clock response that never stops.",
     points: [
       "24/7 response",
       "Spare-parts assurance",
@@ -106,7 +110,8 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 44,
-    region: { x: 58, y: 30, w: 32, h: 26 },
+    // side monitors / console
+    region: { x: 62, y: 30, w: 30, h: 24 },
   },
   {
     id: "maintenance",
@@ -120,7 +125,8 @@ const CAPS: Capability[] = [
     ],
     side: "right",
     cardY: 72,
-    region: { x: 60, y: 54, w: 30, h: 30 },
+    // floor equipment / cabling
+    region: { x: 58, y: 58, w: 30, h: 26 },
   },
 ];
 
