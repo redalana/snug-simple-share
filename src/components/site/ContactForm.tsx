@@ -195,7 +195,7 @@ export function ContactForm() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <div className="relative mx-auto grid max-w-[100rem] gap-12 px-6 lg:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         {/* Left — framing copy + trust */}
         <div className="relative lg:sticky lg:top-28 lg:self-start">
           {/* extremely subtle healthcare wireframe behind left content (<4%) */}

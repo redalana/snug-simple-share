@@ -161,7 +161,7 @@ export function Process() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Eyebrow align="center" index="05">
@@ -179,7 +179,7 @@ export function Process() {
           </p>
         </div>
 
-        <div ref={trackRef} className="relative mx-auto mt-16 max-w-5xl">
+        <div ref={trackRef} className="relative mx-auto mt-16 max-w-6xl">
           {/* central spine — desktop */}
           <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-border lg:block" />
           {/* scroll-driven progress fill */}

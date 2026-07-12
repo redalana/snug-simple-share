@@ -89,7 +89,7 @@ function Card({ s }: { s: Sol }) {
 export function Solutions() {
   return (
     <section id="solutions" className="bg-secondary/50 py-20">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <Eyebrow index="01">Explore Our Solutions</Eyebrow>

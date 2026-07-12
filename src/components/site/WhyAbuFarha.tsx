@@ -389,7 +389,7 @@ export function WhyAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* headline */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
@@ -410,7 +410,7 @@ export function WhyAbuFarha() {
         </div>
 
         {/* ============ DESKTOP: orbital ecosystem ============ */}
-        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-6xl lg:block">
+        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-[86rem] lg:block">
           {/* engineering connection lines */}
           <svg
             className="absolute inset-0 h-full w-full"

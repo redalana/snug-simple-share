@@ -26,7 +26,7 @@ export function GlobalPresence() {
 
   return (
     <section id="coverage" className="bg-secondary/50 py-20">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Header row */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

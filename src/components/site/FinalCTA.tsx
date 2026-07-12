@@ -32,7 +32,7 @@ export function FinalCTA() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 text-center lg:flex-row lg:justify-between lg:text-left"
+        className="relative mx-auto flex max-w-[100rem] flex-col items-center gap-8 px-6 lg:px-10 text-center lg:flex-row lg:justify-between lg:text-left"
       >
         <div>
           <h2 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">

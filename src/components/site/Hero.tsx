@@ -62,7 +62,7 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[104px] lg:pt-[112px]"
     >
       <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="mx-auto grid max-w-[96rem] items-center gap-10 px-6 py-12 lg:grid-cols-[39%_61%] lg:gap-5 lg:py-16 lg:px-10">
+      <div className="mx-auto grid max-w-[100rem] items-center gap-10 px-6 py-12 lg:grid-cols-[39%_61%] lg:gap-8 lg:py-16 lg:px-10">
         {/* Copy */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
