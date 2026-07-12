@@ -254,9 +254,10 @@ export function WhyAbuFarha() {
                   >
                     {n.title}
                   </h3>
-                  <p className="mt-2 flex min-h-[2.6rem] items-start text-[12.5px] leading-[1.55] text-muted-foreground">
+                  <p className="mt-2 min-h-[2.6rem] text-[12.5px] leading-[1.55] text-muted-foreground">
                     {n.desc}
                   </p>
+
                 </div>
 
 
