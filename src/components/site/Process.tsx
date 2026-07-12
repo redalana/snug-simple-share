@@ -7,6 +7,7 @@ import {
   GraduationCap,
   LifeBuoy,
 } from "lucide-react";
+import { Eyebrow } from "./Eyebrow";
 
 const STEPS = [
   { n: "01", title: "Consultation", desc: "Understanding your clinical needs.", icon: MessagesSquare },
