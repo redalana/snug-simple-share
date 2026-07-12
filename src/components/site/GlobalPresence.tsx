@@ -3,10 +3,8 @@ import { ArrowRight, Globe } from "lucide-react";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 
 const STATS = [
-  { value: "40+", label: "Countries" },
-  { value: "310+", label: "Projects" },
-  { value: "250+", label: "Hospitals" },
-  { value: "1,500+", label: "Equipment Installed" },
+  { value: "40+", label: "Countries Served" },
+  { value: "310+", label: "Projects Delivered" },
 ];
 
 // Cropped viewBox focused on Africa & the Middle East (matches the design spec).
