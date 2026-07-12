@@ -91,7 +91,7 @@ export function Solutions() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <Eyebrow>Explore Our Solutions</Eyebrow>
+            <Eyebrow index="01">Explore Our Solutions</Eyebrow>
             <h2 className="mt-4 max-w-xl font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[2.45rem]">
               Advanced Solutions for Every Department
             </h2>
