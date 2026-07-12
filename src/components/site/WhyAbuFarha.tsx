@@ -373,7 +373,7 @@ export function WhyAbuFarha() {
   };
 
   return (
-    <section id="why" className="relative overflow-hidden bg-white py-24">
+    <section id="why" className="relative overflow-hidden bg-white py-20">
       {/* blueprint / engineering grid — < 3% */}
       <div
         aria-hidden
@@ -393,7 +393,7 @@ export function WhyAbuFarha() {
         {/* headline */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
-            <Eyebrow index="02" align="center">
+            <Eyebrow index="04" align="center">
               The Hospital Ecosystem
             </Eyebrow>
           </div>
@@ -403,13 +403,14 @@ export function WhyAbuFarha() {
             We <span className="text-primary">engineer the room</span> around it.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-[1.75] text-muted-foreground">
-            One Cath Lab. Six disciplines converging on a single clinical
-            outcome — this is what a complete healthcare environment looks like.
+            Choosing a supplier is easy. Choosing a partner with biomedical
+            depth, clinical understanding and engineering capability is what
+            protects your investment for years.
           </p>
         </div>
 
         {/* ============ DESKTOP: orbital ecosystem ============ */}
-        <div className="relative mx-auto mt-20 hidden aspect-[16/11] w-full max-w-6xl lg:block">
+        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-6xl lg:block">
           {/* engineering connection lines */}
           <svg
             className="absolute inset-0 h-full w-full"
@@ -627,7 +628,7 @@ export function WhyAbuFarha() {
                     </span>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-                        Capability
+                        Why AbuFarha
                       </p>
                       <h3 className="font-display text-lg font-extrabold tracking-tight text-ink">
                         {c.title}
@@ -655,7 +656,7 @@ export function WhyAbuFarha() {
 
           {/* swipe hint */}
           <div className="mt-2 flex items-center justify-center gap-1.5 text-[12px] font-medium text-muted-foreground">
-            Swipe to explore the ecosystem
+            Swipe to explore our strengths
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} />
           </div>
         </div>
