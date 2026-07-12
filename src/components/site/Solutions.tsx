@@ -301,44 +301,82 @@ export function Solutions() {
         </div>
 
         {/* Category navigation */}
-        <div className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden">
+        <div
+          className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
+          onMouseEnter={pause}
+          onMouseLeave={scheduleResume}
+        >
           <div className="flex min-w-max gap-1 border-b border-border lg:min-w-0">
-            {CATEGORIES.map((c) => {
-              const Icon = c.icon;
+            {CATEGORIES.map((c, i) => {
               const isActive = c.id === activeId;
               return (
                 <button
                   key={c.id}
-                  onClick={() => setActiveId(c.id)}
-                  className={`group relative flex shrink-0 items-center gap-2.5 px-5 py-4 text-[13px] font-semibold tracking-[0.01em] transition-colors duration-300 ${
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-ink"
+                  onClick={() => selectCategory(i)}
+                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[13px] tracking-[0.01em] transition-colors duration-300 ${
+                    isActive
+                      ? "font-semibold text-primary"
+                      : "font-medium text-muted-foreground hover:text-ink"
                   }`}
                 >
-                  <Icon
-                    className={`h-[18px] w-[18px] transition-transform duration-300 ${
-                      isActive ? "scale-110" : "group-hover:scale-105"
+                  {/* soft active background tint */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="cat-tint"
+                      aria-hidden
+                      className="absolute inset-0 rounded-t-lg bg-primary/[0.04]"
+                      transition={{ type: "spring", stiffness: 480, damping: 42 }}
+                    />
+                  )}
+                  {/* premium product thumbnail */}
+                  <span
+                    className={`relative z-10 overflow-hidden rounded-[10px] bg-secondary shadow-sm ring-1 transition-all duration-300 ${
+                      isActive
+                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_6px_14px_-6px_rgba(15,23,42,0.4)]"
+                        : "ring-white/80 group-hover:scale-[1.04]"
                     }`}
-                    strokeWidth={2}
-                  />
-                  {c.nav}
+                    style={{ width: 30, height: 30 }}
+                  >
+                    <img
+                      src={c.img}
+                      alt=""
+                      aria-hidden
+                      width={30}
+                      height={30}
+                      className="h-full w-full object-cover object-[center_38%]"
+                    />
+                  </span>
+                  <span className="relative z-10">{c.nav}</span>
+                  {/* hover underline hint */}
                   <span
                     aria-hidden
-                    className={`absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-ink/15 transition-opacity duration-300 ${
-                      isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
-                    }`}
+                    className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   {isActive && (
                     <motion.span
                       layoutId="cat-underline"
-                      className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary"
+                      className="absolute inset-x-3 -bottom-px z-20 h-0.5 overflow-hidden rounded-full bg-primary/25"
                       transition={{ type: "spring", stiffness: 480, damping: 42 }}
-                    />
+                    >
+                      {/* autoplay progress fill */}
+                      {!paused && (
+                        <motion.span
+                          key={cycleKey}
+                          className="block h-full w-full origin-left rounded-full bg-primary"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                        />
+                      )}
+                      {paused && <span className="block h-full w-full rounded-full bg-primary" />}
+                    </motion.span>
                   )}
                 </button>
               );
             })}
           </div>
         </div>
+
 
         {/* Explorer */}
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-12">
