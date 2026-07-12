@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Globe } from "lucide-react";
-import { COUNTRIES, PINS, MAP_W, MAP_H, type Pin } from "./africaMapData";
+import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 
 const STATS = [
   { value: "40+", label: "Countries" },
