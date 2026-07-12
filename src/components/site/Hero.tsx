@@ -62,7 +62,7 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[104px] lg:pt-[112px]"
     >
       <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-12 lg:grid-cols-[42%_58%] lg:gap-6 lg:py-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-12 lg:grid-cols-[37%_63%] lg:gap-6 lg:py-16">
         {/* Copy */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -163,7 +163,7 @@ export function Hero() {
                   height={1024}
                   fetchPriority="high"
                   style={{ x: equipX, y: equipY, scale: 1.05 }}
-                  className="hidden h-[420px] w-full object-cover will-change-transform sm:block lg:h-[640px]"
+                  className="hidden h-[480px] w-full object-cover will-change-transform sm:block lg:h-[736px]"
                 />
                 {/* dedicated mobile crop — focuses on the Cath Lab system */}
                 <motion.img
@@ -173,7 +173,7 @@ export function Hero() {
                   height={1280}
                   fetchPriority="high"
                   style={{ x: equipX, y: equipY, scale: 1.05 }}
-                  className="block h-[440px] w-full object-cover will-change-transform sm:hidden"
+                  className="block h-[505px] w-full object-cover will-change-transform sm:hidden"
                 />
 
                 {/* monitor "alive" layer — subtle blue glow + parallax over the displays */}
