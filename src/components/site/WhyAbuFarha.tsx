@@ -410,7 +410,7 @@ export function WhyAbuFarha() {
         </div>
 
         {/* ============ DESKTOP: orbital ecosystem ============ */}
-        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-6xl lg:block">
+        <div className="relative mx-auto mt-16 hidden aspect-[16/11] w-full max-w-[86rem] lg:block">
           {/* engineering connection lines */}
           <svg
             className="absolute inset-0 h-full w-full"
