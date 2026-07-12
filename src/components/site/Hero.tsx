@@ -113,7 +113,8 @@ export function Hero() {
               className="h-[360px] w-full object-cover transition-transform duration-500 will-change-transform lg:h-[560px]"
               style={{ transform: "translate3d(var(--px,0), var(--py,0), 0)" }}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-ink/25 via-transparent to-white/10" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-ink/5 to-white/10" />
+            <div className="pointer-events-none absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/10" />
             {/* light sweep */}
             <motion.div
               aria-hidden
