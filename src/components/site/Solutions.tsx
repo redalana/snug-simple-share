@@ -408,15 +408,22 @@ export function Solutions() {
 
                 {/* Premium feature rows */}
                 <ul className="mt-8 flex flex-col gap-5">
-                  {active.capabilities.map((cap) => (
-                    <li key={cap} className="flex items-center gap-3.5 text-[15px] font-medium text-ink">
+                  {active.capabilities.map((cap, i) => (
+                    <motion.li
+                      key={cap}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.15 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                      className="flex items-center gap-3.5 text-[15px] font-medium text-ink"
+                    >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                         <Check className="h-[15px] w-[15px]" strokeWidth={2.75} />
                       </span>
                       <span className="leading-snug">{cap}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
+
 
                 {/* Engineered information panel */}
                 <div className="mt-9 grid overflow-hidden rounded-2xl border border-border/80 bg-secondary/30 sm:grid-cols-3 sm:divide-x sm:divide-border/70">
