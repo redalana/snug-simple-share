@@ -373,7 +373,7 @@ export function WhyAbuFarha() {
   };
 
   return (
-    <section id="why" className="relative overflow-hidden bg-white py-20">
+    <section id="why" className="relative overflow-hidden bg-white py-20 lg:py-24">
       {/* blueprint / engineering grid — < 3% */}
       <div
         aria-hidden

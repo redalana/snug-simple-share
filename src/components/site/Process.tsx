@@ -147,7 +147,7 @@ export function Process() {
   const glowTop = useTransform(fill, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20">
+    <section id="process" className="relative overflow-hidden bg-secondary/50 py-20 lg:py-24">
       {/* faint engineering grid — healthcare identity, <4% */}
       <div
         aria-hidden
