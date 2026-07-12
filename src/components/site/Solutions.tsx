@@ -208,8 +208,64 @@ const CATEGORIES: Category[] = [
 ];
 
 export function Solutions() {
-  const [activeId, setActiveId] = useState(CATEGORIES[0].id);
-  const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [cycleKey, setCycleKey] = useState(0);
+  const active = CATEGORIES[activeIndex];
+  const activeId = active.id;
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Autoplay: advance to next category every AUTOPLAY_MS while not paused.
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(() => {
+      setActiveIndex((i) => (i + 1) % CATEGORIES.length);
+      setCycleKey((k) => k + 1);
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(t);
+  }, [activeIndex, paused, cycleKey]);
+
+  // Preload every category image so switches are instant, no flash.
+  useEffect(() => {
+    CATEGORIES.forEach((c) => {
+      const img = new Image();
+      img.src = c.img;
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    };
+  }, []);
+
+  const pause = useCallback(() => {
+    if (resumeTimer.current) {
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = null;
+    }
+    setPaused(true);
+  }, []);
+
+  const scheduleResume = useCallback(() => {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      setPaused(false);
+      setCycleKey((k) => k + 1);
+    }, RESUME_DELAY_MS);
+  }, []);
+
+  const selectCategory = useCallback((index: number) => {
+    if (resumeTimer.current) {
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = null;
+    }
+    setActiveIndex(index);
+    setPaused(false);
+    setCycleKey((k) => k + 1);
+  }, []);
+
+
 
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-14 lg:py-[4.5rem]">
