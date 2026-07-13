@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Menu, X, Facebook, Linkedin } from "lucide-react";
@@ -62,6 +62,11 @@ const SOCIALS = [
   { label: "LinkedIn", href: "#", Icon: Linkedin },
 ];
 
+const LANGUAGES = [
+  { code: "en", label: "English" },
+  { code: "ar", label: "العربية" },
+] as const;
+
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
@@ -70,6 +75,60 @@ function WhatsAppIcon({ className }: { className?: string }) {
         fill="currentColor"
       />
     </svg>
+  );
+}
+
+function LanguageSelector() {
+  const [lang, setLang] = useState<(typeof LANGUAGES)[number]>(LANGUAGES[0]);
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1.5 text-[15px] font-medium text-foreground/75 transition-colors hover:text-primary"
+      >
+        {lang.label}
+        <ChevronDown
+          className={`h-3.5 w-3.5 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.16 }}
+            className="absolute right-0 top-full z-20 mt-2 w-36 rounded-2xl border border-border/70 bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)]"
+          >
+            {LANGUAGES.map((l) => (
+              <button
+                key={l.code}
+                onClick={() => {
+                  setLang(l);
+                  setOpen(false);
+                }}
+                className={`block w-full rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-accent hover:text-primary ${
+                  l.code === lang.code ? "text-primary" : "text-foreground/75"
+                }`}
+              >
+                {l.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -94,19 +153,24 @@ export function Header() {
             : "bg-white"
         }`}
       >
-        {/* Level 1 — logo, search, socials, CTA */}
-        <div className="mx-auto flex h-[76px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="shrink-0">
+        {/* Level 1 — logo, search, language, socials, CTA */}
+        <div className="mx-auto flex h-[84px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+          <Link to="/" className="shrink-0 origin-left scale-[1.08]">
             <Logo />
           </Link>
 
-          {/* Search */}
-          <div className="ml-auto hidden md:block md:w-[360px] lg:w-[400px]">
+          {/* Search — the hero element of the header */}
+          <div className="ml-auto hidden md:block md:w-[420px] lg:w-[440px] xl:w-[460px]">
             <SearchField />
           </div>
 
+          {/* Language selector */}
+          <div className="hidden lg:block">
+            <LanguageSelector />
+          </div>
+
           {/* Socials */}
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             {SOCIALS.map(({ label, href, Icon }) => (
               <a
                 key={label}
@@ -114,7 +178,7 @@ export function Header() {
                 aria-label={label}
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
-                <Icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
+                <Icon className="h-5 w-5" strokeWidth={1.75} />
               </a>
             ))}
             <a
@@ -122,14 +186,14 @@ export function Header() {
               aria-label="WhatsApp"
               className="text-muted-foreground transition-colors hover:text-primary"
             >
-              <WhatsAppIcon className="h-[19px] w-[19px]" />
+              <WhatsAppIcon className="h-5 w-5" />
             </a>
           </div>
 
-          {/* CTA */}
+          {/* CTA — matches search field height */}
           <a
             href="#contact"
-            className="hidden shrink-0 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
+            className="hidden h-[46px] shrink-0 items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
           >
             Request a Quote
           </a>
@@ -154,19 +218,19 @@ export function Header() {
         </div>
 
         {/* Level 2 — navigation */}
-        <nav className="hidden border-t border-border/60 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-1 px-6 lg:px-10">
+        <nav className="hidden border-t border-border/50 xl:block">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-2 px-6 lg:px-10">
             {NAV.map((item) => (
               <div key={item.label} className="group relative">
                 <a
                   href={item.href}
-                  className="flex items-center gap-1 px-4 py-3.5 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
+                  className="flex items-center gap-1 px-5 py-3.5 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
                 >
                   {item.label}
                   {item.dropdown && (
-                    <ChevronDown className="h-4 w-4 opacity-60 transition-transform group-hover:rotate-180" />
+                    <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                   )}
-                  <span className="absolute inset-x-4 bottom-2 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-5 bottom-2 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
 
                 {item.dropdown && (
@@ -235,7 +299,7 @@ export function Header() {
                       aria-label={label}
                       className="text-muted-foreground transition-colors hover:text-primary"
                     >
-                      <Icon className="h-5 w-5" strokeWidth={1.8} />
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </a>
                   ))}
                   <a
@@ -269,7 +333,7 @@ function SearchField() {
       <input
         type="search"
         placeholder="Search products, brands or categories..."
-        className="h-11 w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
+        className="h-[46px] w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
       />
     </div>
   );
