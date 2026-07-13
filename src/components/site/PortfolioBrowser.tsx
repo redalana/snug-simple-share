@@ -51,9 +51,55 @@ const PRIMARY_CATEGORIES = [
   "C-Arms",
 ] as const;
 
+// Full catalog taxonomy — single source of truth. In production these are
+// loaded from the CMS/database; the filters below derive from them, so adding
+// a new category or manufacturer automatically surfaces it in the UI.
+const ALL_CATEGORIES = [
+  "Cath Lab Systems",
+  "MRI Scanners",
+  "CT Scanners",
+  "PET/CT Scanners",
+  "C-Arms",
+  "X-Ray Systems",
+  "Mammography",
+  "Ultrasound",
+  "Operating Room",
+  "Women's Healthcare",
+  "Bone Densitometers (DEXA)",
+  "Lithotripsy Systems",
+  "Endoscopy",
+  "Urology",
+  "Cardiology",
+  "Neurology",
+  "Radiology",
+  "Surgical Equipment",
+] as const;
+
+// Manufacturers — loaded dynamically from the CMS/database in production.
+const ALL_MANUFACTURERS = [
+  "Philips",
+  "Siemens Healthineers",
+  "Canon Medical",
+  "GE HealthCare",
+  "Hitachi",
+  "Toshiba",
+  "Mindray",
+  "Richard Wolf",
+  "Karl Storz",
+  "Boston Scientific",
+  "Abbott",
+  "Medtronic",
+  "Shimadzu",
+  "Dräger",
+  "Esaote",
+  "Samsung",
+  "Fujifilm",
+  "Olympus",
+] as const;
+
 const FILTER_GROUPS = [
-  { title: "Category", options: ["Cath Lab", "MRI", "CT", "PET/CT", "X-Ray", "C-Arms"] },
-  { title: "Manufacturer", options: ["Philips", "Siemens Healthineers", "GE HealthCare", "Canon Medical"] },
+  { title: "Category", options: [...ALL_CATEGORIES] },
+  { title: "Manufacturer", options: [...ALL_MANUFACTURERS] },
   { title: "Condition", options: ["Brand New", "Certified Refurbished", "Factory Certified"] },
   { title: "Clinical Specialty", options: ["Interventional", "Diagnostic Imaging", "Women Healthcare", "Surgical"] },
   { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
@@ -65,21 +111,9 @@ const FILTER_GROUPS = [
   },
 ];
 
-// Manufacturers — loaded dynamically in production from the CMS.
-const BRANDS = [
-  "Philips",
-  "Siemens Healthineers",
-  "Canon Medical",
-  "GE HealthCare",
-  "Hitachi",
-  "Mindray",
-  "Toshiba",
-  "Karl Storz",
-  "Abbott",
-  "Boston Scientific",
-  "Medtronic",
-  "Dräger",
-] as const;
+// Manufacturer cards in the "Popular Manufacturers" section — same dynamic source.
+const BRANDS = ALL_MANUFACTURERS;
+
 
 type Product = {
   name: string;
@@ -226,6 +260,10 @@ const PER_PAGE_OPTIONS = [12, 24, 36, 48] as const;
 
 function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
   const [open, setOpen] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const VISIBLE = 8;
+  const hasMore = group.options.length > VISIBLE;
+  const visibleOptions = open && (showAll || !hasMore) ? group.options : group.options.slice(0, VISIBLE);
   return (
     <div className="border-b border-border/70 last:border-0">
       <button
@@ -238,22 +276,33 @@ function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
         />
       </button>
       {open && (
-        <ul className="space-y-3 pb-4">
-          {group.options.map((opt) => (
-            <li key={opt}>
-              <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-border text-primary accent-primary"
-                />
-                {opt}
-              </label>
-            </li>
-          ))}
-        </ul>
+        <div className="pb-4">
+          <ul className="space-y-3">
+            {visibleOptions.map((opt) => (
+              <li key={opt}>
+                <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-border text-primary accent-primary"
+                  />
+                  {opt}
+                </label>
+              </li>
+            ))}
+          </ul>
+          {hasMore && (
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="mt-3 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
+            >
+              {showAll ? "Show Less" : `Show More (${group.options.length - VISIBLE})`}
+            </button>
+          )}
+        </div>
       )}
     </div>
   );
+
 }
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
@@ -471,7 +520,7 @@ export function PortfolioBrowser() {
       {/* CATEGORY NAV */}
       <section className="sticky top-[112px] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
-          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
+          <div className="flex w-full flex-wrap items-center gap-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -489,36 +538,22 @@ export function PortfolioBrowser() {
               </button>
             ))}
           </div>
-          <Link
-            to="/categories"
-            className="group inline-flex shrink-0 items-center gap-1.5 border-l border-border pl-4 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-          >
-            View All Categories
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </div>
       </section>
+
 
       {/* POPULAR MANUFACTURERS */}
       <section className="border-b border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="font-display text-xl font-bold tracking-tight text-foreground">
-                Popular Manufacturers
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Certified partners and leading global medical technology brands.
-              </p>
-            </div>
-            <Link
-              to="/categories"
-              className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:inline-flex"
-            >
-              View All Brands
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+          <div className="mb-6">
+            <h2 className="font-display text-xl font-bold tracking-tight text-foreground">
+              Popular Manufacturers
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Certified partners and leading global medical technology brands.
+            </p>
           </div>
+
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
             {BRANDS.map((brand) => (
               <button
@@ -533,13 +568,6 @@ export function PortfolioBrowser() {
               </button>
             ))}
           </div>
-          <Link
-            to="/categories"
-            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:hidden"
-          >
-            View All Brands
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </div>
       </section>
 
