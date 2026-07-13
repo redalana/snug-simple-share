@@ -40,15 +40,50 @@ import { HeroShowcase } from "@/components/site/HeroShowcase";
  * is hardcoded; they are all computed from the product data.
  */
 
-// Primary categories shown as chips.
+// Full medical-technology taxonomy shown as category chips. Category names
+// align with the `category` field on products so filtering stays functional;
+// additional clinical categories surface the full portfolio breadth.
 const PRIMARY_CATEGORIES = [
   "Cath Lab",
   "MRI",
   "CT",
   "PET/CT",
+  "C-Arms",
   "X-Ray",
   "Mammography",
-  "C-Arms",
+  "Ultrasound",
+  "Women's Healthcare",
+  "Operating Room",
+  "Bone Densitometers (DEXA)",
+  "Lithotripsy",
+  "Endoscopy",
+  "Urology",
+  "Cardiology",
+  "Neurology",
+  "Radiology",
+  "Surgical Equipment",
+] as const;
+
+// Full manufacturer roster — leading global medical technology brands.
+const ALL_MANUFACTURERS = [
+  "Philips",
+  "Siemens Healthineers",
+  "Canon Medical",
+  "GE HealthCare",
+  "Hitachi",
+  "Toshiba",
+  "Mindray",
+  "Richard Wolf",
+  "Karl Storz",
+  "Boston Scientific",
+  "Abbott",
+  "Medtronic",
+  "Shimadzu",
+  "Dräger",
+  "Olympus",
+  "Samsung",
+  "Esaote",
+  "Fujifilm",
 ] as const;
 
 type Product = {
@@ -492,7 +527,11 @@ export function PortfolioBrowser() {
   const brands = useMemo(() => {
     const counts = new Map<string, number>();
     for (const p of PRODUCTS) counts.set(p.brand, (counts.get(p.brand) ?? 0) + 1);
-    return [...counts.entries()].map(([name, count]) => ({ name, count }));
+    // Show the full manufacturer roster, ordered by system count then name.
+    const names = new Set<string>([...ALL_MANUFACTURERS, ...counts.keys()]);
+    return [...names]
+      .map((name) => ({ name, count: counts.get(name) ?? 0 }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
   }, []);
 
   return (
@@ -587,7 +626,7 @@ export function PortfolioBrowser() {
       {/* CATEGORY NAV */}
       <section className="sticky top-[112px] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
-          <div className="flex w-full flex-wrap items-center gap-2">
+          <div className="flex w-full items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
