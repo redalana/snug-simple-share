@@ -619,12 +619,33 @@ export function PortfolioBrowser() {
   const [selected, setSelected] = useState<Selected>(EMPTY_SELECTED);
   const [perPage, setPerPage] = useState<number>(PER_PAGE_OPTIONS[0]);
   const [page, setPage] = useState(1);
+  const [openFilters, setOpenFilters] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(FACET_CONFIG.map((f) => [f.key, !!f.defaultOpen])),
+  );
 
   // Restore & remember the user's per-page selection (client-only to avoid SSR mismatch).
   useEffect(() => {
     const saved = Number(window.localStorage.getItem(PER_PAGE_STORAGE_KEY));
     if (PER_PAGE_OPTIONS.includes(saved as (typeof PER_PAGE_OPTIONS)[number])) setPerPage(saved);
   }, []);
+
+  // Restore which filter sections were expanded during the previous browse.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(FILTERS_OPEN_STORAGE_KEY);
+      if (raw) setOpenFilters((prev) => ({ ...prev, ...JSON.parse(raw) }));
+    } catch {
+      /* ignore malformed storage */
+    }
+  }, []);
+
+  const toggleSection = (key: string) => {
+    setOpenFilters((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      window.localStorage.setItem(FILTERS_OPEN_STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  };
 
   const resetPage = () => setPage(1);
 
