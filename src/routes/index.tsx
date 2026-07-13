@@ -4,7 +4,6 @@ import { Hero } from "@/components/site/Hero";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 import { Solutions } from "@/components/site/Solutions";
 import { WhyAbuFarha } from "@/components/site/WhyAbuFarha";
-import { Statistics } from "@/components/site/Statistics";
 import { Projects } from "@/components/site/Projects";
 import { ExperienceAbuFarha } from "@/components/site/ExperienceAbuFarha";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
