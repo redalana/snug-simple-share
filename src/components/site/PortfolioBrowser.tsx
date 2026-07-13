@@ -49,6 +49,10 @@ const FILTER_GROUPS = [
   { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
   { title: "Year", options: ["2024", "2023", "2022", "2021 or earlier"] },
   { title: "System Type", options: ["Fixed", "Mobile", "Ceiling-Mounted", "Floor-Mounted"] },
+  {
+    title: "Availability of Services",
+    options: ["Installation", "Clinical Training", "Technical Support", "Warranty"],
+  },
 ];
 
 type Product = {
