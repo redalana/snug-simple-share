@@ -412,7 +412,18 @@ const FACET_CONFIG: {
 
 
 type Selected = Record<FacetKey, string[]>;
-const EMPTY_SELECTED: Selected = { category: [], manufacturer: [], condition: [] };
+const EMPTY_SELECTED: Selected = {
+  category: [],
+  manufacturer: [],
+  condition: [],
+  country: [],
+  year: [],
+  systemType: [],
+  service: [],
+  specialty: [],
+};
+
+const FILTERS_OPEN_STORAGE_KEY = "abufarha:products:openFilters";
 
 function FilterAccordion({
   title,
