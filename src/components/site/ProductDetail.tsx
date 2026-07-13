@@ -189,18 +189,29 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {/* GALLERY */}
             <div>
               <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_44px_-24px_rgba(0,0,0,0.28)]">
-                <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                <button
+                  type="button"
+                  onClick={() => setLightboxOpen(true)}
+                  aria-label="Open fullscreen gallery"
+                  className="group relative block aspect-[4/3] w-full overflow-hidden bg-secondary"
+                >
                   <motion.img
                     key={active}
                     initial={{ opacity: 0.4, scale: 1.01 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.35 }}
                     src={active}
-                    alt={product.name}
+                    alt={`${product.brand} ${product.name}`}
                     loading="eager"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                </div>
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                    <Expand className="h-3.5 w-3.5" /> Fullscreen
+                  </span>
+                  <span className="absolute bottom-3 left-3 rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                    {activeIndex + 1} / {gallery.length}
+                  </span>
+                </button>
               </div>
               {gallery.length > 1 && (
                 <div className="mt-4 flex gap-3">
