@@ -45,6 +45,7 @@ import {
   productSlug,
 } from "@/lib/products";
 import { generateProductPdf } from "@/lib/product-pdf";
+import { geoService } from "@/lib/services/geoService";
 
 const WHATSAPP_NUMBER = "962799741318";
 
@@ -670,6 +671,22 @@ function QuoteSection({
     phone: "",
     message: `I would like to request a quotation for the ${product.name}. Please send pricing, availability and delivery information.`,
   });
+
+  // Auto-detect the visitor's country and prefill the selector (frontend
+  // placeholder via geoService; backend IP geolocation swaps in later).
+  useEffect(() => {
+    let cancelled = false;
+    geoService.detectCountry().then(({ iso2 }) => {
+      if (cancelled) return;
+      const match = QUOTE_COUNTRIES.find((c) => c.iso2 === iso2);
+      if (match) {
+        setForm((prev) => (prev.country ? prev : { ...prev, country: match.name }));
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const update =
     (field: keyof typeof form) =>
