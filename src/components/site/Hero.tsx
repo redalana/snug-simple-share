@@ -137,6 +137,12 @@ export function Hero() {
               </a>
             </div>
 
+            <div className="mt-4 flex items-center gap-2 text-[13px] font-medium text-muted-foreground">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              Backed by a 1-year free warranty on every installation.
+            </div>
+
+
 
             <div className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6">
               {stats.map((s) => (
