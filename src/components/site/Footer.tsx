@@ -3,6 +3,8 @@ import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "luci
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Logo } from "./Logo";
+import cathLabBg from "@/assets/footer-cathlab.jpg.asset.json";
+import vascularBg from "@/assets/footer-vascular.jpg.asset.json";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
