@@ -81,7 +81,7 @@ export function ExperienceAbuFarha() {
               alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red"
               width={1024}
               height={1200}
-              className="mx-auto w-full max-w-xl select-none object-contain"
+              className="mx-auto w-full max-w-2xl select-none object-contain"
               style={{
                 maskImage:
                   "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
