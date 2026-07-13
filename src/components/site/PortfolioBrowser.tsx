@@ -17,7 +17,6 @@ import {
   Mail,
   Wrench,
   GraduationCap,
-  FileText,
 } from "lucide-react";
 import heroCathlab from "@/assets/hero-cathlab.jpg";
 import solMri from "@/assets/sol-mri.jpg";
