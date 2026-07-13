@@ -1,21 +1,21 @@
 import { Eyebrow } from "./Eyebrow";
 
-type Brand = { name: string; color: string };
+type Brand = { name: string };
 
 const BRANDS: Brand[] = [
-  { name: "PHILIPS", color: "#0B5ED7" },
-  { name: "Siemens Healthineers", color: "#009999" },
-  { name: "GE HealthCare", color: "#6E2B8B" },
-  { name: "Canon", color: "#CC0000" },
-  { name: "Hitachi", color: "#E60027" },
-  { name: "Mindray", color: "#E2231A" },
-  { name: "Toshiba", color: "#E60012" },
-  { name: "Shimadzu", color: "#004098" },
-  { name: "Abbott", color: "#008FC7" },
-  { name: "Boston Scientific", color: "#0057B8" },
-  { name: "Medtronic", color: "#170F5F" },
-  { name: "Richard Wolf", color: "#1D4E9C" },
-  { name: "eSaote", color: "#D51317" },
+  { name: "PHILIPS" },
+  { name: "Siemens Healthineers" },
+  { name: "GE HealthCare" },
+  { name: "Canon" },
+  { name: "Hitachi" },
+  { name: "Mindray" },
+  { name: "Toshiba" },
+  { name: "Shimadzu" },
+  { name: "Abbott" },
+  { name: "Boston Scientific" },
+  { name: "Medtronic" },
+  { name: "Richard Wolf" },
+  { name: "eSaote" },
 ];
 
 export function BrandsMarquee() {
@@ -32,8 +32,7 @@ export function BrandsMarquee() {
           {loop.map((b, i) => (
             <span
               key={i}
-              className="font-display text-lg font-bold tracking-tight opacity-[0.85] transition-all duration-300 ease-out hover:opacity-100 hover:brightness-110"
-              style={{ color: b.color }}
+              className="font-display text-lg font-bold tracking-tight text-ink/45 transition-colors duration-300 ease-out hover:text-ink"
             >
               {b.name}
             </span>
