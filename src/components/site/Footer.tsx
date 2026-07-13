@@ -94,14 +94,25 @@ export function Footer() {
         }}
       />
 
-      {/* LAYER 2 — LEFT: oversized cath lab blueprint, cropped, ~2.5% opacity */}
+      {/* CENTER — very soft light beam for depth */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 120% at 50% -20%, rgba(255,255,255,0.04), transparent 60%)",
+        }}
+      />
+
+      {/* LAYER 2 — LEFT: oversized cath lab blueprint, scaled 170%, cropped, ~2.5% opacity */}
       <svg
         aria-hidden="true"
         viewBox="0 0 600 600"
-        className="pointer-events-none absolute -left-[16%] top-1/2 h-[150%] w-auto -translate-y-1/2"
+        className="pointer-events-none absolute -left-[24%] top-1/2 h-[190%] w-auto -translate-y-1/2"
         style={{ opacity: 0.025 }}
       >
-        <g fill="none" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <g fill="none" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+
           {/* ceiling rail */}
           <line x1="60" y1="70" x2="520" y2="70" />
           <line x1="60" y1="80" x2="520" y2="80" />
