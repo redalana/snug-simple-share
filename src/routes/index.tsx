@@ -8,8 +8,7 @@ import { Projects } from "@/components/site/Projects";
 import { ExperienceAbuFarha } from "@/components/site/ExperienceAbuFarha";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
-import { ReadinessAssessment } from "@/components/site/ReadinessAssessment";
-import { Insights } from "@/components/site/Insights";
+import { ReadinessTeaser } from "@/components/site/ReadinessTeaser";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Footer } from "@/components/site/Footer";
@@ -40,9 +39,7 @@ function Index() {
         {/* How do we work? */}
         <Process />
         {/* Is your hospital ready for advanced medical technology? */}
-        <ReadinessAssessment />
-        {/* Thought leadership */}
-        <Insights />
+        <ReadinessTeaser />
         {/* How can customers start working with us? */}
         <FinalCTA />
         <ContactForm />

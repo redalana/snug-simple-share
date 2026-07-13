@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 
@@ -18,6 +19,12 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HospitalReadinessAssessmentRoute =
+  HospitalReadinessAssessmentRouteImport.update({
+    id: '/hospital-readiness-assessment',
+    path: '/hospital-readiness-assessment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +38,47 @@ const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projects' | '/programs/stroke-care'
+  fullPaths:
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/projects' | '/programs/stroke-care'
-  id: '__root__' | '/' | '/projects' | '/programs/stroke-care'
+  to:
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
+  id:
+    | '__root__'
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
   ProjectsRoute: typeof ProjectsRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
 }
@@ -66,6 +90,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital-readiness-assessment': {
+      id: '/hospital-readiness-assessment'
+      path: '/hospital-readiness-assessment'
+      fullPath: '/hospital-readiness-assessment'
+      preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +118,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
   ProjectsRoute: ProjectsRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
 }
