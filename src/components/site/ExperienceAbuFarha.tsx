@@ -41,7 +41,7 @@ export function ExperienceAbuFarha() {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden bg-white py-28 lg:py-36"
+      className="relative overflow-hidden bg-white py-20 lg:py-24"
     >
       {/* Very subtle engineering grid */}
       <div
