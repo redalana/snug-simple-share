@@ -114,23 +114,23 @@ export function Hero() {
               We supply, install, commission, train and support world-class medical
               equipment for hospitals and clinics across Africa and the Middle East.
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="#solutions"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Explore Products
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="group inline-flex items-center gap-2 rounded-full px-3 py-3.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 <PhoneCall className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
                 Talk to an Expert
