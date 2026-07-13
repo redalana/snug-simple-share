@@ -74,13 +74,12 @@ const INCLUDED = [
   { icon: Headset, label: "After Sales Support" },
 ];
 
-function useShare(product: Product) {
+function useShare(product: Product, url: string) {
   const [copied, setCopied] = useState(false);
-  const url = typeof window !== "undefined" ? window.location.href : "";
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(url || window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -101,17 +100,21 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const gallery = product.gallery?.length ? product.gallery : [product.image];
   const [active, setActive] = useState(gallery[0]);
   const [generating, setGenerating] = useState(false);
-  const share = useShare(product);
+  // Read the live URL only after mount to avoid SSR/client hydration mismatch.
+  const [pageUrl, setPageUrl] = useState("");
+  useEffect(() => {
+    setPageUrl(window.location.href);
+  }, [slug]);
+  const share = useShare(product, pageUrl);
 
   const related = getRelatedProducts(product, 3);
   const adjacent = getAdjacentProducts(slug);
 
   const quoteUrl = `/#contact`;
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${
-      typeof window !== "undefined" ? window.location.href : ""
-    }\n\nPlease send quotation and availability.`,
+    `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
   )}`;
+
 
   const facts: { icon: typeof Factory; label: string; value: string }[] = [
     { icon: Factory, label: "Manufacturer", value: product.brand },
