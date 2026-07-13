@@ -680,36 +680,46 @@ export function PortfolioBrowser() {
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter((p) =>
-        `${p.name} ${p.brand} ${p.category} ${p.keywords} ${p.status}`.toLowerCase().includes(q),
+        `${p.name} ${p.brand} ${p.category} ${p.keywords} ${p.status} ${p.country} ${p.systemType} ${p.year} ${p.specialty.join(" ")}`
+          .toLowerCase()
+          .includes(q),
       );
     }
     return list;
   }, [activeCat, query]);
 
   const productPassesFacets = (p: Product, ignore?: FacetKey) => {
-    for (const { key } of FACETS) {
+    for (const { key } of FACET_CONFIG) {
       if (key === ignore) continue;
       const vals = selected[key];
-      if (vals.length && !vals.includes(FIELD_BY_KEY[key](p))) return false;
+      if (!vals.length) continue;
+      const productVals = FIELD_BY_KEY[key](p);
+      // A product passes when it matches ANY selected value in this facet.
+      if (!vals.some((v) => productVals.includes(v))) return false;
     }
     return true;
   };
 
   // Facet options with LIVE counts (count reflects all other active filters).
+  // Master values are always included (count 0 allowed) so nothing is hidden.
   const facetGroups = useMemo(() => {
-    return FACETS.map(({ key, title, field }) => {
+    return FACET_CONFIG.map(({ key, title, master, searchable }) => {
       const counts = new Map<string, number>();
+      for (const v of master) counts.set(v, 0);
       for (const p of baseList) {
         if (!productPassesFacets(p, key)) continue;
-        const v = field(p);
-        counts.set(v, (counts.get(v) ?? 0) + 1);
+        for (const v of FIELD_BY_KEY[key](p)) counts.set(v, (counts.get(v) ?? 0) + 1);
       }
-      // Ensure currently-selected values remain visible even at count 0.
       for (const v of selected[key]) if (!counts.has(v)) counts.set(v, 0);
+      const order = new Map(master.map((v, i) => [v, i]));
       const options = [...counts.entries()]
         .map(([value, count]) => ({ value, count }))
-        .sort((a, b) => a.value.localeCompare(b.value));
-      return { key, title, options };
+        .sort((a, b) => {
+          const ai = order.has(a.value) ? order.get(a.value)! : Number.MAX_SAFE_INTEGER;
+          const bi = order.has(b.value) ? order.get(b.value)! : Number.MAX_SAFE_INTEGER;
+          return ai - bi || a.value.localeCompare(b.value);
+        });
+      return { key, title, options, searchable };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseList, selected]);
