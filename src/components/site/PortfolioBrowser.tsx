@@ -40,50 +40,39 @@ import { HeroShowcase } from "@/components/site/HeroShowcase";
  * is hardcoded; they are all computed from the product data.
  */
 
-// Full medical-technology taxonomy shown as category chips. Category names
-// align with the `category` field on products so filtering stays functional;
-// additional clinical categories surface the full portfolio breadth.
+// STRICT category taxonomy — the exact set of categories that exist in the
+// AbuFarha Medical database. These names are the single source of truth for
+// the category chips, the Category filter, search and product assignment.
 const PRIMARY_CATEGORIES = [
-  "Cath Lab",
-  "MRI",
-  "CT",
-  "PET/CT",
+  "Cath Lab Systems",
+  "MRI Scanners",
+  "CT Scanners",
+  "PET/CT Scanners",
   "C-Arms",
-  "X-Ray",
+  "X-Ray Systems",
   "Mammography",
   "Ultrasound",
   "Women's Healthcare",
   "Operating Room",
   "Bone Densitometers (DEXA)",
-  "Lithotripsy",
-  "Endoscopy",
-  "Urology",
-  "Cardiology",
-  "Neurology",
-  "Radiology",
-  "Surgical Equipment",
+  "Lithotripsy Systems",
 ] as const;
 
-// Full manufacturer roster — leading global medical technology brands.
+// STRICT manufacturer roster — the exact set of manufacturers that exist in the
+// AbuFarha Medical database. Displayed verbatim; never add, remove or rename.
 const ALL_MANUFACTURERS = [
   "Philips",
-  "Siemens Healthineers",
-  "Canon Medical",
-  "GE HealthCare",
-  "Hitachi",
-  "Toshiba",
+  "Toshiba - Canon",
+  "Siemens",
   "Mindray",
+  "eSaote",
   "Richard Wolf",
-  "Karl Storz",
-  "Boston Scientific",
+  "Hitachi",
+  "GE",
+  "Shimadzu",
   "Abbott",
   "Medtronic",
-  "Shimadzu",
-  "Dräger",
-  "Olympus",
-  "Samsung",
-  "Esaote",
-  "Fujifilm",
+  "Boston Scientific",
 ] as const;
 
 type Product = {
@@ -117,7 +106,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Philips Achieva 1.5T MRI",
     brand: "Philips",
-    category: "MRI",
+    category: "MRI Scanners",
     image: solMri,
     specs: ["1.5 Tesla", "Whole Body"],
     status: "Certified Refurbished",
@@ -144,7 +133,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Philips Allura Xper FD20",
     brand: "Philips",
-    category: "Cath Lab",
+    category: "Cath Lab Systems",
     image: heroCathlab,
     specs: ["Biplane", "Interventional"],
     status: "Certified Refurbished",
@@ -168,8 +157,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Siemens SOMATOM Definition",
-    brand: "Siemens Healthineers",
-    category: "CT",
+    brand: "Siemens",
+    category: "CT Scanners",
     image: solCt,
     specs: ["128 Slice", "Dual Source"],
     status: "Certified Refurbished",
@@ -194,8 +183,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "GE Discovery MI PET/CT",
-    brand: "GE HealthCare",
-    category: "PET/CT",
+    brand: "GE",
+    category: "PET/CT Scanners",
     image: solPetct,
     specs: ["16 Slice", "Digital PET"],
     status: "Factory Certified",
@@ -220,7 +209,7 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Siemens Mammomat Revelation",
-    brand: "Siemens Healthineers",
+    brand: "Siemens",
     category: "Mammography",
     image: solMammo,
     specs: ["3D Tomosynthesis", "50µm"],
@@ -271,8 +260,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Canon Radrex Digital X-Ray",
-    brand: "Canon Medical",
-    category: "X-Ray",
+    brand: "Toshiba - Canon",
+    category: "X-Ray Systems",
     image: solXray,
     specs: ["Digital", "Ceiling-Mounted"],
     status: "Factory Certified",
@@ -296,8 +285,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "GE Innova IGS 530 Cath Lab",
-    brand: "GE HealthCare",
-    category: "Cath Lab",
+    brand: "GE",
+    category: "Cath Lab Systems",
     image: beyondCathlab,
     specs: ["Single Plane", "Cardiac"],
     status: "Certified Refurbished",
