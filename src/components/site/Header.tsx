@@ -108,8 +108,8 @@ function LanguageSelector() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.16 }}
-            className="absolute right-0 top-full z-20 mt-2 w-36 rounded-2xl border border-border/70 bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)]"
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 top-full z-20 mt-2 w-40 rounded-[14px] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
           >
             {LANGUAGES.map((l) => (
               <button
@@ -118,7 +118,7 @@ function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-muted ${
+                className={`flex w-full items-center gap-2.5 rounded-[10px] px-4 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
                   l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
@@ -158,13 +158,13 @@ export function Header() {
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
         <div className="mx-auto flex h-[84px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="shrink-0 origin-left scale-[1.08]">
+          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.13]">
             <Logo />
           </Link>
 
           {/* Search — centered hero element of the header */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[420px] lg:w-[440px]">
+            <div className="w-[460px] lg:w-[480px]">
               <SearchField />
             </div>
           </div>
@@ -173,31 +173,31 @@ export function Header() {
           <div className="hidden shrink-0 items-center lg:flex">
             <LanguageSelector />
 
-            {/* Language → Social : 24px */}
-            <div className="ml-6 flex items-center gap-4">
+            {/* Language → Social : 28px */}
+            <div className="ml-7 flex items-center gap-[18px]">
               {SOCIALS.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className={`text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
+                  className={`text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
                 >
-                  <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </a>
               ))}
               <a
                 href="#"
                 aria-label="WhatsApp"
-                className="text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
+                className="text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
               >
-                <WhatsAppIcon className="h-[18px] w-[18px]" />
+                <WhatsAppIcon className="h-5 w-5" />
               </a>
             </div>
 
             {/* Social → Button : 28px */}
             <a
               href="#contact"
-              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
             </a>
@@ -225,18 +225,18 @@ export function Header() {
 
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-2 px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
             {NAV.map((item) => (
               <div key={item.label} className="group relative">
                 <a
                   href={item.href}
-                  className="flex items-center gap-1 px-5 py-3.5 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
+                  className="flex items-center gap-1 px-5 py-3 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
                 >
                   {item.label}
                   {item.dropdown && (
-                    <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
+                    <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
                   )}
-                  <span className="absolute inset-x-5 bottom-2 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-5 bottom-1.5 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
 
                 {item.dropdown && (
