@@ -65,87 +65,134 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#111315] text-white/70">
       <style>{`
-        @keyframes vascularPulse {
-          0%, 100% { opacity: 0.04; }
-          50% { opacity: 0.06; }
+        @keyframes vascularBreath {
+          0%, 100% { opacity: 0.03; }
+          45%, 55% { opacity: 0.05; }
         }
       `}</style>
 
-      {/* Depth gradients */}
+      {/* LAYER 1 — deep charcoal gradient + soft radial lighting */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(1200px 600px at 12% -10%, rgba(255,255,255,0.06), transparent 60%), radial-gradient(900px 500px at 100% 110%, rgba(180,20,30,0.10), transparent 55%), linear-gradient(180deg, #16181b 0%, #111315 55%, #0d0f10 100%)",
+            "radial-gradient(1100px 620px at 18% -12%, rgba(255,255,255,0.05), transparent 62%), radial-gradient(900px 560px at 88% 8%, rgba(255,255,255,0.028), transparent 60%), linear-gradient(160deg, #181A1D 0%, #141619 42%, #111315 100%)",
         }}
       />
 
-      {/* LEFT — blurred cath lab silhouette */}
+      {/* LAYER 2 — LEFT: oversized cath lab blueprint, cropped, ~2.5% opacity */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 400 400"
-        className="pointer-events-none absolute -left-16 bottom-0 h-[420px] w-[420px]"
-        style={{ opacity: 0.03, filter: "blur(14px)" }}
+        viewBox="0 0 600 600"
+        className="pointer-events-none absolute -left-[16%] top-1/2 h-[150%] w-auto -translate-y-1/2"
+        style={{ opacity: 0.025 }}
       >
-        <g fill="none" stroke="#ffffff" strokeWidth="6">
-          <rect x="60" y="330" width="220" height="18" rx="6" />
-          <path d="M120 330 L120 120 Q120 90 150 90 L250 90" />
-          <circle cx="270" cy="150" r="70" />
-          <circle cx="270" cy="150" r="42" />
-          <path d="M270 300 L270 348" />
-          <rect x="200" y="300" width="140" height="14" rx="6" />
+        <g fill="none" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+          {/* ceiling rail */}
+          <line x1="60" y1="70" x2="520" y2="70" />
+          <line x1="60" y1="80" x2="520" y2="80" />
+          {/* C-arm suspension */}
+          <path d="M300 80 L300 150" />
+          <path d="M300 150 C300 150 210 150 190 250 C170 350 250 420 300 420" />
+          {/* detector head */}
+          <rect x="150" y="215" width="70" height="70" rx="8" />
+          <rect x="162" y="227" width="46" height="46" rx="4" />
+          {/* source head */}
+          <circle cx="300" cy="420" r="46" />
+          <circle cx="300" cy="420" r="26" />
+          <circle cx="300" cy="420" r="8" />
+          {/* patient table */}
+          <rect x="120" y="470" width="360" height="16" rx="6" />
+          <path d="M300 486 L300 560" />
+          <rect x="250" y="560" width="100" height="18" rx="6" />
+          {/* measurement / dimension ticks */}
+          <path d="M60 96 L60 108 M520 96 L520 108" />
+          <line x1="60" y1="102" x2="520" y2="102" strokeDasharray="4 8" />
+          {/* radial protractor around source */}
+          <circle cx="300" cy="420" r="74" strokeDasharray="2 10" />
+          {/* console outline (right, mostly cropped) */}
+          <rect x="470" y="360" width="120" height="150" rx="10" />
+          <line x1="470" y1="400" x2="590" y2="400" />
+          <circle cx="500" cy="440" r="10" />
+          <circle cx="540" cy="440" r="10" />
         </g>
       </svg>
 
-      {/* RIGHT — neurovascular arterial tree */}
+      {/* LAYER 3 — RIGHT: delicate neurovascular network, dark crimson, breathing */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 300 400"
-        className="pointer-events-none absolute right-0 top-0 h-full w-[360px]"
+        viewBox="0 0 360 700"
+        preserveAspectRatio="xMaxYMid slice"
+        className="pointer-events-none absolute right-0 top-0 h-full w-[42%]"
         style={{
-          opacity: 0.04,
-          filter: "blur(1.5px) drop-shadow(0 0 12px rgba(180,20,30,0.6))",
-          animation: "vascularPulse 9s ease-in-out infinite",
+          opacity: 0.035,
+          animation: "vascularBreath 11s ease-in-out infinite",
+          maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to left, black 40%, transparent 100%)",
         }}
       >
-        <g fill="none" stroke="#b4141e" strokeLinecap="round">
-          <path d="M150 400 L150 240" strokeWidth="5" />
-          <path d="M150 240 C150 200 110 190 95 150 C85 125 90 100 70 80" strokeWidth="3.5" />
-          <path d="M150 240 C150 200 190 190 205 150 C215 125 210 100 230 80" strokeWidth="3.5" />
-          <path d="M95 150 C80 140 60 145 48 125" strokeWidth="2" />
-          <path d="M95 150 C88 130 70 120 66 96" strokeWidth="2" />
-          <path d="M205 150 C220 140 240 145 252 125" strokeWidth="2" />
-          <path d="M205 150 C212 130 230 120 234 96" strokeWidth="2" />
-          <path d="M150 240 C150 215 140 205 130 185" strokeWidth="2.4" />
-          <path d="M150 240 C150 215 160 205 170 185" strokeWidth="2.4" />
-          <path d="M70 80 C60 66 62 52 50 44" strokeWidth="1.4" />
-          <path d="M230 80 C240 66 238 52 250 44" strokeWidth="1.4" />
-          <path d="M66 96 C56 88 44 90 40 78" strokeWidth="1.4" />
-          <path d="M234 96 C244 88 256 90 260 78" strokeWidth="1.4" />
+        <g fill="none" stroke="#c1121f" strokeLinecap="round">
+          <path d="M360 350 L250 350" strokeWidth="2.2" />
+          <path d="M250 350 C210 350 200 300 160 280 C130 265 120 230 90 215" strokeWidth="1.6" />
+          <path d="M250 350 C210 350 200 400 160 420 C130 435 120 470 90 485" strokeWidth="1.6" />
+          <path d="M250 350 C230 350 224 330 210 315" strokeWidth="1.3" />
+          <path d="M250 350 C230 350 224 370 210 385" strokeWidth="1.3" />
+          <path d="M160 280 C140 268 118 272 100 250" strokeWidth="0.9" />
+          <path d="M160 280 C150 258 128 250 122 224" strokeWidth="0.9" />
+          <path d="M160 420 C140 432 118 428 100 450" strokeWidth="0.9" />
+          <path d="M160 420 C150 442 128 450 122 476" strokeWidth="0.9" />
+          <path d="M90 215 C78 200 80 182 66 172" strokeWidth="0.7" />
+          <path d="M90 485 C78 500 80 518 66 528" strokeWidth="0.7" />
+          <path d="M122 224 C110 214 96 216 90 202" strokeWidth="0.6" />
+          <path d="M122 476 C110 486 96 484 90 498" strokeWidth="0.6" />
+          <path d="M210 315 C198 306 186 308 178 296" strokeWidth="0.6" />
+          <path d="M210 385 C198 394 186 392 178 404" strokeWidth="0.6" />
+          <path d="M300 350 C280 350 274 322 258 306" strokeWidth="1" />
+          <path d="M300 350 C280 350 274 378 258 394" strokeWidth="1" />
         </g>
       </svg>
+
+      {/* LAYER 4 — film grain + vignette */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          opacity: 0.05,
+          mixBlendMode: "overlay",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 40%, transparent 55%, rgba(0,0,0,0.45) 100%)",
+        }}
+      />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Top footer — 5 columns */}
-        <div className="grid gap-x-8 gap-y-12 py-16 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
+        <div className="grid gap-x-10 gap-y-14 py-20 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
           <div>
             <Logo light />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
-              Delivering advanced medical technologies, turnkey hospital solutions,
+            <p className="mt-6 max-w-sm text-[13.5px] leading-[1.75] text-white/50">
+              Delivering advanced medical technologies, turnkey project delivery,
               biomedical engineering and long-term support for healthcare providers
-              across Africa and the Middle East.
+              across Africa, the Middle East and emerging healthcare markets.
             </p>
-            <div className="mt-7 flex gap-3">
+            <div className="mt-8 flex items-center gap-6">
               {SOCIALS.map(({ label, Icon, color }) => (
                 <a
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5"
+                  className="group transition-transform duration-300 hover:-translate-y-0.5"
                   style={{ ["--sc" as string]: color }}
                 >
-                  <Icon className="h-[18px] w-[18px] text-white/75 transition-colors duration-300 group-hover:text-[var(--sc)]" />
+                  <Icon className="h-[19px] w-[19px] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
                 </a>
               ))}
             </div>
@@ -153,15 +200,15 @@ export function Footer() {
 
           {COLS.map((col) => (
             <div key={col.title}>
-              <h4 className="font-display text-[13px] font-bold uppercase tracking-[0.16em] text-white/90">
+              <h4 className="font-display text-[12px] font-semibold uppercase tracking-[0.2em] text-white/85">
                 {col.title}
               </h4>
-              <ul className="mt-5 space-y-3 text-sm">
+              <ul className="mt-6 space-y-3.5 text-[13.5px]">
                 {col.links.map((l) => (
                   <li key={l}>
                     <a
                       href="#"
-                      className="inline-block text-white/55 transition-all duration-200 hover:translate-x-1 hover:text-white"
+                      className="inline-block text-white/50 transition-all duration-200 hover:translate-x-1 hover:text-white"
                     >
                       {l}
                     </a>
@@ -172,23 +219,24 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Contact bar */}
-        <div className="border-t border-white/10 py-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {/* Premium divider + contact bar */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+        <div className="py-10">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
-                <div className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.6} />
+                <div className="flex items-start gap-3.5">
+                  <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-white/45" strokeWidth={1.5} />
                   <div className="min-w-0">
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+                    <div className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}
                     </div>
-                    <div className="mt-1 truncate text-sm text-white/80">{value}</div>
+                    <div className="mt-1.5 truncate text-[13.5px] text-white/75">{value}</div>
                   </div>
                 </div>
               );
               return href ? (
-                <a key={label} href={href} className="transition-opacity hover:opacity-80">
+                <a key={label} href={href} className="transition-colors hover:[&_*]:text-white/90">
                   {inner}
                 </a>
               ) : (
@@ -199,8 +247,22 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10 py-6 text-center text-xs text-white/40">
-          © 2026 AbuFarha Medical Equipment. All Rights Reserved.
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+        <div className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
+          <div className="text-[12.5px] text-white/40">
+            © 2026 AbuFarha Medical Equipment. All Rights Reserved.
+          </div>
+          <div className="flex items-center gap-7 text-[12.5px]">
+            {["Privacy Policy", "Terms & Conditions", "Sitemap"].map((l) => (
+              <a
+                key={l}
+                href="#"
+                className="text-white/40 transition-colors duration-200 hover:text-white/80"
+              >
+                {l}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
