@@ -36,6 +36,7 @@ import {
   BadgeCheck,
   MapPin,
   Boxes,
+  Mail,
 } from "lucide-react";
 import {
   type Product,
