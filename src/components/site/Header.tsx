@@ -108,8 +108,8 @@ function LanguageSelector() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.16 }}
-            className="absolute right-0 top-full z-20 mt-2 w-36 rounded-2xl border border-border/70 bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)]"
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 top-full z-20 mt-2 w-40 rounded-[14px] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
           >
             {LANGUAGES.map((l) => (
               <button
@@ -118,7 +118,7 @@ function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-muted ${
+                className={`flex w-full items-center gap-2.5 rounded-[10px] px-4 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
                   l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
