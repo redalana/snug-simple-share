@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Menu, X, Facebook, Linkedin } from "lucide-react";
+import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check } from "lucide-react";
 import { Logo } from "./Logo";
 
 type NavItem = {
@@ -58,13 +58,13 @@ const NAV: NavItem[] = [
 ];
 
 const SOCIALS = [
-  { label: "Facebook", href: "#", Icon: Facebook },
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
+  { label: "Facebook", href: "#", Icon: Facebook, hover: "hover:text-[#1877F2]" },
+  { label: "LinkedIn", href: "#", Icon: Linkedin, hover: "hover:text-[#0A66C2]" },
 ];
 
 const LANGUAGES = [
   { code: "en", label: "English" },
-  { code: "ar", label: "العربية" },
+  { code: "fr", label: "Français" },
 ] as const;
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -118,10 +118,13 @@ function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`block w-full rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-accent hover:text-primary ${
-                  l.code === lang.code ? "text-primary" : "text-foreground/75"
+                className={`flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-muted ${
+                  l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
+                <Check
+                  className={`h-4 w-4 text-primary ${l.code === lang.code ? "opacity-100" : "opacity-0"}`}
+                />
                 {l.label}
               </button>
             ))}
@@ -153,50 +156,53 @@ export function Header() {
             : "bg-white"
         }`}
       >
-        {/* Level 1 — logo, search, language, socials, CTA */}
+        {/* Level 1 — logo, centered search, language, socials, CTA */}
         <div className="mx-auto flex h-[84px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
           <Link to="/" className="shrink-0 origin-left scale-[1.08]">
             <Logo />
           </Link>
 
-          {/* Search — the hero element of the header */}
-          <div className="ml-auto hidden md:block md:w-[420px] lg:w-[440px] xl:w-[460px]">
-            <SearchField />
+          {/* Search — centered hero element of the header */}
+          <div className="hidden flex-1 justify-center md:flex">
+            <div className="w-[420px] lg:w-[440px]">
+              <SearchField />
+            </div>
           </div>
 
-          {/* Language selector */}
-          <div className="hidden lg:block">
+          {/* Right cluster — language, socials, CTA */}
+          <div className="hidden shrink-0 items-center lg:flex">
             <LanguageSelector />
-          </div>
 
-          {/* Socials */}
-          <div className="hidden items-center gap-4 lg:flex">
-            {SOCIALS.map(({ label, href, Icon }) => (
+            {/* Language → Social : 24px */}
+            <div className="ml-6 flex items-center gap-4">
+              {SOCIALS.map(({ label, href, Icon, hover }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className={`text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
+                >
+                  <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                </a>
+              ))}
               <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="text-muted-foreground transition-colors hover:text-primary"
+                href="#"
+                aria-label="WhatsApp"
+                className="text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
               >
-                <Icon className="h-5 w-5" strokeWidth={1.75} />
+                <WhatsAppIcon className="h-[18px] w-[18px]" />
               </a>
-            ))}
+            </div>
+
+            {/* Social → Button : 28px */}
             <a
-              href="#"
-              aria-label="WhatsApp"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              href="#contact"
+              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
             >
-              <WhatsAppIcon className="h-5 w-5" />
+              Request a Quote
             </a>
           </div>
 
-          {/* CTA — matches search field height */}
-          <a
-            href="#contact"
-            className="hidden h-[46px] shrink-0 items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
-          >
-            Request a Quote
-          </a>
 
           {/* Mobile controls */}
           <div className="ml-auto flex items-center gap-2 md:ml-0 xl:hidden">
