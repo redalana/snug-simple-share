@@ -85,9 +85,9 @@ export async function generateProductPdf(product: Product): Promise<void> {
   let y = 100;
 
   // PRODUCT IMAGE
-  const img = await imageToDataUrl(product.image);
+  const img = await imageToDataUrl(product.image, 4 / 3);
   const imgW = pageW - margin * 2;
-  const imgH = imgW * 0.5;
+  const imgH = imgW * (3 / 4);
   if (img) {
     try {
       doc.addImage(img.data, img.format, margin, y, imgW, imgH);
