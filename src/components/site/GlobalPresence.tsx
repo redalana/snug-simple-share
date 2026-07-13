@@ -74,7 +74,7 @@ export function GlobalPresence() {
                 viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
                 className="absolute inset-0 h-full w-full"
                 role="img"
-                aria-label="Map of AbuFarha coverage across Africa and the Middle East"
+                aria-label="Map of AbuFarha verified projects across the Middle East, Africa and Asia"
               >
                 {/* inactive countries — legible real geography */}
                 {COUNTRIES.filter((c) => !c.sup).map((c) => (
