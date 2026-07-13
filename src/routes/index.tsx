@@ -5,7 +5,6 @@ import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 import { Solutions } from "@/components/site/Solutions";
 import { ExperienceAbuFarha } from "@/components/site/ExperienceAbuFarha";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
-import { WhyAbuFarha } from "@/components/site/WhyAbuFarha";
 import { ReadinessAssessment } from "@/components/site/ReadinessAssessment";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
