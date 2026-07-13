@@ -40,15 +40,50 @@ import { HeroShowcase } from "@/components/site/HeroShowcase";
  * is hardcoded; they are all computed from the product data.
  */
 
-// Primary categories shown as chips.
+// Full medical-technology taxonomy shown as category chips. Category names
+// align with the `category` field on products so filtering stays functional;
+// additional clinical categories surface the full portfolio breadth.
 const PRIMARY_CATEGORIES = [
   "Cath Lab",
   "MRI",
   "CT",
   "PET/CT",
+  "C-Arms",
   "X-Ray",
   "Mammography",
-  "C-Arms",
+  "Ultrasound",
+  "Women's Healthcare",
+  "Operating Room",
+  "Bone Densitometers (DEXA)",
+  "Lithotripsy",
+  "Endoscopy",
+  "Urology",
+  "Cardiology",
+  "Neurology",
+  "Radiology",
+  "Surgical Equipment",
+] as const;
+
+// Full manufacturer roster — leading global medical technology brands.
+const ALL_MANUFACTURERS = [
+  "Philips",
+  "Siemens Healthineers",
+  "Canon Medical",
+  "GE HealthCare",
+  "Hitachi",
+  "Toshiba",
+  "Mindray",
+  "Richard Wolf",
+  "Karl Storz",
+  "Boston Scientific",
+  "Abbott",
+  "Medtronic",
+  "Shimadzu",
+  "Dräger",
+  "Olympus",
+  "Samsung",
+  "Esaote",
+  "Fujifilm",
 ] as const;
 
 type Product = {
