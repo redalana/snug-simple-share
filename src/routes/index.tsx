@@ -26,7 +26,9 @@ function Index() {
         <BrandsMarquee />
         {/* What technologies do we supply? */}
         <Solutions />
-        {/* What makes AbuFarha different — experience the partnership firsthand */}
+        {/* Why do hospitals choose AbuFarha? */}
+        <WhyAbuFarha />
+        {/* Clinical solutions preview — comprehensive stroke programs */}
         <ExperienceAbuFarha />
         {/* Where do we operate? */}
         <GlobalPresence />
