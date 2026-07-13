@@ -3,23 +3,25 @@ import { ArrowRight, Globe } from "lucide-react";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 
 const STATS = [
-  { value: "40+", label: "Countries Served" },
-  { value: "310+", label: "Projects Delivered" },
+  { value: "10", label: "Countries — Verified Project History" },
+  { value: "110+", label: "Systems & Programs Delivered" },
 ];
 
-// Cropped viewBox focused on Africa & the Middle East (matches the design spec).
-const VB_X = 90;
-const VB_Y = 120;
-const VB_W = 658;
-const VB_H = 480;
+// Cropped viewBox focused on AbuFarha's real footprint
+// (Middle East, North-East Africa, Central & South Asia).
+const VB_X = 280;
+const VB_Y = -80;
+const VB_W = 780;
+const VB_H = 571;
 
 // Pins that fall within the cropped region.
 const VISIBLE_PINS = PINS.filter(
   (p) => p.x >= VB_X && p.x <= VB_X + VB_W && p.y >= VB_Y && p.y <= VB_Y + VB_H,
 );
 
-// Country names that show a static map label in the spec.
-const LABELLED = new Set(["Egypt", "Saudi Arabia", "Nigeria", "Kenya"]);
+// Country names that show a static map label.
+const LABELLED = new Set(["Syria", "Iraq", "Yemen", "Libya"]);
+
 
 export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
