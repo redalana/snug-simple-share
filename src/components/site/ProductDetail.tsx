@@ -354,21 +354,21 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* SYSTEM SNAPSHOT */}
       <section className="border-b border-border/60">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground">
+        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
             System Snapshot
           </h2>
-          <span className="mt-3 block h-0.5 w-16 rounded-full bg-primary" />
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <span className="mt-4 block h-1 w-20 rounded-full bg-primary" />
+          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
             {product.snapshot.slice(0, 6).map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-border/70 bg-card p-5 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
+                className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
               >
-                <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="mt-1.5 font-display text-base font-bold text-foreground">
+                <div className="mt-2 font-display text-xl font-bold text-foreground">
                   {s.value}
                 </div>
               </div>
