@@ -122,23 +122,118 @@ export const COUNTRIES: Country[] = [
   { name: "Zambia", sup: false, d: "M453,485 457,487 460,489 466,490 471,493 475,497 478,505 476,507 474,514 476,522 473,525 470,533 475,535 448,543 449,549 442,550 437,554 436,557 433,558 425,565 420,571 417,571 414,570 404,569 403,568 402,568 399,566 393,565 386,567 380,562 374,554 374,526 393,526 392,523 394,520 392,515 393,511 392,508 395,508 396,511 400,511 406,512 409,516 416,517 421,514 423,519 430,520 433,524 437,529 444,529 443,519 441,521 434,518 432,516 433,507 435,496 433,493 435,487 438,486 450,484 453,485Z" },
 ];
 
-export type Pin = { name: string; x: number; y: number; projects: number; hospitals: number; equipment: number; hq: boolean };
+export type Pin = {
+  name: string;
+  x: number;
+  y: number;
+  hq: boolean;
+  items: string[];
+  total: number;
+};
+
+// Real, verified project history — equipment types & quantities delivered.
 export const PINS: Pin[] = [
-  { name: "Egypt", x: 454, y: 171, projects: 120, hospitals: 58, equipment: 640, hq: true },
-  { name: "Saudi Arabia", x: 580, y: 196, projects: 86, hospitals: 44, equipment: 410, hq: false },
-  { name: "United Arab Emirates", x: 661, y: 195, projects: 64, hospitals: 31, equipment: 300, hq: false },
-  { name: "Jordan", x: 502, y: 132, projects: 28, hospitals: 15, equipment: 120, hq: false },
-  { name: "Iraq", x: 569, y: 114, projects: 34, hospitals: 19, equipment: 150, hq: false },
-  { name: "Libya", x: 339, y: 170, projects: 41, hospitals: 22, equipment: 180, hq: false },
-  { name: "Nigeria", x: 256, y: 325, projects: 52, hospitals: 26, equipment: 210, hq: false },
-  { name: "Ghana", x: 170, y: 340, projects: 23, hospitals: 12, equipment: 95, hq: false },
-  { name: "Kenya", x: 517, y: 409, projects: 38, hospitals: 20, equipment: 160, hq: false },
-  { name: "Uganda", x: 467, y: 399, projects: 19, hospitals: 11, equipment: 80, hq: false },
-  { name: "Tanzania", x: 490, y: 468, projects: 26, hospitals: 14, equipment: 110, hq: false },
-  { name: "Ethiopia", x: 532, y: 329, projects: 31, hospitals: 17, equipment: 130, hq: false },
-  { name: "Rwanda", x: 446, y: 428, projects: 14, hospitals: 8, equipment: 55, hq: false },
-  { name: "Zambia", x: 427, y: 528, projects: 17, hospitals: 9, equipment: 70, hq: false },
-  { name: "Somalia", x: 591, y: 364, projects: 12, hospitals: 6, equipment: 45, hq: false },
-  { name: "Bangladesh", x: 985, y: 199, projects: 22, hospitals: 12, equipment: 90, hq: false },
-  { name: "Uzbekistan", x: 755, y: 41, projects: 16, hospitals: 9, equipment: 65, hq: false },
+  {
+    name: "Syria",
+    x: 518,
+    y: 96,
+    hq: false,
+    total: 18,
+    items: [
+      "Cath Lab / Heart Center × 11",
+      "MRI × 2",
+      "Eye LASIK Center × 3",
+      "IVF Center × 2",
+      "Heart Center Consumables",
+    ],
+  },
+  {
+    name: "Iraq",
+    x: 569,
+    y: 114,
+    hq: false,
+    total: 68,
+    items: [
+      "Cath Lab / Heart Center × 9",
+      "MRI × 3",
+      "Ultrasound × 55",
+      "CT Scanner × 1",
+      "Heart Center Consumables",
+    ],
+  },
+  {
+    name: "Yemen",
+    x: 594,
+    y: 272,
+    hq: false,
+    total: 10,
+    items: [
+      "Cath Lab / Heart Center × 7",
+      "MRI × 2",
+      "CT Scanner × 1",
+      "Heart Center Consumables",
+    ],
+  },
+  {
+    name: "Jordan",
+    x: 502,
+    y: 132,
+    hq: false,
+    total: 3,
+    items: ["Cath Lab / Heart Center × 3"],
+  },
+  {
+    name: "Libya",
+    x: 339,
+    y: 170,
+    hq: false,
+    total: 6,
+    items: [
+      "Cath Lab / Heart Center × 1",
+      "IVF Center × 1",
+      "Ultrasound × 3",
+      "Digital X-ray × 1",
+    ],
+  },
+  {
+    name: "Egypt",
+    x: 454,
+    y: 171,
+    hq: false,
+    total: 1,
+    items: ["Heart Center Consumables"],
+  },
+  {
+    name: "Uzbekistan",
+    x: 755,
+    y: 41,
+    hq: false,
+    total: 1,
+    items: ["Cath Lab / Heart Center × 1", "Heart Center Consumables"],
+  },
+  {
+    name: "Somaliland",
+    x: 590,
+    y: 318,
+    hq: false,
+    total: 1,
+    items: ["Cath Lab / Heart Center × 1", "Heart Center Consumables"],
+  },
+  {
+    name: "Somalia",
+    x: 591,
+    y: 364,
+    hq: false,
+    total: 1,
+    items: ["Cath Lab / Heart Center × 1", "Heart Center Consumables"],
+  },
+  {
+    name: "Bangladesh",
+    x: 985,
+    y: 199,
+    hq: false,
+    total: 2,
+    items: ["Bone Density × 2"],
+  },
 ];
+
