@@ -1,34 +1,82 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Search,
-  ChevronDown,
-  Menu,
-  X,
-  Linkedin,
-  Youtube,
-  Phone,
-  Mail,
-  Globe,
-} from "lucide-react";
+import { Search, ChevronDown, Menu, X, Facebook, Linkedin } from "lucide-react";
 import { Logo } from "./Logo";
 
-const NAV = [
-  { label: "Home", href: "/", dropdown: false },
-  { label: "All Products", href: "#solutions", dropdown: true },
-  { label: "Services", href: "#why", dropdown: true },
+type NavItem = {
+  label: string;
+  href: string;
+  dropdown?: { label: string; href: string }[];
+};
+
+const NAV: NavItem[] = [
+  { label: "Home", href: "/" },
+  {
+    label: "All Products",
+    href: "#solutions",
+    dropdown: [
+      { label: "Cardiac Care", href: "#solutions" },
+      { label: "Imaging & Radiology", href: "#solutions" },
+      { label: "Surgical Systems", href: "#solutions" },
+      { label: "Patient Monitoring", href: "#solutions" },
+    ],
+  },
+  {
+    label: "Services",
+    href: "#why",
+    dropdown: [
+      { label: "Supply & Installation", href: "#why" },
+      { label: "Commissioning", href: "#why" },
+      { label: "Training", href: "#process" },
+      { label: "Maintenance", href: "#process" },
+    ],
+  },
   { label: "Turnkey", href: "#projects" },
   { label: "After Sales", href: "#process" },
-  { label: "About Us", href: "#stats", dropdown: true },
-  { label: "Brands", href: "#brands" },
+  {
+    label: "Brands",
+    href: "#brands",
+    dropdown: [
+      { label: "Philips", href: "#brands" },
+      { label: "Siemens Healthineers", href: "#brands" },
+      { label: "GE HealthCare", href: "#brands" },
+      { label: "Richard Wolf", href: "#brands" },
+    ],
+  },
+  {
+    label: "About Us",
+    href: "#stats",
+    dropdown: [
+      { label: "Our Story", href: "#why" },
+      { label: "Global Presence", href: "#global" },
+      { label: "Why AbuFarha", href: "#why" },
+    ],
+  },
   { label: "Blog", href: "#" },
   { label: "Contact Us", href: "#contact" },
 ];
 
+const SOCIALS = [
+  { label: "Facebook", href: "#", Icon: Facebook },
+  { label: "LinkedIn", href: "#", Icon: Linkedin },
+];
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M12.04 2.5A9.5 9.5 0 0 0 3.9 16.86L3 21.5l4.77-.88A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 5.5 13.3 7.8 7.8 0 0 1-9.34 1.24l-.34-.2-2.83.52.53-2.76-.22-.35A7.8 7.8 0 0 1 12.04 4.2Zm-2.5 3.4c-.2 0-.5.08-.77.37-.26.29-1 .98-1 2.4s1.03 2.78 1.17 2.97c.15.2 2 3.05 4.85 4.16 2.36.93 2.84.75 3.36.7.51-.05 1.66-.68 1.9-1.33.23-.66.23-1.22.16-1.33-.07-.11-.26-.18-.55-.32-.29-.15-1.71-.85-1.98-.94-.26-.1-.46-.15-.65.14-.19.29-.74.94-.9 1.13-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.44-.86-.76-1.44-1.7-1.6-1.99-.17-.29-.02-.44.12-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.49-.65-.5h-.55Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -39,81 +87,126 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* Top utility bar */}
-      <div className="hidden bg-ink text-white/70 lg:block">
-        <div className="mx-auto flex h-9 max-w-[100rem] items-center justify-between px-6 lg:px-10 text-xs">
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5">
-              <Globe className="h-3.5 w-3.5 text-primary" /> Serving Africa &amp; Middle East
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Phone className="h-3.5 w-3.5 text-primary" /> +20 109 111 2200
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Mail className="h-3.5 w-3.5 text-primary" /> info@abufarhamedical.com
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">EN <ChevronDown className="h-3 w-3" /></span>
-            <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-white"><Linkedin className="h-3.5 w-3.5" /></a>
-            <a href="#" aria-label="YouTube" className="transition-colors hover:text-white"><Youtube className="h-3.5 w-3.5" /></a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main nav */}
       <div
         className={`transition-all duration-300 ${
           scrolled
-            ? "bg-white/90 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+            ? "bg-white/90 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.16)] backdrop-blur-xl"
             : "bg-white"
         }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-[100rem] items-center justify-between gap-6 px-6 lg:px-10">
-          <Link to="/">
+        {/* Level 1 — logo, search, socials, CTA */}
+        <div className="mx-auto flex h-[76px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+          <Link to="/" className="shrink-0">
             <Logo />
           </Link>
 
-          <nav className="hidden items-center gap-0.5 xl:flex">
-            {NAV.map((item) => (
+          {/* Search */}
+          <div className="ml-auto hidden md:block md:w-[360px] lg:w-[400px]">
+            <SearchField />
+          </div>
+
+          {/* Socials */}
+          <div className="hidden items-center gap-3 lg:flex">
+            {SOCIALS.map(({ label, href, Icon }) => (
               <a
-                key={item.label}
-                href={item.href}
-                className="group relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-foreground/80 transition-colors hover:text-primary"
+                key={label}
+                href={href}
+                aria-label={label}
+                className="text-muted-foreground transition-colors hover:text-primary"
               >
-                {item.label}
-                {item.dropdown && (
-                  <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-hover:rotate-180" />
-                )}
-                <span className="absolute inset-x-3 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                <Icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
               </a>
             ))}
-          </nav>
+            <a
+              href="#"
+              aria-label="WhatsApp"
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              <WhatsAppIcon className="h-[19px] w-[19px]" />
+            </a>
+          </div>
 
-          <div className="flex items-center gap-2">
+          {/* CTA */}
+          <a
+            href="#contact"
+            className="hidden shrink-0 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
+          >
+            Request a Quote
+          </a>
+
+          {/* Mobile controls */}
+          <div className="ml-auto flex items-center gap-2 md:ml-0 xl:hidden">
             <button
               aria-label="Search"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground/70 transition-all hover:border-primary hover:text-primary"
+              onClick={() => setMobileSearch((v) => !v)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
             >
               <Search className="h-4 w-4" />
             </button>
-            <a
-              href="#contact"
-              className="hidden items-center rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-[0_10px_24px_-10px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
-            >
-              Request a Quote
-            </a>
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border xl:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
+
+        {/* Level 2 — navigation */}
+        <nav className="hidden border-t border-border/60 xl:block">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-1 px-6 lg:px-10">
+            {NAV.map((item) => (
+              <div key={item.label} className="group relative">
+                <a
+                  href={item.href}
+                  className="flex items-center gap-1 px-4 py-3.5 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
+                >
+                  {item.label}
+                  {item.dropdown && (
+                    <ChevronDown className="h-4 w-4 opacity-60 transition-transform group-hover:rotate-180" />
+                  )}
+                  <span className="absolute inset-x-4 bottom-2 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                </a>
+
+                {item.dropdown && (
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+                    <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
+                      {item.dropdown.map((sub) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/75 transition-colors hover:bg-accent hover:text-primary"
+                        >
+                          {sub.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </nav>
       </div>
 
+      {/* Mobile search drawer */}
+      <AnimatePresence>
+        {mobileSearch && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-border bg-white md:hidden"
+          >
+            <div className="mx-auto max-w-[100rem] px-6 py-3">
+              <SearchField />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -122,21 +215,62 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden border-t border-border bg-white xl:hidden"
           >
-            <div className="mx-auto max-w-[100rem] px-6 lg:px-10 py-4">
+            <div className="mx-auto max-w-[100rem] px-6 py-4 lg:px-10">
               {NAV.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block border-b border-border/60 py-3 text-sm font-semibold text-foreground/80 last:border-0"
+                  className="block border-b border-border/60 py-3 text-[16px] font-medium text-foreground/80 transition-colors last:border-0 hover:text-primary"
                 >
                   {item.label}
                 </a>
               ))}
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  {SOCIALS.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      className="text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      <Icon className="h-5 w-5" strokeWidth={1.8} />
+                    </a>
+                  ))}
+                  <a
+                    href="#"
+                    aria-label="WhatsApp"
+                    className="text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    <WhatsAppIcon className="h-5 w-5" />
+                  </a>
+                </div>
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+                >
+                  Request a Quote
+                </a>
+              </div>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
     </header>
+  );
+}
+
+function SearchField() {
+  return (
+    <div className="relative">
+      <Search className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
+      <input
+        type="search"
+        placeholder="Search products, brands or categories..."
+        className="h-11 w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
+      />
+    </div>
   );
 }
