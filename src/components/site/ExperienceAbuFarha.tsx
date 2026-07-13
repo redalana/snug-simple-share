@@ -24,7 +24,7 @@ type Node = {
   category: string;
   title: string;
   copy: string;
-  why: string;
+  
   side: "left" | "right";
   level: "primary" | "secondary";
   /** connector path from the panel edge to a meaningful anatomical region */
@@ -35,27 +35,25 @@ type Node = {
 
 const NODES: Node[] = [
   {
-    id: "decisions",
+    id: "tissue",
     num: "01",
     icon: Gauge,
     category: "Patient Impact",
-    title: "Faster Clinical Decisions",
-    copy: "Early diagnosis and immediate treatment decisions help preserve brain tissue, reduce neurological damage and improve survival during the most critical minutes of stroke care.",
-    why: "Better patient outcomes begin with faster decisions.",
+    title: "Save Brain Tissue Faster",
+    copy: "Early diagnosis and rapid intervention help preserve healthy brain tissue and reduce permanent neurological damage.",
     side: "left",
-    level: "secondary",
+    level: "primary",
     // frontal cortex
     path: "M 20 24 C 34 25, 44 30, 50 34",
     region: { x: 50, y: 34 },
   },
   {
-    id: "efficiency",
+    id: "delays",
     num: "02",
-    icon: TrendingUp,
-    category: "Hospital Performance",
-    title: "Greater Hospital Efficiency",
-    copy: "Reliable imaging systems, optimized clinical workflows and reduced equipment downtime improve procedural efficiency, increase patient capacity and support sustainable hospital operations.",
-    why: "Efficient hospitals deliver faster stroke care.",
+    icon: Timer,
+    category: "Clinical Workflow",
+    title: "Reduce Treatment Delays",
+    copy: "Efficient clinical workflows shorten the time between diagnosis and intervention, improving the chances of successful recovery.",
     side: "left",
     level: "secondary",
     // vascular network
@@ -66,12 +64,11 @@ const NODES: Node[] = [
     id: "recovery",
     num: "03",
     icon: Brain,
-    category: "Patient Outcomes",
-    title: "Better Neurological Recovery",
-    copy: "Integrated stroke pathways reduce treatment delays and improve neurological recovery, rehabilitation potential and long-term quality of life.",
-    why: "Saving time means saving brain function.",
+    category: "Patient Outcome",
+    title: "Improve Functional Recovery",
+    copy: "Integrated stroke pathways increase the likelihood of better neurological recovery and a faster return to independent living.",
     side: "left",
-    level: "primary",
+    level: "secondary",
     // cerebral hemisphere
     path: "M 20 78 C 34 74, 44 64, 49 58",
     region: { x: 49, y: 58 },
@@ -80,38 +77,35 @@ const NODES: Node[] = [
     id: "imaging",
     num: "04",
     icon: ScanLine,
-    category: "Clinical Precision",
+    category: "Technology",
     title: "Precision Neurovascular Imaging",
-    copy: "High-resolution neurovascular imaging allows physicians to identify vessel occlusions rapidly and perform confident endovascular interventions.",
-    why: "Better imaging leads to better clinical decisions.",
+    copy: "High-resolution imaging helps physicians identify blocked vessels quickly and perform safer, more accurate interventions.",
     side: "right",
     level: "primary",
-    // cerebral vessels
-    path: "M 80 24 C 66 26, 58 34, 53 40",
-    region: { x: 53, y: 40 },
-  },
-  {
-    id: "time",
-    num: "05",
-    icon: Timer,
-    category: "Time-Critical Care",
-    title: "Time Is Brain",
-    copy: "Every minute without restoring cerebral blood flow causes irreversible brain cell loss. Rapid intervention preserves healthy brain tissue and improves functional recovery.",
-    why: "Minutes determine outcomes.",
-    side: "right",
-    level: "primary",
-    // blocked artery
-    path: "M 80 51 C 66 50, 60 46, 55 44",
+    // cerebral vessels / blocked artery
+    path: "M 80 24 C 66 26, 58 36, 55 44",
     region: { x: 55, y: 44 },
   },
   {
-    id: "reliability",
+    id: "performance",
+    num: "05",
+    icon: TrendingUp,
+    category: "Hospital Value",
+    title: "Increase Stroke Center Performance",
+    copy: "Reliable technology, optimized workflows and trained clinical teams improve operational efficiency and strengthen hospital performance.",
+    side: "right",
+    level: "secondary",
+    // vascular network
+    path: "M 80 51 C 66 51, 58 49, 53 47",
+    region: { x: 53, y: 47 },
+  },
+  {
+    id: "sustainability",
     num: "06",
     icon: ShieldCheck,
-    category: "Long-Term Sustainability",
-    title: "Reliable Stroke Services",
-    copy: "Preventive maintenance, biomedical engineering, clinical education and technical support help hospitals maintain dependable stroke programs for years after installation.",
-    why: "Long-term reliability protects clinical performance.",
+    category: "Long-Term Success",
+    title: "Build Sustainable Stroke Services",
+    copy: "Continuous biomedical engineering, preventive maintenance and clinical education help hospitals deliver reliable stroke care for years.",
     side: "right",
     level: "secondary",
     // carotid circulation
@@ -205,13 +199,7 @@ function NodePanel({
       >
         {node.copy}
       </p>
-      <p
-        className={`mt-4 border-t border-border/60 pt-3 font-display font-bold italic leading-snug text-ink/80 ${
-          isPrimary ? "text-[15px]" : "text-[13px] text-ink/70"
-        } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
-      >
-        {node.why}
-      </p>
+
     </motion.div>
   );
 }
@@ -360,22 +348,28 @@ export function ExperienceAbuFarha() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 1.1, ease: EASE }}
-              className="relative mx-auto max-w-2xl lg:-mx-6 lg:max-w-none"
+              className="relative mx-auto max-w-2xl lg:-mx-16 lg:max-w-none lg:scale-[1.2]"
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full opacity-50 blur-3xl"
+                className="pointer-events-none absolute inset-0 -z-10 scale-125 rounded-full opacity-60 blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle at 52% 42%, color-mix(in oklab, var(--primary) 13%, transparent), transparent 65%)",
+                    "radial-gradient(circle at 52% 42%, color-mix(in oklab, var(--primary) 15%, transparent), transparent 62%)",
                 }}
               />
               <motion.img
                 src={brainHero}
-                alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red, over a softly blurred cath lab"
+                alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red"
                 width={1024}
                 height={1200}
-                className="w-full select-none rounded-3xl object-contain"
+                className="w-full select-none object-contain"
+                style={{
+                  maskImage:
+                    "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
+                }}
                 animate={
                   reduce
                     ? undefined
