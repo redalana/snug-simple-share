@@ -29,6 +29,7 @@ import solMammo from "@/assets/sol-mammo.jpg";
 import solCarm from "@/assets/sol-carm.jpg";
 import solXray from "@/assets/sol-xray.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
+import { HeroShowcase } from "@/components/site/HeroShowcase";
 
 /**
  * NOTE: All catalog data below is structured to be CMS-ready. Replace the
