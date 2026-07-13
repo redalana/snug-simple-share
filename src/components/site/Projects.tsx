@@ -80,13 +80,16 @@ export function Projects() {
                 transition={{ duration: 0.5 }}
                 className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-border bg-white p-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
               >
-                <div className="h-28 w-40 shrink-0 overflow-hidden rounded-xl">
+                <div className="relative h-28 w-40 shrink-0 overflow-hidden rounded-xl">
                   <img
                     src={proj.img}
                     alt={proj.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <span className="absolute left-2 top-2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary-foreground shadow">
+                    Case Study
+                  </span>
                 </div>
                 <div className="min-w-0">
                   <p className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
