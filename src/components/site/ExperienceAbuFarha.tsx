@@ -199,13 +199,7 @@ function NodePanel({
       >
         {node.copy}
       </p>
-      <p
-        className={`mt-4 border-t border-border/60 pt-3 font-display font-bold italic leading-snug text-ink/80 ${
-          isPrimary ? "text-[15px]" : "text-[13px] text-ink/70"
-        } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
-      >
-        {node.why}
-      </p>
+
     </motion.div>
   );
 }
