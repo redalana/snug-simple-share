@@ -31,8 +31,6 @@ function Index() {
         <Solutions />
         {/* Why do hospitals choose AbuFarha? */}
         <WhyAbuFarha />
-        {/* Proof in numbers */}
-        <Statistics />
         {/* Featured case studies */}
         <Projects />
         {/* Clinical solutions preview — comprehensive stroke programs */}
