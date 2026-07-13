@@ -303,17 +303,17 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {/* QUICK FACTS */}
             <aside className="lg:pt-1">
               <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_18px_44px_-26px_rgba(0,0,0,0.28)]">
-                <h2 className="font-display text-base font-bold text-foreground">Quick Facts</h2>
-                <span className="mt-2 block h-0.5 w-10 rounded-full bg-primary" />
+                <h2 className="font-display text-lg font-bold text-foreground">Quick Facts</h2>
+                <span className="mt-2 block h-1 w-12 rounded-full bg-primary" />
                 <dl className="mt-5 space-y-4">
                   {facts.map((f) => (
                     <div key={f.label} className="flex items-start gap-3">
-                      <f.icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-primary" />
+                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                       <div className="min-w-0">
-                        <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                        <dt className="text-xs uppercase tracking-wide text-muted-foreground">
                           {f.label}
                         </dt>
-                        <dd className="text-sm font-semibold text-foreground">{f.value}</dd>
+                        <dd className="text-[15px] font-semibold text-foreground">{f.value}</dd>
                       </div>
                     </div>
                   ))}
