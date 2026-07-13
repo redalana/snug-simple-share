@@ -58,8 +58,8 @@ export function ExperienceAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
-        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-10">
+      <div className="relative mx-auto max-w-[105rem] px-6 lg:px-10">
+        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-14">
           {/* Left — brain illustration */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
