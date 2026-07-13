@@ -491,44 +491,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </section>
       )}
 
-      {/* FINAL CTA */}
-      <section id="quote" className="mx-auto max-w-[100rem] scroll-mt-32 px-6 py-16 lg:px-10">
-        <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-10 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-14">
-          <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
-            <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-                Interested in the {product.name}?
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-                Our specialists are ready to help you with pricing, availability and clinical
-                fit for your facility.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <button
-                onClick={scrollToQuote}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-              >
-                <FileText className="h-4 w-4" /> Request Quote
-              </button>
-              <a
-                href={whatsappQuote}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                <PhoneCall className="h-4 w-4" /> WhatsApp
-              </a>
-              <a
-                href="tel:+962799741318"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                <PhoneCall className="h-4 w-4" /> Call Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* REQUEST A QUOTE */}
+      <QuoteSection product={product} whatsappQuote={whatsappQuote} />
     </>
   );
 }
