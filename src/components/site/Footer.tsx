@@ -65,14 +65,24 @@ const CONTACTS = [
 ];
 
 export function Footer() {
+  const vesselsRef = useRef<SVGSVGElement>(null);
+
+  useGSAP(() => {
+    const el = vesselsRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Very soft breathing — 3% -> 5% -> 3% over ~11s, almost imperceptible.
+    const tween = gsap.fromTo(
+      el,
+      { opacity: 0.03 },
+      { opacity: 0.05, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
+    );
+    return () => tween.kill();
+  }, []);
+
   return (
     <footer className="relative overflow-hidden bg-[#111315] text-white/70">
-      <style>{`
-        @keyframes vascularBreath {
-          0%, 100% { opacity: 0.03; }
-          45%, 55% { opacity: 0.05; }
-        }
-      `}</style>
+
 
       {/* LAYER 1 — deep charcoal gradient + soft radial lighting */}
       <div
