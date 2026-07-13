@@ -404,7 +404,7 @@ export function ContactForm() {
             transition={{ type: "spring", stiffness: 400, damping: 24 }}
             className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors duration-200 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 disabled:opacity-60"
           >
-            {submitting ? "Sending…" : "Talk to a Medical Equipment Expert"}
+            {submitting ? "Sending…" : "Request Project Consultation"}
             {submitting ? (
               <Send className="h-4 w-4 animate-pulse" />
             ) : (
