@@ -216,16 +216,16 @@ export function ContactForm() {
           </svg>
 
           <div className="relative">
-            <Eyebrow index="06">Request a Consultation</Eyebrow>
+            <Eyebrow index="07">Start the Conversation</Eyebrow>
             <h2 className="mt-6 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
-              Tell us who you are,
+              Let&apos;s discuss your hospital&apos;s
               <br />
-              <span className="text-primary">we&apos;ll tailor the rest.</span>
+              <span className="text-primary">next project.</span>
             </h2>
             <p className="mt-6 max-w-sm text-[15px] leading-[1.85] text-muted-foreground">
-              Whether you run a hospital, practice medicine, distribute equipment
-              or lead a government project — this form adapts to you. No generic
-              enquiries, just a focused conversation.
+              Tell us about your specialty, clinical objectives or upcoming
+              healthcare project, and our specialists will recommend the most
+              suitable solution.
             </p>
 
             {/* trust indicators */}
