@@ -24,7 +24,7 @@ type Node = {
   category: string;
   title: string;
   copy: string;
-  why: string;
+  
   side: "left" | "right";
   level: "primary" | "secondary";
   /** connector path from the panel edge to a meaningful anatomical region */
