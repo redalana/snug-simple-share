@@ -106,7 +106,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Philips Achieva 1.5T MRI",
     brand: "Philips",
-    category: "MRI",
+    category: "MRI Scanners",
     image: solMri,
     specs: ["1.5 Tesla", "Whole Body"],
     status: "Certified Refurbished",
@@ -133,7 +133,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Philips Allura Xper FD20",
     brand: "Philips",
-    category: "Cath Lab",
+    category: "Cath Lab Systems",
     image: heroCathlab,
     specs: ["Biplane", "Interventional"],
     status: "Certified Refurbished",
@@ -157,8 +157,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Siemens SOMATOM Definition",
-    brand: "Siemens Healthineers",
-    category: "CT",
+    brand: "Siemens",
+    category: "CT Scanners",
     image: solCt,
     specs: ["128 Slice", "Dual Source"],
     status: "Certified Refurbished",
@@ -183,8 +183,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "GE Discovery MI PET/CT",
-    brand: "GE HealthCare",
-    category: "PET/CT",
+    brand: "GE",
+    category: "PET/CT Scanners",
     image: solPetct,
     specs: ["16 Slice", "Digital PET"],
     status: "Factory Certified",
@@ -209,7 +209,7 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Siemens Mammomat Revelation",
-    brand: "Siemens Healthineers",
+    brand: "Siemens",
     category: "Mammography",
     image: solMammo,
     specs: ["3D Tomosynthesis", "50µm"],
@@ -260,8 +260,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Canon Radrex Digital X-Ray",
-    brand: "Canon Medical",
-    category: "X-Ray",
+    brand: "Toshiba - Canon",
+    category: "X-Ray Systems",
     image: solXray,
     specs: ["Digital", "Ceiling-Mounted"],
     status: "Factory Certified",
@@ -285,8 +285,8 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "GE Innova IGS 530 Cath Lab",
-    brand: "GE HealthCare",
-    category: "Cath Lab",
+    brand: "GE",
+    category: "Cath Lab Systems",
     image: beyondCathlab,
     specs: ["Single Plane", "Cardiac"],
     status: "Certified Refurbished",
