@@ -2,12 +2,12 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
-  Stethoscope,
-  Wrench,
-  Network,
-  Cpu,
-  Building2,
-  Boxes,
+  Gauge,
+  TrendingUp,
+  Brain,
+  ScanLine,
+  Timer,
+  ShieldCheck,
   MapPin,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -24,96 +24,109 @@ type Node = {
   category: string;
   title: string;
   copy: string;
+  why: string;
   side: "left" | "right";
   level: "primary" | "secondary";
-  /** connector path from the panel edge to a vascular region on the brain */
+  /** connector path from the panel edge to a meaningful anatomical region */
   path: string;
-  /** vascular region node highlighted on hover (viewBox 0-100) */
+  /** anatomical region highlighted on hover (viewBox 0-100) */
   region: { x: number; y: number };
 };
 
 const NODES: Node[] = [
   {
-    id: "physicians",
+    id: "decisions",
     num: "01",
-    icon: Stethoscope,
-    category: "Clinical Expertise",
-    title: "Expert Stroke Physicians",
-    copy: "Meet experienced physicians and discuss real stroke workflows.",
+    icon: Gauge,
+    category: "Patient Impact",
+    title: "Faster Clinical Decisions",
+    copy: "Early diagnosis and immediate treatment decisions help preserve brain tissue, reduce neurological damage and improve survival during the most critical minutes of stroke care.",
+    why: "Better patient outcomes begin with faster decisions.",
     side: "left",
-    level: "primary",
-    path: "M 20 25 C 34 27, 43 34, 49 39",
-    region: { x: 49, y: 39 },
+    level: "secondary",
+    // frontal cortex
+    path: "M 20 24 C 34 25, 44 30, 50 34",
+    region: { x: 50, y: 34 },
   },
   {
-    id: "engineering",
+    id: "efficiency",
     num: "02",
-    icon: Wrench,
-    category: "Engineering",
-    title: "Biomedical Engineering",
-    copy: "See how neurovascular systems are inspected, calibrated and commissioned.",
+    icon: TrendingUp,
+    category: "Hospital Performance",
+    title: "Greater Hospital Efficiency",
+    copy: "Reliable imaging systems, optimized clinical workflows and reduced equipment downtime improve procedural efficiency, increase patient capacity and support sustainable hospital operations.",
+    why: "Efficient hospitals deliver faster stroke care.",
     side: "left",
     level: "secondary",
-    path: "M 20 51 C 34 51, 43 49, 48 48",
-    region: { x: 48, y: 48 },
+    // vascular network
+    path: "M 20 51 C 34 51, 44 49, 49 48",
+    region: { x: 49, y: 48 },
   },
   {
-    id: "programs",
+    id: "recovery",
     num: "03",
-    icon: Network,
-    category: "Programs",
-    title: "Comprehensive Stroke Programs",
-    copy: "Learn how physicians, engineering, technology and workflows become one integrated service.",
+    icon: Brain,
+    category: "Patient Outcomes",
+    title: "Better Neurological Recovery",
+    copy: "Integrated stroke pathways reduce treatment delays and improve neurological recovery, rehabilitation potential and long-term quality of life.",
+    why: "Saving time means saving brain function.",
     side: "left",
-    level: "secondary",
-    path: "M 20 77 C 34 74, 43 62, 48 57",
-    region: { x: 48, y: 57 },
+    level: "primary",
+    // cerebral hemisphere
+    path: "M 20 78 C 34 74, 44 64, 49 58",
+    region: { x: 49, y: 58 },
   },
   {
-    id: "technology",
+    id: "imaging",
     num: "04",
-    icon: Cpu,
-    category: "Technology",
-    title: "Advanced Neurovascular Technology",
-    copy: "Experience advanced biplane angiography and modern stroke treatment technologies.",
+    icon: ScanLine,
+    category: "Clinical Precision",
+    title: "Precision Neurovascular Imaging",
+    copy: "High-resolution neurovascular imaging allows physicians to identify vessel occlusions rapidly and perform confident endovascular interventions.",
+    why: "Better imaging leads to better clinical decisions.",
     side: "right",
     level: "primary",
-    path: "M 80 25 C 66 27, 58 36, 53 41",
-    region: { x: 53, y: 41 },
+    // cerebral vessels
+    path: "M 80 24 C 66 26, 58 34, 53 40",
+    region: { x: 53, y: 40 },
   },
   {
-    id: "hospitals",
+    id: "time",
     num: "05",
-    icon: Building2,
-    category: "Real Practice",
-    title: "Visit Hospitals Using Our Technologies",
-    copy: "Observe real stroke treatment workflows inside hospitals already using these systems.",
+    icon: Timer,
+    category: "Time-Critical Care",
+    title: "Time Is Brain",
+    copy: "Every minute without restoring cerebral blood flow causes irreversible brain cell loss. Rapid intervention preserves healthy brain tissue and improves functional recovery.",
+    why: "Minutes determine outcomes.",
     side: "right",
     level: "primary",
-    path: "M 80 51 C 66 51, 58 49, 53 47",
-    region: { x: 53, y: 47 },
+    // blocked artery
+    path: "M 80 51 C 66 50, 60 46, 55 44",
+    region: { x: 55, y: 44 },
   },
   {
-    id: "facilities",
+    id: "reliability",
     num: "06",
-    icon: Boxes,
-    category: "Facilities",
-    title: "Engineering Facilities & Equipment Warehouse",
-    copy: "Tour our engineering laboratories and medical equipment warehouse to understand how every system is prepared before installation.",
+    icon: ShieldCheck,
+    category: "Long-Term Sustainability",
+    title: "Reliable Stroke Services",
+    copy: "Preventive maintenance, biomedical engineering, clinical education and technical support help hospitals maintain dependable stroke programs for years after installation.",
+    why: "Long-term reliability protects clinical performance.",
     side: "right",
     level: "secondary",
-    path: "M 80 77 C 66 74, 58 62, 53 56",
-    region: { x: 53, y: 56 },
+    // carotid circulation
+    path: "M 80 78 C 66 74, 58 66, 52 60",
+    region: { x: 52, y: 60 },
   },
 ];
 
 const VISIT_POINTS = [
-  "Meet our physicians",
+  "Meet our stroke physicians",
   "Meet our biomedical engineering team",
-  "Tour our headquarters",
+  "Tour AbuFarha headquarters",
   "Explore our engineering laboratories",
   "Visit our medical equipment warehouse",
-  "Explore comprehensive stroke programs",
+  "Observe comprehensive stroke workflows",
   "Visit hospitals using our technologies",
   "Exchange knowledge with our leadership team",
 ];
@@ -147,7 +160,7 @@ function NodePanel({
         active ? "border-primary/40" : "hover:border-primary/30"
       } ${
         isPrimary
-          ? "border-border/80 bg-white p-6 shadow-[0_28px_60px_-38px_rgba(15,23,42,0.55)] lg:-mx-4 hover:shadow-[0_36px_72px_-36px_rgba(15,23,42,0.55)]"
+          ? "border-border/80 bg-white p-7 shadow-[0_28px_60px_-38px_rgba(15,23,42,0.55)] lg:-mx-5 hover:shadow-[0_36px_72px_-36px_rgba(15,23,42,0.55)]"
           : "border-border/55 bg-white/60 p-5 backdrop-blur-sm hover:shadow-[0_24px_50px_-32px_rgba(15,23,42,0.45)]"
       } ${active ? "shadow-[0_36px_72px_-36px_rgba(15,23,42,0.55)]" : ""} ${
         isLeft ? "lg:text-right" : "lg:text-left"
@@ -161,24 +174,24 @@ function NodePanel({
         <span
           className={`inline-flex shrink-0 items-center justify-center rounded-xl border bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)] transition-colors duration-300 ${
             active ? "border-primary/40" : "group-hover:border-primary/40"
-          } ${isPrimary ? "h-11 w-11 border-primary/25" : "h-9 w-9 border-border"}`}
+          } ${isPrimary ? "h-12 w-12 border-primary/25" : "h-9 w-9 border-border"}`}
         >
           <Icon
-            className={isPrimary ? "h-5 w-5" : "h-[17px] w-[17px]"}
+            className={isPrimary ? "h-[22px] w-[22px]" : "h-[17px] w-[17px]"}
             strokeWidth={1.75}
           />
         </span>
         <span
           className={`font-bold uppercase tracking-[0.24em] text-primary ${
-            isPrimary ? "text-[11.5px]" : "text-[10.5px] opacity-80"
+            isPrimary ? "text-[12px]" : "text-[10.5px] opacity-80"
           }`}
         >
           {node.num} · {node.category}
         </span>
       </div>
       <h3
-        className={`mt-4 font-display font-extrabold leading-[1.16] tracking-[-0.02em] text-ink ${
-          isPrimary ? "text-[1.6rem]" : "text-[1.28rem]"
+        className={`mt-4 font-display font-extrabold leading-[1.14] tracking-[-0.02em] text-ink ${
+          isPrimary ? "text-[1.78rem]" : "text-[1.24rem]"
         }`}
       >
         {node.title}
@@ -186,11 +199,18 @@ function NodePanel({
       <p
         className={`mt-3 leading-[1.65] ${
           isPrimary
-            ? "text-[16.5px] text-muted-foreground"
-            : "text-[15px] text-muted-foreground/85"
+            ? "text-[17px] text-muted-foreground"
+            : "text-[14.5px] text-muted-foreground/85"
         } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
       >
         {node.copy}
+      </p>
+      <p
+        className={`mt-4 border-t border-border/60 pt-3 font-display font-bold italic leading-snug text-ink/80 ${
+          isPrimary ? "text-[15px]" : "text-[13px] text-ink/70"
+        } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
+      >
+        {node.why}
       </p>
     </motion.div>
   );
