@@ -499,7 +499,7 @@ export function PortfolioBrowser() {
           <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
             <div>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
-                Need help choosing the right system?
+                Need help choosing the right medical system?
               </h2>
               <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
                 Our specialists can help you identify the most suitable technology for
