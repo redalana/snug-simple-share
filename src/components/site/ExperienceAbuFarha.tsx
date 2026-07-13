@@ -251,22 +251,24 @@ export function ExperienceAbuFarha() {
         >
           <div className="flex justify-center">
             <Eyebrow index="04" align="center">
-              Building Comprehensive Stroke Programs
+              The Stroke Care Ecosystem
             </Eyebrow>
           </div>
           <h2 className="mt-8 font-display text-[3.1rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[4rem] lg:text-[4.6rem]">
-            Every Minute Matters.
+            A Stroke Program Is an Ecosystem —
             <span className="mt-2 block text-primary">
-              Building Complete Stroke Programs That Save Lives.
+              Not a Single Device.
             </span>
           </h2>
           <p className="mx-auto mt-9 max-w-2xl text-[21px] leading-[1.8] text-muted-foreground">
-            Successful stroke treatment is never built around a single medical
-            device. It depends on an integrated ecosystem — advanced
-            neurovascular technology, experienced physicians, biomedical
-            engineers, standardized workflows and long-term support. AbuFarha
-            helps hospitals bring all of these together.
+            When a cerebral artery is blocked, brain tissue is lost every minute
+            until blood flow is restored. Restoring it in time depends on
+            precision imaging, rapid clinical decisions, biomedical engineering,
+            efficient workflows and reliable technical support acting as one
+            system. Each element below explains how it protects the patient's
+            brain — and how AbuFarha helps hospitals bring them together.
           </p>
+
         </motion.div>
 
         {/* Hero visual + connected ecosystem */}
