@@ -1,38 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { PortfolioBrowser } from "@/components/site/PortfolioBrowser";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/products")({
-  head: () => ({
-    meta: [
-      { title: "Medical Technology Portfolio | AbuFarha Medical" },
-      {
-        name: "description",
-        content:
-          "Browse certified medical systems from leading global manufacturers — Cath Lab, MRI, CT, PET/CT, X-Ray and more — for hospitals, clinics and healthcare providers.",
-      },
-      { property: "og:title", content: "Medical Technology Portfolio | AbuFarha Medical" },
-      {
-        property: "og:description",
-        content:
-          "Discover and compare certified medical systems from Philips, Siemens Healthineers, GE HealthCare and Canon Medical.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: ProductsPage,
+  component: () => <Outlet />,
 });
-
-function ProductsPage() {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-[112px]">
-        <PortfolioBrowser />
-      </main>
-      <Footer />
-    </div>
-  );
-}
