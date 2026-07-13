@@ -79,6 +79,8 @@ const INCLUDED = [
   { icon: Headset, label: "After Sales Support" },
 ];
 
+const SNAPSHOT_ICONS = [Gauge, ScanLine, Workflow, Layers3, BadgeCheck, ShieldCheck];
+
 function useShare(product: Product, url: string) {
   const [copied, setCopied] = useState(false);
 
@@ -342,83 +344,91 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </section>
 
-      {/* WHY HOSPITALS CHOOSE */}
-      <section className="border-b border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
-          <div className="text-center">
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+      {/* VALUE BLOCK — Why Choose · Snapshot · Included, unified */}
+      <section className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
+        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
+          {/* WHY HOSPITALS CHOOSE */}
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
               Why Hospitals Choose This System
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              Engineered for confident clinical care
             </h2>
-            <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
+            <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" />
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="flex h-full flex-col items-center rounded-2xl border border-border/70 bg-card p-8 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-28px_rgba(0,0,0,0.34)]"
+                className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-[0_28px_56px_-30px_rgba(0,0,0,0.32)]"
               >
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                  <f.icon className="h-8 w-8" />
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <f.icon className="h-7 w-7" />
                 </span>
-                <h3 className="mt-5 font-display text-xl font-bold leading-snug text-foreground">
+                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
                   {f.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* SYSTEM SNAPSHOT */}
-      <section className="border-b border-border/60">
-        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
-            System Snapshot
-          </h2>
-          <span className="mt-4 block h-1 w-20 rounded-full bg-primary" />
-          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
-            {product.snapshot.slice(0, 6).map((s) => (
-              <div
-                key={s.label}
-                className="group rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all hover:-translate-y-1 hover:border-primary/30"
-              >
-                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Gauge className="h-5 w-5" />
-                </span>
-                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {s.label}
-                </div>
-                <div className="mt-1.5 font-display text-2xl font-bold text-foreground">
-                  {s.value}
-                </div>
-              </div>
-            ))}
+          {/* SYSTEM SNAPSHOT — premium highlight strip */}
+          <div className="mt-16 overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[0_20px_50px_-34px_rgba(0,0,0,0.3)]">
+            <div className="flex items-center justify-between gap-4 border-b border-border/50 bg-secondary/40 px-7 py-5 lg:px-9">
+              <h3 className="font-display text-xl font-bold text-foreground">System Snapshot</h3>
+              <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Key specifications
+              </span>
+            </div>
+            <dl className="grid grid-cols-2 divide-x divide-y divide-border/50 sm:grid-cols-3 lg:grid-cols-6 lg:divide-y-0">
+              {product.snapshot.slice(0, 6).map((s, i) => {
+                const Icon = SNAPSHOT_ICONS[i % SNAPSHOT_ICONS.length];
+                return (
+                  <div key={s.label} className="group px-6 py-8 transition-colors hover:bg-secondary/30">
+                    <Icon className="h-5 w-5 text-primary/70 transition-transform duration-300 group-hover:scale-110" />
+                    <dt className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      {s.label}
+                    </dt>
+                    <dd className="mt-1.5 font-display text-2xl font-bold leading-tight text-foreground">
+                      {s.value}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
           </div>
-        </div>
-      </section>
 
-      {/* INCLUDED WITH EVERY PURCHASE */}
-      <section className="border-b border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10 lg:py-12">
-          <div className="text-center">
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-              Included With Every Purchase
-            </h2>
-            <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
-          </div>
-          <div className="mt-8 grid grid-cols-2 gap-3 rounded-3xl border border-border/70 bg-card p-4 shadow-[0_14px_36px_-30px_rgba(0,0,0,0.25)] sm:grid-cols-3 md:grid-cols-5 md:gap-0 md:divide-x md:divide-border/60">
-            {INCLUDED.map((s) => (
-              <div
-                key={s.label}
-                className="flex flex-col items-center gap-3 px-4 py-6 text-center"
-              >
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <s.icon className="h-7 w-7" />
-                </span>
-                <p className="text-base font-bold text-foreground">{s.label}</p>
-              </div>
-            ))}
+          {/* INCLUDED WITH EVERY PURCHASE */}
+          <div className="mt-16 grid grid-cols-1 gap-8 rounded-3xl border border-border/60 bg-primary/[0.04] p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-center lg:p-12">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
+                Complete Package
+              </span>
+              <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+                Included with every purchase
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Every system ships with full lifecycle support — from installation to
+                long-term after-sales service.
+              </p>
+            </div>
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {INCLUDED.map((s) => (
+                <li
+                  key={s.label}
+                  className="flex items-center gap-3.5 rounded-2xl border border-border/60 bg-card px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_16px_36px_-28px_rgba(0,0,0,0.3)]"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <s.icon className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-bold text-foreground">{s.label}</span>
+                  <CheckCircle2 className="ml-auto h-5 w-5 shrink-0 text-primary/70" />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
