@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Boxes,
   Layers,
+  Globe2,
   BadgeCheck,
   SlidersHorizontal,
   PhoneCall,
