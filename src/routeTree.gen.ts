@@ -14,6 +14,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -42,6 +43,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductsRoute,
+} as any)
 const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
   id: '/programs/stroke-care',
   path: '/programs/stroke-care',
@@ -52,26 +58,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
-  '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -82,14 +90,15 @@ export interface FileRouteTypes {
     | '/products'
     | '/projects'
     | '/programs/stroke-care'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/categories'
     | '/hospital-readiness-assessment'
-    | '/products'
     | '/projects'
     | '/programs/stroke-care'
+    | '/products'
   id:
     | '__root__'
     | '/'
@@ -98,13 +107,14 @@ export interface FileRouteTypes {
     | '/products'
     | '/projects'
     | '/programs/stroke-care'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CategoriesRoute: typeof CategoriesRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
-  ProductsRoute: typeof ProductsRoute
+  ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
 }
@@ -146,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof ProductsRoute
+    }
     '/programs/stroke-care': {
       id: '/programs/stroke-care'
       path: '/programs/stroke-care'
@@ -156,11 +173,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ProductsRouteChildren {
+  ProductsIndexRoute: typeof ProductsIndexRoute
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsIndexRoute: ProductsIndexRoute,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CategoriesRoute: CategoriesRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
-  ProductsRoute: ProductsRoute,
+  ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
 }
