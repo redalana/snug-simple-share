@@ -351,16 +351,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             </h2>
             <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="flex flex-col items-center rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.32)]"
+                className="flex h-full flex-col items-center rounded-2xl border border-border/70 bg-card p-8 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-28px_rgba(0,0,0,0.34)]"
               >
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                   <f.icon className="h-8 w-8" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
+                <h3 className="mt-5 font-display text-xl font-bold leading-snug text-foreground">
                   {f.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
