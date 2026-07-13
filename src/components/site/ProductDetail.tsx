@@ -9,7 +9,7 @@ import {
 } from "react-international-phone";
 import { PhoneField } from "@/components/site/PhoneField";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, Search } from "lucide-react";
+import { Check, Search, X, ZoomIn, ZoomOut, Expand } from "lucide-react";
 import {
   ChevronRight,
   ChevronLeft,
@@ -52,27 +52,22 @@ const FEATURES = [
   {
     icon: ScanLine,
     title: "Exceptional Image Quality",
-    text: "Advanced imaging technology for precise diagnostics and better outcomes.",
-  },
-  {
-    icon: Gauge,
-    title: "Optimized Dose Management",
-    text: "Smart dose control for enhanced patient and staff safety.",
+    text: "Advanced imaging for precise diagnostics and confident clinical decisions.",
   },
   {
     icon: Workflow,
-    title: "Efficient Workflow",
-    text: "Intuitive design and automation for maximum clinical efficiency.",
-  },
-  {
-    icon: Layers3,
-    title: "Versatile Applications",
-    text: "Ideal for a broad range of clinical and interventional procedures.",
+    title: "Clinical Efficiency",
+    text: "Streamlined workflows and automation that save valuable time.",
   },
   {
     icon: Award,
     title: "Reliable Performance",
-    text: "Built for long service life with proven reliability worldwide.",
+    text: "Engineered for long service life and proven uptime worldwide.",
+  },
+  {
+    icon: Layers3,
+    title: "Future Ready Platform",
+    text: "Upgradeable architecture that scales with evolving clinical needs.",
   },
 ];
 
@@ -109,6 +104,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const router = useRouter();
   const gallery = product.gallery?.length ? product.gallery : [product.image];
   const [active, setActive] = useState(gallery[0]);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const activeIndex = Math.max(0, gallery.indexOf(active));
   const [generating, setGenerating] = useState(false);
   // Read the live URL only after mount to avoid SSR/client hydration mismatch.
   const [pageUrl, setPageUrl] = useState("");
@@ -192,18 +189,29 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {/* GALLERY */}
             <div>
               <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_44px_-24px_rgba(0,0,0,0.28)]">
-                <div className="aspect-[4/3] overflow-hidden bg-secondary">
+                <button
+                  type="button"
+                  onClick={() => setLightboxOpen(true)}
+                  aria-label="Open fullscreen gallery"
+                  className="group relative block aspect-[4/3] w-full overflow-hidden bg-secondary"
+                >
                   <motion.img
                     key={active}
                     initial={{ opacity: 0.4, scale: 1.01 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.35 }}
                     src={active}
-                    alt={product.name}
+                    alt={`${product.brand} ${product.name}`}
                     loading="eager"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                </div>
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+                    <Expand className="h-3.5 w-3.5" /> Fullscreen
+                  </span>
+                  <span className="absolute bottom-3 left-3 rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                    {activeIndex + 1} / {gallery.length}
+                  </span>
+                </button>
               </div>
               {gallery.length > 1 && (
                 <div className="mt-4 flex gap-3">
@@ -343,16 +351,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             </h2>
             <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="flex flex-col items-center rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.32)]"
+                className="flex h-full flex-col items-center rounded-2xl border border-border/70 bg-card p-8 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-28px_rgba(0,0,0,0.34)]"
               >
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                   <f.icon className="h-8 w-8" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
+                <h3 className="mt-5 font-display text-xl font-bold leading-snug text-foreground">
                   {f.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
@@ -373,12 +381,15 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {product.snapshot.slice(0, 6).map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
+                className="group rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all hover:-translate-y-1 hover:border-primary/30"
               >
+                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Gauge className="h-5 w-5" />
+                </span>
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="mt-2 font-display text-xl font-bold text-foreground">
+                <div className="mt-1.5 font-display text-2xl font-bold text-foreground">
                   {s.value}
                 </div>
               </div>
@@ -396,13 +407,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             </h2>
             <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-3 rounded-3xl border border-border/70 bg-card p-4 shadow-[0_14px_36px_-30px_rgba(0,0,0,0.25)] sm:grid-cols-3 md:grid-cols-5 md:gap-0 md:divide-x md:divide-border/60">
             {INCLUDED.map((s) => (
-              <div key={s.label} className="flex flex-col items-center gap-3 text-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <s.icon className="h-8 w-8" />
+              <div
+                key={s.label}
+                className="flex flex-col items-center gap-3 px-4 py-6 text-center"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <s.icon className="h-7 w-7" />
                 </span>
-                <p className="text-base font-semibold text-foreground">{s.label}</p>
+                <p className="text-base font-bold text-foreground">{s.label}</p>
               </div>
             ))}
           </div>
@@ -503,6 +517,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* REQUEST A QUOTE */}
       <QuoteSection product={product} whatsappQuote={whatsappQuote} />
+
+      {lightboxOpen && (
+        <Lightbox
+          images={gallery}
+          index={activeIndex}
+          alt={`${product.brand} ${product.name}`}
+          onIndexChange={(i) => setActive(gallery[i])}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
     </>
   );
 }
@@ -845,5 +869,143 @@ function RelatedCard({ product }: { product: Product }) {
         </span>
       </div>
     </Link>
+  );
+}
+
+function Lightbox({
+  images,
+  index,
+  alt,
+  onIndexChange,
+  onClose,
+}: {
+  images: string[];
+  index: number;
+  alt: string;
+  onIndexChange: (i: number) => void;
+  onClose: () => void;
+}) {
+  const [zoomed, setZoomed] = useState(false);
+  const touchX = useRef<number | null>(null);
+
+  const go = (dir: number) => {
+    setZoomed(false);
+    onIndexChange((index + dir + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      else if (e.key === "ArrowRight") go(1);
+      else if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+    };
+  });
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col bg-black/92 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Product image gallery"
+      onClick={onClose}
+      onWheel={(e) => setZoomed(e.deltaY < 0)}
+    >
+      {/* TOP BAR */}
+      <div
+        className="flex items-center justify-between px-5 py-4 text-white"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <span className="rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-semibold">
+          {index + 1} / {images.length}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setZoomed((z) => !z)}
+            aria-label={zoomed ? "Zoom out" : "Zoom in"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+          >
+            {zoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}
+          </button>
+          <button
+            onClick={onClose}
+            aria-label="Close gallery"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* STAGE */}
+      <div
+        className="relative flex flex-1 items-center justify-center overflow-hidden px-4"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (touchX.current === null) return;
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+          touchX.current = null;
+        }}
+      >
+        {images.length > 1 && (
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous image"
+            className="absolute left-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+        )}
+        <img
+          src={images[index]}
+          alt={`${alt} — image ${index + 1}`}
+          onClick={() => setZoomed((z) => !z)}
+          className={`max-h-full max-w-full select-none rounded-lg object-contain transition-transform duration-300 ${
+            zoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in"
+          }`}
+        />
+        {images.length > 1 && (
+          <button
+            onClick={() => go(1)}
+            aria-label="Next image"
+            className="absolute right-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        )}
+      </div>
+
+      {/* THUMBNAILS */}
+      {images.length > 1 && (
+        <div
+          className="flex items-center justify-center gap-2.5 px-4 py-5"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {images.map((img, i) => (
+            <button
+              key={img + i}
+              onClick={() => {
+                setZoomed(false);
+                onIndexChange(i);
+              }}
+              aria-label={`View image ${i + 1}`}
+              className={`h-16 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                i === index ? "border-white" : "border-white/25 opacity-60 hover:opacity-100"
+              }`}
+            >
+              <img src={img} alt="" loading="lazy" className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
