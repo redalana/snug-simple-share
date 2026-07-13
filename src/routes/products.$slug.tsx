@@ -108,4 +108,3 @@ function ProductDetailPage() {
   );
 }
 
-export { slugify };
