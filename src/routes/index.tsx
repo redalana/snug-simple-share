@@ -29,8 +29,6 @@ function Index() {
         <ExperienceAbuFarha />
         {/* Where do we operate? */}
         <GlobalPresence />
-        {/* Why should customers choose AbuFarha? */}
-        <WhyAbuFarha />
         {/* Is your hospital ready for advanced medical technology? */}
         <ReadinessAssessment />
         {/* How can customers start working with us? */}
