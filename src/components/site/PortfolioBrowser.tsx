@@ -582,13 +582,6 @@ export function PortfolioBrowser() {
               </button>
             ))}
           </div>
-          <Link
-            to="/categories"
-            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:hidden"
-          >
-            View All Brands
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </div>
       </section>
 
