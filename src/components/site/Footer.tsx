@@ -22,11 +22,11 @@ const COLS = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white/70">
+    <footer className="border-t border-border bg-white text-muted-foreground">
       <div className="mx-auto grid max-w-[100rem] gap-x-8 gap-y-10 px-6 lg:px-10 py-14 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
         <div>
-          <Logo light />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
+          <Logo />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Your trusted partner for supplying, installing, commissioning and
             supporting advanced medical equipment across Africa and the Middle East.
           </p>
@@ -36,7 +36,7 @@ export function Footer() {
                 key={i}
                 href="#"
                 aria-label="Social link"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:shadow-[0_12px_24px_-10px_var(--primary)]"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-white hover:shadow-[0_12px_24px_-10px_var(--primary)]"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -46,7 +46,7 @@ export function Footer() {
 
         {COLS.map((col) => (
           <div key={col.title}>
-            <h4 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+            <h4 className="font-display text-sm font-bold uppercase tracking-wider text-ink">
               {col.title}
             </h4>
             <ul className="mt-5 space-y-3 text-sm">
@@ -65,14 +65,14 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-border">
         <div className="mx-auto flex max-w-[100rem] flex-col items-start gap-4 px-6 lg:px-10 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-ink">
             <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-primary" /> +20 109 111 2200</span>
             <span className="flex items-center gap-1.5"><Mail className="h-4 w-4 text-primary" /> info@abufarhamedical.com</span>
             <span className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-primary" /> Cairo, Egypt</span>
           </div>
-          <p className="text-white/50">© {new Date().getFullYear()} AbuFarha Medical Equipment. All rights reserved.</p>
+          <p className="text-muted-foreground">© {new Date().getFullYear()} AbuFarha Medical Equipment. All rights reserved.</p>
         </div>
       </div>
     </footer>
