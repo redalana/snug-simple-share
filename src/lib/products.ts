@@ -7,7 +7,7 @@ import solCarm from "@/assets/sol-carm.jpg";
 import solXray from "@/assets/sol-xray.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
-import solDes from "@/assets/sol-des.jpg";
+
 
 /**
  * Single source of truth for the AbuFarha Medical product catalog.
