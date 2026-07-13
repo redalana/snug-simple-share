@@ -52,7 +52,7 @@ export function Hero() {
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[100px] lg:pt-[108px] xl:pt-[152px]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[108px] lg:pt-[116px] xl:pt-[164px]"
     >
       {/* ── The scene: one editorial photograph, aligned to the global grid ─
           The image lives inside the exact same container as every other
