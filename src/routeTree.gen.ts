@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
+import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 
@@ -31,6 +32,11 @@ const HospitalReadinessAssessmentRoute =
     path: '/hospital-readiness-assessment',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -44,6 +50,7 @@ const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
@@ -68,6 +77,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
@@ -75,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
@@ -82,6 +93,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
@@ -90,6 +102,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesRoute: typeof CategoriesRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
   ProductsRoute: typeof ProductsRoute
   ProjectsRoute: typeof ProjectsRoute
@@ -119,6 +132,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -138,6 +158,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesRoute: CategoriesRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
   ProductsRoute: ProductsRoute,
   ProjectsRoute: ProjectsRoute,
