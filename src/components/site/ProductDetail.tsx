@@ -67,10 +67,10 @@ const FEATURES = [
 ];
 
 const INCLUDED = [
-  { icon: Wrench, label: "Installation & Commissioning" },
+  { icon: Wrench, label: "Installation" },
   { icon: GraduationCap, label: "Clinical Training" },
-  { icon: ShieldCheck, label: "Warranty Coverage" },
-  { icon: PackageCheck, label: "Spare Parts Supply" },
+  { icon: ShieldCheck, label: "Warranty" },
+  { icon: PackageCheck, label: "Spare Parts" },
   { icon: Headset, label: "After Sales Support" },
 ];
 
@@ -110,7 +110,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const related = getRelatedProducts(product, 3);
   const adjacent = getAdjacentProducts(slug);
 
-  const quoteUrl = `/#contact`;
+  const scrollToQuote = () => {
+    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
   )}`;
@@ -245,12 +247,12 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               </div>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href={quoteUrl}
+                <button
+                  onClick={scrollToQuote}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
                   <FileText className="h-4 w-4" /> Request a Quote
-                </a>
+                </button>
                 <a
                   href={whatsappQuote}
                   target="_blank"
@@ -301,17 +303,17 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {/* QUICK FACTS */}
             <aside className="lg:pt-1">
               <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_18px_44px_-26px_rgba(0,0,0,0.28)]">
-                <h2 className="font-display text-base font-bold text-foreground">Quick Facts</h2>
-                <span className="mt-2 block h-0.5 w-10 rounded-full bg-primary" />
+                <h2 className="font-display text-lg font-bold text-foreground">Quick Facts</h2>
+                <span className="mt-2 block h-1 w-12 rounded-full bg-primary" />
                 <dl className="mt-5 space-y-4">
                   {facts.map((f) => (
                     <div key={f.label} className="flex items-start gap-3">
-                      <f.icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-primary" />
+                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                       <div className="min-w-0">
-                        <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                        <dt className="text-xs uppercase tracking-wide text-muted-foreground">
                           {f.label}
                         </dt>
-                        <dd className="text-sm font-semibold text-foreground">{f.value}</dd>
+                        <dd className="text-[15px] font-semibold text-foreground">{f.value}</dd>
                       </div>
                     </div>
                   ))}
@@ -324,21 +326,26 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* WHY HOSPITALS CHOOSE */}
       <section className="border-b border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
           <div className="text-center">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               Why Hospitals Choose This System
             </h2>
-            <span className="mx-auto mt-3 block h-0.5 w-16 rounded-full bg-primary" />
+            <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {FEATURES.map((f) => (
-              <div key={f.title} className="text-center">
-                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <f.icon className="h-6 w-6" />
+              <div
+                key={f.title}
+                className="flex flex-col items-center rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.32)]"
+              >
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <f.icon className="h-8 w-8" />
                 </span>
-                <h3 className="mt-4 font-display text-sm font-bold text-foreground">{f.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{f.text}</p>
+                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
+                  {f.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
               </div>
             ))}
           </div>
@@ -347,21 +354,21 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* SYSTEM SNAPSHOT */}
       <section className="border-b border-border/60">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground">
+        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
             System Snapshot
           </h2>
-          <span className="mt-3 block h-0.5 w-16 rounded-full bg-primary" />
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <span className="mt-4 block h-1 w-20 rounded-full bg-primary" />
+          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
             {product.snapshot.slice(0, 6).map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-border/70 bg-card p-5 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
+                className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
               >
-                <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="mt-1.5 font-display text-base font-bold text-foreground">
+                <div className="mt-2 font-display text-xl font-bold text-foreground">
                   {s.value}
                 </div>
               </div>
@@ -372,20 +379,20 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* INCLUDED WITH EVERY PURCHASE */}
       <section className="border-b border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10 lg:py-12">
           <div className="text-center">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               Included With Every Purchase
             </h2>
-            <span className="mx-auto mt-3 block h-0.5 w-16 rounded-full bg-primary" />
+            <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {INCLUDED.map((s) => (
-              <div key={s.label} className="flex flex-col items-center text-center">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <s.icon className="h-6 w-6" />
+              <div key={s.label} className="flex flex-col items-center gap-3 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <s.icon className="h-8 w-8" />
                 </span>
-                <p className="mt-4 text-sm font-semibold text-foreground">{s.label}</p>
+                <p className="text-base font-semibold text-foreground">{s.label}</p>
               </div>
             ))}
           </div>
@@ -485,7 +492,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       )}
 
       {/* FINAL CTA */}
-      <section className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
+      <section id="quote" className="mx-auto max-w-[100rem] scroll-mt-32 px-6 py-16 lg:px-10">
         <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-10 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-14">
           <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
             <div>
@@ -498,12 +505,12 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href={quoteUrl}
+              <button
+                onClick={scrollToQuote}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 <FileText className="h-4 w-4" /> Request Quote
-              </a>
+              </button>
               <a
                 href={whatsappQuote}
                 target="_blank"
