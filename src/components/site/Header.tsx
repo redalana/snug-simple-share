@@ -118,10 +118,13 @@ function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`block w-full rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-accent hover:text-primary ${
-                  l.code === lang.code ? "text-primary" : "text-foreground/75"
+                className={`flex w-full items-center gap-2 rounded-xl px-3.5 py-2 text-left text-sm font-medium transition-colors hover:bg-muted ${
+                  l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
+                <Check
+                  className={`h-4 w-4 text-primary ${l.code === lang.code ? "opacity-100" : "opacity-0"}`}
+                />
                 {l.label}
               </button>
             ))}
