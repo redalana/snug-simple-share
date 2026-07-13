@@ -400,7 +400,7 @@ export function PortfolioBrowser() {
         />
         <div className="relative mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-16">
           {/* BREADCRUMB */}
-          <nav aria-label="Breadcrumb" className="mb-6">
+          <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
               <li>
                 <Link to="/" className="transition-colors hover:text-primary">
@@ -414,46 +414,54 @@ export function PortfolioBrowser() {
             </ol>
           </nav>
 
-          <div className="max-w-3xl">
-            <span className="inline-block h-1 w-12 rounded-full bg-primary" />
-            <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-              All Medical Systems
-            </h1>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              Explore certified medical technologies from leading global manufacturers for
-              hospitals, clinics and healthcare providers across Africa and the Middle East.
-            </p>
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-5 lg:gap-14">
+            {/* LEFT — 40% */}
+            <div className="lg:col-span-2">
+              <span className="inline-block h-1 w-12 rounded-full bg-primary" />
+              <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                All Medical Systems
+              </h1>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+                Explore certified medical technologies from leading global manufacturers for
+                hospitals, clinics and healthcare providers across Africa and the Middle East.
+              </p>
 
-            {/* SEARCH — prominent, premium input */}
-            <div className="mt-9 max-w-3xl">
-              <div className="relative">
-                <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
-                <input
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                    resetPage();
-                  }}
-                  type="search"
-                  placeholder="Search by system, manufacturer, technology or clinical need — e.g. MRI, stroke, Philips, cardiology…"
-                  className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-20px_rgba(15,23,42,0.28)] ring-1 ring-black/[0.04] outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
-                />
+              {/* SEARCH — the primary action */}
+              <div className="mt-8">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
+                  <input
+                    value={query}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      resetPage();
+                    }}
+                    type="search"
+                    placeholder="Search by system name, manufacturer, brand, technology or clinical application..."
+                    className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-20px_rgba(15,23,42,0.28)] ring-1 ring-black/[0.04] outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6">
+                <Stat icon={Boxes} value="11" label="Categories" />
+                <Stat icon={Layers} value="1,500+" label="Systems Installed" />
+                <Stat icon={Globe2} value="40+" label="Countries Served" />
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <BadgeCheck className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <div className="text-lg font-extrabold leading-none text-foreground">Certified</div>
+                    <div className="mt-1 text-xs text-muted-foreground">Quality &amp; Safety</div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-4">
-              <Stat icon={Boxes} value="11" label="Categories" />
-              <Stat icon={Layers} value="1,500+" label="Systems Installed" />
-              <Stat icon={Globe2} value="40+" label="Countries Served" />
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <BadgeCheck className="h-5 w-5" />
-                </span>
-                <div>
-                  <div className="text-sm font-bold text-primary">Certified</div>
-                  <div className="text-xs text-muted-foreground">Quality &amp; Safety</div>
-                </div>
-              </div>
+            {/* RIGHT — 60% showcase slider */}
+            <div className="lg:col-span-3">
+              <HeroShowcase />
             </div>
           </div>
         </div>
