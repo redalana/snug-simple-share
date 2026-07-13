@@ -158,5 +158,6 @@ export async function generateProductPdf(product: Product): Promise<void> {
   doc.text(`Email: ${CONTACT.email}    Website: ${CONTACT.website}`, margin, footerY + 62);
   doc.text(`Location: ${CONTACT.location}`, margin, footerY + 78);
 
-  doc.save(`${product.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-profile.pdf`);
+  const safeName = product.name.replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, "");
+  doc.save(`${safeName}-AbuFarha.pdf`);
 }
