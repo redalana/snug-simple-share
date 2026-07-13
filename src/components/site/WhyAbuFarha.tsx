@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Boxes,
   LifeBuoy,
+  BadgeCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
@@ -76,6 +77,12 @@ const PILLARS: Pillar[] = [
     title: "Long-Term Technical Support",
     copy: "Remote and on-site engineering continues for the full equipment lifecycle — not just the first year.",
   },
+  {
+    icon: BadgeCheck,
+    title: "One-Year Free Warranty",
+    copy: "Every installation includes a full year of complimentary warranty coverage, with continued maintenance plans available beyond the first year to keep your equipment running at full performance.",
+  },
+
 ];
 
 export function WhyAbuFarha() {

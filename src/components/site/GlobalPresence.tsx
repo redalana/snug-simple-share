@@ -3,23 +3,25 @@ import { ArrowRight, Globe } from "lucide-react";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 
 const STATS = [
-  { value: "40+", label: "Countries Served" },
-  { value: "310+", label: "Projects Delivered" },
+  { value: "10", label: "Countries — Verified Project History" },
+  { value: "110+", label: "Systems & Programs Delivered" },
 ];
 
-// Cropped viewBox focused on Africa & the Middle East (matches the design spec).
-const VB_X = 90;
-const VB_Y = 120;
-const VB_W = 658;
-const VB_H = 480;
+// Cropped viewBox focused on AbuFarha's real footprint
+// (Middle East, North-East Africa, Central & South Asia).
+const VB_X = 280;
+const VB_Y = -80;
+const VB_W = 780;
+const VB_H = 571;
 
 // Pins that fall within the cropped region.
 const VISIBLE_PINS = PINS.filter(
   (p) => p.x >= VB_X && p.x <= VB_X + VB_W && p.y >= VB_Y && p.y <= VB_Y + VB_H,
 );
 
-// Country names that show a static map label in the spec.
-const LABELLED = new Set(["Egypt", "Saudi Arabia", "Nigeria", "Kenya"]);
+// Country names that show a static map label.
+const LABELLED = new Set(["Syria", "Iraq", "Yemen", "Libya"]);
+
 
 export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
@@ -72,7 +74,7 @@ export function GlobalPresence() {
                 viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
                 className="absolute inset-0 h-full w-full"
                 role="img"
-                aria-label="Map of AbuFarha coverage across Africa and the Middle East"
+                aria-label="Map of AbuFarha verified projects across the Middle East, Africa and Asia"
               >
                 {/* inactive countries — legible real geography */}
                 {COUNTRIES.filter((c) => !c.sup).map((c) => (
@@ -148,7 +150,7 @@ export function GlobalPresence() {
 
                     {/* hover tooltip */}
                     <div
-                      className={`pointer-events-none absolute left-1/2 z-20 w-52 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
+                      className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
                         flip ? "top-full mt-3" : "bottom-full mb-3"
                       } ${isActive ? "opacity-100" : "translate-y-1 opacity-0"}`}
                     >
@@ -160,20 +162,18 @@ export function GlobalPresence() {
                           </span>
                         )}
                       </div>
-                      <div className="mt-2.5 space-y-1.5 text-[11px]">
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Projects completed</span>
-                          <span className="font-bold text-white">{p.projects}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Hospitals served</span>
-                          <span className="font-bold text-white">{p.hospitals}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Equipment installed</span>
-                          <span className="font-bold text-white">{p.equipment}</span>
-                        </div>
+                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        Verified deliveries
                       </div>
+                      <ul className="mt-2 space-y-1 text-[11px] leading-snug">
+                        {p.items.map((item) => (
+                          <li key={item} className="flex items-start gap-1.5 text-white/75">
+                            <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+
                       {flip ? (
                         <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[6px] border-x-transparent border-b-ink/80" />
                       ) : (
@@ -187,7 +187,7 @@ export function GlobalPresence() {
               {/* countries-served pill */}
               <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[11px] font-medium text-white/75 shadow-sm backdrop-blur-md">
                 <Globe className="h-3.5 w-3.5" />
-                40+ countries served
+                10 countries · verified project history
               </div>
             </div>
 
@@ -195,15 +195,17 @@ export function GlobalPresence() {
             <div className="flex flex-col justify-between px-2 py-3 lg:px-4 lg:py-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-                  Live Footprint
+                  Verified Footprint
                 </span>
                 <h3 className="mt-3 font-display text-2xl font-extrabold tracking-[-0.01em] text-white sm:text-[1.75rem]">
-                  Africa &amp; the Middle East
+                  Middle East, Africa &amp; Asia
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
-                  Local engineers and regional support teams keep every installation
-                  running — wherever your facility operates.
+                  A real, documented delivery record — heart centers, imaging,
+                  IVF and LASIK systems installed and supported across 10 countries.
+                  Hover any pin for the actual equipment delivered.
                 </p>
+
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   {STATS.map((s) => (

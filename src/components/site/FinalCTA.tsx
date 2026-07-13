@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PhoneCall, FileText, ArrowRight } from "lucide-react";
+import { PhoneCall, FileText, ArrowRight, ShieldCheck } from "lucide-react";
 
 export function FinalCTA() {
   return (
@@ -63,7 +63,12 @@ export function FinalCTA() {
           >
             <FileText className="h-4 w-4" /> Company Profile
           </a>
+          <p className="mt-1 flex w-full items-center justify-center gap-2 text-[13px] font-medium text-white/80 lg:justify-start">
+            <ShieldCheck className="h-4 w-4" />
+            Backed by a 1-year free warranty on every installation.
+          </p>
         </div>
+
       </motion.div>
     </section>
   );
