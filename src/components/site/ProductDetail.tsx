@@ -487,7 +487,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       )}
 
       {/* FINAL CTA */}
-      <section id="quote" className="mx-auto max-w-[100rem] scroll-mt-32 px-6 py-16 lg:px-10">>
+      <section id="quote" className="mx-auto max-w-[100rem] scroll-mt-32 px-6 py-16 lg:px-10">
         <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-10 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-14">
           <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
             <div>
