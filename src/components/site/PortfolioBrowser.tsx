@@ -260,6 +260,10 @@ const PER_PAGE_OPTIONS = [12, 24, 36, 48] as const;
 
 function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
   const [open, setOpen] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const VISIBLE = 8;
+  const hasMore = group.options.length > VISIBLE;
+  const visibleOptions = open && (showAll || !hasMore) ? group.options : group.options.slice(0, VISIBLE);
   return (
     <div className="border-b border-border/70 last:border-0">
       <button
@@ -272,22 +276,33 @@ function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
         />
       </button>
       {open && (
-        <ul className="space-y-3 pb-4">
-          {group.options.map((opt) => (
-            <li key={opt}>
-              <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-border text-primary accent-primary"
-                />
-                {opt}
-              </label>
-            </li>
-          ))}
-        </ul>
+        <div className="pb-4">
+          <ul className="space-y-3">
+            {visibleOptions.map((opt) => (
+              <li key={opt}>
+                <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-border text-primary accent-primary"
+                  />
+                  {opt}
+                </label>
+              </li>
+            ))}
+          </ul>
+          {hasMore && (
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="mt-3 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
+            >
+              {showAll ? "Show Less" : `Show More (${group.options.length - VISIBLE})`}
+            </button>
+          )}
+        </div>
       )}
     </div>
   );
+
 }
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
