@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PhoneCall, FileText, ArrowRight } from "lucide-react";
+import { PhoneCall, FileText, ArrowRight, ShieldCheck } from "lucide-react";
 
 export function FinalCTA() {
   return (
