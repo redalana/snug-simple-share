@@ -110,7 +110,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const related = getRelatedProducts(product, 3);
   const adjacent = getAdjacentProducts(slug);
 
-  const quoteUrl = `/#contact`;
+  const scrollToQuote = () => {
+    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
   )}`;
