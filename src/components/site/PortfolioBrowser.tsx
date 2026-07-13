@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Boxes,
   Layers,
+  Globe2,
   BadgeCheck,
   SlidersHorizontal,
   PhoneCall,
@@ -49,6 +50,10 @@ const FILTER_GROUPS = [
   { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
   { title: "Year", options: ["2024", "2023", "2022", "2021 or earlier"] },
   { title: "System Type", options: ["Fixed", "Mobile", "Ceiling-Mounted", "Floor-Mounted"] },
+  {
+    title: "Availability of Services",
+    options: ["Installation", "Clinical Training", "Technical Support", "Warranty"],
+  },
 ];
 
 type Product = {
@@ -263,7 +268,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           )}
         </div>
         <button className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
-          {product.cta}
+          View System
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
@@ -303,45 +308,52 @@ export function PortfolioBrowser() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border/60 bg-secondary">
+      <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
+        {/* Blueprint / engineering-line atmosphere */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 w-1/2 opacity-[0.14]"
+          className="pointer-events-none absolute inset-0 opacity-[0.5]"
           style={{
-            backgroundImage: `url(${heroCathlab})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            maskImage: "linear-gradient(to left, black 30%, transparent)",
-            WebkitMaskImage: "linear-gradient(to left, black 30%, transparent)",
+            backgroundImage:
+              "linear-gradient(to right, color-mix(in srgb, var(--primary) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--primary) 6%, transparent) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage: "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 78%)",
+            WebkitMaskImage: "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 78%)",
           }}
         />
-        <div className="relative mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
-          <div className="max-w-2xl">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl"
+        />
+        <div className="relative mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-16">
+          <div className="max-w-3xl">
             <span className="inline-block h-1 w-12 rounded-full bg-primary" />
             <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-              Medical Technology Portfolio
+              All Medical Systems
             </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Browse certified medical systems from leading global manufacturers for
-              hospitals, clinics and healthcare providers.
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              Explore certified medical technologies from leading global manufacturers for
+              hospitals, clinics and healthcare providers across Africa and the Middle East.
             </p>
 
-            <div className="mt-8 max-w-xl">
+            {/* SEARCH — prominent, premium input */}
+            <div className="mt-9 max-w-3xl">
               <div className="relative">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
+                <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   type="search"
-                  placeholder="Search by system name, manufacturer, clinical category..."
-                  className="h-14 w-full rounded-full bg-card pl-12 pr-4 text-sm text-foreground shadow-[0_8px_28px_-14px_rgba(0,0,0,0.2)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
+                  placeholder="Search by system name, manufacturer, technology or clinical specialty..."
+                  className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-20px_rgba(15,23,42,0.28)] ring-1 ring-black/[0.04] outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
                 />
               </div>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-4">
               <Stat icon={Boxes} value="11" label="Categories" />
               <Stat icon={Layers} value="1,500+" label="Systems Installed" />
+              <Stat icon={Globe2} value="40+" label="Countries Served" />
               <div className="flex items-center gap-2.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <BadgeCheck className="h-5 w-5" />
@@ -487,7 +499,7 @@ export function PortfolioBrowser() {
           <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
             <div>
               <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground">
-                Need help choosing the right system?
+                Need help choosing the right medical system?
               </h2>
               <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
                 Our specialists can help you identify the most suitable technology for
