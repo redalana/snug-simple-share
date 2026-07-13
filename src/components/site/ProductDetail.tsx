@@ -326,21 +326,26 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* WHY HOSPITALS CHOOSE */}
       <section className="border-b border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-14">
           <div className="text-center">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
               Why Hospitals Choose This System
             </h2>
-            <span className="mx-auto mt-3 block h-0.5 w-16 rounded-full bg-primary" />
+            <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {FEATURES.map((f) => (
-              <div key={f.title} className="text-center">
-                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <f.icon className="h-6 w-6" />
+              <div
+                key={f.title}
+                className="flex flex-col items-center rounded-2xl border border-border/70 bg-card p-6 text-center shadow-[0_14px_36px_-26px_rgba(0,0,0,0.28)] transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.32)]"
+              >
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <f.icon className="h-8 w-8" />
                 </span>
-                <h3 className="mt-4 font-display text-sm font-bold text-foreground">{f.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{f.text}</p>
+                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
+                  {f.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
               </div>
             ))}
           </div>
