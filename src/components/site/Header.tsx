@@ -225,18 +225,18 @@ export function Header() {
 
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-2 px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
             {NAV.map((item) => (
               <div key={item.label} className="group relative">
                 <a
                   href={item.href}
-                  className="flex items-center gap-1 px-5 py-3.5 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
+                  className="flex items-center gap-1 px-5 py-3 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
                 >
                   {item.label}
                   {item.dropdown && (
-                    <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
+                    <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
                   )}
-                  <span className="absolute inset-x-5 bottom-2 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-5 bottom-1.5 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
 
                 {item.dropdown && (
