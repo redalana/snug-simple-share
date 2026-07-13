@@ -109,11 +109,11 @@ export function ExperienceAbuFarha() {
             className="order-1 lg:order-2"
           >
             <Eyebrow index="04">Clinical Solutions</Eyebrow>
-            <h2 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.3rem]">
+            <h2 className="mt-7 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]">
               Comprehensive
               <span className="mt-1 block text-primary">Stroke Programs.</span>
             </h2>
-            <p className="mt-7 max-w-xl text-[19px] leading-[1.7] text-muted-foreground">
+            <p className="mt-7 max-w-2xl text-[21px] leading-[1.7] text-muted-foreground">
               Successful stroke care is never a single device. It is an ecosystem
               of imaging, clinical workflows, biomedical engineering and technical
               support working as one — and AbuFarha helps hospitals bring it
