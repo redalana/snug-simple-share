@@ -187,7 +187,7 @@ export function GlobalPresence() {
               {/* countries-served pill */}
               <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[11px] font-medium text-white/75 shadow-sm backdrop-blur-md">
                 <Globe className="h-3.5 w-3.5" />
-                40+ countries served
+                10 countries · verified project history
               </div>
             </div>
 
@@ -195,15 +195,17 @@ export function GlobalPresence() {
             <div className="flex flex-col justify-between px-2 py-3 lg:px-4 lg:py-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
-                  Live Footprint
+                  Verified Footprint
                 </span>
                 <h3 className="mt-3 font-display text-2xl font-extrabold tracking-[-0.01em] text-white sm:text-[1.75rem]">
-                  Africa &amp; the Middle East
+                  Middle East, Africa &amp; Asia
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
-                  Local engineers and regional support teams keep every installation
-                  running — wherever your facility operates.
+                  A real, documented delivery record — heart centers, imaging,
+                  IVF and LASIK systems installed and supported across 10 countries.
+                  Hover any pin for the actual equipment delivered.
                 </p>
+
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   {STATS.map((s) => (
