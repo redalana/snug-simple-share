@@ -348,22 +348,28 @@ export function ExperienceAbuFarha() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 1.1, ease: EASE }}
-              className="relative mx-auto max-w-2xl lg:-mx-6 lg:max-w-none"
+              className="relative mx-auto max-w-2xl lg:-mx-16 lg:max-w-none lg:scale-[1.2]"
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full opacity-50 blur-3xl"
+                className="pointer-events-none absolute inset-0 -z-10 scale-125 rounded-full opacity-60 blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle at 52% 42%, color-mix(in oklab, var(--primary) 13%, transparent), transparent 65%)",
+                    "radial-gradient(circle at 52% 42%, color-mix(in oklab, var(--primary) 15%, transparent), transparent 62%)",
                 }}
               />
               <motion.img
                 src={brainHero}
-                alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red, over a softly blurred cath lab"
+                alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red"
                 width={1024}
                 height={1200}
-                className="w-full select-none rounded-3xl object-contain"
+                className="w-full select-none object-contain"
+                style={{
+                  maskImage:
+                    "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
+                }}
                 animate={
                   reduce
                     ? undefined
