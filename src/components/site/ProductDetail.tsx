@@ -1,7 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import {
+  defaultCountries,
+  parseCountry,
+  FlagImage,
+} from "react-international-phone";
+import { PhoneField } from "@/components/site/PhoneField";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Check, Search } from "lucide-react";
 import {
   ChevronRight,
   ChevronLeft,
@@ -28,6 +36,7 @@ import {
   BadgeCheck,
   MapPin,
   Boxes,
+  Mail,
 } from "lucide-react";
 import {
   type Product,
@@ -498,6 +507,119 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   );
 }
 
+const QUOTE_COUNTRIES = defaultCountries
+  .map(parseCountry)
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+function CountrySelect({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  const selected = useMemo(
+    () => QUOTE_COUNTRIES.find((c) => c.name === value),
+    [value],
+  );
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return QUOTE_COUNTRIES;
+    return QUOTE_COUNTRIES.filter(
+      (c) => c.name.toLowerCase().includes(q) || c.iso2.includes(q),
+    );
+  }, [query]);
+
+  useEffect(() => {
+    if (open) {
+      const t = setTimeout(() => searchRef.current?.focus(), 60);
+      return () => clearTimeout(t);
+    }
+    setQuery("");
+  }, [open]);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          aria-label="Select country"
+          className="flex h-14 w-full items-center gap-2.5 rounded-xl border border-border bg-secondary/30 px-4 text-left text-base text-foreground outline-none transition-all hover:bg-secondary/50 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
+        >
+          {selected ? (
+            <>
+              <FlagImage
+                iso2={selected.iso2}
+                className="h-4 w-6 rounded-[3px] object-cover shadow-sm"
+              />
+              <span className="flex-1 truncate">{selected.name}</span>
+            </>
+          ) : (
+            <span className="flex-1 truncate text-muted-foreground/70">Select country</span>
+          )}
+          <ChevronRight className="h-4 w-4 rotate-90 text-muted-foreground" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        sideOffset={8}
+        className="w-[--radix-popover-trigger-width] min-w-[280px] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
+        <div className="sticky top-0 z-10 border-b border-border/70 bg-white/95 p-2.5 backdrop-blur">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              ref={searchRef}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search country"
+              aria-label="Search countries"
+              className="h-10 w-full rounded-lg border border-border bg-secondary/40 pl-9 pr-3 text-sm outline-none focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/15"
+            />
+          </div>
+        </div>
+        <div className="max-h-[260px] overflow-y-auto overscroll-contain p-1.5">
+          {filtered.length === 0 ? (
+            <p className="px-3 py-6 text-center text-sm text-muted-foreground">
+              No countries found
+            </p>
+          ) : (
+            filtered.map((c) => {
+              const isSelected = c.name === value;
+              return (
+                <button
+                  key={c.iso2}
+                  type="button"
+                  onClick={() => {
+                    onChange(c.name);
+                    setOpen(false);
+                  }}
+                  className={`flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors hover:bg-primary/5 ${
+                    isSelected ? "font-semibold" : ""
+                  }`}
+                >
+                  <FlagImage
+                    iso2={c.iso2}
+                    className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
+                  />
+                  <span className="flex-1 truncate text-foreground">{c.name}</span>
+                  {isSelected && <Check className="h-4 w-4 shrink-0 text-primary" />}
+                </button>
+              );
+            })
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 function QuoteSection({
   product,
   whatsappQuote,
@@ -512,7 +634,7 @@ function QuoteSection({
     country: "",
     email: "",
     phone: "",
-    message: `I would like to request a quote for the ${product.name} (${product.category}). Please share pricing, availability and delivery details.`,
+    message: `I would like to request a quotation for the ${product.name}. Please send pricing, availability and delivery information.`,
   });
 
   const update =
@@ -523,7 +645,6 @@ function QuoteSection({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate submission — stays on the page, never navigates away.
     setTimeout(() => {
       setSubmitting(false);
       toast.success("Quote request sent", {
@@ -540,144 +661,137 @@ function QuoteSection({
     }, 700);
   };
 
+  const labelClass = "mb-2 block text-sm font-semibold text-foreground";
   const inputClass =
-    "w-full rounded-xl border border-border/70 bg-background px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/20";
+    "h-14 w-full rounded-xl border border-border bg-secondary/30 px-4 text-base text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10";
+  const outlineBtn =
+    "inline-flex items-center gap-2.5 rounded-xl border-2 border-border bg-background px-5 py-3.5 text-base font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary";
+
+  const emailQuote = `mailto:info@abufarhamedical.com?subject=${encodeURIComponent(
+    `Quotation Request — ${product.name}`,
+  )}&body=${encodeURIComponent(
+    `I would like to request a quotation for the ${product.name}. Please send pricing, availability and delivery information.`,
+  )}`;
 
   return (
     <section
       id="request-quote"
-      className="mx-auto max-w-[100rem] scroll-mt-28 px-6 py-16 lg:px-10"
+      className="mx-auto max-w-[100rem] scroll-mt-28 px-6 py-20 lg:px-10"
     >
-      <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-8 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-12">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-14">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
-              Get a Quotation
-            </span>
-            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-              Request a Quote
-            </h2>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              Our specialists are ready to help you with pricing, availability and clinical
-              fit for the <span className="font-semibold text-foreground">{product.name}</span>.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={whatsappQuote}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                <PhoneCall className="h-4 w-4" /> WhatsApp
-              </a>
-              <a
-                href="tel:+962799741318"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                <PhoneCall className="h-4 w-4" /> Call Us
-              </a>
-            </div>
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[36fr_64fr] lg:items-start lg:gap-16">
+        {/* LEFT COLUMN */}
+        <div className="lg:sticky lg:top-28">
+          <span className="text-xs font-bold uppercase tracking-[0.24em] text-primary">
+            Get a Quotation
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-[2.75rem]">
+            Request a Quote
+          </h2>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-foreground/80">
+            Our specialists will help you choose the right medical system, verify
+            availability, prepare the quotation and answer all technical questions.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a
+              href={whatsappQuote}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={outlineBtn}
+            >
+              <PhoneCall className="h-5 w-5" /> WhatsApp
+            </a>
+            <a href="tel:+962799741318" className={outlineBtn}>
+              <PhoneCall className="h-5 w-5" /> Call Us
+            </a>
+            <a href={emailQuote} className={outlineBtn}>
+              <Mail className="h-5 w-5" /> Email Us
+            </a>
           </div>
+        </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_18px_44px_-30px_rgba(0,0,0,0.25)] lg:p-8"
-          >
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Full Name
-                </label>
-                <input
-                  required
-                  value={form.fullName}
-                  onChange={update("fullName")}
-                  placeholder="Dr. John Smith"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Hospital / Company
-                </label>
-                <input
-                  value={form.company}
-                  onChange={update("company")}
-                  placeholder="City Medical Center"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Country
-                </label>
-                <input
-                  value={form.country}
-                  onChange={update("country")}
-                  placeholder="Jordan"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Email
-                </label>
-                <input
-                  required
-                  type="email"
-                  value={form.email}
-                  onChange={update("email")}
-                  placeholder="name@hospital.com"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Phone Number
-                </label>
-                <input
-                  value={form.phone}
-                  onChange={update("phone")}
-                  placeholder="+962 79 000 0000"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                  Interested Product
-                </label>
-                <input
-                  readOnly
-                  value={product.name}
-                  className={`${inputClass} cursor-not-allowed bg-secondary/60`}
-                />
-              </div>
-            </div>
-            <div className="mt-4">
-              <label className="mb-1.5 block text-sm font-semibold text-foreground">
-                Message
-              </label>
-              <textarea
-                rows={4}
-                value={form.message}
-                onChange={update("message")}
-                className={`${inputClass} resize-none`}
+        {/* RIGHT COLUMN */}
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-3xl border border-border/70 bg-card p-7 shadow-[0_30px_70px_-40px_rgba(0,0,0,0.4)] sm:p-9 lg:p-10"
+        >
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <label className={labelClass}>Full Name</label>
+              <input
+                required
+                value={form.fullName}
+                onChange={update("fullName")}
+                placeholder="Dr. John Smith"
+                className={inputClass}
               />
             </div>
-            <button
-              type="submit"
-              disabled={submitting}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60 sm:w-auto"
-            >
-              <FileText className="h-4 w-4" />
-              {submitting ? "Sending…" : "Request Quote"}
-            </button>
-          </form>
-        </div>
+            <div>
+              <label className={labelClass}>Hospital / Company</label>
+              <input
+                value={form.company}
+                onChange={update("company")}
+                placeholder="City Medical Center"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Country</label>
+              <CountrySelect
+                value={form.country}
+                onChange={(v) => setForm((prev) => ({ ...prev, country: v }))}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Email</label>
+              <input
+                required
+                type="email"
+                value={form.email}
+                onChange={update("email")}
+                placeholder="name@hospital.com"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Phone Number</label>
+              <PhoneField
+                value={form.phone}
+                onChange={(v) => setForm((prev) => ({ ...prev, phone: v }))}
+                className="h-14"
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Interested Product</label>
+              <input
+                readOnly
+                value={product.name}
+                className={`${inputClass} cursor-not-allowed bg-secondary/60 font-medium`}
+              />
+            </div>
+          </div>
+          <div className="mt-6">
+            <label className={labelClass}>Message</label>
+            <textarea
+              rows={5}
+              value={form.message}
+              onChange={update("message")}
+              className="w-full resize-none rounded-xl border border-border bg-secondary/30 p-4 text-base leading-relaxed text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-primary px-8 py-4 text-base font-bold text-primary-foreground shadow-[0_18px_36px_-16px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
+          >
+            <FileText className="h-5 w-5" />
+            {submitting ? "Sending…" : "Request Quote"}
+          </button>
+        </form>
       </div>
     </section>
   );
 }
+
 
 
 function ShareButton({
