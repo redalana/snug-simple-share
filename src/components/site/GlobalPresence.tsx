@@ -150,7 +150,7 @@ export function GlobalPresence() {
 
                     {/* hover tooltip */}
                     <div
-                      className={`pointer-events-none absolute left-1/2 z-20 w-52 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
+                      className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
                         flip ? "top-full mt-3" : "bottom-full mb-3"
                       } ${isActive ? "opacity-100" : "translate-y-1 opacity-0"}`}
                     >
