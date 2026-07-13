@@ -511,6 +511,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
       {/* REQUEST A QUOTE */}
       <QuoteSection product={product} whatsappQuote={whatsappQuote} />
+
+      {lightboxOpen && (
+        <Lightbox
+          images={gallery}
+          index={activeIndex}
+          alt={`${product.brand} ${product.name}`}
+          onIndexChange={(i) => setActive(gallery[i])}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
     </>
   );
 }
