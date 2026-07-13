@@ -88,6 +88,7 @@ export async function generateProductPdf(product: Product): Promise<void> {
   // PRODUCT INFORMATION
   const info: [string, string][] = [
     ["Manufacturer", product.brand],
+    ["Category", product.category],
     ["Model", product.model],
     ["Condition", product.status],
     ["Warranty", product.warranty],
