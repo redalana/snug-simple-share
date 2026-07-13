@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { Logo } from "./Logo";
 
 function WhatsAppIcon({ className }: { className?: string }) {
