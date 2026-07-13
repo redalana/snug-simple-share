@@ -381,12 +381,15 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             {product.snapshot.slice(0, 6).map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)]"
+                className="group rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all hover:-translate-y-1 hover:border-primary/30"
               >
+                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Gauge className="h-5 w-5" />
+                </span>
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="mt-2 font-display text-xl font-bold text-foreground">
+                <div className="mt-1.5 font-display text-2xl font-bold text-foreground">
                   {s.value}
                 </div>
               </div>
