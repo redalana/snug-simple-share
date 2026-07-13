@@ -3,6 +3,8 @@ import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "luci
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Logo } from "./Logo";
+import cathLabBg from "@/assets/footer-cathlab.jpg.asset.json";
+import vascularBg from "@/assets/footer-vascular.jpg.asset.json";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -65,17 +67,17 @@ const CONTACTS = [
 ];
 
 export function Footer() {
-  const vesselsRef = useRef<SVGSVGElement>(null);
+  const vesselsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const el = vesselsRef.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Very soft breathing — 3% -> 5% -> 3% over ~11s, almost imperceptible.
+    // Very soft breathing glow on the vascular network — almost imperceptible.
     const tween = gsap.fromTo(
       el,
-      { opacity: 0.03 },
-      { opacity: 0.05, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
+      { opacity: 0.4 },
+      { opacity: 0.6, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
     );
     return () => tween.kill();
   }, []);
@@ -104,78 +106,40 @@ export function Footer() {
         }}
       />
 
-      {/* LAYER 2 — LEFT: oversized cath lab blueprint, scaled 170%, cropped, ~2.5% opacity */}
-      <svg
+      {/* LAYER 2 — LEFT: cinematic Cath Lab room, blended into darkness */}
+      <div
         aria-hidden="true"
-        viewBox="0 0 600 600"
-        className="pointer-events-none absolute -left-[24%] top-1/2 h-[190%] w-auto -translate-y-1/2"
-        style={{ opacity: 0.025 }}
-      >
-        <g fill="none" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        className="pointer-events-none absolute inset-y-0 left-0 w-[62%]"
+        style={{
+          backgroundImage: `url(${cathLabBg.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "left center",
+          opacity: 0.16,
+          maskImage:
+            "linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%)",
+        }}
+      />
 
-          {/* ceiling rail */}
-          <line x1="60" y1="70" x2="520" y2="70" />
-          <line x1="60" y1="80" x2="520" y2="80" />
-          {/* C-arm suspension */}
-          <path d="M300 80 L300 150" />
-          <path d="M300 150 C300 150 210 150 190 250 C170 350 250 420 300 420" />
-          {/* detector head */}
-          <rect x="150" y="215" width="70" height="70" rx="8" />
-          <rect x="162" y="227" width="46" height="46" rx="4" />
-          {/* source head */}
-          <circle cx="300" cy="420" r="46" />
-          <circle cx="300" cy="420" r="26" />
-          <circle cx="300" cy="420" r="8" />
-          {/* patient table */}
-          <rect x="120" y="470" width="360" height="16" rx="6" />
-          <path d="M300 486 L300 560" />
-          <rect x="250" y="560" width="100" height="18" rx="6" />
-          {/* measurement / dimension ticks */}
-          <path d="M60 96 L60 108 M520 96 L520 108" />
-          <line x1="60" y1="102" x2="520" y2="102" strokeDasharray="4 8" />
-          {/* radial protractor around source */}
-          <circle cx="300" cy="420" r="74" strokeDasharray="2 10" />
-          {/* console outline (right, mostly cropped) */}
-          <rect x="470" y="360" width="120" height="150" rx="10" />
-          <line x1="470" y1="400" x2="590" y2="400" />
-          <circle cx="500" cy="440" r="10" />
-          <circle cx="540" cy="440" r="10" />
-        </g>
-      </svg>
-
-      {/* LAYER 3 — RIGHT: delicate neurovascular network, dark crimson, breathing */}
-      <svg
+      {/* LAYER 3 — RIGHT: cinematic crimson vascular network, softly breathing */}
+      <div
         ref={vesselsRef}
         aria-hidden="true"
-        viewBox="0 0 360 700"
-        preserveAspectRatio="xMaxYMid slice"
-        className="pointer-events-none absolute right-0 top-0 h-full w-[42%]"
+        className="pointer-events-none absolute inset-y-0 right-0 w-[52%]"
         style={{
-          opacity: 0.03,
-          maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to left, black 40%, transparent 100%)",
+          backgroundImage: `url(${vascularBg.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "right center",
+          opacity: 0.5,
+          mixBlendMode: "screen",
+          maskImage:
+            "linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 55%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 55%, transparent 100%)",
         }}
-      >
-        <g fill="none" stroke="#c1121f" strokeLinecap="round">
-          <path d="M360 350 L250 350" strokeWidth="2.2" />
-          <path d="M250 350 C210 350 200 300 160 280 C130 265 120 230 90 215" strokeWidth="1.6" />
-          <path d="M250 350 C210 350 200 400 160 420 C130 435 120 470 90 485" strokeWidth="1.6" />
-          <path d="M250 350 C230 350 224 330 210 315" strokeWidth="1.3" />
-          <path d="M250 350 C230 350 224 370 210 385" strokeWidth="1.3" />
-          <path d="M160 280 C140 268 118 272 100 250" strokeWidth="0.9" />
-          <path d="M160 280 C150 258 128 250 122 224" strokeWidth="0.9" />
-          <path d="M160 420 C140 432 118 428 100 450" strokeWidth="0.9" />
-          <path d="M160 420 C150 442 128 450 122 476" strokeWidth="0.9" />
-          <path d="M90 215 C78 200 80 182 66 172" strokeWidth="0.7" />
-          <path d="M90 485 C78 500 80 518 66 528" strokeWidth="0.7" />
-          <path d="M122 224 C110 214 96 216 90 202" strokeWidth="0.6" />
-          <path d="M122 476 C110 486 96 484 90 498" strokeWidth="0.6" />
-          <path d="M210 315 C198 306 186 308 178 296" strokeWidth="0.6" />
-          <path d="M210 385 C198 394 186 392 178 404" strokeWidth="0.6" />
-          <path d="M300 350 C280 350 274 322 258 306" strokeWidth="1" />
-          <path d="M300 350 C280 350 274 378 258 394" strokeWidth="1" />
-        </g>
-      </svg>
+      />
+
 
       {/* LAYER 4 — film grain + vignette */}
       <div
