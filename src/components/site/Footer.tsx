@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { Logo } from "./Logo";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -62,14 +65,24 @@ const CONTACTS = [
 ];
 
 export function Footer() {
+  const vesselsRef = useRef<SVGSVGElement>(null);
+
+  useGSAP(() => {
+    const el = vesselsRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Very soft breathing — 3% -> 5% -> 3% over ~11s, almost imperceptible.
+    const tween = gsap.fromTo(
+      el,
+      { opacity: 0.03 },
+      { opacity: 0.05, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
+    );
+    return () => tween.kill();
+  }, []);
+
   return (
     <footer className="relative overflow-hidden bg-[#111315] text-white/70">
-      <style>{`
-        @keyframes vascularBreath {
-          0%, 100% { opacity: 0.03; }
-          45%, 55% { opacity: 0.05; }
-        }
-      `}</style>
+
 
       {/* LAYER 1 — deep charcoal gradient + soft radial lighting */}
       <div
@@ -81,14 +94,25 @@ export function Footer() {
         }}
       />
 
-      {/* LAYER 2 — LEFT: oversized cath lab blueprint, cropped, ~2.5% opacity */}
+      {/* CENTER — very soft light beam for depth */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 120% at 50% -20%, rgba(255,255,255,0.04), transparent 60%)",
+        }}
+      />
+
+      {/* LAYER 2 — LEFT: oversized cath lab blueprint, scaled 170%, cropped, ~2.5% opacity */}
       <svg
         aria-hidden="true"
         viewBox="0 0 600 600"
-        className="pointer-events-none absolute -left-[16%] top-1/2 h-[150%] w-auto -translate-y-1/2"
+        className="pointer-events-none absolute -left-[24%] top-1/2 h-[190%] w-auto -translate-y-1/2"
         style={{ opacity: 0.025 }}
       >
-        <g fill="none" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        <g fill="none" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+
           {/* ceiling rail */}
           <line x1="60" y1="70" x2="520" y2="70" />
           <line x1="60" y1="80" x2="520" y2="80" />
@@ -121,13 +145,13 @@ export function Footer() {
 
       {/* LAYER 3 — RIGHT: delicate neurovascular network, dark crimson, breathing */}
       <svg
+        ref={vesselsRef}
         aria-hidden="true"
         viewBox="0 0 360 700"
         preserveAspectRatio="xMaxYMid slice"
         className="pointer-events-none absolute right-0 top-0 h-full w-[42%]"
         style={{
-          opacity: 0.035,
-          animation: "vascularBreath 11s ease-in-out infinite",
+          opacity: 0.03,
           maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to left, black 40%, transparent 100%)",
         }}
