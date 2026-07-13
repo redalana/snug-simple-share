@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import {
   ChevronRight,
   ChevronLeft,
@@ -111,7 +112,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const adjacent = getAdjacentProducts(slug);
 
   const scrollToQuote = () => {
-    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("request-quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
@@ -491,47 +492,193 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </section>
       )}
 
-      {/* FINAL CTA */}
-      <section id="quote" className="mx-auto max-w-[100rem] scroll-mt-32 px-6 py-16 lg:px-10">
-        <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-10 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-14">
-          <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
-            <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-                Interested in the {product.name}?
-              </h2>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-                Our specialists are ready to help you with pricing, availability and clinical
-                fit for your facility.
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <button
-                onClick={scrollToQuote}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-              >
-                <FileText className="h-4 w-4" /> Request Quote
-              </button>
+      {/* REQUEST A QUOTE */}
+      <QuoteSection product={product} whatsappQuote={whatsappQuote} />
+    </>
+  );
+}
+
+function QuoteSection({
+  product,
+  whatsappQuote,
+}: {
+  product: Product;
+  whatsappQuote: string;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    fullName: "",
+    company: "",
+    country: "",
+    email: "",
+    phone: "",
+    message: `I would like to request a quote for the ${product.name} (${product.category}). Please share pricing, availability and delivery details.`,
+  });
+
+  const update =
+    (field: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    // Simulate submission — stays on the page, never navigates away.
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success("Quote request sent", {
+        description: `Thank you, ${form.fullName || "we"}. Our team will contact you shortly about the ${product.name}.`,
+      });
+      setForm((prev) => ({
+        fullName: "",
+        company: "",
+        country: "",
+        email: "",
+        phone: "",
+        message: prev.message,
+      }));
+    }, 700);
+  };
+
+  const inputClass =
+    "w-full rounded-xl border border-border/70 bg-background px-4 py-3 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground/70 focus:border-primary focus:ring-2 focus:ring-primary/20";
+
+  return (
+    <section
+      id="request-quote"
+      className="mx-auto max-w-[100rem] scroll-mt-28 px-6 py-16 lg:px-10"
+    >
+      <div className="overflow-hidden rounded-3xl border border-border/70 bg-secondary p-8 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] lg:p-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-14">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
+              Get a Quotation
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              Request a Quote
+            </h2>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+              Our specialists are ready to help you with pricing, availability and clinical
+              fit for the <span className="font-semibold text-foreground">{product.name}</span>.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={whatsappQuote}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 <PhoneCall className="h-4 w-4" /> WhatsApp
               </a>
               <a
                 href="tel:+962799741318"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 <PhoneCall className="h-4 w-4" /> Call Us
               </a>
             </div>
           </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_18px_44px_-30px_rgba(0,0,0,0.25)] lg:p-8"
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Full Name
+                </label>
+                <input
+                  required
+                  value={form.fullName}
+                  onChange={update("fullName")}
+                  placeholder="Dr. John Smith"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Hospital / Company
+                </label>
+                <input
+                  value={form.company}
+                  onChange={update("company")}
+                  placeholder="City Medical Center"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Country
+                </label>
+                <input
+                  value={form.country}
+                  onChange={update("country")}
+                  placeholder="Jordan"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Email
+                </label>
+                <input
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={update("email")}
+                  placeholder="name@hospital.com"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Phone Number
+                </label>
+                <input
+                  value={form.phone}
+                  onChange={update("phone")}
+                  placeholder="+962 79 000 0000"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                  Interested Product
+                </label>
+                <input
+                  readOnly
+                  value={product.name}
+                  className={`${inputClass} cursor-not-allowed bg-secondary/60`}
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              <label className="mb-1.5 block text-sm font-semibold text-foreground">
+                Message
+              </label>
+              <textarea
+                rows={4}
+                value={form.message}
+                onChange={update("message")}
+                className={`${inputClass} resize-none`}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60 sm:w-auto"
+            >
+              <FileText className="h-4 w-4" />
+              {submitting ? "Sending…" : "Request Quote"}
+            </button>
+          </form>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
+
 
 function ShareButton({
   href,
