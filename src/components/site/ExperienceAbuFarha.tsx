@@ -125,14 +125,14 @@ export function ExperienceAbuFarha() {
                 const Icon = pillar.icon;
                 return (
                   <li key={pillar.id} className="flex gap-4">
-                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
-                      <Icon className="h-[21px] w-[21px]" strokeWidth={1.75} />
+                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
+                      <Icon className="h-[24px] w-[24px]" strokeWidth={1.75} />
                     </span>
                     <div>
-                      <h3 className="font-display text-[1.24rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
+                      <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                         {pillar.title}
                       </h3>
-                      <p className="mt-1.5 max-w-md text-[15px] leading-[1.6] text-muted-foreground">
+                      <p className="mt-1.5 max-w-lg text-[16.5px] leading-[1.6] text-muted-foreground">
                         {pillar.copy}
                       </p>
                     </div>
