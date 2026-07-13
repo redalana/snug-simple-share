@@ -407,13 +407,16 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             </h2>
             <span className="mx-auto mt-4 block h-1 w-20 rounded-full bg-primary" />
           </div>
-          <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-3 rounded-3xl border border-border/70 bg-card p-4 shadow-[0_14px_36px_-30px_rgba(0,0,0,0.25)] sm:grid-cols-3 md:grid-cols-5 md:gap-0 md:divide-x md:divide-border/60">
             {INCLUDED.map((s) => (
-              <div key={s.label} className="flex flex-col items-center gap-3 text-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <s.icon className="h-8 w-8" />
+              <div
+                key={s.label}
+                className="flex flex-col items-center gap-3 px-4 py-6 text-center"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <s.icon className="h-7 w-7" />
                 </span>
-                <p className="text-base font-semibold text-foreground">{s.label}</p>
+                <p className="text-base font-bold text-foreground">{s.label}</p>
               </div>
             ))}
           </div>
