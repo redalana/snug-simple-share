@@ -751,7 +751,7 @@ export function PortfolioBrowser() {
     ...(activeCat !== "All Categories"
       ? [{ label: activeCat, onRemove: () => { setActiveCat("All Categories"); resetPage(); } }]
       : []),
-    ...FACETS.flatMap(({ key }) =>
+    ...FACET_CONFIG.flatMap(({ key }) =>
       selected[key].map((v) => ({ label: v, onRemove: () => toggleFilter(key, v) })),
     ),
     ...(query.trim()
