@@ -551,23 +551,15 @@ export function PortfolioBrowser() {
       {/* POPULAR MANUFACTURERS */}
       <section className="border-b border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="font-display text-xl font-bold tracking-tight text-foreground">
-                Popular Manufacturers
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Certified partners and leading global medical technology brands.
-              </p>
-            </div>
-            <Link
-              to="/categories"
-              className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:inline-flex"
-            >
-              View All Brands
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+          <div className="mb-6">
+            <h2 className="font-display text-xl font-bold tracking-tight text-foreground">
+              Popular Manufacturers
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Certified partners and leading global medical technology brands.
+            </p>
           </div>
+
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
             {BRANDS.map((brand) => (
               <button
