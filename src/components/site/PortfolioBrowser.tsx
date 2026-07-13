@@ -430,23 +430,35 @@ function FilterAccordion({
   options,
   selected,
   onToggle,
-  defaultOpen,
+  open,
+  onToggleOpen,
+  searchable,
 }: {
   title: string;
   options: { value: string; count: number }[];
   selected: string[];
   onToggle: (value: string) => void;
-  defaultOpen?: boolean;
+  open: boolean;
+  onToggleOpen: () => void;
+  searchable?: boolean;
 }) {
-  const [open, setOpen] = useState(!!defaultOpen);
   const [showAll, setShowAll] = useState(false);
+  const [term, setTerm] = useState("");
   const VISIBLE = 8;
-  const hasMore = options.length > VISIBLE;
-  const visibleOptions = showAll || !hasMore ? options : options.slice(0, VISIBLE);
+
+  const showSearch = !!searchable && options.length > VISIBLE;
+  const q = term.trim().toLowerCase();
+  const searched = q
+    ? options.filter((o) => o.value.toLowerCase().includes(q))
+    : options;
+  const hasMore = !q && searched.length > VISIBLE;
+  const visibleOptions = showAll || !hasMore ? searched : searched.slice(0, VISIBLE);
+
   return (
     <div className="border-b border-border/60 last:border-0">
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggleOpen}
+        aria-expanded={open}
         className="flex w-full items-center justify-between py-5 text-left text-sm font-semibold text-foreground/90 transition-colors hover:text-primary"
       >
         <span className="flex items-center gap-2">
@@ -465,7 +477,22 @@ function FilterAccordion({
         className={`grid transition-all duration-300 ease-out ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
       >
         <div className="overflow-hidden">
+          {showSearch && (
+            <div className="relative mb-4">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                placeholder={`Search ${title.toLowerCase()}…`}
+                className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              />
+            </div>
+          )}
           <ul className="space-y-3.5 pb-5">
+            {visibleOptions.length === 0 && (
+              <li className="text-sm text-muted-foreground/70">No matches.</li>
+            )}
             {visibleOptions.map((opt) => (
               <li key={opt.value}>
                 <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
@@ -486,7 +513,7 @@ function FilterAccordion({
               onClick={() => setShowAll((v) => !v)}
               className="mb-5 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
             >
-              {showAll ? "Show Less" : `Show More (${options.length - VISIBLE})`}
+              {showAll ? "Show Less" : `Show More (${searched.length - VISIBLE})`}
             </button>
           )}
         </div>
@@ -494,6 +521,7 @@ function FilterAccordion({
     </div>
   );
 }
+
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
   return (
