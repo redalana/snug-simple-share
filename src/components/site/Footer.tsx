@@ -145,13 +145,13 @@ export function Footer() {
 
       {/* LAYER 3 — RIGHT: delicate neurovascular network, dark crimson, breathing */}
       <svg
+        ref={vesselsRef}
         aria-hidden="true"
         viewBox="0 0 360 700"
         preserveAspectRatio="xMaxYMid slice"
         className="pointer-events-none absolute right-0 top-0 h-full w-[42%]"
         style={{
-          opacity: 0.035,
-          animation: "vascularBreath 11s ease-in-out infinite",
+          opacity: 0.03,
           maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to left, black 40%, transparent 100%)",
         }}
