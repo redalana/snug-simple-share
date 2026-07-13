@@ -67,17 +67,17 @@ const CONTACTS = [
 ];
 
 export function Footer() {
-  const vesselsRef = useRef<SVGSVGElement>(null);
+  const vesselsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const el = vesselsRef.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Very soft breathing — 3% -> 5% -> 3% over ~11s, almost imperceptible.
+    // Very soft breathing glow on the vascular network — almost imperceptible.
     const tween = gsap.fromTo(
       el,
-      { opacity: 0.03 },
-      { opacity: 0.05, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
+      { opacity: 0.4 },
+      { opacity: 0.6, duration: 5.5, ease: "sine.inOut", yoyo: true, repeat: -1 },
     );
     return () => tween.kill();
   }, []);
