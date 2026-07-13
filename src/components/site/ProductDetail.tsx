@@ -865,3 +865,141 @@ function RelatedCard({ product }: { product: Product }) {
     </Link>
   );
 }
+
+function Lightbox({
+  images,
+  index,
+  alt,
+  onIndexChange,
+  onClose,
+}: {
+  images: string[];
+  index: number;
+  alt: string;
+  onIndexChange: (i: number) => void;
+  onClose: () => void;
+}) {
+  const [zoomed, setZoomed] = useState(false);
+  const touchX = useRef<number | null>(null);
+
+  const go = (dir: number) => {
+    setZoomed(false);
+    onIndexChange((index + dir + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      else if (e.key === "ArrowRight") go(1);
+      else if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+    };
+  });
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col bg-black/92 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Product image gallery"
+      onClick={onClose}
+      onWheel={(e) => setZoomed(e.deltaY < 0)}
+    >
+      {/* TOP BAR */}
+      <div
+        className="flex items-center justify-between px-5 py-4 text-white"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <span className="rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-semibold">
+          {index + 1} / {images.length}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setZoomed((z) => !z)}
+            aria-label={zoomed ? "Zoom out" : "Zoom in"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+          >
+            {zoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}
+          </button>
+          <button
+            onClick={onClose}
+            aria-label="Close gallery"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* STAGE */}
+      <div
+        className="relative flex flex-1 items-center justify-center overflow-hidden px-4"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (touchX.current === null) return;
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+          touchX.current = null;
+        }}
+      >
+        {images.length > 1 && (
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous image"
+            className="absolute left-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+        )}
+        <img
+          src={images[index]}
+          alt={`${alt} — image ${index + 1}`}
+          onClick={() => setZoomed((z) => !z)}
+          className={`max-h-full max-w-full select-none rounded-lg object-contain transition-transform duration-300 ${
+            zoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in"
+          }`}
+        />
+        {images.length > 1 && (
+          <button
+            onClick={() => go(1)}
+            aria-label="Next image"
+            className="absolute right-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        )}
+      </div>
+
+      {/* THUMBNAILS */}
+      {images.length > 1 && (
+        <div
+          className="flex items-center justify-center gap-2.5 px-4 py-5"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {images.map((img, i) => (
+            <button
+              key={img + i}
+              onClick={() => {
+                setZoomed(false);
+                onIndexChange(i);
+              }}
+              aria-label={`View image ${i + 1}`}
+              className={`h-16 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                i === index ? "border-white" : "border-white/25 opacity-60 hover:opacity-100"
+              }`}
+            >
+              <img src={img} alt="" loading="lazy" className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
