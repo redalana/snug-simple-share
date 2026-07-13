@@ -67,10 +67,10 @@ const FEATURES = [
 ];
 
 const INCLUDED = [
-  { icon: Wrench, label: "Installation & Commissioning" },
+  { icon: Wrench, label: "Installation" },
   { icon: GraduationCap, label: "Clinical Training" },
-  { icon: ShieldCheck, label: "Warranty Coverage" },
-  { icon: PackageCheck, label: "Spare Parts Supply" },
+  { icon: ShieldCheck, label: "Warranty" },
+  { icon: PackageCheck, label: "Spare Parts" },
   { icon: Headset, label: "After Sales Support" },
 ];
 
