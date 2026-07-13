@@ -162,20 +162,18 @@ export function GlobalPresence() {
                           </span>
                         )}
                       </div>
-                      <div className="mt-2.5 space-y-1.5 text-[11px]">
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Projects completed</span>
-                          <span className="font-bold text-white">{p.projects}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Hospitals served</span>
-                          <span className="font-bold text-white">{p.hospitals}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/55">Equipment installed</span>
-                          <span className="font-bold text-white">{p.equipment}</span>
-                        </div>
+                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        Verified deliveries
                       </div>
+                      <ul className="mt-2 space-y-1 text-[11px] leading-snug">
+                        {p.items.map((item) => (
+                          <li key={item} className="flex items-start gap-1.5 text-white/75">
+                            <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+
                       {flip ? (
                         <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[6px] border-x-transparent border-b-ink/80" />
                       ) : (
