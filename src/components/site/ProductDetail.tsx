@@ -104,6 +104,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const router = useRouter();
   const gallery = product.gallery?.length ? product.gallery : [product.image];
   const [active, setActive] = useState(gallery[0]);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const activeIndex = Math.max(0, gallery.indexOf(active));
   const [generating, setGenerating] = useState(false);
   // Read the live URL only after mount to avoid SSR/client hydration mismatch.
   const [pageUrl, setPageUrl] = useState("");
