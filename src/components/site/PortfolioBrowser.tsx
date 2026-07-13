@@ -8,7 +8,6 @@ import {
   List,
   ChevronDown,
   ChevronRight,
-  Heart,
   ArrowRight,
   Boxes,
   Layers,
@@ -16,6 +15,9 @@ import {
   SlidersHorizontal,
   PhoneCall,
   Mail,
+  Wrench,
+  GraduationCap,
+  FileText,
 } from "lucide-react";
 import heroCathlab from "@/assets/hero-cathlab.jpg";
 import solMri from "@/assets/sol-mri.jpg";
@@ -42,10 +44,9 @@ const CATEGORIES = [
 
 const FILTER_GROUPS = [
   { title: "Category", options: ["Cath Lab", "MRI", "CT", "PET/CT", "X-Ray", "C-Arms"] },
-  { title: "Brand", options: ["Philips", "Siemens Healthineers", "GE HealthCare", "Canon Medical"] },
-  { title: "Availability", options: ["Available", "Limited", "On Request"] },
-  { title: "Condition", options: ["New", "Refurbished", "Certified Pre-Owned"] },
-  { title: "Manufacturer", options: ["Philips", "Siemens", "GE", "Canon", "Richard Wolf"] },
+  { title: "Manufacturer", options: ["Philips", "Siemens Healthineers", "GE HealthCare", "Canon Medical"] },
+  { title: "Condition", options: ["Brand New", "Certified Refurbished", "Factory Certified"] },
+  { title: "Clinical Specialty", options: ["Interventional", "Diagnostic Imaging", "Women Healthcare", "Surgical"] },
   { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
   { title: "Year", options: ["2024", "2023", "2022", "2021 or earlier"] },
   { title: "System Type", options: ["Fixed", "Mobile", "Ceiling-Mounted", "Floor-Mounted"] },
@@ -57,9 +58,12 @@ type Product = {
   category: string;
   image: string;
   specs: [string, string];
-  availability: "Available" | "Limited" | "On Request";
-  condition: string;
+  /** Professional condition label — never a stock/inventory status. */
+  status: "Certified Refurbished" | "Brand New" | "Factory Certified";
   warranty: string;
+  installation: boolean;
+  training: boolean;
+  cta: string;
 };
 
 const PRODUCTS: Product[] = [
@@ -69,9 +73,11 @@ const PRODUCTS: Product[] = [
     category: "MRI",
     image: solMri,
     specs: ["1.5 Tesla", "Whole Body"],
-    availability: "Available",
-    condition: "Refurbished",
+    status: "Certified Refurbished",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "View Specifications",
   },
   {
     name: "Philips Allura Xper FD20",
@@ -79,9 +85,11 @@ const PRODUCTS: Product[] = [
     category: "Cath Lab",
     image: heroCathlab,
     specs: ["Biplane", "Interventional"],
-    availability: "Available",
-    condition: "Refurbished",
+    status: "Certified Refurbished",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "Request Quotation",
   },
   {
     name: "Siemens SOMATOM Definition",
@@ -89,9 +97,11 @@ const PRODUCTS: Product[] = [
     category: "CT",
     image: solCt,
     specs: ["128 Slice", "Dual Source"],
-    availability: "Available",
-    condition: "Refurbished",
+    status: "Certified Refurbished",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "View Specifications",
   },
   {
     name: "GE Discovery MI PET/CT",
@@ -99,9 +109,11 @@ const PRODUCTS: Product[] = [
     category: "PET/CT",
     image: solPetct,
     specs: ["16 Slice", "Digital PET"],
-    availability: "Limited",
-    condition: "Refurbished",
+    status: "Factory Certified",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "Contact Product Specialist",
   },
   {
     name: "Siemens Mammomat Revelation",
@@ -109,9 +121,11 @@ const PRODUCTS: Product[] = [
     category: "Mammography",
     image: solMammo,
     specs: ["3D Tomosynthesis", "50µm"],
-    availability: "Available",
-    condition: "New",
+    status: "Brand New",
     warranty: "2-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "Download Brochure",
   },
   {
     name: "Philips Zenition 70 C-Arm",
@@ -119,9 +133,11 @@ const PRODUCTS: Product[] = [
     category: "C-Arms",
     image: solCarm,
     specs: ["Mobile", "Flat Detector"],
-    availability: "Available",
-    condition: "New",
+    status: "Brand New",
     warranty: "2-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "Request Quotation",
   },
   {
     name: "Canon Radrex Digital X-Ray",
@@ -129,9 +145,11 @@ const PRODUCTS: Product[] = [
     category: "X-Ray",
     image: solXray,
     specs: ["Digital", "Ceiling-Mounted"],
-    availability: "On Request",
-    condition: "Certified Pre-Owned",
+    status: "Factory Certified",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "Learn More",
   },
   {
     name: "GE Innova IGS 530 Cath Lab",
@@ -139,16 +157,18 @@ const PRODUCTS: Product[] = [
     category: "Cath Lab",
     image: beyondCathlab,
     specs: ["Single Plane", "Cardiac"],
-    availability: "Available",
-    condition: "Refurbished",
+    status: "Certified Refurbished",
     warranty: "1-Year Warranty",
+    installation: true,
+    training: true,
+    cta: "View Specifications",
   },
 ];
 
-const AVAILABILITY_STYLES: Record<Product["availability"], string> = {
-  Available: "bg-emerald-500/95 text-white",
-  Limited: "bg-amber-500/95 text-white",
-  "On Request": "bg-muted-foreground/90 text-white",
+const STATUS_STYLES: Record<Product["status"], string> = {
+  "Brand New": "bg-primary/10 text-primary ring-1 ring-primary/20",
+  "Certified Refurbished": "bg-secondary text-foreground/80 ring-1 ring-border",
+  "Factory Certified": "bg-secondary text-foreground/80 ring-1 ring-border",
 };
 
 function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
@@ -190,7 +210,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className={`group overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.28)] ${
+      className={`group overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.32)] ${
         view === "list" ? "sm:flex" : ""
       }`}
     >
@@ -199,19 +219,13 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+          className="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
         />
         <span
-          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-semibold ${AVAILABILITY_STYLES[product.availability]}`}
+          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-semibold ${STATUS_STYLES[product.status]}`}
         >
-          {product.availability}
+          {product.status}
         </span>
-        <button
-          aria-label="Save"
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-foreground/60 shadow-sm backdrop-blur transition-colors hover:text-primary"
-        >
-          <Heart className="h-4 w-4" />
-        </button>
         <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.brand}
         </span>
@@ -231,23 +245,44 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
             </span>
           ))}
         </div>
-        <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-emerald-600">
-          <ShieldCheck className="h-4 w-4" />
-          {product.warranty} · {product.condition}
+        <div className="mt-4 space-y-2 border-t border-border/60 pt-4 text-xs font-medium text-foreground/70">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-primary" />
+            {product.warranty} Included
+          </div>
+          {product.installation && (
+            <div className="flex items-center gap-2">
+              <Wrench className="h-4 w-4 text-primary" />
+              Installation &amp; Commissioning Available
+            </div>
+          )}
+          {product.training && (
+            <div className="flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-primary" />
+              Clinical Training &amp; Technical Support
+            </div>
+          )}
         </div>
-        <button className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
-          Explore System
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        <button className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
+          {product.cta}
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
     </motion.article>
   );
 }
 
+const SORT_OPTIONS = [
+  "Sort by System",
+  "Sort by Manufacturer",
+  "Sort by Clinical Specialty",
+  "Sort by Technology",
+] as const;
+
 export function PortfolioBrowser() {
   const [activeCat, setActiveCat] = useState<string>("All Categories");
   const [view, setView] = useState<"grid" | "list">("grid");
-  const [sort, setSort] = useState("Newest First");
+  const [sort, setSort] = useState<string>(SORT_OPTIONS[0]);
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
@@ -257,8 +292,12 @@ export function PortfolioBrowser() {
       list = list.filter((p) =>
         `${p.name} ${p.brand} ${p.category}`.toLowerCase().includes(query.toLowerCase()),
       );
-    if (sort === "Name (A–Z)")
+    if (sort === "Sort by System")
       list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    else if (sort === "Sort by Manufacturer")
+      list = [...list].sort((a, b) => a.brand.localeCompare(b.brand));
+    else if (sort === "Sort by Clinical Specialty" || sort === "Sort by Technology")
+      list = [...list].sort((a, b) => a.category.localeCompare(b.category));
     return list;
   }, [activeCat, query, sort]);
 
@@ -295,7 +334,7 @@ export function PortfolioBrowser() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   type="search"
-                  placeholder="Search by product name, brand, category..."
+                  placeholder="Search by system name, manufacturer, clinical category..."
                   className="h-14 w-full rounded-full bg-card pl-12 pr-4 text-sm text-foreground shadow-[0_8px_28px_-14px_rgba(0,0,0,0.2)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
                 />
               </div>
@@ -303,7 +342,7 @@ export function PortfolioBrowser() {
 
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Stat icon={Boxes} value="11" label="Categories" />
-              <Stat icon={Layers} value="310+" label="Available Systems" />
+              <Stat icon={Layers} value="1,500+" label="Systems Installed" />
               <div className="flex items-center gap-2.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <BadgeCheck className="h-5 w-5" />
@@ -320,26 +359,28 @@ export function PortfolioBrowser() {
 
       {/* CATEGORY NAV */}
       <section className="sticky top-[112px] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-[100rem] items-center gap-2 overflow-x-auto px-6 py-4 lg:px-10">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCat(cat)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                activeCat === cat
-                  ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
-                  : "border border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-primary"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
+          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCat(cat)}
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  activeCat === cat
+                    ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
+                    : "border border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
           <Link
             to="/categories"
-            className="ml-1 inline-flex shrink-0 items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
+            className="group inline-flex shrink-0 items-center gap-1.5 border-l border-border pl-4 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
           >
             View All Categories
-            <ChevronRight className="h-4 w-4" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
@@ -363,9 +404,6 @@ export function PortfolioBrowser() {
                 {FILTER_GROUPS.map((group) => (
                   <FilterAccordion key={group.title} group={group} />
                 ))}
-                <button className="mt-6 w-full rounded-full border border-primary/30 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
-                  Apply Filters
-                </button>
               </div>
             </div>
           </aside>
@@ -383,7 +421,7 @@ export function PortfolioBrowser() {
                   <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search within results"
+                    placeholder="Refine within results"
                     className="h-10 w-52 rounded-full border border-border bg-background pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-primary/30"
                   />
                 </div>
@@ -393,8 +431,9 @@ export function PortfolioBrowser() {
                     onChange={(e) => setSort(e.target.value)}
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
-                    <option>Newest First</option>
-                    <option>Name (A–Z)</option>
+                    {SORT_OPTIONS.map((o) => (
+                      <option key={o}>{o}</option>
+                    ))}
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 </div>
