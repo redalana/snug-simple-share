@@ -454,12 +454,14 @@ export function ExperienceAbuFarha() {
                 A Personal Invitation
               </span>
               <h3 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3rem]">
-                You're Personally Invited.
+                Visit Before You Invest.
               </h3>
               <p className="mt-6 max-w-xl text-[18px] leading-[1.75] text-muted-foreground">
-                Healthcare leaders, physicians and biomedical engineers are
-                invited to experience AbuFarha firsthand — and see how
-                comprehensive stroke programs are built, step by step.
+                We invite healthcare leaders, physicians and biomedical
+                engineers to experience firsthand how comprehensive stroke
+                programs are planned, engineered, implemented and supported
+                before making one of their hospital's most important technology
+                investments.
               </p>
 
               <p className="mt-10 text-[12px] font-bold uppercase tracking-[0.3em] text-ink/50">
@@ -480,22 +482,28 @@ export function ExperienceAbuFarha() {
                 ))}
               </ul>
 
-              <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+              <p className="mt-11 max-w-xl text-[13.5px] leading-relaxed text-muted-foreground/70">
+                Helping hospitals build comprehensive stroke programs across
+                Africa and the Middle East since 1999.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#contact"
-                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[15px] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[15px] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                 >
                   Schedule Your Clinical Visit
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
                 <a
                   href="#contact"
-                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-[15px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-[15px] font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
                 >
-                  Talk With Our Stroke Team
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  Talk With Our Stroke Program Team
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </div>
+
             </div>
           </div>
         </motion.div>
