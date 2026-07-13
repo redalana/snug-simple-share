@@ -97,7 +97,7 @@ export function HeroShowcase() {
               to="/products"
               className="group mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
             >
-              View System
+              View Details
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
