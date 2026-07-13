@@ -22,15 +22,15 @@ import {
   SearchX,
   X,
 } from "lucide-react";
-import heroCathlab from "@/assets/hero-cathlab.jpg";
-import solMri from "@/assets/sol-mri.jpg";
-import solCt from "@/assets/sol-ct.jpg";
-import solPetct from "@/assets/sol-petct.jpg";
-import solMammo from "@/assets/sol-mammo.jpg";
-import solCarm from "@/assets/sol-carm.jpg";
-import solXray from "@/assets/sol-xray.jpg";
-import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import { HeroShowcase } from "@/components/site/HeroShowcase";
+import {
+  PRIMARY_CATEGORIES,
+  ALL_MANUFACTURERS,
+  PRODUCTS,
+  productSlug,
+  type Product,
+} from "@/lib/products";
+
 
 /**
  * NOTE: All catalog data below is structured to be CMS-ready. Replace the
