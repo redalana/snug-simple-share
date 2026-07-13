@@ -527,7 +527,11 @@ export function PortfolioBrowser() {
   const brands = useMemo(() => {
     const counts = new Map<string, number>();
     for (const p of PRODUCTS) counts.set(p.brand, (counts.get(p.brand) ?? 0) + 1);
-    return [...counts.entries()].map(([name, count]) => ({ name, count }));
+    // Show the full manufacturer roster, ordered by system count then name.
+    const names = new Set<string>([...ALL_MANUFACTURERS, ...counts.keys()]);
+    return [...names]
+      .map((name) => ({ name, count: counts.get(name) ?? 0 }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
   }, []);
 
   return (
