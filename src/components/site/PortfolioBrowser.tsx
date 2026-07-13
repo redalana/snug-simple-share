@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
@@ -20,6 +20,7 @@ import {
   Wrench,
   GraduationCap,
   SearchX,
+  X,
 } from "lucide-react";
 import heroCathlab from "@/assets/hero-cathlab.jpg";
 import solMri from "@/assets/sol-mri.jpg";
@@ -33,87 +34,22 @@ import { HeroShowcase } from "@/components/site/HeroShowcase";
 
 /**
  * NOTE: All catalog data below is structured to be CMS-ready. Replace the
- * static arrays with a loader/query when the CMS is connected — the UI reads
- * everything dynamically (categories, brands, counts, pagination).
+ * static PRODUCTS array with a loader/query when the CMS/database is connected —
+ * the UI derives everything dynamically from it (categories, manufacturers,
+ * conditions, live filter counts, pagination). Nothing in the filters or counts
+ * is hardcoded; they are all computed from the product data.
  */
 
-// Primary categories shown as chips; the rest live on the /categories page.
+// Primary categories shown as chips.
 const PRIMARY_CATEGORIES = [
   "Cath Lab",
   "MRI",
   "CT",
   "PET/CT",
   "X-Ray",
-  "Ultrasound",
-  "Women Healthcare",
   "Mammography",
-  "Operating Room",
   "C-Arms",
 ] as const;
-
-// Full catalog taxonomy — single source of truth. In production these are
-// loaded from the CMS/database; the filters below derive from them, so adding
-// a new category or manufacturer automatically surfaces it in the UI.
-const ALL_CATEGORIES = [
-  "Cath Lab Systems",
-  "MRI Scanners",
-  "CT Scanners",
-  "PET/CT Scanners",
-  "C-Arms",
-  "X-Ray Systems",
-  "Mammography",
-  "Ultrasound",
-  "Operating Room",
-  "Women's Healthcare",
-  "Bone Densitometers (DEXA)",
-  "Lithotripsy Systems",
-  "Endoscopy",
-  "Urology",
-  "Cardiology",
-  "Neurology",
-  "Radiology",
-  "Surgical Equipment",
-] as const;
-
-// Manufacturers — loaded dynamically from the CMS/database in production.
-const ALL_MANUFACTURERS = [
-  "Philips",
-  "Siemens Healthineers",
-  "Canon Medical",
-  "GE HealthCare",
-  "Hitachi",
-  "Toshiba",
-  "Mindray",
-  "Richard Wolf",
-  "Karl Storz",
-  "Boston Scientific",
-  "Abbott",
-  "Medtronic",
-  "Shimadzu",
-  "Dräger",
-  "Esaote",
-  "Samsung",
-  "Fujifilm",
-  "Olympus",
-] as const;
-
-const FILTER_GROUPS = [
-  { title: "Category", options: [...ALL_CATEGORIES] },
-  { title: "Manufacturer", options: [...ALL_MANUFACTURERS] },
-  { title: "Condition", options: ["Brand New", "Certified Refurbished", "Factory Certified"] },
-  { title: "Clinical Specialty", options: ["Interventional", "Diagnostic Imaging", "Women Healthcare", "Surgical"] },
-  { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
-  { title: "Year", options: ["2024", "2023", "2022", "2021 or earlier"] },
-  { title: "System Type", options: ["Fixed", "Mobile", "Ceiling-Mounted", "Floor-Mounted"] },
-  {
-    title: "Availability of Services",
-    options: ["Installation", "Clinical Training", "Technical Support", "Warranty"],
-  },
-];
-
-// Manufacturer cards in the "Popular Manufacturers" section — same dynamic source.
-const BRANDS = ALL_MANUFACTURERS;
-
 
 type Product = {
   name: string;
@@ -256,36 +192,80 @@ const SORT_OPTIONS = [
   "System Name",
 ] as const;
 
-const PER_PAGE_OPTIONS = [12, 24, 36, 48] as const;
+const PER_PAGE_OPTIONS = [12, 24, 48, 96] as const;
+const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 
-function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
-  const [open, setOpen] = useState(false);
+// Filter facet definitions — the values + counts are derived dynamically from
+// the catalog at render time, so adding a product surfaces its category,
+// manufacturer or condition automatically.
+type FacetKey = "category" | "manufacturer" | "condition";
+const FACETS: { key: FacetKey; title: string; field: (p: Product) => string }[] = [
+  { key: "category", title: "Category", field: (p) => p.category },
+  { key: "manufacturer", title: "Manufacturer", field: (p) => p.brand },
+  { key: "condition", title: "Condition", field: (p) => p.status },
+];
+
+const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string> = {
+  category: (p) => p.category,
+  manufacturer: (p) => p.brand,
+  condition: (p) => p.status,
+};
+
+type Selected = Record<FacetKey, string[]>;
+const EMPTY_SELECTED: Selected = { category: [], manufacturer: [], condition: [] };
+
+function FilterAccordion({
+  title,
+  options,
+  selected,
+  onToggle,
+  defaultOpen,
+}: {
+  title: string;
+  options: { value: string; count: number }[];
+  selected: string[];
+  onToggle: (value: string) => void;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(!!defaultOpen);
   const [showAll, setShowAll] = useState(false);
   const VISIBLE = 8;
-  const hasMore = group.options.length > VISIBLE;
-  const visibleOptions = open && (showAll || !hasMore) ? group.options : group.options.slice(0, VISIBLE);
+  const hasMore = options.length > VISIBLE;
+  const visibleOptions = showAll || !hasMore ? options : options.slice(0, VISIBLE);
   return (
-    <div className="border-b border-border/70 last:border-0">
+    <div className="border-b border-border/60 last:border-0">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between py-4 text-left text-sm font-semibold text-foreground/85 transition-colors hover:text-primary"
+        className="flex w-full items-center justify-between py-5 text-left text-sm font-semibold text-foreground/90 transition-colors hover:text-primary"
       >
-        {group.title}
+        <span className="flex items-center gap-2">
+          {title}
+          {selected.length > 0 && (
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-bold text-primary-foreground">
+              {selected.length}
+            </span>
+          )}
+        </span>
         <ChevronDown
-          className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
-      {open && (
-        <div className="pb-4">
-          <ul className="space-y-3">
+      <div
+        className={`grid transition-all duration-300 ease-out ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <ul className="space-y-3.5 pb-5">
             {visibleOptions.map((opt) => (
-              <li key={opt}>
+              <li key={opt.value}>
                 <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 rounded border-border text-primary accent-primary"
+                    checked={selected.includes(opt.value)}
+                    onChange={() => onToggle(opt.value)}
+                    className="h-[18px] w-[18px] rounded-[5px] border-border text-primary accent-primary"
                   />
-                  {opt}
+                  <span className="flex-1">{opt.value}</span>
+                  <span className="text-xs font-medium text-muted-foreground/70">({opt.count})</span>
                 </label>
               </li>
             ))}
@@ -293,16 +273,15 @@ function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
           {hasMore && (
             <button
               onClick={() => setShowAll((v) => !v)}
-              className="mt-3 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
+              className="mb-5 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
             >
-              {showAll ? "Show Less" : `Show More (${group.options.length - VISIBLE})`}
+              {showAll ? "Show Less" : `Show More (${options.length - VISIBLE})`}
             </button>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
-
 }
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
@@ -312,17 +291,23 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className={`group overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.32)] ${
-        view === "list" ? "sm:flex" : ""
+      className={`group flex overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.32)] ${
+        view === "list" ? "flex-col sm:flex-row" : "flex-col"
       }`}
     >
-      <div className={`relative overflow-hidden ${view === "list" ? "sm:w-72 sm:shrink-0" : ""}`}>
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
-        />
+      <div
+        className={`relative shrink-0 overflow-hidden bg-secondary ${
+          view === "list" ? "sm:w-72" : ""
+        }`}
+      >
+        <div className={view === "list" ? "aspect-[4/3] sm:h-full" : "aspect-[4/3]"}>
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+          />
+        </div>
         <span
           className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-semibold ${STATUS_STYLES[product.status]}`}
         >
@@ -366,7 +351,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           )}
         </div>
         <button className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
-          View System
+          View Details
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
@@ -392,30 +377,96 @@ export function PortfolioBrowser() {
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sort, setSort] = useState<string>(SORT_OPTIONS[0]);
   const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState<Selected>(EMPTY_SELECTED);
   const [perPage, setPerPage] = useState<number>(PER_PAGE_OPTIONS[0]);
   const [page, setPage] = useState(1);
 
-  const filtered = useMemo(() => {
+  // Restore & remember the user's per-page selection (client-only to avoid SSR mismatch).
+  useEffect(() => {
+    const saved = Number(window.localStorage.getItem(PER_PAGE_STORAGE_KEY));
+    if (PER_PAGE_OPTIONS.includes(saved as (typeof PER_PAGE_OPTIONS)[number])) setPerPage(saved);
+  }, []);
+
+  const resetPage = () => setPage(1);
+
+  const changePerPage = (n: number) => {
+    setPerPage(n);
+    window.localStorage.setItem(PER_PAGE_STORAGE_KEY, String(n));
+    resetPage();
+  };
+
+  const toggleFilter = (key: FacetKey, value: string) => {
+    setSelected((prev) => {
+      const has = prev[key].includes(value);
+      return {
+        ...prev,
+        [key]: has ? prev[key].filter((v) => v !== value) : [...prev[key], value],
+      };
+    });
+    resetPage();
+  };
+
+  const clearAll = () => {
+    setSelected(EMPTY_SELECTED);
+    setQuery("");
+    setActiveCat("All Categories");
+    resetPage();
+  };
+
+  // Base list: category pill + free-text search (facets applied on top).
+  const baseList = useMemo(() => {
     let list = PRODUCTS;
     if (activeCat !== "All Categories") list = list.filter((p) => p.category === activeCat);
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter((p) =>
-        `${p.name} ${p.brand} ${p.category} ${p.keywords}`.toLowerCase().includes(q),
+        `${p.name} ${p.brand} ${p.category} ${p.keywords} ${p.status}`.toLowerCase().includes(q),
       );
     }
+    return list;
+  }, [activeCat, query]);
+
+  const productPassesFacets = (p: Product, ignore?: FacetKey) => {
+    for (const { key } of FACETS) {
+      if (key === ignore) continue;
+      const vals = selected[key];
+      if (vals.length && !vals.includes(FIELD_BY_KEY[key](p))) return false;
+    }
+    return true;
+  };
+
+  // Facet options with LIVE counts (count reflects all other active filters).
+  const facetGroups = useMemo(() => {
+    return FACETS.map(({ key, title, field }) => {
+      const counts = new Map<string, number>();
+      for (const p of baseList) {
+        if (!productPassesFacets(p, key)) continue;
+        const v = field(p);
+        counts.set(v, (counts.get(v) ?? 0) + 1);
+      }
+      // Ensure currently-selected values remain visible even at count 0.
+      for (const v of selected[key]) if (!counts.has(v)) counts.set(v, 0);
+      const options = [...counts.entries()]
+        .map(([value, count]) => ({ value, count }))
+        .sort((a, b) => a.value.localeCompare(b.value));
+      return { key, title, options };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseList, selected]);
+
+  const filtered = useMemo(() => {
+    let list = baseList.filter((p) => productPassesFacets(p));
     if (sort === "Newest" || sort === "Recently Added")
       list = [...list].sort((a, b) => b.addedOrder - a.addedOrder);
     else if (sort === "Manufacturer A–Z")
       list = [...list].sort((a, b) => a.brand.localeCompare(b.brand));
     else if (sort === "Manufacturer Z–A")
       list = [...list].sort((a, b) => b.brand.localeCompare(a.brand));
-    else if (sort === "Category")
-      list = [...list].sort((a, b) => a.category.localeCompare(b.category));
-    else if (sort === "System Name")
-      list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    else if (sort === "Category") list = [...list].sort((a, b) => a.category.localeCompare(b.category));
+    else if (sort === "System Name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [activeCat, query, sort]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseList, selected, sort]);
 
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
@@ -425,8 +476,24 @@ export function PortfolioBrowser() {
   const rangeStart = total === 0 ? 0 : startIdx + 1;
   const rangeEnd = Math.min(startIdx + perPage, total);
 
-  // Reset to first page whenever the result set changes.
-  const resetPage = () => setPage(1);
+  // Active chips (facets + category pill + search).
+  const activeChips: { label: string; onRemove: () => void }[] = [
+    ...(activeCat !== "All Categories"
+      ? [{ label: activeCat, onRemove: () => { setActiveCat("All Categories"); resetPage(); } }]
+      : []),
+    ...FACETS.flatMap(({ key }) =>
+      selected[key].map((v) => ({ label: v, onRemove: () => toggleFilter(key, v) })),
+    ),
+    ...(query.trim()
+      ? [{ label: `“${query.trim()}”`, onRemove: () => { setQuery(""); resetPage(); } }]
+      : []),
+  ];
+
+  const brands = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of PRODUCTS) counts.set(p.brand, (counts.get(p.brand) ?? 0) + 1);
+    return [...counts.entries()].map(([name, count]) => ({ name, count }));
+  }, []);
 
   return (
     <>
@@ -478,7 +545,7 @@ export function PortfolioBrowser() {
 
               {/* SEARCH — the primary action */}
               <div className="mt-8">
-                <div className="relative">
+                <div className="group/search relative">
                   <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
                   <input
                     value={query}
@@ -487,8 +554,8 @@ export function PortfolioBrowser() {
                       resetPage();
                     }}
                     type="search"
-                    placeholder="Search by system name, manufacturer, brand, technology or clinical application..."
-                    className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-20px_rgba(15,23,42,0.28)] ring-1 ring-black/[0.04] outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
+                    placeholder="Search by system name, manufacturer, model, technology, or keyword..."
+                    className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
                   />
                 </div>
               </div>
@@ -528,10 +595,10 @@ export function PortfolioBrowser() {
                   setActiveCat(cat);
                   resetPage();
                 }}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
                   activeCat === cat
-                    ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
-                    : "border border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-primary"
+                    ? "bg-primary text-primary-foreground shadow-[0_10px_24px_-10px_var(--primary)] ring-1 ring-primary"
+                    : "border border-border bg-card text-foreground/75 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_10px_24px_-16px_var(--primary)]"
                 }`}
               >
                 {cat}
@@ -540,7 +607,6 @@ export function PortfolioBrowser() {
           </div>
         </div>
       </section>
-
 
       {/* POPULAR MANUFACTURERS */}
       <section className="border-b border-border/60 bg-secondary/30">
@@ -555,18 +621,26 @@ export function PortfolioBrowser() {
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
-            {BRANDS.map((brand) => (
-              <button
-                key={brand}
-                onClick={() => {
-                  setQuery(brand);
-                  resetPage();
-                }}
-                className="flex h-20 items-center justify-center rounded-2xl border border-border/70 bg-card px-4 text-center font-display text-sm font-bold tracking-tight text-foreground/75 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
-              >
-                {brand}
-              </button>
-            ))}
+            {brands.map((brand) => {
+              const active = selected.manufacturer.includes(brand.name);
+              return (
+                <button
+                  key={brand.name}
+                  onClick={() => toggleFilter("manufacturer", brand.name)}
+                  aria-pressed={active}
+                  className={`flex h-20 flex-col items-center justify-center rounded-2xl border bg-card px-4 text-center font-display text-sm font-bold tracking-tight shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_-22px_rgba(0,0,0,0.35)] ${
+                    active
+                      ? "border-primary text-primary ring-1 ring-primary/40"
+                      : "border-border/70 text-foreground/75 hover:border-primary/60 hover:text-primary"
+                  }`}
+                >
+                  <span>{brand.name}</span>
+                  <span className="mt-1 text-[11px] font-medium text-muted-foreground/70">
+                    {brand.count} {brand.count === 1 ? "system" : "systems"}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -578,17 +652,29 @@ export function PortfolioBrowser() {
           <aside className="mb-8 lg:mb-0">
             <div className="lg:sticky lg:top-[188px]">
               <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
-                <div className="mb-3 flex items-center justify-between">
+                <div className="mb-1 flex items-center justify-between">
                   <div className="flex items-center gap-2 font-display font-bold text-foreground">
                     <SlidersHorizontal className="h-4 w-4 text-primary" />
                     Filters
                   </div>
-                  <button className="text-xs font-semibold text-primary hover:text-primary-dark">
-                    Clear All
-                  </button>
+                  {activeChips.length > 0 && (
+                    <button
+                      onClick={clearAll}
+                      className="text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
+                    >
+                      Clear All
+                    </button>
+                  )}
                 </div>
-                {FILTER_GROUPS.map((group) => (
-                  <FilterAccordion key={group.title} group={group} />
+                {facetGroups.map((group, i) => (
+                  <FilterAccordion
+                    key={group.key}
+                    title={group.title}
+                    options={group.options}
+                    selected={selected[group.key]}
+                    onToggle={(v) => toggleFilter(group.key, v)}
+                    defaultOpen={i < 2}
+                  />
                 ))}
               </div>
             </div>
@@ -597,7 +683,7 @@ export function PortfolioBrowser() {
           {/* CONTENT */}
           <div>
             {/* TOOLBAR */}
-            <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-border/70 bg-card p-4 shadow-[0_10px_30px_-22px_rgba(0,0,0,0.18)] sm:flex-row sm:items-center sm:justify-between">
+            <div className="mb-6 flex flex-col gap-4 rounded-2xl border border-border/70 bg-card p-4 shadow-[0_10px_30px_-22px_rgba(0,0,0,0.18)] sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
                 Showing{" "}
                 <span className="font-bold text-foreground">
@@ -606,18 +692,6 @@ export function PortfolioBrowser() {
                 of <span className="font-bold text-foreground">{total}</span> Medical Systems
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <div className="relative">
-                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <input
-                    value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      resetPage();
-                    }}
-                    placeholder="Refine within results"
-                    className="h-10 w-52 rounded-full border border-border bg-background pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-primary/30"
-                  />
-                </div>
                 <div className="relative">
                   <select
                     value={sort}
@@ -636,10 +710,7 @@ export function PortfolioBrowser() {
                 <div className="relative">
                   <select
                     value={perPage}
-                    onChange={(e) => {
-                      setPerPage(Number(e.target.value));
-                      resetPage();
-                    }}
+                    onChange={(e) => changePerPage(Number(e.target.value))}
                     aria-label="Systems per page"
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
@@ -674,6 +745,31 @@ export function PortfolioBrowser() {
               </div>
             </div>
 
+            {/* ACTIVE FILTER CHIPS */}
+            {activeChips.length > 0 && (
+              <div className="mb-8 flex flex-wrap items-center gap-2">
+                <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Active filters:
+                </span>
+                {activeChips.map((chip, i) => (
+                  <button
+                    key={`${chip.label}-${i}`}
+                    onClick={chip.onRemove}
+                    className="group inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/5 py-1.5 pl-3 pr-2 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {chip.label}
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                ))}
+                <button
+                  onClick={clearAll}
+                  className="ml-1 text-xs font-semibold text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            )}
+
             {/* GRID */}
             {total === 0 ? (
               <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border px-6 py-20 text-center">
@@ -687,11 +783,7 @@ export function PortfolioBrowser() {
                   Try adjusting your search or filter options to explore more medical technologies.
                 </p>
                 <button
-                  onClick={() => {
-                    setQuery("");
-                    setActiveCat("All Categories");
-                    resetPage();
-                  }}
+                  onClick={clearAll}
                   className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground"
                 >
                   Reset filters
