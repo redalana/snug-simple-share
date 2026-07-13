@@ -14,7 +14,7 @@ const NAV: NavItem[] = [
   { label: "Home", href: "/" },
   {
     label: "All Products",
-    href: "#solutions",
+    href: "/products",
     dropdown: [
       { label: "Cardiac Care", href: "#solutions" },
       { label: "Imaging & Radiology", href: "#solutions" },

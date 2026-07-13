@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ProductsRouteImport } from './routes/products'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
+import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 
@@ -19,12 +21,22 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HospitalReadinessAssessmentRoute =
   HospitalReadinessAssessmentRouteImport.update({
     id: '/hospital-readiness-assessment',
     path: '/hospital-readiness-assessment',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -38,20 +50,26 @@ const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/categories': typeof CategoriesRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/products': typeof ProductsRoute
   '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
@@ -59,26 +77,34 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
+    | '/products'
     | '/projects'
     | '/programs/stroke-care'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
+    | '/products'
     | '/projects'
     | '/programs/stroke-care'
   id:
     | '__root__'
     | '/'
+    | '/categories'
     | '/hospital-readiness-assessment'
+    | '/products'
     | '/projects'
     | '/programs/stroke-care'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesRoute: typeof CategoriesRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
+  ProductsRoute: typeof ProductsRoute
   ProjectsRoute: typeof ProjectsRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
 }
@@ -92,11 +118,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hospital-readiness-assessment': {
       id: '/hospital-readiness-assessment'
       path: '/hospital-readiness-assessment'
       fullPath: '/hospital-readiness-assessment'
       preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -118,7 +158,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesRoute: CategoriesRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
+  ProductsRoute: ProductsRoute,
   ProjectsRoute: ProjectsRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
 }
