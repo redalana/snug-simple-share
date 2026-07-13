@@ -8,6 +8,7 @@ import {
   List,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   ArrowRight,
   Boxes,
   Layers,
@@ -18,6 +19,7 @@ import {
   Mail,
   Wrench,
   GraduationCap,
+  SearchX,
 } from "lucide-react";
 import heroCathlab from "@/assets/hero-cathlab.jpg";
 import solMri from "@/assets/sol-mri.jpg";
@@ -28,18 +30,24 @@ import solCarm from "@/assets/sol-carm.jpg";
 import solXray from "@/assets/sol-xray.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 
-const CATEGORIES = [
-  "All Categories",
+/**
+ * NOTE: All catalog data below is structured to be CMS-ready. Replace the
+ * static arrays with a loader/query when the CMS is connected — the UI reads
+ * everything dynamically (categories, brands, counts, pagination).
+ */
+
+// Primary categories shown as chips; the rest live on the /categories page.
+const PRIMARY_CATEGORIES = [
   "Cath Lab",
   "MRI",
   "CT",
   "PET/CT",
-  "Women Healthcare",
-  "Ultrasound",
   "X-Ray",
-  "C-Arms",
+  "Ultrasound",
+  "Women Healthcare",
   "Mammography",
   "Operating Room",
+  "C-Arms",
 ] as const;
 
 const FILTER_GROUPS = [
@@ -56,6 +64,22 @@ const FILTER_GROUPS = [
   },
 ];
 
+// Manufacturers — loaded dynamically in production from the CMS.
+const BRANDS = [
+  "Philips",
+  "Siemens Healthineers",
+  "Canon Medical",
+  "GE HealthCare",
+  "Hitachi",
+  "Mindray",
+  "Toshiba",
+  "Karl Storz",
+  "Abbott",
+  "Boston Scientific",
+  "Medtronic",
+  "Dräger",
+] as const;
+
 type Product = {
   name: string;
   brand: string;
@@ -67,7 +91,10 @@ type Product = {
   warranty: string;
   installation: boolean;
   training: boolean;
-  cta: string;
+  /** Extra searchable terms: technology + clinical keywords. */
+  keywords: string;
+  /** Monotonic order used for "Newest" / "Recently Added" sorting. */
+  addedOrder: number;
 };
 
 const PRODUCTS: Product[] = [
@@ -81,7 +108,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "View Specifications",
+    keywords: "neuro stroke oncology imaging magnetic resonance diagnostic",
+    addedOrder: 6,
   },
   {
     name: "Philips Allura Xper FD20",
@@ -93,7 +121,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "Request Quotation",
+    keywords: "cardiology interventional angiography neurovascular catheterization",
+    addedOrder: 8,
   },
   {
     name: "Siemens SOMATOM Definition",
@@ -105,7 +134,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "View Specifications",
+    keywords: "computed tomography stroke cardiac oncology imaging diagnostic",
+    addedOrder: 5,
   },
   {
     name: "GE Discovery MI PET/CT",
@@ -117,7 +147,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "Contact Product Specialist",
+    keywords: "pet oncology nuclear molecular imaging cancer diagnostic",
+    addedOrder: 7,
   },
   {
     name: "Siemens Mammomat Revelation",
@@ -129,7 +160,8 @@ const PRODUCTS: Product[] = [
     warranty: "2-Year Warranty",
     installation: true,
     training: true,
-    cta: "Download Brochure",
+    keywords: "women health breast screening tomosynthesis mammography diagnostic",
+    addedOrder: 4,
   },
   {
     name: "Philips Zenition 70 C-Arm",
@@ -141,7 +173,8 @@ const PRODUCTS: Product[] = [
     warranty: "2-Year Warranty",
     installation: true,
     training: true,
-    cta: "Request Quotation",
+    keywords: "surgical mobile fluoroscopy orthopedic interventional operating room",
+    addedOrder: 3,
   },
   {
     name: "Canon Radrex Digital X-Ray",
@@ -153,7 +186,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "Learn More",
+    keywords: "radiography digital imaging chest bone diagnostic",
+    addedOrder: 2,
   },
   {
     name: "GE Innova IGS 530 Cath Lab",
@@ -165,7 +199,8 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
-    cta: "View Specifications",
+    keywords: "cardiology cardiac interventional angiography catheterization",
+    addedOrder: 1,
   },
 ];
 
@@ -175,13 +210,26 @@ const STATUS_STYLES: Record<Product["status"], string> = {
   "Factory Certified": "bg-secondary text-foreground/80 ring-1 ring-border",
 };
 
+const CATEGORIES = ["All Categories", ...PRIMARY_CATEGORIES] as const;
+
+const SORT_OPTIONS = [
+  "Newest",
+  "Recently Added",
+  "Manufacturer A–Z",
+  "Manufacturer Z–A",
+  "Category",
+  "System Name",
+] as const;
+
+const PER_PAGE_OPTIONS = [12, 24, 36, 48] as const;
+
 function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-border/70 last:border-0">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between py-3.5 text-left text-sm font-semibold text-foreground/85 transition-colors hover:text-primary"
+        className="flex w-full items-center justify-between py-4 text-left text-sm font-semibold text-foreground/85 transition-colors hover:text-primary"
       >
         {group.title}
         <ChevronDown
@@ -189,10 +237,10 @@ function FilterAccordion({ group }: { group: (typeof FILTER_GROUPS)[number] }) {
         />
       </button>
       {open && (
-        <ul className="space-y-2.5 pb-4">
+        <ul className="space-y-3 pb-4">
           {group.options.map((opt) => (
             <li key={opt}>
-              <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+              <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
                 <input
                   type="checkbox"
                   className="h-4 w-4 rounded border-border text-primary accent-primary"
@@ -276,34 +324,59 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
   );
 }
 
-const SORT_OPTIONS = [
-  "Sort by System",
-  "Sort by Manufacturer",
-  "Sort by Clinical Specialty",
-  "Sort by Technology",
-] as const;
+/** Builds a compact page list with ellipses: 1 … 4 5 6 … 10 */
+function buildPageList(current: number, total: number): (number | "…")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages: (number | "…")[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  if (start > 2) pages.push("…");
+  for (let i = start; i <= end; i++) pages.push(i);
+  if (end < total - 1) pages.push("…");
+  pages.push(total);
+  return pages;
+}
 
 export function PortfolioBrowser() {
   const [activeCat, setActiveCat] = useState<string>("All Categories");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sort, setSort] = useState<string>(SORT_OPTIONS[0]);
   const [query, setQuery] = useState("");
+  const [perPage, setPerPage] = useState<number>(PER_PAGE_OPTIONS[0]);
+  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     let list = PRODUCTS;
     if (activeCat !== "All Categories") list = list.filter((p) => p.category === activeCat);
-    if (query.trim())
+    if (query.trim()) {
+      const q = query.toLowerCase();
       list = list.filter((p) =>
-        `${p.name} ${p.brand} ${p.category}`.toLowerCase().includes(query.toLowerCase()),
+        `${p.name} ${p.brand} ${p.category} ${p.keywords}`.toLowerCase().includes(q),
       );
-    if (sort === "Sort by System")
-      list = [...list].sort((a, b) => a.name.localeCompare(b.name));
-    else if (sort === "Sort by Manufacturer")
+    }
+    if (sort === "Newest" || sort === "Recently Added")
+      list = [...list].sort((a, b) => b.addedOrder - a.addedOrder);
+    else if (sort === "Manufacturer A–Z")
       list = [...list].sort((a, b) => a.brand.localeCompare(b.brand));
-    else if (sort === "Sort by Clinical Specialty" || sort === "Sort by Technology")
+    else if (sort === "Manufacturer Z–A")
+      list = [...list].sort((a, b) => b.brand.localeCompare(a.brand));
+    else if (sort === "Category")
       list = [...list].sort((a, b) => a.category.localeCompare(b.category));
+    else if (sort === "System Name")
+      list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
   }, [activeCat, query, sort]);
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+  const safePage = Math.min(page, totalPages);
+  const startIdx = (safePage - 1) * perPage;
+  const pageItems = filtered.slice(startIdx, startIdx + perPage);
+  const rangeStart = total === 0 ? 0 : startIdx + 1;
+  const rangeEnd = Math.min(startIdx + perPage, total);
+
+  // Reset to first page whenever the result set changes.
+  const resetPage = () => setPage(1);
 
   return (
     <>
@@ -326,6 +399,21 @@ export function PortfolioBrowser() {
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl"
         />
         <div className="relative mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-16">
+          {/* BREADCRUMB */}
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
+              <li>
+                <Link to="/" className="transition-colors hover:text-primary">
+                  Home
+                </Link>
+              </li>
+              <ChevronRight className="h-4 w-4 text-muted-foreground/60" />
+              <li className="font-semibold text-foreground" aria-current="page">
+                All Medical Systems
+              </li>
+            </ol>
+          </nav>
+
           <div className="max-w-3xl">
             <span className="inline-block h-1 w-12 rounded-full bg-primary" />
             <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
@@ -342,9 +430,12 @@ export function PortfolioBrowser() {
                 <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
                 <input
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    resetPage();
+                  }}
                   type="search"
-                  placeholder="Search by system name, manufacturer, technology or clinical specialty..."
+                  placeholder="Search by system, manufacturer, technology or clinical need — e.g. MRI, stroke, Philips, cardiology…"
                   className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-20px_rgba(15,23,42,0.28)] ring-1 ring-black/[0.04] outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/40"
                 />
               </div>
@@ -375,7 +466,10 @@ export function PortfolioBrowser() {
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCat(cat)}
+                onClick={() => {
+                  setActiveCat(cat);
+                  resetPage();
+                }}
                 className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   activeCat === cat
                     ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
@@ -396,14 +490,58 @@ export function PortfolioBrowser() {
         </div>
       </section>
 
+      {/* POPULAR MANUFACTURERS */}
+      <section className="border-b border-border/60 bg-secondary/30">
+        <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="font-display text-xl font-bold tracking-tight text-foreground">
+                Popular Manufacturers
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Certified partners and leading global medical technology brands.
+              </p>
+            </div>
+            <Link
+              to="/categories"
+              className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:inline-flex"
+            >
+              View All Brands
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
+            {BRANDS.map((brand) => (
+              <button
+                key={brand}
+                onClick={() => {
+                  setQuery(brand);
+                  resetPage();
+                }}
+                className="flex h-20 items-center justify-center rounded-2xl border border-border/70 bg-card px-4 text-center font-display text-sm font-bold tracking-tight text-foreground/75 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
+              >
+                {brand}
+              </button>
+            ))}
+          </div>
+          <Link
+            to="/categories"
+            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark sm:hidden"
+          >
+            View All Brands
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </section>
+
       {/* MAIN */}
       <section className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-16">
-        <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-10">
+        <div className="lg:grid lg:grid-cols-[320px_1fr] lg:gap-10">
           {/* FILTERS */}
           <aside className="mb-8 lg:mb-0">
             <div className="lg:sticky lg:top-[188px]">
-              <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
-                <div className="mb-2 flex items-center justify-between">
+              <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
+                <div className="mb-3 flex items-center justify-between">
                   <div className="flex items-center gap-2 font-display font-bold text-foreground">
                     <SlidersHorizontal className="h-4 w-4 text-primary" />
                     Filters
@@ -424,14 +562,21 @@ export function PortfolioBrowser() {
             {/* TOOLBAR */}
             <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-border/70 bg-card p-4 shadow-[0_10px_30px_-22px_rgba(0,0,0,0.18)] sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
-                Showing <span className="font-bold text-foreground">{filtered.length}</span> systems
+                Showing{" "}
+                <span className="font-bold text-foreground">
+                  {rangeStart}–{rangeEnd}
+                </span>{" "}
+                of <span className="font-bold text-foreground">{total}</span> Medical Systems
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <div className="relative">
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <input
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      resetPage();
+                    }}
                     placeholder="Refine within results"
                     className="h-10 w-52 rounded-full border border-border bg-background pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-primary/30"
                   />
@@ -439,11 +584,32 @@ export function PortfolioBrowser() {
                 <div className="relative">
                   <select
                     value={sort}
-                    onChange={(e) => setSort(e.target.value)}
+                    onChange={(e) => {
+                      setSort(e.target.value);
+                      resetPage();
+                    }}
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
                     {SORT_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                </div>
+                <div className="relative">
+                  <select
+                    value={perPage}
+                    onChange={(e) => {
+                      setPerPage(Number(e.target.value));
+                      resetPage();
+                    }}
+                    aria-label="Systems per page"
+                    className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
+                  >
+                    {PER_PAGE_OPTIONS.map((n) => (
+                      <option key={n} value={n}>
+                        {n} / page
+                      </option>
                     ))}
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -472,22 +638,97 @@ export function PortfolioBrowser() {
             </div>
 
             {/* GRID */}
-            {filtered.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border p-16 text-center text-muted-foreground">
-                No systems match your filters.
+            {total === 0 ? (
+              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border px-6 py-20 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-primary">
+                  <SearchX className="h-7 w-7" />
+                </span>
+                <h3 className="mt-6 font-display text-xl font-bold text-foreground">
+                  No systems match your current filters.
+                </h3>
+                <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                  Try adjusting your search or filter options to explore more medical technologies.
+                </p>
+                <button
+                  onClick={() => {
+                    setQuery("");
+                    setActiveCat("All Categories");
+                    resetPage();
+                  }}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+                >
+                  Reset filters
+                </button>
               </div>
             ) : (
-              <div
-                className={
-                  view === "grid"
-                    ? "grid gap-6 sm:grid-cols-2 xl:grid-cols-3"
-                    : "flex flex-col gap-6"
-                }
-              >
-                {filtered.map((p) => (
-                  <ProductCard key={p.name} product={p} view={view} />
-                ))}
-              </div>
+              <>
+                <div
+                  className={
+                    view === "grid"
+                      ? "grid gap-6 sm:grid-cols-2 xl:grid-cols-3"
+                      : "flex flex-col gap-6"
+                  }
+                >
+                  {pageItems.map((p) => (
+                    <ProductCard key={p.name} product={p} view={view} />
+                  ))}
+                </div>
+
+                {/* PAGINATION */}
+                <nav
+                  aria-label="Pagination"
+                  className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row"
+                >
+                  <p className="text-sm text-muted-foreground">
+                    Showing{" "}
+                    <span className="font-bold text-foreground">
+                      {rangeStart}–{rangeEnd}
+                    </span>{" "}
+                    of <span className="font-bold text-foreground">{total}</span> Medical Systems
+                  </p>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={safePage === 1}
+                      className="inline-flex h-10 items-center gap-1 rounded-full border border-border bg-card px-4 text-sm font-semibold text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary disabled:pointer-events-none disabled:opacity-40"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                      Previous
+                    </button>
+                    {buildPageList(safePage, totalPages).map((p, i) =>
+                      p === "…" ? (
+                        <span
+                          key={`e${i}`}
+                          className="flex h-10 w-10 items-center justify-center text-sm text-muted-foreground"
+                        >
+                          …
+                        </span>
+                      ) : (
+                        <button
+                          key={p}
+                          onClick={() => setPage(p)}
+                          aria-current={p === safePage ? "page" : undefined}
+                          className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-colors ${
+                            p === safePage
+                              ? "bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_var(--primary)]"
+                              : "border border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-primary"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      ),
+                    )}
+                    <button
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={safePage === totalPages}
+                      className="inline-flex h-10 items-center gap-1 rounded-full border border-border bg-card px-4 text-sm font-semibold text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary disabled:pointer-events-none disabled:opacity-40"
+                    >
+                      Next
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </nav>
+              </>
             )}
           </div>
         </div>
