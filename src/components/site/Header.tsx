@@ -158,13 +158,13 @@ export function Header() {
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
         <div className="mx-auto flex h-[84px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="shrink-0 origin-left scale-[1.08]">
+          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.13]">
             <Logo />
           </Link>
 
           {/* Search — centered hero element of the header */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[420px] lg:w-[440px]">
+            <div className="w-[460px] lg:w-[480px]">
               <SearchField />
             </div>
           </div>
@@ -173,31 +173,31 @@ export function Header() {
           <div className="hidden shrink-0 items-center lg:flex">
             <LanguageSelector />
 
-            {/* Language → Social : 24px */}
-            <div className="ml-6 flex items-center gap-4">
+            {/* Language → Social : 28px */}
+            <div className="ml-7 flex items-center gap-[18px]">
               {SOCIALS.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className={`text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
+                  className={`text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
                 >
-                  <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </a>
               ))}
               <a
                 href="#"
                 aria-label="WhatsApp"
-                className="text-muted-foreground transition-all duration-[250ms] hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
+                className="text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
               >
-                <WhatsAppIcon className="h-[18px] w-[18px]" />
+                <WhatsAppIcon className="h-5 w-5" />
               </a>
             </div>
 
             {/* Social → Button : 28px */}
             <a
               href="#contact"
-              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
             </a>
