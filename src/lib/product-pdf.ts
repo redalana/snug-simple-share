@@ -9,22 +9,50 @@ const CONTACT = {
   location: "Amman, Jordan",
 };
 
-async function imageToDataUrl(url: string): Promise<{ data: string; format: string } | null> {
+/**
+ * Loads an image and cover-crops it to a fixed aspect ratio via canvas so the
+ * PDF renders images identically to the website (object-fit: cover), never
+ * stretched or distorted regardless of the uploaded dimensions.
+ */
+async function imageToDataUrl(
+  url: string,
+  aspect = 4 / 3,
+): Promise<{ data: string; format: string } | null> {
   try {
     const res = await fetch(url);
     const blob = await res.blob();
-    const format = blob.type.includes("png") ? "PNG" : "JPEG";
-    const data = await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-    return { data, format };
+    const bitmap = await createImageBitmap(blob);
+
+    // Compute cover-crop source rectangle.
+    const srcRatio = bitmap.width / bitmap.height;
+    let sx = 0;
+    let sy = 0;
+    let sw = bitmap.width;
+    let sh = bitmap.height;
+    if (srcRatio > aspect) {
+      sw = bitmap.height * aspect;
+      sx = (bitmap.width - sw) / 2;
+    } else {
+      sh = bitmap.width / aspect;
+      sy = (bitmap.height - sh) / 2;
+    }
+
+    const outW = 1200;
+    const outH = Math.round(outW / aspect);
+    const canvas = document.createElement("canvas");
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("no canvas context");
+    ctx.drawImage(bitmap, sx, sy, sw, sh, 0, 0, outW, outH);
+    bitmap.close();
+
+    return { data: canvas.toDataURL("image/jpeg", 0.92), format: "JPEG" };
   } catch {
     return null;
   }
 }
+
 
 /**
  * Generates a professional, printable PDF product profile from product data —
