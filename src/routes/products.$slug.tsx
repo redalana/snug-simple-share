@@ -2,7 +2,7 @@ import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProductDetail } from "@/components/site/ProductDetail";
-import { getProductBySlug, slugify } from "@/lib/products";
+import { getProductBySlug } from "@/lib/products";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
