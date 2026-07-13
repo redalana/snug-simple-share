@@ -58,8 +58,8 @@ const NAV: NavItem[] = [
 ];
 
 const SOCIALS = [
-  { label: "Facebook", href: "#", Icon: Facebook },
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
+  { label: "Facebook", href: "#", Icon: Facebook, hover: "hover:text-[#1877F2]" },
+  { label: "LinkedIn", href: "#", Icon: Linkedin, hover: "hover:text-[#0A66C2]" },
 ];
 
 const LANGUAGES = [
