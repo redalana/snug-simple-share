@@ -520,7 +520,7 @@ export function PortfolioBrowser() {
       {/* CATEGORY NAV */}
       <section className="sticky top-[112px] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
-          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
+          <div className="flex w-full flex-wrap items-center gap-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -538,15 +538,9 @@ export function PortfolioBrowser() {
               </button>
             ))}
           </div>
-          <Link
-            to="/categories"
-            className="group inline-flex shrink-0 items-center gap-1.5 border-l border-border pl-4 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-          >
-            View All Categories
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </div>
       </section>
+
 
       {/* POPULAR MANUFACTURERS */}
       <section className="border-b border-border/60 bg-secondary/30">
