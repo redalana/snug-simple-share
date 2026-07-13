@@ -40,50 +40,39 @@ import { HeroShowcase } from "@/components/site/HeroShowcase";
  * is hardcoded; they are all computed from the product data.
  */
 
-// Full medical-technology taxonomy shown as category chips. Category names
-// align with the `category` field on products so filtering stays functional;
-// additional clinical categories surface the full portfolio breadth.
+// STRICT category taxonomy — the exact set of categories that exist in the
+// AbuFarha Medical database. These names are the single source of truth for
+// the category chips, the Category filter, search and product assignment.
 const PRIMARY_CATEGORIES = [
-  "Cath Lab",
-  "MRI",
-  "CT",
-  "PET/CT",
+  "Cath Lab Systems",
+  "MRI Scanners",
+  "CT Scanners",
+  "PET/CT Scanners",
   "C-Arms",
-  "X-Ray",
+  "X-Ray Systems",
   "Mammography",
   "Ultrasound",
   "Women's Healthcare",
   "Operating Room",
   "Bone Densitometers (DEXA)",
-  "Lithotripsy",
-  "Endoscopy",
-  "Urology",
-  "Cardiology",
-  "Neurology",
-  "Radiology",
-  "Surgical Equipment",
+  "Lithotripsy Systems",
 ] as const;
 
-// Full manufacturer roster — leading global medical technology brands.
+// STRICT manufacturer roster — the exact set of manufacturers that exist in the
+// AbuFarha Medical database. Displayed verbatim; never add, remove or rename.
 const ALL_MANUFACTURERS = [
   "Philips",
-  "Siemens Healthineers",
-  "Canon Medical",
-  "GE HealthCare",
-  "Hitachi",
-  "Toshiba",
+  "Toshiba - Canon",
+  "Siemens",
   "Mindray",
+  "eSaote",
   "Richard Wolf",
-  "Karl Storz",
-  "Boston Scientific",
+  "Hitachi",
+  "GE",
+  "Shimadzu",
   "Abbott",
   "Medtronic",
-  "Shimadzu",
-  "Dräger",
-  "Olympus",
-  "Samsung",
-  "Esaote",
-  "Fujifilm",
+  "Boston Scientific",
 ] as const;
 
 type Product = {
