@@ -216,16 +216,16 @@ export function ContactForm() {
           </svg>
 
           <div className="relative">
-            <Eyebrow index="06">Request a Consultation</Eyebrow>
+            <Eyebrow index="07">Start the Conversation</Eyebrow>
             <h2 className="mt-6 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
-              Tell us who you are,
+              Let&apos;s discuss your hospital&apos;s
               <br />
-              <span className="text-primary">we&apos;ll tailor the rest.</span>
+              <span className="text-primary">next project.</span>
             </h2>
             <p className="mt-6 max-w-sm text-[15px] leading-[1.85] text-muted-foreground">
-              Whether you run a hospital, practice medicine, distribute equipment
-              or lead a government project — this form adapts to you. No generic
-              enquiries, just a focused conversation.
+              Tell us about your specialty, clinical objectives or upcoming
+              healthcare project, and our specialists will recommend the most
+              suitable solution.
             </p>
 
             {/* trust indicators */}
@@ -404,7 +404,7 @@ export function ContactForm() {
             transition={{ type: "spring", stiffness: 400, damping: 24 }}
             className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors duration-200 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 disabled:opacity-60"
           >
-            {submitting ? "Sending…" : "Talk to a Medical Equipment Expert"}
+            {submitting ? "Sending…" : "Request Project Consultation"}
             {submitting ? (
               <Send className="h-4 w-4 animate-pulse" />
             ) : (

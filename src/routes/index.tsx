@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 import { Solutions } from "@/components/site/Solutions";
+import { WhyAbuFarha } from "@/components/site/WhyAbuFarha";
 import { ExperienceAbuFarha } from "@/components/site/ExperienceAbuFarha";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { ReadinessAssessment } from "@/components/site/ReadinessAssessment";
@@ -25,7 +26,9 @@ function Index() {
         <BrandsMarquee />
         {/* What technologies do we supply? */}
         <Solutions />
-        {/* What makes AbuFarha different — experience the partnership firsthand */}
+        {/* Why do hospitals choose AbuFarha? */}
+        <WhyAbuFarha />
+        {/* Clinical solutions preview — comprehensive stroke programs */}
         <ExperienceAbuFarha />
         {/* Where do we operate? */}
         <GlobalPresence />
