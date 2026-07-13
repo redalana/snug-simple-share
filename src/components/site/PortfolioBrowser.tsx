@@ -342,21 +342,74 @@ const SORT_OPTIONS = [
 const PER_PAGE_OPTIONS = [12, 24, 48, 96] as const;
 const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 
-// Filter facet definitions — the values + counts are derived dynamically from
-// the catalog at render time, so adding a product surfaces its category,
-// manufacturer or condition automatically.
-type FacetKey = "category" | "manufacturer" | "condition";
-const FACETS: { key: FacetKey; title: string; field: (p: Product) => string }[] = [
-  { key: "category", title: "Category", field: (p) => p.category },
-  { key: "manufacturer", title: "Manufacturer", field: (p) => p.brand },
-  { key: "condition", title: "Condition", field: (p) => p.status },
+// Master taxonomies — the complete enterprise filter vocabulary. Every value
+// is always shown (with a live count) so brands/categories are never hidden
+// just because they currently hold few or no systems.
+const CONDITIONS = ["Brand New", "Certified Refurbished", "Factory Certified"] as const;
+const COUNTRIES = ["Germany", "Japan", "USA", "Netherlands", "Italy", "China"] as const;
+const SYSTEM_TYPES = ["Fixed", "Mobile", "Ceiling Mounted", "Floor Mounted", "Portable"] as const;
+const SERVICES = [
+  "Installation Available",
+  "Commissioning Available",
+  "Clinical Training",
+  "Preventive Maintenance",
+  "Spare Parts Available",
+  "Remote Support",
+  "Technical Support",
+  "Warranty Included",
+] as const;
+const SPECIALTIES = [
+  "Cardiology",
+  "Radiology",
+  "Oncology",
+  "Neurology",
+  "Women's Health",
+  "Orthopedics",
+  "Urology",
+] as const;
+const YEARS = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018] as const;
+
+// Filter facet definitions — values + live counts are computed from the catalog
+// at render time and merged with the master taxonomies above, so nothing is
+// hidden and adding a product simply increases the relevant counts.
+type FacetKey =
+  | "category"
+  | "manufacturer"
+  | "condition"
+  | "country"
+  | "year"
+  | "systemType"
+  | "service"
+  | "specialty";
+
+const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string[]> = {
+  category: (p) => [p.category],
+  manufacturer: (p) => [p.brand],
+  condition: (p) => [p.status],
+  country: (p) => [p.country],
+  year: (p) => [String(p.year)],
+  systemType: (p) => [p.systemType],
+  service: (p) => p.services,
+  specialty: (p) => p.specialty,
+};
+
+const FACET_CONFIG: {
+  key: FacetKey;
+  title: string;
+  master: readonly string[];
+  defaultOpen?: boolean;
+  searchable?: boolean;
+}[] = [
+  { key: "category", title: "Category", master: PRIMARY_CATEGORIES, defaultOpen: true },
+  { key: "manufacturer", title: "Manufacturer", master: ALL_MANUFACTURERS, defaultOpen: true, searchable: true },
+  { key: "condition", title: "Condition", master: CONDITIONS },
+  { key: "country", title: "Country of Origin", master: COUNTRIES },
+  { key: "year", title: "Year", master: YEARS.map(String) },
+  { key: "systemType", title: "System Type", master: SYSTEM_TYPES },
+  { key: "service", title: "Availability of Services", master: SERVICES },
+  { key: "specialty", title: "Clinical Specialty", master: SPECIALTIES },
 ];
 
-const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string> = {
-  category: (p) => p.category,
-  manufacturer: (p) => p.brand,
-  condition: (p) => p.status,
-};
 
 type Selected = Record<FacetKey, string[]>;
 const EMPTY_SELECTED: Selected = { category: [], manufacturer: [], condition: [] };
