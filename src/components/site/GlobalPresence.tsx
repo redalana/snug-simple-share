@@ -19,8 +19,10 @@ const VISIBLE_PINS = PINS.filter(
   (p) => p.x >= VB_X && p.x <= VB_X + VB_W && p.y >= VB_Y && p.y <= VB_Y + VB_H,
 );
 
-// Country names that show a static map label.
-const LABELLED = new Set(["Syria", "Iraq", "Yemen", "Libya"]);
+// Country names that show a static map label — all 10 verified countries.
+const LABELLED = new Set(
+  PINS.map((p) => p.name),
+);
 
 
 export function GlobalPresence() {

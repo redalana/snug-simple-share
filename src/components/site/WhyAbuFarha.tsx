@@ -17,7 +17,7 @@ type Stat = { value: number; suffix: string; label: string };
 const STATS: Stat[] = [
   { value: 25, suffix: "+", label: "Years Experience" },
   { value: 250, suffix: "+", label: "Hospitals Served" },
-  { value: 40, suffix: "+", label: "Countries Covered" },
+  { value: 10, suffix: "", label: "Countries Covered" },
   { value: 1500, suffix: "+", label: "Equipment Installed" },
 ];
 
@@ -87,7 +87,7 @@ const PILLARS: Pillar[] = [
 
 export function WhyAbuFarha() {
   return (
-    <section id="why" className="relative bg-secondary/40 py-24 lg:py-32">
+    <section id="why" className="relative bg-secondary/40 py-20 lg:py-24">
       <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

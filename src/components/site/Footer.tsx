@@ -12,7 +12,7 @@ const COLS = [
   },
   {
     title: "Company",
-    links: ["About Us", "Our Mission", "Our Vision", "Leadership Team", "Careers"],
+    links: ["About Us", "Our Mission", "Our Vision", "Leadership Team", "Blog", "Careers"],
   },
   {
     title: "Support",

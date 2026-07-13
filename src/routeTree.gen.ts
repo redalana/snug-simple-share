@@ -9,9 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalReadinessAssessmentRoute =
+  HospitalReadinessAssessmentRouteImport.update({
+    id: '/hospital-readiness-assessment',
+    path: '/hospital-readiness-assessment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +38,67 @@ const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
+  '/projects': typeof ProjectsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/programs/stroke-care'
+  fullPaths:
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/programs/stroke-care'
-  id: '__root__' | '/' | '/programs/stroke-care'
+  to:
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
+  id:
+    | '__root__'
+    | '/'
+    | '/hospital-readiness-assessment'
+    | '/projects'
+    | '/programs/stroke-care'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
+  ProjectsRoute: typeof ProjectsRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospital-readiness-assessment': {
+      id: '/hospital-readiness-assessment'
+      path: '/hospital-readiness-assessment'
+      fullPath: '/hospital-readiness-assessment'
+      preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,8 +118,20 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
+  ProjectsRoute: ProjectsRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
