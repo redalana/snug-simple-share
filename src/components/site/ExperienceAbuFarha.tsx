@@ -58,8 +58,8 @@ export function ExperienceAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
-        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-10">
+      <div className="relative mx-auto max-w-[105rem] px-6 lg:px-10">
+        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-14">
           {/* Left — brain illustration */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -81,7 +81,7 @@ export function ExperienceAbuFarha() {
               alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red"
               width={1024}
               height={1200}
-              className="mx-auto w-full max-w-xl select-none object-contain"
+              className="mx-auto w-full max-w-2xl select-none object-contain"
               style={{
                 maskImage:
                   "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
@@ -109,11 +109,11 @@ export function ExperienceAbuFarha() {
             className="order-1 lg:order-2"
           >
             <Eyebrow index="04">Clinical Solutions</Eyebrow>
-            <h2 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.3rem]">
+            <h2 className="mt-7 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]">
               Comprehensive
               <span className="mt-1 block text-primary">Stroke Programs.</span>
             </h2>
-            <p className="mt-7 max-w-xl text-[19px] leading-[1.7] text-muted-foreground">
+            <p className="mt-7 max-w-2xl text-[21px] leading-[1.7] text-muted-foreground">
               Successful stroke care is never a single device. It is an ecosystem
               of imaging, clinical workflows, biomedical engineering and technical
               support working as one — and AbuFarha helps hospitals bring it
@@ -125,14 +125,14 @@ export function ExperienceAbuFarha() {
                 const Icon = pillar.icon;
                 return (
                   <li key={pillar.id} className="flex gap-4">
-                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
-                      <Icon className="h-[21px] w-[21px]" strokeWidth={1.75} />
+                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
+                      <Icon className="h-[24px] w-[24px]" strokeWidth={1.75} />
                     </span>
                     <div>
-                      <h3 className="font-display text-[1.24rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
+                      <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                         {pillar.title}
                       </h3>
-                      <p className="mt-1.5 max-w-md text-[15px] leading-[1.6] text-muted-foreground">
+                      <p className="mt-1.5 max-w-lg text-[16.5px] leading-[1.6] text-muted-foreground">
                         {pillar.copy}
                       </p>
                     </div>

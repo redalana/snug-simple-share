@@ -9,6 +9,33 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
+import { useCountUp } from "@/hooks/use-count-up";
+
+type Stat = { value: number; suffix: string; label: string };
+
+const STATS: Stat[] = [
+  { value: 25, suffix: "+", label: "Years Experience" },
+  { value: 250, suffix: "+", label: "Hospitals Served" },
+  { value: 40, suffix: "+", label: "Countries Covered" },
+  { value: 1500, suffix: "+", label: "Equipment Installed" },
+];
+
+function StatItem({ stat }: { stat: Stat }) {
+  const { ref, value } = useCountUp(stat.value);
+  return (
+    <div className="text-center">
+      <div className="font-display text-[2.4rem] font-extrabold leading-none tracking-tight text-ink sm:text-[2.9rem]">
+        <span ref={ref} className="tabular-nums">
+          {value.toLocaleString()}
+        </span>
+        <span className="text-primary">{stat.suffix}</span>
+      </div>
+      <div className="mt-2 text-[13px] font-semibold uppercase tracking-wider text-muted-foreground">
+        {stat.label}
+      </div>
+    </div>
+  );
+}
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -100,7 +127,21 @@ export function WhyAbuFarha() {
             );
           })}
         </div>
+
+        {/* Trust numbers — closing strip of the same section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mt-16 grid grid-cols-2 gap-y-10 rounded-2xl border border-border/70 bg-white/60 py-10 shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)] sm:grid-cols-4 lg:mt-20"
+        >
+          {STATS.map((stat) => (
+            <StatItem key={stat.label} stat={stat} />
+          ))}
+        </motion.div>
       </div>
+
     </section>
   );
 }
