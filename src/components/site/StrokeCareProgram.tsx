@@ -204,13 +204,13 @@ function NodePanel({
   );
 }
 
-export function ExperienceAbuFarha() {
+export function StrokeCareProgram() {
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
     <section
-      id="experience"
+      id="stroke-ecosystem"
       className="relative overflow-hidden bg-white py-28 lg:py-40"
     >
       {/* Very subtle engineering grid */}
