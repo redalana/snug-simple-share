@@ -500,12 +500,12 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href={quoteUrl}
+              <button
+                onClick={scrollToQuote}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 <FileText className="h-4 w-4" /> Request Quote
-              </a>
+              </button>
               <a
                 href={whatsappQuote}
                 target="_blank"
