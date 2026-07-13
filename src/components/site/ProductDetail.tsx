@@ -79,6 +79,8 @@ const INCLUDED = [
   { icon: Headset, label: "After Sales Support" },
 ];
 
+const SNAPSHOT_ICONS = [Gauge, ScanLine, Workflow, Layers3, BadgeCheck, ShieldCheck];
+
 function useShare(product: Product, url: string) {
   const [copied, setCopied] = useState(false);
 
