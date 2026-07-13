@@ -940,14 +940,16 @@ export function PortfolioBrowser() {
                     </button>
                   )}
                 </div>
-                {facetGroups.map((group, i) => (
+                {facetGroups.map((group) => (
                   <FilterAccordion
                     key={group.key}
                     title={group.title}
                     options={group.options}
                     selected={selected[group.key]}
                     onToggle={(v) => toggleFilter(group.key, v)}
-                    defaultOpen={i < 2}
+                    open={!!openFilters[group.key]}
+                    onToggleOpen={() => toggleSection(group.key)}
+                    searchable={group.searchable}
                   />
                 ))}
               </div>
