@@ -52,27 +52,22 @@ const FEATURES = [
   {
     icon: ScanLine,
     title: "Exceptional Image Quality",
-    text: "Advanced imaging technology for precise diagnostics and better outcomes.",
-  },
-  {
-    icon: Gauge,
-    title: "Optimized Dose Management",
-    text: "Smart dose control for enhanced patient and staff safety.",
+    text: "Advanced imaging for precise diagnostics and confident clinical decisions.",
   },
   {
     icon: Workflow,
-    title: "Efficient Workflow",
-    text: "Intuitive design and automation for maximum clinical efficiency.",
-  },
-  {
-    icon: Layers3,
-    title: "Versatile Applications",
-    text: "Ideal for a broad range of clinical and interventional procedures.",
+    title: "Clinical Efficiency",
+    text: "Streamlined workflows and automation that save valuable time.",
   },
   {
     icon: Award,
     title: "Reliable Performance",
-    text: "Built for long service life with proven reliability worldwide.",
+    text: "Engineered for long service life and proven uptime worldwide.",
+  },
+  {
+    icon: Layers3,
+    title: "Future Ready Platform",
+    text: "Upgradeable architecture that scales with evolving clinical needs.",
   },
 ];
 
