@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Boxes,
   LifeBuoy,
+  BadgeCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
