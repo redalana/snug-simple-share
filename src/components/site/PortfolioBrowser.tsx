@@ -97,6 +97,16 @@ type Product = {
   warranty: string;
   installation: boolean;
   training: boolean;
+  /** Country of manufacture. */
+  country: string;
+  /** Manufacturing / production year. */
+  year: number;
+  /** Physical installation type. */
+  systemType: string;
+  /** Service & support capabilities offered with the system. */
+  services: string[];
+  /** Clinical specialties the system serves. */
+  specialty: string[];
   /** Extra searchable terms: technology + clinical keywords. */
   keywords: string;
   /** Monotonic order used for "Newest" / "Recently Added" sorting. */
@@ -114,6 +124,20 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "Netherlands",
+    year: 2019,
+    systemType: "Fixed",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Spare Parts Available",
+      "Remote Support",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Radiology", "Neurology", "Oncology"],
     keywords: "neuro stroke oncology imaging magnetic resonance diagnostic",
     addedOrder: 6,
   },
@@ -127,6 +151,18 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "Netherlands",
+    year: 2018,
+    systemType: "Ceiling Mounted",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Cardiology", "Radiology"],
     keywords: "cardiology interventional angiography neurovascular catheterization",
     addedOrder: 8,
   },
@@ -140,6 +176,19 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "Germany",
+    year: 2020,
+    systemType: "Fixed",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Spare Parts Available",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Radiology", "Oncology", "Cardiology"],
     keywords: "computed tomography stroke cardiac oncology imaging diagnostic",
     addedOrder: 5,
   },
@@ -153,6 +202,19 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "USA",
+    year: 2021,
+    systemType: "Fixed",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Remote Support",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Oncology", "Radiology"],
     keywords: "pet oncology nuclear molecular imaging cancer diagnostic",
     addedOrder: 7,
   },
@@ -166,6 +228,20 @@ const PRODUCTS: Product[] = [
     warranty: "2-Year Warranty",
     installation: true,
     training: true,
+    country: "Germany",
+    year: 2022,
+    systemType: "Floor Mounted",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Spare Parts Available",
+      "Remote Support",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Women's Health", "Radiology", "Oncology"],
     keywords: "women health breast screening tomosynthesis mammography diagnostic",
     addedOrder: 4,
   },
@@ -179,6 +255,17 @@ const PRODUCTS: Product[] = [
     warranty: "2-Year Warranty",
     installation: true,
     training: true,
+    country: "Netherlands",
+    year: 2023,
+    systemType: "Mobile",
+    services: [
+      "Installation Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Radiology", "Orthopedics"],
     keywords: "surgical mobile fluoroscopy orthopedic interventional operating room",
     addedOrder: 3,
   },
@@ -192,6 +279,18 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "Japan",
+    year: 2022,
+    systemType: "Ceiling Mounted",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Spare Parts Available",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Radiology"],
     keywords: "radiography digital imaging chest bone diagnostic",
     addedOrder: 2,
   },
@@ -205,6 +304,19 @@ const PRODUCTS: Product[] = [
     warranty: "1-Year Warranty",
     installation: true,
     training: true,
+    country: "USA",
+    year: 2020,
+    systemType: "Fixed",
+    services: [
+      "Installation Available",
+      "Commissioning Available",
+      "Clinical Training",
+      "Preventive Maintenance",
+      "Remote Support",
+      "Technical Support",
+      "Warranty Included",
+    ],
+    specialty: ["Cardiology", "Radiology"],
     keywords: "cardiology cardiac interventional angiography catheterization",
     addedOrder: 1,
   },
@@ -230,47 +342,123 @@ const SORT_OPTIONS = [
 const PER_PAGE_OPTIONS = [12, 24, 48, 96] as const;
 const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 
-// Filter facet definitions — the values + counts are derived dynamically from
-// the catalog at render time, so adding a product surfaces its category,
-// manufacturer or condition automatically.
-type FacetKey = "category" | "manufacturer" | "condition";
-const FACETS: { key: FacetKey; title: string; field: (p: Product) => string }[] = [
-  { key: "category", title: "Category", field: (p) => p.category },
-  { key: "manufacturer", title: "Manufacturer", field: (p) => p.brand },
-  { key: "condition", title: "Condition", field: (p) => p.status },
-];
+// Master taxonomies — the complete enterprise filter vocabulary. Every value
+// is always shown (with a live count) so brands/categories are never hidden
+// just because they currently hold few or no systems.
+const CONDITIONS = ["Brand New", "Certified Refurbished", "Factory Certified"] as const;
+const COUNTRIES = ["Germany", "Japan", "USA", "Netherlands", "Italy", "China"] as const;
+const SYSTEM_TYPES = ["Fixed", "Mobile", "Ceiling Mounted", "Floor Mounted", "Portable"] as const;
+const SERVICES = [
+  "Installation Available",
+  "Commissioning Available",
+  "Clinical Training",
+  "Preventive Maintenance",
+  "Spare Parts Available",
+  "Remote Support",
+  "Technical Support",
+  "Warranty Included",
+] as const;
+const SPECIALTIES = [
+  "Cardiology",
+  "Radiology",
+  "Oncology",
+  "Neurology",
+  "Women's Health",
+  "Orthopedics",
+  "Urology",
+] as const;
+const YEARS = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018] as const;
 
-const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string> = {
-  category: (p) => p.category,
-  manufacturer: (p) => p.brand,
-  condition: (p) => p.status,
+// Filter facet definitions — values + live counts are computed from the catalog
+// at render time and merged with the master taxonomies above, so nothing is
+// hidden and adding a product simply increases the relevant counts.
+type FacetKey =
+  | "category"
+  | "manufacturer"
+  | "condition"
+  | "country"
+  | "year"
+  | "systemType"
+  | "service"
+  | "specialty";
+
+const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string[]> = {
+  category: (p) => [p.category],
+  manufacturer: (p) => [p.brand],
+  condition: (p) => [p.status],
+  country: (p) => [p.country],
+  year: (p) => [String(p.year)],
+  systemType: (p) => [p.systemType],
+  service: (p) => p.services,
+  specialty: (p) => p.specialty,
 };
 
+const FACET_CONFIG: {
+  key: FacetKey;
+  title: string;
+  master: readonly string[];
+  defaultOpen?: boolean;
+  searchable?: boolean;
+}[] = [
+  { key: "category", title: "Category", master: PRIMARY_CATEGORIES, defaultOpen: true },
+  { key: "manufacturer", title: "Manufacturer", master: ALL_MANUFACTURERS, defaultOpen: true, searchable: true },
+  { key: "condition", title: "Condition", master: CONDITIONS },
+  { key: "country", title: "Country of Origin", master: COUNTRIES },
+  { key: "year", title: "Year", master: YEARS.map(String) },
+  { key: "systemType", title: "System Type", master: SYSTEM_TYPES },
+  { key: "service", title: "Availability of Services", master: SERVICES },
+  { key: "specialty", title: "Clinical Specialty", master: SPECIALTIES },
+];
+
+
 type Selected = Record<FacetKey, string[]>;
-const EMPTY_SELECTED: Selected = { category: [], manufacturer: [], condition: [] };
+const EMPTY_SELECTED: Selected = {
+  category: [],
+  manufacturer: [],
+  condition: [],
+  country: [],
+  year: [],
+  systemType: [],
+  service: [],
+  specialty: [],
+};
+
+const FILTERS_OPEN_STORAGE_KEY = "abufarha:products:openFilters";
 
 function FilterAccordion({
   title,
   options,
   selected,
   onToggle,
-  defaultOpen,
+  open,
+  onToggleOpen,
+  searchable,
 }: {
   title: string;
   options: { value: string; count: number }[];
   selected: string[];
   onToggle: (value: string) => void;
-  defaultOpen?: boolean;
+  open: boolean;
+  onToggleOpen: () => void;
+  searchable?: boolean;
 }) {
-  const [open, setOpen] = useState(!!defaultOpen);
   const [showAll, setShowAll] = useState(false);
+  const [term, setTerm] = useState("");
   const VISIBLE = 8;
-  const hasMore = options.length > VISIBLE;
-  const visibleOptions = showAll || !hasMore ? options : options.slice(0, VISIBLE);
+
+  const showSearch = !!searchable && options.length > VISIBLE;
+  const q = term.trim().toLowerCase();
+  const searched = q
+    ? options.filter((o) => o.value.toLowerCase().includes(q))
+    : options;
+  const hasMore = !q && searched.length > VISIBLE;
+  const visibleOptions = showAll || !hasMore ? searched : searched.slice(0, VISIBLE);
+
   return (
     <div className="border-b border-border/60 last:border-0">
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggleOpen}
+        aria-expanded={open}
         className="flex w-full items-center justify-between py-5 text-left text-sm font-semibold text-foreground/90 transition-colors hover:text-primary"
       >
         <span className="flex items-center gap-2">
@@ -289,7 +477,22 @@ function FilterAccordion({
         className={`grid transition-all duration-300 ease-out ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
       >
         <div className="overflow-hidden">
+          {showSearch && (
+            <div className="relative mb-4">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                placeholder={`Search ${title.toLowerCase()}…`}
+                className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              />
+            </div>
+          )}
           <ul className="space-y-3.5 pb-5">
+            {visibleOptions.length === 0 && (
+              <li className="text-sm text-muted-foreground/70">No matches.</li>
+            )}
             {visibleOptions.map((opt) => (
               <li key={opt.value}>
                 <label className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
@@ -310,7 +513,7 @@ function FilterAccordion({
               onClick={() => setShowAll((v) => !v)}
               className="mb-5 text-xs font-semibold text-primary transition-colors hover:text-primary-dark"
             >
-              {showAll ? "Show Less" : `Show More (${options.length - VISIBLE})`}
+              {showAll ? "Show Less" : `Show More (${searched.length - VISIBLE})`}
             </button>
           )}
         </div>
@@ -318,6 +521,7 @@ function FilterAccordion({
     </div>
   );
 }
+
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
   return (
@@ -415,12 +619,33 @@ export function PortfolioBrowser() {
   const [selected, setSelected] = useState<Selected>(EMPTY_SELECTED);
   const [perPage, setPerPage] = useState<number>(PER_PAGE_OPTIONS[0]);
   const [page, setPage] = useState(1);
+  const [openFilters, setOpenFilters] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(FACET_CONFIG.map((f) => [f.key, !!f.defaultOpen])),
+  );
 
   // Restore & remember the user's per-page selection (client-only to avoid SSR mismatch).
   useEffect(() => {
     const saved = Number(window.localStorage.getItem(PER_PAGE_STORAGE_KEY));
     if (PER_PAGE_OPTIONS.includes(saved as (typeof PER_PAGE_OPTIONS)[number])) setPerPage(saved);
   }, []);
+
+  // Restore which filter sections were expanded during the previous browse.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(FILTERS_OPEN_STORAGE_KEY);
+      if (raw) setOpenFilters((prev) => ({ ...prev, ...JSON.parse(raw) }));
+    } catch {
+      /* ignore malformed storage */
+    }
+  }, []);
+
+  const toggleSection = (key: string) => {
+    setOpenFilters((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      window.localStorage.setItem(FILTERS_OPEN_STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  };
 
   const resetPage = () => setPage(1);
 
@@ -455,36 +680,46 @@ export function PortfolioBrowser() {
     if (query.trim()) {
       const q = query.toLowerCase();
       list = list.filter((p) =>
-        `${p.name} ${p.brand} ${p.category} ${p.keywords} ${p.status}`.toLowerCase().includes(q),
+        `${p.name} ${p.brand} ${p.category} ${p.keywords} ${p.status} ${p.country} ${p.systemType} ${p.year} ${p.specialty.join(" ")}`
+          .toLowerCase()
+          .includes(q),
       );
     }
     return list;
   }, [activeCat, query]);
 
   const productPassesFacets = (p: Product, ignore?: FacetKey) => {
-    for (const { key } of FACETS) {
+    for (const { key } of FACET_CONFIG) {
       if (key === ignore) continue;
       const vals = selected[key];
-      if (vals.length && !vals.includes(FIELD_BY_KEY[key](p))) return false;
+      if (!vals.length) continue;
+      const productVals = FIELD_BY_KEY[key](p);
+      // A product passes when it matches ANY selected value in this facet.
+      if (!vals.some((v) => productVals.includes(v))) return false;
     }
     return true;
   };
 
   // Facet options with LIVE counts (count reflects all other active filters).
+  // Master values are always included (count 0 allowed) so nothing is hidden.
   const facetGroups = useMemo(() => {
-    return FACETS.map(({ key, title, field }) => {
+    return FACET_CONFIG.map(({ key, title, master, searchable }) => {
       const counts = new Map<string, number>();
+      for (const v of master) counts.set(v, 0);
       for (const p of baseList) {
         if (!productPassesFacets(p, key)) continue;
-        const v = field(p);
-        counts.set(v, (counts.get(v) ?? 0) + 1);
+        for (const v of FIELD_BY_KEY[key](p)) counts.set(v, (counts.get(v) ?? 0) + 1);
       }
-      // Ensure currently-selected values remain visible even at count 0.
       for (const v of selected[key]) if (!counts.has(v)) counts.set(v, 0);
+      const order = new Map(master.map((v, i) => [v, i]));
       const options = [...counts.entries()]
         .map(([value, count]) => ({ value, count }))
-        .sort((a, b) => a.value.localeCompare(b.value));
-      return { key, title, options };
+        .sort((a, b) => {
+          const ai = order.has(a.value) ? order.get(a.value)! : Number.MAX_SAFE_INTEGER;
+          const bi = order.has(b.value) ? order.get(b.value)! : Number.MAX_SAFE_INTEGER;
+          return ai - bi || a.value.localeCompare(b.value);
+        });
+      return { key, title, options, searchable };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseList, selected]);
@@ -516,7 +751,7 @@ export function PortfolioBrowser() {
     ...(activeCat !== "All Categories"
       ? [{ label: activeCat, onRemove: () => { setActiveCat("All Categories"); resetPage(); } }]
       : []),
-    ...FACETS.flatMap(({ key }) =>
+    ...FACET_CONFIG.flatMap(({ key }) =>
       selected[key].map((v) => ({ label: v, onRemove: () => toggleFilter(key, v) })),
     ),
     ...(query.trim()
@@ -705,14 +940,16 @@ export function PortfolioBrowser() {
                     </button>
                   )}
                 </div>
-                {facetGroups.map((group, i) => (
+                {facetGroups.map((group) => (
                   <FilterAccordion
                     key={group.key}
                     title={group.title}
                     options={group.options}
                     selected={selected[group.key]}
                     onToggle={(v) => toggleFilter(group.key, v)}
-                    defaultOpen={i < 2}
+                    open={!!openFilters[group.key]}
+                    onToggleOpen={() => toggleSection(group.key)}
+                    searchable={group.searchable}
                   />
                 ))}
               </div>
