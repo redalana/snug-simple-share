@@ -51,9 +51,55 @@ const PRIMARY_CATEGORIES = [
   "C-Arms",
 ] as const;
 
+// Full catalog taxonomy — single source of truth. In production these are
+// loaded from the CMS/database; the filters below derive from them, so adding
+// a new category or manufacturer automatically surfaces it in the UI.
+const ALL_CATEGORIES = [
+  "Cath Lab Systems",
+  "MRI Scanners",
+  "CT Scanners",
+  "PET/CT Scanners",
+  "C-Arms",
+  "X-Ray Systems",
+  "Mammography",
+  "Ultrasound",
+  "Operating Room",
+  "Women's Healthcare",
+  "Bone Densitometers (DEXA)",
+  "Lithotripsy Systems",
+  "Endoscopy",
+  "Urology",
+  "Cardiology",
+  "Neurology",
+  "Radiology",
+  "Surgical Equipment",
+] as const;
+
+// Manufacturers — loaded dynamically from the CMS/database in production.
+const ALL_MANUFACTURERS = [
+  "Philips",
+  "Siemens Healthineers",
+  "Canon Medical",
+  "GE HealthCare",
+  "Hitachi",
+  "Toshiba",
+  "Mindray",
+  "Richard Wolf",
+  "Karl Storz",
+  "Boston Scientific",
+  "Abbott",
+  "Medtronic",
+  "Shimadzu",
+  "Dräger",
+  "Esaote",
+  "Samsung",
+  "Fujifilm",
+  "Olympus",
+] as const;
+
 const FILTER_GROUPS = [
-  { title: "Category", options: ["Cath Lab", "MRI", "CT", "PET/CT", "X-Ray", "C-Arms"] },
-  { title: "Manufacturer", options: ["Philips", "Siemens Healthineers", "GE HealthCare", "Canon Medical"] },
+  { title: "Category", options: [...ALL_CATEGORIES] },
+  { title: "Manufacturer", options: [...ALL_MANUFACTURERS] },
   { title: "Condition", options: ["Brand New", "Certified Refurbished", "Factory Certified"] },
   { title: "Clinical Specialty", options: ["Interventional", "Diagnostic Imaging", "Women Healthcare", "Surgical"] },
   { title: "Country of Origin", options: ["Germany", "Netherlands", "USA", "Japan"] },
@@ -65,21 +111,9 @@ const FILTER_GROUPS = [
   },
 ];
 
-// Manufacturers — loaded dynamically in production from the CMS.
-const BRANDS = [
-  "Philips",
-  "Siemens Healthineers",
-  "Canon Medical",
-  "GE HealthCare",
-  "Hitachi",
-  "Mindray",
-  "Toshiba",
-  "Karl Storz",
-  "Abbott",
-  "Boston Scientific",
-  "Medtronic",
-  "Dräger",
-] as const;
+// Manufacturer cards in the "Popular Manufacturers" section — same dynamic source.
+const BRANDS = ALL_MANUFACTURERS;
+
 
 type Product = {
   name: string;
