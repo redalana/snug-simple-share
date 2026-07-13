@@ -339,7 +339,7 @@ function SearchField() {
       <input
         type="search"
         placeholder="Search products, brands or categories..."
-        className="h-[46px] w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
+        className="h-12 w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
       />
     </div>
   );
