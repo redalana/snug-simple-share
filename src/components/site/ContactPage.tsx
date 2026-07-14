@@ -324,7 +324,7 @@ function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-white pt-6 pb-10">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
@@ -473,7 +473,7 @@ function ContactBar() {
   ];
   return (
     <section className="relative -mt-8 pb-4">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-9">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
@@ -574,7 +574,7 @@ function FormBlock() {
 
   return (
     <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[80px] lg:py-[80px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           {/* Form */}
@@ -810,7 +810,7 @@ function FieldError({ msg }: { msg: string }) {
 function OfficeMap() {
   return (
     <section className="bg-white py-[120px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
@@ -912,7 +912,7 @@ function OfficeRow({
 function StatsStrip() {
   return (
     <section className="py-[90px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
             <div
