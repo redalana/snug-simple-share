@@ -793,20 +793,20 @@ function FieldError({ msg }: { msg: string }) {
 
 function OfficeMap() {
   return (
-    <section className="bg-white py-14 lg:py-20">
+    <section className="bg-white py-14 lg:py-16">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
+        <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
             src={MAP_EMBED}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="h-[520px] w-full border-0"
+            className="h-[560px] w-full border-0"
           />
 
           {/* Floating card */}
-          <div className="pointer-events-none absolute inset-0 flex items-stretch">
-            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:p-7">
+          <div className="pointer-events-none absolute inset-0 flex items-start">
+            <div className="pointer-events-auto m-4 w-full max-w-[300px] rounded-[24px] border border-white/70 bg-white/95 p-5 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:max-w-[30%] sm:p-6">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-xl font-black text-foreground">
                   Visit Our Office
