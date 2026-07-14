@@ -753,24 +753,25 @@ function FormBlock() {
             </h2>
             <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
 
-            <ul className="mt-7 space-y-5">
+            <ul className="mt-8 space-y-3">
               {WHY.map(({ icon: Icon, title, desc }) => (
                 <li
                   key={title}
-                  className="group flex items-start gap-4 rounded-2xl p-3 transition-colors hover:bg-secondary/40"
+                  className="group flex items-start gap-5 rounded-2xl p-3.5 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-secondary/40"
                 >
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-105">
-                    <Icon className="h-5 w-5" />
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary transition-transform duration-200 ease-out group-hover:scale-105 group-hover:bg-primary/15">
+                    <Icon className="h-7 w-7" strokeWidth={1.75} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[15px] font-bold text-foreground">{title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    <div className="text-[16px] font-bold text-foreground">{title}</div>
+                    <p className="mt-1 line-clamp-2 text-[14px] leading-[1.55] text-muted-foreground">
                       {desc}
                     </p>
                   </div>
                 </li>
               ))}
             </ul>
+
           </div>
         </div>
       </div>
