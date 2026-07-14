@@ -937,7 +937,7 @@ function StatsStrip() {
 
 function FaqSection() {
   return (
-    <section className="bg-white py-20 lg:py-32">
+    <section className="bg-white py-[110px]">
       <div className="mx-auto w-[85%] max-w-[95rem] px-4 lg:px-6">
         <div className="text-center">
           <Eyebrow align="center">FAQ</Eyebrow>
