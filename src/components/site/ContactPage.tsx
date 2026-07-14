@@ -346,7 +346,7 @@ function Hero() {
               alt={s.alt}
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
-              style={{ objectPosition: "center 42%" }}
+              style={{ objectPosition: "75% center" }}
               className={cn(
                 "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
                 i === slide ? "opacity-100" : "opacity-0",
