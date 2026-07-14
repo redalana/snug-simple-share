@@ -474,14 +474,15 @@ function ContactBar() {
   return (
     <section className="relative -mt-8 pb-4">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-7">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-9">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
+              aria-label={`${title}: ${lines[0]}`}
+              className="group flex h-full items-center gap-4 rounded-xl p-7 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               <span
                 className={cn(
@@ -507,6 +508,7 @@ function ContactBar() {
     </section>
   );
 }
+
 
 
 // ----------------------------------------------------------------------
