@@ -307,16 +307,34 @@ const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${en
 )}`;
 
 // ----------------------------------------------------------------------
-// Section: Hero
+// Section: Hero (supports auto-rotating slides)
 // ----------------------------------------------------------------------
+
+const HERO_SLIDES: { src: string; alt: string }[] = [
+  { src: heroCathLab, alt: "AbuFarha Medical Supplies team in a modern cath lab" },
+];
 
 function Hero() {
   const reduce = useReducedMotion();
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    if (HERO_SLIDES.length < 2 || reduce) return;
+    const id = window.setInterval(
+      () => setSlide((i) => (i + 1) % HERO_SLIDES.length),
+      5500,
+    );
+    return () => window.clearInterval(id);
+  }, [reduce]);
+
   return (
     <section className="relative overflow-hidden bg-white pt-6 pb-10">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-4 flex items-center gap-2 text-sm text-muted-foreground"
+        >
           <Link to="/" className="inline-flex items-center gap-1 hover:text-primary">
             <HomeIcon className="h-3.5 w-3.5" /> Home
           </Link>
@@ -324,16 +342,41 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative overflow-hidden rounded-[28px]">
-          {/* Background image */}
-          <img
-            src={heroCathLab}
-            alt="AbuFarha Medical Supplies team in a modern cath lab"
-            loading="eager"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+        <div className="relative min-h-[520px] overflow-hidden rounded-[28px] sm:min-h-[560px] lg:min-h-[600px]">
+          {/* Background image(s) with crossfade */}
+          {HERO_SLIDES.map((s, i) => (
+            <img
+              key={s.src}
+              src={s.src}
+              alt={s.alt}
+              loading={i === 0 ? "eager" : "lazy"}
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
+                i === slide ? "opacity-100" : "opacity-0",
+              )}
+            />
+          ))}
+
+          {/* Slide indicators (only when multiple) */}
+          {HERO_SLIDES.length > 1 && (
+            <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => setSlide(i)}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all duration-300",
+                    i === slide ? "w-8 bg-primary" : "w-3 bg-foreground/25",
+                  )}
+                />
+              ))}
+            </div>
+          )}
+
           {/* Gradient scrim */}
           <div
+            aria-hidden
             className="absolute inset-0"
             style={{
               background:
@@ -358,20 +401,21 @@ function Hero() {
                 healthcare <span className="text-primary">together</span>
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-                From consultation to after-sales support, our team is ready to provide the right medical solutions for your healthcare facility.
+                From consultation to after-sales support, our team is ready to
+                provide the right medical solutions for your healthcare facility.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <a
                   href="#contact-form"
-                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-primary-dark hover:shadow-[0_20px_38px_-14px_var(--primary)]"
                 >
                   Get in Touch
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
                 </a>
                 <button
                   type="button"
-                  className="inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
+                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-primary/40 hover:text-primary hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
                 >
                   <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
                     <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
@@ -389,6 +433,7 @@ function Hero() {
     </section>
   );
 }
+
 
 // ----------------------------------------------------------------------
 // Section: Quick contact bar
@@ -429,18 +474,18 @@ function ContactBar() {
   return (
     <section className="relative -mt-8 pb-4">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-6 sm:p-6">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-4 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-5">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-secondary/40"
+              className="group flex items-center gap-4 rounded-xl p-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
             >
               <span
                 className={cn(
-                  "grid h-14 w-14 shrink-0 place-items-center rounded-full text-white transition-transform group-hover:scale-105",
+                  "grid h-14 w-14 shrink-0 place-items-center rounded-full text-white shadow-[0_10px_24px_-12px_rgba(15,23,42,0.4)] transition-transform duration-200 ease-out group-hover:scale-105",
                   color,
                 )}
               >
@@ -448,10 +493,12 @@ function ContactBar() {
               </span>
               <div className="min-w-0">
                 <div className="text-[15px] font-bold text-foreground">{title}</div>
-                <div className="mt-0.5 text-sm text-muted-foreground">
+                <div className="mt-0.5 truncate text-sm text-muted-foreground">
                   {lines[0]}
                 </div>
-                <div className="text-[13px] text-muted-foreground/80">{lines[1]}</div>
+                <div className="truncate text-[13px] text-muted-foreground/80">
+                  {lines[1]}
+                </div>
               </div>
             </a>
           ))}
@@ -460,6 +507,7 @@ function ContactBar() {
     </section>
   );
 }
+
 
 // ----------------------------------------------------------------------
 // Section: Form + Why choose
@@ -520,7 +568,7 @@ function FormBlock() {
   };
 
   const inputCls =
-    "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10";
+    "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
     <section id="contact-form" className="bg-secondary/30 py-16 lg:py-20">
@@ -552,9 +600,9 @@ function FormBlock() {
               )}
             </AnimatePresence>
 
-            <form onSubmit={onSubmit} noValidate className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <form onSubmit={onSubmit} noValidate className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
               <div>
-                <Label htmlFor="fullName">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="fullName">
                   Full Name <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -571,7 +619,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="company">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="company">
                   Hospital / Company <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -588,7 +636,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label>
+                <Label className="text-[13px] font-semibold text-foreground">
                   Country <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -602,7 +650,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="phone">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="phone">
                   Phone Number <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -617,7 +665,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="email">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="email">
                   Email Address <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -635,7 +683,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label>
+                <Label className="text-[13px] font-semibold text-foreground">
                   Inquiry Type <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -661,7 +709,7 @@ function FormBlock() {
               </div>
 
               <div className="sm:col-span-2">
-                <Label htmlFor="message">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="message">
                   Message <span className="text-primary">*</span>
                 </Label>
                 <Textarea
@@ -705,24 +753,25 @@ function FormBlock() {
             </h2>
             <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
 
-            <ul className="mt-7 space-y-5">
+            <ul className="mt-8 space-y-3">
               {WHY.map(({ icon: Icon, title, desc }) => (
                 <li
                   key={title}
-                  className="group flex items-start gap-4 rounded-2xl p-3 transition-colors hover:bg-secondary/40"
+                  className="group flex items-start gap-5 rounded-2xl p-3.5 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-secondary/40"
                 >
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-105">
-                    <Icon className="h-5 w-5" />
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary transition-transform duration-200 ease-out group-hover:scale-105 group-hover:bg-primary/15">
+                    <Icon className="h-7 w-7" strokeWidth={1.75} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[15px] font-bold text-foreground">{title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    <div className="text-[16px] font-bold text-foreground">{title}</div>
+                    <p className="mt-1 line-clamp-2 text-[14px] leading-[1.55] text-muted-foreground">
                       {desc}
                     </p>
                   </div>
                 </li>
               ))}
             </ul>
+
           </div>
         </div>
       </div>
@@ -744,7 +793,7 @@ function OfficeMap() {
   return (
     <section className="bg-white py-14 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-white shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)]">
+        <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
             src={MAP_EMBED}
@@ -755,7 +804,7 @@ function OfficeMap() {
 
           {/* Floating card */}
           <div className="pointer-events-none absolute inset-0 flex items-stretch">
-            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-2xl border border-border/60 bg-white/95 p-6 shadow-[0_25px_60px_-25px_rgba(15,23,42,0.35)] backdrop-blur-sm sm:m-6 sm:p-7">
+            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:p-7">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-xl font-black text-foreground">
                   Visit Our Office
@@ -899,9 +948,10 @@ function FaqSection() {
             <AccordionItem
               key={f.q}
               value={`faq-${i}`}
-              className="mb-3 rounded-2xl border border-border/70 bg-secondary/25 px-5 transition-colors data-[state=open]:border-primary/40 data-[state=open]:bg-white data-[state=open]:shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)]"
+              className="mb-3 overflow-hidden rounded-2xl border border-border/70 bg-secondary/25 px-5 transition-all duration-200 ease-out hover:border-primary/30 hover:bg-white hover:shadow-[0_10px_28px_-20px_rgba(15,23,42,0.25)] data-[state=open]:border-primary/40 data-[state=open]:bg-white data-[state=open]:shadow-[0_14px_36px_-18px_rgba(15,23,42,0.28)]"
             >
               <AccordionTrigger className="py-4 text-left text-[15px] font-semibold text-foreground hover:no-underline">
+
                 {f.q}
               </AccordionTrigger>
               <AccordionContent className="pb-4 text-sm leading-relaxed text-muted-foreground">
