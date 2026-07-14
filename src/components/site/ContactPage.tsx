@@ -296,15 +296,10 @@ const OFFICE = {
   mapQuery: "AbuFarha Medical Supplies, Queen Rania Street, Amman, Jordan",
 };
 
-const MAP_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}&output=embed`;
-const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}`;
-const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}`;
+const OFFICE_COORDS = { lat: 32.0239137, lng: 35.8507975 };
+const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_COORDS.lat},${OFFICE_COORDS.lng}&z=17&output=embed`;
+const MAP_LINK = "https://maps.app.goo.gl/7bX4sKYX38MBWhF17";
+const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_COORDS.lat},${OFFICE_COORDS.lng}&destination_place_id=ChIJh2jUIVOfHBURCIAjP6fryU8`;
 
 // ----------------------------------------------------------------------
 // Section: Hero (supports auto-rotating slides)
@@ -342,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[520px] overflow-hidden rounded-[28px] sm:min-h-[560px] lg:min-h-[600px]">
+        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[560px] lg:min-h-[600px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
@@ -380,7 +375,7 @@ function Hero() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.86) 32%, rgba(255,255,255,0.55) 55%, rgba(255,255,255,0.05) 78%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.68) 32%, rgba(255,255,255,0.32) 55%, rgba(255,255,255,0.02) 78%, rgba(255,255,255,0) 100%)",
             }}
           />
 
@@ -413,15 +408,17 @@ function Hero() {
                   Get in Touch
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
                 </a>
-                <button
-                  type="button"
-                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-primary/40 hover:text-primary hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
+                <a
+                  href="https://wa.me/962799741318"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[#25D366]/50 hover:text-[#128C7E] hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
                 >
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
-                    <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-[#25D366] text-white">
+                    <WhatsAppIcon className="h-4 w-4" />
                   </span>
-                  Watch Our Story
-                </button>
+                  WhatsApp Us
+                </a>
               </div>
             </motion.div>
 
@@ -474,14 +471,14 @@ function ContactBar() {
   return (
     <section className="relative -mt-8 pb-4">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-4 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-5">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-7">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-xl p-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
+              className="group flex items-center gap-4 rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
             >
               <span
                 className={cn(
@@ -571,15 +568,18 @@ function FormBlock() {
     "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
-    <section id="contact-form" className="bg-secondary/30 py-16 lg:py-20">
+    <section id="contact-form" className="bg-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           {/* Form */}
-          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Send Us a Message
             </h2>
             <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
+            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+              Have a project in mind? Let&apos;s discuss your medical equipment requirements.
+            </p>
 
             <AnimatePresence>
               {success && (
@@ -717,9 +717,9 @@ function FormBlock() {
                   value={values.message ?? ""}
                   onChange={(e) => setField("message", e.target.value)}
                   placeholder="Tell us more about your inquiry..."
-                  rows={5}
+                  rows={8}
                   className={cn(
-                    "mt-1.5 rounded-xl border-border bg-secondary/30 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10",
+                    "mt-1.5 min-h-[200px] rounded-xl border-border bg-secondary/30 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10",
                     errors.message && "border-destructive",
                   )}
                 />
@@ -735,19 +735,21 @@ function FormBlock() {
                 </span>
               </div>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="sm:col-span-2 group mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
-              >
-                {submitting ? "Sending..." : "Submit Inquiry"}
-                <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
+              <div className="sm:col-span-2 mt-2 flex justify-center">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+                >
+                  {submitting ? "Sending..." : "Submit Inquiry"}
+                  <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </button>
+              </div>
             </form>
           </div>
 
           {/* Why choose */}
-          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:sticky lg:top-24 lg:p-10">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Why Choose AbuFarha?
             </h2>
@@ -791,20 +793,20 @@ function FieldError({ msg }: { msg: string }) {
 
 function OfficeMap() {
   return (
-    <section className="bg-white py-14 lg:py-20">
+    <section className="bg-white py-14 lg:py-16">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
+        <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
             src={MAP_EMBED}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="h-[520px] w-full border-0"
+            className="h-[560px] w-full border-0"
           />
 
           {/* Floating card */}
-          <div className="pointer-events-none absolute inset-0 flex items-stretch">
-            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:p-7">
+          <div className="pointer-events-none absolute inset-0 flex items-start">
+            <div className="pointer-events-auto m-4 w-full max-w-[300px] rounded-[24px] border border-white/70 bg-white/95 p-5 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:max-w-[30%] sm:p-6">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-xl font-black text-foreground">
                   Visit Our Office
@@ -893,25 +895,25 @@ function OfficeRow({
 
 function StatsStrip() {
   return (
-    <section className="pb-4">
+    <section className="py-10 lg:py-12">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-2 gap-4 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-8">
+        <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
             <div
               key={label}
               className={cn(
-                "flex items-center gap-4 sm:gap-5",
+                "flex flex-col items-center gap-2 text-center sm:items-start sm:text-left",
                 i > 0 && "sm:border-l sm:border-border/60 sm:pl-6",
               )}
             >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-                <Icon className="h-5 w-5" />
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                <Icon className="h-4 w-4" />
               </span>
               <div className="min-w-0">
-                <div className="font-display text-2xl font-black tabular-nums text-foreground sm:text-3xl">
+                <div className="font-display text-4xl font-black tabular-nums leading-none text-foreground sm:text-5xl lg:text-6xl">
                   {value}
                 </div>
-                <div className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                   {label}
                 </div>
               </div>
@@ -929,8 +931,8 @@ function StatsStrip() {
 
 function FaqSection() {
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
+    <section className="bg-white py-20 lg:py-32">
+      <div className="mx-auto w-[85%] max-w-[95rem] px-4 lg:px-6">
         <div className="text-center">
           <Eyebrow align="center">FAQ</Eyebrow>
           <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
@@ -942,7 +944,7 @@ function FaqSection() {
         <Accordion
           type="single"
           collapsible
-          className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-x-6 md:grid-cols-2"
+          className="mt-10 grid w-full grid-cols-1 gap-x-6 md:grid-cols-2"
         >
           {FAQS.map((f, i) => (
             <AccordionItem
