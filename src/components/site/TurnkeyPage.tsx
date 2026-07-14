@@ -114,21 +114,43 @@ function TurnkeyHero() {
             </div>
           </div>
 
-          {/* image — clean, premium, no floating cards */}
+          {/* image with vascular medical background + floating glass stat cards */}
           <div className="relative">
-            <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-primary/15 via-transparent to-primary/10 blur-2xl" />
+            <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-primary/20 via-transparent to-primary/10 blur-2xl" />
             <div className="relative overflow-hidden rounded-3xl shadow-[0_50px_100px_-40px_rgba(15,23,42,0.4)] ring-1 ring-black/5">
               <img
                 src={heroImg}
-                alt="Modern hospital facility delivered by AbuFarha"
+                alt="AbuFarha turnkey medical center with vascular network visualization"
                 width={1600}
                 height={1000}
                 className="h-[420px] w-full object-cover sm:h-[500px] lg:h-[560px]"
               />
-              {/* premium lighting */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-ink/30 via-transparent to-white/10" />
-              <div className="pointer-events-none absolute -top-16 -right-10 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-20 -left-16 h-80 w-80 rounded-full bg-primary/25 blur-3xl" />
+              <div className="pointer-events-none absolute -top-16 -right-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-20 -left-16 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+            </div>
+
+            {/* floating glass stat cards (2x2) */}
+            <div className="absolute right-3 top-6 grid grid-cols-2 gap-3 sm:right-6 sm:top-10 sm:gap-4 lg:right-8">
+              {HERO_STATS.map((s, i) => (
+                <motion.div
+                  key={`float-${s.label}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
+                  className="flex w-[130px] flex-col items-start rounded-2xl border border-white/70 bg-white/90 p-3.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl sm:w-[150px] sm:p-4"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15">
+                    <s.icon className="h-4 w-4" strokeWidth={2.2} />
+                  </div>
+                  <div className="mt-2 font-display text-[1.05rem] font-extrabold leading-none text-ink sm:text-[1.15rem]">
+                    {s.value}
+                  </div>
+                  <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    {s.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -183,11 +205,10 @@ function RegionalPresence() {
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_2.15fr] lg:items-start">
           <div>
-            <Eyebrow>Global Footprint</Eyebrow>
-            <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.5rem]">
+            <h2 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.5rem]">
               Our Presence
               <br />
-              <span className="text-primary">Across the World</span>
+              Across <span className="text-primary">the World</span>
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
               We have successfully supplied, installed and supported medical
