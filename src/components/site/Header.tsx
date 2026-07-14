@@ -54,7 +54,7 @@ const NAV: NavItem[] = [
     ],
   },
   { label: "Blog", href: "#" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const SOCIALS = [
