@@ -181,9 +181,7 @@ function CountrySelect({
                     className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
                   />
                   <span className="flex-1 truncate text-ink">{c.name}</span>
-                  <span className="tabular-nums text-xs text-muted-foreground">
-                    +{c.dialCode}
-                  </span>
+
                   {selected && <Check className="h-4 w-4 text-primary" />}
                 </button>
               );
