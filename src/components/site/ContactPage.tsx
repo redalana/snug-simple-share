@@ -123,10 +123,8 @@ function CountrySelect({
                   className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
                 />
                 <span className="truncate font-medium text-ink">{current.name}</span>
-                <span className="tabular-nums text-muted-foreground">
-                  (+{current.dialCode})
-                </span>
               </>
+
             ) : (
               <span className="text-muted-foreground">Select your country</span>
             )}
