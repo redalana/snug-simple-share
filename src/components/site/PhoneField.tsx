@@ -265,12 +265,14 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
 function formatExample(iso2: string, dialCode: string): string {
   try {
     const t = new AsYouType(iso2.toUpperCase() as CountryCode);
-    // fabricate a sample using the dial code for a hint
     getCountryCallingCode(iso2.toUpperCase() as CountryCode);
     t.input(`+${dialCode}1001234567`);
     const out = t.getNumber()?.formatInternational();
-    return out ? out.replace(/\d/g, (d, i) => (i < 3 ? d : "0")) : `+${dialCode} 000 000 0000`;
+    if (!out) return "00 000 0000";
+    return out
+      .replace(new RegExp(`^\\+${dialCode}\\s*`), "")
+      .replace(/\d/g, "0");
   } catch {
-    return `+${dialCode} 000 000 0000`;
+    return "00 000 0000";
   }
 }
