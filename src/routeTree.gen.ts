@@ -17,6 +17,7 @@ import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -62,6 +63,11 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProductsRoute,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
   id: '/programs/stroke-care',
   path: '/programs/stroke-care',
@@ -89,11 +95,11 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteWithChildren
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -101,6 +107,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/blog': typeof BlogIndexRoute
   '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
@@ -115,6 +122,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
+  '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
@@ -130,11 +138,11 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
+    | '/blog/'
     | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/blog'
     | '/categories'
     | '/contact'
     | '/hospital-readiness-assessment'
@@ -142,6 +150,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
+    | '/blog'
     | '/products'
   id:
     | '__root__'
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
+    | '/blog/'
     | '/products/'
   fileRoutesById: FileRoutesById
 }
@@ -227,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/programs/stroke-care': {
       id: '/programs/stroke-care'
       path: '/programs/stroke-care'
@@ -253,10 +270,12 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
