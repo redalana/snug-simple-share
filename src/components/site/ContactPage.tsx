@@ -931,8 +931,8 @@ function StatsStrip() {
 
 function FaqSection() {
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
+    <section className="bg-white py-20 lg:py-32">
+      <div className="mx-auto w-[85%] max-w-[95rem] px-4 lg:px-6">
         <div className="text-center">
           <Eyebrow align="center">FAQ</Eyebrow>
           <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
@@ -944,7 +944,7 @@ function FaqSection() {
         <Accordion
           type="single"
           collapsible
-          className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-x-6 md:grid-cols-2"
+          className="mt-10 grid w-full grid-cols-1 gap-x-6 md:grid-cols-2"
         >
           {FAQS.map((f, i) => (
             <AccordionItem
