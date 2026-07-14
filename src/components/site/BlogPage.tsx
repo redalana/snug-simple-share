@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Calendar,
@@ -11,198 +12,14 @@ import {
   MessageCircle,
   Search,
 } from "lucide-react";
-import heroCathlab from "@/assets/hero-cathlab.jpg";
-import solMri from "@/assets/sol-mri.jpg";
-import solCt from "@/assets/sol-ct.jpg";
-import solPetct from "@/assets/sol-petct.jpg";
-import solCarm from "@/assets/sol-carm.jpg";
-import solOr from "@/assets/sol-or.jpg";
-import solUltrasound from "@/assets/sol-ultrasound.jpg";
-import solMammo from "@/assets/sol-mammo.jpg";
-import solXray from "@/assets/sol-xray.jpg";
-import solDexa from "@/assets/sol-dexa.jpg";
-import solEswl from "@/assets/sol-eswl.jpg";
 import solDes from "@/assets/sol-des.jpg";
-import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
-import abufarhaHq from "@/assets/abufarha-hq.jpg";
-
-type Slide = {
-  image: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  readTime: string;
-  date: string;
-  focus?: string;
-};
-
-const SLIDES: Slide[] = [
-  {
-    image: heroCathlab,
-    category: "Cath Lab",
-    title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
-    excerpt:
-      "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
-    readTime: "8 min read",
-    date: "May 20, 2026",
-    focus: "center",
-  },
-  {
-    image: solMri,
-    category: "MRI",
-    title: "Choosing Between 1.5T and 3T MRI for Your Hospital",
-    excerpt:
-      "A field-tested comparison of image quality, throughput, siting costs, and clinical fit — so you buy the scanner your program actually needs.",
-    readTime: "7 min read",
-    date: "May 15, 2026",
-    focus: "center",
-  },
-  {
-    image: solPetct,
-    category: "PET/CT",
-    title: "Building a Modern Molecular Imaging Program from the Ground Up",
-    excerpt:
-      "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
-    readTime: "9 min read",
-    date: "May 10, 2026",
-    focus: "center",
-  },
-  {
-    image: solOr,
-    category: "Turnkey Projects",
-    title: "Turnkey Hospital Departments: From Planning to Commissioning",
-    excerpt:
-      "How we deliver complete departments on time, on budget, and to the highest clinical standards across Africa and the Middle East.",
-    readTime: "6 min read",
-    date: "May 5, 2026",
-    focus: "center 40%",
-  },
-];
-
-
-type Article = {
-  image: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  readTime: string;
-  date: string;
-};
-
-const LATEST: Article[] = [
-  {
-    image: solMri,
-    category: "MRI",
-    title: "MRI Technology Explained: A Complete Guide for Healthcare Providers",
-    excerpt:
-      "Understand MRI technology, applications, and how to choose the right system for your hospital.",
-    readTime: "7 min read",
-    date: "May 18, 2026",
-  },
-  {
-    image: solCt,
-    category: "CT Scan",
-    title: "CT Scanners: Key Features, Benefits & Buying Considerations",
-    excerpt:
-      "A practical guide to selecting the best CT scanner for your clinical and budgetary needs.",
-    readTime: "7 min read",
-    date: "May 15, 2026",
-  },
-  {
-    image: solPetct,
-    category: "PET/CT",
-    title: "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
-    excerpt:
-      "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
-    readTime: "6 min read",
-    date: "May 12, 2026",
-  },
-  {
-    image: solOr,
-    category: "Turnkey Projects",
-    title: "Turnkey Hospital Projects: From Planning to Commissioning",
-    excerpt:
-      "How we deliver complete healthcare facilities on time, on budget, and to the highest standards.",
-    readTime: "6 min read",
-    date: "May 10, 2026",
-  },
-  {
-    image: beyondCathlab,
-    category: "After Sales",
-    title: "After-Sales Support That Keeps Your Equipment Running",
-    excerpt:
-      "Our commitment to maintenance, spare parts, technical support, and maximum uptime.",
-    readTime: "6 min read",
-    date: "May 8, 2026",
-  },
-  {
-    image: whyCathlab,
-    category: "Biomedical",
-    title: "The Role of Biomedical Engineering in Modern Healthcare",
-    excerpt:
-      "Why biomedical engineering is essential for safety, efficiency, and compliance.",
-    readTime: "5 min read",
-    date: "May 6, 2026",
-  },
-];
-
-const MORE: Article[] = [
-  {
-    image: solUltrasound,
-    category: "Ultrasound",
-    title: "Advancements in Ultrasound Technology for Better Diagnosis",
-    excerpt:
-      "New transducer designs and AI-assisted imaging are reshaping bedside diagnostics.",
-    readTime: "6 min read",
-    date: "May 5, 2026",
-  },
-  {
-    image: solOr,
-    category: "Operating Room",
-    title: "Modern Operating Room Equipment: Key Technologies",
-    excerpt:
-      "From integrated OR systems to advanced surgical lights — what a modern theatre needs.",
-    readTime: "6 min read",
-    date: "May 3, 2026",
-  },
-  {
-    image: solCarm,
-    category: "Imaging Solutions",
-    title: "CT vs MRI: Which Imaging Solution is Right for Your Hospital?",
-    excerpt:
-      "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
-    readTime: "6 min read",
-    date: "May 1, 2026",
-  },
-  {
-    image: solXray,
-    category: "Technical Support",
-    title: "Preventive Maintenance: The Key to Equipment Reliability",
-    excerpt:
-      "A structured PM program reduces downtime, extends lifetime and protects patient safety.",
-    readTime: "6 min read",
-    date: "Apr 29, 2026",
-  },
-  {
-    image: solDexa,
-    category: "Radiation Therapy",
-    title: "Radiation Therapy Equipment: Latest Innovations",
-    excerpt:
-      "How new linear accelerators and planning software are improving oncology outcomes.",
-    readTime: "6 min read",
-    date: "Apr 27, 2026",
-  },
-  {
-    image: abufarhaHq,
-    category: "Hospital Planning",
-    title: "Planning a New Hospital? Key Considerations for Success",
-    excerpt:
-      "Site readiness, workflow design and technology strategy — planned together, not in silos.",
-    readTime: "6 min read",
-    date: "Apr 25, 2026",
-  },
-];
+import {
+  FEATURED_ARTICLES,
+  LATEST_ARTICLES,
+  MORE_ARTICLES,
+  type Article,
+} from "@/lib/blog";
 
 const SORTS = ["Latest", "Oldest", "Most Popular"] as const;
 
@@ -211,9 +28,9 @@ export function BlogPage() {
     <div className="bg-white">
       <HeroSlider />
       <SearchBar />
-      <ArticleGrid heading="Latest Articles" items={LATEST} />
+      <ArticleGrid heading="Latest Articles" items={LATEST_ARTICLES} />
       <CTABand />
-      <ArticleGrid heading="More Articles" items={MORE} />
+      <ArticleGrid heading="More Articles" items={MORE_ARTICLES} />
       <Pagination />
       <Newsletter />
     </div>
@@ -225,7 +42,8 @@ export function BlogPage() {
 function HeroSlider() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const count = SLIDES.length;
+  const slides = FEATURED_ARTICLES;
+  const count = slides.length;
 
   const next = useCallback(() => setActive((i) => (i + 1) % count), [count]);
   const prev = useCallback(
@@ -239,7 +57,7 @@ function HeroSlider() {
     return () => clearInterval(id);
   }, [next, paused]);
 
-  const slide = SLIDES[active];
+  const slide = slides[active];
 
   return (
     <section className="bg-white pt-[100px] xl:pt-[150px]">
@@ -252,7 +70,7 @@ function HeroSlider() {
           <AnimatePresence mode="sync">
             <motion.img
               key={active}
-              src={slide.image}
+              src={slide.coverImage}
               alt={slide.title}
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -263,12 +81,9 @@ function HeroSlider() {
             />
           </AnimatePresence>
 
-          {/* Softer left gradient for legibility — keeps equipment visible */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/35 to-transparent" />
 
-          {/* content — generous safe area */}
           <div className="relative z-10 flex h-full max-w-2xl flex-col justify-center px-8 py-16 sm:px-14 sm:py-20 lg:px-16 lg:py-20">
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -288,24 +103,24 @@ function HeroSlider() {
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-5 text-xs font-medium text-white/80">
                   <span className="inline-flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5" /> {slide.readTime}
+                    <Clock className="h-3.5 w-3.5" /> {slide.readingTime}
                   </span>
                   <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" /> {slide.date}
+                    <Calendar className="h-3.5 w-3.5" /> {slide.publishedDate}
                   </span>
                 </div>
-                <button
-                  type="button"
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: slide.slug }}
                   className="group mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_40px_-16px_rgba(220,38,38,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
                   Read Article
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* arrows */}
           <button
             type="button"
             aria-label="Previous slide"
@@ -323,11 +138,10 @@ function HeroSlider() {
             <ChevronRight className="h-5 w-5" />
           </button>
 
-          {/* dots */}
           <div className="absolute inset-x-0 bottom-5 z-20 flex justify-center gap-2">
-            {SLIDES.map((s, i) => (
+            {slides.map((s, i) => (
               <button
-                key={s.title}
+                key={s.slug}
                 type="button"
                 aria-label={`Show slide ${i + 1}`}
                 onClick={() => setActive(i)}
@@ -423,9 +237,9 @@ function ArticleGrid({ heading, items }: { heading: string; items: Article[] }) 
         <h2 className="mb-6 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-[1.75rem]">
           {heading}
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((a) => (
-            <ArticleCard key={a.title} a={a} />
+            <ArticleCard key={a.slug} a={a} />
           ))}
         </div>
       </div>
@@ -435,42 +249,52 @@ function ArticleGrid({ heading, items }: { heading: string; items: Article[] }) 
 
 function ArticleCard({ a }: { a: Article }) {
   return (
-    <motion.a
-      href="#"
+    <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.35)]"
     >
-      <div className="aspect-[16/10] w-full overflow-hidden bg-secondary">
-        <img
-          src={a.image}
-          alt={a.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      </div>
-      <div className="flex flex-1 flex-col p-5">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
-          {a.category}
-        </span>
-        <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
-          {a.title}
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {a.excerpt}
-        </p>
-        <div className="mt-5 flex items-center gap-5 border-t border-border pt-4 text-xs font-medium text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <Clock className="h-3.5 w-3.5" /> {a.readTime}
+      <Link
+        to="/blog/$slug"
+        params={{ slug: a.slug }}
+        className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.35)]"
+      >
+        <div className="aspect-[16/10] w-full overflow-hidden bg-secondary">
+          <img
+            src={a.coverImage}
+            alt={a.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+        <div className="flex flex-1 flex-col p-5">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
+            {a.category}
           </span>
-          <span className="inline-flex items-center gap-1.5">
-            <Calendar className="h-3.5 w-3.5" /> {a.date}
+          <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
+            {a.title}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {a.excerpt}
+          </p>
+          <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+            <div className="flex items-center gap-4 border-t border-border pt-4 text-xs font-medium text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5" /> {a.readingTime}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5" /> {a.publishedDate}
+              </span>
+            </div>
+          </div>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-primary">
+            Read More
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
-      </div>
-    </motion.a>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -495,13 +319,13 @@ function CTABand() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href="#"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"

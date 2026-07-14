@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -71,26 +72,33 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProductsRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/projects': typeof ProjectsRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/products': typeof ProductsIndexRoute
@@ -98,12 +106,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/products/': typeof ProductsIndexRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
+    | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
     | '/products/'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hospital-readiness-assessment'
     | '/projects'
+    | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
     | '/products'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
+    | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
     | '/products/'
@@ -148,7 +160,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CategoriesRoute: typeof CategoriesRoute
   ContactRoute: typeof ContactRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
@@ -229,8 +241,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsSlugRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface ProductsRouteChildren {
   ProductsSlugRoute: typeof ProductsSlugRoute
@@ -248,7 +277,7 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   CategoriesRoute: CategoriesRoute,
   ContactRoute: ContactRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
