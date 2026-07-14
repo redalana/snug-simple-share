@@ -978,6 +978,17 @@ function FaqSection() {
 // ----------------------------------------------------------------------
 
 export function ContactPage() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== "#contact-form") return;
+    const id = window.setTimeout(() => {
+      document
+        .getElementById("contact-form")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
     <>
       <Hero />
@@ -989,3 +1000,4 @@ export function ContactPage() {
     </>
   );
 }
+
