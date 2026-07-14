@@ -392,9 +392,6 @@ const WHY = [
   { icon: Handshake, title: "Long-Term Partnership", desc: "Reliable after-sales support with genuine parts and maintenance." },
 ];
 
-function Handshake({ className, strokeWidth }: { className?: string; strokeWidth?: number }) {
-  return <ShieldCheck className={className} strokeWidth={strokeWidth} />;
-}
 
 function WhyChoose() {
   return (
