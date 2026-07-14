@@ -474,18 +474,18 @@ function ContactBar() {
   return (
     <section className="relative -mt-8 pb-4">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-6 sm:p-6">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-4 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-5">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-secondary/40"
+              className="group flex items-center gap-4 rounded-xl p-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
             >
               <span
                 className={cn(
-                  "grid h-14 w-14 shrink-0 place-items-center rounded-full text-white transition-transform group-hover:scale-105",
+                  "grid h-14 w-14 shrink-0 place-items-center rounded-full text-white shadow-[0_10px_24px_-12px_rgba(15,23,42,0.4)] transition-transform duration-200 ease-out group-hover:scale-105",
                   color,
                 )}
               >
@@ -493,10 +493,12 @@ function ContactBar() {
               </span>
               <div className="min-w-0">
                 <div className="text-[15px] font-bold text-foreground">{title}</div>
-                <div className="mt-0.5 text-sm text-muted-foreground">
+                <div className="mt-0.5 truncate text-sm text-muted-foreground">
                   {lines[0]}
                 </div>
-                <div className="text-[13px] text-muted-foreground/80">{lines[1]}</div>
+                <div className="truncate text-[13px] text-muted-foreground/80">
+                  {lines[1]}
+                </div>
               </div>
             </a>
           ))}
@@ -505,6 +507,7 @@ function ContactBar() {
     </section>
   );
 }
+
 
 // ----------------------------------------------------------------------
 // Section: Form + Why choose
