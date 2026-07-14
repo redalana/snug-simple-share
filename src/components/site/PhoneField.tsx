@@ -59,6 +59,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
       defaultCountry: "eg",
       value,
       countries: defaultCountries,
+      disableDialCodeAndPrefix: true,
       onChange: (data) => onChange(data.phone),
     });
 

@@ -337,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[560px] lg:min-h-[600px]">
+        <div className="relative min-h-[560px] overflow-hidden rounded-[36px] sm:min-h-[620px] lg:min-h-[680px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
@@ -345,8 +345,10 @@ function Hero() {
               src={s.src}
               alt={s.alt}
               loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              style={{ objectPosition: "70% center" }}
               className={cn(
-                "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
                 i === slide ? "opacity-100" : "opacity-0",
               )}
             />
@@ -369,15 +371,16 @@ function Hero() {
             </div>
           )}
 
-          {/* Gradient scrim */}
+          {/* Gradient scrim — lighter on the right so equipment stays visible */}
           <div
             aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.68) 32%, rgba(255,255,255,0.32) 55%, rgba(255,255,255,0.02) 78%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.78) 30%, rgba(255,255,255,0.38) 55%, rgba(255,255,255,0.08) 78%, rgba(255,255,255,0) 100%)",
             }}
           />
+
 
           <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1.05fr]">
             <motion.div
@@ -471,14 +474,15 @@ function ContactBar() {
   return (
     <section className="relative -mt-8 pb-4">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-7">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-9">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)]"
+              aria-label={`${title}: ${lines[0]}`}
+              className="group flex h-full items-center gap-4 rounded-xl p-7 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               <span
                 className={cn(
@@ -504,6 +508,7 @@ function ContactBar() {
     </section>
   );
 }
+
 
 
 // ----------------------------------------------------------------------
@@ -568,8 +573,9 @@ function FormBlock() {
     "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
-    <section id="contact-form" className="bg-secondary/30 py-20 lg:py-28">
+    <section id="contact-form" className="scroll-mt-24 bg-secondary/30 py-[80px] lg:py-[80px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           {/* Form */}
           <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
@@ -739,12 +745,22 @@ function FormBlock() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {submitting ? "Sending..." : "Submit Inquiry"}
-                  <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  {submitting ? (
+                    <>
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Submit Inquiry
+                      <Send className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
+                    </>
+                  )}
                 </button>
               </div>
+
             </form>
           </div>
 
@@ -793,7 +809,7 @@ function FieldError({ msg }: { msg: string }) {
 
 function OfficeMap() {
   return (
-    <section className="bg-white py-14 lg:py-16">
+    <section className="bg-white py-[120px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
@@ -895,7 +911,7 @@ function OfficeRow({
 
 function StatsStrip() {
   return (
-    <section className="py-10 lg:py-12">
+    <section className="py-[90px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
@@ -931,7 +947,7 @@ function StatsStrip() {
 
 function FaqSection() {
   return (
-    <section className="bg-white py-20 lg:py-32">
+    <section className="bg-white py-[110px]">
       <div className="mx-auto w-[85%] max-w-[95rem] px-4 lg:px-6">
         <div className="text-center">
           <Eyebrow align="center">FAQ</Eyebrow>
@@ -972,6 +988,17 @@ function FaqSection() {
 // ----------------------------------------------------------------------
 
 export function ContactPage() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== "#contact-form") return;
+    const id = window.setTimeout(() => {
+      document
+        .getElementById("contact-form")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
     <>
       <Hero />
@@ -983,3 +1010,4 @@ export function ContactPage() {
     </>
   );
 }
+
