@@ -46,7 +46,8 @@ import imgProject2 from "@/assets/project-2.jpg";
 import imgProject3 from "@/assets/project-3.jpg";
 import imgProject4 from "@/assets/beyond-cathlab.jpg";
 import imgEngineer from "@/assets/beyond-cathlab.jpg";
-import imgCtaBg from "@/assets/footer-cathlab.jpg";
+import ctaAsset from "@/assets/footer-cathlab.jpg.asset.json";
+const imgCtaBg = ctaAsset.url;
 
 
 /* ------------------------------------------------------------------ Hero */
