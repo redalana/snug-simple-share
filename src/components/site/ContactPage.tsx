@@ -799,7 +799,7 @@ function FieldError({ msg }: { msg: string }) {
 
 function OfficeMap() {
   return (
-    <section className="bg-white py-14 lg:py-16">
+    <section className="bg-white py-[120px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
