@@ -568,7 +568,7 @@ function FormBlock() {
   };
 
   const inputCls =
-    "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10";
+    "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
     <section id="contact-form" className="bg-secondary/30 py-16 lg:py-20">
