@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
+  ChevronLeft,
+  ChevronUp,
   BarChart3,
   Calendar,
   CheckCircle2,
@@ -12,6 +14,7 @@ import {
   DollarSign,
   Facebook,
   Linkedin,
+  Loader2,
   Link2,
   Mail,
   MessageCircle,
@@ -66,15 +69,18 @@ export function BlogArticlePage({ slug }: { slug: string }) {
 
   return (
     <div className="bg-white">
+      <ReadingProgress />
+      <ArticleLightbox />
       <Breadcrumb category={article.category} title={article.title} />
       <section className="bg-white pb-14 lg:pb-20">
         <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10 lg:pt-10 xl:gap-12">
           <div className="min-w-0">
             <Hero article={article} />
-            <div className="mt-14 space-y-12">
+            <div className="mt-14 max-w-[78ch] space-y-14" data-article-content>
               {article.content.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
+              <AuthorReview />
             </div>
           </div>
           <Sidebar article={article} related={related} />
@@ -82,6 +88,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
       </section>
       <ExpertCTA />
       <NewsletterBand />
+      <BackToTop />
     </div>
   );
 }
@@ -133,6 +140,9 @@ function Hero({ article }: { article: Article }) {
             <Calendar className="h-3.5 w-3.5" /> {article.publishedDate}
           </span>
           <span className="inline-flex items-center gap-1.5">
+            Updated {article.lastUpdated ?? article.publishedDate}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" /> {article.readingTime}
           </span>
           <span className="inline-flex items-center gap-1.5">
@@ -149,10 +159,11 @@ function Hero({ article }: { article: Article }) {
         className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.4)] lg:aspect-[5/4]"
       >
         <img
+          data-article-image
           src={article.coverImage}
           alt={article.title}
           style={{ objectPosition: article.focus ?? "center center" }}
-          className="h-full w-full object-cover"
+          className="h-full w-full cursor-zoom-in object-cover"
         />
       </motion.div>
     </div>
@@ -253,9 +264,12 @@ function Block({ block }: { block: ContentBlock }) {
             >
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
                 <img
+                  data-article-image
                   src={block.image}
                   alt={block.imageAlt ?? block.text}
-                  className="h-full w-full object-cover"
+                  width="520"
+                  height="390"
+                  className="h-full w-full cursor-zoom-in object-cover"
                   loading="lazy"
                 />
               </div>
@@ -297,10 +311,13 @@ function Block({ block }: { block: ContentBlock }) {
           {block.image && (
             <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
               <img
+                data-article-image
                 src={block.image}
                 alt={block.imageAlt ?? ""}
                 loading="lazy"
-                className="h-full w-full object-cover"
+                width="520"
+                height="390"
+                className="h-full w-full cursor-zoom-in object-cover"
               />
             </div>
           )}
@@ -356,10 +373,13 @@ function Block({ block }: { block: ContentBlock }) {
         <figure>
           <div className="overflow-hidden rounded-2xl bg-secondary">
             <img
+              data-article-image
               src={block.src}
               alt={block.alt}
               loading="lazy"
-              className="h-full w-full object-cover"
+              width="1200"
+              height="675"
+              className="h-full w-full cursor-zoom-in object-cover"
             />
           </div>
           {block.caption && (
@@ -432,7 +452,7 @@ function PriceTable({
       <div className="overflow-hidden rounded-2xl border border-border">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm">
-            <thead>
+            <thead className="lg:sticky lg:top-0 lg:z-10">
               <tr className="bg-secondary text-left">
                 {headers.map((h) => (
                   <th
@@ -446,7 +466,7 @@ function PriceTable({
             </thead>
             <tbody>
               {rows.map((row, i) => (
-                <tr key={i} className="border-t border-border">
+                <tr key={i} className="border-t border-border transition-colors hover:bg-secondary/60">
                   {row.map((cell, j) => {
                     const isHighlight =
                       highlightLastColumn && j === row.length - 1;
@@ -581,7 +601,8 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
             <button
               type="button"
               onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+              aria-expanded={isOpen}
+              className="flex min-h-16 w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-secondary/40"
             >
               <span className="font-display text-[15px] font-bold text-ink">
                 {it.q}
@@ -592,11 +613,19 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
                 <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
               )}
             </button>
-            {isOpen && (
-              <div className="px-5 pb-4 text-[15px] leading-relaxed text-foreground/80">
-                {it.a}
-              </div>
-            )}
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-5 text-[15px] leading-relaxed text-foreground/80">{it.a}</div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}
@@ -690,7 +719,7 @@ function RelatedArticles({ items }: { items: Article[] }) {
             key={a.slug}
             to="/blog/$slug"
             params={{ slug: a.slug }}
-            className="group flex gap-3"
+            className="group flex gap-3 rounded-lg p-1 transition-shadow hover:shadow-[0_12px_30px_-22px_rgba(15,23,42,0.45)]"
           >
             <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-secondary">
               <img
@@ -724,7 +753,7 @@ function RelatedArticles({ items }: { items: Article[] }) {
 }
 
 function SidebarNewsletter() {
-  const [email, setEmail] = useState("");
+  const form = useNewsletterForm();
   return (
     <div className="overflow-hidden rounded-2xl bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-5 ring-1 ring-primary/15">
       <p className="font-display text-base font-extrabold leading-snug text-ink">
@@ -734,24 +763,27 @@ function SidebarNewsletter() {
         Subscribe to our newsletter and never miss an important update.
       </p>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={form.submit}
         className="mt-4 space-y-2.5"
       >
         <input
           type="email"
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={(e) => form.setEmail(e.target.value)}
           placeholder="Your email address"
           className="h-11 w-full rounded-full border border-border bg-white px-4 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10"
         />
         <button
           type="submit"
-          className="inline-flex h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground transition hover:-translate-y-0.5 hover:bg-primary-dark"
+          disabled={form.loading}
+          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-bold text-primary-foreground transition hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
         >
-          Subscribe
+          {form.loading && <Loader2 className="h-4 w-4 animate-spin" />}
+          {form.loading ? "Subscribing…" : "Subscribe"}
         </button>
       </form>
+      {form.message && <p role="status" className={`mt-3 text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}>{form.message}</p>}
       <div className="mt-4 aspect-[16/8] w-full overflow-hidden rounded-xl bg-secondary">
         <img
           src={whyCathlab}
@@ -787,13 +819,16 @@ function ExpertCTA() {
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link
                 to="/contact"
+                hash="contact-form"
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <a
-                href="#"
+                href={`https://wa.me/962799741318?text=${encodeURIComponent("I've just read your article and I'd like to discuss this system.")}`}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"
               >
                 <WhatsAppIcon className="h-4 w-4" />
@@ -816,7 +851,7 @@ function ExpertCTA() {
 }
 
 function NewsletterBand() {
-  const [email, setEmail] = useState("");
+  const form = useNewsletterForm();
   return (
     <section className="bg-white pb-16 lg:pb-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
@@ -836,23 +871,26 @@ function NewsletterBand() {
             </div>
             <form
               className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={form.submit}
             >
               <input
                 type="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={form.email}
+                onChange={(e) => form.setEmail(e.target.value)}
                 placeholder="Your email address"
                 className="h-12 w-full min-w-[240px] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[260px]"
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                disabled={form.loading}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
               >
-                Subscribe
+                {form.loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                {form.loading ? "Subscribing…" : "Subscribe"}
               </button>
             </form>
+            {form.message && <p role="status" className={`text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}>{form.message}</p>}
             <div className="hidden h-32 w-56 shrink-0 overflow-hidden rounded-2xl lg:block">
               <img
                 src={solDes}
