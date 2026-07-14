@@ -34,6 +34,7 @@ type Slide = {
   excerpt: string;
   readTime: string;
   date: string;
+  focus?: string;
 };
 
 const SLIDES: Slide[] = [
@@ -45,6 +46,7 @@ const SLIDES: Slide[] = [
       "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
     readTime: "8 min read",
     date: "May 20, 2026",
+    focus: "center",
   },
   {
     image: solMri,
@@ -54,6 +56,7 @@ const SLIDES: Slide[] = [
       "A field-tested comparison of image quality, throughput, siting costs, and clinical fit — so you buy the scanner your program actually needs.",
     readTime: "7 min read",
     date: "May 15, 2026",
+    focus: "center",
   },
   {
     image: solPetct,
@@ -63,6 +66,7 @@ const SLIDES: Slide[] = [
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
     readTime: "9 min read",
     date: "May 10, 2026",
+    focus: "center",
   },
   {
     image: solOr,
@@ -72,8 +76,10 @@ const SLIDES: Slide[] = [
       "How we deliver complete departments on time, on budget, and to the highest clinical standards across Africa and the Middle East.",
     readTime: "6 min read",
     date: "May 5, 2026",
+    focus: "center 40%",
   },
 ];
+
 
 type Article = {
   image: string;
