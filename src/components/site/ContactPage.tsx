@@ -296,15 +296,10 @@ const OFFICE = {
   mapQuery: "AbuFarha Medical Supplies, Queen Rania Street, Amman, Jordan",
 };
 
-const MAP_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}&output=embed`;
-const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}`;
-const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-  OFFICE.mapQuery,
-)}`;
+const OFFICE_COORDS = { lat: 32.0239137, lng: 35.8507975 };
+const MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_COORDS.lat},${OFFICE_COORDS.lng}&z=17&output=embed`;
+const MAP_LINK = "https://maps.app.goo.gl/7bX4sKYX38MBWhF17";
+const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_COORDS.lat},${OFFICE_COORDS.lng}&destination_place_id=ChIJh2jUIVOfHBURCIAjP6fryU8`;
 
 // ----------------------------------------------------------------------
 // Section: Hero (supports auto-rotating slides)
