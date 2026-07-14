@@ -44,7 +44,7 @@ export function GlobalPresence() {
             </h2>
           </div>
           <a
-            href="#contact"
+            href="/contact"
             className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
           >
             View all countries

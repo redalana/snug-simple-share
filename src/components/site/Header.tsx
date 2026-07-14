@@ -54,7 +54,7 @@ const NAV: NavItem[] = [
     ],
   },
   { label: "Blog", href: "#" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const SOCIALS = [
@@ -196,7 +196,7 @@ export function Header() {
 
             {/* Social → Button : 28px */}
             <a
-              href="#contact"
+              href="/contact"
               className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
@@ -317,7 +317,7 @@ export function Header() {
                   </a>
                 </div>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
                 >

@@ -460,7 +460,7 @@ export function BeyondEquipment() {
 
                   <motion.a
                     variants={panelItem}
-                    href="#contact"
+                    href="/contact"
                     className="group mt-8 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     {active.cta}
@@ -562,7 +562,7 @@ export function BeyondEquipment() {
                     </div>
                   </div>
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="group mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-primary"
                   >
                     {a.cta}

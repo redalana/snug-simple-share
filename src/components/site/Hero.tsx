@@ -129,7 +129,7 @@ export function Hero() {
                 View Projects
               </a>
               <a
-                href="#contact"
+                href="/contact"
                 className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 <PhoneCall className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />

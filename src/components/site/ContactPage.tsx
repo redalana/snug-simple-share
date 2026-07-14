@@ -1,0 +1,933 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
+import { toast } from "sonner";
+import {
+  Phone,
+  Headphones,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  ShieldCheck,
+  Zap,
+  UserCheck,
+  Globe2,
+  Building2,
+  ArrowRight,
+  Navigation,
+  ExternalLink,
+  User,
+  Building,
+  ChevronDown,
+  Check,
+  Search,
+  Play,
+  Home as HomeIcon,
+  Globe,
+  HeartPulse,
+  Award,
+} from "lucide-react";
+import {
+  defaultCountries,
+  parseCountry,
+  FlagImage,
+} from "react-international-phone";
+import "react-international-phone/style.css";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { PhoneField } from "@/components/site/PhoneField";
+import { Eyebrow } from "@/components/site/Eyebrow";
+import { cn } from "@/lib/utils";
+import { geoService } from "@/lib/services/geoService";
+import heroCathLab from "@/assets/hero-cathlab.jpg";
+
+// ----------------------------------------------------------------------
+// Country selector (searchable, flag + dial code) — used for the Country
+// field. Phone field is handled by <PhoneField />.
+// ----------------------------------------------------------------------
+
+const COUNTRIES = defaultCountries
+  .map(parseCountry)
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+function CountrySelect({
+  value,
+  onChange,
+  hasError,
+}: {
+  value: string;
+  onChange: (iso2: string) => void;
+  hasError?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const current = useMemo(
+    () => COUNTRIES.find((c) => c.iso2 === value) ?? null,
+    [value],
+  );
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return COUNTRIES;
+    const digits = q.replace(/[^\d]/g, "");
+    return COUNTRIES.filter(
+      (c) =>
+        c.name.toLowerCase().includes(q) ||
+        c.iso2.includes(q) ||
+        (digits && c.dialCode.includes(digits)) ||
+        `+${c.dialCode}`.includes(q),
+    );
+  }, [query]);
+
+  useEffect(() => {
+    if (open) setTimeout(() => searchRef.current?.focus(), 50);
+    else setQuery("");
+  }, [open]);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          className={cn(
+            "flex h-12 w-full items-center justify-between rounded-xl border border-border bg-secondary/30 px-3.5 text-left text-sm transition-all duration-200",
+            "hover:border-primary/40 hover:bg-secondary/40",
+            "focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10",
+            hasError && "border-destructive",
+          )}
+        >
+          <span className="flex min-w-0 items-center gap-2.5">
+            {current ? (
+              <>
+                <FlagImage
+                  iso2={current.iso2}
+                  className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
+                />
+                <span className="truncate font-medium text-ink">{current.name}</span>
+                <span className="tabular-nums text-muted-foreground">
+                  (+{current.dialCode})
+                </span>
+              </>
+            ) : (
+              <span className="text-muted-foreground">Select your country</span>
+            )}
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
+              open && "rotate-180",
+            )}
+          />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        sideOffset={8}
+        className="w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
+        <div className="sticky top-0 z-10 border-b border-border/70 bg-white p-2.5">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              ref={searchRef}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search country"
+              className="h-10 rounded-lg border-border bg-secondary/40 pl-9 text-sm"
+            />
+          </div>
+        </div>
+        <div className="max-h-[260px] overflow-y-auto overscroll-contain p-1.5">
+          {filtered.length === 0 ? (
+            <p className="px-3 py-6 text-center text-sm text-muted-foreground">
+              No countries found
+            </p>
+          ) : (
+            filtered.map((c) => {
+              const selected = c.iso2 === value;
+              return (
+                <button
+                  key={c.iso2}
+                  type="button"
+                  onClick={() => {
+                    onChange(c.iso2);
+                    setOpen(false);
+                  }}
+                  className={cn(
+                    "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors hover:bg-primary/5",
+                    selected && "bg-primary/8 font-semibold",
+                  )}
+                >
+                  <FlagImage
+                    iso2={c.iso2}
+                    className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
+                  />
+                  <span className="flex-1 truncate text-ink">{c.name}</span>
+                  <span className="tabular-nums text-xs text-muted-foreground">
+                    +{c.dialCode}
+                  </span>
+                  {selected && <Check className="h-4 w-4 text-primary" />}
+                </button>
+              );
+            })
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Data
+// ----------------------------------------------------------------------
+
+const INQUIRY_TYPES = [
+  "Product Inquiry",
+  "Request a Quote",
+  "Service & Maintenance",
+  "Spare Parts",
+  "Turnkey Project",
+  "Training Request",
+  "Partnership / Distributor",
+  "Other",
+];
+
+const SCHEMA = z.object({
+  fullName: z.string().trim().min(2, "Enter your full name").max(120),
+  company: z.string().trim().min(2, "Enter your hospital or company").max(160),
+  country: z.string().trim().min(2, "Select your country"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Enter your phone number")
+    .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number"),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  inquiry: z.string().min(1, "Select an inquiry type"),
+  message: z.string().trim().min(10, "Add a short message (min 10 chars)").max(1000),
+});
+
+const WHY = [
+  {
+    icon: Zap,
+    title: "Fast Response",
+    desc: "We respond to all inquiries within 24 hours.",
+  },
+  {
+    icon: UserCheck,
+    title: "Certified Engineers",
+    desc: "Highly trained & certified biomedical engineers.",
+  },
+  {
+    icon: Globe2,
+    title: "Africa & Middle East Coverage",
+    desc: "Serving 25+ countries across Africa & the Middle East.",
+  },
+  {
+    icon: Building2,
+    title: "Turnkey Solutions",
+    desc: "From planning to installation and training.",
+  },
+  {
+    icon: Headphones,
+    title: "After Sales Support",
+    desc: "Long-term support you can rely on.",
+  },
+];
+
+const STATS = [
+  { icon: Globe, value: "25+", label: "Countries Served" },
+  { icon: Building2, value: "1,500+", label: "Systems Installed" },
+  { icon: HeartPulse, value: "500+", label: "Healthcare Facilities" },
+  { icon: Award, value: "15+", label: "Years of Experience" },
+];
+
+const FAQS = [
+  {
+    q: "How fast do you respond to inquiries?",
+    a: "Our team acknowledges every inquiry within one business day, and most are answered in a few hours during working hours.",
+  },
+  {
+    q: "Which countries do you deliver to?",
+    a: "We deliver across the Middle East and Africa, with active projects in 25+ countries and logistics partners for the rest of the region.",
+  },
+  {
+    q: "Do you supply refurbished medical equipment?",
+    a: "Yes. We supply both brand-new and certified refurbished systems, always with OEM-grade parts, installation and warranty.",
+  },
+  {
+    q: "Is training included with the equipment?",
+    a: "Every installation includes clinical and biomedical training so your team can operate and maintain the system with confidence.",
+  },
+  {
+    q: "Do you provide installation and commissioning?",
+    a: "Our engineers handle site planning, installation, calibration and full commissioning — including handover documentation.",
+  },
+  {
+    q: "Do you provide after-sales support?",
+    a: "Yes. Preventive maintenance contracts, spare parts, remote support and on-site engineers keep your systems up and running.",
+  },
+];
+
+const OFFICE = {
+  address: "4th Floor, Complex 396\nQueen Rania Street\nAmman, Jordan",
+  phone: "+962 6 4026063",
+  email: "info@abufarhamedical.com",
+  hours: "Saturday to Thursday\n9:00 AM – 5:00 PM",
+  mapQuery: "AbuFarha Medical Supplies, Queen Rania Street, Amman, Jordan",
+};
+
+const MAP_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(
+  OFFICE.mapQuery,
+)}&output=embed`;
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  OFFICE.mapQuery,
+)}`;
+const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  OFFICE.mapQuery,
+)}`;
+
+// ----------------------------------------------------------------------
+// Section: Hero
+// ----------------------------------------------------------------------
+
+function Hero() {
+  const reduce = useReducedMotion();
+  return (
+    <section className="relative overflow-hidden bg-white pt-6 pb-10">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+          <Link to="/" className="inline-flex items-center gap-1 hover:text-primary">
+            <HomeIcon className="h-3.5 w-3.5" /> Home
+          </Link>
+          <span className="opacity-40">/</span>
+          <span className="font-medium text-foreground">Contact Us</span>
+        </nav>
+
+        <div className="relative overflow-hidden rounded-[28px]">
+          {/* Background image */}
+          <img
+            src={heroCathLab}
+            alt="AbuFarha Medical Supplies team in a modern cath lab"
+            loading="eager"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {/* Gradient scrim */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.86) 32%, rgba(255,255,255,0.55) 55%, rgba(255,255,255,0.05) 78%, rgba(255,255,255,0) 100%)",
+            }}
+          />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1.05fr]">
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="px-6 py-14 sm:px-10 sm:py-20 lg:px-14 lg:py-24"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                Trusted Medical Equipment Partner
+              </div>
+              <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                Let&apos;s build better
+                <br />
+                healthcare <span className="text-primary">together</span>
+              </h1>
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+                From consultation to after-sales support, our team is ready to provide the right medical solutions for your healthcare facility.
+              </p>
+
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <a
+                  href="#contact-form"
+                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  Get in Touch
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <button
+                  type="button"
+                  className="inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
+                >
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
+                    <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
+                  </span>
+                  Watch Our Story
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right column intentionally lets the image show through */}
+            <div className="hidden lg:block" aria-hidden />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Section: Quick contact bar
+// ----------------------------------------------------------------------
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12.04 2.5A9.5 9.5 0 0 0 3.9 16.86L3 21.5l4.77-.88A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 1 1 0 15.6 7.75 7.75 0 0 1-3.97-1.08l-.28-.17-2.83.52.53-2.76-.18-.29A7.8 7.8 0 0 1 12.04 4.2Zm-2.5 3.4c-.2 0-.5.08-.77.37-.26.29-1 .98-1 2.4s1.03 2.78 1.17 2.97c.15.2 2 3.05 4.85 4.16 2.36.93 2.84.75 3.36.7.51-.05 1.66-.68 1.9-1.33.23-.66.23-1.22.16-1.33-.07-.11-.26-.18-.55-.32-.29-.15-1.71-.85-1.98-.94-.26-.1-.46-.15-.65.14-.19.29-.74.94-.9 1.13-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.44-.86-.76-1.44-1.7-1.6-1.99-.17-.29-.02-.44.12-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.49-.65-.5h-.55Z" />
+    </svg>
+  );
+}
+
+function ContactBar() {
+  const items = [
+    {
+      icon: Phone,
+      title: "Sales",
+      lines: ["+962 6 4026063", "sales@abufarhamedical.com"],
+      href: "tel:+96264026063",
+      color: "bg-primary",
+    },
+    {
+      icon: Headphones,
+      title: "Support",
+      lines: ["+962 79 974 1318", "support@abufarhamedical.com"],
+      href: "tel:+962799741318",
+      color: "bg-primary",
+    },
+    {
+      icon: WhatsAppIcon,
+      title: "WhatsApp",
+      lines: ["+962 79 974 1318", "Chat with us on WhatsApp"],
+      href: "https://wa.me/962799741318",
+      color: "bg-[#25D366]",
+    },
+  ];
+  return (
+    <section className="relative -mt-8 pb-4">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border/70 bg-white p-5 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-6 sm:p-6">
+          {items.map(({ icon: Icon, title, lines, href, color }) => (
+            <a
+              key={title}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel="noreferrer"
+              className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-secondary/40"
+            >
+              <span
+                className={cn(
+                  "grid h-14 w-14 shrink-0 place-items-center rounded-full text-white transition-transform group-hover:scale-105",
+                  color,
+                )}
+              >
+                <Icon className="h-6 w-6" />
+              </span>
+              <div className="min-w-0">
+                <div className="text-[15px] font-bold text-foreground">{title}</div>
+                <div className="mt-0.5 text-sm text-muted-foreground">
+                  {lines[0]}
+                </div>
+                <div className="text-[13px] text-muted-foreground/80">{lines[1]}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Section: Form + Why choose
+// ----------------------------------------------------------------------
+
+function FormBlock() {
+  const [country, setCountry] = useState("jo");
+  const [values, setValues] = useState<Record<string, string>>({});
+  const [inquiry, setInquiry] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    geoService.detectCountry().then((c) => {
+      if (!alive) return;
+      const iso = c.iso2.toLowerCase();
+      if (COUNTRIES.some((x) => x.iso2 === iso)) setCountry(iso);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const setField = (name: string, v: string) =>
+    setValues((s) => ({ ...s, [name]: v }));
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      fullName: values.fullName ?? "",
+      company: values.company ?? "",
+      country,
+      phone: values.phone ?? "",
+      email: values.email ?? "",
+      inquiry,
+      message: values.message ?? "",
+    };
+    const res = SCHEMA.safeParse(payload);
+    if (!res.success) {
+      const next: Record<string, string> = {};
+      for (const i of res.error.issues) next[i.path[0] as string] = i.message;
+      setErrors(next);
+      toast.error("Please complete the required fields.");
+      return;
+    }
+    setErrors({});
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setSuccess(true);
+      toast.success("Thank you — our team will reach out shortly.");
+      setValues({});
+      setInquiry("");
+      setTimeout(() => setSuccess(false), 5000);
+    }, 700);
+  };
+
+  const inputCls =
+    "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10";
+
+  return (
+    <section id="contact-form" className="bg-secondary/30 py-16 lg:py-20">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+          {/* Form */}
+          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+            <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
+              Send Us a Message
+            </h2>
+            <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
+
+            <AnimatePresence>
+              {success && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
+                >
+                  <Check className="mt-0.5 h-5 w-5 shrink-0" />
+                  <div>
+                    <div className="font-semibold">Message sent</div>
+                    <div className="text-emerald-700/80">
+                      Our team will get back to you within one business day.
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <form onSubmit={onSubmit} noValidate className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <Label htmlFor="fullName">
+                  Full Name <span className="text-primary">*</span>
+                </Label>
+                <div className="relative mt-1.5">
+                  <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="fullName"
+                    value={values.fullName ?? ""}
+                    onChange={(e) => setField("fullName", e.target.value)}
+                    placeholder="Dr. Ahmed Hassan"
+                    className={cn(inputCls, "pl-10", errors.fullName && "border-destructive")}
+                  />
+                </div>
+                {errors.fullName && <FieldError msg={errors.fullName} />}
+              </div>
+
+              <div>
+                <Label htmlFor="company">
+                  Hospital / Company <span className="text-primary">*</span>
+                </Label>
+                <div className="relative mt-1.5">
+                  <Building className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="company"
+                    value={values.company ?? ""}
+                    onChange={(e) => setField("company", e.target.value)}
+                    placeholder="Hospital or Company name"
+                    className={cn(inputCls, "pl-10", errors.company && "border-destructive")}
+                  />
+                </div>
+                {errors.company && <FieldError msg={errors.company} />}
+              </div>
+
+              <div>
+                <Label>
+                  Country <span className="text-primary">*</span>
+                </Label>
+                <div className="mt-1.5">
+                  <CountrySelect
+                    value={country}
+                    onChange={setCountry}
+                    hasError={!!errors.country}
+                  />
+                </div>
+                {errors.country && <FieldError msg={errors.country} />}
+              </div>
+
+              <div>
+                <Label htmlFor="phone">
+                  Phone Number <span className="text-primary">*</span>
+                </Label>
+                <div className="mt-1.5">
+                  <PhoneField
+                    id="phone"
+                    value={values.phone ?? ""}
+                    onChange={(v) => setField("phone", v)}
+                    hasError={!!errors.phone}
+                  />
+                </div>
+                {errors.phone && <FieldError msg={errors.phone} />}
+              </div>
+
+              <div>
+                <Label htmlFor="email">
+                  Email Address <span className="text-primary">*</span>
+                </Label>
+                <div className="relative mt-1.5">
+                  <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={values.email ?? ""}
+                    onChange={(e) => setField("email", e.target.value)}
+                    placeholder="ahmed.hassan@hospital.com"
+                    className={cn(inputCls, "pl-10", errors.email && "border-destructive")}
+                  />
+                </div>
+                {errors.email && <FieldError msg={errors.email} />}
+              </div>
+
+              <div>
+                <Label>
+                  Inquiry Type <span className="text-primary">*</span>
+                </Label>
+                <div className="mt-1.5">
+                  <Select value={inquiry} onValueChange={setInquiry}>
+                    <SelectTrigger
+                      className={cn(
+                        "h-12 rounded-xl border-border bg-secondary/30",
+                        errors.inquiry && "border-destructive",
+                      )}
+                    >
+                      <SelectValue placeholder="Select an option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {INQUIRY_TYPES.map((t) => (
+                        <SelectItem key={t} value={t}>
+                          {t}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                {errors.inquiry && <FieldError msg={errors.inquiry} />}
+              </div>
+
+              <div className="sm:col-span-2">
+                <Label htmlFor="message">
+                  Message <span className="text-primary">*</span>
+                </Label>
+                <Textarea
+                  id="message"
+                  value={values.message ?? ""}
+                  onChange={(e) => setField("message", e.target.value)}
+                  placeholder="Tell us more about your inquiry..."
+                  rows={5}
+                  className={cn(
+                    "mt-1.5 rounded-xl border-border bg-secondary/30 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10",
+                    errors.message && "border-destructive",
+                  )}
+                />
+                {errors.message && <FieldError msg={errors.message} />}
+              </div>
+
+              <div className="sm:col-span-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your information is securely transmitted.
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5 text-primary" /> We usually respond within 24 hours.
+                </span>
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="sm:col-span-2 group mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+              >
+                {submitting ? "Sending..." : "Submit Inquiry"}
+                <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
+            </form>
+          </div>
+
+          {/* Why choose */}
+          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+            <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
+              Why Choose AbuFarha?
+            </h2>
+            <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
+
+            <ul className="mt-7 space-y-5">
+              {WHY.map(({ icon: Icon, title, desc }) => (
+                <li
+                  key={title}
+                  className="group flex items-start gap-4 rounded-2xl p-3 transition-colors hover:bg-secondary/40"
+                >
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-105">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[15px] font-bold text-foreground">{title}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {desc}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FieldError({ msg }: { msg: string }) {
+  return (
+    <p className="mt-1.5 text-xs font-medium text-destructive">{msg}</p>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Section: Map + Office card
+// ----------------------------------------------------------------------
+
+function OfficeMap() {
+  return (
+    <section className="bg-white py-14 lg:py-20">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-white shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)]">
+          <iframe
+            title="AbuFarha Medical Supplies — Amman office"
+            src={MAP_EMBED}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-[520px] w-full border-0"
+          />
+
+          {/* Floating card */}
+          <div className="pointer-events-none absolute inset-0 flex items-stretch">
+            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-2xl border border-border/60 bg-white/95 p-6 shadow-[0_25px_60px_-25px_rgba(15,23,42,0.35)] backdrop-blur-sm sm:m-6 sm:p-7">
+              <div className="flex items-center gap-3">
+                <h3 className="font-display text-xl font-black text-foreground">
+                  Visit Our Office
+                </h3>
+                <div className="h-[2px] w-8 rounded-full bg-primary" />
+              </div>
+
+              <ul className="mt-5 space-y-4 text-sm">
+                <OfficeRow icon={MapPin} label="Address">
+                  {OFFICE.address.split("\n").map((l) => (
+                    <div key={l}>{l}</div>
+                  ))}
+                </OfficeRow>
+                <OfficeRow icon={Phone} label="Phone">
+                  <a href={`tel:${OFFICE.phone.replace(/\s/g, "")}`} className="hover:text-primary">
+                    {OFFICE.phone}
+                  </a>
+                </OfficeRow>
+                <OfficeRow icon={Mail} label="Email">
+                  <a href={`mailto:${OFFICE.email}`} className="break-all hover:text-primary">
+                    {OFFICE.email}
+                  </a>
+                </OfficeRow>
+                <OfficeRow icon={Clock} label="Working Hours">
+                  {OFFICE.hours.split("\n").map((l) => (
+                    <div key={l}>{l}</div>
+                  ))}
+                </OfficeRow>
+              </ul>
+
+              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
+                <a
+                  href={DIRECTIONS_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  Get Directions <Navigation className="h-4 w-4" />
+                </a>
+                <a
+                  href={MAP_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
+                >
+                  Open in Google Maps <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OfficeRow({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: typeof MapPin;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="flex items-start gap-3">
+      <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+        <Icon className="h-4 w-4" />
+      </span>
+      <div className="min-w-0">
+        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+          {label}
+        </div>
+        <div className="mt-0.5 text-[14px] leading-relaxed text-foreground">
+          {children}
+        </div>
+      </div>
+    </li>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Section: Stats strip
+// ----------------------------------------------------------------------
+
+function StatsStrip() {
+  return (
+    <section className="pb-4">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid grid-cols-2 gap-4 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-8">
+          {STATS.map(({ icon: Icon, value, label }, i) => (
+            <div
+              key={label}
+              className={cn(
+                "flex items-center gap-4 sm:gap-5",
+                i > 0 && "sm:border-l sm:border-border/60 sm:pl-6",
+              )}
+            >
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                <Icon className="h-5 w-5" />
+              </span>
+              <div className="min-w-0">
+                <div className="font-display text-2xl font-black tabular-nums text-foreground sm:text-3xl">
+                  {value}
+                </div>
+                <div className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {label}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Section: FAQ
+// ----------------------------------------------------------------------
+
+function FaqSection() {
+  return (
+    <section className="bg-white py-16 lg:py-24">
+      <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
+        <div className="text-center">
+          <Eyebrow align="center">FAQ</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+            Frequently Asked Questions
+          </h2>
+          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-primary" />
+        </div>
+
+        <Accordion
+          type="single"
+          collapsible
+          className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-x-6 md:grid-cols-2"
+        >
+          {FAQS.map((f, i) => (
+            <AccordionItem
+              key={f.q}
+              value={`faq-${i}`}
+              className="mb-3 rounded-2xl border border-border/70 bg-secondary/25 px-5 transition-colors data-[state=open]:border-primary/40 data-[state=open]:bg-white data-[state=open]:shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)]"
+            >
+              <AccordionTrigger className="py-4 text-left text-[15px] font-semibold text-foreground hover:no-underline">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 text-sm leading-relaxed text-muted-foreground">
+                {f.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+// ----------------------------------------------------------------------
+// Root
+// ----------------------------------------------------------------------
+
+export function ContactPage() {
+  return (
+    <>
+      <Hero />
+      <ContactBar />
+      <FormBlock />
+      <OfficeMap />
+      <StatsStrip />
+      <FaqSection />
+    </>
+  );
+}

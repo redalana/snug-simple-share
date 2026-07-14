@@ -292,7 +292,7 @@ export function Solutions() {
             </h2>
           </div>
           <a
-            href="#contact"
+            href="/contact"
             className="group inline-flex items-center gap-2 text-sm font-bold text-primary"
           >
             View All Categories
@@ -447,14 +447,14 @@ export function Solutions() {
 
                 <div className="mt-9 flex flex-wrap gap-3">
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_12px_28px_-10px_var(--color-primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_18px_38px_-12px_var(--color-primary)] hover:-translate-y-0.5"
                   >
                     Explore {active.nav}
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="inline-flex items-center gap-2 rounded-full border border-border/70 px-7 py-3.5 text-sm font-semibold text-ink/80 transition-all duration-300 hover:border-ink/25 hover:bg-secondary/40 hover:text-ink"
                   >
                     Talk to a Specialist
