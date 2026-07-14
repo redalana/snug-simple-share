@@ -754,7 +754,7 @@ function FormBlock() {
           </div>
 
           {/* Why choose */}
-          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:sticky lg:top-24 lg:p-10">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Why Choose AbuFarha?
             </h2>
