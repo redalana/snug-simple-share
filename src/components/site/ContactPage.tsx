@@ -323,7 +323,7 @@ function Hero() {
   }, [reduce]);
 
   return (
-    <section className="relative overflow-hidden bg-white pt-6 pb-10">
+    <section className="relative overflow-hidden bg-white pt-4 pb-4">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         {/* Breadcrumb */}
         <nav
