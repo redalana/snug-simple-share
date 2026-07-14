@@ -32,7 +32,7 @@ const NAV: NavItem[] = [
       { label: "Maintenance", href: "#process" },
     ],
   },
-  { label: "Turnkey", href: "#projects" },
+  { label: "Turnkey", href: "/turnkey" },
   { label: "After Sales", href: "#process" },
   {
     label: "Brands",

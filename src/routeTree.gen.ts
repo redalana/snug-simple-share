@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TurnkeyRouteImport } from './routes/turnkey'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
@@ -22,6 +23,11 @@ import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TurnkeyRoute = TurnkeyRouteImport.update({
+  id: '/turnkey',
+  path: '/turnkey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/turnkey': typeof TurnkeyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/projects': typeof ProjectsRoute
+  '/turnkey': typeof TurnkeyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/turnkey': typeof TurnkeyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
+    | '/turnkey'
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hospital-readiness-assessment'
     | '/projects'
+    | '/turnkey'
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/hospital-readiness-assessment'
     | '/products'
     | '/projects'
+    | '/turnkey'
     | '/blog/$slug'
     | '/products/$slug'
     | '/programs/stroke-care'
@@ -176,11 +188,19 @@ export interface RootRouteChildren {
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
+  TurnkeyRoute: typeof TurnkeyRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/turnkey': {
+      id: '/turnkey'
+      path: '/turnkey'
+      fullPath: '/turnkey'
+      preLoaderRoute: typeof TurnkeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
@@ -302,18 +322,9 @@ const rootRouteChildren: RootRouteChildren = {
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
+  TurnkeyRoute: TurnkeyRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
