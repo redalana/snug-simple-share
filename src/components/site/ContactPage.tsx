@@ -337,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[600px] overflow-hidden rounded-[36px] sm:min-h-[680px] lg:min-h-[760px]">
+        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[580px] lg:min-h-[640px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
