@@ -47,7 +47,7 @@ export function Insights() {
               Perspectives on Medical Technology &amp; Care
             </h2>
           </div>
-          <a href="#contact" className="group inline-flex items-center gap-2 text-sm font-bold text-primary">
+          <a href="/contact" className="group inline-flex items-center gap-2 text-sm font-bold text-primary">
             View All Articles
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
@@ -56,7 +56,7 @@ export function Insights() {
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Featured article */}
           <motion.a
-            href="#contact"
+            href="/contact"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -96,7 +96,7 @@ export function Insights() {
           <div className="grid gap-4">
             {SECONDARY.map((article) => (
               <motion.a
-                href="#contact"
+                href="/contact"
                 key={article.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}

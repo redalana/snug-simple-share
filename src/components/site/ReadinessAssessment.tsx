@@ -541,14 +541,14 @@ export function ReadinessAssessment() {
               className="mt-7 flex flex-col gap-3"
             >
               <a
-                href="#contact"
+                href="/contact"
                 className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
               >
                 Request a Free Hospital Readiness Assessment
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
-                href="#contact"
+                href="/contact"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[14px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
               >
                 Talk to a Biomedical Engineer

@@ -876,13 +876,13 @@ export function PortfolioBrowser() {
             </div>
             <div className="flex flex-wrap justify-center gap-3">
               <a
-                href="/#contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 <PhoneCall className="h-4 w-4" /> Request Consultation
               </a>
               <a
-                href="/#contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
               >
                 <Mail className="h-4 w-4" /> Contact Our Team
