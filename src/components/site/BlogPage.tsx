@@ -34,6 +34,7 @@ type Slide = {
   excerpt: string;
   readTime: string;
   date: string;
+  focus?: string;
 };
 
 const SLIDES: Slide[] = [
@@ -45,6 +46,7 @@ const SLIDES: Slide[] = [
       "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
     readTime: "8 min read",
     date: "May 20, 2026",
+    focus: "center",
   },
   {
     image: solMri,
@@ -54,6 +56,7 @@ const SLIDES: Slide[] = [
       "A field-tested comparison of image quality, throughput, siting costs, and clinical fit — so you buy the scanner your program actually needs.",
     readTime: "7 min read",
     date: "May 15, 2026",
+    focus: "center",
   },
   {
     image: solPetct,
@@ -63,6 +66,7 @@ const SLIDES: Slide[] = [
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
     readTime: "9 min read",
     date: "May 10, 2026",
+    focus: "center",
   },
   {
     image: solOr,
@@ -72,8 +76,10 @@ const SLIDES: Slide[] = [
       "How we deliver complete departments on time, on budget, and to the highest clinical standards across Africa and the Middle East.",
     readTime: "6 min read",
     date: "May 5, 2026",
+    focus: "center 40%",
   },
 ];
+
 
 type Article = {
   image: string;
@@ -236,10 +242,10 @@ function HeroSlider() {
   const slide = SLIDES[active];
 
   return (
-    <section className="bg-white pt-6 lg:pt-8">
+    <section className="bg-white pt-[100px] xl:pt-[150px]">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div
-          className="relative h-[420px] w-full overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] sm:h-[480px] lg:h-[540px]"
+          className="relative h-[460px] w-full overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] sm:h-[520px] lg:h-[580px]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -252,15 +258,17 @@ function HeroSlider() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
+              style={{ objectPosition: slide.focus ?? "center center" }}
               className="absolute inset-0 h-full w-full object-cover"
             />
           </AnimatePresence>
 
-          {/* dark left gradient for legibility */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-transparent" />
+          {/* Softer left gradient for legibility — keeps equipment visible */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/35 to-transparent" />
 
-          {/* content */}
-          <div className="relative z-10 flex h-full max-w-2xl flex-col justify-center px-8 sm:px-12 lg:px-14">
+          {/* content — generous safe area */}
+          <div className="relative z-10 flex h-full max-w-2xl flex-col justify-center px-8 py-16 sm:px-14 sm:py-20 lg:px-16 lg:py-20">
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
