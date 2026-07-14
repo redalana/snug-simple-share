@@ -600,9 +600,9 @@ function FormBlock() {
               )}
             </AnimatePresence>
 
-            <form onSubmit={onSubmit} noValidate className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <form onSubmit={onSubmit} noValidate className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
               <div>
-                <Label htmlFor="fullName">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="fullName">
                   Full Name <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -619,7 +619,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="company">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="company">
                   Hospital / Company <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -636,7 +636,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label>
+                <Label className="text-[13px] font-semibold text-foreground">
                   Country <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -650,7 +650,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="phone">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="phone">
                   Phone Number <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -665,7 +665,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label htmlFor="email">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="email">
                   Email Address <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -683,7 +683,7 @@ function FormBlock() {
               </div>
 
               <div>
-                <Label>
+                <Label className="text-[13px] font-semibold text-foreground">
                   Inquiry Type <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -709,7 +709,7 @@ function FormBlock() {
               </div>
 
               <div className="sm:col-span-2">
-                <Label htmlFor="message">
+                <Label className="text-[13px] font-semibold text-foreground" htmlFor="message">
                   Message <span className="text-primary">*</span>
                 </Label>
                 <Textarea
