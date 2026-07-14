@@ -147,37 +147,39 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
   const dialCode = country.dialCode;
 
   return (
-    <div
-      className={cn(
-        "flex h-12 items-stretch overflow-hidden rounded-xl border border-border bg-secondary/30 transition-all duration-200",
-        "focus-within:border-primary focus-within:bg-white focus-within:ring-4 focus-within:ring-primary/10 focus-within:shadow-[0_6px_20px_-8px_var(--primary)]",
-        hasError && "border-destructive",
-        className,
-      )}
-    >
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            type="button"
-            aria-label={`Selected country: ${country.name} (+${dialCode}). Change country`}
-            className="flex shrink-0 items-center gap-2 border-r border-border/80 px-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-secondary/60 focus-visible:outline-none focus-visible:bg-secondary/70"
-          >
-            <FlagImage iso2={country.iso2} className="h-4 w-6 rounded-[3px] object-cover shadow-sm" />
-            <span className="tabular-nums text-muted-foreground">+{dialCode}</span>
-            <ChevronDown
-              className={cn(
-                "h-3.5 w-3.5 text-muted-foreground transition-transform duration-300",
-                open && "rotate-180",
-              )}
-            />
-          </button>
-        </PopoverTrigger>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverAnchor asChild>
+        <div
+          className={cn(
+            "flex h-12 items-stretch overflow-hidden rounded-xl border border-border bg-secondary/30 transition-all duration-200",
+            "focus-within:border-primary focus-within:bg-white focus-within:ring-4 focus-within:ring-primary/10 focus-within:shadow-[0_6px_20px_-8px_var(--primary)]",
+            hasError && "border-destructive",
+            className,
+          )}
+        >
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              aria-label={`Selected country: ${country.name} (+${dialCode}). Change country`}
+              className="flex shrink-0 items-center gap-2 border-r border-border/80 px-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-secondary/60 focus-visible:outline-none focus-visible:bg-secondary/70"
+            >
+              <FlagImage iso2={country.iso2} className="h-4 w-6 rounded-[3px] object-cover shadow-sm" />
+              <span className="tabular-nums text-muted-foreground">+{dialCode}</span>
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-muted-foreground transition-transform duration-300",
+                  open && "rotate-180",
+                )}
+              />
+            </button>
+          </PopoverTrigger>
         <PopoverContent
           align="start"
-          sideOffset={10}
-          className="w-[320px] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+          sideOffset={6}
+          className="w-[var(--radix-popover-trigger-width)] min-w-[280px] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
+
           <AnimatePresence>
             {open && (
               <motion.div
