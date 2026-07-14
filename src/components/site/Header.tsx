@@ -195,12 +195,13 @@ export function Header() {
             </div>
 
             {/* Social → Button : 28px */}
-            <a
-              href="/contact#contact-form"
+            <Link
+              to="/contact"
+              hash="contact-form"
               className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
-            </a>
+            </Link>
           </div>
 
 
@@ -316,13 +317,14 @@ export function Header() {
                     <WhatsAppIcon className="h-5 w-5" />
                   </a>
                 </div>
-                <a
-                  href="/contact#contact-form"
+                <Link
+                  to="/contact"
+                  hash="contact-form"
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
                 >
                   Request a Quote
-                </a>
+                </Link>
               </div>
             </div>
           </motion.nav>

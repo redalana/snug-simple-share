@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
@@ -337,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[560px] overflow-hidden rounded-[36px] sm:min-h-[620px] lg:min-h-[680px]">
+        <div className="relative min-h-[600px] overflow-hidden rounded-[36px] sm:min-h-[680px] lg:min-h-[760px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
@@ -346,7 +346,7 @@ function Hero() {
               alt={s.alt}
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
-              style={{ objectPosition: "70% center" }}
+              style={{ objectPosition: "center 42%" }}
               className={cn(
                 "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
                 i === slide ? "opacity-100" : "opacity-0",
@@ -573,7 +573,7 @@ function FormBlock() {
     "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
-    <section id="contact-form" className="scroll-mt-24 bg-secondary/30 py-[80px] lg:py-[80px]">
+    <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[80px] lg:py-[80px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
@@ -988,16 +988,18 @@ function FaqSection() {
 // ----------------------------------------------------------------------
 
 export function ContactPage() {
+  const locationHash = useRouterState({ select: (state) => state.location.hash });
+
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.location.hash !== "#contact-form") return;
+    if (locationHash !== "contact-form" && locationHash !== "#contact-form") return;
     const id = window.setTimeout(() => {
       document
         .getElementById("contact-form")
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 120);
     return () => window.clearTimeout(id);
-  }, []);
+  }, [locationHash]);
 
   return (
     <>
