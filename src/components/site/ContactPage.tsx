@@ -382,12 +382,12 @@ function Hero() {
           />
 
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1.05fr]">
+          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_1.25fr]">
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="px-6 py-14 sm:px-10 sm:py-20 lg:px-14 lg:py-24"
+              className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
