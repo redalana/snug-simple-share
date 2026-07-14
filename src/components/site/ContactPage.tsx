@@ -745,12 +745,22 @@ function FormBlock() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {submitting ? "Sending..." : "Submit Inquiry"}
-                  <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  {submitting ? (
+                    <>
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Submit Inquiry
+                      <Send className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5" />
+                    </>
+                  )}
                 </button>
               </div>
+
             </form>
           </div>
 
