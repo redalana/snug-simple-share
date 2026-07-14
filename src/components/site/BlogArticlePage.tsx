@@ -4,17 +4,36 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
+  BarChart3,
   Calendar,
+  CheckCircle2,
   ChevronRight,
   Clock,
+  DollarSign,
   Facebook,
   Linkedin,
   Link2,
   Mail,
-  Twitter,
+  MessageCircle,
+  Minus,
+  Plus,
+  ShieldCheck,
+  Truck,
+  TrendingUp,
   User,
+  X,
 } from "lucide-react";
-import { getArticle, getPrevNext, getRelated, type ContentBlock } from "@/lib/blog";
+import solDes from "@/assets/sol-des.jpg";
+import whyCathlab from "@/assets/why-cathlab.jpg";
+import {
+  getArticle,
+  getRelated,
+  type Article,
+  type BenefitIcon,
+  type ContentBlock,
+} from "@/lib/blog";
+
+/* ---------------- Page shell ---------------- */
 
 export function BlogArticlePage({ slug }: { slug: string }) {
   const article = getArticle(slug);
@@ -43,17 +62,26 @@ export function BlogArticlePage({ slug }: { slug: string }) {
     );
   }
 
-  const related = getRelated(article.slug, 3);
-  const { prev, next } = getPrevNext(article.slug);
+  const related = getRelated(article.slug, 4);
 
   return (
     <div className="bg-white">
       <Breadcrumb category={article.category} title={article.title} />
-      <Hero article={article} />
-      <Body article={article} />
-      <PrevNext prev={prev} next={next} />
-      <Related items={related} />
-      <NewsletterCTA />
+      <section className="bg-white pb-14 lg:pb-20">
+        <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10 lg:pt-10 xl:gap-12">
+          <div className="min-w-0">
+            <Hero article={article} />
+            <div className="mt-14 space-y-12">
+              {article.content.map((block, i) => (
+                <Block key={i} block={block} />
+              ))}
+            </div>
+          </div>
+          <Sidebar article={article} related={related} />
+        </div>
+      </section>
+      <ExpertCTA />
+      <NewsletterBand />
     </div>
   );
 }
@@ -62,8 +90,8 @@ export function BlogArticlePage({ slug }: { slug: string }) {
 
 function Breadcrumb({ category, title }: { category: string; title: string }) {
   return (
-    <section className="bg-secondary pt-[100px] xl:pt-[150px]">
-      <div className="mx-auto max-w-[87.5rem] px-6 py-4 lg:px-10">
+    <section className="bg-white pt-[100px] xl:pt-[150px]">
+      <div className="mx-auto max-w-[87.5rem] px-6 pt-6 lg:px-10">
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
@@ -76,195 +104,93 @@ function Breadcrumb({ category, title }: { category: string; title: string }) {
             Blog
           </Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="text-ink">{category}</span>
+          <span className="hover:text-primary">{category}</span>
           <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="truncate text-ink">{title}</span>
+          <span className="line-clamp-1 text-ink">{title}</span>
         </nav>
       </div>
     </section>
   );
 }
 
-/* ---------------- Hero ---------------- */
+/* ---------------- Hero (title left, image right) ---------------- */
 
-function Hero({
-  article,
-}: {
-  article: ReturnType<typeof getArticle> extends infer T
-    ? T extends undefined
-      ? never
-      : NonNullable<T>
-    : never;
-}) {
+function Hero({ article }: { article: Article }) {
   return (
-    <section className="bg-secondary pb-10 lg:pb-14">
-      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="mx-auto max-w-4xl text-center">
-          <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
-            {article.category}
-          </span>
-          <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.75rem]">
-            {article.title}
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            {article.excerpt}
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <User className="h-3.5 w-3.5" /> {article.author.name}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar className="h-3.5 w-3.5" /> {article.publishedDate}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5" /> {article.readingTime}
-            </span>
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto mt-10 aspect-[16/8] w-full max-w-[80rem] overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)]"
-        >
-          <img
-            src={article.coverImage}
-            alt={article.title}
-            style={{ objectPosition: article.focus ?? "center center" }}
-            className="h-full w-full object-cover"
-          />
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Body ---------------- */
-
-function Body({
-  article,
-}: {
-  article: NonNullable<ReturnType<typeof getArticle>>;
-}) {
-  return (
-    <section className="bg-white py-14 lg:py-20">
-      <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 lg:grid-cols-[280px_1fr] lg:px-10 xl:grid-cols-[300px_1fr_260px] xl:gap-12">
-        <TableOfContents items={article.tableOfContents} />
-        <article className="min-w-0">
-          <SocialShare title={article.title} />
-          <div className="prose-article mt-8">
-            {article.content.map((block, i) => (
-              <Block key={i} block={block} />
-            ))}
-          </div>
-          <AuthorCard author={article.author} />
-        </article>
-        <aside className="hidden xl:block">
-          <div className="sticky top-[170px] space-y-6">
-            <StickyCTA />
-          </div>
-        </aside>
-      </div>
-    </section>
-  );
-}
-
-function TableOfContents({
-  items,
-}: {
-  items: { id: string; title: string }[];
-}) {
-  const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
-
-  useEffect(() => {
-    const handler = () => {
-      let current: string | null = null;
-      for (const item of items) {
-        const el = document.getElementById(item.id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        if (top < 160) current = item.id;
-      }
-      if (current) setActive(current);
-    };
-    window.addEventListener("scroll", handler, { passive: true });
-    handler();
-    return () => window.removeEventListener("scroll", handler);
-  }, [items]);
-
-  return (
-    <aside className="lg:sticky lg:top-[170px] lg:self-start">
-      <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)]">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-primary">
-          Table of Contents
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
+      <div>
+        <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
+          {article.category}
+        </span>
+        <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.5rem]">
+          {article.title}
+        </h1>
+        <p className="mt-5 text-[15.5px] leading-relaxed text-muted-foreground">
+          {article.excerpt}
         </p>
-        <nav className="mt-4 space-y-1.5">
-          {items.map((it) => {
-            const isActive = active === it.id;
-            return (
-              <a
-                key={it.id}
-                href={`#${it.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById(it.id);
-                  if (!el) return;
-                  window.scrollTo({
-                    top: el.getBoundingClientRect().top + window.scrollY - 130,
-                    behavior: "smooth",
-                  });
-                }}
-                className={`block rounded-lg border-l-2 px-3 py-1.5 text-sm transition ${
-                  isActive
-                    ? "border-primary bg-primary/5 font-semibold text-primary"
-                    : "border-transparent text-muted-foreground hover:border-primary/30 hover:text-ink"
-                }`}
-              >
-                {it.title}
-              </a>
-            );
-          })}
-        </nav>
+        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5">
+            <Calendar className="h-3.5 w-3.5" /> {article.publishedDate}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Clock className="h-3.5 w-3.5" /> {article.readingTime}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <User className="h-3.5 w-3.5" /> By {article.author.name}
+          </span>
+        </div>
+        <SocialShare title={article.title} />
       </div>
-    </aside>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.4)] lg:aspect-[5/4]"
+      >
+        <img
+          src={article.coverImage}
+          alt={article.title}
+          style={{ objectPosition: article.focus ?? "center center" }}
+          className="h-full w-full object-cover"
+        />
+      </motion.div>
+    </div>
   );
 }
 
 function SocialShare({ title }: { title: string }) {
   const [copied, setCopied] = useState(false);
-  const url =
-    typeof window !== "undefined" ? window.location.href : "";
-  const encodedUrl = encodeURIComponent(url);
-  const encodedTitle = encodeURIComponent(title);
+  const url = typeof window !== "undefined" ? window.location.href : "";
+  const enc = encodeURIComponent;
 
   const items = [
     {
-      label: "Facebook",
-      Icon: Facebook,
-      href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    },
-    {
-      label: "Twitter",
-      Icon: Twitter,
-      href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
-    },
-    {
       label: "LinkedIn",
       Icon: Linkedin,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`,
     },
     {
-      label: "Email",
-      Icon: Mail,
-      href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+      label: "Facebook",
+      Icon: Facebook,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`,
+    },
+    {
+      label: "X",
+      Icon: X,
+      href: `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`,
+    },
+    {
+      label: "WhatsApp",
+      Icon: WhatsAppIcon,
+      href: `https://wa.me/?text=${enc(`${title} ${url}`)}`,
     },
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-y border-border py-4">
-      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-        Share
+    <div className="mt-6 flex flex-wrap items-center gap-3">
+      <span className="text-sm font-medium text-muted-foreground">
+        Share this article:
       </span>
       <div className="flex items-center gap-2">
         {items.map(({ label, Icon, href }) => (
@@ -274,7 +200,7 @@ function SocialShare({ title }: { title: string }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`Share on ${label}`}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+            className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-primary hover:text-primary-foreground"
           >
             <Icon className="h-4 w-4" />
           </a>
@@ -291,42 +217,99 @@ function SocialShare({ title }: { title: string }) {
               /* ignore */
             }
           }}
-          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border bg-white px-3 text-xs font-semibold text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+          className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-primary hover:text-primary-foreground"
         >
           <Link2 className="h-4 w-4" />
-          {copied ? "Copied" : "Copy link"}
         </button>
+        {copied && (
+          <span className="text-xs font-semibold text-primary">Copied</span>
+        )}
       </div>
     </div>
   );
 }
 
+/* ---------------- Content blocks ---------------- */
+
 function Block({ block }: { block: ContentBlock }) {
   switch (block.type) {
     case "h2":
       return (
-        <h2
-          id={block.id}
-          className="mt-10 scroll-mt-32 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-[1.75rem]"
-        >
-          {block.text}
-        </h2>
+        <div id={block.id} className="scroll-mt-32">
+          <h2 className="font-display text-[1.6rem] font-extrabold tracking-tight text-ink sm:text-[1.75rem]">
+            {block.number ? `${block.number}. ` : ""}
+            {block.text}
+          </h2>
+          {block.body && !block.image && (
+            <p className="mt-4 text-[15.5px] leading-[1.8] text-foreground/85">
+              {block.body}
+            </p>
+          )}
+          {block.body && block.image && (
+            <div
+              className={`mt-5 grid items-start gap-6 sm:grid-cols-[auto_1fr] ${
+                block.imagePosition === "left" ? "" : "sm:[&>*:first-child]:order-2"
+              }`}
+            >
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
+                <img
+                  src={block.image}
+                  alt={block.imageAlt ?? block.text}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p className="text-[15.5px] leading-[1.8] text-foreground/85">
+                {block.body}
+              </p>
+            </div>
+          )}
+        </div>
       );
+
     case "h3":
       return (
-        <h3 className="mt-8 font-display text-xl font-bold text-ink">
+        <h3 className="font-display text-xl font-bold text-ink">
           {block.text}
         </h3>
       );
+
     case "p":
       return (
-        <p className="mt-4 text-[15.5px] leading-[1.75] text-foreground/85">
+        <p className="text-[15.5px] leading-[1.8] text-foreground/85">
           {block.text}
         </p>
       );
+
+    case "intro":
+      return (
+        <div className="grid gap-6 sm:grid-cols-[1fr_auto]">
+          <div className="space-y-4">
+            {block.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                className="text-[15.5px] leading-[1.8] text-foreground/85"
+              >
+                {p}
+              </p>
+            ))}
+          </div>
+          {block.image && (
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
+              <img
+                src={block.image}
+                alt={block.imageAlt ?? ""}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )}
+        </div>
+      );
+
     case "ul":
       return (
-        <ul className="mt-4 space-y-2.5">
+        <ul className="space-y-2.5">
           {block.items.map((it, i) => (
             <li
               key={i}
@@ -338,9 +321,25 @@ function Block({ block }: { block: ContentBlock }) {
           ))}
         </ul>
       );
+
+    case "benefits":
+      return <BenefitsGrid items={block.items} />;
+
+    case "table":
+      return <PriceTable {...block} />;
+
+    case "requirements":
+      return <Requirements {...block} />;
+
+    case "roi":
+      return <RoiSection {...block} />;
+
+    case "faq":
+      return <Faq items={block.items} />;
+
     case "quote":
       return (
-        <blockquote className="mt-6 rounded-2xl border-l-4 border-primary bg-secondary p-6">
+        <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6">
           <p className="font-display text-lg font-semibold italic leading-relaxed text-ink">
             "{block.text}"
           </p>
@@ -351,15 +350,16 @@ function Block({ block }: { block: ContentBlock }) {
           )}
         </blockquote>
       );
+
     case "image":
       return (
-        <figure className="mt-8">
+        <figure>
           <div className="overflow-hidden rounded-2xl bg-secondary">
             <img
               src={block.src}
               alt={block.alt}
-              className="h-full w-full object-cover"
               loading="lazy"
+              className="h-full w-full object-cover"
             />
           </div>
           {block.caption && (
@@ -369,78 +369,231 @@ function Block({ block }: { block: ContentBlock }) {
           )}
         </figure>
       );
-    case "table":
-      return (
-        <div className="mt-8 overflow-hidden rounded-2xl border border-border">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
-              <thead>
-                <tr className="bg-secondary text-left">
-                  {block.headers.map((h) => (
-                    <th
-                      key={h}
-                      className="px-5 py-3 text-xs font-bold uppercase tracking-wider text-ink"
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {block.rows.map((row, i) => (
-                  <tr key={i} className="border-t border-border">
-                    {row.map((cell, j) => (
-                      <td
-                        key={j}
-                        className="px-5 py-3 align-top text-foreground/85"
-                      >
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {block.caption && (
-            <p className="border-t border-border bg-secondary px-5 py-2 text-xs text-muted-foreground">
-              {block.caption}
-            </p>
-          )}
-        </div>
-      );
-    case "faq":
-      return <Faq items={block.items} />;
   }
 }
 
-function Faq({ items }: { items: { q: string; a: string }[] }) {
-  const [open, setOpen] = useState<number | null>(0);
+/* -- Benefits grid -- */
+
+const BENEFIT_ICONS: Record<
+  BenefitIcon,
+  React.ComponentType<{ className?: string }>
+> = {
+  cost: DollarSign,
+  reliability: ShieldCheck,
+  delivery: Truck,
+  performance: BarChart3,
+};
+
+function BenefitsGrid({
+  items,
+}: {
+  items: { icon: BenefitIcon; title: string; description: string }[];
+}) {
   return (
-    <div className="mt-6 space-y-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((it) => {
+        const Icon = BENEFIT_ICONS[it.icon];
+        return (
+          <div
+            key={it.title}
+            className="rounded-2xl border border-border bg-white p-5 text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_16px_40px_-24px_rgba(15,23,42,0.25)]"
+          >
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary">
+              <Icon className="h-5 w-5" />
+            </div>
+            <p className="mt-3 font-display text-[15px] font-extrabold text-ink">
+              {it.title}
+            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              {it.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* -- Price table -- */
+
+function PriceTable({
+  headers,
+  rows,
+  highlightLastColumn,
+  caption,
+}: {
+  headers: string[];
+  rows: string[][];
+  highlightLastColumn?: boolean;
+  caption?: string;
+}) {
+  return (
+    <div>
+      <div className="overflow-hidden rounded-2xl border border-border">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="bg-secondary text-left">
+                {headers.map((h) => (
+                  <th
+                    key={h}
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wider text-ink"
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, i) => (
+                <tr key={i} className="border-t border-border">
+                  {row.map((cell, j) => {
+                    const isHighlight =
+                      highlightLastColumn && j === row.length - 1;
+                    return (
+                      <td
+                        key={j}
+                        className={`px-5 py-3 align-top ${
+                          isHighlight
+                            ? "font-bold text-emerald-600"
+                            : "text-foreground/85"
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {caption && (
+        <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="grid h-4 w-4 place-items-center rounded-full border border-muted-foreground/40 text-[10px]">
+            i
+          </span>
+          {caption}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* -- Requirements -- */
+
+function Requirements({
+  checklist,
+  specs,
+}: {
+  checklist: string[];
+  specs: { title: string; rows: { label: string; value: string }[] };
+}) {
+  return (
+    <div className="grid gap-6 lg:grid-cols-2">
+      <ul className="space-y-3">
+        {checklist.map((it) => (
+          <li
+            key={it}
+            className="flex items-start gap-3 text-[15px] text-foreground/85"
+          >
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            {it}
+          </li>
+        ))}
+      </ul>
+      <div className="rounded-2xl border border-border bg-secondary p-5">
+        <p className="font-display text-[15px] font-extrabold text-ink">
+          {specs.title}
+        </p>
+        <dl className="mt-4 space-y-3 text-sm">
+          {specs.rows.map((r) => (
+            <div key={r.label} className="flex items-start justify-between gap-6">
+              <dt className="text-muted-foreground">{r.label}</dt>
+              <dd className="text-right font-semibold text-ink">{r.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  );
+}
+
+/* -- ROI section -- */
+
+function RoiSection({
+  paragraph,
+  bullets,
+  callout,
+}: {
+  paragraph: string;
+  bullets: string[];
+  callout: { title: string; lines: string[] };
+}) {
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+      <div>
+        <p className="text-[15.5px] leading-[1.8] text-foreground/85">
+          {paragraph}
+        </p>
+        <ul className="mt-5 space-y-2.5">
+          {bullets.map((b) => (
+            <li
+              key={b}
+              className="flex gap-3 text-[15.5px] leading-[1.7] text-foreground/85"
+            >
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="rounded-2xl bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-5 ring-1 ring-primary/15">
+        <div className="flex items-center gap-3">
+          <div className="grid h-11 w-11 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
+            <TrendingUp className="h-5 w-5 text-primary" />
+          </div>
+          <p className="font-display text-base font-extrabold text-primary">
+            {callout.title}
+          </p>
+        </div>
+        <ul className="mt-3 space-y-1.5 text-sm text-foreground/85">
+          {callout.lines.map((l) => (
+            <li key={l}>{l}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/* -- FAQ -- */
+
+function Faq({ items }: { items: { q: string; a: string }[] }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border">
       {items.map((it, i) => {
         const isOpen = open === i;
         return (
-          <div
-            key={i}
-            className="overflow-hidden rounded-2xl border border-border bg-white transition"
-          >
+          <div key={i} className="bg-white">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? null : i)}
               className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
             >
-              <span className="font-display text-base font-bold text-ink">
+              <span className="font-display text-[15px] font-bold text-ink">
                 {it.q}
               </span>
-              <ChevronRight
-                className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${
-                  isOpen ? "rotate-90 text-primary" : ""
-                }`}
-              />
+              {isOpen ? (
+                <Minus className="h-4 w-4 shrink-0 text-primary" />
+              ) : (
+                <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
+              )}
             </button>
             {isOpen && (
-              <div className="border-t border-border px-5 py-4 text-[15px] leading-relaxed text-foreground/85">
+              <div className="px-5 pb-4 text-[15px] leading-relaxed text-foreground/80">
                 {it.a}
               </div>
             )}
@@ -451,197 +604,239 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
   );
 }
 
-function AuthorCard({
-  author,
+/* ---------------- Sidebar ---------------- */
+
+function Sidebar({
+  article,
+  related,
 }: {
-  author: { name: string; role: string; avatar?: string };
+  article: Article;
+  related: Article[];
 }) {
-  const initials = useMemo(
-    () =>
-      author.name
-        .split(" ")
-        .map((s) => s[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase(),
-    [author.name],
-  );
   return (
-    <div className="mt-12 flex items-center gap-4 rounded-2xl border border-border bg-secondary p-5">
-      <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
-        {initials}
-      </div>
-      <div>
-        <p className="font-display text-base font-bold text-ink">
-          {author.name}
-        </p>
-        <p className="text-sm text-muted-foreground">{author.role}</p>
-      </div>
+    <aside className="space-y-6 lg:sticky lg:top-[170px] lg:self-start">
+      <OnThisPage items={article.tableOfContents} />
+      <RelatedArticles items={related} />
+      <SidebarNewsletter />
+    </aside>
+  );
+}
+
+function OnThisPage({ items }: { items: { id: string; title: string }[] }) {
+  const [active, setActive] = useState<string | null>(items[0]?.id ?? null);
+
+  useEffect(() => {
+    const handler = () => {
+      let current: string | null = null;
+      for (const item of items) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top < 180) current = item.id;
+      }
+      if (current) setActive(current);
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    handler();
+    return () => window.removeEventListener("scroll", handler);
+  }, [items]);
+
+  return (
+    <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+      <p className="font-display text-base font-extrabold text-ink">
+        On this page
+      </p>
+      <nav className="mt-3 space-y-0.5">
+        {items.map((it) => {
+          const isActive = active === it.id;
+          return (
+            <a
+              key={it.id}
+              href={`#${it.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById(it.id);
+                if (!el) return;
+                window.scrollTo({
+                  top: el.getBoundingClientRect().top + window.scrollY - 140,
+                  behavior: "smooth",
+                });
+              }}
+              className={`flex items-center justify-between gap-2 border-l-2 py-1.5 pl-3 pr-2 text-sm transition ${
+                isActive
+                  ? "border-primary font-semibold text-primary"
+                  : "border-transparent text-muted-foreground hover:text-ink"
+              }`}
+            >
+              <span className="truncate">{it.title}</span>
+              <ChevronRight className="h-3.5 w-3.5 opacity-40" />
+            </a>
+          );
+        })}
+      </nav>
     </div>
   );
 }
 
-function StickyCTA() {
-  return (
-    <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)]">
-      <p className="text-[11px] font-bold uppercase tracking-wider text-primary">
-        Talk to an expert
-      </p>
-      <h4 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink">
-        Planning a new imaging or turnkey project?
-      </h4>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Our engineers will help you scope, specify and cost the right platform
-        for your facility.
-      </p>
-      <Link
-        to="/contact"
-        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition hover:-translate-y-0.5 hover:bg-primary-dark"
-      >
-        Request a Quote
-        <ArrowRight className="h-4 w-4" />
-      </Link>
-    </div>
-  );
-}
-
-/* ---------------- Prev / Next ---------------- */
-
-function PrevNext({
-  prev,
-  next,
-}: {
-  prev?: NonNullable<ReturnType<typeof getArticle>>;
-  next?: NonNullable<ReturnType<typeof getArticle>>;
-}) {
-  if (!prev && !next) return null;
-  return (
-    <section className="bg-white pb-14 lg:pb-20">
-      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="grid gap-4 border-t border-border pt-8 md:grid-cols-2">
-          {prev ? (
-            <Link
-              to="/blog/$slug"
-              params={{ slug: prev.slug }}
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-5 transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_20px_40px_-24px_rgba(15,23,42,0.3)]"
-            >
-              <ArrowLeft className="h-5 w-5 shrink-0 text-primary transition-transform group-hover:-translate-x-1" />
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                  Previous Article
-                </p>
-                <p className="mt-1 font-display text-sm font-bold text-ink group-hover:text-primary">
-                  {prev.title}
-                </p>
-              </div>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {next ? (
-            <Link
-              to="/blog/$slug"
-              params={{ slug: next.slug }}
-              className="group flex items-center justify-end gap-4 rounded-2xl border border-border bg-white p-5 text-right transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_20px_40px_-24px_rgba(15,23,42,0.3)]"
-            >
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                  Next Article
-                </p>
-                <p className="mt-1 font-display text-sm font-bold text-ink group-hover:text-primary">
-                  {next.title}
-                </p>
-              </div>
-              <ArrowRight className="h-5 w-5 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Related ---------------- */
-
-function Related({
-  items,
-}: {
-  items: NonNullable<ReturnType<typeof getArticle>>[];
-}) {
+function RelatedArticles({ items }: { items: Article[] }) {
   if (!items.length) return null;
   return (
-    <section className="bg-secondary py-14 lg:py-20">
-      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-[1.75rem]">
-          Related Articles
-        </h2>
-        <p className="mt-2 text-muted-foreground">
-          Keep exploring insights from our clinical and engineering teams.
-        </p>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((a) => (
-            <Link
-              key={a.slug}
-              to="/blog/$slug"
-              params={{ slug: a.slug }}
-              className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.35)]"
-            >
-              <div className="aspect-[16/10] w-full overflow-hidden bg-secondary">
-                <img
-                  src={a.coverImage}
-                  alt={a.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
-                  {a.category}
+    <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+      <p className="font-display text-base font-extrabold text-ink">
+        Related Articles
+      </p>
+      <div className="mt-4 space-y-4">
+        {items.map((a) => (
+          <Link
+            key={a.slug}
+            to="/blog/$slug"
+            params={{ slug: a.slug }}
+            className="group flex gap-3"
+          >
+            <div className="h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-secondary">
+              <img
+                src={a.coverImage}
+                alt={a.title}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                {a.category}
+              </p>
+              <p className="mt-0.5 line-clamp-2 font-display text-[13px] font-bold leading-snug text-ink transition-colors group-hover:text-primary">
+                {a.title}
+              </p>
+              <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground">
+                <span className="inline-flex items-center gap-1">
+                  <Clock className="h-3 w-3" /> {a.readingTime}
                 </span>
-                <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
-                  {a.title}
-                </h3>
-                <div className="mt-auto flex items-center gap-4 pt-5 text-xs font-medium text-muted-foreground">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5" /> {a.readingTime}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" /> {a.publishedDate}
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-1">
+                  <Calendar className="h-3 w-3" /> {a.publishedDate}
+                </span>
               </div>
-            </Link>
-          ))}
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SidebarNewsletter() {
+  const [email, setEmail] = useState("");
+  return (
+    <div className="overflow-hidden rounded-2xl bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-5 ring-1 ring-primary/15">
+      <p className="font-display text-base font-extrabold leading-snug text-ink">
+        Stay updated with the latest medical technology insights
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Subscribe to our newsletter and never miss an important update.
+      </p>
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="mt-4 space-y-2.5"
+      >
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Your email address"
+          className="h-11 w-full rounded-full border border-border bg-white px-4 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10"
+        />
+        <button
+          type="submit"
+          className="inline-flex h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground transition hover:-translate-y-0.5 hover:bg-primary-dark"
+        >
+          Subscribe
+        </button>
+      </form>
+      <div className="mt-4 aspect-[16/8] w-full overflow-hidden rounded-xl bg-secondary">
+        <img
+          src={whyCathlab}
+          alt="Medical technology"
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Bottom bands ---------------- */
+
+function ExpertCTA() {
+  return (
+    <section className="bg-white pb-8">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(90deg,#fff5f5_0%,#fff_60%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-primary/10 sm:p-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
+            <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
+              <MessageCircle className="h-7 w-7 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-display text-xl font-extrabold text-ink sm:text-[1.4rem]">
+                Need expert advice?
+              </h3>
+              <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
+                Our specialists can help you choose the right medical equipment
+                for your facility and budget.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              >
+                Request a Quote
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
+            </div>
+            <div className="hidden h-32 w-56 shrink-0 overflow-hidden rounded-2xl lg:block">
+              <img
+                src={whyCathlab}
+                alt="Medical specialists"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Newsletter / Final CTA ---------------- */
-
-function NewsletterCTA() {
+function NewsletterBand() {
   const [email, setEmail] = useState("");
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-white pb-16 lg:pb-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl bg-ink px-6 py-10 text-white sm:px-10 sm:py-14">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-primary-foreground/80">
-              Knowledge Center
-            </p>
-            <h3 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">
-              Get expert insights in your inbox
-            </h3>
-            <p className="mt-3 text-sm text-white/70 sm:text-base">
-              Monthly briefings on medical equipment, imaging technology and
-              hospital operations — no fluff, unsubscribe anytime.
-            </p>
+        <div className="relative overflow-hidden rounded-3xl bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-black/[0.04] sm:p-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
+            <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
+              <Mail className="h-7 w-7 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-display text-xl font-extrabold text-ink sm:text-[1.4rem]">
+                Subscribe to our newsletter
+              </h3>
+              <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
+                Get the latest buying guides, clinical insights and technology
+                updates delivered to your inbox.
+              </p>
+            </div>
             <form
+              className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto"
               onSubmit={(e) => e.preventDefault()}
-              className="mx-auto mt-6 flex w-full max-w-md flex-col gap-3 sm:flex-row"
             >
               <input
                 type="email"
@@ -649,34 +844,37 @@ function NewsletterCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-12 flex-1 rounded-full border border-white/15 bg-white/10 px-5 text-sm text-white placeholder:text-white/50 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
+                className="h-12 w-full min-w-[240px] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[260px]"
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground transition hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Subscribe
               </button>
             </form>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/20"
-              >
-                Talk to an Expert
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/blog"
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white/80 transition hover:text-white"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Back to all articles
-              </Link>
+            <div className="hidden h-32 w-56 shrink-0 overflow-hidden rounded-2xl lg:block">
+              <img
+                src={solDes}
+                alt="Newsletter"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M12.04 2.5A9.5 9.5 0 0 0 3.9 16.86L3 21.5l4.77-.88A9.5 9.5 0 1 0 12.04 2.5Zm0 1.7a7.8 7.8 0 0 1 5.5 13.3 7.8 7.8 0 0 1-9.34 1.24l-.34-.2-2.83.52.53-2.76-.22-.35A7.8 7.8 0 0 1 12.04 4.2Zm-2.5 3.4c-.2 0-.5.08-.77.37-.26.29-1 .98-1 2.4s1.03 2.78 1.17 2.97c.15.2 2 3.05 4.85 4.16 2.36.93 2.84.75 3.36.7.51-.05 1.66-.68 1.9-1.33.23-.66.23-1.22.16-1.33-.07-.11-.26-.18-.55-.32-.29-.15-1.71-.85-1.98-.94-.26-.1-.46-.15-.65.14-.19.29-.74.94-.9 1.13-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.44-.86-.76-1.44-1.7-1.6-1.99-.17-.29-.02-.44.12-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.49-.65-.5h-.55Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
