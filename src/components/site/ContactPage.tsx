@@ -337,66 +337,22 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[580px] lg:min-h-[640px]">
-          {/* Background image(s) with crossfade */}
-          {HERO_SLIDES.map((s, i) => (
-            <img
-              key={s.src}
-              src={s.src}
-              alt={s.alt}
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
-              style={{ objectPosition: "75% center" }}
-              className={cn(
-                "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
-                i === slide ? "opacity-100" : "opacity-0",
-              )}
-            />
-          ))}
-
-          {/* Slide indicators (only when multiple) */}
-          {HERO_SLIDES.length > 1 && (
-            <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-              {HERO_SLIDES.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to slide ${i + 1}`}
-                  onClick={() => setSlide(i)}
-                  className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    i === slide ? "w-8 bg-primary" : "w-3 bg-foreground/25",
-                  )}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Gradient scrim — lighter on the right so equipment stays visible */}
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.82) 28%, rgba(255,255,255,0.35) 52%, rgba(255,255,255,0.04) 75%, rgba(255,255,255,0) 100%)",
-            }}
-          />
-
-
-          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_1.25fr]">
+        <div className="relative min-h-[560px] overflow-hidden rounded-[36px] bg-secondary/30 sm:min-h-[620px] lg:h-[720px] lg:min-h-0">
+          <div className="relative grid h-full grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16"
+              className="relative z-10 flex flex-col justify-center bg-white px-6 py-10 sm:px-10 sm:py-14 lg:px-12 lg:py-16 xl:px-14"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 Trusted Medical Equipment Partner
               </div>
-              <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Let&apos;s build better
-                <br />
-                healthcare <span className="text-primary">together</span>
+              <h1 className="mt-6 max-w-[9ch] font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[3.45rem]">
+                Let&apos;s build
+                <br />better healthcare
+                <br /><span className="text-primary">together</span>
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
                 From consultation to after-sales support, our team is ready to
@@ -425,8 +381,37 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Right column intentionally lets the image show through */}
-            <div className="hidden lg:block" aria-hidden />
+            <div className="relative min-h-[300px] overflow-hidden bg-secondary/50 sm:min-h-[360px] lg:min-h-0">
+              {HERO_SLIDES.map((s, i) => (
+                <img
+                  key={s.src}
+                  src={s.src}
+                  alt={s.alt}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ease-out",
+                    i === slide ? "opacity-100" : "opacity-0",
+                  )}
+                />
+              ))}
+              <div aria-hidden className="absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-white/45 to-transparent lg:block" />
+              {HERO_SLIDES.length > 1 && (
+                <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+                  {HERO_SLIDES.map((_, i) => (
+                    <button
+                      key={i}
+                      aria-label={`Go to slide ${i + 1}`}
+                      onClick={() => setSlide(i)}
+                      className={cn(
+                        "h-1.5 rounded-full transition-all duration-300",
+                        i === slide ? "w-8 bg-primary" : "w-3 bg-foreground/25",
+                      )}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -473,7 +458,7 @@ function ContactBar() {
   ];
   return (
     <section className="relative -mt-12 pb-2">
-      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+      <div className="mx-auto w-full max-w-[87.5rem] px-6">
         <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-9">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
@@ -576,9 +561,9 @@ function FormBlock() {
     <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[80px] lg:py-[80px]">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+        <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)] lg:items-start">
           {/* Form */}
-          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+          <div className="w-full rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:p-12">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Send Us a Message
             </h2>
@@ -765,13 +750,13 @@ function FormBlock() {
           </div>
 
           {/* Why choose */}
-          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:sticky lg:top-24 lg:p-10">
+          <div className="w-full rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:sticky lg:top-24 lg:min-h-[880px] lg:p-12">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Why Choose AbuFarha?
             </h2>
             <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
 
-            <ul className="mt-8 space-y-3">
+            <ul className="mt-8 space-y-5">
               {WHY.map(({ icon: Icon, title, desc }) => (
                 <li
                   key={title}
