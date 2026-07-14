@@ -317,7 +317,7 @@ export function Header() {
                   </a>
                 </div>
                 <a
-                  href="/contact"
+                  href="/contact#contact-form"
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
                 >
