@@ -722,9 +722,9 @@ function FormBlock() {
                   value={values.message ?? ""}
                   onChange={(e) => setField("message", e.target.value)}
                   placeholder="Tell us more about your inquiry..."
-                  rows={5}
+                  rows={8}
                   className={cn(
-                    "mt-1.5 rounded-xl border-border bg-secondary/30 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10",
+                    "mt-1.5 min-h-[200px] rounded-xl border-border bg-secondary/30 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10",
                     errors.message && "border-destructive",
                   )}
                 />
@@ -740,14 +740,16 @@ function FormBlock() {
                 </span>
               </div>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="sm:col-span-2 group mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
-              >
-                {submitting ? "Sending..." : "Submit Inquiry"}
-                <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
+              <div className="sm:col-span-2 mt-2 flex justify-center">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group inline-flex h-14 w-[70%] items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold uppercase tracking-wide text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+                >
+                  {submitting ? "Sending..." : "Submit Inquiry"}
+                  <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </button>
+              </div>
             </form>
           </div>
 
