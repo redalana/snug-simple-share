@@ -307,16 +307,34 @@ const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${en
 )}`;
 
 // ----------------------------------------------------------------------
-// Section: Hero
+// Section: Hero (supports auto-rotating slides)
 // ----------------------------------------------------------------------
+
+const HERO_SLIDES: { src: string; alt: string }[] = [
+  { src: heroCathLab, alt: "AbuFarha Medical Supplies team in a modern cath lab" },
+];
 
 function Hero() {
   const reduce = useReducedMotion();
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    if (HERO_SLIDES.length < 2 || reduce) return;
+    const id = window.setInterval(
+      () => setSlide((i) => (i + 1) % HERO_SLIDES.length),
+      5500,
+    );
+    return () => window.clearInterval(id);
+  }, [reduce]);
+
   return (
     <section className="relative overflow-hidden bg-white pt-6 pb-10">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-4 flex items-center gap-2 text-sm text-muted-foreground"
+        >
           <Link to="/" className="inline-flex items-center gap-1 hover:text-primary">
             <HomeIcon className="h-3.5 w-3.5" /> Home
           </Link>
@@ -324,16 +342,41 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative overflow-hidden rounded-[28px]">
-          {/* Background image */}
-          <img
-            src={heroCathLab}
-            alt="AbuFarha Medical Supplies team in a modern cath lab"
-            loading="eager"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+        <div className="relative min-h-[520px] overflow-hidden rounded-[28px] sm:min-h-[560px] lg:min-h-[600px]">
+          {/* Background image(s) with crossfade */}
+          {HERO_SLIDES.map((s, i) => (
+            <img
+              key={s.src}
+              src={s.src}
+              alt={s.alt}
+              loading={i === 0 ? "eager" : "lazy"}
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
+                i === slide ? "opacity-100" : "opacity-0",
+              )}
+            />
+          ))}
+
+          {/* Slide indicators (only when multiple) */}
+          {HERO_SLIDES.length > 1 && (
+            <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => setSlide(i)}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all duration-300",
+                    i === slide ? "w-8 bg-primary" : "w-3 bg-foreground/25",
+                  )}
+                />
+              ))}
+            </div>
+          )}
+
           {/* Gradient scrim */}
           <div
+            aria-hidden
             className="absolute inset-0"
             style={{
               background:
@@ -358,20 +401,21 @@ function Hero() {
                 healthcare <span className="text-primary">together</span>
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-                From consultation to after-sales support, our team is ready to provide the right medical solutions for your healthcare facility.
+                From consultation to after-sales support, our team is ready to
+                provide the right medical solutions for your healthcare facility.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <a
                   href="#contact-form"
-                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-primary-dark hover:shadow-[0_20px_38px_-14px_var(--primary)]"
                 >
                   Get in Touch
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
                 </a>
                 <button
                   type="button"
-                  className="inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
+                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-primary/40 hover:text-primary hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
                 >
                   <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
                     <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
@@ -389,6 +433,7 @@ function Hero() {
     </section>
   );
 }
+
 
 // ----------------------------------------------------------------------
 // Section: Quick contact bar
