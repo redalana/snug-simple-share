@@ -172,7 +172,8 @@ function Hero({ article }: { article: Article }) {
 
 function SocialShare({ title }: { title: string }) {
   const [copied, setCopied] = useState(false);
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  const [url, setUrl] = useState("");
+  useEffect(() => setUrl(window.location.href), []);
   const enc = encodeURIComponent;
 
   const items = [
