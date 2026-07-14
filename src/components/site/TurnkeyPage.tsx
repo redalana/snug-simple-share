@@ -205,11 +205,10 @@ function RegionalPresence() {
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_2.15fr] lg:items-start">
           <div>
-            <Eyebrow>Global Footprint</Eyebrow>
-            <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.5rem]">
+            <h2 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.5rem]">
               Our Presence
               <br />
-              <span className="text-primary">Across the World</span>
+              Across <span className="text-primary">the World</span>
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
               We have successfully supplied, installed and supported medical
