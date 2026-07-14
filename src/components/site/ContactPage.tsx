@@ -323,8 +323,8 @@ function Hero() {
   }, [reduce]);
 
   return (
-    <section className="relative overflow-hidden bg-white pt-6 pb-10">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+    <section className="relative overflow-hidden bg-white pt-4 pb-4">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         {/* Breadcrumb */}
         <nav
           aria-label="Breadcrumb"
@@ -337,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[600px] overflow-hidden rounded-[36px] sm:min-h-[680px] lg:min-h-[760px]">
+        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[580px] lg:min-h-[640px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
@@ -346,7 +346,7 @@ function Hero() {
               alt={s.alt}
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
-              style={{ objectPosition: "center 42%" }}
+              style={{ objectPosition: "75% center" }}
               className={cn(
                 "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
                 i === slide ? "opacity-100" : "opacity-0",
@@ -377,17 +377,17 @@ function Hero() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.78) 30%, rgba(255,255,255,0.38) 55%, rgba(255,255,255,0.08) 78%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.82) 28%, rgba(255,255,255,0.35) 52%, rgba(255,255,255,0.04) 75%, rgba(255,255,255,0) 100%)",
             }}
           />
 
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1.05fr]">
+          <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_1.25fr]">
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="px-6 py-14 sm:px-10 sm:py-20 lg:px-14 lg:py-24"
+              className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -472,8 +472,8 @@ function ContactBar() {
     },
   ];
   return (
-    <section className="relative -mt-8 pb-4">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+    <section className="relative -mt-12 pb-2">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/70 bg-white p-6 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:gap-4 sm:p-9">
           {items.map(({ icon: Icon, title, lines, href, color }) => (
             <a
@@ -574,7 +574,7 @@ function FormBlock() {
 
   return (
     <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[80px] lg:py-[80px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           {/* Form */}
@@ -810,7 +810,7 @@ function FieldError({ msg }: { msg: string }) {
 function OfficeMap() {
   return (
     <section className="bg-white py-[120px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
@@ -912,7 +912,7 @@ function OfficeRow({
 function StatsStrip() {
   return (
     <section className="py-[90px]">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
             <div
