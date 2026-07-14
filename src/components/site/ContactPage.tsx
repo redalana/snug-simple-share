@@ -573,15 +573,18 @@ function FormBlock() {
     "h-[52px] rounded-xl border-border bg-secondary/30 text-[15px] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
-    <section id="contact-form" className="bg-secondary/30 py-16 lg:py-20">
+    <section id="contact-form" className="bg-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           {/* Form */}
-          <div className="rounded-3xl border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
+          <div className="rounded-[20px] border border-border/60 bg-white p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-8 lg:p-10">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Send Us a Message
             </h2>
             <div className="mt-2 h-1 w-14 rounded-full bg-primary" />
+            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+              Have a project in mind? Let&apos;s discuss your medical equipment requirements.
+            </p>
 
             <AnimatePresence>
               {success && (
