@@ -413,15 +413,17 @@ function Hero() {
                   Get in Touch
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
                 </a>
-                <button
-                  type="button"
-                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-primary/40 hover:text-primary hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
+                <a
+                  href="https://wa.me/962799741318"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[#25D366]/50 hover:text-[#128C7E] hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"
                 >
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
-                    <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-[#25D366] text-white">
+                    <WhatsAppIcon className="h-4 w-4" />
                   </span>
-                  Watch Our Story
-                </button>
+                  WhatsApp Us
+                </a>
               </div>
             </motion.div>
 
