@@ -804,7 +804,7 @@ function OfficeMap() {
 
           {/* Floating card */}
           <div className="pointer-events-none absolute inset-0 flex items-stretch">
-            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-2xl border border-border/60 bg-white/95 p-6 shadow-[0_25px_60px_-25px_rgba(15,23,42,0.35)] backdrop-blur-sm sm:m-6 sm:p-7">
+            <div className="pointer-events-auto m-4 w-full max-w-sm rounded-[28px] border border-white/70 bg-white/95 p-6 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:p-7">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-xl font-black text-foreground">
                   Visit Our Office
