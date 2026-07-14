@@ -901,7 +901,7 @@ function OfficeRow({
 
 function StatsStrip() {
   return (
-    <section className="py-10 lg:py-12">
+    <section className="py-[90px]">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
