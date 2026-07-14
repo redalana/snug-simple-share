@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -903,6 +903,160 @@ function NewsletterBand() {
         </div>
       </div>
     </section>
+  );
+}
+
+function useNewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    if (!valid) {
+      setSuccess(false);
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    setMessage("");
+    await new Promise((resolve) => window.setTimeout(resolve, 650));
+    setLoading(false);
+    setSuccess(true);
+    setMessage("Thank you — you're subscribed to AbuFarha Medical insights.");
+    setEmail("");
+  };
+
+  return { email, setEmail, loading, message, success, submit };
+}
+
+function ReadingProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(height > 0 ? Math.min(100, (window.scrollY / height) * 100) : 0);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  return (
+    <div className="fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true">
+      <div className="h-full bg-primary transition-[width] duration-100" style={{ width: `${progress}%` }} />
+    </div>
+  );
+}
+
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 700);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  return (
+    <button
+      type="button"
+      aria-label="Back to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={`fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-full bg-ink text-white shadow-lg transition-all ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
+    >
+      <ChevronUp className="h-5 w-5" />
+    </button>
+  );
+}
+
+function AuthorReview() {
+  return (
+    <section className="border-t border-border pt-8" aria-label="Article reviewer">
+      <p className="text-xs font-bold uppercase tracking-wider text-primary">Reviewed by</p>
+      <p className="mt-2 font-display text-lg font-extrabold text-ink">AbuFarha Biomedical Engineering Team</p>
+      <p className="mt-1 text-sm text-muted-foreground">Certified Medical Equipment Specialists</p>
+    </section>
+  );
+}
+
+function ArticleLightbox() {
+  const [images, setImages] = useState<Array<{ src: string; alt: string }>>([]);
+  const [index, setIndex] = useState<number | null>(null);
+  const [zoomed, setZoomed] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  useEffect(() => {
+    const open = (event: MouseEvent) => {
+      const image = (event.target as HTMLElement).closest<HTMLImageElement>("[data-article-image]");
+      if (!image) return;
+      const all = Array.from(document.querySelectorAll<HTMLImageElement>("[data-article-image]"));
+      setImages(all.map((item) => ({ src: item.currentSrc || item.src, alt: item.alt })));
+      setIndex(all.indexOf(image));
+    };
+    document.addEventListener("click", open);
+    return () => document.removeEventListener("click", open);
+  }, []);
+
+  useEffect(() => {
+    if (index === null) return;
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIndex(null);
+      if (event.key === "ArrowRight") setIndex((value) => value === null ? null : (value + 1) % images.length);
+      if (event.key === "ArrowLeft") setIndex((value) => value === null ? null : (value - 1 + images.length) % images.length);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", keydown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", keydown);
+    };
+  }, [index, images.length]);
+
+  const move = (direction: number) => {
+    setZoomed(false);
+    setIndex((value) => value === null ? null : (value + direction + images.length) % images.length);
+  };
+
+  return (
+    <AnimatePresence>
+      {index !== null && images[index] && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Article image viewer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4 sm:p-10"
+          onClick={() => setIndex(null)}
+          onTouchStart={(event) => setTouchStart(event.touches[0]?.clientX ?? null)}
+          onTouchEnd={(event) => {
+            if (touchStart === null) return;
+            const distance = (event.changedTouches[0]?.clientX ?? touchStart) - touchStart;
+            if (Math.abs(distance) > 50) move(distance < 0 ? 1 : -1);
+            setTouchStart(null);
+          }}
+        >
+          <button type="button" aria-label="Close image viewer" onClick={() => setIndex(null)} className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+            <X className="h-5 w-5" />
+          </button>
+          {images.length > 1 && <button type="button" aria-label="Previous image" onClick={(event) => { event.stopPropagation(); move(-1); }} className="absolute left-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-6"><ChevronLeft className="h-6 w-6" /></button>}
+          <img
+            src={images[index].src}
+            alt={images[index].alt}
+            onClick={(event) => { event.stopPropagation(); setZoomed((value) => !value); }}
+            className={`max-h-[88vh] max-w-[88vw] object-contain transition-transform duration-300 ${zoomed ? "cursor-zoom-out scale-150" : "cursor-zoom-in scale-100"}`}
+          />
+          {images.length > 1 && <button type="button" aria-label="Next image" onClick={(event) => { event.stopPropagation(); move(1); }} className="absolute right-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-6"><ArrowRight className="h-6 w-6" /></button>}
+          <span className="absolute bottom-5 text-xs font-semibold text-white/70">{index + 1} / {images.length}</span>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
