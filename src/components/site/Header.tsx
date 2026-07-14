@@ -53,7 +53,7 @@ const NAV: NavItem[] = [
       { label: "Why AbuFarha", href: "#why" },
     ],
   },
-  { label: "Blog", href: "#" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];
 
