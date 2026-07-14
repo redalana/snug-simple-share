@@ -343,7 +343,7 @@ function Hero() {
               initial={reduce ? undefined : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 flex flex-col justify-center bg-white px-6 py-10 sm:px-10 sm:py-14 lg:px-12 lg:py-16 xl:px-14"
+              className="relative z-10 flex flex-col justify-center bg-white px-6 py-10 sm:px-10 sm:py-14 lg:px-10 lg:py-16 xl:px-12"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -351,7 +351,7 @@ function Hero() {
               </div>
               <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[2.5rem] xl:text-[2.75rem]">
                 Let&apos;s build
-                <br />better healthcare
+                <br /><span className="whitespace-nowrap">better healthcare</span>
                 <br /><span className="text-primary">together</span>
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
