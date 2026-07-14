@@ -793,7 +793,7 @@ function OfficeMap() {
   return (
     <section className="bg-white py-14 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-white shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)]">
+        <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
             src={MAP_EMBED}
