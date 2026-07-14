@@ -5,29 +5,54 @@ import solPetct from "@/assets/sol-petct.jpg";
 import solCarm from "@/assets/sol-carm.jpg";
 import solOr from "@/assets/sol-or.jpg";
 import solUltrasound from "@/assets/sol-ultrasound.jpg";
-import solMammo from "@/assets/sol-mammo.jpg";
 import solXray from "@/assets/sol-xray.jpg";
 import solDexa from "@/assets/sol-dexa.jpg";
-import solEswl from "@/assets/sol-eswl.jpg";
-import solDes from "@/assets/sol-des.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
 import abufarhaHq from "@/assets/abufarha-hq.jpg";
 
 export type TocItem = { id: string; title: string };
 
+export type BenefitIcon = "cost" | "reliability" | "delivery" | "performance";
+
 export type ContentBlock =
   | { type: "p"; text: string }
-  | { type: "h2"; id: string; text: string }
+  | { type: "intro"; paragraphs: string[]; image?: string; imageAlt?: string }
+  | {
+      type: "h2";
+      id: string;
+      text: string;
+      number?: number;
+      image?: string;
+      imageAlt?: string;
+      imagePosition?: "left" | "right";
+      body?: string;
+    }
   | { type: "h3"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "quote"; text: string; cite?: string }
   | { type: "image"; src: string; alt: string; caption?: string }
   | {
+      type: "benefits";
+      items: { icon: BenefitIcon; title: string; description: string }[];
+    }
+  | {
       type: "table";
       headers: string[];
       rows: string[][];
+      highlightLastColumn?: boolean;
       caption?: string;
+    }
+  | {
+      type: "requirements";
+      checklist: string[];
+      specs: { title: string; rows: { label: string; value: string }[] };
+    }
+  | {
+      type: "roi";
+      paragraph: string;
+      bullets: string[];
+      callout: { title: string; lines: string[] };
     }
   | { type: "faq"; items: { q: string; a: string }[] };
 
@@ -54,107 +79,209 @@ function makeDefaultContent(a: {
   category: string;
   coverImage: string;
 }): { content: ContentBlock[]; toc: TocItem[] } {
+  const noun = a.category;
   const toc: TocItem[] = [
-    { id: "overview", title: "Overview" },
-    { id: "why-it-matters", title: "Why it matters" },
-    { id: "what-to-look-for", title: "What to look for" },
-    { id: "installation", title: "Installation & commissioning" },
-    { id: "support", title: "After-sales support" },
-    { id: "faq", title: "Frequently asked questions" },
+    { id: "introduction", title: "Introduction" },
+    { id: "what-is", title: `What is Refurbished ${noun}?` },
+    { id: "benefits", title: `Benefits of Choosing Refurbished ${noun}` },
+    { id: "cost", title: `${noun} Cost: New vs Refurbished` },
+    { id: "installation", title: "Installation Requirements" },
+    { id: "roi", title: "ROI: Is It Worth It?" },
+    { id: "faq", title: "Frequently Asked Questions" },
+    { id: "conclusion", title: "Conclusion" },
   ];
+
   const content: ContentBlock[] = [
-    { type: "h2", id: "overview", text: "Overview" },
     {
-      type: "p",
-      text: `${a.title} is a core topic for hospital leaders planning capital investments across ${a.category.toLowerCase()}. This guide brings together the operational, clinical and commercial considerations we see every week working with hospitals across Africa and the Middle East.`,
+      type: "h2",
+      id: "introduction",
+      text: "Introduction",
     },
     {
-      type: "p",
-      text: "AbuFarha Medical Equipment supplies, installs, commissions and supports the platforms discussed here — so the guidance below is grounded in field experience, not brochures.",
-    },
-    { type: "h2", id: "why-it-matters", text: "Why it matters" },
-    {
-      type: "p",
-      text: "The right platform pays back through throughput, uptime and clinical confidence. The wrong one drains budgets on service contracts, spare parts and unplanned downtime — long after the invoice is closed.",
-    },
-    {
-      type: "ul",
-      items: [
-        "Clinical fit — does the system support the studies you actually run?",
-        "Total cost of ownership over 7–10 years, not just capital price",
-        "Serviceability and spare-parts availability in your region",
-        "Training and workflow readiness for your team",
+      type: "intro",
+      image: a.coverImage,
+      imageAlt: a.title,
+      paragraphs: [
+        `${a.title} is a decision that shapes clinical services and capital budgets for years. However, the high cost of new systems can be a challenge for many hospitals and imaging centers. Refurbished platforms provide a reliable, cost-effective alternative — delivering premium performance, advanced technology and long-term value.`,
+        `This guide walks you through everything you need to know before investing in a refurbished ${noun.toLowerCase()} system, including costs, popular brands, installation requirements and expected ROI.`,
       ],
     },
-    { type: "h2", id: "what-to-look-for", text: "What to look for" },
+
     {
-      type: "p",
-      text: "Every specification matters, but a handful of decisions drive most of the outcome. Prioritise these before comparing brochures line-by-line.",
+      type: "h2",
+      id: "what-is",
+      text: `What is a Refurbished ${noun} System?`,
+      number: 1,
+      image: a.coverImage,
+      imagePosition: "left",
+      body: `A refurbished ${noun.toLowerCase()} system is a pre-owned platform that has been fully inspected, restored and tested by certified engineers to meet original manufacturer standards. It includes essential component replacement, software updates and quality assurance tests to ensure optimal performance and patient safety.`,
+    },
+
+    {
+      type: "h2",
+      id: "benefits",
+      text: `Benefits of Choosing Refurbished ${noun}`,
+      number: 2,
+    },
+    {
+      type: "benefits",
+      items: [
+        {
+          icon: "cost",
+          title: "Cost Savings",
+          description: "Save 30% – 60% compared to new systems.",
+        },
+        {
+          icon: "reliability",
+          title: "Proven Reliability",
+          description:
+            "Rigorous refurbishment & testing ensures reliable performance.",
+        },
+        {
+          icon: "delivery",
+          title: "Faster Delivery",
+          description: "Shorter lead time and quicker installation.",
+        },
+        {
+          icon: "performance",
+          title: "High Performance",
+          description: "Excellent image quality & clinical results.",
+        },
+      ],
+    },
+
+    {
+      type: "h2",
+      id: "cost",
+      text: `${noun} Cost: New vs Refurbished`,
+      number: 3,
     },
     {
       type: "table",
-      headers: ["Criterion", "What good looks like", "Common mistake"],
+      headers: [
+        "System Type",
+        "New Price (USD)",
+        "Refurbished Price (USD)",
+        "Potential Savings",
+      ],
       rows: [
         [
-          "Clinical protocols",
-          "Vendor demos on your case mix",
-          "Trusting generic sample images",
+          `Entry-level ${noun}`,
+          "$1,000,000 – $1,800,000",
+          "$450,000 – $900,000",
+          "30% – 60%",
         ],
         [
-          "Siting",
-          "Structural, power and HVAC survey up front",
-          "Discovering constraints during install",
+          `Mid-range ${noun}`,
+          "$1,800,000 – $3,200,000",
+          "$800,000 – $1,600,000",
+          "30% – 55%",
         ],
         [
-          "Training",
-          "Applications training on-site, in your workflow",
-          "One-day handover at go-live",
-        ],
-        [
-          "Support",
-          "Local engineers with parts stocked in-region",
-          "Cross-continent parts logistics",
+          `High-end ${noun}`,
+          "$600,000 – $1,200,000",
+          "$250,000 – $600,000",
+          "40% – 60%",
         ],
       ],
+      highlightLastColumn: true,
+      caption:
+        "Prices vary depending on brand, model, condition and configuration.",
+    },
+
+    {
+      type: "h2",
+      id: "installation",
+      text: "Installation Requirements",
+      number: 4,
     },
     {
-      type: "image",
-      src: a.coverImage,
-      alt: a.title,
-      caption: `${a.category} — installation and commissioning by AbuFarha Medical.`,
+      type: "requirements",
+      checklist: [
+        "Site preparation and civil works",
+        "RF shielding and room compliance",
+        "Power supply and grounding",
+        "Cooling and ventilation system",
+        "Software & network integration",
+        "Regulatory compliance & safety tests",
+      ],
+      specs: {
+        title: `Typical Room Requirements (${noun})`,
+        rows: [
+          { label: "Room Size (Min.)", value: "5.5m (L) × 3.5m (W) × 2.4m (H)" },
+          { label: "Power Requirement", value: "60 – 80 kVA" },
+          { label: "Cooling", value: "2 – 4 tons" },
+          { label: "RF Shielding", value: "Required" },
+          { label: "Door Width", value: "Min. 1.2m" },
+        ],
+      },
     },
-    { type: "h2", id: "installation", text: "Installation & commissioning" },
+
     {
-      type: "p",
-      text: "Installation is where projects quietly succeed or fail. Site readiness, RF shielding, gas & power, floor loading and workflow simulation should be signed off before the crate arrives.",
+      type: "h2",
+      id: "roi",
+      text: "ROI: Is It Worth It?",
+      number: 5,
     },
     {
-      type: "quote",
-      text: "A commissioning plan is a clinical document, not a logistics checklist. Treat it that way and go-live becomes uneventful.",
-      cite: "AbuFarha Field Engineering",
+      type: "roi",
+      paragraph: `Investing in a refurbished ${noun.toLowerCase()} system can provide a strong return by increasing patient throughput, expanding diagnostic services and reducing operational costs.`,
+      bullets: [
+        "Lower initial investment",
+        `High patient demand for ${noun.toLowerCase()}`,
+        "Minimal downtime with proper maintenance",
+        "Long service life with OEM parts & support",
+      ],
+      callout: {
+        title: "Typical ROI Timeline",
+        lines: [
+          "Payback Period: 1 – 3 years",
+          "Lifespan: 7 – 10 years with proper maintenance",
+        ],
+      },
     },
-    { type: "h2", id: "support", text: "After-sales support" },
+
     {
-      type: "p",
-      text: "Uptime is a discipline. We staff regional engineers, hold critical spares in-country and run preventive maintenance on a fixed cadence so your team never has to chase the next service visit.",
+      type: "h2",
+      id: "faq",
+      text: "Frequently Asked Questions",
+      number: 6,
     },
-    { type: "h2", id: "faq", text: "Frequently asked questions" },
     {
       type: "faq",
       items: [
         {
-          q: "Do you supply refurbished as well as new systems?",
-          a: "Yes — refurbished platforms are fully re-certified with warranty, parts and training, and are often the fastest path to a modern imaging capability.",
+          q: `Are refurbished ${noun.toLowerCase()} systems reliable?`,
+          a: "Yes — every system we supply is fully re-certified by our engineers with a warranty, spare parts and applications training.",
         },
         {
-          q: "How long does a typical installation take?",
-          a: "Between 3 and 12 weeks depending on modality and site readiness. We share a detailed schedule after the site survey.",
+          q: "What warranty do you provide?",
+          a: "Standard warranty is 12 months on parts and labour, with extended options available up to 36 months.",
         },
         {
-          q: "Do you provide clinical applications training?",
-          a: "Every project includes on-site applications training for radiographers, physicists and physicians, plus refresher visits in the first year.",
+          q: "How long does installation take?",
+          a: "Typical installation takes between 3 and 8 weeks depending on site readiness and modality.",
+        },
+        {
+          q: "Can I upgrade the system later?",
+          a: "Yes — most platforms accept coil, software and workflow upgrades throughout their service life.",
+        },
+        {
+          q: "What brands do you support?",
+          a: "We support Philips, Siemens Healthineers, GE HealthCare, Canon and other leading OEMs.",
         },
       ],
+    },
+
+    {
+      type: "h2",
+      id: "conclusion",
+      text: "Conclusion",
+      number: 7,
+    },
+    {
+      type: "p",
+      text: `Refurbished ${noun.toLowerCase()} is a proven way to bring advanced diagnostic capability to hospitals without the capital burden of new equipment. With the right partner for supply, installation, training and after-sales support, the total cost of ownership drops sharply while clinical performance stays uncompromised.`,
     },
   ];
   return { content, toc };
@@ -166,8 +293,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
 }> = [
   {
     slug: "refurbished-cath-lab-systems-africa-buyers-guide",
-    title:
-      "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
+    title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
     metaDescription:
       "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
     category: "Cath Lab",
@@ -191,7 +317,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "A field-tested comparison of image quality, throughput, siting costs and clinical fit — so you buy the scanner your program actually needs.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 15, 2026",
-    readingTime: "7 min read",
+    readingTime: "10 min read",
     featured: true,
   },
   {
@@ -210,8 +336,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   },
   {
     slug: "turnkey-hospital-departments-planning-to-commissioning",
-    title:
-      "Turnkey Hospital Departments: From Planning to Commissioning",
+    title: "Turnkey Hospital Departments: From Planning to Commissioning",
     metaDescription:
       "How AbuFarha delivers complete departments on time, on budget and to the highest clinical standards.",
     category: "Turnkey Projects",
@@ -227,34 +352,33 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "mri-technology-explained-guide-for-providers",
     title:
-      "MRI Technology Explained: A Complete Guide for Healthcare Providers",
+      "The Ultimate Guide to Refurbished MRI Scanners: Costs, Brands, Installation & ROI for Hospitals",
     metaDescription:
-      "Understand MRI technology, applications, and how to choose the right system for your hospital.",
-    category: "MRI",
+      "A complete guide for hospital administrators and investors on refurbished MRI systems — including costs, brands, installation requirements, and return on investment.",
+    category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
-      "Understand MRI technology, applications, and how to choose the right system for your hospital.",
-    author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
-    publishedDate: "May 18, 2026",
-    readingTime: "7 min read",
+      "A complete guide for hospital administrators and investors on refurbished MRI systems — including costs, brands, installation requirements, and return on investment.",
+    author: { name: "AbuFarha Medical", role: "Editorial Team" },
+    publishedDate: "May 20, 2026",
+    readingTime: "10 min read",
   },
   {
     slug: "ct-scanners-features-benefits-buying-considerations",
     title: "CT Scanners: Key Features, Benefits & Buying Considerations",
     metaDescription:
       "A practical guide to selecting the best CT scanner for your clinical and budgetary needs.",
-    category: "CT Scan",
+    category: "CT Scanners",
     coverImage: solCt,
     excerpt:
       "A practical guide to selecting the best CT scanner for your clinical and budgetary needs.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
-    publishedDate: "May 15, 2026",
+    publishedDate: "May 16, 2026",
     readingTime: "7 min read",
   },
   {
     slug: "philips-gemini-gxl-16-petct-review",
-    title:
-      "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
+    title: "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
     metaDescription:
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
     category: "PET/CT",
@@ -263,7 +387,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 12, 2026",
-    readingTime: "6 min read",
+    readingTime: "8 min read",
   },
   {
     slug: "turnkey-hospital-projects-planning-to-commissioning",
@@ -327,8 +451,8 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
     excerpt:
       "From integrated OR systems to advanced surgical lights — what a modern theatre needs.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
-    publishedDate: "May 3, 2026",
-    readingTime: "6 min read",
+    publishedDate: "May 6, 2026",
+    readingTime: "7 min read",
   },
   {
     slug: "ct-vs-mri-which-is-right-for-your-hospital",
@@ -404,7 +528,7 @@ export function getArticle(slug: string): Article | undefined {
   return ARTICLES.find((a) => a.slug === slug);
 }
 
-export function getRelated(slug: string, limit = 3): Article[] {
+export function getRelated(slug: string, limit = 4): Article[] {
   const current = getArticle(slug);
   if (!current) return ARTICLES.slice(0, limit);
   const sameCategory = ARTICLES.filter(
