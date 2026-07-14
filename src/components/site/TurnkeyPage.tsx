@@ -9,7 +9,6 @@ import {
   Users,
   Headphones,
   ClipboardList,
-  Settings,
   GraduationCap,
   ShieldCheck,
   Award,
@@ -18,7 +17,6 @@ import {
   Trophy,
   Globe,
   Package,
-  CheckCircle2,
   PenTool,
   ShoppingCart,
   Target,
@@ -32,8 +30,8 @@ import {
   UserRound,
   ChevronLeft,
   ChevronRight,
+  Handshake,
 } from "lucide-react";
-import { Eyebrow } from "./Eyebrow";
 import heroImg from "@/assets/turnkey-hero.jpg";
 import imgCath from "@/assets/sol-carm.jpg";
 import imgMri from "@/assets/sol-mri.jpg";
@@ -49,6 +47,7 @@ import imgProject3 from "@/assets/project-3.jpg";
 import imgProject4 from "@/assets/beyond-cathlab.jpg";
 import imgEngineer from "@/assets/beyond-cathlab.jpg";
 import imgCtaBg from "@/assets/footer-cathlab.jpg";
+
 
 /* ------------------------------------------------------------------ Hero */
 
