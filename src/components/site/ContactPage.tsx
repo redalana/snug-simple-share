@@ -337,7 +337,7 @@ function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[520px] overflow-hidden rounded-[36px] sm:min-h-[560px] lg:min-h-[600px]">
+        <div className="relative min-h-[560px] overflow-hidden rounded-[36px] sm:min-h-[620px] lg:min-h-[680px]">
           {/* Background image(s) with crossfade */}
           {HERO_SLIDES.map((s, i) => (
             <img
@@ -345,8 +345,10 @@ function Hero() {
               src={s.src}
               alt={s.alt}
               loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              style={{ objectPosition: "70% center" }}
               className={cn(
-                "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out",
                 i === slide ? "opacity-100" : "opacity-0",
               )}
             />
@@ -369,15 +371,16 @@ function Hero() {
             </div>
           )}
 
-          {/* Gradient scrim */}
+          {/* Gradient scrim — lighter on the right so equipment stays visible */}
           <div
             aria-hidden
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.68) 32%, rgba(255,255,255,0.32) 55%, rgba(255,255,255,0.02) 78%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.78) 30%, rgba(255,255,255,0.38) 55%, rgba(255,255,255,0.08) 78%, rgba(255,255,255,0) 100%)",
             }}
           />
+
 
           <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_1.05fr]">
             <motion.div
