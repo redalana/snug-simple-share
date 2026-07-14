@@ -377,7 +377,7 @@ function Hero() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.78) 30%, rgba(255,255,255,0.38) 55%, rgba(255,255,255,0.08) 78%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.82) 28%, rgba(255,255,255,0.35) 52%, rgba(255,255,255,0.04) 75%, rgba(255,255,255,0) 100%)",
             }}
           />
 
