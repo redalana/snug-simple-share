@@ -559,11 +559,11 @@ function FormBlock() {
 
   return (
     <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[80px] lg:py-[80px]">
-      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+      <div className="mx-auto w-full max-w-[87.5rem] px-6">
 
-        <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)] lg:items-start">
+        <div className="grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(340px,1fr)]">
           {/* Form */}
-          <div className="w-full rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:p-12">
+          <div className="m-0 w-full justify-self-stretch rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:p-12">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Send Us a Message
             </h2>
@@ -750,7 +750,7 @@ function FormBlock() {
           </div>
 
           {/* Why choose */}
-          <div className="w-full rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:sticky lg:top-24 lg:min-h-[880px] lg:p-12">
+          <div className="m-0 w-full justify-self-stretch rounded-[20px] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:sticky lg:top-24 lg:min-h-[880px] lg:p-12">
             <h2 className="font-display text-2xl font-black text-foreground sm:text-3xl">
               Why Choose AbuFarha?
             </h2>
