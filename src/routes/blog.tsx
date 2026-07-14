@@ -20,7 +20,9 @@ export const Route = createFileRoute("/blog")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/blog" },
     ],
+    links: [{ rel: "canonical", href: "/blog" }],
   }),
   component: BlogRoute,
 });

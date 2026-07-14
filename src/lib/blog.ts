@@ -67,6 +67,7 @@ export type Article = {
   excerpt: string;
   author: { name: string; role: string; avatar?: string };
   publishedDate: string;
+  lastUpdated?: string;
   readingTime: string;
   featured?: boolean;
   featuredProduct?: { name: string; slug: string; image: string };
@@ -292,7 +293,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   tableOfContents?: TocItem[];
 }> = [
   {
-    slug: "refurbished-cath-lab-systems-africa-buyers-guide",
+    slug: "cath-lab-buying-guide",
     title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
     metaDescription:
       "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
@@ -303,6 +304,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "Everything you need to know before investing in a refurbished cath lab system. Costs, benefits, installation, training, and after-sales support.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "May 20, 2026",
+    lastUpdated: "July 14, 2026",
     readingTime: "8 min read",
     featured: true,
   },
@@ -350,7 +352,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
     featured: true,
   },
   {
-    slug: "mri-technology-explained-guide-for-providers",
+    slug: "refurbished-mri-scanners-guide",
     title:
       "The Ultimate Guide to Refurbished MRI Scanners: Costs, Brands, Installation & ROI for Hospitals",
     metaDescription:
@@ -361,6 +363,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "A complete guide for hospital administrators and investors on refurbished MRI systems — including costs, brands, installation requirements, and return on investment.",
     author: { name: "AbuFarha Medical", role: "Editorial Team" },
     publishedDate: "May 20, 2026",
+    lastUpdated: "July 14, 2026",
     readingTime: "10 min read",
   },
   {
@@ -525,7 +528,11 @@ export const LATEST_ARTICLES = ARTICLES.slice(0, 9);
 export const MORE_ARTICLES = ARTICLES.slice(9);
 
 export function getArticle(slug: string): Article | undefined {
-  return ARTICLES.find((a) => a.slug === slug);
+  const aliases: Record<string, string> = {
+    "mri-technology-explained-guide-for-providers": "refurbished-mri-scanners-guide",
+    "refurbished-cath-lab-systems-africa-buyers-guide": "cath-lab-buying-guide",
+  };
+  return ARTICLES.find((a) => a.slug === (aliases[slug] ?? slug));
 }
 
 export function getRelated(slug: string, limit = 4): Article[] {

@@ -16,6 +16,41 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const title = article.seoTitle ?? `${article.title} — AbuFarha Medical`;
+    const articlePath = `/blog/${article.slug}`;
+    const faq = article.content.find((block) => block.type === "faq");
+    const schemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: article.title,
+        description: article.metaDescription,
+        datePublished: article.publishedDate,
+        dateModified: article.lastUpdated ?? article.publishedDate,
+        author: { "@type": "Organization", name: "AbuFarha Biomedical Engineering Team" },
+        publisher: { "@type": "Organization", name: "AbuFarha Medical" },
+        mainEntityOfPage: articlePath,
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "/blog" },
+          { "@type": "ListItem", position: 3, name: article.title, item: articlePath },
+        ],
+      },
+      ...(faq?.type === "faq"
+        ? [{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.items.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }]
+        : []),
+    ];
     return {
       meta: [
         { title },
@@ -23,10 +58,16 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: article.metaDescription },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: article.coverImage },
+        { property: "og:url", content: articlePath },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: article.coverImage },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: article.metaDescription },
       ],
+      links: [{ rel: "canonical", href: articlePath }],
+      scripts: schemas.map((schema) => ({
+        type: "application/ld+json",
+        children: JSON.stringify(schema),
+      })),
     };
   },
   component: ArticleRoute,
