@@ -1,1124 +1,1151 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Minus,
-  Plus,
-  MapPin,
-  ShieldCheck,
-  Wrench,
-  GraduationCap,
-  Headphones,
-  ClipboardCheck,
-  FileText,
-  Cpu,
-  Heart,
-  Scan,
-  Activity,
-  Stethoscope,
-  Baby,
-  FlaskConical,
-  Sparkles,
-  UserRound,
-  CircleDot,
-} from "lucide-react";
-import heroImg from "@/assets/turnkey-hero.jpg";
-import imgCath from "@/assets/sol-carm.jpg";
-import imgMri from "@/assets/sol-mri.jpg";
-import imgOr from "@/assets/sol-or.jpg";
-import imgCt from "@/assets/sol-ct.jpg";
-import imgUs from "@/assets/sol-ultrasound.jpg";
-import imgXray from "@/assets/sol-xray.jpg";
-import imgDexa from "@/assets/sol-dexa.jpg";
-import imgMammo from "@/assets/sol-mammo.jpg";
-import imgProject1 from "@/assets/project-1.jpg";
-import imgProject2 from "@/assets/project-2.jpg";
-import imgProject3 from "@/assets/project-3.jpg";
-import imgEngineer from "@/assets/beyond-cathlab.jpg";
-import ctaAsset from "@/assets/footer-cathlab.jpg.asset.json";
-const imgCtaBg = ctaAsset.url;
+import { ArrowUpRight, Plus, Minus } from "lucide-react";
+import turnkeyHero from "@/assets/turnkey-hero.jpg";
+import solMri from "@/assets/sol-mri.jpg";
+import solCt from "@/assets/sol-ct.jpg";
+import solPetct from "@/assets/sol-petct.jpg";
+import solCarm from "@/assets/sol-carm.jpg";
+import solOr from "@/assets/sol-or.jpg";
+import solMammo from "@/assets/sol-mammo.jpg";
+import solXray from "@/assets/sol-xray.jpg";
+import solUltrasound from "@/assets/sol-ultrasound.jpg";
+import heroCathlab from "@/assets/hero-cathlab.jpg";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import abufarhaHq from "@/assets/abufarha-hq.jpg";
 
-/* =============================================================== 01. HERO */
+/* -------------------------------------------------------------------------- */
+/*  Data                                                                      */
+/* -------------------------------------------------------------------------- */
 
-function TurnkeyHero() {
-  return (
-    <section className="relative isolate overflow-hidden bg-ink text-white">
-      <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="Fully equipped interventional cardiology suite delivered by AbuFarha"
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-transparent to-transparent" />
-      </div>
-
-      <div className="relative mx-auto grid min-h-[86vh] max-w-[100rem] items-end px-8 pb-16 pt-40 sm:px-12 lg:min-h-[92vh] lg:px-20 lg:pb-24 lg:pt-48 xl:px-28">
-        <div className="max-w-[62ch]">
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-            <span className="h-px w-8 bg-primary" />
-            Turnkey Medical Departments
-          </span>
-          <h1 className="mt-6 font-display text-[2.7rem] font-extrabold leading-[0.98] tracking-[-0.03em] sm:text-[3.6rem] lg:text-[4.8rem]">
-            We don&apos;t just supply
-            <br />
-            equipment. We deliver
-            <br />
-            <span className="text-primary">departments ready for life.</span>
-          </h1>
-          <p className="mt-7 max-w-xl text-[15.5px] leading-relaxed text-white/75">
-            From the first blueprint on paper to the first patient in the room,
-            AbuFarha delivers fully equipped medical departments — supplied,
-            installed, commissioned, and clinically trained to operate from day one.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-primary-foreground shadow-[0_18px_44px_-16px_color-mix(in_oklab,var(--primary)_65%,transparent)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-            >
-              Plan Your Department
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="#experience"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/10"
-            >
-              See How It Works
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================ 02. DEPARTMENT GALLERY */
-
-const DEPARTMENTS = [
-  { name: "Cardiac Cath Lab", tag: "Interventional Cardiology", img: imgCath, icon: Heart },
-  { name: "Radiology & Imaging", tag: "MRI · CT · X-Ray", img: imgMri, icon: Scan },
-  { name: "Operating Theatre", tag: "Surgical Excellence", img: imgOr, icon: Activity },
-  { name: "Intensive Care", tag: "ICU · CCU · HDU", img: imgCt, icon: Stethoscope },
-  { name: "Neonatal Care", tag: "NICU", img: imgDexa, icon: Baby },
-  { name: "Sterilization (CSSD)", tag: "Central Sterile Supply", img: imgUs, icon: Sparkles },
-  { name: "Clinical Laboratory", tag: "Diagnostics", img: imgMammo, icon: FlaskConical },
-  { name: "Outpatient Clinic", tag: "Ambulatory Care", img: imgXray, icon: UserRound },
-];
-
-function DepartmentGallery() {
-  const [active, setActive] = useState(0);
-  const current = DEPARTMENTS[active];
-  return (
-    <section id="departments" className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid items-end gap-8 md:grid-cols-[1fr_auto]">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              01 · Choose Your Department
-            </span>
-            <h2 className="mt-4 max-w-3xl font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[3rem]">
-              A complete solution for every
-              <br />
-              <span className="text-primary">clinical department.</span>
-            </h2>
-          </div>
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 self-end text-[13px] font-bold text-ink transition-colors hover:text-primary"
-          >
-            View all departments
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        {/* Large focus image */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
-          <motion.div
-            key={current.img}
-            initial={{ opacity: 0.4, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative aspect-[16/11] overflow-hidden rounded-[24px] bg-ink"
-          >
-            <img
-              src={current.img}
-              alt={current.name}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-ink/70 via-ink/10 to-transparent" />
-            <div className="absolute inset-x-8 bottom-8 text-white">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur">
-                {current.tag}
-              </span>
-              <h3 className="mt-3 font-display text-[2rem] font-extrabold leading-tight tracking-[-0.02em] sm:text-[2.6rem]">
-                {current.name}
-              </h3>
-            </div>
-          </motion.div>
-
-          {/* Selector list */}
-          <ul className="grid grid-cols-2 gap-2 self-stretch sm:grid-cols-2 lg:grid-cols-2">
-            {DEPARTMENTS.map((d, i) => {
-              const isActive = i === active;
-              return (
-                <li key={d.name}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    onClick={() => setActive(i)}
-                    className={`group relative flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left transition-all ${
-                      isActive
-                        ? "border-primary bg-primary/[0.04] shadow-[0_16px_40px_-24px_color-mix(in_oklab,var(--primary)_50%,transparent)]"
-                        : "border-border bg-white hover:border-ink/30"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors ${
-                        isActive ? "bg-primary text-primary-foreground" : "bg-secondary text-ink"
-                      }`}
-                    >
-                      <d.icon className="h-[18px] w-[18px]" strokeWidth={2} />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block font-display text-[13.5px] font-extrabold leading-tight text-ink">
-                        {d.name}
-                      </span>
-                      <span className="mt-1 block text-[11.5px] font-medium text-muted-foreground">
-                        {d.tag}
-                      </span>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================ 03. SIGNATURE — DEPARTMENT TRANSFORMATION */
-
-const STAGES = [
+const PHASES = [
   {
     n: "01",
-    title: "Empty Room",
-    body: "A prepared clinical shell — walls, power, medical gases. Ready to be transformed.",
+    title: "Supply",
+    body: "OEM procurement, logistics and cold-chain-grade handling from factory to floor.",
   },
   {
     n: "02",
-    title: "Equipment Arrives",
-    body: "Imaging systems, patient tables, monitors and workstations delivered on schedule.",
+    title: "Install",
+    body: "Manufacturer-certified engineers execute mechanical, electrical and network integration.",
   },
   {
     n: "03",
-    title: "Installation",
-    body: "Certified engineers mount, cable and align every system to manufacturer spec.",
+    title: "Commission",
+    body: "Calibration, safety validation and acceptance testing against clinical protocols.",
   },
   {
     n: "04",
-    title: "Integration",
-    body: "PACS, HIS and modality integration — data flows the moment the room switches on.",
+    title: "Train",
+    body: "On-site clinical applications training for technicians, physicians and biomed staff.",
   },
   {
     n: "05",
-    title: "Commissioning",
-    body: "Calibration, safety validation, dose optimization and full acceptance testing.",
+    title: "Support",
+    body: "Preventive maintenance, spare parts and priority technical response for the lifecycle.",
   },
-  {
-    n: "06",
-    title: "Clinical Training",
-    body: "Hands-on training for physicians, technologists and biomedical staff on every workflow.",
-  },
-  {
-    n: "07",
-    title: "Ready for Life",
-    body: "First patient in. A fully operational department — supported for its entire lifecycle.",
-    ready: true,
-  },
-];
+] as const;
 
-function SignatureExperience() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-  const activeIndex = useTransform(scrollYProgress, (v) =>
-    Math.min(STAGES.length - 1, Math.floor(v * STAGES.length))
-  );
-  const [i, setI] = useState(0);
-  activeIndex.on("change", (v) => setI(v));
-
-  const stage = STAGES[i];
-  const isReady = !!stage.ready;
-
-  return (
-    <section
-      id="experience"
-      ref={ref}
-      className="relative bg-[oklch(0.14_0.04_264)] text-white"
-      style={{ height: `${STAGES.length * 90}vh` }}
-    >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        {/* Ambient gradient */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-70"
-          style={{
-            backgroundImage:
-              "radial-gradient(60% 50% at 70% 50%, color-mix(in oklab, var(--primary) 22%, transparent), transparent 70%)",
-          }}
-        />
-
-        <div className="relative mx-auto grid w-full max-w-[100rem] gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-10">
-          {/* Left: narrative */}
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              02 · Signature Experience
-            </span>
-            <h2 className="mt-4 font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-[3rem]">
-              From an empty room
-              <br />
-              to <span className="text-primary">ready for life.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">
-              Scroll to watch a clinical space transform — every stage that AbuFarha
-              handles before your team welcomes the first patient.
-            </p>
-
-            {/* progress rail */}
-            <ol className="mt-10 space-y-3">
-              {STAGES.map((s, idx) => {
-                const isActive = idx === i;
-                const done = idx < i;
-                return (
-                  <li key={s.n} className="flex items-center gap-4">
-                    <span
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition-all ${
-                        s.ready && idx <= i
-                          ? "bg-emerald-500 text-white"
-                          : isActive
-                            ? "bg-primary text-primary-foreground"
-                            : done
-                              ? "bg-white/20 text-white"
-                              : "bg-white/5 text-white/40"
-                      }`}
-                    >
-                      {done || (s.ready && idx <= i) ? (
-                        <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                      ) : (
-                        s.n
-                      )}
-                    </span>
-                    <span
-                      className={`font-display text-[13.5px] font-extrabold tracking-tight transition-colors ${
-                        isActive ? "text-white" : "text-white/45"
-                      }`}
-                    >
-                      {s.title}
-                    </span>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-
-          {/* Right: stage visual */}
-          <div className="relative">
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] border border-white/10 bg-black/40 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.6)]">
-              {/* Blueprint grid */}
-              <div
-                className="absolute inset-0 opacity-40"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                  backgroundSize: "44px 44px",
-                }}
-              />
-              {/* Progressive image reveal (uses cath lab as canonical department) */}
-              <motion.img
-                src={imgCath}
-                alt="Department transformation preview"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{
-                  filter: `saturate(${0.3 + (i / (STAGES.length - 1)) * 0.9}) brightness(${0.35 + (i / (STAGES.length - 1)) * 0.75})`,
-                  opacity: 0.35 + (i / (STAGES.length - 1)) * 0.65,
-                }}
-                transition={{ duration: 0.6 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-              {/* Stage caption */}
-              <motion.div
-                key={stage.n}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                className="absolute inset-x-8 bottom-8"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">
-                    Stage {stage.n}
-                  </span>
-                  {isReady && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-wider text-emerald-400 ring-1 ring-emerald-400/30">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      Operational
-                    </span>
-                  )}
-                </div>
-                <h3 className="mt-2 font-display text-[1.8rem] font-extrabold leading-tight tracking-[-0.02em] sm:text-[2.2rem]">
-                  {stage.title}
-                </h3>
-                <p className="mt-2 max-w-md text-[13.5px] leading-relaxed text-white/75">
-                  {stage.body}
-                </p>
-              </motion.div>
-
-              {/* Progress bar */}
-              <div className="absolute inset-x-8 top-8">
-                <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
-                  <motion.div
-                    className={`h-full ${isReady ? "bg-emerald-500" : "bg-primary"}`}
-                    style={{ width: `${((i + 1) / STAGES.length) * 100}%` }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* =========================================== 04. DEPARTMENT SOLUTION (ROOM) */
-
-type Hotspot = {
-  id: string;
-  x: number;
-  y: number;
-  title: string;
-  body: string;
+type Department = {
+  key: string;
+  group: string;
+  name: string;
+  meta: string;
+  image: string;
+  spec: string;
+  included: string[];
+  optional: string[];
 };
 
-const HOTSPOTS: Hotspot[] = [
+const DEPARTMENTS: Department[] = [
   {
-    id: "h1",
-    x: 32,
-    y: 42,
-    title: "Imaging System",
-    body: "Biplane or single-plane angiography, sized to the room and clinical program.",
+    key: "cathlab",
+    group: "Interventional Suites",
+    name: "Cath Lab",
+    meta: "Cardiac • Neuro • Vascular",
+    image: heroCathlab,
+    spec: "Biplane and single-plane suites commissioned with hemodynamic recording, PACS integration and radiation-protection compliance.",
+    included: [
+      "Angiographic imaging system",
+      "Hemodynamic monitoring",
+      "Injector & contrast workflow",
+      "Radiation protection package",
+      "Clinical applications training",
+    ],
+    optional: [
+      "UPS & power conditioning",
+      "Structured lead shielding",
+      "Boom-mounted monitor arrays",
+    ],
   },
   {
-    id: "h2",
-    x: 52,
-    y: 58,
-    title: "Patient Table",
-    body: "Motorized, radiolucent interventional table with integrated controls.",
+    key: "mri",
+    group: "Diagnostic Imaging",
+    name: "MRI Suite",
+    meta: "1.5T • 3T • Wide-bore",
+    image: solMri,
+    spec: "Shielded magnet room delivered with cryogen management, RF-cage validation and homogeneity certified across the full field of view.",
+    included: [
+      "Magnet, gradient & RF chain",
+      "Cryogen and quench routing",
+      "Coil portfolio & workstation",
+      "Homogeneity acceptance testing",
+      "Radiographer certification",
+    ],
+    optional: [
+      "RF cage supply & validation",
+      "Chiller / heat rejection",
+      "In-bore patient comfort suite",
+    ],
   },
   {
-    id: "h3",
-    x: 70,
-    y: 30,
-    title: "Ceiling Monitors",
-    body: "Large-format medical displays on articulated suspension.",
+    key: "ct",
+    group: "Diagnostic Imaging",
+    name: "CT Scanner",
+    meta: "64 – 640 slice",
+    image: solCt,
+    spec: "High-resolution CT installed with dose-modulation protocols, cardiac gating and reconstruction workstation tuned to local clinical needs.",
+    included: [
+      "Gantry, table & detector array",
+      "Dose-modulation software",
+      "Advanced reconstruction console",
+      "Protocol optimisation",
+      "Radiographer certification",
+    ],
+    optional: [
+      "Contrast injector integration",
+      "Dual-energy licensing",
+      "Cardiac gating package",
+    ],
   },
   {
-    id: "h4",
-    x: 20,
-    y: 68,
-    title: "Hemodynamic System",
-    body: "Real-time physiological monitoring integrated with the reporting workstation.",
+    key: "petct",
+    group: "Diagnostic Imaging",
+    name: "PET / CT",
+    meta: "Molecular imaging",
+    image: solPetct,
+    spec: "Molecular imaging suite delivered with hot-lab workflow review, dosimetry protocols and oncology reading environment.",
+    included: [
+      "PET / CT gantry & detector",
+      "Time-of-flight reconstruction",
+      "Oncology reading workstation",
+      "Hot-lab workflow review",
+      "Nuclear-medicine training",
+    ],
+    optional: [
+      "Shielded hot-lab fit-out",
+      "Cyclotron interface",
+      "Theranostics protocols",
+    ],
   },
   {
-    id: "h5",
-    x: 82,
-    y: 62,
-    title: "Injector & Radiation Protection",
-    body: "Contrast injector, lead shielding, ceiling and table-mounted protection.",
-  },
-];
-
-function DepartmentSolution() {
-  const [active, setActive] = useState<string>(HOTSPOTS[0].id);
-  const spot = HOTSPOTS.find((h) => h.id === active)!;
-  return (
-    <section className="bg-secondary/40 py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="max-w-3xl">
-          <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-            03 · Inside a Solution
-          </span>
-          <h2 className="mt-4 font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[3rem]">
-            Explore a real
-            <br />
-            <span className="text-primary">Cath Lab</span> solution.
-          </h2>
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-            Every AbuFarha turnkey department is designed as a single integrated system.
-            Hover the numbered points to see what goes inside.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-          {/* Interactive room */}
-          <div className="relative aspect-[16/11] overflow-hidden rounded-[24px] bg-ink shadow-[0_40px_80px_-40px_rgba(15,23,42,0.4)]">
-            <img
-              src={imgCath}
-              alt="Interactive cath lab room"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
-
-            {HOTSPOTS.map((h, idx) => {
-              const isActive = h.id === active;
-              return (
-                <button
-                  key={h.id}
-                  type="button"
-                  onMouseEnter={() => setActive(h.id)}
-                  onFocus={() => setActive(h.id)}
-                  onClick={() => setActive(h.id)}
-                  aria-label={h.title}
-                  className="group absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                >
-                  <span
-                    className={`absolute inset-0 -m-2 rounded-full transition-all ${
-                      isActive ? "bg-primary/30 blur-md" : "bg-white/10 blur-sm"
-                    }`}
-                  />
-                  <span
-                    className={`relative flex h-9 w-9 items-center justify-center rounded-full font-display text-[12px] font-bold ring-2 transition-all ${
-                      isActive
-                        ? "bg-primary text-primary-foreground ring-white shadow-lg"
-                        : "bg-white/95 text-ink ring-white/60 group-hover:scale-110"
-                    }`}
-                  >
-                    {idx + 1}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Panel */}
-          <div className="flex flex-col rounded-[24px] border border-border bg-white p-8 shadow-[0_30px_60px_-40px_rgba(15,23,42,0.25)]">
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-foreground">
-              Solution Component
-            </span>
-            <motion.div
-              key={spot.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="mt-3 font-display text-[1.6rem] font-extrabold leading-tight tracking-[-0.02em] text-ink">
-                {spot.title}
-              </h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
-                {spot.body}
-              </p>
-            </motion.div>
-
-            <ul className="mt-8 space-y-2 border-t border-border pt-6">
-              {HOTSPOTS.map((h, idx) => (
-                <li key={h.id}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActive(h.id)}
-                    onFocus={() => setActive(h.id)}
-                    onClick={() => setActive(h.id)}
-                    className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-[13.5px] font-semibold transition-colors ${
-                      h.id === active ? "text-primary" : "text-ink/70 hover:text-ink"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10.5px] font-bold ${
-                        h.id === active
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-secondary text-ink"
-                      }`}
-                    >
-                      {idx + 1}
-                    </span>
-                    {h.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="/contact"
-              className="mt-8 inline-flex items-center justify-between gap-2 rounded-full bg-ink px-5 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-primary"
-            >
-              Request a customized solution
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ==================================================== 05. SOLUTION SCOPE */
-
-const SCOPE_ROWS: Array<{ label: string; included: boolean; optional: boolean; note?: string }> = [
-  { label: "Needs analysis & clinical planning", included: true, optional: false },
-  { label: "Equipment supply from partner OEMs", included: true, optional: false },
-  { label: "Delivery, uncrating & positioning", included: true, optional: false },
-  { label: "Installation by certified engineers", included: true, optional: false },
-  { label: "System integration (PACS · HIS · RIS)", included: true, optional: false },
-  { label: "Commissioning & acceptance testing", included: true, optional: false },
-  { label: "Clinical & biomedical training", included: true, optional: false },
-  { label: "Full technical documentation", included: true, optional: false },
-  { label: "Warranty coverage", included: true, optional: false },
-  { label: "Extended service contract (AMC)", included: false, optional: true },
-  { label: "Preventive maintenance program", included: false, optional: true },
-  { label: "Radiation protection design", included: false, optional: true },
-  { label: "Room fit-out coordination with contractor", included: false, optional: true },
-];
-
-function SolutionScope() {
-  return (
-    <section className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_2fr] lg:items-start">
-          <div className="lg:sticky lg:top-32">
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              04 · Solution Scope
-            </span>
-            <h2 className="mt-4 font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[2.8rem]">
-              What&apos;s inside
-              <br />
-              a turnkey scope.
-            </h2>
-            <p className="mt-5 text-[14.5px] leading-relaxed text-muted-foreground">
-              Full transparency on what AbuFarha delivers as standard and what you
-              can add — no small print, no surprises.
-            </p>
-          </div>
-
-          <div className="overflow-hidden rounded-[20px] border border-border">
-            <div className="grid grid-cols-[1fr_120px_120px] bg-ink text-[11px] font-bold uppercase tracking-[0.22em] text-white/70">
-              <div className="px-6 py-4">Deliverable</div>
-              <div className="px-4 py-4 text-center">Included</div>
-              <div className="px-4 py-4 text-center">Optional</div>
-            </div>
-            {SCOPE_ROWS.map((r, idx) => (
-              <div
-                key={r.label}
-                className={`grid grid-cols-[1fr_120px_120px] items-center border-t border-border text-[14px] ${
-                  idx % 2 === 0 ? "bg-white" : "bg-secondary/30"
-                }`}
-              >
-                <div className="px-6 py-4 font-medium text-ink">{r.label}</div>
-                <div className="flex justify-center py-4">
-                  {r.included ? (
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/12 text-emerald-600 ring-1 ring-emerald-500/25">
-                      <Check className="h-4 w-4" strokeWidth={2.5} />
-                    </span>
-                  ) : (
-                    <Minus className="h-4 w-4 text-muted-foreground/40" />
-                  )}
-                </div>
-                <div className="flex justify-center py-4">
-                  {r.optional ? (
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/8 text-primary ring-1 ring-primary/20">
-                      <Plus className="h-4 w-4" strokeWidth={2.5} />
-                    </span>
-                  ) : (
-                    <Minus className="h-4 w-4 text-muted-foreground/40" />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* =============================================== 06 & 07. RELATED PREVIEWS */
-
-const RELATED_SERVICES = [
-  {
-    title: "Installation & Commissioning",
-    body: "Certified engineering teams from delivery to acceptance testing.",
-    icon: Wrench,
+    key: "or",
+    group: "Critical Care",
+    name: "Operating Room",
+    meta: "General • Hybrid • Orthopaedic",
+    image: solOr,
+    spec: "Fully-equipped surgical theatre delivered with imaging, anaesthesia, integration and sterile-workflow validation.",
+    included: [
+      "Surgical table & lighting",
+      "Anaesthesia workstation",
+      "Electrosurgery & energy platforms",
+      "OR integration & video routing",
+      "Perioperative team training",
+    ],
+    optional: [
+      "Intra-operative imaging (C-arm / O-arm)",
+      "Robotic surgery integration",
+      "Laminar-flow validation",
+    ],
   },
   {
-    title: "Clinical Training",
-    body: "Hands-on onboarding for physicians, nurses and technologists.",
-    icon: GraduationCap,
+    key: "carm",
+    group: "Interventional Suites",
+    name: "Mobile C-Arm Suite",
+    meta: "Fluoroscopy • Ortho • Pain",
+    image: solCarm,
+    spec: "Mobile fluoroscopy workflow validated for orthopaedic, vascular and pain-management use with radiation-safety programme.",
+    included: [
+      "Mobile C-arm system",
+      "DICOM & PACS integration",
+      "Radiation-safety programme",
+      "Applications training",
+    ],
+    optional: [
+      "Advanced 3D imaging package",
+      "Lead-shielding refresh",
+    ],
   },
   {
-    title: "Preventive Maintenance",
-    body: "Scheduled service programs that protect uptime and warranty.",
-    icon: ShieldCheck,
+    key: "mammo",
+    group: "Women's Health",
+    name: "Mammography Suite",
+    meta: "2D • 3D tomosynthesis",
+    image: solMammo,
+    spec: "Screening and diagnostic mammography delivered with tomosynthesis, biopsy workflow and MQSA-aligned QC protocols.",
+    included: [
+      "Full-field digital mammography",
+      "Tomosynthesis licensing",
+      "Reading workstation",
+      "QC protocol setup",
+      "Radiographer certification",
+    ],
+    optional: [
+      "Stereotactic biopsy add-on",
+      "Contrast-enhanced mammography",
+    ],
   },
   {
-    title: "24/7 Technical Support",
-    body: "Multi-country support desk with rapid on-site escalation.",
-    icon: Headphones,
+    key: "xray",
+    group: "Diagnostic Imaging",
+    name: "Digital X-Ray Room",
+    meta: "Ceiling & floor-mounted",
+    image: solXray,
+    spec: "Digital radiography suite installed with wireless detectors, dose-tracking and RIS/PACS integration.",
+    included: [
+      "Generator, tube & detector",
+      "Auto-positioning workflow",
+      "Dose-tracking & QC",
+      "PACS & RIS integration",
+    ],
+    optional: [
+      "Long-length imaging package",
+      "Tomo add-on",
+    ],
+  },
+  {
+    key: "us",
+    group: "Diagnostic Imaging",
+    name: "Ultrasound Room",
+    meta: "General • Cardiac • Women's",
+    image: solUltrasound,
+    spec: "Ultrasound rooms outfitted with the right probe portfolio, ergonomic workflow and reporting integration.",
+    included: [
+      "Console & probe portfolio",
+      "Reporting workstation",
+      "PACS integration",
+      "Sonographer training",
+    ],
+    optional: [
+      "Contrast-enhanced ultrasound",
+      "Fusion / navigation",
+    ],
   },
 ];
-
-const RELATED_PRODUCTS = [
-  { title: "Interventional Imaging", tag: "Biplane · Mono-plane", img: imgCath },
-  { title: "MRI & CT Systems", tag: "Advanced Diagnostics", img: imgMri },
-  { title: "Surgical Solutions", tag: "OR Integration", img: imgOr },
-  { title: "Patient Monitoring", tag: "ICU · CCU", img: imgUs },
-];
-
-function RelatedServices() {
-  return (
-    <section className="bg-secondary/40 py-24 lg:py-28">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              05 · Related Services
-            </span>
-            <h2 className="mt-3 font-display text-[1.8rem] font-extrabold tracking-[-0.02em] text-ink sm:text-[2.4rem]">
-              The services behind every department.
-            </h2>
-          </div>
-          <Link
-            to="/"
-            hash="services"
-            className="inline-flex items-center gap-2 text-[13px] font-bold text-ink transition-colors hover:text-primary"
-          >
-            All services
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {RELATED_SERVICES.map((s) => (
-            <Link
-              key={s.title}
-              to="/"
-              hash="services"
-              className="group flex h-full flex-col rounded-[20px] border border-border bg-white p-7 transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_30px_60px_-30px_rgba(15,23,42,0.25)]"
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/8 text-primary ring-1 ring-primary/20">
-                <s.icon className="h-5 w-5" strokeWidth={2} />
-              </span>
-              <h3 className="mt-6 font-display text-[16px] font-extrabold leading-tight text-ink">
-                {s.title}
-              </h3>
-              <p className="mt-2 flex-1 text-[13px] leading-relaxed text-muted-foreground">
-                {s.body}
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-[12.5px] font-bold text-primary">
-                Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RelatedProducts() {
-  return (
-    <section className="bg-white py-24 lg:py-28">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              06 · Featured Product Families
-            </span>
-            <h2 className="mt-3 font-display text-[1.8rem] font-extrabold tracking-[-0.02em] text-ink sm:text-[2.4rem]">
-              Equipment that powers every solution.
-            </h2>
-          </div>
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 text-[13px] font-bold text-ink transition-colors hover:text-primary"
-          >
-            All products
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {RELATED_PRODUCTS.map((p) => (
-            <Link
-              key={p.title}
-              to="/products"
-              className="group relative block aspect-[4/5] overflow-hidden rounded-[20px] bg-ink"
-            >
-              <img
-                src={p.img}
-                alt={p.title}
-                className="h-full w-full object-cover opacity-90 transition-all duration-700 group-hover:scale-110 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-              <div className="absolute inset-x-6 bottom-6 text-white">
-                <span className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/70">
-                  {p.tag}
-                </span>
-                <h3 className="mt-2 font-display text-[18px] font-extrabold leading-tight">
-                  {p.title}
-                </h3>
-              </div>
-              <span className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition-all group-hover:bg-primary">
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================== 08. CASE STUDIES */
 
 const CASES = [
   {
-    country: "Jordan",
-    department: "Cardiac Cath Lab",
-    scope: "Full turnkey — Biplane interventional suite",
-    equipment: ["Biplane angiography", "Hemodynamic system", "Ceiling monitors", "Injector"],
-    services: ["Installation", "Commissioning", "Clinical training", "5-year AMC"],
-    outcome: "First case within 6 weeks of handover. Zero unplanned downtime in year one.",
-    img: imgProject1,
-  },
-  {
     country: "Iraq",
-    department: "Radiology & Imaging",
-    scope: "MRI + CT suite integration",
-    equipment: ["1.5T MRI", "128-slice CT", "PACS integration", "Radiation shielding coordination"],
-    services: ["Installation", "PACS integration", "Technologist training", "AMC"],
-    outcome: "Two modalities live in parallel — patient throughput up 42% quarter over quarter.",
-    img: imgProject2,
+    dept: "Cath Lab",
+    scope: "Supply · Install · Commission · Train",
+    outcome: "Interventional cardiology programme operational within 30 days of handover.",
+    image: project1,
   },
   {
-    country: "Uzbekistan",
-    department: "ICU & Monitoring",
-    scope: "16-bed intensive care solution",
-    equipment: ["Patient monitors", "Central station", "Ventilators", "Infusion systems"],
-    services: ["Installation", "Nurse training", "24/7 support", "Spare parts program"],
-    outcome: "Unified monitoring across 16 beds — validated and operational in 5 weeks.",
-    img: imgProject3,
+    country: "Egypt",
+    dept: "Advanced Imaging",
+    scope: "Turnkey MRI + CT",
+    outcome: "Two-modality diagnostic centre delivered as a single coordinated project.",
+    image: project2,
+  },
+  {
+    country: "Jordan",
+    dept: "Cardiac Centre",
+    scope: "Turnkey Cardiology Department",
+    outcome: "End-to-end cardiology floor commissioned, trained and under long-term service.",
+    image: project3,
   },
 ];
-
-function CaseStudies() {
-  return (
-    <section id="cases" className="bg-[oklch(0.14_0.04_264)] py-24 text-white lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              07 · Real Departments · Real Outcomes
-            </span>
-            <h2 className="mt-4 max-w-2xl font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-[3rem]">
-              Departments delivered.
-              <br />
-              <span className="text-primary">Lives changed.</span>
-            </h2>
-          </div>
-          <Link
-            to="/projects"
-            className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-[13px] font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
-          >
-            All projects <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="mt-14 space-y-14">
-          {CASES.map((c, idx) => (
-            <article
-              key={c.country + c.department}
-              className={`grid gap-8 lg:grid-cols-2 lg:items-center ${
-                idx % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""
-              }`}
-            >
-              <div className="relative aspect-[5/4] overflow-hidden rounded-[24px]">
-                <img src={c.img} alt={`${c.country} — ${c.department}`} className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute inset-x-6 bottom-6 flex items-center gap-2 text-white">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur">
-                    <MapPin className="h-3 w-3" /> {c.country}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-300 ring-1 ring-emerald-400/30">
-                    <CircleDot className="h-3 w-3" /> Operational
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-display text-[1.8rem] font-extrabold leading-tight tracking-[-0.02em] sm:text-[2.2rem]">
-                  {c.department}
-                </h3>
-                <p className="mt-3 text-[14.5px] leading-relaxed text-white/70">{c.scope}</p>
-
-                <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                      <Cpu className="h-3.5 w-3.5" /> Equipment
-                    </div>
-                    <ul className="mt-3 space-y-1.5 text-[13.5px] text-white/85">
-                      {c.equipment.map((e) => (
-                        <li key={e} className="flex gap-2">
-                          <span className="mt-2 h-1 w-1 rounded-full bg-primary" />
-                          {e}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                      <ClipboardCheck className="h-3.5 w-3.5" /> Services delivered
-                    </div>
-                    <ul className="mt-3 space-y-1.5 text-[13.5px] text-white/85">
-                      {c.services.map((e) => (
-                        <li key={e} className="flex gap-2">
-                          <span className="mt-2 h-1 w-1 rounded-full bg-primary" />
-                          {e}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-8 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.06] p-5">
-                  <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300">
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} /> Outcome
-                  </div>
-                  <p className="mt-2 text-[14px] leading-relaxed text-white/90">{c.outcome}</p>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ==================================================== 09. FAQ (GEO / SEO) */
 
 const FAQS = [
   {
-    q: "What is a turnkey medical department?",
-    a: "A turnkey department is a complete clinical solution delivered end-to-end — from equipment planning and supply through installation, integration, commissioning, clinical training and long-term support. AbuFarha hands over a department that is fully operational from day one.",
+    q: "What is an AbuFarha turnkey medical department?",
+    a: "A complete clinical department delivered as a single accountable programme — equipment supply, installation, commissioning, clinical training, documentation and ongoing support. The outcome is a department ready for clinical operation, not a construction project.",
   },
   {
-    q: "Which departments can AbuFarha deliver?",
-    a: "Cardiac Cath Labs, Radiology & Imaging (MRI, CT, X-Ray), Operating Theatres, ICU & Critical Care, Neonatal (NICU), Sterilization (CSSD), Clinical Laboratories and Outpatient Clinics — configured to each hospital's clinical program.",
+    q: "Which departments can be delivered turnkey?",
+    a: "Cath Lab, MRI, CT, PET/CT, Operating Room, ICU, Mammography, Digital X-Ray, Ultrasound and mobile C-arm suites — across cardiology, radiology, oncology, women's health and surgery.",
   },
   {
-    q: "How does commissioning work?",
-    a: "After installation, our engineers perform calibration, safety validation, dose optimization and full acceptance testing against manufacturer and international standards, alongside the hospital's biomedical team.",
+    q: "What is included in the standard scope?",
+    a: "Equipment procurement, factory-certified installation, safety and performance commissioning, applications training, technical documentation, warranty and a defined preventive-maintenance schedule.",
   },
   {
-    q: "How is clinical training delivered?",
-    a: "On-site, hands-on training for physicians, technologists and biomedical staff covering daily workflows, protocols and system administration — followed by refresher sessions during the warranty period.",
+    q: "What is optional?",
+    a: "Power conditioning and UPS, RF and lead shielding validation, contrast injectors, advanced software licences, cyclotron interfacing, and extended service agreements are scoped per project.",
   },
   {
-    q: "What happens after installation?",
-    a: "Departments are covered by warranty and can be enrolled in an extended service contract with preventive maintenance, genuine spare parts, remote diagnostics and 24/7 technical support.",
+    q: "Do you build the hospital shell?",
+    a: "No. AbuFarha does not build hospitals or perform civil works. We deliver the clinical core inside the space provided — equipment, integration, commissioning, training and long-term support.",
   },
   {
-    q: "Does AbuFarha build the hospital itself?",
-    a: "No. AbuFarha does not carry out civil construction. We coordinate with your contractor and deliver everything that turns a prepared clinical shell into a fully equipped, operational medical department.",
+    q: "How long does commissioning and training take?",
+    a: "Typical department commissioning runs from two to six weeks depending on modality and scope, immediately followed by on-site clinical applications training with the operating team.",
+  },
+  {
+    q: "What happens after handover?",
+    a: "Every turnkey installation moves into an after-sales programme: preventive maintenance, spare-parts logistics, remote diagnostics where supported, and priority technical response.",
   },
 ];
 
-function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
-  return (
-    <section id="faq" className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid gap-14 lg:grid-cols-[0.85fr_1.6fr] lg:items-start">
-          <div className="lg:sticky lg:top-32">
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              08 · Answers
-            </span>
-            <h2 className="mt-4 font-display text-[2.2rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[2.8rem]">
-              Turnkey,
-              <br />
-              <span className="text-primary">explained.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-[14.5px] leading-relaxed text-muted-foreground">
-              The most common questions from hospitals and ministries evaluating an
-              AbuFarha turnkey department.
-            </p>
-          </div>
+/* -------------------------------------------------------------------------- */
+/*  Utility                                                                   */
+/* -------------------------------------------------------------------------- */
 
-          <ul className="divide-y divide-border border-y border-border">
-            {FAQS.map((f, i) => {
-              const isOpen = open === i;
-              return (
-                <li key={f.q}>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-start justify-between gap-6 py-6 text-left"
-                  >
-                    <span className="font-display text-[16.5px] font-extrabold leading-snug text-ink">
-                      {f.q}
-                    </span>
-                    <span
-                      className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all ${
-                        isOpen ? "border-primary bg-primary text-primary-foreground rotate-45" : "border-border text-ink"
-                      }`}
-                    >
-                      <Plus className="h-4 w-4" strokeWidth={2.2} />
-                    </span>
-                  </button>
-                  <motion.div
-                    initial={false}
-                    animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="pb-6 pr-14 text-[14.5px] leading-relaxed text-muted-foreground">
-                      {f.a}
-                    </p>
-                  </motion.div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+const NAVY = "bg-[#0A1633]";
+const NAVY_2 = "bg-[#0d1c3d]";
+const SURFACE = "bg-[#F4F5F7]";
+const INK = "text-[#0A1633]";
+const RED = "text-[hsl(0_84%_55%)]";
+const RED_BG = "bg-[hsl(0_84%_55%)]";
 
-      {/* FAQ schema for GEO / search engines */}
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQS.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
-        }}
+function StatusDot({ tone = "on" }: { tone?: "on" | "off" }) {
+  if (tone === "on") {
+    return (
+      <span
+        aria-hidden
+        className="h-1.5 w-1.5 rounded-full bg-[#34C759] shadow-[0_0_10px_#34C759]"
       />
-    </section>
-  );
+    );
+  }
+  return <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-white/25" />;
 }
 
-/* ========================================================= 10. FINAL CTA */
-
-function TurnkeyCTA() {
+function ChapterLabel({
+  index,
+  children,
+  tone = "dark",
+}: {
+  index: string;
+  children: React.ReactNode;
+  tone?: "dark" | "light";
+}) {
+  const chip =
+    tone === "light"
+      ? "text-white/60 border-white/15 bg-white/5"
+      : "text-[#0A1633]/60 border-[#0A1633]/10 bg-white";
   return (
-    <section id="cta" className="relative overflow-hidden bg-[oklch(0.18_0.04_264)] text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <img
-          src={imgCtaBg}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[oklch(0.14_0.04_264)] via-[oklch(0.18_0.04_264)]/85 to-[oklch(0.18_0.04_264)]/40" />
-      </div>
-
-      <div className="relative mx-auto grid max-w-[100rem] gap-12 px-6 py-24 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:px-10 lg:py-32">
-        <div>
-          <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-            Ready When You Are
-          </span>
-          <h2 className="mt-5 font-display text-[2.4rem] font-extrabold leading-[1] tracking-[-0.03em] sm:text-[3.2rem] lg:text-[3.8rem]">
-            Let&apos;s plan your
-            <br />
-            next department.
-          </h2>
-          <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-white/70">
-            A 30-minute consultation with our clinical and engineering leads —
-            no obligation, tailored to your program.
-          </p>
-        </div>
-
-        <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-8 backdrop-blur">
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">
-            <FileText className="h-3.5 w-3.5" /> What you&apos;ll get
-          </div>
-          <ul className="mt-5 space-y-3 text-[14px] text-white/85">
-            {[
-              "A tailored department blueprint",
-              "Indicative equipment configuration",
-              "Timeline & scope of works",
-              "Warranty & support proposal",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-3">
-                <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-400/25">
-                  <Check className="h-3 w-3" strokeWidth={3} />
-                </span>
-                {t}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_18px_44px_-16px_color-mix(in_oklab,var(--primary)_65%,transparent)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-            >
-              Book a consultation
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="#experience"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/5"
-            >
-              Revisit the journey
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Trust strip */}
-      <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-[100rem] flex-wrap items-center justify-between gap-6 px-6 py-6 text-[12px] font-medium text-white/60 lg:px-10">
-          <span className="flex items-center gap-2">
-            <img src={imgEngineer} alt="" className="h-8 w-8 rounded-full object-cover" />
-            25+ years of clinical partnership across the region
-          </span>
-          <span className="hidden sm:inline-flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-primary" /> OEM-authorized · ISO-aligned processes
-          </span>
-        </div>
-      </div>
-    </section>
+    <span
+      className={`inline-flex items-center gap-3 rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] ${chip}`}
+    >
+      <span className="tabular-nums">{index}</span>
+      <span className="h-px w-6 bg-current opacity-40" />
+      <span>{children}</span>
+    </span>
   );
 }
 
-/* ================================================================== PAGE */
+/* -------------------------------------------------------------------------- */
+/*  Page                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export function TurnkeyPage() {
   return (
     <>
-      <TurnkeyHero />
-      <DepartmentGallery />
-      <SignatureExperience />
-      <DepartmentSolution />
-      <SolutionScope />
-      <RelatedServices />
-      <RelatedProducts />
+      <FaqSchema />
+      <OpeningStatement />
+      <ReadinessConsole />
+      <DepartmentExplorer />
+      <IncludedOptional />
+      <DeliveryEditorial />
+      <TrustBand />
       <CaseStudies />
-      <FAQ />
-      <TurnkeyCTA />
+      <Faq />
+      <ClosingCta />
     </>
+  );
+}
+
+/* --------- 01 · Opening statement (full-bleed, editorial) ----------------- */
+
+function OpeningStatement() {
+  return (
+    <section className={`relative ${NAVY} text-white overflow-hidden`}>
+      <img
+        src={turnkeyHero}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover opacity-25"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1633] via-[#0A1633]/70 to-[#0A1633]" />
+      <div className="relative mx-auto max-w-[1240px] px-6 pt-24 pb-28 lg:pt-32 lg:pb-40">
+        <ChapterLabel index="00" tone="light">
+          Turnkey Department Delivery
+        </ChapterLabel>
+        <div className="mt-10 grid grid-cols-12 gap-8 items-end">
+          <h1
+            className="col-span-12 lg:col-span-9 font-display font-extrabold tracking-[-0.03em] leading-[0.92]
+                       text-[clamp(2.75rem,7vw,6.5rem)]"
+          >
+            Operational{" "}
+            <span className="text-white/40">at the flip of a switch.</span>
+          </h1>
+          <p className="col-span-12 lg:col-span-3 text-white/60 text-base leading-relaxed lg:pb-3">
+            We translate complex clinical requirements into fully functioning
+            medical departments. Not construction — clinical operationalisation.
+          </p>
+        </div>
+
+        <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-white/10 pt-8 text-sm">
+          <div className="flex items-center gap-3">
+            <StatusDot />
+            <span className="text-white/70">
+              Departments delivered ready for clinical operation
+            </span>
+          </div>
+          <div className="hidden h-4 w-px bg-white/10 md:block" />
+          <div className="flex items-center gap-3 text-white/50">
+            <span className="font-mono text-xs tracking-widest">
+              MENA · AFRICA · CENTRAL ASIA
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------- 02 · Signature moment: Operational Readiness Console ----------- */
+
+function ReadinessConsole() {
+  // Scroll-linked phase activation for the "flip of a switch" moment.
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = document.getElementById("readiness-console");
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          // stagger the phases turning "on"
+          PHASES.forEach((_, i) => {
+            setTimeout(() => setActive((prev) => Math.max(prev, i + 1)), i * 320);
+          });
+        });
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <section className={`${NAVY} text-white`}>
+      <div
+        id="readiness-console"
+        className="mx-auto max-w-[1240px] px-6 py-24 lg:py-32"
+      >
+        <div className="grid grid-cols-12 gap-8 items-end mb-14">
+          <div className="col-span-12 lg:col-span-8">
+            <ChapterLabel index="01" tone="light">
+              Operational Readiness Console
+            </ChapterLabel>
+            <h2 className="mt-6 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl">
+              Five phases between an empty room{" "}
+              <span className="text-white/40">and the first patient.</span>
+            </h2>
+          </div>
+          <p className="col-span-12 lg:col-span-4 text-white/60 leading-relaxed lg:pb-2">
+            Each phase is signed off before the next begins. When the last
+            indicator turns green, the department is live.
+          </p>
+        </div>
+
+        <div
+          className={`relative ${NAVY_2} rounded-2xl border border-white/10 overflow-hidden`}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-white/5">
+            {PHASES.map((p, i) => {
+              const on = i < active;
+              return (
+                <div key={p.n} className="group relative p-8">
+                  <div className="flex items-center gap-2 mb-6 transition-opacity">
+                    <StatusDot tone={on ? "on" : "off"} />
+                    <span className="text-[10px] uppercase tracking-[0.24em] text-white/40 font-bold">
+                      Phase {p.n}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-2xl font-bold tracking-tight mb-2">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-white/50 leading-relaxed">
+                    {p.body}
+                  </p>
+                  <div
+                    className={`mt-8 text-[10px] font-mono uppercase tracking-widest transition-colors ${
+                      on ? "text-[#34C759]" : "text-white/25"
+                    }`}
+                  >
+                    {on ? "● Ready" : "○ Pending"}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <p className="mt-8 text-sm text-white/40 max-w-2xl">
+          AbuFarha does not perform civil works. We deliver the clinical core
+          inside the space provided — equipment, integration, commissioning,
+          training and long-term support.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* --------- 03 · Interactive Department Explorer --------------------------- */
+
+function DepartmentExplorer() {
+  const [key, setKey] = useState<string>(DEPARTMENTS[0].key);
+  const active = useMemo(
+    () => DEPARTMENTS.find((d) => d.key === key) ?? DEPARTMENTS[0],
+    [key]
+  );
+
+  const groups = useMemo(() => {
+    const map = new Map<string, Department[]>();
+    for (const d of DEPARTMENTS) {
+      if (!map.has(d.group)) map.set(d.group, []);
+      map.get(d.group)!.push(d);
+    }
+    return [...map.entries()];
+  }, []);
+
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1240px] px-6 py-24 lg:py-32">
+        <div className="grid grid-cols-12 gap-8 items-end mb-16">
+          <div className="col-span-12 lg:col-span-8">
+            <ChapterLabel index="02">Departmental Specialists</ChapterLabel>
+            <h2
+              className={`mt-6 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl ${INK}`}
+            >
+              We don't build the shell.{" "}
+              <span className="text-[#0A1633]/40">We deliver the core.</span>
+            </h2>
+          </div>
+          <p className="col-span-12 lg:col-span-4 text-[#0A1633]/60 leading-relaxed lg:pb-2">
+            Select a department to preview a typical turnkey scope. Every
+            programme is scoped to the site — this is the shape of the
+            outcome.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-12 gap-12 lg:gap-16">
+          {/* Department index */}
+          <aside className="col-span-12 lg:col-span-4 lg:sticky lg:top-32 self-start">
+            <div className="space-y-8">
+              {groups.map(([group, items]) => (
+                <div key={group}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="h-px w-6 bg-[#0A1633]/20" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#0A1633]/50">
+                      {group}
+                    </span>
+                  </div>
+                  <ul>
+                    {items.map((d) => {
+                      const on = d.key === active.key;
+                      return (
+                        <li key={d.key}>
+                          <button
+                            type="button"
+                            onClick={() => setKey(d.key)}
+                            className={`group w-full flex items-center justify-between gap-4 border-b border-[#0A1633]/10 py-4 text-left transition-colors ${
+                              on
+                                ? "border-[hsl(0_84%_55%)]"
+                                : "hover:border-[#0A1633]/40"
+                            }`}
+                          >
+                            <span
+                              className={`font-display text-lg font-bold tracking-tight ${
+                                on ? RED : INK
+                              }`}
+                            >
+                              {d.name}
+                            </span>
+                            <span
+                              className={`text-[11px] font-mono uppercase tracking-widest ${
+                                on
+                                  ? "text-[hsl(0_84%_55%)]"
+                                  : "text-[#0A1633]/40"
+                              }`}
+                            >
+                              {d.meta}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </aside>
+
+          {/* Featured department */}
+          <div className="col-span-12 lg:col-span-8">
+            <div className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-[#F4F5F7]">
+              <img
+                key={active.image}
+                src={active.image}
+                alt={active.name}
+                className="absolute inset-0 h-full w-full object-cover animate-[fade-in_0.5s_ease-out]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1633]/60 via-transparent to-transparent" />
+              <div className="absolute top-6 left-6 flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] text-[#0A1633]/70">
+                <StatusDot />
+                Ready for operation
+              </div>
+              <div className="absolute bottom-6 left-6 right-6 md:right-auto md:max-w-md">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-white/70 mb-2">
+                  {active.group}
+                </div>
+                <h3 className="font-display text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                  {active.name}
+                </h3>
+              </div>
+            </div>
+
+            <p className="mt-10 text-lg text-[#0A1633]/70 leading-relaxed max-w-2xl">
+              {active.spec}
+            </p>
+
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+              <ScopeList
+                title="What's included"
+                items={active.included}
+                accent="red"
+              />
+              <ScopeList
+                title="Optional extras"
+                items={active.optional}
+                accent="mute"
+              />
+            </div>
+
+            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+              <Link
+                to="/products"
+                className={`inline-flex items-center gap-2 ${INK} font-bold hover:${RED} transition-colors`}
+              >
+                Browse equipment portfolio{" "}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 text-[#0A1633]/60 hover:text-[#0A1633] transition-colors"
+              >
+                See it delivered on real projects{" "}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ScopeList({
+  title,
+  items,
+  accent,
+}: {
+  title: string;
+  items: string[];
+  accent: "red" | "mute";
+}) {
+  const line =
+    accent === "red" ? "bg-[hsl(0_84%_55%)]" : "bg-[#0A1633]/20";
+  return (
+    <div>
+      <h4 className="font-bold mb-4 uppercase text-[11px] tracking-[0.24em] text-[#0A1633]">
+        {title}
+      </h4>
+      <ul className="space-y-3">
+        {items.map((it) => (
+          <li key={it} className="flex items-start gap-3 text-[15px] text-[#0A1633]/75">
+            <span className={`mt-2.5 h-px w-5 shrink-0 ${line}`} />
+            <span>{it}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* --------- 04 · Included vs Optional (editorial contract) ----------------- */
+
+function IncludedOptional() {
+  return (
+    <section className={`${SURFACE}`}>
+      <div className="mx-auto max-w-[1240px] px-6 py-24 lg:py-32">
+        <ChapterLabel index="03">The Turnkey Contract</ChapterLabel>
+        <div className="mt-6 grid grid-cols-12 gap-8 items-end mb-16">
+          <h2
+            className={`col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl ${INK}`}
+          >
+            One accountable programme.{" "}
+            <span className="text-[#0A1633]/40">
+              No hand-offs between vendors.
+            </span>
+          </h2>
+          <p className="col-span-12 lg:col-span-4 text-[#0A1633]/60 leading-relaxed">
+            Every turnkey engagement is delivered against a single scope of
+            work. Here is the shape of what's inside — and what typically sits
+            outside — before we tailor it to your site.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#0A1633]/10 border border-[#0A1633]/10 rounded-2xl overflow-hidden">
+          <ContractColumn
+            eyebrow="Included as standard"
+            tone="light"
+            items={[
+              ["Equipment supply", "OEM procurement, freight and site delivery."],
+              ["Installation", "Manufacturer-certified engineers on site."],
+              ["Commissioning", "Calibration, safety and acceptance testing."],
+              ["Clinical training", "On-site applications training for staff."],
+              ["Documentation", "As-built, protocols and compliance dossier."],
+              ["Warranty", "Manufacturer warranty coverage from day one."],
+              ["Preventive maintenance", "Scheduled service programme."],
+              ["Technical support", "Priority response for the lifecycle."],
+            ]}
+          />
+          <ContractColumn
+            eyebrow="Optional, scoped per project"
+            tone="dark"
+            items={[
+              ["Power conditioning", "UPS, isolation and clean-power design."],
+              ["RF & lead shielding", "Cage supply and post-install validation."],
+              ["Advanced software", "Cardiac, oncology, AI reconstruction licences."],
+              ["Injectors & consumables", "Contrast workflow and starter stock."],
+              ["Extended service", "Multi-year full-risk agreements."],
+              ["Remote diagnostics", "OEM-supported connectivity where available."],
+            ]}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContractColumn({
+  eyebrow,
+  items,
+  tone,
+}: {
+  eyebrow: string;
+  items: [string, string][];
+  tone: "light" | "dark";
+}) {
+  const bg = tone === "dark" ? NAVY : "bg-white";
+  const heading = tone === "dark" ? "text-white" : INK;
+  const meta = tone === "dark" ? "text-white/60" : "text-[#0A1633]/60";
+  const eb = tone === "dark" ? "text-white/50" : "text-[#0A1633]/50";
+  const rule = tone === "dark" ? "border-white/10" : "border-[#0A1633]/10";
+  const bullet =
+    tone === "dark" ? "bg-[#34C759]" : "bg-[hsl(0_84%_55%)]";
+
+  return (
+    <div className={`${bg} p-10 lg:p-14`}>
+      <div className={`text-[10px] font-bold uppercase tracking-[0.24em] ${eb} mb-8`}>
+        {eyebrow}
+      </div>
+      <ul className={`divide-y ${rule}`}>
+        {items.map(([label, desc]) => (
+          <li
+            key={label}
+            className="grid grid-cols-12 gap-6 py-5 items-baseline"
+          >
+            <div className="col-span-1 pt-2">
+              <span className={`block h-1.5 w-1.5 rounded-full ${bullet}`} />
+            </div>
+            <div className={`col-span-5 font-display font-bold ${heading}`}>
+              {label}
+            </div>
+            <div className={`col-span-6 text-sm ${meta} leading-relaxed`}>
+              {desc}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* --------- 05 · How we deliver (magazine feature, not icon grid) --------- */
+
+const CHAPTERS = [
+  {
+    n: "I",
+    title: "Consultation",
+    kicker: "Clinical intent before equipment.",
+    body: "We begin with the clinical programme — case mix, throughput, staff — and reverse-engineer the technical brief. The right department is the one built around how it will actually be used.",
+  },
+  {
+    n: "II",
+    title: "Engineering & Integration",
+    kicker: "The technical layer, made invisible.",
+    body: "Structural, mechanical, electrical and IT integration is handled by manufacturer-certified engineers so that clinical teams inherit a room that simply works — with PACS, RIS and hospital systems already speaking.",
+  },
+  {
+    n: "III",
+    title: "Commissioning & Handover",
+    kicker: "Signed off against clinical protocols.",
+    body: "Acceptance testing follows international standards and the department's own SOPs. Handover is a document, a walkthrough, and a green light — not a hopeful email.",
+  },
+  {
+    n: "IV",
+    title: "Applications Training",
+    kicker: "Confidence in the first case, not the tenth.",
+    body: "Clinical applications specialists run on-site training tied to real protocols. Staff move from vendor demo to independent operation before the team leaves the floor.",
+  },
+  {
+    n: "V",
+    title: "Lifecycle Support",
+    kicker: "The relationship starts at handover.",
+    body: "Preventive maintenance, spare-parts logistics and priority technical response are contracted for the life of the equipment, not sold as an afterthought.",
+  },
+];
+
+function DeliveryEditorial() {
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1240px] px-6 py-24 lg:py-32">
+        <ChapterLabel index="04">How We Deliver</ChapterLabel>
+        <div className="mt-6 grid grid-cols-12 gap-8 items-end mb-16">
+          <h2
+            className={`col-span-12 lg:col-span-9 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl ${INK}`}
+          >
+            Five chapters,{" "}
+            <span className="text-[#0A1633]/40">
+              from first conversation to last shift.
+            </span>
+          </h2>
+        </div>
+
+        <div className="border-t border-[#0A1633]/10">
+          {CHAPTERS.map((c) => (
+            <article
+              key={c.n}
+              className="grid grid-cols-12 gap-8 border-b border-[#0A1633]/10 py-12"
+            >
+              <div className="col-span-12 md:col-span-2">
+                <div className="font-display text-3xl font-extrabold text-[#0A1633]/25">
+                  {c.n}
+                </div>
+              </div>
+              <div className="col-span-12 md:col-span-6">
+                <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-[#0A1633] mb-2">
+                  {c.title}
+                </h3>
+                <p className="text-[#0A1633]/60 text-lg italic">{c.kicker}</p>
+              </div>
+              <div className="col-span-12 md:col-span-4">
+                <p className="text-[#0A1633]/70 leading-relaxed">{c.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+          <Link
+            to="/hospital-readiness-assessment"
+            className={`inline-flex items-center gap-2 ${INK} font-bold hover:${RED} transition-colors`}
+          >
+            Start a readiness assessment <ArrowUpRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 text-[#0A1633]/60 hover:text-[#0A1633] transition-colors"
+          >
+            Talk to a project engineer <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------- 06 · Trust band (dark, editorial — no stats wall) -------------- */
+
+function TrustBand() {
+  return (
+    <section className={`${NAVY} text-white relative overflow-hidden`}>
+      <img
+        src={abufarhaHq}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/85 to-[#0A1633]/50" />
+      <div className="relative mx-auto max-w-[1240px] px-6 py-24 lg:py-32">
+        <ChapterLabel index="05" tone="light">
+          Why AbuFarha
+        </ChapterLabel>
+        <div className="mt-6 grid grid-cols-12 gap-8 items-end">
+          <h2 className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl">
+            25 years of clinical outcomes,{" "}
+            <span className="text-white/40">
+              across ten countries and counting.
+            </span>
+          </h2>
+          <p className="col-span-12 lg:col-span-4 text-white/60 leading-relaxed">
+            We operate where continuity matters most — MENA, Africa and Central
+            Asia — because a department is only as valuable as the years of
+            support behind it.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
+          {[
+            ["Since 1999", "Continuous operation"],
+            ["10+ countries", "Active service footprint"],
+            ["30+ departments", "Delivered turnkey"],
+            ["Lifecycle SLA", "Priority technical response"],
+          ].map(([k, v]) => (
+            <div key={k} className={`${NAVY} p-8`}>
+              <div className="font-display text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                {k}
+              </div>
+              <div className="mt-2 text-xs uppercase tracking-[0.24em] text-white/50 font-bold">
+                {v}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 text-white font-bold hover:text-[hsl(0_84%_65%)] transition-colors"
+          >
+            View project portfolio <ArrowUpRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+          >
+            Meet the engineering team <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------- 07 · Case studies (widescreen tiles, typographic) -------------- */
+
+function CaseStudies() {
+  return (
+    <section className={`${SURFACE}`}>
+      <div className="mx-auto max-w-[1240px] px-6 py-24 lg:py-32">
+        <div className="grid grid-cols-12 gap-8 items-end mb-16">
+          <div className="col-span-12 lg:col-span-8">
+            <ChapterLabel index="06">Delivered in the Field</ChapterLabel>
+            <h2
+              className={`mt-6 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl ${INK}`}
+            >
+              Real departments.{" "}
+              <span className="text-[#0A1633]/40">
+                Live under clinical load.
+              </span>
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-4 lg:pb-2">
+            <Link
+              to="/projects"
+              className={`inline-flex items-center gap-2 ${INK} font-bold hover:${RED} transition-colors text-sm`}
+            >
+              All projects <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          {CASES.map((c, i) => (
+            <Link
+              key={c.country + c.dept}
+              to="/projects"
+              className="group grid grid-cols-12 gap-6 items-stretch bg-white rounded-2xl overflow-hidden border border-[#0A1633]/5 hover:border-[#0A1633]/15 transition-colors"
+            >
+              <div
+                className={`col-span-12 md:col-span-5 relative aspect-[4/3] md:aspect-auto ${
+                  i % 2 === 1 ? "md:order-2" : ""
+                }`}
+              >
+                <img
+                  src={c.image}
+                  alt={`${c.dept} · ${c.country}`}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] text-[#0A1633]/70">
+                  <StatusDot />
+                  {c.country}
+                </div>
+              </div>
+              <div className="col-span-12 md:col-span-7 p-8 md:p-12 flex flex-col justify-center">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-[#0A1633]/40 mb-3">
+                  Case Study — Turnkey Department
+                </div>
+                <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-[#0A1633] mb-4">
+                  {c.dept}
+                </h3>
+                <div className="text-xs font-mono uppercase tracking-widest text-[#0A1633]/60 mb-6">
+                  Scope · {c.scope}
+                </div>
+                <p className="text-[#0A1633]/70 leading-relaxed max-w-md">
+                  {c.outcome}
+                </p>
+                <div
+                  className={`mt-8 inline-flex items-center gap-2 ${INK} font-bold text-sm group-hover:${RED} transition-colors`}
+                >
+                  Read the project <ArrowUpRight className="h-4 w-4" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------- 08 · FAQ (GEO-friendly disclosure) ----------------------------- */
+
+function Faq() {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1040px] px-6 py-24 lg:py-32">
+        <ChapterLabel index="07">Questions Buyers Ask</ChapterLabel>
+        <h2
+          className={`mt-6 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl mb-14 ${INK}`}
+        >
+          Clarity{" "}
+          <span className="text-[#0A1633]/40">
+            before the first purchase order.
+          </span>
+        </h2>
+
+        <div className="border-t border-[#0A1633]/10">
+          {FAQS.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.q} className="border-b border-[#0A1633]/10">
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-start justify-between gap-6 py-6 text-left"
+                  aria-expanded={isOpen}
+                >
+                  <span className="flex items-baseline gap-4">
+                    <span className="font-mono text-xs text-[#0A1633]/40 tabular-nums pt-1">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#0A1633]">
+                      {f.q}
+                    </span>
+                  </span>
+                  <span
+                    className={`mt-1 shrink-0 rounded-full border border-[#0A1633]/15 p-2 transition-colors ${
+                      isOpen ? "bg-[#0A1633] text-white border-[#0A1633]" : "text-[#0A1633]"
+                    }`}
+                    aria-hidden
+                  >
+                    {isOpen ? (
+                      <Minus className="h-4 w-4" />
+                    ) : (
+                      <Plus className="h-4 w-4" />
+                    )}
+                  </span>
+                </button>
+                <div
+                  className={`grid transition-all duration-300 ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100 pb-8"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="pl-10 pr-16 text-[#0A1633]/70 leading-relaxed max-w-3xl">
+                      {f.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FaqSchema() {
+  const json = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
+    />
+  );
+}
+
+/* --------- 09 · Closing CTA ---------------------------------------------- */
+
+function ClosingCta() {
+  return (
+    <section className={`${SURFACE}`}>
+      <div className="mx-auto max-w-[1240px] px-6 pb-24 lg:pb-32">
+        <div
+          className={`${NAVY} rounded-[2rem] p-10 md:p-16 lg:p-20 relative overflow-hidden`}
+        >
+          <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[hsl(0_84%_55%)]/10 blur-3xl" />
+          <div className="relative grid grid-cols-12 gap-8 items-end">
+            <div className="col-span-12 lg:col-span-8">
+              <ChapterLabel index="08" tone="light">
+                Start Your Department
+              </ChapterLabel>
+              <h2 className="mt-6 font-display text-white font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl">
+                Tell us the room.{" "}
+                <span className="text-white/40">
+                  We'll return with the department.
+                </span>
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-4 flex flex-wrap gap-4 lg:justify-end">
+              <Link
+                to="/contact"
+                className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-4 rounded-full hover:brightness-110 transition-all`}
+              >
+                Initiate a project <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/hospital-readiness-assessment"
+                className="inline-flex items-center gap-2 border border-white/25 text-white font-bold px-6 py-4 rounded-full hover:bg-white/5 transition-all"
+              >
+                Readiness assessment
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
