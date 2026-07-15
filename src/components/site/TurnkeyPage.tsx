@@ -764,36 +764,53 @@ function FAQSection() {
 /* ---------------- Final CTA ---------------- */
 
 function FinalCTASection() {
+  const stats = [
+    { value: "30+", label: "Major Projects" },
+    { value: "10+", label: "Countries" },
+    { value: "Since 1999", label: "Delivering Turnkey" },
+    { value: "1-Year", label: "Free Warranty" },
+  ];
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-20 lg:px-10">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111315] via-[#111315] to-[#1c1f22] p-8 text-white lg:p-14">
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
-          <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-8">
+          <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                Ready to Build Your Department?
+                Start Your Next Department
               </div>
               <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] sm:text-[2.4rem]">
-                Let's plan your next turnkey project — together.
+                Tell us the room.
+                <br /> We'll return with the department.
               </h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-[1.65] text-white/70">
-                From consultation to long-term after-sales support, our team delivers medical departments that work from Day One.
+                From equipment supply to installation, commissioning, clinical training and long-term after-sales support — one accountable partner, one delivered department.
               </p>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <a
+                  href="/contact"
+                  className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  Initiate a Project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/10"
+                >
+                  Talk to an Expert
+                </a>
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-end">
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-              >
-                Request a Quote <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/10"
-              >
-                Talk to an Expert
-              </a>
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-4">
+                {stats.map((s) => (
+                  <div key={s.label} className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+                    <div className="font-display text-[1.6rem] font-extrabold leading-none text-primary">{s.value}</div>
+                    <div className="mt-2 text-[12px] font-semibold text-white/80">{s.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
