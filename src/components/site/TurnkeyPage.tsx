@@ -46,11 +46,12 @@ const CAPABILITIES = [
 ];
 
 const DEPARTMENTS = [
-  { id: "cath", name: "Cath Lab", sub: "Interventional Cardiology", img: cathImg },
-  { id: "mri", name: "MRI Center", sub: "Advanced Imaging", img: mriImg },
-  { id: "ct", name: "CT Department", sub: "Computed Tomography", img: ctImg },
-  { id: "or", name: "Operating Room", sub: "Surgical Excellence", img: orImg },
-  { id: "icu", name: "ICU", sub: "Intensive Care", img: icuImg },
+  { id: "cath", name: "Cath Lab", sub: "Interventional Cardiology", img: cathImg, code: "01" },
+  { id: "mri", name: "MRI Center", sub: "Advanced Imaging", img: mriImg, code: "02" },
+  { id: "ct", name: "CT Department", sub: "Computed Tomography", img: ctImg, code: "03" },
+  { id: "or", name: "Operating Room", sub: "Surgical Excellence", img: orImg, code: "04" },
+  { id: "icu", name: "ICU", sub: "Intensive Care", img: icuImg, code: "05" },
+  { id: "pet", name: "PET / CT", sub: "Molecular Imaging", img: ctImg, code: "06" },
 ];
 
 const TRANSFORM_STEPS = [
@@ -98,6 +99,11 @@ const DEPARTMENT_META: Record<string, { title: string; description: string; feat
     title: "ICU Turnkey Solution",
     description: "Intensive care units delivered with monitoring, ventilation and life-support systems ready for critical clinical operation.",
     features: ["Critical Monitoring", "Ventilation Support", "Central Monitoring", "Infection Control", "Long-term Support"],
+  },
+  pet: {
+    title: "PET / CT Turnkey Solution",
+    description: "Molecular imaging suites delivered with hot-lab coordination, scanner installation, dosimetry and clinical training for oncology programs.",
+    features: ["Molecular Imaging", "Hot Lab Coordination", "Radiation Safety", "PACS Integration", "Clinical Training"],
   },
 };
 
@@ -496,258 +502,513 @@ function Hero() {
 }
 
 
-/* ---------------- Department Selector ---------------- */
+/* ---------------- Department Hub ---------------- */
 
 function DepartmentSelector({ active, onChange }: { active: string; onChange: (id: string) => void }) {
-  const setActive = onChange;
+  const activeDept = DEPARTMENTS.find((d) => d.id === active) ?? DEPARTMENTS[0];
+  const meta = DEPARTMENT_META[activeDept.id] ?? DEPARTMENT_META.cath;
+
   return (
-    <section id="departments" className="bg-white">
-      <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-3">
-            <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-              <span className="mr-2 text-primary/60">01</span> Choose Your Department
+    <section id="departments" className="relative bg-[#fafaf9]">
+      <div className="mx-auto max-w-[100rem] px-6 pt-24 pb-28 lg:px-10 lg:pt-32 lg:pb-36">
+        {/* Editorial header */}
+        <div className="flex items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+              <span className="mr-3 text-primary/50">01 — Ecosystem</span>
             </div>
-            <h2 className="mt-4 font-display text-[1.9rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[2.15rem]">
-              Solutions for Every
-              <br /> Clinical Department
+            <h2 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-ink sm:text-[3.6rem] lg:text-[4.4rem]">
+              One partner.
+              <br />
+              <span className="text-muted-foreground/60">Every clinical department.</span>
             </h2>
-            <p className="mt-4 text-[14.5px] leading-[1.65] text-muted-foreground">
-              Click on a department to explore its complete turnkey solution.
+          </div>
+          <div className="hidden shrink-0 items-baseline gap-3 lg:flex">
+            <span className="font-display text-[3.2rem] font-extrabold leading-none text-ink">{DEPARTMENTS.length}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              departments
+              <br />delivered turnkey
+            </span>
+          </div>
+        </div>
+
+        {/* Two-column ecosystem */}
+        <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
+          {/* Editorial index (left) */}
+          <div className="lg:col-span-5">
+            <div className="mb-6 flex items-center gap-3 text-[10.5px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+              <span className="h-px w-6 bg-muted-foreground/40" /> Select a department
+            </div>
+            <ul className="divide-y divide-ink/10">
+              {DEPARTMENTS.map((d) => {
+                const isActive = d.id === active;
+                return (
+                  <li key={d.id}>
+                    <button
+                      onMouseEnter={() => onChange(d.id)}
+                      onClick={() => onChange(d.id)}
+                      className="group relative w-full py-5 text-left lg:py-6"
+                      aria-pressed={isActive}
+                    >
+                      <div className="grid grid-cols-[3rem_1fr_auto] items-center gap-5">
+                        <span
+                          className={`font-display text-[13px] font-semibold tabular-nums transition-colors ${
+                            isActive ? "text-primary" : "text-muted-foreground/60"
+                          }`}
+                        >
+                          {d.code}
+                        </span>
+                        <div className="min-w-0">
+                          <div
+                            className={`font-display text-[1.35rem] font-extrabold tracking-[-0.02em] transition-all sm:text-[1.55rem] ${
+                              isActive ? "text-ink" : "text-ink/40 group-hover:text-ink/70"
+                            }`}
+                          >
+                            {d.name}
+                          </div>
+                          <AnimatePresence initial={false}>
+                            {isActive && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                className="overflow-hidden"
+                              >
+                                <p className="mt-2 max-w-md text-[13.5px] leading-[1.6] text-muted-foreground">
+                                  {d.sub}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                        <ArrowRight
+                          className={`h-4 w-4 transition-all ${
+                            isActive ? "translate-x-0 text-primary opacity-100" : "-translate-x-2 text-ink/30 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                          }`}
+                        />
+                      </div>
+                      {isActive && (
+                        <motion.span
+                          layoutId="dept-active-rail"
+                          className="absolute left-0 top-1/2 h-8 w-[3px] -translate-y-1/2 rounded-full bg-primary"
+                          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                        />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Immersive canvas (right) */}
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-ink/5 sm:aspect-[5/6] lg:aspect-[4/5]">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeDept.id}
+                  src={activeDept.img}
+                  alt={activeDept.name}
+                  initial={{ opacity: 0, scale: 1.06 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/5 to-transparent" />
+
+              {/* Top-left connection glyph */}
+              <div className="absolute left-6 top-6 flex items-center gap-3 text-white">
+                <svg width="34" height="34" viewBox="0 0 34 34" className="opacity-90">
+                  <circle cx="17" cy="17" r="3" fill="currentColor" className="text-primary" />
+                  <circle cx="17" cy="17" r="15" fill="none" stroke="currentColor" strokeOpacity="0.4" strokeDasharray="2 3" />
+                </svg>
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/85">
+                  AbuFarha · Turnkey Node
+                </div>
+              </div>
+
+              {/* Bottom info card */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeDept.id + "-panel"}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                  className="absolute inset-x-6 bottom-6 rounded-[4px] bg-white/95 p-6 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-8 lg:max-w-md"
+                >
+                  <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-primary">
+                    {activeDept.code} · {activeDept.sub}
+                  </div>
+                  <div className="mt-2 font-display text-[1.7rem] font-extrabold leading-tight tracking-[-0.02em] text-ink sm:text-[1.95rem]">
+                    {activeDept.name}
+                  </div>
+                  <p className="mt-3 text-[13.5px] leading-[1.6] text-muted-foreground">
+                    {meta.description}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {meta.features.slice(0, 3).map((f) => (
+                      <span
+                        key={f}
+                        className="rounded-full border border-ink/10 px-2.5 py-1 text-[10.5px] font-semibold text-ink/75"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href="#solution"
+                    className="mt-6 inline-flex items-center gap-2 text-[12.5px] font-bold text-ink transition-colors hover:text-primary"
+                  >
+                    Explore this solution
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Transformation Journey (cinematic horizontal scroll) ---------------- */
+
+const JOURNEY_STAGES = [
+  { n: "01", title: "Empty Room", copy: "A raw shell. Bare walls, unfinished floors — the starting point of every project.", metric: "Day 0", metricLabel: "Site handover", img: solutionRoomImg },
+  { n: "02", title: "Construction Ready", copy: "Civil coordination complete. Structural, electrical and mechanical infrastructure verified against clinical spec.", metric: "12", metricLabel: "Site checks", img: orImg },
+  { n: "03", title: "Equipment Arrives", copy: "Certified medical systems arrive on schedule from OEM partners across Europe, Japan and the US.", metric: "OEM", metricLabel: "Certified partners", img: project3 },
+  { n: "04", title: "Installation", copy: "Biomedical engineers install, align and integrate every component to manufacturer specification.", metric: "100%", metricLabel: "Spec compliance", img: project2 },
+  { n: "05", title: "Clinical Training", copy: "Hands-on programs for physicians, nurses and biomedical staff — delivered on-site by clinical specialists.", metric: "1:1", metricLabel: "Clinical mentoring", img: icuImg },
+  { n: "06", title: "Department Live", copy: "Commissioned, calibrated and clinically accepted. Ready to receive its first patient.", metric: "Day One", metricLabel: "Patients admitted", img: cathImg },
+];
+
+function TransformationSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      const p = max > 0 ? el.scrollLeft / max : 0;
+      setProgress(p);
+      setActiveIdx(Math.round(p * (JOURNEY_STAGES.length - 1)));
+    };
+    onScroll();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.72, behavior: "smooth" });
+  };
+
+  return (
+    <section id="transformation" className="relative overflow-hidden bg-[#0b0c0e] text-white">
+      <div className="mx-auto max-w-[100rem] px-6 pt-24 lg:px-10 lg:pt-32">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <div className="max-w-xl">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+              <span className="mr-3 text-primary/60">02 — Journey</span>
+            </div>
+            <h2 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-[3.4rem] lg:text-[4rem]">
+              From empty room
+              <br />
+              <span className="text-white/45">to ready for patients.</span>
+            </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-[1.65] text-white/60">
+              Six stages, one continuous accountability. Scroll horizontally through the transformation we deliver on every project.
             </p>
           </div>
 
-          <div className="lg:col-span-9">
-            <div className="mb-4 flex items-center justify-end gap-2">
-              <button className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary">
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <div className="font-display text-[2.4rem] font-extrabold leading-none tabular-nums">
+                {JOURNEY_STAGES[activeIdx].n}
+              </div>
+              <div className="mt-1 text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/50">
+                {JOURNEY_STAGES[activeIdx].title}
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => scrollBy(-1)}
+                aria-label="Previous stage"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/20 text-white/80 transition hover:border-white hover:text-white"
+              >
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary">
+              <button
+                onClick={() => scrollBy(1)}
+                aria-label="Next stage"
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/20 text-white/80 transition hover:border-white hover:text-white"
+              >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-              {DEPARTMENTS.map((d) => {
-                const isActive = active === d.id;
-                return (
-                  <button
-                    key={d.id}
-                    onClick={() => setActive(d.id)}
-                    className={`group overflow-hidden rounded-md border bg-white text-left transition-all ${
-                      isActive
-                        ? "border-primary ring-2 ring-primary/30"
-                        : "border-border hover:border-primary/40"
-                    }`}
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-                      <img
-                        src={d.img}
-                        alt={d.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-3">
-                      <div className="flex items-center gap-1.5">
-                        <Heart className={`h-3.5 w-3.5 ${isActive ? "text-primary" : "text-primary/70"}`} />
-                        <div className="text-[13px] font-bold text-ink">{d.name}</div>
-                      </div>
-                      <div className="mt-1 text-[11px] text-muted-foreground">{d.sub}</div>
-                    </div>
-                  </button>
-                );
-              })}
-              <button className="group flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-border bg-white p-4 text-center transition hover:border-primary hover:bg-primary/5">
-                <LayoutGrid className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
-                <div>
-                  <div className="text-[13px] font-bold text-ink">More Departments</div>
-                  <div className="mt-0.5 text-[11px] text-muted-foreground">View All</div>
+          </div>
+        </div>
+
+        {/* Progress rail */}
+        <div className="relative mt-12 h-px w-full bg-white/10">
+          <motion.div
+            className="absolute inset-y-0 left-0 bg-primary"
+            style={{ width: `${Math.max(6, progress * 100)}%` }}
+            transition={{ duration: 0.2 }}
+          />
+          <div className="mt-4 flex justify-between text-[10px] font-semibold uppercase tracking-[0.24em] text-white/40">
+            {JOURNEY_STAGES.map((s, i) => (
+              <span key={s.n} className={i === activeIdx ? "text-white" : ""}>
+                {s.n}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal cinematic scroller */}
+      <div
+        ref={scrollerRef}
+        className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-6 pb-24 lg:mt-16 lg:gap-8 lg:px-10 lg:pb-32"
+        style={{ scrollbarWidth: "none" }}
+      >
+        <style>{`section#transformation ::-webkit-scrollbar{display:none}`}</style>
+        {JOURNEY_STAGES.map((stage, i) => (
+          <motion.article
+            key={stage.n}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.03 }}
+            className="relative flex w-[86vw] shrink-0 snap-center flex-col overflow-hidden rounded-[6px] bg-white/[0.03] sm:w-[78vw] lg:w-[64vw] xl:w-[56vw]"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <img src={stage.img} alt={stage.title} loading="lazy" className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-[#0b0c0e]/10 to-transparent" />
+
+              {/* Floating stage tag */}
+              <div className="absolute left-6 top-6 flex items-center gap-3">
+                <span className="font-display text-[3.5rem] font-extrabold leading-none tracking-[-0.04em] text-white sm:text-[4.5rem]">
+                  {stage.n}
+                </span>
+                <div className="h-8 w-px bg-white/50" />
+                <span className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/85">
+                  Stage
+                </span>
+              </div>
+
+              {/* Floating metric */}
+              <div className="absolute right-6 top-6 rounded-[3px] bg-white/95 px-4 py-3 text-ink shadow-2xl">
+                <div className="font-display text-[1.4rem] font-extrabold leading-none tracking-[-0.02em]">
+                  {stage.metric}
                 </div>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Transformation ---------------- */
-
-function TransformationSection() {
-  return (
-    <section id="transformation" className="bg-white">
-      <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative overflow-hidden rounded-xl bg-[#111315] p-6 text-white lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-3">
-              <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                <span className="mr-2 text-white/40">02</span> Build Your Department
+                <div className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                  {stage.metricLabel}
+                </div>
               </div>
-              <h2 className="mt-4 font-display text-[1.75rem] font-extrabold leading-[1.15] tracking-[-0.02em] sm:text-[2rem]">
-                From Empty Room
-                <br /> to Ready for Patients
-              </h2>
-              <p className="mt-4 text-[14px] leading-[1.65] text-white/65">
-                We take care of every detail. See how we transform a space into a fully functional medical department.
+            </div>
+
+            <div className="flex-1 px-8 py-8 lg:px-10 lg:py-10">
+              <h3 className="font-display text-[1.8rem] font-extrabold tracking-[-0.02em] text-white sm:text-[2.1rem]">
+                {stage.title}
+              </h3>
+              <p className="mt-3 max-w-lg text-[14.5px] leading-[1.65] text-white/60">
+                {stage.copy}
               </p>
-              <button className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-2.5 text-[13px] font-bold text-white transition hover:bg-white/10">
-                <Play className="h-3.5 w-3.5" /> See the Transformation
-              </button>
             </div>
-
-            <div className="lg:col-span-9">
-              {/* Step titles */}
-              <div className="grid grid-cols-3 gap-3 md:grid-cols-6">
-                {TRANSFORM_STEPS.map((s) => (
-                  <div key={s.n} className="flex flex-col items-center text-center">
-                    <div className="grid h-7 w-7 place-items-center rounded-full bg-primary text-[12px] font-bold text-white">
-                      {s.n}
-                    </div>
-                    <div className="mt-2 text-[11.5px] font-semibold leading-tight">{s.title}</div>
-                    <div className="text-[11.5px] leading-tight text-white/60">{s.sub}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Image row */}
-              <div className="mt-4 grid grid-cols-3 gap-3 md:grid-cols-6">
-                {TRANSFORM_STEPS.map((s, i) => (
-                  <div
-                    key={s.n}
-                    className="relative aspect-[4/3] overflow-hidden rounded-md bg-white/5"
-                  >
-                    <img
-                      src={i === 0 ? orImg : i === 5 ? cathImg : [mriImg, ctImg, cathImg, orImg][i % 4]}
-                      alt={`Step ${s.n}: ${s.title}`}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                      style={{ filter: i === 0 ? "grayscale(0.6) brightness(1.1)" : "none" }}
-                    />
-                    {i === 5 && (
-                      <div className="absolute inset-x-2 bottom-2 flex items-center gap-2 rounded-md bg-white/95 px-2.5 py-1.5 text-ink shadow-lg">
-                        <span className="grid h-5 w-5 place-items-center rounded-full bg-green-600 text-white">
-                          <Check className="h-3 w-3" />
-                        </span>
-                        <div className="text-[10.5px] font-bold leading-tight">
-                          READY
-                          <div className="font-medium text-muted-foreground">FOR PATIENTS</div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+          </motion.article>
+        ))}
+        <div className="w-6 shrink-0 lg:w-10" />
       </div>
     </section>
   );
 }
 
-/* ---------------- Solution Overview ---------------- */
+/* ---------------- Solution Overview (split-screen, interactive hotspots) ---------------- */
+
+const SOLUTION_HOTSPOTS: Array<{ n: number; label: string; x: number; y: number; spec: string }> = [
+  { n: 1, label: "Imaging System", x: 32, y: 42, spec: "Floor / ceiling-mounted C-arm with flat-panel detector." },
+  { n: 2, label: "Patient Table", x: 48, y: 68, spec: "Motorised, carbon-fibre top with tilt & lateral roll." },
+  { n: 3, label: "Ceiling Monitors", x: 58, y: 26, spec: "Multi-modality display suspension, up to 8 signals." },
+  { n: 4, label: "Hemodynamic System", x: 76, y: 46, spec: "Real-time acquisition, reporting and archiving." },
+  { n: 5, label: "Injector", x: 68, y: 70, spec: "Dual-head contrast injector with pressure limiting." },
+  { n: 6, label: "Radiation Protection", x: 22, y: 72, spec: "Ceiling-suspended shield and lower-body drape." },
+];
 
 function SolutionOverview({ active }: { active: string }) {
   const meta = DEPARTMENT_META[active] ?? DEPARTMENT_META.cath;
-  const hotspots = [
-    { n: 1, x: 30, y: 45 },
-    { n: 2, x: 20, y: 62 },
-    { n: 3, x: 52, y: 30 },
-    { n: 4, x: 60, y: 55 },
-    { n: 5, x: 72, y: 45 },
-    { n: 6, x: 35, y: 70 },
-    { n: 7, x: 78, y: 65 },
-    { n: 8, x: 45, y: 78 },
-  ];
+  const [hot, setHot] = useState(1);
+  const activeHot = SOLUTION_HOTSPOTS.find((h) => h.n === hot) ?? SOLUTION_HOTSPOTS[0];
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
-          {/* Left copy */}
-          <div className="lg:col-span-3">
-            <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-              <span className="mr-2 text-primary/60">03</span> Solution Overview
-            </div>
-            <h2 className="mt-4 font-display text-[1.9rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[2.15rem]">
-              {meta.title}
-            </h2>
-            <p className="mt-4 text-[14px] leading-[1.65] text-muted-foreground">
-              {meta.description}
-            </p>
-            <ul className="mt-5 space-y-2.5">
-              {meta.features.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-[13.5px] text-ink">
-                  <CircleDot className="h-4 w-4 text-primary" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-7 flex items-center gap-5">
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-[13px] font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-              >
-                Request Consultation <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a href="#" className="inline-flex items-center gap-1.5 text-[13px] font-bold text-primary">
-                Download Brochure <Download className="h-3.5 w-3.5" />
-              </a>
-            </div>
+    <section id="solution" className="relative bg-white">
+      <div className="mx-auto max-w-[100rem] px-6 pt-24 pb-28 lg:px-10 lg:pt-32 lg:pb-36">
+        {/* Editorial intro */}
+        <div className="max-w-3xl">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+            <span className="mr-3 text-primary/50">03 — Anatomy</span>
           </div>
+          <h2 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-ink sm:text-[3.4rem] lg:text-[4rem]">
+            {meta.title.replace(" Turnkey Solution", "")},
+            <br />
+            <span className="text-muted-foreground/60">component by component.</span>
+          </h2>
+          <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-muted-foreground">
+            {meta.description}
+          </p>
+        </div>
 
-          {/* Floorplan */}
-          <div className="lg:col-span-6">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-secondary">
-              <img
+        {/* Split screen */}
+        <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
+          {/* Immersive image */}
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-secondary sm:aspect-[5/6] lg:aspect-[4/5]">
+              <motion.img
                 src={solutionRoomImg}
-                alt="Cath Lab floor layout with equipment"
+                alt="Cath Lab layout with equipment"
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
+                animate={{
+                  scale: 1.12,
+                  x: `${(50 - activeHot.x) * 0.35}%`,
+                  y: `${(50 - activeHot.y) * 0.35}%`,
+                }}
+                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
               />
-              {hotspots.map((h) => (
-                <button
-                  key={h.n}
-                  aria-label={`Component ${h.n}`}
-                  style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 grid h-7 w-7 place-items-center rounded-full bg-primary text-[11px] font-bold text-white shadow-md ring-4 ring-white/70 transition hover:scale-110"
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent" />
+
+              {SOLUTION_HOTSPOTS.map((h) => {
+                const isActive = h.n === hot;
+                return (
+                  <button
+                    key={h.n}
+                    onClick={() => setHot(h.n)}
+                    onMouseEnter={() => setHot(h.n)}
+                    aria-label={h.label}
+                    style={{ left: `${h.x}%`, top: `${h.y}%` }}
+                    className="group absolute -translate-x-1/2 -translate-y-1/2"
+                  >
+                    <span
+                      className={`relative grid place-items-center rounded-full transition-all duration-500 ${
+                        isActive ? "h-10 w-10 bg-primary text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)]" : "h-7 w-7 bg-white/95 text-ink shadow-md"
+                      }`}
+                    >
+                      <span className="text-[11px] font-bold tabular-nums">{h.n}</span>
+                      {isActive && (
+                        <motion.span
+                          layoutId="hot-ring"
+                          className="absolute inset-0 rounded-full ring-2 ring-primary/40"
+                          transition={{ type: "spring", stiffness: 300, damping: 26 }}
+                        />
+                      )}
+                    </span>
+                  </button>
+                );
+              })}
+
+              {/* Floating label of active hotspot */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeHot.n}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-x-6 bottom-6 rounded-[3px] bg-white/95 p-5 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 lg:max-w-sm"
                 >
-                  {h.n}
-                </button>
-              ))}
-            </div>
-            <div className="mt-3 text-center text-[12px] text-muted-foreground">
-              👆 Click on numbers to explore components
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-display text-[13px] font-bold tabular-nums text-primary">
+                      0{activeHot.n}
+                    </span>
+                    <div className="font-display text-[1.15rem] font-extrabold text-ink">
+                      {activeHot.label}
+                    </div>
+                  </div>
+                  <p className="mt-2 text-[12.5px] leading-[1.6] text-muted-foreground">
+                    {activeHot.spec}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
-          {/* Components sidebar */}
-          <div className="lg:col-span-3">
-            <div className="rounded-lg border border-border bg-white p-4">
-              <div className="mb-2 text-[13.5px] font-bold text-ink">Solution Components</div>
-              <ul className="divide-y divide-border">
-                {CATH_COMPONENTS.map((c, i) => (
-                  <li key={c} className="flex items-center justify-between py-2.5 text-[12.5px] text-ink">
-                    <span className="flex items-center gap-2.5">
-                      <span className="grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-white">
-                        {i + 1}
-                      </span>
-                      {c}
-                    </span>
-                    <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
-                  </li>
-                ))}
+          {/* Sticky info panel */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-24">
+              <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                Solution components
+              </div>
+              <ul className="mt-6 divide-y divide-ink/10">
+                {SOLUTION_HOTSPOTS.map((h) => {
+                  const isActive = h.n === hot;
+                  return (
+                    <li key={h.n}>
+                      <button
+                        onClick={() => setHot(h.n)}
+                        className="group grid w-full grid-cols-[2.25rem_1fr_auto] items-center gap-4 py-4 text-left"
+                      >
+                        <span
+                          className={`font-display text-[12px] font-bold tabular-nums transition-colors ${
+                            isActive ? "text-primary" : "text-muted-foreground/60"
+                          }`}
+                        >
+                          0{h.n}
+                        </span>
+                        <span
+                          className={`font-display text-[1.05rem] font-bold tracking-[-0.01em] transition-colors ${
+                            isActive ? "text-ink" : "text-ink/50 group-hover:text-ink/80"
+                          }`}
+                        >
+                          {h.label}
+                        </span>
+                        <span
+                          className={`h-[6px] w-[6px] rounded-full transition-all ${
+                            isActive ? "bg-primary" : "bg-ink/15 group-hover:bg-ink/40"
+                          }`}
+                        />
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
-            </div>
-            <div className="mt-4 rounded-lg bg-secondary p-4">
-              <div className="text-[13px] font-bold text-ink">Need a customized solution?</div>
-              <p className="mt-1.5 text-[12px] text-muted-foreground">
-                Our team will design a solution tailored to your clinical needs.
-              </p>
-              <a href="/contact" className="mt-2 inline-flex items-center gap-1.5 text-[12.5px] font-bold text-primary">
-                Talk to an Expert <ArrowRight className="h-3 w-3" />
-              </a>
+
+              <div className="mt-10 border-t border-ink/10 pt-8">
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                  Clinical outcomes
+                </div>
+                <ul className="mt-5 flex flex-wrap gap-1.5">
+                  {meta.features.map((f) => (
+                    <li
+                      key={f}
+                      className="rounded-full border border-ink/10 px-3 py-1.5 text-[11.5px] font-semibold text-ink/75"
+                    >
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center gap-6">
+                <a
+                  href="/contact"
+                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[13px] font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-primary"
+                >
+                  Request consultation
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </a>
+                <a href="#" className="inline-flex items-center gap-2 text-[13px] font-bold text-ink transition-colors hover:text-primary">
+                  Download brochure <Download className="h-3.5 w-3.5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -755,6 +1016,7 @@ function SolutionOverview({ active }: { active: string }) {
     </section>
   );
 }
+
 
 /* ---------------- Included ---------------- */
 
