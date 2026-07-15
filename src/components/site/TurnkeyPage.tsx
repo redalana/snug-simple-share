@@ -75,9 +75,9 @@ const COMPONENTS = [
 ];
 
 const PROJECTS = [
-  { id: 1, region: "Regional", title: "Cardiac Cath Lab Program", scope: "Cath Lab Turnkey Solution", image: project1 },
-  { id: 2, region: "Regional", title: "Advanced Imaging Center", scope: "MRI & CT Suite", image: project2 },
-  { id: 3, region: "Regional", title: "Hybrid Operating Suite", scope: "OR Integration", image: project3 },
+  { id: 1, region: "Middle East", title: "Cardiac Catheterization Suite", scope: "Cath Lab Turnkey Solution", image: project1 },
+  { id: 2, region: "North Africa", title: "Advanced Imaging Center", scope: "MRI & CT Suite", image: project2 },
+  { id: 3, region: "Central Asia", title: "Hybrid Operating Theatre", scope: "OR Integration", image: project3 },
 ];
 
 const STATS = [
