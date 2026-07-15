@@ -415,16 +415,25 @@ function IncludedComponents() {
   );
 }
 
+const REGION_PINS = [
+  { name: "MENA", top: "34%", left: "56%" },
+  { name: "North Africa", top: "42%", left: "48%" },
+  { name: "East Africa", top: "62%", left: "54%" },
+  { name: "West Africa", top: "55%", left: "42%" },
+  { name: "Gulf", top: "40%", left: "62%" },
+  { name: "Central Asia", top: "28%", left: "70%" },
+];
+
 function ProjectsSection() {
   const [i, setI] = useState(0);
   const p = PROJECTS[i];
   return (
-    <section className="bg-[#f7f8fa] py-20 lg:py-24">
-      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:px-10">
+    <section className="bg-white py-20 lg:py-24">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[0.9fr_1.4fr_1fr] lg:items-center lg:gap-10 lg:px-10">
         <div>
           <p className="text-xs font-bold tracking-[0.22em] text-primary">REAL PROJECTS. REAL IMPACT.</p>
           <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
-            Projects Across Our<br />Regions of Operation
+            Projects Across<br />Our Regions
           </h2>
           <a
             href="/projects"
@@ -432,11 +441,29 @@ function ProjectsSection() {
           >
             Explore All Projects <ArrowRight className="h-4 w-4" />
           </a>
-          <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4 text-primary" />
-            <span>Middle East · Africa · Central Asia</span>
-          </div>
         </div>
+
+        {/* Region map */}
+        <div className="relative aspect-[4/3] w-full rounded-2xl bg-[#eef2f7] ring-1 ring-black/5">
+          <svg viewBox="0 0 800 600" className="absolute inset-0 h-full w-full text-neutral-300" fill="currentColor" aria-hidden>
+            {/* stylized continent silhouettes */}
+            <path d="M180 180 Q260 150 340 170 L420 160 Q500 170 560 210 L600 260 Q580 320 540 360 L500 420 Q440 470 380 480 L320 490 Q260 470 220 420 L180 360 Q150 300 160 240 Z" opacity="0.55" />
+            <path d="M580 200 Q640 180 680 200 L700 240 Q690 280 660 300 L620 310 Q590 290 580 250 Z" opacity="0.55" />
+          </svg>
+          {REGION_PINS.map((r) => (
+            <div key={r.name} style={{ top: r.top, left: r.left }} className="absolute -translate-x-1/2 -translate-y-full">
+              <div className="relative flex flex-col items-center">
+                <span className="rounded-md bg-white px-2 py-0.5 text-[10px] font-bold text-foreground shadow ring-1 ring-black/5">
+                  {r.name}
+                </span>
+                <span className="mt-0.5 grid h-6 w-6 place-items-center">
+                  <MapPin className="h-6 w-6 fill-primary text-primary" strokeWidth={1} />
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
 
         <div className="relative">
           <AnimatePresence mode="wait">
