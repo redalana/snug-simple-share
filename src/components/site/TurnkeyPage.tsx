@@ -574,7 +574,6 @@ export function TurnkeyPage() {
       <DepartmentNavigator />
       <TurnkeyJourney />
       <DepartmentAnatomy />
-      <IncludedComponents />
       <ProjectsSection />
       <CTA />
     </div>
