@@ -550,47 +550,71 @@ function Hero() {
             {/* Floating stats card */}
             <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-2xl p-5 min-w-[210px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]">
               <div className="flex items-baseline gap-2">
-                <span className={`font-display text-5xl font-extrabold ${RED} tracking-tight`}>
+      <div className="relative mx-auto max-w-[1240px] px-6 pt-14 pb-6 lg:pt-20 lg:pb-8">
+        <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-6">
+          Turnkey Medical Solutions
+        </div>
+
+        <div className="grid grid-cols-12 gap-8 items-end">
+          <h1
+            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.96]
+                       text-[clamp(2.5rem,5.8vw,5.25rem)]"
+          >
+            We don&apos;t just supply equipment.
+            <br />
+            We deliver departments{" "}
+            <span className={RED}>ready for life.</span>
+          </h1>
+
+          <div className="col-span-12 lg:col-span-4 flex flex-col gap-6 lg:pb-3">
+            <p className="text-white/70 text-[15px] leading-relaxed max-w-md">
+              From planning to long-term support, we deliver fully-equipped
+              medical departments that are ready for clinical operation from
+              day one.
+            </p>
+
+            {/* Floating stats card — trimmed */}
+            <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-xl px-4 py-3.5 min-w-[170px] shadow-[0_18px_50px_-20px_rgba(0,0,0,0.5)]">
+              <div className="flex items-baseline gap-2">
+                <span className={`font-display text-[2.5rem] leading-none font-extrabold ${RED} tracking-tight`}>
                   30+
                 </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#0A1633]/70">
+                  Major<br/>Projects
+                </span>
               </div>
-              <div className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0A1633]/70">
-                Major Projects
-              </div>
-              <div className="mt-4 border-t border-[#0A1633]/10 pt-3 space-y-1 text-xs text-[#0A1633]/60">
-                <div>10+ Countries</div>
-                <div>Since 1999</div>
+              <div className="mt-3 border-t border-[#0A1633]/10 pt-2 flex items-center gap-3 text-[11px] text-[#0A1633]/60">
+                <span>10+ Countries</span>
+                <span className="h-1 w-1 rounded-full bg-[#0A1633]/30" />
+                <span>Since 1999</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
             to="/contact"
-            className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3.5 rounded-full hover:brightness-110 transition-all`}
+            className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3 rounded-full hover:brightness-110 transition-all`}
           >
             Explore Departments <ArrowRight className="h-4 w-4" />
           </Link>
           <a
             href="#build"
-            className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3.5 rounded-full hover:bg-white/5 transition-all"
+            className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/5 transition-all"
           >
             <PlayCircle className="h-4 w-4" /> How It Works
           </a>
         </div>
 
-        {/* Capability strip */}
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
+        {/* Capability strip — trimmed */}
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
           {CAPABILITIES.map((c) => (
-            <div
-              key={c.title}
-              className="bg-[#0A1633]/70 p-4 lg:p-5"
-            >
-              <div className="text-[11px] font-bold text-white tracking-tight">
+            <div key={c.title} className="bg-[#0A1633]/70 px-4 py-2.5">
+              <div className="text-[11px] font-bold text-white tracking-tight leading-tight">
                 {c.title}
               </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/50">
+              <div className="mt-0.5 text-[9px] uppercase tracking-[0.18em] text-white/50">
                 {c.sub}
               </div>
             </div>
