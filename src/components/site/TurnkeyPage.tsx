@@ -879,51 +879,25 @@ function SolutionOverview({ active }: { active: string }) {
 
         {/* Split screen */}
         <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
-          {/* Immersive image */}
+          {/* Immersive 3D viewer */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-secondary sm:aspect-[5/6] lg:aspect-[4/5]">
-              <motion.img
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-gradient-to-b from-[#f4f6f9] to-[#e6ebf1] sm:aspect-[5/6] lg:aspect-[4/5]">
+              {/* Static fallback */}
+              <img
                 src={solutionRoomImg}
                 alt="Cath Lab layout with equipment"
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-                animate={{
-                  scale: 1.12,
-                  x: `${(50 - activeHot.x) * 0.35}%`,
-                  y: `${(50 - activeHot.y) * 0.35}%`,
-                }}
-                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 h-full w-full object-cover opacity-90 sm:hidden"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent" />
+              <ClientOnly3D>
+                <SolutionViewer3D activeN={hot} onSelect={setHot} />
+              </ClientOnly3D>
 
-              {SOLUTION_HOTSPOTS.map((h) => {
-                const isActive = h.n === hot;
-                return (
-                  <button
-                    key={h.n}
-                    onClick={() => setHot(h.n)}
-                    onMouseEnter={() => setHot(h.n)}
-                    aria-label={h.label}
-                    style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                    className="group absolute -translate-x-1/2 -translate-y-1/2"
-                  >
-                    <span
-                      className={`relative grid place-items-center rounded-full transition-all duration-500 ${
-                        isActive ? "h-10 w-10 bg-primary text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)]" : "h-7 w-7 bg-white/95 text-ink shadow-md"
-                      }`}
-                    >
-                      <span className="text-[11px] font-bold tabular-nums">{h.n}</span>
-                      {isActive && (
-                        <motion.span
-                          layoutId="hot-ring"
-                          className="absolute inset-0 rounded-full ring-2 ring-primary/40"
-                          transition={{ type: "spring", stiffness: 300, damping: 26 }}
-                        />
-                      )}
-                    </span>
-                  </button>
-                );
-              })}
+              {/* 360° badge */}
+              <div className="pointer-events-none absolute left-6 top-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.22em] text-ink/80 shadow-sm backdrop-blur">
+                <CircleDot className="h-3.5 w-3.5 text-primary" />
+                360° View
+              </div>
 
               {/* Floating label of active hotspot */}
               <AnimatePresence mode="wait">
@@ -950,6 +924,7 @@ function SolutionOverview({ active }: { active: string }) {
               </AnimatePresence>
             </div>
           </div>
+
 
           {/* Sticky info panel */}
           <div className="lg:col-span-5">
