@@ -94,7 +94,7 @@ export function Hero() {
 
       {/* ── Content, resting in the negative space of the scene ─────────── */}
       <div className="relative mx-auto max-w-[100rem] px-6 py-9 lg:px-10 lg:py-14">
-        <div className="lg:max-w-[46%]">
+        <div className="pl-12 lg:max-w-[46%]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
