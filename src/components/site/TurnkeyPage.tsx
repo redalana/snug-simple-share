@@ -63,23 +63,46 @@ const TRANSFORM_STEPS = [
 ];
 
 const CATH_COMPONENTS = [
-  "Biplane Imaging System",
+  "Imaging System",
   "Patient Table",
-  "Ceiling Mounted Monitors",
+  "Ceiling Monitors",
   "Hemodynamic System",
-  "Injector System",
+  "Injector",
   "Radiation Protection",
-  "Workstation & Storage",
-  "Power & UPS System",
+  "Workstation",
+  "UPS",
 ];
 
-const CATH_FEATURES = [
-  "Interventional Procedures",
-  "Advanced Imaging",
-  "Radiation Safety",
-  "Workflow Efficiency",
-  "Patient Comfort",
-];
+const DEPARTMENT_META: Record<string, { title: string; description: string; features: string[] }> = {
+  cath: {
+    title: "Cath Lab Turnkey Solution",
+    description: "A comprehensive solution designed for interventional procedures with maximum safety, efficiency and clinical performance.",
+    features: ["Interventional Procedures", "Advanced Imaging", "Radiation Safety", "Workflow Efficiency", "Patient Comfort"],
+  },
+  mri: {
+    title: "MRI Center Turnkey Solution",
+    description: "End-to-end MRI suite delivery — from RF shielding coordination to scanner installation, commissioning and clinical training.",
+    features: ["Advanced Imaging", "RF Shielding Coordination", "Patient Comfort", "Workflow Efficiency", "Long-term Support"],
+  },
+  ct: {
+    title: "CT Department Turnkey Solution",
+    description: "A complete CT suite equipped for rapid, high-resolution diagnostic imaging with integrated safety and workflow systems.",
+    features: ["Diagnostic Imaging", "Radiation Safety", "Contrast Injection", "PACS Integration", "Workflow Efficiency"],
+  },
+  or: {
+    title: "Operating Room Turnkey Solution",
+    description: "Fully equipped operating rooms delivered with surgical lighting, tables, anesthesia and integration systems ready for Day One.",
+    features: ["Surgical Excellence", "Integrated Systems", "Sterile Workflow", "Team Ergonomics", "Patient Safety"],
+  },
+  icu: {
+    title: "ICU Turnkey Solution",
+    description: "Intensive care units delivered with monitoring, ventilation and life-support systems ready for critical clinical operation.",
+    features: ["Critical Monitoring", "Ventilation Support", "Central Monitoring", "Infection Control", "Long-term Support"],
+  },
+};
+
+const CATH_FEATURES = DEPARTMENT_META.cath.features;
+
 
 const INCLUDED = [
   { icon: ClipboardList, title: "Planning", sub: "Needs Analysis" },
@@ -131,6 +154,10 @@ const FAQS = [
     a: "Yes — every project includes hands-on clinical training for doctors and nurses, plus biomedical training for the technical team, delivered on-site.",
   },
   {
+    q: "Do you handle civil construction or hospital building?",
+    a: "No. AbuFarha Medical Equipment does not perform civil works or building construction. Our scope begins with medical equipment supply and systems integration — we coordinate with your civil contractor on site readiness, then deliver, install, commission, train and support.",
+  },
+  {
     q: "What kind of after-sales support do you offer?",
     a: "One-year free warranty on every installation, plus optional service contracts covering preventive maintenance, spare parts and 24/7 technical support.",
   },
@@ -139,12 +166,13 @@ const FAQS = [
 /* ---------------- Page ---------------- */
 
 export function TurnkeyPage() {
+  const [activeDept, setActiveDept] = useState("cath");
   return (
     <div className="bg-white">
       <Hero />
-      <DepartmentSelector />
+      <DepartmentSelector active={activeDept} onChange={setActiveDept} />
       <TransformationSection />
-      <SolutionOverview />
+      <SolutionOverview active={activeDept} />
       <IncludedSection />
       <RelatedGrid />
       <ProjectsSection />
@@ -158,7 +186,7 @@ export function TurnkeyPage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#0A1633] text-white">
+    <section className="relative overflow-hidden bg-[#111315] text-white">
       <div className="relative mx-auto grid max-w-[100rem] gap-8 px-6 pt-14 pb-0 lg:grid-cols-12 lg:gap-6 lg:px-10 lg:pt-16">
         {/* Left copy */}
         <div className="relative z-10 lg:col-span-5 lg:pb-16">
@@ -203,7 +231,7 @@ function Hero() {
               className="h-full w-full object-cover"
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111315] via-[#111315]/40 to-transparent" />
           </div>
 
           {/* Stats card */}
@@ -218,7 +246,7 @@ function Hero() {
       </div>
 
       {/* Capability strip */}
-      <div className="relative border-t border-white/10 bg-[#0A1633]">
+      <div className="relative border-t border-white/10 bg-[#111315]">
         <div className="mx-auto grid max-w-[100rem] grid-cols-2 gap-y-4 px-6 py-5 sm:grid-cols-3 lg:grid-cols-6 lg:px-10">
           {CAPABILITIES.map((c) => (
             <div key={c.title} className="flex items-center gap-3">
@@ -239,8 +267,8 @@ function Hero() {
 
 /* ---------------- Department Selector ---------------- */
 
-function DepartmentSelector() {
-  const [active, setActive] = useState("cath");
+function DepartmentSelector({ active, onChange }: { active: string; onChange: (id: string) => void }) {
+  const setActive = onChange;
   return (
     <section id="departments" className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
@@ -319,7 +347,7 @@ function TransformationSection() {
   return (
     <section id="transformation" className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative overflow-hidden rounded-xl bg-[#0A1633] p-6 text-white lg:p-10">
+        <div className="relative overflow-hidden rounded-xl bg-[#111315] p-6 text-white lg:p-10">
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-3">
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
@@ -389,7 +417,8 @@ function TransformationSection() {
 
 /* ---------------- Solution Overview ---------------- */
 
-function SolutionOverview() {
+function SolutionOverview({ active }: { active: string }) {
+  const meta = DEPARTMENT_META[active] ?? DEPARTMENT_META.cath;
   const hotspots = [
     { n: 1, x: 30, y: 45 },
     { n: 2, x: 20, y: 62 },
@@ -411,14 +440,13 @@ function SolutionOverview() {
               <span className="mr-2 text-primary/60">03</span> Solution Overview
             </div>
             <h2 className="mt-4 font-display text-[1.9rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[2.15rem]">
-              Cath Lab
-              <br /> Turnkey Solution
+              {meta.title}
             </h2>
             <p className="mt-4 text-[14px] leading-[1.65] text-muted-foreground">
-              A comprehensive solution designed for interventional procedures with maximum safety, efficiency and clinical performance.
+              {meta.description}
             </p>
             <ul className="mt-5 space-y-2.5">
-              {CATH_FEATURES.map((f) => (
+              {meta.features.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-[13.5px] text-ink">
                   <CircleDot className="h-4 w-4 text-primary" />
                   {f}
@@ -610,7 +638,7 @@ function ProjectsSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative overflow-hidden rounded-xl bg-[#0A1633] p-6 text-white lg:p-10">
+        <div className="relative overflow-hidden rounded-xl bg-[#111315] p-6 text-white lg:p-10">
           <div className="flex items-end justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
@@ -736,36 +764,53 @@ function FAQSection() {
 /* ---------------- Final CTA ---------------- */
 
 function FinalCTASection() {
+  const stats = [
+    { value: "30+", label: "Major Projects" },
+    { value: "10+", label: "Countries" },
+    { value: "Since 1999", label: "Delivering Turnkey" },
+    { value: "1-Year", label: "Free Warranty" },
+  ];
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-20 lg:px-10">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1633] via-[#0A1633] to-[#12224a] p-8 text-white lg:p-14">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111315] via-[#111315] to-[#1c1f22] p-8 text-white lg:p-14">
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
-          <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-8">
+          <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                Ready to Build Your Department?
+                Start Your Next Department
               </div>
               <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] sm:text-[2.4rem]">
-                Let's plan your next turnkey project — together.
+                Tell us the room.
+                <br /> We'll return with the department.
               </h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-[1.65] text-white/70">
-                From consultation to long-term after-sales support, our team delivers medical departments that work from Day One.
+                From equipment supply to installation, commissioning, clinical training and long-term after-sales support — one accountable partner, one delivered department.
               </p>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <a
+                  href="/contact"
+                  className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  Initiate a Project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/10"
+                >
+                  Talk to an Expert
+                </a>
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-end">
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-              >
-                Request a Quote <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/10"
-              >
-                Talk to an Expert
-              </a>
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-4">
+                {stats.map((s) => (
+                  <div key={s.label} className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+                    <div className="font-display text-[1.6rem] font-extrabold leading-none text-primary">{s.value}</div>
+                    <div className="mt-2 text-[12px] font-semibold text-white/80">{s.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
