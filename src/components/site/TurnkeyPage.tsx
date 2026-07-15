@@ -75,9 +75,9 @@ const COMPONENTS = [
 ];
 
 const PROJECTS = [
-  { id: 1, region: "Regional", title: "Cardiac Cath Lab Program", scope: "Cath Lab Turnkey Solution", image: project1 },
-  { id: 2, region: "Regional", title: "Advanced Imaging Center", scope: "MRI & CT Suite", image: project2 },
-  { id: 3, region: "Regional", title: "Hybrid Operating Suite", scope: "OR Integration", image: project3 },
+  { id: 1, region: "Middle East", title: "Cardiac Catheterization Suite", scope: "Cath Lab Turnkey Solution", image: project1 },
+  { id: 2, region: "North Africa", title: "Advanced Imaging Center", scope: "MRI & CT Suite", image: project2 },
+  { id: 3, region: "Central Asia", title: "Hybrid Operating Theatre", scope: "OR Integration", image: project3 },
 ];
 
 const STATS = [
@@ -198,28 +198,28 @@ function DepartmentNavigator() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
           {DEPARTMENTS.map((d) => {
             const isActive = d.id === active;
             return (
               <button
                 key={d.id}
                 onClick={() => setActive(d.id)}
-                className={`group relative flex flex-col items-start gap-6 rounded-2xl border p-5 text-left transition-all ${
+                className={`group relative flex aspect-[3/4] flex-col items-start justify-between rounded-xl border p-4 text-left transition-all ${
                   isActive
                     ? "border-primary bg-primary text-white shadow-[0_20px_50px_-20px_rgba(225,29,46,0.7)]"
-                    : "border-white/10 bg-white/[0.03] text-white hover:border-white/25 hover:bg-white/[0.06]"
+                    : "border-white/15 bg-white/[0.02] text-white hover:border-white/30 hover:bg-white/[0.05]"
                 }`}
               >
-                <d.icon className="h-8 w-8" strokeWidth={1.4} />
-                <div>
+                <d.icon className="h-10 w-10" strokeWidth={1.3} />
+                <div className="pr-6">
                   <div className="font-display text-[15px] font-bold leading-tight">{d.name}</div>
-                  <div className={`mt-1 text-[11px] leading-tight ${isActive ? "text-white/85" : "text-white/55"}`}>
+                  <div className={`mt-1.5 text-[11px] leading-tight ${isActive ? "text-white/85" : "text-white/55"}`}>
                     {d.sub}
                   </div>
                 </div>
-                <ArrowRight className="absolute bottom-4 right-4 h-4 w-4 opacity-70" />
-                {isActive && <span className="absolute -bottom-[1px] left-6 right-6 h-[3px] rounded-full bg-white/80" />}
+                <ArrowRight className="absolute bottom-3 right-3 h-4 w-4 opacity-80" />
+                {isActive && <span className="absolute -bottom-[1px] left-4 right-4 h-[3px] rounded-full bg-white/90" />}
               </button>
             );
           })}
@@ -415,16 +415,25 @@ function IncludedComponents() {
   );
 }
 
+const REGION_PINS = [
+  { name: "MENA", top: "34%", left: "56%" },
+  { name: "North Africa", top: "42%", left: "48%" },
+  { name: "East Africa", top: "62%", left: "54%" },
+  { name: "West Africa", top: "55%", left: "42%" },
+  { name: "Gulf", top: "40%", left: "62%" },
+  { name: "Central Asia", top: "28%", left: "70%" },
+];
+
 function ProjectsSection() {
   const [i, setI] = useState(0);
   const p = PROJECTS[i];
   return (
-    <section className="bg-[#f7f8fa] py-20 lg:py-24">
-      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:px-10">
+    <section className="bg-white py-20 lg:py-24">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[0.9fr_1.4fr_1fr] lg:items-center lg:gap-10 lg:px-10">
         <div>
           <p className="text-xs font-bold tracking-[0.22em] text-primary">REAL PROJECTS. REAL IMPACT.</p>
           <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
-            Projects Across Our<br />Regions of Operation
+            Projects Across<br />Our Regions
           </h2>
           <a
             href="/projects"
@@ -432,11 +441,29 @@ function ProjectsSection() {
           >
             Explore All Projects <ArrowRight className="h-4 w-4" />
           </a>
-          <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4 text-primary" />
-            <span>Middle East · Africa · Central Asia</span>
-          </div>
         </div>
+
+        {/* Region map */}
+        <div className="relative aspect-[4/3] w-full rounded-2xl bg-[#eef2f7] ring-1 ring-black/5">
+          <svg viewBox="0 0 800 600" className="absolute inset-0 h-full w-full text-neutral-300" fill="currentColor" aria-hidden>
+            {/* stylized continent silhouettes */}
+            <path d="M180 180 Q260 150 340 170 L420 160 Q500 170 560 210 L600 260 Q580 320 540 360 L500 420 Q440 470 380 480 L320 490 Q260 470 220 420 L180 360 Q150 300 160 240 Z" opacity="0.55" />
+            <path d="M580 200 Q640 180 680 200 L700 240 Q690 280 660 300 L620 310 Q590 290 580 250 Z" opacity="0.55" />
+          </svg>
+          {REGION_PINS.map((r) => (
+            <div key={r.name} style={{ top: r.top, left: r.left }} className="absolute -translate-x-1/2 -translate-y-full">
+              <div className="relative flex flex-col items-center">
+                <span className="rounded-md bg-white px-2 py-0.5 text-[10px] font-bold text-foreground shadow ring-1 ring-black/5">
+                  {r.name}
+                </span>
+                <span className="mt-0.5 grid h-6 w-6 place-items-center">
+                  <MapPin className="h-6 w-6 fill-primary text-primary" strokeWidth={1} />
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
 
         <div className="relative">
           <AnimatePresence mode="wait">
@@ -547,7 +574,6 @@ export function TurnkeyPage() {
       <DepartmentNavigator />
       <TurnkeyJourney />
       <DepartmentAnatomy />
-      <IncludedComponents />
       <ProjectsSection />
       <CTA />
     </div>
