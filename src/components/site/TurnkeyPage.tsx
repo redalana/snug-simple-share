@@ -74,7 +74,7 @@ function TurnkeyHero() {
       </div>
 
       <div className="relative mx-auto max-w-[100rem] px-8 pt-14 pb-10 sm:px-12 lg:px-20 lg:pt-20 lg:pb-14 xl:px-28">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl pl-12">
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
             Turnkey Healthcare Solutions
           </span>
