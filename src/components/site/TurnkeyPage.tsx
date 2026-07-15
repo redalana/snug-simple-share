@@ -166,12 +166,13 @@ const FAQS = [
 /* ---------------- Page ---------------- */
 
 export function TurnkeyPage() {
+  const [activeDept, setActiveDept] = useState("cath");
   return (
     <div className="bg-white">
       <Hero />
-      <DepartmentSelector />
+      <DepartmentSelector active={activeDept} onChange={setActiveDept} />
       <TransformationSection />
-      <SolutionOverview />
+      <SolutionOverview active={activeDept} />
       <IncludedSection />
       <RelatedGrid />
       <ProjectsSection />
