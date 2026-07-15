@@ -522,34 +522,6 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/85 to-[#0A1633]/30" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1633] to-transparent" />
 
-      <div className="relative mx-auto max-w-[1240px] px-6 pt-20 pb-10 lg:pt-28 lg:pb-14">
-        <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-8">
-          Turnkey Medical Solutions
-        </div>
-
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <h1
-            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.94]
-                       text-[clamp(2.75rem,7.2vw,6.75rem)]"
-          >
-            We don&apos;t just supply
-            <br />
-            equipment. We deliver
-            <br />
-            departments{" "}
-            <span className={RED}>ready for life.</span>
-          </h1>
-
-          <div className="col-span-12 lg:col-span-4 flex flex-col gap-8 lg:pb-4">
-            <p className="text-white/70 text-base leading-relaxed max-w-md">
-              From planning to long-term support, we deliver fully-equipped
-              medical departments that are ready for clinical operation from
-              day one.
-            </p>
-
-            {/* Floating stats card */}
-            <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-2xl p-5 min-w-[210px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]">
-              <div className="flex items-baseline gap-2">
       <div className="relative mx-auto max-w-[1240px] px-6 pt-14 pb-6 lg:pt-20 lg:pb-8">
         <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-6">
           Turnkey Medical Solutions
