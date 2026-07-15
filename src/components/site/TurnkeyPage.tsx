@@ -184,78 +184,308 @@ export function TurnkeyPage() {
 
 /* ---------------- Hero ---------------- */
 
+type HeroSlide = {
+  id: string;
+  image: string;
+  alt: string;
+  eyebrow: string;
+  headline: React.ReactNode;
+  description: string;
+  primary: { label: string; href: string };
+  secondary: { label: string; href: string };
+};
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "cath",
+    image: heroImg,
+    alt: "Modern catheterization lab with C-arm imaging system",
+    eyebrow: "Turnkey Medical Solutions",
+    headline: (
+      <>
+        We Don't Just Supply
+        <br /> Equipment.
+        <br />
+        <span className="text-primary">
+          We Deliver Departments
+          <br /> Ready for Life.
+        </span>
+      </>
+    ),
+    description:
+      "From planning to long-term support, we deliver fully equipped medical departments ready for clinical operation from Day One.",
+    primary: { label: "Explore Departments", href: "#departments" },
+    secondary: { label: "How It Works", href: "#transformation" },
+  },
+  {
+    id: "mri",
+    image: mriImg,
+    alt: "Advanced MRI scanner in a hospital imaging suite",
+    eyebrow: "MRI Centers",
+    headline: (
+      <>
+        Complete MRI Centers.
+        <br />
+        <span className="text-primary">
+          Designed. Installed.
+          <br /> Commissioned.
+        </span>
+      </>
+    ),
+    description:
+      "From shielding and room preparation to installation, calibration and training.",
+    primary: { label: "Explore MRI Solutions", href: "#departments" },
+    secondary: { label: "View Projects", href: "#projects" },
+  },
+  {
+    id: "or",
+    image: orImg,
+    alt: "Integrated hybrid operating room with imaging and surgical systems",
+    eyebrow: "Hybrid Operating Rooms",
+    headline: (
+      <>
+        Integrated Surgical
+        <br /> Environments
+        <br />
+        <span className="text-primary">Built For Performance.</span>
+      </>
+    ),
+    description:
+      "Turnkey operating rooms with imaging integration, surgical workflow optimization and clinical training.",
+    primary: { label: "Explore Operating Rooms", href: "#departments" },
+    secondary: { label: "Talk To Our Team", href: "/contact" },
+  },
+  {
+    id: "support",
+    image: solutionRoomImg,
+    alt: "Clinical training and long-term technical support in a hospital",
+    eyebrow: "Clinical Training & Support",
+    headline: (
+      <>
+        Beyond Installation.
+        <br />
+        <span className="text-primary">We Stay With You.</span>
+      </>
+    ),
+    description:
+      "Clinical education, preventive maintenance, spare parts and long-term technical support.",
+    primary: { label: "After Sales Support", href: "#faq" },
+    secondary: { label: "Contact Us", href: "/contact" },
+  },
+];
+
+const AUTOPLAY_MS = 6000;
+
 function Hero() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const go = useCallback(
+    (dir: 1 | -1) => setIndex((i) => (i + dir + HERO_SLIDES.length) % HERO_SLIDES.length),
+    [],
+  );
+  const goTo = useCallback((i: number) => setIndex(i), []);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % HERO_SLIDES.length), AUTOPLAY_MS);
+    return () => clearInterval(t);
+  }, [paused]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") go(1);
+      if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [go]);
+
+  const slide = HERO_SLIDES[index];
+
   return (
-    <section className="relative overflow-hidden bg-[#111315] text-white">
-      <div className="relative mx-auto grid max-w-[100rem] gap-8 px-6 pt-14 pb-0 lg:grid-cols-12 lg:gap-6 lg:px-10 lg:pt-16">
-        {/* Left copy */}
-        <div className="relative z-10 lg:col-span-5 lg:pb-16">
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-            Turnkey Medical Solutions
+    <section
+      className="relative overflow-hidden bg-white text-ink"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      aria-roledescription="carousel"
+      aria-label="Turnkey solutions hero"
+    >
+      <div className="relative mx-auto max-w-[100rem] px-6 pt-10 pb-0 lg:px-10 lg:pt-14">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
+          {/* Left copy */}
+          <div className="relative z-10 lg:col-span-5 lg:pb-14 lg:pt-4">
+            <AnimatePresence mode="wait">
+              <motion.div key={slide.id}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary"
+                >
+                  {slide.eyebrow}
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-5 font-display text-[2.35rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3.1rem]"
+                >
+                  {slide.headline}
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-6 max-w-md text-[15px] leading-[1.65] text-muted-foreground"
+                >
+                  {slide.description}
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+                >
+                  <a
+                    href={slide.primary.href}
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                  >
+                    {slide.primary.label}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                  <a
+                    href={slide.secondary.href}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[#e6e7ea] bg-white px-6 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-ink/40"
+                  >
+                    <Play className="h-4 w-4 text-primary" />
+                    {slide.secondary.label}
+                  </a>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          <h1 className="mt-5 font-display text-[2.35rem] font-extrabold leading-[1.08] tracking-[-0.02em] sm:text-[2.75rem] lg:text-[3.1rem]">
-            We Don't Just Supply
-            <br /> Equipment.
-            <br /> We Deliver Departments
-            <br />
-            <span className="text-primary">Ready for Life.</span>
-          </h1>
-          <p className="mt-6 max-w-md text-[15px] leading-[1.65] text-white/70">
-            From planning to long-term support, we build fully equipped medical
-            departments that are ready for clinical operation from Day One.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a
-              href="#departments"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-            >
-              Explore Departments
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="#transformation"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
-            >
-              <Play className="h-4 w-4" />
-              How It Works
-            </a>
-          </div>
-        </div>
 
-        {/* Right image */}
-        <div className="relative lg:col-span-7 lg:pb-16">
-          <div className="relative h-[280px] w-full overflow-hidden rounded-lg sm:h-[380px] lg:h-[440px]">
-            <img
-              src={heroImg}
-              alt="Modern cath lab with C-arm imaging system"
-              className="h-full w-full object-cover"
-              fetchPriority="high"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#111315] via-[#111315]/40 to-transparent" />
-          </div>
+          {/* Right image */}
+          <div
+            className="relative lg:col-span-7 lg:pb-14"
+            onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              if (touchStartX.current == null) return;
+              const dx = e.changedTouches[0].clientX - touchStartX.current;
+              if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+              touchStartX.current = null;
+            }}
+          >
+            <div className="relative h-[300px] w-full overflow-hidden rounded-lg bg-[#f4f5f7] sm:h-[420px] lg:h-[500px]">
+              <AnimatePresence mode="sync">
+                <motion.img
+                  key={slide.id}
+                  src={slide.image}
+                  alt={slide.alt}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  initial={{ opacity: 0, scale: 1 }}
+                  animate={{ opacity: 1, scale: 1.05 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    opacity: { duration: 0.9, ease: "easeInOut" },
+                    scale: { duration: 6, ease: "linear" },
+                  }}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </AnimatePresence>
 
-          {/* Stats card */}
-          <div className="absolute bottom-6 right-4 hidden w-[190px] rounded-md bg-white p-4 text-ink shadow-2xl sm:block lg:bottom-24">
-            <div className="h-0.5 w-6 bg-primary" />
-            <div className="mt-2 font-display text-[2rem] font-extrabold leading-none text-primary">30+</div>
-            <div className="mt-1 text-[13px] font-semibold text-ink">Major Projects</div>
-            <div className="mt-3 text-[12px] text-muted-foreground">10+ Countries</div>
-            <div className="mt-1 text-[12px] text-muted-foreground">Since 1999</div>
+              {/* Stats card — top-right on desktop */}
+              <motion.div
+                key={`stats-${slide.id}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute right-4 top-4 hidden rounded-md bg-white/95 px-5 py-3 shadow-xl backdrop-blur sm:flex sm:items-center sm:gap-6"
+              >
+                <div className="text-center">
+                  <div className="font-display text-xl font-extrabold leading-none text-primary">30+</div>
+                  <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Major<br/>Projects</div>
+                </div>
+                <div className="h-9 w-px bg-[#e6e7ea]" />
+                <div className="text-center">
+                  <div className="font-display text-xl font-extrabold leading-none text-primary">10+</div>
+                  <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Countries</div>
+                </div>
+                <div className="h-9 w-px bg-[#e6e7ea]" />
+                <div className="text-center">
+                  <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Since</div>
+                  <div className="mt-1 font-display text-xl font-extrabold leading-none text-primary">1999</div>
+                </div>
+              </motion.div>
+
+              {/* Arrows */}
+              <button
+                type="button"
+                aria-label="Previous slide"
+                onClick={() => go(-1)}
+                className="absolute left-3 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/90 p-2 text-ink shadow-md transition hover:bg-white sm:flex"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next slide"
+                onClick={() => go(1)}
+                className="absolute right-3 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/90 p-2 text-ink shadow-md transition hover:bg-white sm:flex"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+
+              {/* Dots */}
+              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2">
+                {HERO_SLIDES.map((s, i) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-label={`Go to slide ${i + 1}`}
+                    onClick={() => goTo(i)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === index ? "w-6 bg-primary" : "w-1.5 bg-white/80 hover:bg-white"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile stats card */}
+            <div className="mt-4 flex items-center justify-around rounded-md border border-[#eceef1] bg-white px-4 py-3 shadow-sm sm:hidden">
+              <div className="text-center">
+                <div className="font-display text-lg font-extrabold text-primary">30+</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Projects</div>
+              </div>
+              <div className="h-8 w-px bg-[#e6e7ea]" />
+              <div className="text-center">
+                <div className="font-display text-lg font-extrabold text-primary">10+</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Countries</div>
+              </div>
+              <div className="h-8 w-px bg-[#e6e7ea]" />
+              <div className="text-center">
+                <div className="font-display text-lg font-extrabold text-primary">1999</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Since</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Capability strip */}
-      <div className="relative border-t border-white/10 bg-[#111315]">
+      <div className="relative mt-10 border-t border-[#eceef1] bg-white">
         <div className="mx-auto grid max-w-[100rem] grid-cols-2 gap-y-4 px-6 py-5 sm:grid-cols-3 lg:grid-cols-6 lg:px-10">
           {CAPABILITIES.map((c) => (
             <div key={c.title} className="flex items-center gap-3">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-white/90">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
                 <c.icon className="h-4 w-4" />
               </span>
               <div className="min-w-0">
-                <div className="truncate text-[12.5px] font-semibold text-white">{c.title}</div>
-                <div className="truncate text-[11px] text-white/55">{c.sub}</div>
+                <div className="truncate text-[12.5px] font-semibold text-ink">{c.title}</div>
+                <div className="truncate text-[11px] text-muted-foreground">{c.sub}</div>
               </div>
             </div>
           ))}
@@ -264,6 +494,7 @@ function Hero() {
     </section>
   );
 }
+
 
 /* ---------------- Department Selector ---------------- */
 
