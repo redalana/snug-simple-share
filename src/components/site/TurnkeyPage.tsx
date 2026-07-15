@@ -608,31 +608,27 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
             </ul>
           </div>
 
-          {/* Immersive canvas (right) */}
+          {/* Immersive 3D hub (right) */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-ink/5 sm:aspect-[5/6] lg:aspect-[4/5]">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeDept.id}
-                  src={activeDept.img}
-                  alt={activeDept.name}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/5 to-transparent" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-gradient-to-b from-[#f6f7f9] to-[#eceff3] sm:aspect-[5/6] lg:aspect-[4/5]">
+              {/* Static fallback image (mobile / reduced motion) */}
+              <img
+                src={activeDept.img}
+                alt={activeDept.name}
+                className="absolute inset-0 h-full w-full object-cover opacity-90 sm:hidden"
+              />
+              <ClientOnly3D>
+                <OrbitHub3D activeId={activeDept.id} />
+              </ClientOnly3D>
 
-              {/* Top-left connection glyph */}
-              <div className="absolute left-6 top-6 flex items-center gap-3 text-white">
+              {/* Top-left glyph */}
+              <div className="pointer-events-none absolute left-6 top-6 flex items-center gap-3 text-ink">
                 <svg width="34" height="34" viewBox="0 0 34 34" className="opacity-90">
                   <circle cx="17" cy="17" r="3" fill="currentColor" className="text-primary" />
                   <circle cx="17" cy="17" r="15" fill="none" stroke="currentColor" strokeOpacity="0.4" strokeDasharray="2 3" />
                 </svg>
-                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/85">
-                  AbuFarha · Turnkey Node
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-ink/70">
+                  AbuFarha · Turnkey Hub
                 </div>
               </div>
 
@@ -644,7 +640,7 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-                  className="absolute inset-x-6 bottom-6 rounded-[4px] bg-white/95 p-6 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-8 lg:max-w-md"
+                  className="pointer-events-auto absolute inset-x-6 bottom-6 rounded-[4px] bg-white/95 p-6 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-8 lg:max-w-md"
                 >
                   <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-primary">
                     {activeDept.code} · {activeDept.sub}
@@ -681,6 +677,7 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
     </section>
   );
 }
+
 
 /* ---------------- Transformation Journey (cinematic horizontal scroll) ---------------- */
 
