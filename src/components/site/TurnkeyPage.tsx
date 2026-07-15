@@ -46,11 +46,12 @@ const CAPABILITIES = [
 ];
 
 const DEPARTMENTS = [
-  { id: "cath", name: "Cath Lab", sub: "Interventional Cardiology", img: cathImg },
-  { id: "mri", name: "MRI Center", sub: "Advanced Imaging", img: mriImg },
-  { id: "ct", name: "CT Department", sub: "Computed Tomography", img: ctImg },
-  { id: "or", name: "Operating Room", sub: "Surgical Excellence", img: orImg },
-  { id: "icu", name: "ICU", sub: "Intensive Care", img: icuImg },
+  { id: "cath", name: "Cath Lab", sub: "Interventional Cardiology", img: cathImg, code: "01" },
+  { id: "mri", name: "MRI Center", sub: "Advanced Imaging", img: mriImg, code: "02" },
+  { id: "ct", name: "CT Department", sub: "Computed Tomography", img: ctImg, code: "03" },
+  { id: "or", name: "Operating Room", sub: "Surgical Excellence", img: orImg, code: "04" },
+  { id: "icu", name: "ICU", sub: "Intensive Care", img: icuImg, code: "05" },
+  { id: "pet", name: "PET / CT", sub: "Molecular Imaging", img: ctImg, code: "06" },
 ];
 
 const TRANSFORM_STEPS = [
