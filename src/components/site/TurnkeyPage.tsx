@@ -158,7 +158,7 @@ export function TurnkeyPage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#0A1633] text-white">
+    <section className="relative overflow-hidden bg-[#111315] text-white">
       <div className="relative mx-auto grid max-w-[100rem] gap-8 px-6 pt-14 pb-0 lg:grid-cols-12 lg:gap-6 lg:px-10 lg:pt-16">
         {/* Left copy */}
         <div className="relative z-10 lg:col-span-5 lg:pb-16">
@@ -203,7 +203,7 @@ function Hero() {
               className="h-full w-full object-cover"
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111315] via-[#111315]/40 to-transparent" />
           </div>
 
           {/* Stats card */}
@@ -218,7 +218,7 @@ function Hero() {
       </div>
 
       {/* Capability strip */}
-      <div className="relative border-t border-white/10 bg-[#0A1633]">
+      <div className="relative border-t border-white/10 bg-[#111315]">
         <div className="mx-auto grid max-w-[100rem] grid-cols-2 gap-y-4 px-6 py-5 sm:grid-cols-3 lg:grid-cols-6 lg:px-10">
           {CAPABILITIES.map((c) => (
             <div key={c.title} className="flex items-center gap-3">
@@ -319,7 +319,7 @@ function TransformationSection() {
   return (
     <section id="transformation" className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative overflow-hidden rounded-xl bg-[#0A1633] p-6 text-white lg:p-10">
+        <div className="relative overflow-hidden rounded-xl bg-[#111315] p-6 text-white lg:p-10">
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-3">
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
@@ -610,7 +610,7 @@ function ProjectsSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative overflow-hidden rounded-xl bg-[#0A1633] p-6 text-white lg:p-10">
+        <div className="relative overflow-hidden rounded-xl bg-[#111315] p-6 text-white lg:p-10">
           <div className="flex items-end justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
@@ -739,7 +739,7 @@ function FinalCTASection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 pb-20 lg:px-10">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1633] via-[#0A1633] to-[#12224a] p-8 text-white lg:p-14">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#111315] via-[#111315] to-[#1c1f22] p-8 text-white lg:p-14">
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
           <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
