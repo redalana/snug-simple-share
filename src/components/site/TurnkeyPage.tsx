@@ -33,6 +33,12 @@ import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
+import { ClientOnly3D } from "@/components/site/turnkey/ClientOnly3D";
+import { OrbitHub3D } from "@/components/site/turnkey/OrbitHub3D";
+import { JourneyScene3D } from "@/components/site/turnkey/JourneyScene3D";
+import { SolutionViewer3D } from "@/components/site/turnkey/SolutionViewer3D";
+
+
 
 /* ---------------- Data ---------------- */
 
