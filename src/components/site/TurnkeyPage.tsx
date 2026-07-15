@@ -100,6 +100,11 @@ const DEPARTMENT_META: Record<string, { title: string; description: string; feat
     description: "Intensive care units delivered with monitoring, ventilation and life-support systems ready for critical clinical operation.",
     features: ["Critical Monitoring", "Ventilation Support", "Central Monitoring", "Infection Control", "Long-term Support"],
   },
+  pet: {
+    title: "PET / CT Turnkey Solution",
+    description: "Molecular imaging suites delivered with hot-lab coordination, scanner installation, dosimetry and clinical training for oncology programs.",
+    features: ["Molecular Imaging", "Hot Lab Coordination", "Radiation Safety", "PACS Integration", "Clinical Training"],
+  },
 };
 
 const CATH_FEATURES = DEPARTMENT_META.cath.features;
