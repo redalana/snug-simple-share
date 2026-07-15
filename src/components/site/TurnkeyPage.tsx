@@ -7,14 +7,6 @@ import {
   Plus,
   Minus,
   PlayCircle,
-  Stethoscope,
-  Package,
-  Wrench,
-  ShieldCheck,
-  GraduationCap,
-  FileText,
-  BadgeCheck,
-  Headphones,
 } from "lucide-react";
 import turnkeyHero from "@/assets/turnkey-hero.jpg";
 import solMri from "@/assets/sol-mri.jpg";
