@@ -63,15 +63,43 @@ const TRANSFORM_STEPS = [
 ];
 
 const CATH_COMPONENTS = [
-  "Biplane Imaging System",
+  "Imaging System",
   "Patient Table",
-  "Ceiling Mounted Monitors",
+  "Ceiling Monitors",
   "Hemodynamic System",
-  "Injector System",
+  "Injector",
   "Radiation Protection",
-  "Workstation & Storage",
-  "Power & UPS System",
+  "Workstation",
+  "UPS",
 ];
+
+const DEPARTMENT_META: Record<string, { title: string; description: string; features: string[] }> = {
+  cath: {
+    title: "Cath Lab Turnkey Solution",
+    description: "A comprehensive solution designed for interventional procedures with maximum safety, efficiency and clinical performance.",
+    features: ["Interventional Procedures", "Advanced Imaging", "Radiation Safety", "Workflow Efficiency", "Patient Comfort"],
+  },
+  mri: {
+    title: "MRI Center Turnkey Solution",
+    description: "End-to-end MRI suite delivery — from RF shielding coordination to scanner installation, commissioning and clinical training.",
+    features: ["Advanced Imaging", "RF Shielding Coordination", "Patient Comfort", "Workflow Efficiency", "Long-term Support"],
+  },
+  ct: {
+    title: "CT Department Turnkey Solution",
+    description: "A complete CT suite equipped for rapid, high-resolution diagnostic imaging with integrated safety and workflow systems.",
+    features: ["Diagnostic Imaging", "Radiation Safety", "Contrast Injection", "PACS Integration", "Workflow Efficiency"],
+  },
+  or: {
+    title: "Operating Room Turnkey Solution",
+    description: "Fully equipped operating rooms delivered with surgical lighting, tables, anesthesia and integration systems ready for Day One.",
+    features: ["Surgical Excellence", "Integrated Systems", "Sterile Workflow", "Team Ergonomics", "Patient Safety"],
+  },
+  icu: {
+    title: "ICU Turnkey Solution",
+    description: "Intensive care units delivered with monitoring, ventilation and life-support systems ready for critical clinical operation.",
+    features: ["Critical Monitoring", "Ventilation Support", "Central Monitoring", "Infection Control", "Long-term Support"],
+  },
+};
 
 const CATH_FEATURES = [
   "Interventional Procedures",
