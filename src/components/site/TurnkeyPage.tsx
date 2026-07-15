@@ -1519,4 +1519,4 @@ function ClosingCta() {
     </section>
   );
 }
-}
+
