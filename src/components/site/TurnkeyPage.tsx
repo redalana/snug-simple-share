@@ -1449,38 +1449,74 @@ function ClosingCta() {
     <section className="bg-white">
       <div className="mx-auto max-w-[1240px] px-6 pb-24 lg:pb-32">
         <div
-          className={`${NAVY} rounded-[2rem] p-10 md:p-16 lg:p-20 relative overflow-hidden`}
+          className={`${NAVY} rounded-[2rem] relative overflow-hidden isolate`}
         >
-          <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[hsl(0_84%_55%)]/10 blur-3xl" />
-          <div className="relative grid grid-cols-12 gap-8 items-end">
-            <div className="col-span-12 lg:col-span-8">
-              <ChapterLabel index="06" tone="light">
-                Start Your Department
-              </ChapterLabel>
-              <h2 className="mt-6 font-display text-white font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl">
-                Tell us the room.{" "}
-                <span className="text-white/40">
-                  We&apos;ll return with the department.
-                </span>
-              </h2>
+          {/* editorial photography backdrop */}
+          <img
+            src={heroCathlab}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/90 to-[#0A1633]/40" />
+          <div className="absolute -top-24 -right-24 w-[520px] h-[520px] rounded-full bg-[hsl(0_84%_55%)]/20 blur-3xl" />
+          <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#34C759]/10 blur-3xl" />
+
+          <div className="relative p-10 md:p-16 lg:p-20">
+            <div className="grid grid-cols-12 gap-10 items-end">
+              <div className="col-span-12 lg:col-span-8">
+                <ChapterLabel index="06" tone="light">
+                  Start Your Department
+                </ChapterLabel>
+                <h2 className="mt-6 font-display text-white font-extrabold tracking-[-0.025em] leading-[0.98] text-4xl md:text-5xl lg:text-[4.25rem]">
+                  Tell us the room.{" "}
+                  <span className="text-white/40">
+                    We&apos;ll return with the department.
+                  </span>
+                </h2>
+                <p className="mt-6 text-white/70 max-w-xl text-[15px] leading-relaxed">
+                  A single accountable programme — from planning to
+                  commissioning to long-term support. Ready for clinical
+                  operation, not another vendor to manage.
+                </p>
+              </div>
+              <div className="col-span-12 lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+                <Link
+                  to="/contact"
+                  className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-4 rounded-full hover:brightness-110 transition-all shadow-[0_18px_50px_-20px_hsl(0_84%_55%/0.6)]`}
+                >
+                  Initiate a project <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/hospital-readiness-assessment"
+                  className="inline-flex items-center gap-2 border border-white/25 text-white font-bold px-6 py-4 rounded-full hover:bg-white/5 transition-all"
+                >
+                  Readiness assessment
+                </Link>
+              </div>
             </div>
-            <div className="col-span-12 lg:col-span-4 flex flex-wrap gap-4 lg:justify-end">
-              <Link
-                to="/contact"
-                className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-4 rounded-full hover:brightness-110 transition-all`}
-              >
-                Initiate a project <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/hospital-readiness-assessment"
-                className="inline-flex items-center gap-2 border border-white/25 text-white font-bold px-6 py-4 rounded-full hover:bg-white/5 transition-all"
-              >
-                Readiness assessment
-              </Link>
+
+            <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-white">
+              {[
+                { k: "30+", v: "Major Projects" },
+                { k: "10+", v: "Countries" },
+                { k: "25 yrs", v: "Experience" },
+                { k: "1 yr", v: "Free Warranty" },
+              ].map((s) => (
+                <div key={s.v}>
+                  <div className="font-display text-2xl md:text-3xl font-extrabold tracking-tight">
+                    {s.k}
+                  </div>
+                  <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                    {s.v}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </section>
   );
+}
 }
