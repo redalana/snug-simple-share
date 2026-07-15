@@ -417,7 +417,8 @@ function TransformationSection() {
 
 /* ---------------- Solution Overview ---------------- */
 
-function SolutionOverview() {
+function SolutionOverview({ active }: { active: string }) {
+  const meta = DEPARTMENT_META[active] ?? DEPARTMENT_META.cath;
   const hotspots = [
     { n: 1, x: 30, y: 45 },
     { n: 2, x: 20, y: 62 },
