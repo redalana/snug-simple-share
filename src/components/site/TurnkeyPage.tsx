@@ -440,14 +440,13 @@ function SolutionOverview({ active }: { active: string }) {
               <span className="mr-2 text-primary/60">03</span> Solution Overview
             </div>
             <h2 className="mt-4 font-display text-[1.9rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[2.15rem]">
-              Cath Lab
-              <br /> Turnkey Solution
+              {meta.title}
             </h2>
             <p className="mt-4 text-[14px] leading-[1.65] text-muted-foreground">
-              A comprehensive solution designed for interventional procedures with maximum safety, efficiency and clinical performance.
+              {meta.description}
             </p>
             <ul className="mt-5 space-y-2.5">
-              {CATH_FEATURES.map((f) => (
+              {meta.features.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-[13.5px] text-ink">
                   <CircleDot className="h-4 w-4 text-primary" />
                   {f}
