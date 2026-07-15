@@ -814,6 +814,41 @@ function BuildYourDepartment() {
                   );
                 })}
               </div>
+
+              {/* Operational-ready progress line */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                    <span>Delivery Progress</span>
+                  </div>
+                  <div
+                    className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                      active >= PHASES.length ? "text-[#34C759]" : "text-white/40"
+                    }`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${
+                        active >= PHASES.length
+                          ? "bg-[#34C759] shadow-[0_0_10px_#34C759]"
+                          : "bg-white/25"
+                      }`}
+                    />
+                    {active >= PHASES.length
+                      ? "Ready for Clinical Operation"
+                      : `Phase ${Math.max(active, 1)} of ${PHASES.length}`}
+                  </div>
+                </div>
+                <div className="relative h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div
+                    className={`absolute inset-y-0 left-0 transition-all duration-700 ease-out rounded-full ${
+                      active >= PHASES.length
+                        ? "bg-[#34C759] shadow-[0_0_20px_#34C759]"
+                        : "bg-[hsl(0_84%_55%)]"
+                    }`}
+                    style={{ width: `${(active / PHASES.length) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
