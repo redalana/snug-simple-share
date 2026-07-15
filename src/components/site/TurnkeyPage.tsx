@@ -267,8 +267,8 @@ function Hero() {
 
 /* ---------------- Department Selector ---------------- */
 
-function DepartmentSelector() {
-  const [active, setActive] = useState("cath");
+function DepartmentSelector({ active, onChange }: { active: string; onChange: (id: string) => void }) {
+  const setActive = onChange;
   return (
     <section id="departments" className="bg-white">
       <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
