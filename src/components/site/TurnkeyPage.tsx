@@ -1136,7 +1136,7 @@ function RelatedColumn({
 }: {
   title: string;
   sub: string;
-  items: { name: string; image: string; to: string }[];
+  items: { name: string; image: string; to: string; type?: string; spec?: string }[];
   cta: string;
   to: string;
 }) {
@@ -1156,23 +1156,37 @@ function RelatedColumn({
           {cta} <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         {items.map((it) => (
           <Link
             key={it.name}
             to={it.to}
-            className="group block rounded-xl overflow-hidden bg-[#F4F5F7]"
+            className="group block rounded-2xl overflow-hidden bg-white border border-[#0A1633]/8 hover:border-[#0A1633]/25 transition-colors"
           >
-            <div className="relative aspect-square overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <img
                 src={it.image}
                 alt={it.name}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1633]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-bold leading-tight">
-                {it.name}
+              {it.type && (
+                <div className="absolute top-3 left-3 bg-white/95 text-[#0A1633] px-2 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.18em]">
+                  {it.type}
+                </div>
+              )}
+            </div>
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="font-display font-extrabold text-[15px] leading-tight text-[#0A1633]">
+                  {it.name}
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-[#0A1633]/40 group-hover:text-[hsl(0_84%_55%)] transition-colors shrink-0" />
               </div>
+              {it.spec && (
+                <div className="mt-1.5 text-[11.5px] text-[#0A1633]/55 leading-snug">
+                  {it.spec}
+                </div>
+              )}
             </div>
           </Link>
         ))}
