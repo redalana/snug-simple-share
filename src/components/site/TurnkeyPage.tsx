@@ -33,6 +33,12 @@ import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
+import { ClientOnly3D } from "@/components/site/turnkey/ClientOnly3D";
+import { OrbitHub3D } from "@/components/site/turnkey/OrbitHub3D";
+import { JourneyScene3D } from "@/components/site/turnkey/JourneyScene3D";
+import { SolutionViewer3D } from "@/components/site/turnkey/SolutionViewer3D";
+
+
 
 /* ---------------- Data ---------------- */
 
@@ -602,31 +608,27 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
             </ul>
           </div>
 
-          {/* Immersive canvas (right) */}
+          {/* Immersive 3D hub (right) */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-ink/5 sm:aspect-[5/6] lg:aspect-[4/5]">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeDept.id}
-                  src={activeDept.img}
-                  alt={activeDept.name}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/5 to-transparent" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-gradient-to-b from-[#f6f7f9] to-[#eceff3] sm:aspect-[5/6] lg:aspect-[4/5]">
+              {/* Static fallback image (mobile / reduced motion) */}
+              <img
+                src={activeDept.img}
+                alt={activeDept.name}
+                className="absolute inset-0 h-full w-full object-cover opacity-90 sm:hidden"
+              />
+              <ClientOnly3D>
+                <OrbitHub3D activeId={activeDept.id} />
+              </ClientOnly3D>
 
-              {/* Top-left connection glyph */}
-              <div className="absolute left-6 top-6 flex items-center gap-3 text-white">
+              {/* Top-left glyph */}
+              <div className="pointer-events-none absolute left-6 top-6 flex items-center gap-3 text-ink">
                 <svg width="34" height="34" viewBox="0 0 34 34" className="opacity-90">
                   <circle cx="17" cy="17" r="3" fill="currentColor" className="text-primary" />
                   <circle cx="17" cy="17" r="15" fill="none" stroke="currentColor" strokeOpacity="0.4" strokeDasharray="2 3" />
                 </svg>
-                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/85">
-                  AbuFarha · Turnkey Node
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-ink/70">
+                  AbuFarha · Turnkey Hub
                 </div>
               </div>
 
@@ -638,7 +640,7 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-                  className="absolute inset-x-6 bottom-6 rounded-[4px] bg-white/95 p-6 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-8 lg:max-w-md"
+                  className="pointer-events-auto absolute inset-x-6 bottom-6 rounded-[4px] bg-white/95 p-6 backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-8 lg:max-w-md"
                 >
                   <div className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-primary">
                     {activeDept.code} · {activeDept.sub}
@@ -675,6 +677,7 @@ function DepartmentSelector({ active, onChange }: { active: string; onChange: (i
     </section>
   );
 }
+
 
 /* ---------------- Transformation Journey (cinematic horizontal scroll) ---------------- */
 
@@ -714,7 +717,14 @@ function TransformationSection() {
 
   return (
     <section id="transformation" className="relative overflow-hidden bg-[#0b0c0e] text-white">
-      <div className="mx-auto max-w-[100rem] px-6 pt-24 lg:px-10 lg:pt-32">
+      {/* 3D cinematic backdrop */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[46vh] opacity-70 [mask-image:linear-gradient(to_bottom,black_10%,transparent_92%)] lg:h-[52vh]">
+        <ClientOnly3D>
+          <JourneyScene3D activeIndex={activeIdx} />
+        </ClientOnly3D>
+      </div>
+      <div className="relative mx-auto max-w-[100rem] px-6 pt-24 lg:px-10 lg:pt-32">
+
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-xl">
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
@@ -869,51 +879,25 @@ function SolutionOverview({ active }: { active: string }) {
 
         {/* Split screen */}
         <div className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
-          {/* Immersive image */}
+          {/* Immersive 3D viewer */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-secondary sm:aspect-[5/6] lg:aspect-[4/5]">
-              <motion.img
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-gradient-to-b from-[#f4f6f9] to-[#e6ebf1] sm:aspect-[5/6] lg:aspect-[4/5]">
+              {/* Static fallback */}
+              <img
                 src={solutionRoomImg}
                 alt="Cath Lab layout with equipment"
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-                animate={{
-                  scale: 1.12,
-                  x: `${(50 - activeHot.x) * 0.35}%`,
-                  y: `${(50 - activeHot.y) * 0.35}%`,
-                }}
-                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 h-full w-full object-cover opacity-90 sm:hidden"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent" />
+              <ClientOnly3D>
+                <SolutionViewer3D activeN={hot} onSelect={setHot} />
+              </ClientOnly3D>
 
-              {SOLUTION_HOTSPOTS.map((h) => {
-                const isActive = h.n === hot;
-                return (
-                  <button
-                    key={h.n}
-                    onClick={() => setHot(h.n)}
-                    onMouseEnter={() => setHot(h.n)}
-                    aria-label={h.label}
-                    style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                    className="group absolute -translate-x-1/2 -translate-y-1/2"
-                  >
-                    <span
-                      className={`relative grid place-items-center rounded-full transition-all duration-500 ${
-                        isActive ? "h-10 w-10 bg-primary text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)]" : "h-7 w-7 bg-white/95 text-ink shadow-md"
-                      }`}
-                    >
-                      <span className="text-[11px] font-bold tabular-nums">{h.n}</span>
-                      {isActive && (
-                        <motion.span
-                          layoutId="hot-ring"
-                          className="absolute inset-0 rounded-full ring-2 ring-primary/40"
-                          transition={{ type: "spring", stiffness: 300, damping: 26 }}
-                        />
-                      )}
-                    </span>
-                  </button>
-                );
-              })}
+              {/* 360° badge */}
+              <div className="pointer-events-none absolute left-6 top-6 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-[10.5px] font-semibold uppercase tracking-[0.22em] text-ink/80 shadow-sm backdrop-blur">
+                <CircleDot className="h-3.5 w-3.5 text-primary" />
+                360° View
+              </div>
 
               {/* Floating label of active hotspot */}
               <AnimatePresence mode="wait">
@@ -940,6 +924,7 @@ function SolutionOverview({ active }: { active: string }) {
               </AnimatePresence>
             </div>
           </div>
+
 
           {/* Sticky info panel */}
           <div className="lg:col-span-5">
