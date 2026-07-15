@@ -521,8 +521,8 @@ function Hero() {
 
         <div className="grid grid-cols-12 gap-8 items-end">
           <h1
-            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.96]
-                       text-[clamp(2.5rem,5.8vw,5.25rem)]"
+            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.98]
+                       text-[clamp(2.25rem,4.4vw,4rem)]"
           >
             We don&apos;t just supply equipment.
             <br />
