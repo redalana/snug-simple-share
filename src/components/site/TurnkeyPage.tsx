@@ -1260,28 +1260,50 @@ function Projects() {
                 <Link
                   key={c.title}
                   to="/projects"
-                  className="group shrink-0 w-[280px] md:w-[320px] rounded-2xl overflow-hidden snap-start relative"
+                  className="group shrink-0 w-[320px] md:w-[360px] rounded-2xl overflow-hidden snap-start relative bg-[#0d1c3d] border border-white/8"
                 >
-                  <div className="relative aspect-[4/5]">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={c.image}
                       alt={`${c.title} — ${c.country}`}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1633] via-[#0A1633]/50 to-transparent" />
-                    <div className="absolute top-4 left-4 inline-flex items-center gap-2 bg-white/95 text-[#0A1633] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d1c3d] via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 inline-flex items-center gap-2 bg-white/95 text-[#0A1633] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em]">
                       <StatusDot />
                       {c.country}
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="font-display text-lg font-extrabold tracking-tight text-white">
-                        {c.title}
+                  </div>
+                  <div className="p-5">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                      {c.dept}
+                    </div>
+                    <div className="mt-2 font-display text-[1.15rem] leading-[1.15] font-extrabold tracking-tight text-white">
+                      {c.title}
+                    </div>
+
+                    <dl className="mt-4 space-y-2.5 text-[12px] leading-snug">
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Scope</dt>
+                        <dd className="text-white/85">{c.scope}</dd>
                       </div>
-                      <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/70">
-                        Scope · {c.scope}
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Equipment</dt>
+                        <dd className="text-white/70">{c.equipment}</dd>
                       </div>
-                      <div className="mt-4 h-9 w-9 rounded-full bg-white text-[#0A1633] flex items-center justify-center group-hover:bg-[hsl(0_84%_55%)] group-hover:text-white transition-colors">
-                        <ArrowUpRight className="h-4 w-4" />
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Services</dt>
+                        <dd className="text-white/70">{c.services}</dd>
+                      </div>
+                    </dl>
+
+                    <div className="mt-4 pt-4 border-t border-white/10 flex items-start gap-3">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#34C759] shadow-[0_0_10px_#34C759] shrink-0" />
+                      <div className="text-[12.5px] text-white leading-snug flex-1">
+                        {c.outcome}
+                      </div>
+                      <div className="h-8 w-8 rounded-full bg-white text-[#0A1633] flex items-center justify-center group-hover:bg-[hsl(0_84%_55%)] group-hover:text-white transition-colors shrink-0">
+                        <ArrowUpRight className="h-3.5 w-3.5" />
                       </div>
                     </div>
                   </div>
