@@ -154,6 +154,10 @@ const FAQS = [
     a: "Yes — every project includes hands-on clinical training for doctors and nurses, plus biomedical training for the technical team, delivered on-site.",
   },
   {
+    q: "Do you handle civil construction or hospital building?",
+    a: "No. AbuFarha Medical Equipment does not perform civil works or building construction. Our scope begins with medical equipment supply and systems integration — we coordinate with your civil contractor on site readiness, then deliver, install, commission, train and support.",
+  },
+  {
     q: "What kind of after-sales support do you offer?",
     a: "One-year free warranty on every installation, plus optional service contracts covering preventive maintenance, spare parts and 24/7 technical support.",
   },
