@@ -504,85 +504,85 @@ export function TurnkeyPage() {
 
 function Hero() {
   return (
-    <section className={`relative ${NAVY} text-white overflow-hidden`}>
+    <section
+      className={`relative ${NAVY} text-white overflow-hidden`}
+      aria-labelledby="turnkey-hero-title"
+    >
+      {/* Immersive medical environment — image-first */}
       <img
         src={turnkeyHero}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full object-cover opacity-50"
+        alt="Fully equipped catheterization laboratory ready for clinical operation"
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        fetchPriority="high"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/85 to-[#0A1633]/30" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1633] to-transparent" />
+      {/* Editorial washes — deep navy on the left, dissolve on the right,
+          hard fade at the bottom so the next section peeks through */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/80 to-[#0A1633]/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1633]/40 via-transparent to-[#0A1633]" />
 
-      <div className="relative mx-auto max-w-[1240px] px-6 pt-14 pb-6 lg:pt-20 lg:pb-8">
-        <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-6">
-          Turnkey Medical Solutions
-        </div>
+      <div className="relative mx-auto max-w-[1240px] px-6 pt-16 pb-14 lg:pt-20 lg:pb-16 min-h-[520px] lg:min-h-[600px] flex flex-col justify-end">
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_68%)]">
+            <span className="h-px w-8 bg-[hsl(0_84%_55%)]" />
+            Turnkey Medical Departments
+          </div>
 
-        <div className="grid grid-cols-12 gap-8 items-end">
           <h1
-            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.98]
-                       text-[clamp(2.25rem,4.4vw,4rem)]"
+            id="turnkey-hero-title"
+            className="mt-5 font-display font-extrabold tracking-[-0.03em] leading-[0.98]
+                       text-[clamp(2.25rem,4.6vw,4.25rem)]"
           >
-            We don&apos;t just supply equipment.
+            Complete medical departments,
             <br />
-            We deliver departments{" "}
-            <span className={RED}>ready for life.</span>
+            <span className={RED}>delivered ready for life.</span>
           </h1>
 
-          <div className="col-span-12 lg:col-span-4 flex flex-col gap-6 lg:pb-3">
-            <p className="text-white/70 text-[15px] leading-relaxed max-w-md">
-              From planning to long-term support, we deliver fully-equipped
-              medical departments that are ready for clinical operation from
-              day one.
-            </p>
+          <p className="mt-5 max-w-xl text-white/75 text-[15px] lg:text-[16px] leading-relaxed">
+            We plan, supply, install, commission and train — so every department
+            we hand over is fully operational from day one.
+          </p>
 
-            {/* Floating stats card — trimmed */}
-            <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-xl px-4 py-3.5 min-w-[170px] shadow-[0_18px_50px_-20px_rgba(0,0,0,0.5)]">
-              <div className="flex items-baseline gap-2">
-                <span className={`font-display text-[2.5rem] leading-none font-extrabold ${RED} tracking-tight`}>
-                  30+
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#0A1633]/70">
-                  Major<br/>Projects
-                </span>
-              </div>
-              <div className="mt-3 border-t border-[#0A1633]/10 pt-2 flex items-center gap-3 text-[11px] text-[#0A1633]/60">
-                <span>10+ Countries</span>
-                <span className="h-1 w-1 rounded-full bg-[#0A1633]/30" />
-                <span>Since 1999</span>
-              </div>
-            </div>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <Link
+              to="/contact"
+              className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3 rounded-full hover:brightness-110 transition-all shadow-[0_18px_40px_-12px_rgba(220,38,38,0.55)]`}
+            >
+              Plan Your Department <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href="#build"
+              className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-all backdrop-blur-sm"
+            >
+              <PlayCircle className="h-4 w-4" /> See the Process
+            </a>
           </div>
         </div>
+      </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link
-            to="/contact"
-            className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3 rounded-full hover:brightness-110 transition-all`}
-          >
-            Explore Departments <ArrowRight className="h-4 w-4" />
-          </Link>
-          <a
-            href="#build"
-            className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/5 transition-all"
-          >
-            <PlayCircle className="h-4 w-4" /> How It Works
-          </a>
-        </div>
-
-        {/* Capability strip — trimmed */}
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
-          {CAPABILITIES.map((c) => (
-            <div key={c.title} className="bg-[#0A1633]/70 px-4 py-2.5">
-              <div className="text-[11px] font-bold text-white tracking-tight leading-tight">
-                {c.title}
-              </div>
-              <div className="mt-0.5 text-[9px] uppercase tracking-[0.18em] text-white/50">
-                {c.sub}
-              </div>
-            </div>
-          ))}
+      {/* Slim capability rail — one editorial line, then the page breathes */}
+      <div className="relative border-t border-white/10 bg-[#0A1633]/70 backdrop-blur-sm">
+        <div className="mx-auto max-w-[1240px] px-6">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+            {CAPABILITIES.map((c, i) => (
+              <li
+                key={c.title}
+                className="flex items-center gap-3 px-1 sm:px-5 py-3"
+              >
+                <span className="font-display text-[11px] font-bold text-white/40 tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <div className="text-[12px] font-bold text-white leading-tight truncate">
+                    {c.title}
+                  </div>
+                  <div className="text-[9px] uppercase tracking-[0.18em] text-white/45 truncate">
+                    {c.sub}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
