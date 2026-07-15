@@ -101,13 +101,8 @@ const DEPARTMENT_META: Record<string, { title: string; description: string; feat
   },
 };
 
-const CATH_FEATURES = [
-  "Interventional Procedures",
-  "Advanced Imaging",
-  "Radiation Safety",
-  "Workflow Efficiency",
-  "Patient Comfort",
-];
+const CATH_FEATURES = DEPARTMENT_META.cath.features;
+
 
 const INCLUDED = [
   { icon: ClipboardList, title: "Planning", sub: "Needs Analysis" },
