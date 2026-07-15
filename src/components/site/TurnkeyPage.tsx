@@ -181,7 +181,7 @@ function DepartmentGallery() {
                         isActive ? "bg-primary text-primary-foreground" : "bg-secondary text-ink"
                       }`}
                     >
-                      <d.icon className="h-4.5 w-4.5" strokeWidth={2} />
+                      <d.icon className="h-[18px] w-[18px]" strokeWidth={2} />
                     </span>
                     <span className="min-w-0">
                       <span className="block font-display text-[13.5px] font-extrabold leading-tight text-ink">
