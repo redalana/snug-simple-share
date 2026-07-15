@@ -717,7 +717,14 @@ function TransformationSection() {
 
   return (
     <section id="transformation" className="relative overflow-hidden bg-[#0b0c0e] text-white">
-      <div className="mx-auto max-w-[100rem] px-6 pt-24 lg:px-10 lg:pt-32">
+      {/* 3D cinematic backdrop */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[46vh] opacity-70 [mask-image:linear-gradient(to_bottom,black_10%,transparent_92%)] lg:h-[52vh]">
+        <ClientOnly3D>
+          <JourneyScene3D activeIndex={activeIdx} />
+        </ClientOnly3D>
+      </div>
+      <div className="relative mx-auto max-w-[100rem] px-6 pt-24 lg:px-10 lg:pt-32">
+
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-xl">
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
