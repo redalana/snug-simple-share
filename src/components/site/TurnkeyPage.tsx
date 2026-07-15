@@ -1,24 +1,25 @@
-import { useState, useEffect, useRef, useMemo } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useReducedMotion,
-  useMotionValue,
-} from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
+  Play,
+  Package,
+  Headphones,
+  Building2,
+  Globe,
+  Plus,
+  Check,
   ChevronLeft,
   ChevronRight,
-  Plus,
-  Minus,
-  MapPin,
-  ShieldCheck,
   PhoneCall,
-  FileText,
+  Heart,
+  Scan,
+  CircuitBoard,
+  Stethoscope,
+  Activity,
+  Radiation,
+  MapPin,
 } from "lucide-react";
 
 import heroCath from "@/assets/sol-carm.jpg";
@@ -27,521 +28,256 @@ import heroCt from "@/assets/sol-ct.jpg";
 import heroOr from "@/assets/sol-or.jpg";
 import icuImg from "@/assets/why-cathlab.jpg";
 import petImg from "@/assets/sol-petct.jpg";
+import turnkeyHero from "@/assets/turnkey-hero.jpg";
+import beyondCath from "@/assets/beyond-cathlab.jpg";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
-import { ClientOnly3D } from "@/components/site/turnkey/ClientOnly3D";
-import { OrbitHub3D } from "@/components/site/turnkey/OrbitHub3D";
-import { JourneyScene3D } from "@/components/site/turnkey/JourneyScene3D";
-import { SolutionViewer3D } from "@/components/site/turnkey/SolutionViewer3D";
-import { useCountUp } from "@/hooks/use-count-up";
-
-/* ============================================================
+/* =========================================================
    DATA
-   ============================================================ */
-
-type Slide = {
-  id: string;
-  code: string;
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  stats: { label: string; value: string }[];
-};
-
-const HERO_SLIDES: Slide[] = [
-  {
-    id: "cath",
-    code: "01 / 04",
-    eyebrow: "Interventional Cardiology",
-    title: "Cath Labs, delivered ready for the first patient.",
-    subtitle:
-      "Complete interventional suites — imaging system, hemodynamic monitoring, radiation safety and clinical training — engineered as one turnkey deliverable.",
-    image: heroCath,
-    stats: [
-      { label: "Suites Delivered", value: "40+" },
-      { label: "Countries", value: "10" },
-      { label: "Uptime SLA", value: "99.6%" },
-    ],
-  },
-  {
-    id: "mri",
-    code: "02 / 04",
-    eyebrow: "Advanced Imaging",
-    title: "MRI centers, from RF shielding to first scan.",
-    subtitle:
-      "Site planning, cryogen logistics, RF cage coordination, scanner installation, commissioning and radiographer training — one accountable partner.",
-    image: heroMri,
-    stats: [
-      { label: "Field Strength", value: "up to 3T" },
-      { label: "Install Weeks", value: "10–14" },
-      { label: "Training Days", value: "10" },
-    ],
-  },
-  {
-    id: "ct",
-    code: "03 / 04",
-    eyebrow: "Computed Tomography",
-    title: "CT departments engineered for throughput.",
-    subtitle:
-      "Room preparation, shielding, scanner installation, contrast injector, PACS integration and workflow calibration — commissioned as a complete department.",
-    image: heroCt,
-    stats: [
-      { label: "Slice Range", value: "64 – 256" },
-      { label: "Studies/Day", value: "120+" },
-      { label: "Warranty", value: "12 mo" },
-    ],
-  },
-  {
-    id: "or",
-    code: "04 / 04",
-    eyebrow: "Surgical Excellence",
-    title: "Operating rooms ready on day one.",
-    subtitle:
-      "Surgical lights, tables, anesthesia, integration and endoscopy — installed, commissioned and clinically trained as a single turnkey handover.",
-    image: heroOr,
-    stats: [
-      { label: "OR Suites", value: "25+" },
-      { label: "Integration", value: "Full A/V" },
-      { label: "Handover", value: "Turnkey" },
-    ],
-  },
-];
+   ========================================================= */
 
 const DEPARTMENTS = [
-  {
-    id: "cath",
-    code: "01",
-    name: "Cath Lab",
-    tagline: "Interventional Cardiology",
-    image: heroCath,
-    copy: "Complete interventional suite — imaging chain, hemodynamic monitoring, radiation protection and clinical training.",
-    bullets: ["C-arm imaging", "Hemodynamic system", "Ceiling monitors", "Radiation protection", "PACS integration"],
-  },
-  {
-    id: "mri",
-    code: "02",
-    name: "MRI Center",
-    tagline: "Advanced Imaging",
-    image: heroMri,
-    copy: "End-to-end MRI suite — RF cage coordination, scanner installation, commissioning and radiographer training.",
-    bullets: ["1.5T / 3T systems", "RF shielding coordination", "Cryogen logistics", "Coil configuration", "Patient comfort"],
-  },
-  {
-    id: "ct",
-    code: "03",
-    name: "CT Department",
-    tagline: "Computed Tomography",
-    image: heroCt,
-    copy: "High-throughput CT suites with contrast injection, PACS integration and calibrated clinical workflow.",
-    bullets: ["64 – 256 slice", "Contrast injector", "PACS / RIS", "Room shielding", "Dose optimization"],
-  },
-  {
-    id: "or",
-    code: "04",
-    name: "Operating Room",
-    tagline: "Surgical Excellence",
-    image: heroOr,
-    copy: "Fully equipped OR with lighting, tables, anesthesia and integrated audio-video — delivered as one suite.",
-    bullets: ["Surgical lighting", "OR tables", "Anesthesia workstation", "Endoscopy tower", "OR integration"],
-  },
-  {
-    id: "icu",
-    code: "05",
-    name: "ICU",
-    tagline: "Intensive Care",
-    image: icuImg,
-    copy: "Critical care units with ventilation, patient monitoring and central station — commissioned for continuous operation.",
-    bullets: ["Ventilators", "Patient monitors", "Central station", "Infusion systems", "Infection control"],
-  },
-  {
-    id: "pet",
-    code: "06",
-    name: "PET / CT",
-    tagline: "Molecular Imaging",
-    image: petImg,
-    copy: "Molecular imaging suites with hot-lab coordination, dosimetry and oncology-focused clinical training.",
-    bullets: ["Hot lab planning", "Scanner installation", "Dosimetry", "Radiation safety", "Clinical training"],
-  },
+  { id: "cath", name: "Cath Lab", sub: "Interventional Cardiology", icon: Heart, image: heroCath },
+  { id: "mri", name: "MRI Center", sub: "Advanced Imaging", icon: Scan, image: heroMri },
+  { id: "ct", name: "CT Department", sub: "Computed Tomography", icon: CircuitBoard, image: heroCt },
+  { id: "or", name: "Hybrid OR", sub: "Surgical Excellence", icon: Stethoscope, image: heroOr },
+  { id: "icu", name: "ICU", sub: "Intensive Care", icon: Activity, image: icuImg },
+  { id: "pet", name: "PET/CT", sub: "Molecular Imaging", icon: Radiation, image: petImg },
+] as const;
+
+const PHASES = [
+  { n: "01", title: "Planning", copy: "We analyze your needs and design the right solution.", img: project1 },
+  { n: "02", title: "Design & Engineering", copy: "Detailed planning and technical specifications.", img: project2 },
+  { n: "03", title: "Procurement", copy: "We source world-class equipment from trusted brands.", img: project3 },
+  { n: "04", title: "Installation", copy: "Our engineers ensure precision installation and integration.", img: heroCath },
+  { n: "05", title: "Training", copy: "We train your team for confident and safe operation.", img: heroOr },
+  { n: "06", title: "After Sales Support", copy: "Lifetime support with maintenance and rapid service.", img: beyondCath },
 ];
 
-const JOURNEY_STAGES = [
-  {
-    n: "01",
-    title: "Empty Room",
-    body: "We walk your shell space with architects and biomedical engineers to align every service point before a single cable is pulled.",
-  },
-  {
-    n: "02",
-    title: "Planning",
-    body: "Room layout, shielding, power, HVAC, gases and IT flows are engineered against the exact clinical workflow you will run on day one.",
-  },
-  {
-    n: "03",
-    title: "Delivery",
-    body: "Coordinated freight, customs and on-site staging — equipment arrives sequenced to installation, not left waiting in crates.",
-  },
-  {
-    n: "04",
-    title: "Installation",
-    body: "Certified engineers install imaging chains, monitoring, integration and life-support systems to manufacturer specification.",
-  },
-  {
-    n: "05",
-    title: "Calibration",
-    body: "Acceptance testing, QA phantoms, dose calibration and integration validation — signed off before any patient enters the room.",
-  },
-  {
-    n: "06",
-    title: "Training",
-    body: "Hands-on clinical and biomedical training for radiographers, cardiologists, nurses and technicians in the actual room.",
-  },
-  {
-    n: "07",
-    title: "Department Ready",
-    body: "Handover with documentation, warranty, spare parts protocol and a support line that answers the same day.",
-  },
+const HOTSPOTS = [
+  { id: "imaging", label: "Imaging System", top: "22%", left: "58%", desc: "High-resolution imaging for accurate diagnosis and real-time guidance.", features: ["Advanced Image Quality", "Low Dose Technology", "Real-time Processing", "Seamless Integration"] },
+  { id: "monitor", label: "Monitoring System", top: "36%", left: "78%", desc: "Continuous hemodynamic and vital-sign monitoring.", features: ["Multi-parameter", "Central Station Ready", "Alarm Intelligence", "EMR Integration"] },
+  { id: "table", label: "Patient Table", top: "68%", left: "42%", desc: "Motorized carbon-fiber table for interventional workflows.", features: ["Floating Tabletop", "High Weight Capacity", "Radiolucent", "Precision Motion"] },
+  { id: "ceiling", label: "Ceiling System", top: "10%", left: "34%", desc: "Ceiling-mounted supply units for equipment and services.", features: ["Modular Arms", "Integrated Services", "Sterile Zone", "Cable Management"] },
+  { id: "workstation", label: "Workstation", top: "44%", left: "88%", desc: "Post-processing workstation for review and reporting.", features: ["3D Reconstruction", "Advanced Analytics", "PACS Ready", "Multi-user"] },
+  { id: "power", label: "Power & Networking", top: "82%", left: "20%", desc: "Redundant power and clinical network backbone.", features: ["UPS Protected", "Fiber Backbone", "Isolated Ground", "Fail-safe"] },
 ];
 
-const CATH_HOTSPOTS = [
-  { n: 1, label: "C-Arm Imaging", spec: "Flat-panel detector · pulsed fluoroscopy · low-dose protocols" },
-  { n: 2, label: "Patient Table", spec: "Carbon-fiber tabletop · floating motion · 250 kg capacity" },
-  { n: 3, label: "Ceiling Monitors", spec: "Suspended boom · 4K medical display · multi-modality routing" },
-  { n: 4, label: "Hemodynamic", spec: "Real-time pressure & ECG · closed-loop reporting" },
-  { n: 5, label: "Injector", spec: "Dual-head contrast · pressure-limited safety" },
-  { n: 6, label: "Radiation Shield", spec: "Ceiling & table shields · leaded glass · staff dosimetry" },
+const COMPONENTS = [
+  { icon: Scan, title: "Imaging Systems", copy: "Angiography, MRI, CT and ultrasound platforms." },
+  { icon: Activity, title: "Monitoring", copy: "Hemodynamic and vital-sign monitoring." },
+  { icon: Stethoscope, title: "Surgical Equipment", copy: "Tables, lights, pendants and workstations." },
+  { icon: CircuitBoard, title: "IT & PACS", copy: "Imaging network, storage and clinical software." },
+  { icon: Package, title: "Sterile & Furniture", copy: "Sterile workflow and clinical furniture." },
+  { icon: Radiation, title: "Radiation Protection", copy: "Shielding, aprons and dosimetry." },
 ];
 
 const PROJECTS = [
-  {
-    country: "Jordan",
-    city: "Amman",
-    title: "Cardiac Cath Lab Suite",
-    scope: "Turnkey interventional cardiology — imaging, hemodynamics, training.",
-    image: project1,
-  },
-  {
-    country: "Yemen",
-    city: "Sana'a",
-    title: "Multi-Slice CT Department",
-    scope: "Room preparation, scanner installation, PACS integration.",
-    image: project2,
-  },
-  {
-    country: "Iraq",
-    city: "Baghdad",
-    title: "Operating Room Complex",
-    scope: "Surgical lighting, tables, anesthesia and OR integration.",
-    image: project3,
-  },
+  { id: 1, region: "Regional", title: "Cardiac Cath Lab Program", scope: "Cath Lab Turnkey Solution", image: project1 },
+  { id: 2, region: "Regional", title: "Advanced Imaging Center", scope: "MRI & CT Suite", image: project2 },
+  { id: 3, region: "Regional", title: "Hybrid Operating Suite", scope: "OR Integration", image: project3 },
 ];
 
-const FAQS = [
-  {
-    q: "What is included in a turnkey solution?",
-    a: "Site assessment, room engineering, equipment supply, installation, commissioning, clinical training, warranty and long-term after-sales support — coordinated as one accountable contract.",
-  },
-  {
-    q: "How long does a typical department take?",
-    a: "A cath lab or CT suite typically takes 10 – 14 weeks from signed order to clinical handover. MRI centers with RF shielding coordination run 14 – 20 weeks.",
-  },
-  {
-    q: "Which regions do you cover?",
-    a: "Jordan, Yemen, Syria, Iraq, Libya, Somaliland, Somalia, Egypt, Uzbekistan and Bangladesh — with regional engineering teams and spare-parts logistics.",
-  },
-  {
-    q: "Do you handle training and after-sales support?",
-    a: "Yes. Every turnkey handover includes hands-on clinical training, biomedical documentation, a 12-month warranty and a same-day support line.",
-  },
+const STATS = [
+  { icon: Building2, value: "30+", label: "Major Projects" },
+  { icon: Globe, value: "10+", label: "Countries" },
+  { icon: Package, value: "250+", label: "Departments Delivered" },
+  { icon: Headphones, value: "24/7", label: "Support" },
 ];
 
-/* ============================================================
-   HERO — full viewport 4-slide slider with parallax
-   ============================================================ */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
 
 function Hero() {
-  const reduce = useReducedMotion();
-  const [i, setI] = useState(0);
-  const [dir, setDir] = useState(1);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => {
-      setDir(1);
-      setI((v) => (v + 1) % HERO_SLIDES.length);
-    }, 7000);
-    return () => clearInterval(id);
-  }, [reduce, i]);
-
-  const go = (n: number) => {
-    setDir(n > i ? 1 : -1);
-    setI((n + HERO_SLIDES.length) % HERO_SLIDES.length);
-  };
-
-  // mouse parallax
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const px = useSpring(mx, { stiffness: 60, damping: 15 });
-  const py = useSpring(my, { stiffness: 60, damping: 15 });
-  const tx = useTransform(px, (v) => v * 20);
-  const ty = useTransform(py, (v) => v * 12);
-
-  const slide = HERO_SLIDES[i];
-
   return (
-    <section
-      onMouseMove={(e) => {
-        const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
-        mx.set((e.clientX - r.left) / r.width - 0.5);
-        my.set((e.clientY - r.top) / r.height - 0.5);
-      }}
-      className="relative isolate h-[calc(100vh-112px)] min-h-[640px] w-full overflow-hidden bg-[#0b0c0e] text-white"
-    >
-      {/* image stack */}
-      <AnimatePresence initial={false} custom={dir}>
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#fdf5f5] to-white">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 pb-20 pt-14 lg:grid-cols-[1.05fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20">
+        {/* Left */}
         <motion.div
-          key={slide.id}
-          className="absolute inset-0"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col justify-center"
         >
-          <motion.img
-            src={slide.image}
-            alt={slide.title}
-            style={{ x: tx, y: ty }}
-            className="h-full w-full object-cover"
-            draggable={false}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+          <p className="text-xs font-bold tracking-[0.22em] text-primary">TURNKEY SOLUTIONS</p>
+          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[3.75rem]">
+            Complete Departments.
+            <br />
+            <span className="text-primary">Ready to Perform.</span>
+          </h1>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground">
+            From planning to performance, we deliver fully integrated medical
+            departments that are engineered for better care and built to last.
+          </p>
 
-      {/* subtle grid */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      {/* content */}
-      <div className="relative z-10 mx-auto flex h-full max-w-[100rem] flex-col justify-end px-6 pb-16 lg:px-12 lg:pb-20">
-        <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70">
-          <span className="h-px w-10 bg-[#E11D2E]" />
-          Turnkey Healthcare Solutions
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={slide.id}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-4xl"
-          >
-            <div className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-[#E11D2E]">
-              {slide.eyebrow}
-            </div>
-            <h1 className="font-display text-[2.3rem] font-semibold leading-[1.02] tracking-[-0.02em] sm:text-[3.2rem] lg:text-[4.4rem]">
-              {slide.title}
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 lg:text-lg">
-              {slide.subtitle}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* stats + controls */}
-        <div className="mt-10 flex flex-col gap-8 lg:mt-14 lg:flex-row lg:items-end lg:justify-between">
-          <div className="flex flex-wrap gap-x-10 gap-y-6">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={slide.id + "-stats"}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex flex-wrap gap-x-10 gap-y-6"
-              >
-                {slide.stats.map((s) => (
-                  <div key={s.label}>
-                    <div className="font-display text-3xl font-semibold tracking-tight text-white lg:text-4xl">
-                      {s.value}
-                    </div>
-                    <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/60">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="flex items-center gap-4">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#departments"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#E11D2E] px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+              href="#journey"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3.5 text-sm font-bold text-background transition-transform hover:-translate-y-0.5"
             >
-              Explore Departments
+              How It Works
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
-            <div className="flex items-center gap-2">
-              <button
-                aria-label="Previous slide"
-                onClick={() => go(i - 1)}
-                className="grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition hover:bg-white/10"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                aria-label="Next slide"
-                onClick={() => go(i + 1)}
-                className="grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition hover:bg-white/10"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3.5 text-sm font-bold text-foreground shadow-sm transition-all hover:-translate-y-0.5"
+            >
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-white">
+                <Play className="h-3.5 w-3.5 fill-current" />
+              </span>
+              Watch Full Overview
+            </a>
           </div>
-        </div>
 
-        {/* slide indicator */}
-        <div className="mt-10 flex items-center justify-between border-t border-white/15 pt-5">
-          <div className="text-xs font-semibold tracking-[0.3em] text-white/60">{slide.code}</div>
-          <div className="flex flex-1 items-center gap-2 pl-8">
-            {HERO_SLIDES.map((s, idx) => (
-              <button
-                key={s.id}
-                aria-label={`Show ${s.eyebrow}`}
-                onClick={() => go(idx)}
-                className="group relative h-[3px] flex-1 overflow-hidden rounded-full bg-white/15"
-              >
-                {idx === i && (
-                  <motion.span
-                    key={i + "-bar"}
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: reduce ? 0 : 7, ease: "linear" }}
-                    className="absolute inset-y-0 left-0 bg-[#E11D2E]"
-                  />
-                )}
-                {idx < i && <span className="absolute inset-0 bg-white/50" />}
-              </button>
+          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex items-start gap-3">
+                <s.icon className="mt-1 h-6 w-6 text-primary" strokeWidth={1.5} />
+                <div>
+                  <div className="font-display text-2xl font-extrabold text-foreground">{s.value}</div>
+                  <div className="text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
+        </motion.div>
+
+        {/* Right image + floating card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="relative"
+        >
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.35)]">
+            <img src={turnkeyHero} alt="Modern medical suite" className="h-full w-full object-cover" />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="absolute -bottom-6 right-4 w-[19rem] rounded-2xl bg-white p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/5 lg:right-8"
+          >
+            <div className="flex items-start gap-3">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                <Package className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="font-display text-base font-bold text-foreground">Turnkey. Total Care.</div>
+                <p className="mt-1 text-[13px] leading-snug text-muted-foreground">
+                  One partner for every step. One standard of excellence.
+                </p>
+                <a href="#journey" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-primary">
+                  Explore Our Process <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
-/* ============================================================
-   DEPARTMENT ECOSYSTEM
-   ============================================================ */
-
-function DepartmentEcosystem() {
-  const [id, setId] = useState(DEPARTMENTS[0].id);
-  const active = DEPARTMENTS.find((d) => d.id === id) ?? DEPARTMENTS[0];
-
+function DepartmentNavigator() {
+  const [active, setActive] = useState<string>(DEPARTMENTS[0].id);
   return (
-    <section id="departments" className="relative overflow-hidden bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-12">
-        <div className="flex items-end justify-between gap-8">
-          <div>
-            <div className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#E11D2E]">
-              <span className="h-px w-10 bg-[#E11D2E]" />
-              Department Ecosystem
-            </div>
-            <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111315] lg:text-6xl">
-              One operating system, six connected departments.
-            </h2>
-          </div>
-          <p className="hidden max-w-sm text-sm leading-relaxed text-neutral-600 lg:block">
-            Explore the departments AbuFarha delivers as complete turnkey suites — engineered, installed and clinically commissioned.
+    <section id="departments" className="bg-[#0b1220] py-16 lg:py-20 text-white">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[1fr_2.4fr] lg:gap-14 lg:px-10">
+        <div>
+          <p className="text-xs font-bold tracking-[0.22em] text-primary">DEPARTMENT NAVIGATOR</p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+            Solutions for Every<br />Clinical Environment
+          </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">
+            Select a department to discover how we build and deliver complete
+            solutions tailored to your clinical goals.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* 3D hub */}
-          <div className="relative lg:col-span-7">
-            <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] bg-[#f6f7f9] ring-1 ring-black/5">
-              <ClientOnly3D
-                fallback={
-                  <img
-                    src={active.image}
-                    alt={active.name}
-                    className="h-full w-full object-cover"
-                  />
-                }
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {DEPARTMENTS.map((d) => {
+            const isActive = d.id === active;
+            return (
+              <button
+                key={d.id}
+                onClick={() => setActive(d.id)}
+                className={`group relative flex flex-col items-start gap-6 rounded-2xl border p-5 text-left transition-all ${
+                  isActive
+                    ? "border-primary bg-primary text-white shadow-[0_20px_50px_-20px_rgba(225,29,46,0.7)]"
+                    : "border-white/10 bg-white/[0.03] text-white hover:border-white/25 hover:bg-white/[0.06]"
+                }`}
               >
-                <OrbitHub3D activeId={active.id} />
-              </ClientOnly3D>
-              <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-end justify-between text-[10px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
-                <span>Interactive · Drag to feel depth</span>
-                <span>{active.code} / 06</span>
-              </div>
-            </div>
+                <d.icon className="h-8 w-8" strokeWidth={1.4} />
+                <div>
+                  <div className="font-display text-[15px] font-bold leading-tight">{d.name}</div>
+                  <div className={`mt-1 text-[11px] leading-tight ${isActive ? "text-white/85" : "text-white/55"}`}>
+                    {d.sub}
+                  </div>
+                </div>
+                <ArrowRight className="absolute bottom-4 right-4 h-4 w-4 opacity-70" />
+                {isActive && <span className="absolute -bottom-[1px] left-6 right-6 h-[3px] rounded-full bg-white/80" />}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TurnkeyJourney() {
+  return (
+    <section id="journey" className="bg-white py-20 lg:py-24">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[1fr_3fr] lg:gap-12">
+          <div>
+            <p className="text-xs font-bold tracking-[0.22em] text-primary">THE TURNKEY JOURNEY</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+              A Proven Process.<br />
+              <span className="text-primary">Six Key Phases.</span>
+            </h2>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Our structured approach ensures your department is delivered on time,
+              on budget, and beyond expectations.
+            </p>
+            <a
+              href="#"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground"
+            >
+              View All Phases <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
 
-          {/* selector + content */}
-          <div className="lg:col-span-5">
-            <div className="grid grid-cols-2 gap-2">
-              {DEPARTMENTS.map((d) => {
-                const on = d.id === id;
-                return (
-                  <button
-                    key={d.id}
-                    onClick={() => setId(d.id)}
-                    className={`group flex flex-col items-start rounded-2xl border p-4 text-left transition ${
-                      on
-                        ? "border-[#E11D2E] bg-[#E11D2E]/[0.04]"
-                        : "border-neutral-200 hover:border-neutral-400"
-                    }`}
-                  >
-                    <div className="flex w-full items-center justify-between text-[10px] font-semibold tracking-[0.24em] text-neutral-500">
-                      {d.code}
-                      {on && <span className="h-1.5 w-1.5 rounded-full bg-[#E11D2E]" />}
-                    </div>
-                    <div className="mt-3 font-display text-base font-semibold text-[#111315]">
-                      {d.name}
-                    </div>
-                    <div className="text-xs text-neutral-500">{d.tagline}</div>
-                  </button>
-                );
-              })}
+          <div className="relative">
+            {/* connector line */}
+            <div className="pointer-events-none absolute left-0 right-0 top-[152px] hidden h-px border-t border-dashed border-primary/40 md:block" />
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
+              {PHASES.map((p, i) => (
+                <motion.div
+                  key={p.n}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  className="relative"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100 ring-1 ring-black/5">
+                    <img src={p.img} alt={p.title} className="h-full w-full object-cover" />
+                  </div>
+                  <div className="relative z-10 mx-auto -mt-4 grid h-8 w-8 place-items-center rounded-full bg-primary text-[11px] font-bold text-white ring-4 ring-white">
+                    {p.n}
+                  </div>
+                  <div className="mt-3 text-center">
+                    <div className="font-display text-sm font-bold text-foreground">{p.title}</div>
+                    <p className="mt-1 text-xs leading-snug text-muted-foreground">{p.copy}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-8 rounded-2xl border border-neutral-200 p-6"
-              >
-                <div className="font-display text-2xl font-semibold text-[#111315]">
-                  {active.name} Turnkey
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-600">{active.copy}</p>
-                <ul className="mt-5 grid grid-cols-1 gap-2 text-sm text-neutral-700">
-                  {active.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2">
-                      <span className="mt-2 h-1 w-4 flex-none bg-[#E11D2E]" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -549,89 +285,247 @@ function DepartmentEcosystem() {
   );
 }
 
-/* ============================================================
-   CINEMATIC JOURNEY — pinned scroll
-   ============================================================ */
-
-function CinematicJourney() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    return scrollYProgress.on("change", (v) => {
-      const n = Math.min(JOURNEY_STAGES.length - 1, Math.floor(v * JOURNEY_STAGES.length));
-      setIdx(n);
-    });
-  }, [scrollYProgress]);
-
-  const progress = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 20 });
-
+function DepartmentAnatomy() {
+  const [active, setActive] = useState(HOTSPOTS[0]);
   return (
-    <section
-      ref={ref}
-      className="relative bg-[#0b0c0e] text-white"
-      style={{ height: `${JOURNEY_STAGES.length * 90}vh` }}
-    >
-      <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden">
-        {/* 3D scene */}
-        <div className="absolute inset-0">
-          <ClientOnly3D
-            fallback={<div className="h-full w-full bg-gradient-to-b from-[#111315] to-[#0b0c0e]" />}
-          >
-            <JourneyScene3D activeIndex={Math.min(idx, 5)} />
-          </ClientOnly3D>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
-        </div>
+    <section className="bg-[#f7f8fa] py-20 lg:py-24">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid gap-8 lg:grid-cols-[1fr_2.2fr_1.1fr] lg:gap-10">
+          {/* Left copy + list */}
+          <div>
+            <p className="text-xs font-bold tracking-[0.22em] text-primary">INSIDE THE DEPARTMENT</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+              Every Detail.<br />
+              <span className="text-primary">Designed for Performance.</span>
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Our structured approach to a Cath Lab solution.
+              Click on the hotspots to learn more.
+            </p>
 
-        {/* top bar */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[100rem] items-center justify-between px-6 pt-10 lg:px-12">
-          <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70">
-            <span className="h-px w-10 bg-[#E11D2E]" />
-            Cinematic Journey
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              {HOTSPOTS.map((h) => (
+                <button
+                  key={h.id}
+                  onClick={() => setActive(h)}
+                  className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                    active.id === h.id ? "bg-primary/10 text-primary" : "text-foreground hover:bg-black/5"
+                  }`}
+                >
+                  <Plus className="h-4 w-4 shrink-0" />
+                  <span className="font-medium">{h.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
-          <motion.div className="text-xs font-semibold tracking-[0.3em] text-white/70">
-            {progress}
-          </motion.div>
-        </div>
 
-        {/* stage content */}
-        <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[100rem] flex-col gap-10 px-6 pb-14 lg:px-12 lg:pb-20">
+          {/* Interactive image */}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]">
+            <img src={heroCath} alt="Cath Lab anatomy" className="h-full w-full object-cover" />
+            {HOTSPOTS.map((h) => (
+              <button
+                key={h.id}
+                onClick={() => setActive(h)}
+                style={{ top: h.top, left: h.left }}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                aria-label={h.label}
+              >
+                <span className={`relative grid h-8 w-8 place-items-center rounded-full text-white shadow-lg transition-transform ${
+                  active.id === h.id ? "scale-110 bg-primary" : "bg-primary/90 hover:scale-110"
+                }`}>
+                  <Plus className="h-4 w-4" />
+                  <span className={`absolute inset-0 -z-10 rounded-full bg-primary/40 ${active.id === h.id ? "animate-ping" : ""}`} />
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Spec panel */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              key={active.id}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-3xl"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+              className="rounded-2xl bg-white p-6 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.2)] ring-1 ring-black/5"
             >
-              <div className="text-xs font-semibold uppercase tracking-[0.35em] text-[#E11D2E]">
-                Stage {JOURNEY_STAGES[idx].n}
+              <div className="flex items-start gap-3">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <Scan className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-display text-lg font-bold text-foreground">{active.label}</div>
+                  <p className="mt-1 text-sm leading-snug text-muted-foreground">{active.desc}</p>
+                </div>
               </div>
-              <h3 className="mt-3 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] lg:text-6xl">
-                {JOURNEY_STAGES[idx].title}
-              </h3>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75">
-                {JOURNEY_STAGES[idx].body}
-              </p>
+              <ul className="mt-5 space-y-2.5">
+                {active.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-foreground">
+                    <Check className="h-4 w-4 text-primary" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#" className="mt-6 inline-flex items-center gap-1 text-sm font-bold text-primary">
+                Learn More <ArrowRight className="h-4 w-4" />
+              </a>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IncludedComponents() {
+  return (
+    <section className="bg-white py-20 lg:py-24">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-bold tracking-[0.22em] text-primary">WHAT'S INCLUDED</p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+            A Complete Turnkey Package
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Everything needed for a department to open its doors and treat its first patient — supplied, installed and supported by one partner.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {COMPONENTS.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.06, duration: 0.5 }}
+              className="group rounded-2xl border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.15)]"
+            >
+              <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                <c.icon className="h-6 w-6" strokeWidth={1.5} />
+              </div>
+              <div className="mt-6 font-display text-lg font-bold text-foreground">{c.title}</div>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.copy}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectsSection() {
+  const [i, setI] = useState(0);
+  const p = PROJECTS[i];
+  return (
+    <section className="bg-[#f7f8fa] py-20 lg:py-24">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 lg:grid-cols-[1fr_1.4fr] lg:items-center lg:px-10">
+        <div>
+          <p className="text-xs font-bold tracking-[0.22em] text-primary">REAL PROJECTS. REAL IMPACT.</p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+            Projects Across Our<br />Regions of Operation
+          </h2>
+          <a
+            href="/projects"
+            className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground"
+          >
+            Explore All Projects <ArrowRight className="h-4 w-4" />
+          </a>
+          <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="h-4 w-4 text-primary" />
+            <span>Middle East · Africa · Central Asia</span>
+          </div>
+        </div>
+
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.3)] ring-1 ring-black/5"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <img src={p.image} alt={p.title} className="h-full w-full object-cover" />
+                <span className="absolute left-5 top-5 rounded-md bg-black/80 px-3 py-1 text-xs font-bold text-white">
+                  {p.region}
+                </span>
+              </div>
+              <div className="flex items-end justify-between p-6">
+                <div>
+                  <div className="font-display text-xl font-bold text-foreground">{p.title}</div>
+                  <div className="mt-1 text-sm text-muted-foreground">{p.scope}</div>
+                </div>
+                <a href="/projects" className="inline-flex items-center gap-1 text-sm font-bold text-primary">
+                  View Case Study <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* stage rail */}
-          <div className="flex flex-col gap-3">
-            <div className="relative h-[2px] w-full overflow-hidden bg-white/15">
-              <motion.div
-                style={{ scaleX, transformOrigin: "0% 50%" }}
-                className="absolute inset-0 bg-[#E11D2E]"
-              />
+          <div className="mt-4 flex items-center justify-end gap-2">
+            <button
+              onClick={() => setI((i - 1 + PROJECTS.length) % PROJECTS.length)}
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-foreground hover:border-foreground"
+              aria-label="Previous project"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setI((i + 1) % PROJECTS.length)}
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-foreground hover:border-foreground"
+              aria-label="Next project"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTA() {
+  return (
+    <section className="bg-white py-16 lg:py-20">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="relative overflow-hidden rounded-3xl bg-[#0b1220] p-10 text-white lg:p-14">
+          <div className="pointer-events-none absolute inset-0 opacity-30">
+            <img src={turnkeyHero} alt="" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0b1220] via-[#0b1220]/85 to-transparent" />
+          </div>
+          <div className="relative grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div>
+              <h2 className="font-display text-3xl font-extrabold leading-[1.1] sm:text-4xl">
+                Ready to Build Your<br />
+                <span className="text-primary">Next Department?</span>
+              </h2>
+              <p className="mt-4 max-w-md text-sm text-white/75">
+                Let's discuss your project and create a solution that exceeds your expectations.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a href="/contact" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5">
+                  Start Your Project <ArrowRight className="h-4 w-4" />
+                </a>
+                <a href="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 hover:bg-white/10">
+                  Talk to an Expert <PhoneCall className="h-4 w-4" />
+                </a>
+              </div>
             </div>
-            <div className="grid grid-cols-7 gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/60">
-              {JOURNEY_STAGES.map((s, i) => (
-                <div key={s.n} className={i === idx ? "text-white" : ""}>
-                  <div>{s.n}</div>
-                  <div className="mt-1 truncate">{s.title}</div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:gap-6">
+              {[
+                { icon: Building2, title: "Expert Engineering Team" },
+                { icon: Globe, title: "Global Supply Chain Network" },
+                { icon: Package, title: "End-to-End Project Management" },
+              ].map((f) => (
+                <div key={f.title} className="flex items-center gap-3">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/10 text-white">
+                    <f.icon className="h-5 w-5" strokeWidth={1.5} />
+                  </div>
+                  <div className="text-sm font-bold">{f.title}</div>
                 </div>
               ))}
             </div>
@@ -642,413 +536,20 @@ function CinematicJourney() {
   );
 }
 
-/* ============================================================
-   SOLUTION VIEWER
-   ============================================================ */
-
-function SolutionViewer() {
-  const [hot, setHot] = useState(1);
-  const active = CATH_HOTSPOTS.find((h) => h.n === hot) ?? CATH_HOTSPOTS[0];
-
-  return (
-    <section className="relative overflow-hidden bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-12">
-        <div className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#E11D2E]">
-          <span className="h-px w-10 bg-[#E11D2E]" />
-          Solution Viewer
-        </div>
-        <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111315] lg:text-6xl">
-          Inside a complete Cath Lab suite.
-        </h2>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-600">
-          Every component we install — engineered as one interventional environment.
-        </p>
-
-        <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-14">
-          <div className="relative lg:col-span-8">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] bg-[#0b0c0e] ring-1 ring-black/10">
-              <ClientOnly3D
-                fallback={<img src={heroCath} alt="Cath lab" className="h-full w-full object-cover" />}
-              >
-                <SolutionViewer3D activeN={hot} onSelect={setHot} />
-              </ClientOnly3D>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-32">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-500">
-                Component 0{active.n} / 06
-              </div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.n}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <h3 className="mt-3 font-display text-3xl font-semibold text-[#111315]">
-                    {active.label}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">{active.spec}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-8 space-y-1.5">
-                {CATH_HOTSPOTS.map((h) => {
-                  const on = h.n === hot;
-                  return (
-                    <button
-                      key={h.n}
-                      onClick={() => setHot(h.n)}
-                      className={`flex w-full items-center gap-4 rounded-xl border p-3.5 text-left text-sm transition ${
-                        on
-                          ? "border-[#E11D2E] bg-[#E11D2E]/[0.05] text-[#111315]"
-                          : "border-neutral-200 text-neutral-700 hover:border-neutral-400"
-                      }`}
-                    >
-                      <span
-                        className={`grid h-7 w-7 flex-none place-items-center rounded-full text-[11px] font-bold ${
-                          on ? "bg-[#E11D2E] text-white" : "bg-neutral-100 text-neutral-600"
-                        }`}
-                      >
-                        {h.n}
-                      </span>
-                      <span className="flex-1 font-medium">{h.label}</span>
-                      <ArrowUpRight
-                        className={`h-4 w-4 transition ${on ? "text-[#E11D2E]" : "text-neutral-400"}`}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   PROJECTS
-   ============================================================ */
-
-function Projects() {
-  const [i, setI] = useState(0);
-  const p = PROJECTS[i];
-  const go = (n: number) => setI((n + PROJECTS.length) % PROJECTS.length);
-
-  return (
-    <section className="relative overflow-hidden bg-[#f6f7f9] py-24 lg:py-32">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-12">
-        <div className="flex items-end justify-between">
-          <div>
-            <div className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#E11D2E]">
-              <span className="h-px w-10 bg-[#E11D2E]" />
-              Selected Projects
-            </div>
-            <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111315] lg:text-6xl">
-              Delivered across the region.
-            </h2>
-          </div>
-          <div className="hidden items-center gap-2 lg:flex">
-            <button
-              aria-label="Previous project"
-              onClick={() => go(i - 1)}
-              className="grid h-12 w-12 place-items-center rounded-full border border-neutral-300 text-[#111315] transition hover:bg-white"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              aria-label="Next project"
-              onClick={() => go(i + 1)}
-              className="grid h-12 w-12 place-items-center rounded-full border border-neutral-300 text-[#111315] transition hover:bg-white"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[2rem] bg-black ring-1 ring-black/10">
-              <AnimatePresence mode="sync">
-                <motion.img
-                  key={p.image}
-                  src={p.image}
-                  alt={p.title}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute inset-x-8 bottom-8 flex items-end justify-between text-white">
-                <div>
-                  <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
-                    <MapPin className="h-3.5 w-3.5" />
-                    {p.city}, {p.country}
-                  </div>
-                  <h3 className="mt-3 font-display text-2xl font-semibold lg:text-4xl">{p.title}</h3>
-                </div>
-                <div className="text-xs font-semibold tracking-[0.3em] text-white/70">
-                  0{i + 1} / 0{PROJECTS.length}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4">
-            <div className="rounded-[2rem] border border-neutral-200 bg-white p-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-500">
-                    Project Scope
-                  </div>
-                  <p className="mt-4 text-base leading-relaxed text-neutral-700">{p.scope}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-8 space-y-1.5">
-                {PROJECTS.map((pr, idx) => {
-                  const on = idx === i;
-                  return (
-                    <button
-                      key={pr.title}
-                      onClick={() => go(idx)}
-                      className={`flex w-full items-center justify-between rounded-xl border p-3.5 text-left text-sm transition ${
-                        on
-                          ? "border-[#E11D2E] bg-[#E11D2E]/[0.05]"
-                          : "border-neutral-200 hover:border-neutral-400"
-                      }`}
-                    >
-                      <div>
-                        <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-500">
-                          {pr.country}
-                        </div>
-                        <div className="mt-1 font-medium text-[#111315]">{pr.title}</div>
-                      </div>
-                      <ArrowUpRight
-                        className={`h-4 w-4 ${on ? "text-[#E11D2E]" : "text-neutral-400"}`}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   FAQ
-   ============================================================ */
-
-function FAQ() {
-  const [open, setOpen] = useState(0);
-  return (
-    <section className="relative bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-5xl px-6 lg:px-12">
-        <div className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#E11D2E]">
-          <span className="h-px w-10 bg-[#E11D2E]" />
-          Frequently Asked
-        </div>
-        <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111315] lg:text-6xl">
-          Answers, before you ask.
-        </h2>
-
-        <div className="mt-14 divide-y divide-neutral-200 border-y border-neutral-200">
-          {FAQS.map((f, idx) => {
-            const on = idx === open;
-            return (
-              <div key={f.q}>
-                <button
-                  onClick={() => setOpen(on ? -1 : idx)}
-                  className="group flex w-full items-center justify-between gap-8 py-8 text-left"
-                >
-                  <span className="font-display text-xl font-semibold text-[#111315] lg:text-2xl">
-                    {f.q}
-                  </span>
-                  <span
-                    className={`grid h-10 w-10 flex-none place-items-center rounded-full border transition ${
-                      on
-                        ? "border-[#E11D2E] bg-[#E11D2E] text-white"
-                        : "border-neutral-300 text-[#111315] group-hover:border-neutral-500"
-                    }`}
-                  >
-                    {on ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                  </span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {on && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="max-w-3xl pb-8 text-base leading-relaxed text-neutral-600">
-                        {f.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   FINAL CTA — cinematic with counters
-   ============================================================ */
-
-function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const { ref, value } = useCountUp(target, 2000);
-  return (
-    <span ref={ref} className="font-display text-5xl font-semibold tracking-tight lg:text-7xl">
-      {value}
-      {suffix}
-    </span>
-  );
-}
-
-function FinalCTA() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
-
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 24 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        d: 6 + Math.random() * 10,
-      })),
-    [],
-  );
-
-  return (
-    <section
-      ref={ref}
-      className="relative isolate overflow-hidden bg-[#0b0c0e] py-28 text-white lg:py-40"
-    >
-      {/* particles */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        {particles.map((p) => (
-          <motion.span
-            key={p.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.6, 0], y: [0, -30, -60] }}
-            transition={{ duration: p.d, repeat: Infinity, delay: p.id * 0.2, ease: "easeInOut" }}
-            style={{ left: `${p.x}%`, top: `${p.y}%` }}
-            className="absolute h-1 w-1 rounded-full bg-white/40"
-          />
-        ))}
-      </div>
-
-      {/* radial glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E11D2E]/25 blur-[120px]" />
-
-      <motion.div style={{ y }} className="relative mx-auto max-w-[100rem] px-6 lg:px-12">
-        <div className="grid grid-cols-3 gap-8 border-b border-white/15 pb-14 lg:gap-14">
-          <div>
-            <Counter target={40} suffix="+" />
-            <div className="mt-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/60">
-              Turnkey Suites
-            </div>
-          </div>
-          <div>
-            <Counter target={10} />
-            <div className="mt-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/60">
-              Countries Served
-            </div>
-          </div>
-          <div>
-            <Counter target={25} suffix="+" />
-            <div className="mt-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/60">
-              Years of Engineering
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8">
-            <div className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70">
-              <span className="h-px w-10 bg-[#E11D2E]" />
-              Start Your Project
-            </div>
-            <h2 className="font-display text-5xl font-semibold leading-[1.02] tracking-[-0.02em] lg:text-[5.5rem]">
-              Let's build the next department together.
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 lg:text-lg">
-              Talk to our engineers about equipping your next cath lab, MRI center, CT suite or operating room — delivered as one accountable turnkey solution.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3 lg:col-span-4 lg:items-end">
-            <a
-              href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#E11D2E] px-7 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
-            >
-              Request a Consultation
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="tel:+962000000000"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              <PhoneCall className="h-4 w-4" /> Talk to an Expert
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              <FileText className="h-4 w-4" /> Company Profile
-            </a>
-            <div className="mt-2 flex items-center gap-2 text-xs text-white/60">
-              <ShieldCheck className="h-4 w-4" />
-              12-month warranty on every installation
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
-/* ============================================================
+/* =========================================================
    PAGE
-   ============================================================ */
+   ========================================================= */
 
 export function TurnkeyPage() {
   return (
-    <>
+    <div className="bg-background">
       <Hero />
-      <DepartmentEcosystem />
-      <CinematicJourney />
-      <SolutionViewer />
-      <Projects />
-      <FAQ />
-      <FinalCTA />
-    </>
+      <DepartmentNavigator />
+      <TurnkeyJourney />
+      <DepartmentAnatomy />
+      <IncludedComponents />
+      <ProjectsSection />
+      <CTA />
+    </div>
   );
 }
