@@ -7,14 +7,6 @@ import {
   Plus,
   Minus,
   PlayCircle,
-  Stethoscope,
-  Package,
-  Wrench,
-  ShieldCheck,
-  GraduationCap,
-  FileText,
-  BadgeCheck,
-  Headphones,
 } from "lucide-react";
 import turnkeyHero from "@/assets/turnkey-hero.jpg";
 import solMri from "@/assets/sol-mri.jpg";
@@ -291,15 +283,19 @@ const PHASES = [
   },
 ] as const;
 
-const INCLUDED = [
-  { icon: Stethoscope, label: "Planning", sub: "Needs Analysis" },
-  { icon: Package, label: "Equipment", sub: "Supply" },
-  { icon: Wrench, label: "Installation", sub: "Expert Execution" },
-  { icon: ShieldCheck, label: "Commissioning", sub: "Safety & Testing" },
-  { icon: GraduationCap, label: "Training", sub: "Clinical & Technical" },
-  { icon: FileText, label: "Documentation", sub: "Complete Handover" },
-  { icon: BadgeCheck, label: "Warranty", sub: "Peace of Mind" },
-  { icon: Headphones, label: "After Sales", sub: "Long-term Support" },
+const SCOPE_MATRIX = [
+  { label: "Needs Analysis & Site Survey", included: true, note: "Clinical workflow, room readiness, service routing." },
+  { label: "Equipment Supply (OEM certified)", included: true, note: "Premium global manufacturers, factory sealed." },
+  { label: "Installation by Certified Engineers", included: true, note: "Manufacturer-authorised installation teams." },
+  { label: "Commissioning & Acceptance Testing", included: true, note: "Safety, calibration, protocol validation." },
+  { label: "Clinical Applications Training", included: true, note: "On-site, protocol-based, until independent." },
+  { label: "Technical Documentation & Handover", included: true, note: "As-built records, manuals, QC baselines." },
+  { label: "Manufacturer Warranty", included: true, note: "Standard OEM warranty, coordinated end-to-end." },
+  { label: "Preventive Maintenance Programme", included: true, note: "Scheduled visits with priority response." },
+  { label: "Extended Warranty (multi-year)", included: false, note: "Optional lifecycle cover, quoted per system." },
+  { label: "Bio-medical Consumables Programme", included: false, note: "Optional recurring supply contract." },
+  { label: "Remote Diagnostics & Uptime SLA", included: false, note: "Where supported by the OEM platform." },
+  { label: "Refresher & Advanced Training", included: false, note: "Booked as needed post go-live." },
 ] as const;
 
 const CAPABILITIES = [
@@ -319,26 +315,54 @@ const RELATED_SERVICES = [
 ];
 
 const RELATED_PRODUCTS = [
-  { name: "Biplane Systems", image: heroCathlab, to: "/products" },
-  { name: "Patient Tables", image: solOr, to: "/products" },
-  { name: "Injectors", image: solCt, to: "/products" },
-  { name: "Radiation Protection", image: solMammo, to: "/products" },
+  {
+    name: "Biplane Imaging System",
+    type: "Interventional Cardiology",
+    spec: "Dual-plane · Low-dose · 3D roadmap",
+    image: heroCathlab,
+    to: "/products",
+  },
+  {
+    name: "Surgical Patient Table",
+    type: "Operating Room",
+    spec: "Modular · 450 kg · Carbon top",
+    image: solOr,
+    to: "/products",
+  },
+  {
+    name: "Dual-Head Contrast Injector",
+    type: "CT / Angiography",
+    spec: "Programmable · Traceable · MR-safe",
+    image: solCt,
+    to: "/products",
+  },
+  {
+    name: "Radiation Protection Suite",
+    type: "Cath Lab / Radiology",
+    spec: "Ceiling · Mobile · Personal PPE",
+    image: solMammo,
+    to: "/products",
+  },
 ];
 
 const CASES = [
   {
     country: "Egypt",
     title: "Advanced Cath Lab Installation",
-    scope: "Supply · Install · Train",
-    dept: "Cath Lab",
-    outcome: "Interventional cardiology programme operational within 30 days of handover.",
+    scope: "Supply · Install · Commission · Train",
+    dept: "Interventional Cardiology",
+    equipment: "Biplane imaging, hemodynamic system, injector, radiation protection.",
+    services: "Site survey, install, commissioning, applications training, warranty.",
+    outcome: "Interventional programme operational within 30 days of handover.",
     image: project1,
   },
   {
     country: "Kenya",
     title: "Cardiac Center Development",
-    scope: "Turnkey Solution",
+    scope: "Full Turnkey Solution",
     dept: "Cardiology Floor",
+    equipment: "Cath lab, echo, patient monitors, recovery bays, central station.",
+    services: "Planning, supply, install, integration, training, PPM contract.",
     outcome: "Full cardiology floor commissioned across imaging, cath and recovery.",
     image: project2,
   },
@@ -347,14 +371,18 @@ const CASES = [
     title: "Cath Lab Upgrade Project",
     scope: "Supply · Install · Commission",
     dept: "Cath Lab",
-    outcome: "Legacy suite upgraded with biplane imaging and PACS integration.",
+    equipment: "Biplane C-arm, hemodynamic monitor, ceiling suspensions, PACS gateway.",
+    services: "De-install legacy, install, commissioning, PACS integration.",
+    outcome: "Legacy suite upgraded with biplane imaging and PACS integration live.",
     image: project3,
   },
   {
     country: "Jordan",
     title: "Interventional Cardiology Unit",
-    scope: "Turnkey Solution",
+    scope: "Full Turnkey Solution",
     dept: "Interventional Cardiology",
+    equipment: "Cath lab, defibrillators, ultrasound, ICU-grade monitors.",
+    services: "Supply, install, commissioning, training, multi-year support.",
     outcome: "End-to-end unit commissioned, trained and under long-term service.",
     image: heroCathlab,
   },
@@ -486,75 +514,71 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/85 to-[#0A1633]/30" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1633] to-transparent" />
 
-      <div className="relative mx-auto max-w-[1240px] px-6 pt-20 pb-10 lg:pt-28 lg:pb-14">
-        <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-8">
+      <div className="relative mx-auto max-w-[1240px] px-6 pt-14 pb-6 lg:pt-20 lg:pb-8">
+        <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-[hsl(0_84%_65%)] mb-6">
           Turnkey Medical Solutions
         </div>
 
         <div className="grid grid-cols-12 gap-8 items-end">
           <h1
-            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.94]
-                       text-[clamp(2.75rem,7.2vw,6.75rem)]"
+            className="col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.03em] leading-[0.98]
+                       text-[clamp(2.25rem,4.4vw,4rem)]"
           >
-            We don&apos;t just supply
+            We don&apos;t just supply equipment.
             <br />
-            equipment. We deliver
-            <br />
-            departments{" "}
+            We deliver departments{" "}
             <span className={RED}>ready for life.</span>
           </h1>
 
-          <div className="col-span-12 lg:col-span-4 flex flex-col gap-8 lg:pb-4">
-            <p className="text-white/70 text-base leading-relaxed max-w-md">
+          <div className="col-span-12 lg:col-span-4 flex flex-col gap-6 lg:pb-3">
+            <p className="text-white/70 text-[15px] leading-relaxed max-w-md">
               From planning to long-term support, we deliver fully-equipped
               medical departments that are ready for clinical operation from
               day one.
             </p>
 
-            {/* Floating stats card */}
-            <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-2xl p-5 min-w-[210px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]">
+            {/* Floating stats card — trimmed */}
+            <div className="self-start lg:self-end bg-white text-[#0A1633] rounded-xl px-4 py-3.5 min-w-[170px] shadow-[0_18px_50px_-20px_rgba(0,0,0,0.5)]">
               <div className="flex items-baseline gap-2">
-                <span className={`font-display text-5xl font-extrabold ${RED} tracking-tight`}>
+                <span className={`font-display text-[2.5rem] leading-none font-extrabold ${RED} tracking-tight`}>
                   30+
                 </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#0A1633]/70">
+                  Major<br/>Projects
+                </span>
               </div>
-              <div className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0A1633]/70">
-                Major Projects
-              </div>
-              <div className="mt-4 border-t border-[#0A1633]/10 pt-3 space-y-1 text-xs text-[#0A1633]/60">
-                <div>10+ Countries</div>
-                <div>Since 1999</div>
+              <div className="mt-3 border-t border-[#0A1633]/10 pt-2 flex items-center gap-3 text-[11px] text-[#0A1633]/60">
+                <span>10+ Countries</span>
+                <span className="h-1 w-1 rounded-full bg-[#0A1633]/30" />
+                <span>Since 1999</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
             to="/contact"
-            className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3.5 rounded-full hover:brightness-110 transition-all`}
+            className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-3 rounded-full hover:brightness-110 transition-all`}
           >
             Explore Departments <ArrowRight className="h-4 w-4" />
           </Link>
           <a
             href="#build"
-            className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3.5 rounded-full hover:bg-white/5 transition-all"
+            className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/5 transition-all"
           >
             <PlayCircle className="h-4 w-4" /> How It Works
           </a>
         </div>
 
-        {/* Capability strip */}
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
+        {/* Capability strip — trimmed */}
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-white/10 border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
           {CAPABILITIES.map((c) => (
-            <div
-              key={c.title}
-              className="bg-[#0A1633]/70 p-4 lg:p-5"
-            >
-              <div className="text-[11px] font-bold text-white tracking-tight">
+            <div key={c.title} className="bg-[#0A1633]/70 px-4 py-2.5">
+              <div className="text-[11px] font-bold text-white tracking-tight leading-tight">
                 {c.title}
               </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/50">
+              <div className="mt-0.5 text-[9px] uppercase tracking-[0.18em] text-white/50">
                 {c.sub}
               </div>
             </div>
@@ -782,6 +806,41 @@ function BuildYourDepartment() {
                   );
                 })}
               </div>
+
+              {/* Operational-ready progress line */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                    <span>Delivery Progress</span>
+                  </div>
+                  <div
+                    className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                      active >= PHASES.length ? "text-[#34C759]" : "text-white/40"
+                    }`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full ${
+                        active >= PHASES.length
+                          ? "bg-[#34C759] shadow-[0_0_10px_#34C759]"
+                          : "bg-white/25"
+                      }`}
+                    />
+                    {active >= PHASES.length
+                      ? "Ready for Clinical Operation"
+                      : `Phase ${Math.max(active, 1)} of ${PHASES.length}`}
+                  </div>
+                </div>
+                <div className="relative h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div
+                    className={`absolute inset-y-0 left-0 transition-all duration-700 ease-out rounded-full ${
+                      active >= PHASES.length
+                        ? "bg-[#34C759] shadow-[0_0_20px_#34C759]"
+                        : "bg-[hsl(0_84%_55%)]"
+                    }`}
+                    style={{ width: `${(active / PHASES.length) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -978,41 +1037,95 @@ function SolutionOverview() {
 /* --------- 04 · What's Included ------------------------------------------ */
 
 function WhatsIncluded() {
+  const included = SCOPE_MATRIX.filter((r) => r.included);
+  const optional = SCOPE_MATRIX.filter((r) => !r.included);
   return (
     <section className={SURFACE}>
-      <div className="mx-auto max-w-[1240px] px-6 py-16 lg:py-20">
+      <div className="mx-auto max-w-[1240px] px-6 py-20 lg:py-24">
         <div className="grid grid-cols-12 gap-8 items-end mb-10">
-          <h3
-            className={`col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.02em] text-2xl md:text-3xl ${INK}`}
-          >
-            What&apos;s included in our turnkey solution.
-          </h3>
+          <div className="col-span-12 lg:col-span-8">
+            <SectionKicker index="04" label="Scope Matrix" />
+            <h3
+              className={`mt-5 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-3xl md:text-4xl lg:text-[2.75rem] ${INK}`}
+            >
+              What&apos;s included.{" "}
+              <span className="text-[#0A1633]/40">What&apos;s optional.</span>
+            </h3>
+          </div>
           <p className="col-span-12 lg:col-span-4 text-sm text-[#0A1633]/60 leading-relaxed">
             Every engagement is delivered against a single accountable scope —
-            no hand-offs between vendors.
+            no hand-offs between vendors, no ambiguity at handover.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-px bg-[#0A1633]/10 border border-[#0A1633]/10 rounded-2xl overflow-hidden">
-          {INCLUDED.map((it) => {
-            const Icon = it.icon;
-            return (
-              <div
-                key={it.label}
-                className="bg-white p-5 lg:p-6 flex flex-col items-start"
-              >
-                <Icon className="h-6 w-6 text-[#0A1633]" strokeWidth={1.6} />
-                <div className="mt-4 font-display font-bold text-[#0A1633] text-sm">
-                  {it.label}
-                </div>
-                <div className="mt-1 text-[11px] text-[#0A1633]/60 leading-snug">
-                  {it.sub}
-                </div>
-              </div>
-            );
-          })}
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ScopeColumn label="Included as standard" tone="on" rows={included} />
+          <ScopeColumn label="Optional add-ons" tone="off" rows={optional} />
         </div>
       </div>
     </section>
+  );
+}
+
+function ScopeColumn({
+  label,
+  tone,
+  rows,
+}: {
+  label: string;
+  tone: "on" | "off";
+  rows: readonly { label: string; note: string }[];
+}) {
+  const on = tone === "on";
+  return (
+    <div className={`rounded-2xl overflow-hidden border ${on ? "border-[#0A1633]/10 bg-white" : "border-[#0A1633]/10 bg-white/60"}`}>
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[#0A1633]/10">
+        <div className="flex items-center gap-2.5">
+          <span
+            className={`h-2 w-2 rounded-full ${
+              on ? "bg-[#34C759] shadow-[0_0_10px_#34C759]" : "bg-[#0A1633]/25"
+            }`}
+          />
+          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0A1633]">
+            {label}
+          </span>
+        </div>
+        <span className="text-[11px] font-mono tabular-nums text-[#0A1633]/40">
+          {String(rows.length).padStart(2, "0")}
+        </span>
+      </div>
+      <ul>
+        {rows.map((r, i) => (
+          <li
+            key={r.label}
+            className={`grid grid-cols-[auto_1fr_auto] items-start gap-4 px-6 py-4 ${
+              i < rows.length - 1 ? "border-b border-[#0A1633]/8" : ""
+            }`}
+          >
+            <span className="font-mono text-[11px] tabular-nums text-[#0A1633]/40 pt-0.5">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <div className="text-[15px] font-semibold text-[#0A1633] leading-snug">
+                {r.label}
+              </div>
+              <div className="mt-0.5 text-[12.5px] text-[#0A1633]/55 leading-snug">
+                {r.note}
+              </div>
+            </div>
+            <span
+              className={`text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full shrink-0 ${
+                on
+                  ? "bg-[#34C759]/12 text-[#0d7a34]"
+                  : "border border-[#0A1633]/20 text-[#0A1633]/60"
+              }`}
+            >
+              {on ? "Included" : "Optional"}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -1050,7 +1163,7 @@ function RelatedColumn({
 }: {
   title: string;
   sub: string;
-  items: { name: string; image: string; to: string }[];
+  items: { name: string; image: string; to: string; type?: string; spec?: string }[];
   cta: string;
   to: string;
 }) {
@@ -1070,23 +1183,37 @@ function RelatedColumn({
           {cta} <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         {items.map((it) => (
           <Link
             key={it.name}
             to={it.to}
-            className="group block rounded-xl overflow-hidden bg-[#F4F5F7]"
+            className="group block rounded-2xl overflow-hidden bg-white border border-[#0A1633]/8 hover:border-[#0A1633]/25 transition-colors"
           >
-            <div className="relative aspect-square overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <img
                 src={it.image}
                 alt={it.name}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1633]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-bold leading-tight">
-                {it.name}
+              {it.type && (
+                <div className="absolute top-3 left-3 bg-white/95 text-[#0A1633] px-2 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.18em]">
+                  {it.type}
+                </div>
+              )}
+            </div>
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="font-display font-extrabold text-[15px] leading-tight text-[#0A1633]">
+                  {it.name}
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-[#0A1633]/40 group-hover:text-[hsl(0_84%_55%)] transition-colors shrink-0" />
               </div>
+              {it.spec && (
+                <div className="mt-1.5 text-[11.5px] text-[#0A1633]/55 leading-snug">
+                  {it.spec}
+                </div>
+              )}
             </div>
           </Link>
         ))}
@@ -1160,28 +1287,50 @@ function Projects() {
                 <Link
                   key={c.title}
                   to="/projects"
-                  className="group shrink-0 w-[280px] md:w-[320px] rounded-2xl overflow-hidden snap-start relative"
+                  className="group shrink-0 w-[320px] md:w-[360px] rounded-2xl overflow-hidden snap-start relative bg-[#0d1c3d] border border-white/8"
                 >
-                  <div className="relative aspect-[4/5]">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={c.image}
                       alt={`${c.title} — ${c.country}`}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1633] via-[#0A1633]/50 to-transparent" />
-                    <div className="absolute top-4 left-4 inline-flex items-center gap-2 bg-white/95 text-[#0A1633] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d1c3d] via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 inline-flex items-center gap-2 bg-white/95 text-[#0A1633] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em]">
                       <StatusDot />
                       {c.country}
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="font-display text-lg font-extrabold tracking-tight text-white">
-                        {c.title}
+                  </div>
+                  <div className="p-5">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                      {c.dept}
+                    </div>
+                    <div className="mt-2 font-display text-[1.15rem] leading-[1.15] font-extrabold tracking-tight text-white">
+                      {c.title}
+                    </div>
+
+                    <dl className="mt-4 space-y-2.5 text-[12px] leading-snug">
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Scope</dt>
+                        <dd className="text-white/85">{c.scope}</dd>
                       </div>
-                      <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/70">
-                        Scope · {c.scope}
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Equipment</dt>
+                        <dd className="text-white/70">{c.equipment}</dd>
                       </div>
-                      <div className="mt-4 h-9 w-9 rounded-full bg-white text-[#0A1633] flex items-center justify-center group-hover:bg-[hsl(0_84%_55%)] group-hover:text-white transition-colors">
-                        <ArrowUpRight className="h-4 w-4" />
+                      <div className="grid grid-cols-[70px_1fr] gap-3">
+                        <dt className="text-white/40 uppercase tracking-[0.14em] text-[10px] font-bold pt-0.5">Services</dt>
+                        <dd className="text-white/70">{c.services}</dd>
+                      </div>
+                    </dl>
+
+                    <div className="mt-4 pt-4 border-t border-white/10 flex items-start gap-3">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#34C759] shadow-[0_0_10px_#34C759] shrink-0" />
+                      <div className="text-[12.5px] text-white leading-snug flex-1">
+                        {c.outcome}
+                      </div>
+                      <div className="h-8 w-8 rounded-full bg-white text-[#0A1633] flex items-center justify-center group-hover:bg-[hsl(0_84%_55%)] group-hover:text-white transition-colors shrink-0">
+                        <ArrowUpRight className="h-3.5 w-3.5" />
                       </div>
                     </div>
                   </div>
@@ -1292,34 +1441,69 @@ function ClosingCta() {
     <section className="bg-white">
       <div className="mx-auto max-w-[1240px] px-6 pb-24 lg:pb-32">
         <div
-          className={`${NAVY} rounded-[2rem] p-10 md:p-16 lg:p-20 relative overflow-hidden`}
+          className={`${NAVY} rounded-[2rem] relative overflow-hidden isolate`}
         >
-          <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[hsl(0_84%_55%)]/10 blur-3xl" />
-          <div className="relative grid grid-cols-12 gap-8 items-end">
-            <div className="col-span-12 lg:col-span-8">
-              <ChapterLabel index="06" tone="light">
-                Start Your Department
-              </ChapterLabel>
-              <h2 className="mt-6 font-display text-white font-extrabold tracking-[-0.02em] leading-[1.02] text-4xl md:text-5xl lg:text-6xl">
-                Tell us the room.{" "}
-                <span className="text-white/40">
-                  We&apos;ll return with the department.
-                </span>
-              </h2>
+          {/* editorial photography backdrop */}
+          <img
+            src={heroCathlab}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1633] via-[#0A1633]/90 to-[#0A1633]/40" />
+          <div className="absolute -top-24 -right-24 w-[520px] h-[520px] rounded-full bg-[hsl(0_84%_55%)]/20 blur-3xl" />
+          <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-[#34C759]/10 blur-3xl" />
+
+          <div className="relative p-10 md:p-16 lg:p-20">
+            <div className="grid grid-cols-12 gap-10 items-end">
+              <div className="col-span-12 lg:col-span-8">
+                <ChapterLabel index="06" tone="light">
+                  Start Your Department
+                </ChapterLabel>
+                <h2 className="mt-6 font-display text-white font-extrabold tracking-[-0.025em] leading-[0.98] text-4xl md:text-5xl lg:text-[4.25rem]">
+                  Tell us the room.{" "}
+                  <span className="text-white/40">
+                    We&apos;ll return with the department.
+                  </span>
+                </h2>
+                <p className="mt-6 text-white/70 max-w-xl text-[15px] leading-relaxed">
+                  A single accountable programme — from planning to
+                  commissioning to long-term support. Ready for clinical
+                  operation, not another vendor to manage.
+                </p>
+              </div>
+              <div className="col-span-12 lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+                <Link
+                  to="/contact"
+                  className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-4 rounded-full hover:brightness-110 transition-all shadow-[0_18px_50px_-20px_hsl(0_84%_55%/0.6)]`}
+                >
+                  Initiate a project <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/hospital-readiness-assessment"
+                  className="inline-flex items-center gap-2 border border-white/25 text-white font-bold px-6 py-4 rounded-full hover:bg-white/5 transition-all"
+                >
+                  Readiness assessment
+                </Link>
+              </div>
             </div>
-            <div className="col-span-12 lg:col-span-4 flex flex-wrap gap-4 lg:justify-end">
-              <Link
-                to="/contact"
-                className={`inline-flex items-center gap-2 ${RED_BG} text-white font-bold px-6 py-4 rounded-full hover:brightness-110 transition-all`}
-              >
-                Initiate a project <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/hospital-readiness-assessment"
-                className="inline-flex items-center gap-2 border border-white/25 text-white font-bold px-6 py-4 rounded-full hover:bg-white/5 transition-all"
-              >
-                Readiness assessment
-              </Link>
+
+            <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-white">
+              {[
+                { k: "30+", v: "Major Projects" },
+                { k: "10+", v: "Countries" },
+                { k: "25 yrs", v: "Experience" },
+                { k: "1 yr", v: "Free Warranty" },
+              ].map((s) => (
+                <div key={s.v}>
+                  <div className="font-display text-2xl md:text-3xl font-extrabold tracking-tight">
+                    {s.k}
+                  </div>
+                  <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                    {s.v}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1327,3 +1511,4 @@ function ClosingCta() {
     </section>
   );
 }
+
