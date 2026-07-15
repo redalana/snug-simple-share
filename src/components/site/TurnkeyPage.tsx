@@ -291,15 +291,19 @@ const PHASES = [
   },
 ] as const;
 
-const INCLUDED = [
-  { icon: Stethoscope, label: "Planning", sub: "Needs Analysis" },
-  { icon: Package, label: "Equipment", sub: "Supply" },
-  { icon: Wrench, label: "Installation", sub: "Expert Execution" },
-  { icon: ShieldCheck, label: "Commissioning", sub: "Safety & Testing" },
-  { icon: GraduationCap, label: "Training", sub: "Clinical & Technical" },
-  { icon: FileText, label: "Documentation", sub: "Complete Handover" },
-  { icon: BadgeCheck, label: "Warranty", sub: "Peace of Mind" },
-  { icon: Headphones, label: "After Sales", sub: "Long-term Support" },
+const SCOPE_MATRIX = [
+  { label: "Needs Analysis & Site Survey", included: true, note: "Clinical workflow, room readiness, service routing." },
+  { label: "Equipment Supply (OEM certified)", included: true, note: "Premium global manufacturers, factory sealed." },
+  { label: "Installation by Certified Engineers", included: true, note: "Manufacturer-authorised installation teams." },
+  { label: "Commissioning & Acceptance Testing", included: true, note: "Safety, calibration, protocol validation." },
+  { label: "Clinical Applications Training", included: true, note: "On-site, protocol-based, until independent." },
+  { label: "Technical Documentation & Handover", included: true, note: "As-built records, manuals, QC baselines." },
+  { label: "Manufacturer Warranty", included: true, note: "Standard OEM warranty, coordinated end-to-end." },
+  { label: "Preventive Maintenance Programme", included: true, note: "Scheduled visits with priority response." },
+  { label: "Extended Warranty (multi-year)", included: false, note: "Optional lifecycle cover, quoted per system." },
+  { label: "Bio-medical Consumables Programme", included: false, note: "Optional recurring supply contract." },
+  { label: "Remote Diagnostics & Uptime SLA", included: false, note: "Where supported by the OEM platform." },
+  { label: "Refresher & Advanced Training", included: false, note: "Booked as needed post go-live." },
 ] as const;
 
 const CAPABILITIES = [
@@ -319,26 +323,54 @@ const RELATED_SERVICES = [
 ];
 
 const RELATED_PRODUCTS = [
-  { name: "Biplane Systems", image: heroCathlab, to: "/products" },
-  { name: "Patient Tables", image: solOr, to: "/products" },
-  { name: "Injectors", image: solCt, to: "/products" },
-  { name: "Radiation Protection", image: solMammo, to: "/products" },
+  {
+    name: "Biplane Imaging System",
+    type: "Interventional Cardiology",
+    spec: "Dual-plane · Low-dose · 3D roadmap",
+    image: heroCathlab,
+    to: "/products",
+  },
+  {
+    name: "Surgical Patient Table",
+    type: "Operating Room",
+    spec: "Modular · 450 kg · Carbon top",
+    image: solOr,
+    to: "/products",
+  },
+  {
+    name: "Dual-Head Contrast Injector",
+    type: "CT / Angiography",
+    spec: "Programmable · Traceable · MR-safe",
+    image: solCt,
+    to: "/products",
+  },
+  {
+    name: "Radiation Protection Suite",
+    type: "Cath Lab / Radiology",
+    spec: "Ceiling · Mobile · Personal PPE",
+    image: solMammo,
+    to: "/products",
+  },
 ];
 
 const CASES = [
   {
     country: "Egypt",
     title: "Advanced Cath Lab Installation",
-    scope: "Supply · Install · Train",
-    dept: "Cath Lab",
-    outcome: "Interventional cardiology programme operational within 30 days of handover.",
+    scope: "Supply · Install · Commission · Train",
+    dept: "Interventional Cardiology",
+    equipment: "Biplane imaging, hemodynamic system, injector, radiation protection.",
+    services: "Site survey, install, commissioning, applications training, warranty.",
+    outcome: "Interventional programme operational within 30 days of handover.",
     image: project1,
   },
   {
     country: "Kenya",
     title: "Cardiac Center Development",
-    scope: "Turnkey Solution",
+    scope: "Full Turnkey Solution",
     dept: "Cardiology Floor",
+    equipment: "Cath lab, echo, patient monitors, recovery bays, central station.",
+    services: "Planning, supply, install, integration, training, PPM contract.",
     outcome: "Full cardiology floor commissioned across imaging, cath and recovery.",
     image: project2,
   },
@@ -347,14 +379,18 @@ const CASES = [
     title: "Cath Lab Upgrade Project",
     scope: "Supply · Install · Commission",
     dept: "Cath Lab",
-    outcome: "Legacy suite upgraded with biplane imaging and PACS integration.",
+    equipment: "Biplane C-arm, hemodynamic monitor, ceiling suspensions, PACS gateway.",
+    services: "De-install legacy, install, commissioning, PACS integration.",
+    outcome: "Legacy suite upgraded with biplane imaging and PACS integration live.",
     image: project3,
   },
   {
     country: "Jordan",
     title: "Interventional Cardiology Unit",
-    scope: "Turnkey Solution",
+    scope: "Full Turnkey Solution",
     dept: "Interventional Cardiology",
+    equipment: "Cath lab, defibrillators, ultrasound, ICU-grade monitors.",
+    services: "Supply, install, commissioning, training, multi-year support.",
     outcome: "End-to-end unit commissioned, trained and under long-term service.",
     image: heroCathlab,
   },
