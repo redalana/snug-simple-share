@@ -73,7 +73,7 @@ function TurnkeyHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-transparent to-ink/95" />
       </div>
 
-      <div className="relative mx-auto max-w-[100rem] px-6 pt-14 pb-10 lg:px-10 lg:pt-20 lg:pb-14">
+      <div className="relative mx-auto max-w-[100rem] px-8 pt-14 pb-10 sm:px-12 lg:px-20 lg:pt-20 lg:pb-14 xl:px-28">
         <div className="max-w-2xl">
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary">
             Turnkey Healthcare Solutions
