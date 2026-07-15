@@ -1010,41 +1010,95 @@ function SolutionOverview() {
 /* --------- 04 · What's Included ------------------------------------------ */
 
 function WhatsIncluded() {
+  const included = SCOPE_MATRIX.filter((r) => r.included);
+  const optional = SCOPE_MATRIX.filter((r) => !r.included);
   return (
     <section className={SURFACE}>
-      <div className="mx-auto max-w-[1240px] px-6 py-16 lg:py-20">
+      <div className="mx-auto max-w-[1240px] px-6 py-20 lg:py-24">
         <div className="grid grid-cols-12 gap-8 items-end mb-10">
-          <h3
-            className={`col-span-12 lg:col-span-8 font-display font-extrabold tracking-[-0.02em] text-2xl md:text-3xl ${INK}`}
-          >
-            What&apos;s included in our turnkey solution.
-          </h3>
+          <div className="col-span-12 lg:col-span-8">
+            <SectionKicker index="04" label="Scope Matrix" />
+            <h3
+              className={`mt-5 font-display font-extrabold tracking-[-0.02em] leading-[1.02] text-3xl md:text-4xl lg:text-[2.75rem] ${INK}`}
+            >
+              What&apos;s included.{" "}
+              <span className="text-[#0A1633]/40">What&apos;s optional.</span>
+            </h3>
+          </div>
           <p className="col-span-12 lg:col-span-4 text-sm text-[#0A1633]/60 leading-relaxed">
             Every engagement is delivered against a single accountable scope —
-            no hand-offs between vendors.
+            no hand-offs between vendors, no ambiguity at handover.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-px bg-[#0A1633]/10 border border-[#0A1633]/10 rounded-2xl overflow-hidden">
-          {INCLUDED.map((it) => {
-            const Icon = it.icon;
-            return (
-              <div
-                key={it.label}
-                className="bg-white p-5 lg:p-6 flex flex-col items-start"
-              >
-                <Icon className="h-6 w-6 text-[#0A1633]" strokeWidth={1.6} />
-                <div className="mt-4 font-display font-bold text-[#0A1633] text-sm">
-                  {it.label}
-                </div>
-                <div className="mt-1 text-[11px] text-[#0A1633]/60 leading-snug">
-                  {it.sub}
-                </div>
-              </div>
-            );
-          })}
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ScopeColumn label="Included as standard" tone="on" rows={included} />
+          <ScopeColumn label="Optional add-ons" tone="off" rows={optional} />
         </div>
       </div>
     </section>
+  );
+}
+
+function ScopeColumn({
+  label,
+  tone,
+  rows,
+}: {
+  label: string;
+  tone: "on" | "off";
+  rows: readonly { label: string; note: string }[];
+}) {
+  const on = tone === "on";
+  return (
+    <div className={`rounded-2xl overflow-hidden border ${on ? "border-[#0A1633]/10 bg-white" : "border-[#0A1633]/10 bg-white/60"}`}>
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[#0A1633]/10">
+        <div className="flex items-center gap-2.5">
+          <span
+            className={`h-2 w-2 rounded-full ${
+              on ? "bg-[#34C759] shadow-[0_0_10px_#34C759]" : "bg-[#0A1633]/25"
+            }`}
+          />
+          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0A1633]">
+            {label}
+          </span>
+        </div>
+        <span className="text-[11px] font-mono tabular-nums text-[#0A1633]/40">
+          {String(rows.length).padStart(2, "0")}
+        </span>
+      </div>
+      <ul>
+        {rows.map((r, i) => (
+          <li
+            key={r.label}
+            className={`grid grid-cols-[auto_1fr_auto] items-start gap-4 px-6 py-4 ${
+              i < rows.length - 1 ? "border-b border-[#0A1633]/8" : ""
+            }`}
+          >
+            <span className="font-mono text-[11px] tabular-nums text-[#0A1633]/40 pt-0.5">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <div className="text-[15px] font-semibold text-[#0A1633] leading-snug">
+                {r.label}
+              </div>
+              <div className="mt-0.5 text-[12.5px] text-[#0A1633]/55 leading-snug">
+                {r.note}
+              </div>
+            </div>
+            <span
+              className={`text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full shrink-0 ${
+                on
+                  ? "bg-[#34C759]/12 text-[#0d7a34]"
+                  : "border border-[#0A1633]/20 text-[#0A1633]/60"
+              }`}
+            >
+              {on ? "Included" : "Optional"}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
