@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "abufarha-medical-mcp",
+      "version": "0.1.0",
+      "title": "AbuFarha Medical Supplies MCP"
+    },
+    "tools": [
+      {
+        "name": "get_company_overview",
+        "title": "Get company overview",
+        "description": "Get an overview of AbuFarha Medical Supplies: what the company does, regions served, and the five-phase turnkey delivery model.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_departments",
+        "title": "List medical departments",
+        "description": "List the medical departments AbuFarha Medical Supplies delivers as turnkey solutions, with an overview of typical scope for each.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_department",
+        "title": "Get department details",
+        "description": "Get the full turnkey scope for a specific medical department by id (e.g. 'mri', 'cath-lab', 'operating-room').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Department id from list_departments."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
