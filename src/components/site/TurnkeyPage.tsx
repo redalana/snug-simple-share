@@ -198,28 +198,28 @@ function DepartmentNavigator() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
           {DEPARTMENTS.map((d) => {
             const isActive = d.id === active;
             return (
               <button
                 key={d.id}
                 onClick={() => setActive(d.id)}
-                className={`group relative flex flex-col items-start gap-6 rounded-2xl border p-5 text-left transition-all ${
+                className={`group relative flex aspect-[3/4] flex-col items-start justify-between rounded-xl border p-4 text-left transition-all ${
                   isActive
                     ? "border-primary bg-primary text-white shadow-[0_20px_50px_-20px_rgba(225,29,46,0.7)]"
-                    : "border-white/10 bg-white/[0.03] text-white hover:border-white/25 hover:bg-white/[0.06]"
+                    : "border-white/15 bg-white/[0.02] text-white hover:border-white/30 hover:bg-white/[0.05]"
                 }`}
               >
-                <d.icon className="h-8 w-8" strokeWidth={1.4} />
-                <div>
+                <d.icon className="h-10 w-10" strokeWidth={1.3} />
+                <div className="pr-6">
                   <div className="font-display text-[15px] font-bold leading-tight">{d.name}</div>
-                  <div className={`mt-1 text-[11px] leading-tight ${isActive ? "text-white/85" : "text-white/55"}`}>
+                  <div className={`mt-1.5 text-[11px] leading-tight ${isActive ? "text-white/85" : "text-white/55"}`}>
                     {d.sub}
                   </div>
                 </div>
-                <ArrowRight className="absolute bottom-4 right-4 h-4 w-4 opacity-70" />
-                {isActive && <span className="absolute -bottom-[1px] left-6 right-6 h-[3px] rounded-full bg-white/80" />}
+                <ArrowRight className="absolute bottom-3 right-3 h-4 w-4 opacity-80" />
+                {isActive && <span className="absolute -bottom-[1px] left-4 right-4 h-[3px] rounded-full bg-white/90" />}
               </button>
             );
           })}
