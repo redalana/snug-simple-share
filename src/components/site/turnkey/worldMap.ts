@@ -12,22 +12,18 @@ export const MAP_H = 620;
 
 // Region window (lon, lat). Covers North + East Africa, Middle East,
 // Central Asia and reaches Bangladesh in the east.
-const REGION: GeoJSON.Feature = {
-  type: "Feature",
-  properties: {},
-  geometry: {
-    type: "Polygon",
-    coordinates: [
-      [
-        [8, -8],
-        [95, -8],
-        [95, 50],
-        [8, 50],
-        [8, -8],
-      ],
-    ],
-  },
-};
+// Use MultiPoint corners (not a Polygon) — d3-geo treats polygon rings as
+// geodesic segments, which yields wrong bounds for large lon/lat rectangles
+// and collapses the projected extent. MultiPoint uses the raw corners.
+const REGION: GeoJSON.GeoJsonObject = {
+  type: "MultiPoint",
+  coordinates: [
+    [8, -8],
+    [95, -8],
+    [95, 50],
+    [8, 50],
+  ],
+} as GeoJSON.GeoJsonObject;
 
 export const projection = geoMercator().fitExtent(
   [
