@@ -316,89 +316,180 @@ const REMOTE_FEATURES = [
   {
     icon: Radio,
     t: "Remote Diagnostics",
-    d: "OEM-approved secure tunnels let our engineers inspect logs, run service utilities and resolve most issues without a site visit.",
+    d: "Detect software and hardware issues before failure.",
   },
   {
     icon: LineChart,
-    t: "Predictive Maintenance",
-    d: "Continuous anomaly detection on tube arc counts, coil temperature and image quality metrics — we act before a failure interrupts your schedule.",
+    t: "Predictive Monitoring",
+    d: "Continuous health monitoring for installed equipment.",
   },
   {
-    icon: Activity,
-    t: "Live Monitoring",
-    d: "24/7 telemetry from every connected system, with a full audit trail for compliance and QA reviews.",
+    icon: Cog,
+    t: "Software Updates",
+    d: "OEM software updates and configuration support.",
+  },
+  {
+    icon: Zap,
+    t: "Rapid Engineer Response",
+    d: "Fast engineering response for critical service cases.",
   },
 ];
+
+const LIVE_STATUS = [
+  { name: "MRI Systems", status: "Online", tone: "emerald" },
+  { name: "CT Systems", status: "Healthy", tone: "emerald" },
+  { name: "Cath Labs", status: "Connected", tone: "sky" },
+  { name: "Ultrasound", status: "Monitoring", tone: "sky" },
+  { name: "PET/CT", status: "Scheduled Maintenance", tone: "amber" },
+] as const;
+
+const TONE_MAP: Record<string, { dot: string; text: string; bg: string }> = {
+  emerald: { dot: "bg-emerald-400", text: "text-emerald-300", bg: "bg-emerald-400/10" },
+  sky: { dot: "bg-sky-400", text: "text-sky-300", bg: "bg-sky-400/10" },
+  amber: { dot: "bg-amber-400", text: "text-amber-300", bg: "bg-amber-400/10" },
+};
 
 function RemoteDiagnostics() {
   return (
     <section className="relative overflow-hidden bg-background py-24 lg:py-28">
-      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20 lg:px-10">
-        <div className="relative">
+      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-16 lg:px-10">
+        {/* LEFT — Image with parallax */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative lg:sticky lg:top-24"
+        >
           <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/25 to-transparent blur-2xl" />
           <div className="relative overflow-hidden rounded-3xl shadow-[0_50px_100px_-40px_rgba(0,0,0,0.55)]">
-            <img
+            <motion.img
               src={remoteImg}
-              alt="Engineer monitoring medical equipment telemetry from operations center"
+              alt="Biomedical engineer using a tablet beside an MRI scanner to remotely monitor equipment health"
               className="h-full w-full object-cover"
               loading="lazy"
               width={1600}
-              height={1100}
+              height={1408}
+              initial={{ scale: 1.08 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.4, ease: "easeOut" }}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent" />
-            <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-md">
-              <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em]">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                Live Telemetry
-              </div>
-              <div className="text-[12px] font-semibold">128 devices connected</div>
-            </div>
-          </div>
-        </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
 
+            {/* Floating status badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="absolute left-5 top-5 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-xl"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </span>
+              <div className="leading-tight">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.22em]">Connected</div>
+                <div className="text-[12px] text-white/80">24/7 Live Monitoring</div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* RIGHT — Content */}
         <div>
           <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            Remote Diagnostics
+            Proactive Support
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-[3.25rem]">
-            We see problems before your team does.
+            Every System.
+            <br />
+            Always Connected.
           </h2>
           <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-muted-foreground">
-            Our operations center continuously monitors device health, image
-            quality metrics and system logs across every installation — most
-            issues are resolved remotely, before they interrupt a patient
-            schedule.
+            Our biomedical engineers continuously monitor installed systems,
+            detect issues early, and provide remote support before downtime
+            impacts your hospital — from performance telemetry and predictive
+            alerts to OEM software support and rapid engineering response.
           </p>
-          <div className="mt-10 divide-y divide-border/70 border-y border-border/70">
+
+          {/* 4 feature cards */}
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {REMOTE_FEATURES.map(({ icon: Icon, t, d }, i) => (
               <motion.div
                 key={t}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group flex items-start gap-6 py-7"
+                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.25)]"
               >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                  <Icon className="h-6 w-6" strokeWidth={1.75} />
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </div>
-                <div className="flex-1">
-                  <div className="font-display text-xl font-bold text-foreground">
-                    {t}
-                  </div>
-                  <div className="mt-1.5 text-[14.5px] leading-relaxed text-muted-foreground">
-                    {d}
-                  </div>
+                <div className="mt-4 font-display text-[1.05rem] font-bold text-foreground">
+                  {t}
                 </div>
-                <ArrowUpRight className="mt-2 h-5 w-5 shrink-0 text-muted-foreground/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                <div className="mt-1.5 text-[13.5px] leading-relaxed text-muted-foreground">
+                  {d}
+                </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Live Equipment Status */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-ink text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]"
+          >
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
+              <div className="flex items-center gap-2.5">
+                <Signal className="h-4 w-4 text-emerald-400" strokeWidth={2} />
+                <span className="text-[12px] font-semibold uppercase tracking-[0.22em] text-white/90">
+                  Live Equipment Status
+                </span>
+              </div>
+              <span className="text-[11px] font-medium text-white/50">
+                Updated · just now
+              </span>
+            </div>
+            <ul className="divide-y divide-white/5">
+              {LIVE_STATUS.map(({ name, status, tone }) => {
+                const c = TONE_MAP[tone];
+                return (
+                  <li
+                    key={name}
+                    className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-white/[0.03]"
+                  >
+                    <span className="text-[14px] font-medium text-white/90">{name}</span>
+                    <span
+                      className={`inline-flex items-center gap-2 rounded-full ${c.bg} px-3 py-1 text-[12px] font-semibold ${c.text}`}
+                    >
+                      <span className="relative flex h-2 w-2">
+                        <span
+                          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${c.dot} opacity-60`}
+                        />
+                        <span
+                          className={`relative inline-flex h-2 w-2 rounded-full ${c.dot}`}
+                        />
+                      </span>
+                      {status}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------------- SUPPORT JOURNEY ---------------- */
 
