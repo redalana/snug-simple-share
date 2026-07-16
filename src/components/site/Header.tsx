@@ -346,7 +346,9 @@ export function Header() {
                     />
                   </a>
 
-                  {item.dropdown && (
+                  {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
+
+                  {item.dropdown && item.label !== "Brands" && (
                     <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
                       <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
                         {item.dropdown.map((sub) => (
