@@ -3,11 +3,11 @@ import { useMemo, useState } from "react";
 import {
   ArrowRight,
   Award,
+  CalendarClock,
   FileText,
   Globe2,
   GitCompare,
   HeadphonesIcon,
-  Lightbulb,
   Search,
   ShieldCheck,
   Sparkles,
@@ -190,6 +190,11 @@ function productCount(brand: Brand): number {
   return PRODUCTS.filter((p) => p.brand === brand.productKey).length;
 }
 
+function firstProductImage(brand: Brand): string | undefined {
+  if (!brand.productKey) return undefined;
+  return PRODUCTS.find((p) => p.brand === brand.productKey)?.image;
+}
+
 function BrandMark({ brand, size = "md" }: { brand: Brand; size?: "md" | "lg" }) {
   const c = brand.color;
   const d = size === "lg" ? 7 : 5;
@@ -268,22 +273,22 @@ function BrandsPage() {
             <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
             <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
           </div>
-          <div className="mx-auto max-w-[100rem] px-6 pt-14 lg:px-10 lg:pt-16">
+          <div className="mx-auto max-w-[100rem] px-6 pt-11 lg:px-10 lg:pt-12">
             <div className="mx-auto max-w-4xl text-center">
               <div className="flex justify-center">
                 <Eyebrow index="01">Our Brand Portfolio</Eyebrow>
               </div>
-              <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3.6rem]">
+              <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3.6rem]">
                 Twelve world-leading manufacturers.
                 <br />
                 <span className="text-primary">One trusted partner.</span>
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 AbuFarha Medical is the authorized channel for the medical technology
                 brands hospitals rely on every day — supplied, installed, commissioned
                 and supported by our engineers.
               </p>
-              <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <a
                   href="#brand-grid"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
@@ -301,11 +306,12 @@ function BrandsPage() {
             </div>
 
             {/* ANIMATED LOGO WALL */}
-            <div className="mt-14 pb-16 lg:mt-16 lg:pb-20">
+            <div className="mt-10 pb-12 lg:mt-12 lg:pb-16">
               <LogoWall />
             </div>
           </div>
         </section>
+
 
         {/* METRICS */}
         <section className="border-b border-border bg-accent/30">
@@ -334,7 +340,7 @@ function BrandsPage() {
         {/* STICKY SEARCH + FILTERS */}
         <div className="sticky top-[88px] z-30 border-b border-border bg-white/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-[100rem] flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:gap-6 lg:px-10">
-            <div className="relative flex-1 lg:max-w-xl">
+            <div className="relative flex-1 lg:max-w-[52rem]">
               <Search
                 className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-muted-foreground"
                 strokeWidth={2}
@@ -396,7 +402,7 @@ function BrandsPage() {
         )}
 
         {/* BRAND GRID */}
-        <section id="brand-grid" className="bg-accent/25 py-20 lg:py-28">
+        <section id="brand-grid" className="bg-[#FAFAFA] py-20 lg:py-28">
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
@@ -463,12 +469,6 @@ function BrandsPage() {
                   to: "/products",
                 },
                 {
-                  icon: Lightbulb,
-                  title: "Help Me Choose",
-                  desc: "Answer a few questions and get a shortlist that fits your case mix.",
-                  to: "/hospital-readiness-assessment",
-                },
-                {
                   icon: HeadphonesIcon,
                   title: "Talk to an Engineer",
                   desc: "Independent biomedical guidance from our senior team.",
@@ -479,6 +479,12 @@ function BrandsPage() {
                   title: "Request a Quote",
                   desc: "Get pricing, availability and lead times within one working day.",
                   to: "/contact",
+                },
+                {
+                  icon: CalendarClock,
+                  title: "Book Consultation",
+                  desc: "Schedule a 30-minute call to review your project scope.",
+                  to: "/hospital-readiness-assessment",
                 },
               ].map((a) => (
                 <Link
@@ -589,74 +595,97 @@ function LogoWall() {
 /* -------- CARDS -------- */
 function FeaturedBrandCard({ brand }: { brand: Brand }) {
   const count = productCount(brand);
+  const thumb = firstProductImage(brand);
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-[0_30px_80px_-30px_rgba(0,0,0,0.4)]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/70 hover:shadow-[0_30px_80px_-30px_rgba(230,57,70,0.35)]"
     >
-      <span className="absolute inset-x-0 top-0 h-[3px]" style={{ backgroundColor: brand.color }} />
-      <span
-        className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-[0.12]"
-        style={{ backgroundColor: brand.color }}
-      />
+      <span className="absolute inset-x-0 top-0 z-10 h-[3px]" style={{ backgroundColor: brand.color }} />
 
-      <div className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">
-          <Sparkles className="h-3 w-3" strokeWidth={2.5} />
-          Featured
-        </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          {brand.country}
-        </span>
-      </div>
-
-      <div className="mt-6 flex items-center gap-3.5">
-        <BrandMark brand={brand} size="lg" />
-        <div className="flex flex-col leading-none">
-          <span
-            className="font-display text-[1.75rem] font-extrabold tracking-tight"
-            style={{ color: brand.color }}
-          >
-            {brand.name}
+      {/* Product thumbnail */}
+      {thumb && (
+        <div className="relative h-40 w-full overflow-hidden bg-[#f4f5f7]">
+          <img
+            src={thumb}
+            alt={`${brand.name} equipment`}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/70 via-white/0 to-white/0" />
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-primary shadow-sm backdrop-blur">
+            <Sparkles className="h-3 w-3" strokeWidth={2.5} />
+            Featured
           </span>
-          {brand.sub && (
+          <span className="absolute right-4 top-4 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur">
+            {brand.country}
+          </span>
+        </div>
+      )}
+
+      <div className="flex flex-1 flex-col p-8">
+        <div className="flex items-center gap-4">
+          <span
+            className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-white shadow-sm"
+            aria-hidden
+          >
+            <BrandMark brand={brand} size="lg" />
+          </span>
+          <div className="flex min-w-0 flex-col leading-none">
             <span
-              className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]"
-              style={{ color: brand.color, opacity: 0.8 }}
+              className="truncate font-display text-[2rem] font-extrabold tracking-tight"
+              style={{ color: brand.color }}
             >
-              {brand.sub}
+              {brand.name}
+            </span>
+            {brand.sub && (
+              <span
+                className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em]"
+                style={{ color: brand.color, opacity: 0.8 }}
+              >
+                {brand.sub}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <p className="mt-6 flex-1 text-[15px] leading-relaxed text-muted-foreground">
+          {brand.description}
+        </p>
+
+        <div className="mt-6 flex flex-wrap gap-1.5">
+          {brand.categories.map((c) => (
+            <span
+              key={c}
+              className="rounded-full border border-border bg-accent/50 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide text-foreground/80"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-7 flex items-center justify-between gap-3 border-t border-border pt-5">
+          <div className="flex items-center gap-2">
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5"
+            >
+              View Products
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.25} />
+            </Link>
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3.5 py-2 text-xs font-semibold text-foreground/80 transition-colors hover:border-primary/50 hover:text-primary"
+            >
+              <GitCompare className="h-3.5 w-3.5" strokeWidth={2.25} />
+              Compare
+            </Link>
+          </div>
+          {count > 0 && (
+            <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              {count} {count === 1 ? "system" : "systems"}
             </span>
           )}
         </div>
-      </div>
-
-      <p className="mt-6 flex-1 text-[15px] leading-relaxed text-muted-foreground">
-        {brand.description}
-      </p>
-
-      <div className="mt-6 flex flex-wrap gap-1.5">
-        {brand.categories.map((c) => (
-          <span
-            key={c}
-            className="rounded-full border border-border bg-accent/50 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide text-foreground/80"
-          >
-            {c}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-7 flex items-center justify-between border-t border-border pt-5">
-        <Link
-          to="/products"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
-        >
-          View Products
-          <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
-        </Link>
-        {count > 0 && (
-          <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-            {count} {count === 1 ? "system" : "systems"} in stock
-          </span>
-        )}
       </div>
     </article>
   );
@@ -664,18 +693,25 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
 
 function BrandCard({ brand }: { brand: Brand }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.35)]">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white p-9 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/70 hover:shadow-[0_28px_70px_-25px_rgba(230,57,70,0.35)]">
       <span
         className="absolute inset-x-0 top-0 h-1 opacity-80"
         style={{ backgroundColor: brand.color }}
       />
+      {/* soft red glow on hover */}
+      <span className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: "inset 0 0 0 1px rgba(230,57,70,0.35)" }} />
 
       {/* Logo lockup — consistent alignment across every card */}
-      <div className="flex h-16 items-center gap-3">
-        <BrandMark brand={brand} size="lg" />
+      <div className="flex h-16 items-center gap-4">
+        <span
+          className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-white shadow-sm"
+          aria-hidden
+        >
+          <BrandMark brand={brand} size="lg" />
+        </span>
         <div className="flex min-w-0 flex-col leading-none">
           <span
-            className="truncate font-display text-2xl font-extrabold tracking-tight"
+            className="truncate font-display text-[1.6rem] font-extrabold tracking-tight"
             style={{ color: brand.color }}
           >
             {brand.name}
@@ -688,7 +724,7 @@ function BrandCard({ brand }: { brand: Brand }) {
         </div>
       </div>
 
-      <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-6 flex-1 text-sm leading-relaxed text-muted-foreground">
         {brand.description}
       </p>
 
@@ -703,7 +739,7 @@ function BrandCard({ brand }: { brand: Brand }) {
         ))}
       </div>
 
-      <div className="mt-7 border-t border-border pt-5">
+      <div className="mt-8 border-t border-border pt-5">
         <Link
           to="/products"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5"
