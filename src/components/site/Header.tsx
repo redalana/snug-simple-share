@@ -391,12 +391,14 @@ function MobileProductsAccordion({
                 Product Categories
               </span>
               <ul className="flex flex-col">
-                {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => {
-                  const isActive = pathname === href;
+                {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
+                  const isActive =
+                    pathname === "/products" && !!category && activeCategory === category;
                   return (
                     <li key={label}>
                       <Link
-                        to={href}
+                        to="/products"
+                        search={category ? { category } : {}}
                         onClick={onNavigate}
                         aria-current={isActive ? "page" : undefined}
                         className={`flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
@@ -413,6 +415,7 @@ function MobileProductsAccordion({
                   );
                 })}
               </ul>
+
               <Link
                 to="/products"
                 onClick={onNavigate}
