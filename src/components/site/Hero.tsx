@@ -5,11 +5,29 @@ import {
   useReducedMotion,
   type PanInfo,
 } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Play, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  ChevronLeft,
+  ChevronRight,
+  ClipboardList,
+  Factory,
+  GraduationCap,
+  LifeBuoy,
+  Package,
+  Play,
+  ShieldCheck,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
+
 import heroCath from "@/assets/hero-cathlab.jpg";
-import heroMri from "@/assets/sol-mri.jpg";
-import heroOr from "@/assets/sol-or.jpg";
-import heroService from "@/assets/beyond-cathlab.jpg";
+import turnkeyInstall from "@/assets/turnkey-hero.jpg";
+import engineerService from "@/assets/aftersales-engineering.jpg";
+
+
+type TrustItem = { icon: LucideIcon; label: string };
 
 type Slide = {
   theme: string;
@@ -19,7 +37,7 @@ type Slide = {
   image: string;
   imageAlt: string;
   card: { title: string; body: string };
-  stats: { value: string; label: string }[];
+  trust: TrustItem[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string; icon?: boolean };
 };
@@ -36,21 +54,20 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "AbuFarha supplies certified medical imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — to leading hospitals across Africa and the Middle East.",
+      "AbuFarha supplies certified imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — from the world's leading OEMs to hospitals across Africa and the Middle East.",
     image: heroCath,
     imageAlt: "Modern cath lab suite with advanced interventional imaging system",
     card: { title: "Certified Medical Systems", body: "Imaging and interventional technology, delivered." },
-    stats: [
-      { value: "✓", label: "Certified Systems" },
-      { value: "✓", label: "Factory Refurbished" },
-      { value: "✓", label: "OEM Quality Standards" },
-      { value: "1Y", label: "Warranty Included" },
+    trust: [
+      { icon: BadgeCheck, label: "Certified Systems" },
+      { icon: Factory, label: "OEM Brands" },
+      { icon: ShieldCheck, label: "Factory Refurbished Available" },
     ],
     primary: { label: "Explore Products", href: "/products" },
     secondary: { label: "Request a Quote", href: "/contact" },
   },
   {
-    theme: "Turnkey Healthcare Projects",
+    theme: "Turnkey Projects",
     eyebrow: "Design · Supply · Install · Commission",
     headline: (
       <>
@@ -60,22 +77,22 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "We plan, supply, install, commission and hand over complete healthcare facilities — from radiology and cath lab departments to full imaging centers — ready for clinical use on day one.",
-    image: heroMri,
-    imageAlt: "Biomedical engineers installing an MRI imaging system",
+      "A single partner across the full project lifecycle — site planning and shielding, equipment supply, installation, commissioning and clinical training — so departments open on schedule, fully compliant, and ready to treat patients.",
+    image: turnkeyInstall,
+    imageAlt: "Biomedical engineers installing and commissioning medical imaging equipment",
     card: { title: "Turnkey Delivery", body: "One partner, from blueprint to first patient." },
-    stats: [
-      { value: "✓", label: "Planning" },
-      { value: "✓", label: "Installation" },
-      { value: "✓", label: "Commissioning" },
-      { value: "✓", label: "Clinical Training" },
+    trust: [
+      { icon: ClipboardList, label: "Planning" },
+      { icon: Wrench, label: "Installation" },
+      { icon: BadgeCheck, label: "Commissioning" },
+      { icon: GraduationCap, label: "Clinical Training" },
     ],
     primary: { label: "Explore Turnkey Projects", href: "/turnkey" },
     secondary: { label: "Talk to an Engineer", href: "/contact" },
   },
   {
-    theme: "After-Sales & Biomedical Engineering",
-    eyebrow: "Lifecycle Support That Keeps Hospitals Running",
+    theme: "After-Sales",
+    eyebrow: "Lifecycle Biomedical Engineering Support",
     headline: (
       <>
         Reliable After-Sales Support
@@ -84,20 +101,20 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "Preventive and corrective maintenance, genuine spare parts, software updates and long-term biomedical engineering support — delivered by certified engineers on the ground.",
-    image: heroService,
-    imageAlt: "Biomedical engineer servicing advanced MRI imaging equipment",
+      "Preventive and corrective maintenance, genuine OEM spare parts, software updates, warranty coverage and 24/7 technical support — delivered by certified biomedical engineers on the ground.",
+    image: engineerService,
+    imageAlt: "Certified biomedical engineer servicing advanced medical imaging equipment",
     card: { title: "Always-On Support", body: "Certified engineers, genuine parts, 24/7." },
-    stats: [
-      { value: "24/7", label: "Technical Support" },
-      { value: "✓", label: "Preventive Maintenance" },
-      { value: "OEM", label: "Spare Parts" },
-      { value: "✓", label: "Warranty Coverage" },
+    trust: [
+      { icon: LifeBuoy, label: "24/7 Support" },
+      { icon: Zap, label: "Fast Response" },
+      { icon: Package, label: "OEM Spare Parts" },
     ],
     primary: { label: "Explore Services", href: "/after-sales" },
     secondary: { label: "Contact Support", href: "/contact" },
   },
 ];
+
 
 const AUTOPLAY_MS = 7500;
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -306,27 +323,24 @@ export function Hero() {
                 Backed by a 1-year free warranty on every installation.
               </motion.div>
 
-              <div className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6 sm:grid-cols-4">
-                {slide.stats.map((s, i) => (
-                  <motion.div
-                    key={`${index}-${s.label}`}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.55,
-                      ease: EASE,
-                      delay: 0.5 + i * 0.08,
-                    }}
-                  >
-                    <div className="font-display text-2xl font-extrabold leading-none text-ink">
-                      {s.value}
-                    </div>
-                    <div className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                      {s.label}
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-border pt-6">
+                {slide.trust.map((t, i) => {
+                  const Icon = t.icon;
+                  return (
+                    <motion.span
+                      key={`${index}-${t.label}`}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, ease: EASE, delay: 0.5 + i * 0.07 }}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/70 px-3 py-1.5 text-[12px] font-semibold text-ink shadow-sm backdrop-blur"
+                    >
+                      <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={2.4} />
+                      {t.label}
+                    </motion.span>
+                  );
+                })}
               </div>
+
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -360,44 +374,59 @@ export function Hero() {
 
         {/* ── Controls ────────────────────────────────────────────── */}
         <div className="relative z-30 mt-10 flex items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            {SLIDES.map((s, i) => (
-              <button
-                key={s.theme}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}: ${s.theme}`}
-                aria-current={i === index}
-                className="group flex items-center gap-2"
-              >
-                <span
-                  className={`relative block h-[3px] overflow-hidden rounded-full transition-all duration-500 ${
-                    i === index ? "w-14 bg-primary/25" : "w-6 bg-border"
+          <div className="flex flex-wrap items-center gap-2">
+            {SLIDES.map((s, i) => {
+              const active = i === index;
+              return (
+                <button
+                  key={s.theme}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}: ${s.theme}`}
+                  aria-current={active}
+                  className={`group flex min-w-[9rem] flex-col gap-2 rounded-lg px-3 py-2 text-left transition-colors sm:min-w-[11rem] ${
+                    active ? "bg-primary/[0.04]" : "hover:bg-secondary/60"
                   }`}
                 >
-                  {i === index && !reduce && !paused ? (
-                    <motion.span
-                      key={`prog-${index}`}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-                      style={{ transformOrigin: "left" }}
-                      className="absolute inset-0 bg-primary"
-                    />
-                  ) : i === index ? (
-                    <span className="absolute inset-0 bg-primary" />
-                  ) : null}
-                </span>
-                <span
-                  className={`hidden text-[11px] font-bold uppercase tracking-[0.18em] transition-colors md:inline ${
-                    i === index ? "text-ink" : "text-muted-foreground group-hover:text-ink"
-                  }`}
-                >
-                  0{i + 1}
-                </span>
-              </button>
-            ))}
+                  <span className="flex items-center gap-2">
+                    <span
+                      className={`font-display text-[11px] font-extrabold tabular-nums transition-colors ${
+                        active ? "text-primary" : "text-muted-foreground/70"
+                      }`}
+                    >
+                      0{i + 1}
+                    </span>
+                    <span
+                      className={`text-[11px] font-bold uppercase tracking-[0.18em] transition-colors ${
+                        active ? "text-ink" : "text-muted-foreground group-hover:text-ink"
+                      }`}
+                    >
+                      {s.theme}
+                    </span>
+                  </span>
+                  <span
+                    className={`relative block h-[3px] overflow-hidden rounded-full transition-colors ${
+                      active ? "bg-primary/20" : "bg-border"
+                    }`}
+                  >
+                    {active && !reduce && !paused ? (
+                      <motion.span
+                        key={`prog-${index}`}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                        style={{ transformOrigin: "left" }}
+                        className="absolute inset-0 bg-primary"
+                      />
+                    ) : active ? (
+                      <span className="absolute inset-0 bg-primary" />
+                    ) : null}
+                  </span>
+                </button>
+              );
+            })}
           </div>
+
           <div className="flex items-center gap-2">
             <button
               type="button"
