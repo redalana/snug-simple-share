@@ -241,9 +241,9 @@ function BrandsMegaDropdown() {
 
 function ProductsMegaDropdown() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const search = useRouterState({ select: (s) => s.location.search as unknown }) as Record<string, unknown>;
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
+  const activeCategory = new URLSearchParams(searchStr).get("category");
 
-  const activeCategory = typeof search.category === "string" ? search.category : null;
   const [closed, setClosed] = useState(false);
   const lastKey = useRef(`${pathname}?${activeCategory ?? ""}`);
 
