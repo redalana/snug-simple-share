@@ -741,11 +741,12 @@ function EquipmentGallery() {
 
 function Engineering() {
   const features = [
-    { icon: ShieldCheck, t: "OEM Certified Team", d: "Trained directly by Siemens, Philips, GE, Canon and more." },
-    { icon: Cog, t: "Factory Procedures", d: "Every service follows original manufacturer specifications." },
-    { icon: Users, t: "Clinical Application Support", d: "Hands-on training for radiographers and biomeds on every install." },
-    { icon: ClipboardCheck, t: "Full Warranty Coverage", d: "1-year free warranty plus extended service contracts." },
+    { icon: ShieldCheck, t: "OEM Certified Team", d: "Trained by Siemens, Philips, GE and Canon." },
+    { icon: Cog, t: "Factory Procedures", d: "Every service follows original OEM specifications." },
+    { icon: Users, t: "Clinical Support", d: "Hands-on training for radiographers and biomeds." },
+    { icon: ClipboardCheck, t: "Full Warranty", d: "1-year coverage plus extended service contracts." },
   ];
+
   const badges = [
     { icon: Award, k: "12+", v: "OEM Certificates" },
     { icon: Clock, k: "< 4h", v: "Response Time" },
