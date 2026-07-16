@@ -37,13 +37,8 @@ const NAV: NavItem[] = [
   { label: "After Sales", href: "/after-sales" },
   {
     label: "Brands",
-    href: "#brands",
-    dropdown: [
-      { label: "Philips", href: "#brands" },
-      { label: "Siemens Healthineers", href: "#brands" },
-      { label: "GE HealthCare", href: "#brands" },
-      { label: "Richard Wolf", href: "#brands" },
-    ],
+    href: "/brands",
+    dropdown: [{ label: "All Brands", href: "/brands" }],
   },
   {
     label: "About Us",
