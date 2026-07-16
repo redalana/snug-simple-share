@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -47,13 +47,6 @@ import trainingImg from "@/assets/aftersales-hero.jpg";
 /*  HERO                                                              */
 /* ================================================================== */
 
-const HERO_QUICK = [
-  { icon: Wrench, label: "Installation & Commissioning" },
-  { icon: GraduationCap, label: "Clinical Training" },
-  { icon: Settings2, label: "Preventive Maintenance" },
-  { icon: Package, label: "Spare Parts & Support" },
-];
-
 const HERO_KPIS = [
   { icon: BadgeCheck, value: "25+", label: "Years of Experience" },
   { icon: Users, value: "500+", label: "Systems Supported" },
@@ -61,52 +54,207 @@ const HERO_KPIS = [
   { icon: LifeBuoy, value: "24/7", label: "Technical Support" },
 ];
 
+type HeroSlide = {
+  img: string;
+  eyebrow: string;
+  title: React.ReactNode;
+  desc: string;
+  cta: { label: string; href: string };
+  highlights: { icon: LucideIcon; label: string }[];
+};
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    img: heroImg,
+    eyebrow: "Our Services",
+    title: (
+      <>
+        Complete Healthcare
+        <br />
+        Engineering Services.
+        <br />
+        <span className="text-primary">From Planning to Lifetime Support.</span>
+      </>
+    ),
+    desc: "End-to-end delivery for imaging, cath lab and critical care systems — planning, installation, calibration and long-term uptime, all under one accountable partner.",
+    cta: { label: "Explore All Services", href: "#request" },
+    highlights: [
+      { icon: Wrench, label: "Installation & Commissioning" },
+      { icon: GraduationCap, label: "Clinical Training" },
+      { icon: Settings2, label: "Preventive Maintenance" },
+      { icon: Package, label: "Spare Parts & Support" },
+    ],
+  },
+  {
+    img: trainingImg,
+    eyebrow: "Clinical Enablement",
+    title: (
+      <>
+        Clinical Training &
+        <br />
+        <span className="text-primary">Application Support.</span>
+      </>
+    ),
+    desc: "Certified application specialists train your radiologists, technologists and biomedical teams on real protocols — turning advanced equipment into confident daily practice.",
+    cta: { label: "Request Training Program", href: "#request" },
+    highlights: [
+      { icon: GraduationCap, label: "User Operation Training" },
+      { icon: ClipboardList, label: "Protocol Optimization" },
+      { icon: ShieldCheck, label: "Safety & Compliance" },
+      { icon: Users, label: "Refresher Sessions" },
+    ],
+  },
+  {
+    img: engineeringImg,
+    eyebrow: "Preventive Maintenance",
+    title: (
+      <>
+        Predictable Uptime.
+        <br />
+        <span className="text-primary">Preventive Maintenance.</span>
+      </>
+    ),
+    desc: "Scheduled inspection, calibration and performance verification aligned with OEM standards — protecting image quality, patient safety and the lifespan of every system.",
+    cta: { label: "Book a Maintenance Plan", href: "#request" },
+    highlights: [
+      { icon: Settings2, label: "Routine Inspections" },
+      { icon: BadgeCheck, label: "OEM Calibration" },
+      { icon: ShieldCheck, label: "Safety Testing" },
+      { icon: ClipboardList, label: "Compliance Reports" },
+    ],
+  },
+  {
+    img: remoteEngineerImg,
+    eyebrow: "Technical Support",
+    title: (
+      <>
+        24/7 Technical Support
+        <br />
+        <span className="text-primary">& Warranty Coverage.</span>
+      </>
+    ),
+    desc: "A dedicated service desk, priority on-site response and full warranty administration — minimizing downtime for every critical system in your department.",
+    cta: { label: "Talk to Support Now", href: "tel:+96264026063" },
+    highlights: [
+      { icon: Headphones, label: "24/7 Service Desk" },
+      { icon: Radar, label: "Remote Diagnostics" },
+      { icon: Wrench, label: "On-Site Response" },
+      { icon: ShieldCheck, label: "Warranty Coverage" },
+    ],
+  },
+  {
+    img: ctaImg,
+    eyebrow: "Long-Term Partnership",
+    title: (
+      <>
+        A Lifetime
+        <br />
+        <span className="text-primary">Engineering Partnership.</span>
+      </>
+    ),
+    desc: "From day-one commissioning to year-ten upgrades — spare parts availability, technology refresh and continuous training that keep your investment performing for its full lifecycle.",
+    cta: { label: "Become a Partner", href: "#request" },
+    highlights: [
+      { icon: LifeBuoy, label: "Lifetime Support" },
+      { icon: Package, label: "OEM Spare Parts" },
+      { icon: Cpu, label: "Upgrades & Refresh" },
+      { icon: BadgeCheck, label: "Trusted Partner" },
+    ],
+  },
+];
+
 function Hero() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = HERO_SLIDES.length;
+
+  // autoplay every 6s, pause on hover
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % total);
+    }, 6000);
+    return () => window.clearInterval(id);
+  }, [paused, total]);
+
+  const goTo = (i: number) => setIndex(((i % total) + total) % total);
+
   return (
-    <section className="relative isolate overflow-hidden bg-[#0d0f12] text-white">
+    <section
+      className="relative isolate overflow-hidden bg-[#0d0f12] text-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      aria-roledescription="carousel"
+      aria-label="AbuFarha healthcare engineering services"
+    >
+      {/* background image layers — fade transition */}
       <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="AbuFarha biomedical engineers servicing a Cath Lab"
-          className="h-full w-full object-cover object-center opacity-80"
-        />
+        {HERO_SLIDES.map((s, i) => (
+          <img
+            key={s.eyebrow}
+            src={s.img}
+            alt=""
+            aria-hidden="true"
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
+              i === index ? "opacity-80" : "opacity-0",
+            )}
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f12] via-[#0d0f12]/85 to-[#0d0f12]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f12]/70 via-transparent to-transparent" />
       </div>
 
       <div className="relative mx-auto grid max-w-[100rem] gap-10 px-6 py-20 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16 lg:px-10 lg:py-24">
-        {/* LEFT */}
-        <div>
-          <Eyebrow tone="light">Our Services</Eyebrow>
-          <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[56px]">
-            Complete Healthcare
-            <br />
-            Engineering Services.
-            <br />
-            <span className="text-primary">From Planning to Lifetime Support.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-white/70">
-            We deliver end-to-end solutions that keep your medical
-            equipment performing at its best — ensuring reliability,
-            safety and maximum uptime.
-          </p>
+        {/* LEFT — animated content */}
+        <div className="relative min-h-[460px]">
+          {HERO_SLIDES.map((s, i) => (
+            <div
+              key={s.eyebrow}
+              aria-hidden={i !== index}
+              className={cn(
+                "transition-opacity duration-700 ease-out",
+                i === index
+                  ? "relative opacity-100"
+                  : "pointer-events-none absolute inset-0 opacity-0",
+              )}
+            >
+              <Eyebrow tone="light">{s.eyebrow}</Eyebrow>
+              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[52px]">
+                {s.title}
+              </h1>
+              <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-white/70">
+                {s.desc}
+              </p>
 
-          <div className="mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {HERO_QUICK.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
-              >
-                <Icon className="h-6 w-6 text-primary" strokeWidth={1.6} />
-                <div className="mt-3 text-[12.5px] font-semibold leading-snug text-white">
-                  {label}
-                </div>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href={s.cta.href}
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+                >
+                  {s.cta.label}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
-            ))}
-          </div>
+
+              <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+                {s.highlights.map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
+                  >
+                    <Icon className="h-6 w-6 text-primary" strokeWidth={1.6} />
+                    <div className="mt-3 text-[12.5px] font-semibold leading-snug text-white">
+                      {label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* RIGHT — KPI PANEL */}
+        {/* RIGHT — KPI PANEL (persistent across slides) */}
         <div className="lg:justify-self-end">
           <div className="rounded-2xl border border-white/12 bg-[#111418]/85 p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md lg:min-w-[320px]">
             <div className="flex flex-col divide-y divide-white/10">
@@ -129,9 +277,46 @@ function Hero() {
           </div>
         </div>
       </div>
+
+      {/* NAV ARROWS */}
+      <button
+        type="button"
+        aria-label="Previous slide"
+        onClick={() => goTo(index - 1)}
+        className="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur transition hover:border-primary hover:bg-primary hover:text-primary-foreground md:grid"
+      >
+        <ArrowRight className="h-4 w-4 rotate-180" />
+      </button>
+      <button
+        type="button"
+        aria-label="Next slide"
+        onClick={() => goTo(index + 1)}
+        className="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/30 text-white backdrop-blur transition hover:border-primary hover:bg-primary hover:text-primary-foreground md:grid"
+      >
+        <ArrowRight className="h-4 w-4" />
+      </button>
+
+      {/* PAGINATION DOTS */}
+      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
+        {HERO_SLIDES.map((s, i) => (
+          <button
+            key={s.eyebrow}
+            type="button"
+            aria-label={`Go to slide ${i + 1}`}
+            aria-current={i === index}
+            onClick={() => goTo(i)}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300",
+              i === index ? "w-8 bg-primary" : "w-3 bg-white/40 hover:bg-white/70",
+            )}
+          />
+        ))}
+      </div>
     </section>
   );
 }
+
+
 
 /* ================================================================== */
 /*  HOW WE SUPPORT YOU                                                */
