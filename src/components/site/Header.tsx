@@ -23,16 +23,7 @@ const NAV: NavItem[] = [
       { label: "Patient Monitoring", href: "#solutions" },
     ],
   },
-  {
-    label: "Services",
-    href: "/services",
-    dropdown: [
-      { label: "All Services", href: "/services" },
-      { label: "Installation & Commissioning", href: "/services#capabilities" },
-      { label: "Preventive Maintenance", href: "/services#capabilities" },
-      { label: "Training & Support", href: "/services#capabilities" },
-    ],
-  },
+  { label: "Services", href: "/services" },
   { label: "Turnkey", href: "/turnkey" },
   { label: "After Sales", href: "/after-sales" },
   {
