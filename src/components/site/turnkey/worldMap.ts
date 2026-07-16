@@ -15,7 +15,7 @@ export const MAP_H = 620;
 // Use MultiPoint corners (not a Polygon) — d3-geo treats polygon rings as
 // geodesic segments, which yields wrong bounds for large lon/lat rectangles
 // and collapses the projected extent. MultiPoint uses the raw corners.
-const REGION: GeoJSON.GeoJsonObject = {
+const REGION: GeoJSON.MultiPoint = {
   type: "MultiPoint",
   coordinates: [
     [8, -8],
@@ -23,7 +23,7 @@ const REGION: GeoJSON.GeoJsonObject = {
     [95, 50],
     [8, 50],
   ],
-} as GeoJSON.GeoJsonObject;
+};
 
 export const projection = geoMercator().fitExtent(
   [
