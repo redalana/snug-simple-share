@@ -22,7 +22,7 @@ import {
   Signal,
   ArrowUpRight,
   Mail,
-  HeadphonesIcon,
+  Headphones,
   LineChart,
   ClipboardCheck,
   Award,
