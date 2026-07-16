@@ -520,7 +520,7 @@ function EquipmentGallery() {
           </p>
         </div>
 
-        <div className="mt-14 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid auto-rows-[260px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {EQUIPMENT.map((e, i) => (
             <motion.div
               key={e.name}
@@ -528,36 +528,41 @@ function EquipmentGallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
-              className={`group relative overflow-hidden rounded-2xl bg-ink transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] ${e.span}`}
+              className={`group relative flex flex-col overflow-hidden rounded-2xl bg-ink shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] ${e.span}`}
             >
               <Link
                 to="/products"
                 search={{ category: e.category }}
                 aria-label={`View ${e.name} in our product portfolio`}
-                className="absolute inset-0 z-10"
+                className="absolute inset-0 z-20"
               >
                 <span className="sr-only">{e.name}</span>
               </Link>
-              <div className="absolute inset-0 overflow-hidden">
+
+              {/* Image area — takes all remaining space above the fixed content bar */}
+              <div className="relative min-h-0 flex-1 overflow-hidden">
                 <img
                   src={e.img}
                   alt={e.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent transition-opacity duration-500 group-hover:from-ink group-hover:via-ink/75" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent transition-opacity duration-500 group-hover:from-ink/95" />
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 pt-16 sm:p-7 sm:pt-20">
-                <div className="font-display text-2xl font-extrabold leading-tight text-white drop-shadow-md sm:text-[1.75rem]">
+
+              {/* Dedicated bottom content area — fixed height, never overlapped */}
+              <div className="relative z-10 flex h-[92px] shrink-0 items-center justify-between gap-4 bg-ink px-5 py-4 sm:px-6">
+                <div className="min-w-0 font-display text-[1.35rem] font-extrabold leading-tight text-white sm:text-[1.5rem]">
                   {e.name}
                 </div>
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all duration-300 group-hover:bg-primary group-hover:translate-x-1 group-hover:-translate-y-1">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 group-hover:bg-primary group-hover:translate-x-1 group-hover:-translate-y-1">
                   <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
 
       </div>
     </section>
