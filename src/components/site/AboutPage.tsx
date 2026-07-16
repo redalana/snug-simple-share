@@ -23,11 +23,8 @@ import {
   Radar,
   Building,
   Microscope,
-  School,
   Ribbon,
   HeartPulse,
-  ShieldAlert,
-  Landmark,
   Award,
   BadgeCheck,
   Clock,
@@ -40,7 +37,14 @@ import {
   TrendingUp,
   Headphones,
   Star,
+  Baby,
+  Droplets,
+  ScanLine,
+  Scissors,
+  CalendarClock,
+  HardHat,
 } from "lucide-react";
+
 import { Eyebrow } from "./Eyebrow";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 import { useCountUp } from "@/hooks/use-count-up";
@@ -76,11 +80,12 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 
 // ---------- Hero ----------
 const HERO_KPIS = [
-  { icon: ShieldCheck, value: "25+", label: "Years of Experience" },
-  { icon: Building2, value: "30+", label: "Major Healthcare Projects" },
+  { icon: CalendarClock, value: "Since 1999", label: "Established" },
   { icon: Globe2, value: "10+", label: "Countries Served" },
-  { icon: MonitorCheck, value: "500+", label: "Systems Installed" },
+  { icon: Building2, value: "Turnkey", label: "Hospital Projects" },
+  { icon: Cpu, value: "Biomedical", label: "Engineering Support" },
 ];
+
 
 function Hero() {
   return (
@@ -106,10 +111,13 @@ function Hero() {
             <span className="text-primary">Trusted Across Africa &amp; The Middle East.</span>
           </h1>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/75">
-            AbuFarha delivers advanced medical imaging, biomedical engineering
-            and end-to-end turnkey solutions that empower hospitals, improve
-            clinical outcomes and build a healthier future across the region.
+            AbuFarha Medical Supplies has been supplying, installing,
+            commissioning and supporting medical equipment for hospitals across
+            Africa and the Middle East since 1999 — combining biomedical
+            engineering expertise with long-term healthcare partnership.
           </p>
+
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/contact"
@@ -161,19 +169,20 @@ function Hero() {
 
 // ---------- Journey ----------
 const JOURNEY = [
-  { year: "1999", title: "Our Beginning", img: hqImg,
-    desc: "AbuFarha was founded with a vision to bring advanced medical technology and engineering excellence to our region." },
-  { year: "2005", title: "Regional Expansion", img: p1,
-    desc: "Operations extended across key countries in Africa and the Middle East, with permanent local engineering teams." },
-  { year: "2010", title: "Turnkey Projects", img: p2,
-    desc: "Delivered complex turnkey installations for hospitals, imaging and diagnostic centers — from planning to handover." },
-  { year: "2015", title: "After-Sales Network", img: engImg,
-    desc: "Built a full after-sales network of certified biomedical engineers with regional spare-parts stock and rapid response." },
-  { year: "2020", title: "Continuous Growth", img: p3,
-    desc: "Strengthened partnerships with global OEMs and scaled clinical training programs for radiologists and technologists." },
-  { year: "Today", title: "Looking Ahead", img: cathlab,
-    desc: "Committed to advancing healthcare through engineering, service and long-term hospital partnerships." },
+  { year: "1999", title: "Company Founded in Jordan", img: hqImg,
+    desc: "AbuFarha Medical Supplies is founded in Jordan to bring reliable medical equipment and engineering support to regional hospitals." },
+  { year: "2005", title: "Expansion into Hospital Projects", img: p1,
+    desc: "Moves beyond equipment supply into full hospital equipping projects — planning, installation and clinical commissioning." },
+  { year: "2010", title: "Regional Growth", img: p2,
+    desc: "Establishes a network of biomedical engineers and application specialists serving hospitals across the Middle East." },
+  { year: "2015", title: "Large Turnkey Healthcare Projects", img: engImg,
+    desc: "Delivers multi-department turnkey healthcare projects covering imaging, cath lab, ICU, OR and sterilization from a single accountable partner." },
+  { year: "2020", title: "Expansion Across Africa & Middle East", img: p3,
+    desc: "Extends operations into North and East Africa and Central Asia, with permanent field engineering teams and regional spare-parts stock." },
+  { year: "Today", title: "Complete Healthcare Engineering Partner", img: cathlab,
+    desc: "A complete healthcare engineering partner — supply, installation, commissioning, clinical training and lifetime technical support." },
 ];
+
 
 function Journey() {
   return (
@@ -227,26 +236,27 @@ function Journey() {
 const BENTO = [
   {
     key: "eng", img: engImg, span: "lg:col-span-2 lg:row-span-2 min-h-[620px]",
-    title: "Engineering First, Not Trading",
-    desc: "We are biomedical engineers who happen to distribute equipment — not distributors who happen to service it. Every system we deliver is planned, installed and supported by our own certified engineering team.",
+    title: "Engineering First",
+    desc: "AbuFarha is an engineering company that supplies medical equipment — not a reseller. Every project is scoped, installed and supported by our own biomedical engineers, from first site visit to lifetime service.",
     featured: true,
   },
   {
     key: "cert", img: warehouseImg, span: "min-h-[290px]",
     title: "Certified Biomedical Engineers",
-    desc: "OEM-trained field engineers with hands-on experience across imaging, cath lab, monitoring and life-support platforms.",
+    desc: "OEM-trained field engineers with hands-on experience across MRI, CT, cath lab, ultrasound, monitoring and life-support systems.",
   },
   {
     key: "turnkey", img: beyond, span: "min-h-[290px]",
-    title: "Turnkey Project Delivery",
-    desc: "From site survey and design to civil coordination, installation, training and handover — one accountable engineering partner.",
+    title: "Turnkey Healthcare Projects",
+    desc: "One accountable partner for planning, procurement, installation, commissioning, training and handover of complete hospital departments.",
   },
   {
     key: "partner", img: remoteImg, span: "lg:col-span-2 min-h-[290px]",
     title: "Long-Term Partnership",
-    desc: "Relationships built on transparency and continuous engineering support across the full equipment lifecycle — long after commissioning.",
+    desc: "We stay engaged long after go-live — preventive maintenance, spare parts, clinical retraining and technology upgrades across the equipment lifecycle.",
   },
 ];
+
 
 function Bento() {
   return (
@@ -302,14 +312,15 @@ function Bento() {
 
 // ---------- How We Work (DARK for rhythm) ----------
 const STEPS = [
-  { n: "01", icon: MessageSquare, title: "Consultation", desc: "Clinical needs, infrastructure, workflow and long-term goals are assessed before any solution is proposed." },
-  { n: "02", icon: ClipboardCheck, title: "Planning", desc: "Engineers design the optimal solution for your facility with full technical documentation and layout planning." },
-  { n: "03", icon: Boxes, title: "Procurement", desc: "Equipment is sourced directly from OEM partners with full warranty, traceability and cold-chain integrity." },
-  { n: "04", icon: Wrench, title: "Installation", desc: "Certified engineers install, calibrate and clinically commission every system to strict OEM standards." },
-  { n: "05", icon: GraduationCap, title: "Training", desc: "Clinical and technical teams receive structured, protocol-based training for confident day-one operation." },
-  { n: "06", icon: Settings2, title: "Maintenance", desc: "Preventive and corrective maintenance keep systems performing to manufacturer specification over time." },
-  { n: "07", icon: LifeBuoy, title: "Lifetime Support", desc: "24/7 technical support, regional spare parts and lifecycle engineering long after handover." },
+  { n: "01", icon: MessageSquare, title: "Consultation", desc: "We meet with clinical and biomedical teams to understand the department, patient workload, workflow and long-term clinical goals." },
+  { n: "02", icon: ClipboardCheck, title: "Planning & Design", desc: "Engineers produce room layouts, technical specifications, electrical and HVAC requirements and full equipment lists tailored to the facility." },
+  { n: "03", icon: Boxes, title: "Equipment Procurement", desc: "Systems are procured directly from OEM partners with full warranty and traceability — matched to the approved technical specification." },
+  { n: "04", icon: Wrench, title: "Installation", desc: "Certified engineers manage rigging, mechanical and electrical installation and site coordination against manufacturer standards." },
+  { n: "05", icon: Gauge, title: "Commissioning", desc: "Every system is calibrated, tested and clinically accepted with a documented commissioning report handed to the biomedical department." },
+  { n: "06", icon: GraduationCap, title: "Clinical Training", desc: "Application specialists train radiographers, technologists, nurses and biomedical staff on protocols, workflows and safe daily operation." },
+  { n: "07", icon: LifeBuoy, title: "After-Sales Support", desc: "Preventive maintenance contracts, corrective service, spare parts and 24/7 technical support across the full equipment lifetime." },
 ];
+
 
 function HowWeWork() {
   return (
@@ -359,37 +370,38 @@ function HowWeWork() {
 const EXPERTISE = [
   {
     icon: Cpu, title: "Biomedical Engineering", thumb: engImg,
-    desc: "Our in-house biomedical engineering team specializes in advanced imaging, interventional cath lab, patient monitoring and life-support platforms. Engineers hold OEM-level certifications across the systems they service, and every intervention is documented against manufacturer specifications.",
+    desc: "Our in-house biomedical engineering team is the backbone of AbuFarha. Engineers are trained on the specific OEM platforms they service — from MRI and CT to cath lab, monitoring and life-support systems — and every intervention follows manufacturer specifications and is fully documented.",
   },
   {
     icon: Stethoscope, title: "Clinical Applications", thumb: cathlab,
-    desc: "Clinical application specialists work directly with radiologists, cardiologists and technologists to build imaging protocols, optimize dose, refine workflows and validate clinical performance — turning capable equipment into confident daily practice.",
+    desc: "Application specialists work directly with radiologists, cardiologists, technologists and nurses to build imaging protocols, optimize dose, refine clinical workflows and validate performance — turning capable equipment into confident daily clinical practice.",
   },
   {
     icon: Wrench, title: "Installation & Commissioning", thumb: warehouseImg,
-    desc: "Complete site preparation, rigging, mechanical installation, electrical hook-up, calibration and clinical acceptance testing — all executed to OEM standards, with a documented commissioning report handed to the biomedical department.",
-  },
-  {
-    icon: Gauge, title: "Calibration & Testing", thumb: p2,
-    desc: "Scheduled calibration, image-quality checks, dose verification and performance validation keep every system within manufacturer tolerance — protecting image quality, patient safety and regulatory compliance year after year.",
-  },
-  {
-    icon: GraduationCap, title: "Clinical Training", thumb: p1,
-    desc: "Structured on-site training programs for radiographers, biomedical engineers and clinicians, complemented by advanced sessions at reference centers. Training is protocol-based, scenario-driven and continues after go-live.",
+    desc: "Complete site preparation, rigging, mechanical installation, electrical hook-up, calibration and clinical acceptance testing — executed to OEM standards, with a signed commissioning report handed to the biomedical department at handover.",
   },
   {
     icon: ShieldCheck, title: "Preventive Maintenance", thumb: remoteImg,
-    desc: "OEM-aligned preventive maintenance contracts reduce unplanned downtime, extend equipment lifetime and protect long-term image quality — with predictable service windows and full documentation for every visit.",
+    desc: "Scheduled OEM-aligned preventive maintenance keeps every system within manufacturer tolerance, reduces unplanned downtime and extends equipment lifetime — with predictable service windows and full documentation for every visit.",
+  },
+  {
+    icon: Settings2, title: "Corrective Maintenance", thumb: p2,
+    desc: "When a system fails, our engineers diagnose, source certified spare parts from our regional stock and restore operation quickly — with root-cause analysis and a corrective report so the same fault does not repeat.",
+  },
+  {
+    icon: GraduationCap, title: "Clinical Training", thumb: p1,
+    desc: "Structured on-site training programs for radiographers, biomedical engineers, nurses and clinicians. Training is protocol-based, scenario-driven and continues after go-live so departments stay confident as staff rotate.",
   },
   {
     icon: Headphones, title: "Technical Support", thumb: p3,
-    desc: "24/7 remote diagnostics combined with rapid on-site response from engineers stationed regionally. First-line triage, root-cause analysis and escalation paths are defined for every contracted customer.",
+    desc: "24/7 remote diagnostics combined with rapid on-site response from engineers stationed regionally. First-line triage, escalation to OEM engineering and clear service-level commitments for every contracted customer.",
   },
   {
-    icon: ClipboardCheck, title: "Project Management", thumb: beyond,
-    desc: "Dedicated project managers coordinate design, civil works, procurement, installation, training and handover — giving hospitals one accountable partner for complex, multi-modality turnkey builds.",
+    icon: ClipboardCheck, title: "Hospital Planning", thumb: beyond,
+    desc: "We help hospitals plan new departments — room layouts, equipment lists, electrical and HVAC requirements, workflow mapping and phased delivery — so the finished department works clinically from day one.",
   },
 ];
+
 
 function Expertise() {
   const [open, setOpen] = useState<number>(0);
@@ -565,15 +577,18 @@ function WhereWeWork() {
   );
 }
 
-// ---------- Industries (Clinical Environments) ----------
+// ---------- Healthcare Facilities We Support ----------
 const INDUSTRIES = [
-  { icon: Building, title: "Hospitals", desc: "Full imaging and interventional solutions for public and private hospitals — from single-modality rooms to multi-department turnkey builds.", feature: true },
-  { icon: HeartPulse, title: "Cardiac Centers", desc: "Cath lab, echocardiography and cardiovascular imaging with dedicated cardiology application support and clinical protocol tuning." },
-  { icon: Microscope, title: "Diagnostic Centers", desc: "MRI, CT, ultrasound and X-ray systems commissioned for high daily throughput and consistent image quality." },
-  { icon: Ribbon, title: "Cancer Centers", desc: "Oncology imaging and treatment-planning platforms with full clinical commissioning and radiation-safety validation." },
-  { icon: ShieldAlert, title: "Military Hospitals", desc: "Mission-critical equipment for defense healthcare facilities, engineered for reliability in demanding operational environments." },
-  { icon: School, title: "Universities", desc: "Academic and research equipment for teaching hospitals and biomedical faculties, with training curricula for students and residents." },
-  { icon: Landmark, title: "Government Projects", desc: "Long-term partnership on national healthcare programs and multi-site turnkey initiatives with full lifecycle accountability." },
+  { icon: Building, title: "General Hospitals", desc: "End-to-end equipping for public and private hospitals — imaging, cath lab, ICU, OR, sterilization and outpatient departments delivered as one accountable project.", feature: true },
+  { icon: Building2, title: "Specialized Hospitals", desc: "Cardiac, orthopedic, oncology, women's-health and eye hospitals equipped to their specific clinical protocols and workflows." },
+  { icon: HeartPulse, title: "Heart Centers", desc: "Cath lab, echocardiography, ECG and cardiovascular imaging — installed, commissioned and clinically supported by cardiology-trained engineers." },
+  { icon: ScanLine, title: "Diagnostic Imaging Centers", desc: "MRI, CT, ultrasound, mammography and X-ray systems commissioned for high daily throughput and consistent image quality." },
+  { icon: Activity, title: "ICU & CCU", desc: "Patient monitors, ventilators, infusion systems and central-station networks configured to critical-care protocols with staff training." },
+  { icon: Scissors, title: "Operating Theatres", desc: "OR tables, surgical lights, anesthesia machines, electrosurgical units and OR-integration — installed to hospital layout and workflow." },
+  { icon: Baby, title: "NICU", desc: "Incubators, warmers, phototherapy, neonatal monitors and ventilators for neonatal intensive care — commissioned to neonatal safety standards." },
+  { icon: HeartPulse, title: "Delivery Rooms", desc: "Delivery beds, fetal monitors, resuscitation units and warmers for labor and delivery — set up for immediate maternal and neonatal care." },
+  { icon: Droplets, title: "Central Sterilization Departments", desc: "Autoclaves, washer-disinfectors and CSSD workflow equipment — installed, validated and documented to sterilization standards." },
+  { icon: Stethoscope, title: "Outpatient Clinics", desc: "Examination, diagnostic and minor-procedure equipment for outpatient departments and private clinics, with training on daily use." },
 ];
 
 function Industries() {
@@ -582,16 +597,15 @@ function Industries() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">
-            <div className="flex justify-center"><Eyebrow align="center" index="07">Industries We Serve</Eyebrow></div>
+            <div className="flex justify-center"><Eyebrow align="center" index="07">Healthcare Facilities We Support</Eyebrow></div>
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Purpose-built for every clinical environment.
             </h2>
           </div>
         </Reveal>
-        {/* Asymmetric grid: featured hero + smaller cards */}
-        <div className="mt-14 grid gap-4 lg:grid-cols-6">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {/* Featured card */}
-          <Reveal className="lg:col-span-3 lg:row-span-2">
+          <Reveal className="lg:col-span-2 lg:row-span-2">
             <div className="group relative flex h-full min-h-[380px] flex-col justify-end overflow-hidden rounded-3xl bg-ink p-8 text-white shadow-[0_30px_70px_-30px_rgba(0,0,0,0.45)]">
               <img src={cathlab} alt="" className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/10" />
@@ -599,13 +613,13 @@ function Industries() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-[0_10px_30px_-8px_var(--primary)]">
                   <Building className="h-6 w-6" />
                 </div>
-                <h3 className="mt-6 font-display text-[1.75rem] font-extrabold leading-tight">Hospitals</h3>
+                <h3 className="mt-6 font-display text-[1.75rem] font-extrabold leading-tight">{INDUSTRIES[0].title}</h3>
                 <p className="mt-3 max-w-md text-[14.5px] leading-relaxed text-white/85">{INDUSTRIES[0].desc}</p>
               </div>
             </div>
           </Reveal>
           {INDUSTRIES.slice(1).map((i, idx) => (
-            <Reveal key={i.title} delay={idx * 0.05} className={idx === 0 || idx === 3 ? "lg:col-span-3" : "lg:col-span-2"}>
+            <Reveal key={i.title} delay={idx * 0.04}>
               <div className="group flex h-full flex-col rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_24px_50px_-24px_rgba(15,23,42,0.25)]">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
                   <i.icon className="h-5 w-5" />
@@ -616,6 +630,7 @@ function Industries() {
             </Reveal>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -673,12 +688,13 @@ function Partners() {
 
 // ---------- Team ----------
 const TEAM_ROLES = [
-  { icon: Cpu, title: "Biomedical Engineers", desc: "Installation, commissioning and preventive maintenance across imaging, cath lab and monitoring platforms." },
-  { icon: Stethoscope, title: "Clinical Specialists", desc: "Application and workflow experts working alongside radiologists, cardiologists and technologists." },
-  { icon: Activity, title: "Applications Team", desc: "Modality specialists optimizing clinical protocols for MRI, CT, cath lab and ultrasound." },
-  { icon: UserCog, title: "Project Managers", desc: "Coordinating design, civil works, delivery, installation and handover for complex turnkey projects." },
-  { icon: Wrench, title: "Field Service Engineers", desc: "On-ground technical support, calibration and corrective maintenance across the region." },
+  { icon: Cpu, title: "Biomedical Engineers", desc: "Certified engineers responsible for installation, commissioning, preventive maintenance and corrective service across every system we deliver." },
+  { icon: Activity, title: "Application Specialists", desc: "Modality specialists with deep expertise in MRI, CT and Cath Lab systems — tuning imaging protocols and validating clinical performance." },
+  { icon: GraduationCap, title: "Clinical Trainers", desc: "Trainers who work on-site with radiographers, technologists and nurses so departments operate confidently from day one and after staff rotation." },
+  { icon: Stethoscope, title: "Healthcare Consultants", desc: "Advisors who help hospitals plan new departments, choose the right technology and phase delivery across large multi-year projects." },
+  { icon: UserCog, title: "MRI, CT & Cath Lab Engineers", desc: "Modality-specific field engineers with hands-on experience on advanced imaging and interventional platforms across leading OEMs." },
 ];
+
 
 const TEAM_BADGES = ["OEM Certified", "ISO 13485", "ISO 9001", "Radiation Safety"];
 
@@ -709,8 +725,12 @@ function Team() {
               People who install it, train on it and stand behind it.
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-              A multi-disciplinary team of certified professionals covering every step from clinical planning to lifetime support.
+              AbuFarha's people are the reason hospitals stay with us long after handover.
+              Biomedical engineers, application specialists, clinical trainers and healthcare
+              consultants work as one multi-disciplinary team — collaborating with doctors,
+              nurses and biomedical departments on every project.
             </p>
+
             <div className="mt-8 space-y-3">
               {TEAM_ROLES.map(r => (
                 <div key={r.title} className="group flex gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-[0_20px_36px_-20px_rgba(15,23,42,0.28)]">
@@ -733,12 +753,16 @@ function Team() {
 
 // ---------- Why Trust ----------
 const WHY = [
-  { icon: ShieldCheck, title: "25+ Years Experience", desc: "A quarter-century of engineering track record across imaging, cath lab and biomedical systems — with reference sites across two continents.", feature: true },
-  { icon: BadgeCheck, title: "OEM Standards", desc: "Every install, calibration and maintenance action follows manufacturer specifications and is fully documented." },
-  { icon: Clock, title: "Rapid Response", desc: "Regionally-stationed engineers deliver fast on-site turnaround, backed by 24/7 remote diagnostics." },
-  { icon: MapPinned, title: "Regional Presence", desc: "Local teams across Africa and the Middle East with regional spare-parts stock — always close to your facility." },
-  { icon: Handshake, title: "Long-Term Partnership", desc: "We stay engaged across the full equipment lifecycle — not just at handover." },
+  { icon: Globe2, title: "Regional Experience", desc: "More than two decades supporting hospitals across the Middle East and Africa — we understand the region's infrastructure, workflows and clinical realities.", feature: true },
+  { icon: ClipboardCheck, title: "Hospital Planning Expertise", desc: "We help hospitals scope new departments — room layouts, equipment lists, electrical and HVAC requirements and phased delivery plans." },
+  { icon: Wrench, title: "Installation & Commissioning", desc: "In-house engineers install and commission every system to OEM standards, with a documented acceptance report handed over at go-live." },
+  { icon: GraduationCap, title: "Clinical Training", desc: "Application specialists train radiographers, technologists, nurses and clinicians on protocols and safe daily operation — on-site and after go-live." },
+  { icon: ShieldCheck, title: "Preventive Maintenance", desc: "Scheduled OEM-aligned preventive maintenance keeps systems within manufacturer tolerance and extends equipment lifetime." },
+  { icon: LifeBuoy, title: "Long-Term Technical Support", desc: "24/7 remote diagnostics plus regional field engineers and spare-parts stock — rapid response wherever the hospital is." },
+  { icon: BadgeCheck, title: "OEM Standards", desc: "Every install, calibration and service action follows manufacturer specifications and is fully traceable and documented." },
+  { icon: Award, title: "One-Year Warranty", desc: "Every new installation is backed by a one-year warranty covering parts and engineering labor — with clear escalation paths." },
 ];
+
 
 function WhyTrust() {
   return (
@@ -764,7 +788,7 @@ function WhyTrust() {
                 <div className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur">
                   <Star className="h-3 w-3" /> Our Foundation
                 </div>
-                <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">25+ Years of Engineering Trust</h3>
+                <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">Regional Experience Since 1999</h3>
                 <p className="mt-4 text-[14.5px] leading-relaxed text-white/85">
                   {WHY[0].desc}
                 </p>
@@ -793,13 +817,13 @@ function WhyTrust() {
 
 // ---------- Certifications ----------
 const CERTS = [
-  { icon: Award, title: "ISO 9001:2015", sub: "Quality Management", desc: "Company-wide quality management system audited to the ISO 9001:2015 international standard." },
-  { icon: Award, title: "ISO 13485:2016", sub: "Medical Devices Quality", desc: "Dedicated quality system for medical-device supply and servicing under ISO 13485:2016." },
-  { icon: BadgeCheck, title: "OEM Certified Engineers", sub: "Manufacturer trained", desc: "Field engineers hold current OEM certifications for the specific platforms they install and service." },
-  { icon: ShieldCheck, title: "Safety & Compliance", sub: "International standards", desc: "Radiation safety, electrical safety and installation practices aligned with IEC and local regulations." },
-  { icon: Stethoscope, title: "Clinical Standards", sub: "Patient safety first", desc: "Clinical acceptance testing and image-quality validation on every commissioned system." },
-  { icon: Radar, title: "Quality Assurance", sub: "Documented processes", desc: "Every intervention is documented with a QA report handed to the biomedical department." },
+  { icon: BadgeCheck, title: "OEM Standards", sub: "Manufacturer-aligned", desc: "Every installation, calibration and service action follows manufacturer specifications — with engineers trained on the exact platforms they support." },
+  { icon: Radar, title: "Quality Assurance", sub: "Documented processes", desc: "Every intervention is logged with a QA report handed to the biomedical department, so hospitals have a full engineering history for each system." },
+  { icon: Wrench, title: "Professional Installation", sub: "Certified engineers", desc: "Rigging, mechanical, electrical and clinical acceptance testing carried out by AbuFarha's in-house engineering team, not subcontractors." },
+  { icon: ShieldCheck, title: "Clinical Safety", sub: "Patient safety first", desc: "Radiation safety, electrical safety and clinical acceptance testing on every commissioned system, aligned with international standards." },
+  { icon: Award, title: "Engineering Excellence", sub: "Long-term reliability", desc: "Preventive maintenance, corrective service and lifecycle support delivered to a consistent engineering standard — the same discipline on day one and year ten." },
 ];
+
 
 function Certifications() {
   return (
@@ -837,13 +861,14 @@ function Certifications() {
 // ---------- Engineering by the Numbers (NEW, dark) ----------
 type Metric = { value: number; suffix: string; label: string; sub: string; icon: React.ComponentType<{ className?: string }>; };
 const METRICS: Metric[] = [
-  { value: 25, suffix: "+", label: "Years of Experience", sub: "Engineering since 1999", icon: ShieldCheck },
-  { value: 500, suffix: "+", label: "Systems Installed", sub: "Across every major modality", icon: MonitorCheck },
-  { value: 30, suffix: "+", label: "Healthcare Projects", sub: "Turnkey builds delivered", icon: Building2 },
-  { value: 10, suffix: "+", label: "Countries Served", sub: "Africa & the Middle East", icon: Globe2 },
-  { value: 98, suffix: "%", label: "Customer Satisfaction", sub: "Long-term partnerships", icon: TrendingUp },
-  { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site coverage", icon: Headphones },
+  { value: 1999, suffix: "", label: "Established", sub: "Engineering healthcare since 1999", icon: CalendarClock },
+  { value: 10, suffix: "+", label: "Countries", sub: "Africa, Middle East & Central Asia", icon: Globe2 },
+  { value: 30, suffix: "+", label: "Hospital Projects", sub: "Across Africa & the Middle East", icon: Building2 },
+  { value: 40, suffix: "+", label: "Biomedical Engineers", sub: "In-house engineering team", icon: Cpu },
+  { value: 500, suffix: "+", label: "Turnkey Solutions Deployed", sub: "Systems installed & commissioned", icon: HardHat },
+  { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site, region-wide", icon: Headphones },
 ];
+
 
 function MetricCard({ m, i }: { m: Metric; i: number }) {
   const { ref, value } = useCountUp(m.value);
@@ -858,7 +883,7 @@ function MetricCard({ m, i }: { m: Metric; i: number }) {
           </div>
         </div>
         <div className="relative mt-8 font-display text-[3.5rem] font-extrabold leading-none tracking-tight text-white">
-          <span ref={ref} className="tabular-nums">{value.toLocaleString()}</span>
+          <span ref={ref} className="tabular-nums">{m.value >= 1900 && m.value < 2100 ? value : value.toLocaleString()}</span>
           <span className="text-primary">{m.suffix}</span>
         </div>
         <div className="relative mt-4 font-display text-[1.05rem] font-bold text-white">{m.label}</div>
@@ -915,9 +940,12 @@ function FinalCTA() {
               Let's Build Better Healthcare <span className="text-primary">Together.</span>
             </h2>
             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70">
-              Partner with AbuFarha for reliable solutions, exceptional service and long-term success.
-              Our engineers are ready to design the right system for your facility.
+              We don't just sell equipment — we become your long-term healthcare
+              engineering partner. From planning and installation to clinical
+              training and lifetime technical support, AbuFarha stays with your
+              hospital every step of the way.
             </p>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact"
                 className="inline-flex h-[50px] items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark">
