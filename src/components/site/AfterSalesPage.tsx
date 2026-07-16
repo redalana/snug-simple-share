@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
-  Headphones,
   Phone,
   MessageSquare,
   Activity,
@@ -13,7 +12,6 @@ import {
   Package,
   MapPin,
   Radio,
-  ClipboardCheck,
   Truck,
   Cog,
   Gauge,
@@ -21,9 +19,15 @@ import {
   UploadCloud,
   Plus,
   Minus,
-  Zap,
   Signal,
   ArrowUpRight,
+  Mail,
+  HeadphonesIcon,
+  LineChart,
+  ClipboardCheck,
+  Award,
+  Globe2,
+  Zap,
 } from "lucide-react";
 import heroImg from "@/assets/aftersales-hero.jpg";
 import remoteImg from "@/assets/aftersales-remote.jpg";
@@ -52,30 +56,34 @@ function Hero() {
           width={1600}
           height={1100}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-transparent to-ink/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/20 to-ink/50" />
+        {/* soft red glow */}
+        <div className="pointer-events-none absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-primary/25 blur-[140px]" />
+        <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-[100rem] gap-16 px-6 pb-24 pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pb-32 lg:pt-36">
+      <div className="relative mx-auto grid min-h-[780px] max-w-[100rem] items-center gap-16 px-6 pb-24 pt-32 lg:min-h-[820px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-32 lg:pt-40">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75 backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             After Sales Support
           </div>
-          <h1 className="mt-6 font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-[5.25rem]">
+          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[6rem]">
             Reliable Support.
             <br />
-            <span className="text-primary">Maximum</span>{" "}
+            <span className="text-primary">Maximum</span>
+            <br />
             <span className="text-white/95">Performance.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
             We keep your medical equipment running at peak performance with
             expert care, genuine parts and fast response — every time.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#request"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-white shadow-[0_18px_50px_-18px_rgba(220,38,38,0.85)] transition-all hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
             >
               Request Service
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -84,82 +92,90 @@ function Hero() {
               href="tel:+96264026063"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
             >
-              <Headphones className="h-4 w-4" />
+              <HeadphonesIcon className="h-4 w-4" />
               Emergency Support
             </a>
           </div>
         </div>
 
         {/* Floating service dashboard */}
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-primary/20 via-primary/0 to-white/0 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative"
+        >
+          <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-br from-primary/30 via-primary/5 to-transparent blur-3xl" />
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.07] p-7 backdrop-blur-2xl shadow-[0_50px_100px_-30px_rgba(0,0,0,0.7)]"
+          >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.24em] text-white/50">
                   Service Dashboard
                 </div>
-                <div className="mt-1 text-sm font-semibold text-white">
+                <div className="mt-1.5 text-base font-semibold text-white">
                   Live · Amman Ops Center
                 </div>
               </div>
               <div className="flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold text-emerald-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                 ALL SYSTEMS OK
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-3.5">
               {[
-                { icon: Headphones, k: "24/7", v: "Technical Support" },
-                { icon: ShieldCheck, k: "Certified", v: "Biomed Engineers" },
-                { icon: Package, k: "100%", v: "Genuine OEM Parts" },
-                { icon: Clock, k: "< 4 Hrs", v: "Avg Response" },
-              ].map(({ icon: Icon, k, v }) => (
+                { k: "24/7", v: "Technical Support" },
+                { k: "Certified", v: "Biomed Engineers" },
+                { k: "100%", v: "Genuine OEM Parts" },
+                { k: "< 4 Hrs", v: "Avg Response" },
+              ].map(({ k, v }) => (
                 <div
                   key={v}
-                  className="rounded-xl border border-white/10 bg-white/[0.04] p-3.5"
+                  className="rounded-xl border border-white/10 bg-white/[0.04] p-4"
                 >
-                  <Icon className="h-4 w-4 text-primary" />
-                  <div className="mt-2 font-display text-lg font-extrabold text-white">
+                  <div className="font-display text-xl font-extrabold text-white">
                     {k}
                   </div>
-                  <div className="text-[11.5px] text-white/60">{v}</div>
+                  <div className="mt-0.5 text-[11.5px] text-white/60">{v}</div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 rounded-xl border border-white/10 bg-black/30 p-4">
-              <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">
+            <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-5">
+              <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
                 <span>Ticket #AF-24017</span>
                 <span className="text-primary">EN ROUTE</span>
               </div>
               <div className="mt-2 text-sm font-semibold text-white">
                 Siemens Artis Q · King Hussein Cancer Center
               </div>
-              <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   initial={{ width: "5%" }}
                   animate={{ width: "68%" }}
-                  transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full rounded-full bg-gradient-to-r from-primary to-primary-glow"
                 />
               </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-white/50">
+              <div className="mt-2 flex items-center justify-between text-[11px] text-white/55">
                 <span>Engineer 12 min away</span>
                 <span>ETA 10:42</span>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
-/* ---------------- COMMAND CENTER ---------------- */
+/* ---------------- SERVICE OPERATIONS DASHBOARD ---------------- */
 
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
+function AnimatedNumber({ value, suffix = "", decimals = 0 }: { value: number; suffix?: string; decimals?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [n, setN] = useState(0);
@@ -171,7 +187,7 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(value * eased));
+      setN(value * eased);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -179,43 +195,38 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
   }, [inView, value]);
   return (
     <span ref={ref}>
-      {n.toLocaleString()}
+      {decimals ? n.toFixed(decimals) : Math.round(n).toLocaleString()}
       {suffix}
     </span>
   );
 }
 
-const REGION_PINS = [
-  { name: "Jordan", x: 58, y: 42 },
-  { name: "Egypt", x: 54, y: 48 },
-  { name: "Iraq", x: 63, y: 40 },
-  { name: "Syria", x: 58, y: 36 },
-  { name: "Libya", x: 48, y: 48 },
-  { name: "Yemen", x: 66, y: 60 },
-  { name: "Somalia", x: 71, y: 66 },
-  { name: "Uzbekistan", x: 78, y: 30 },
-  { name: "Bangladesh", x: 88, y: 50 },
-];
+function Sparkline({ data, color = "rgb(220,38,38)" }: { data: number[]; color?: string }) {
+  const w = 120;
+  const h = 34;
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const range = max - min || 1;
+  const pts = data
+    .map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / range) * h}`)
+    .join(" ");
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="h-8 w-full">
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
-function CommandCenter() {
+function OperationsDashboard() {
   return (
     <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-28">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-      <div className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -top-40 left-1/3 h-[32rem] w-[32rem] rounded-full bg-primary/12 blur-[140px]" />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-              Service Command Center
+              Service Operations
             </div>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
               Real-time overview of our
@@ -229,125 +240,63 @@ function CommandCenter() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.05fr_1.2fr]">
-          {/* Metric cards */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { k: 128, s: "", label: "Active Service Cases", note: "Across all regions", icon: Activity },
-              { k: 46, s: "", label: "Engineers Available", note: "Ready to respond", icon: Users },
-              { k: 1842, s: "", label: "Equipment Online", note: "Under our care", icon: Cog },
-              { k: 2350, s: "+", label: "Spare Parts Ready", note: "In regional stock", icon: Package },
-            ].map(({ k, s, label, note, icon: Icon }) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br from-white/[0.05] to-white/[0.01] p-5"
-              >
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <Icon className="h-4 w-4 text-primary" />
-                <div className="mt-4 font-display text-4xl font-extrabold tracking-tight">
-                  <AnimatedNumber value={k} suffix={s} />
-                </div>
-                <div className="mt-1 text-[13px] font-semibold text-white">{label}</div>
-                <div className="text-[11.5px] text-white/50">{note}</div>
-              </motion.div>
-            ))}
-            <div className="col-span-2 rounded-2xl border border-white/8 bg-gradient-to-br from-primary/10 to-transparent p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/50">
-                    Average Response Time
-                  </div>
-                  <div className="mt-1 font-display text-5xl font-extrabold text-white">
-                    2.4<span className="text-2xl text-white/60"> hrs</span>
-                  </div>
-                  <div className="text-[12px] text-white/55">From ticket to action</div>
-                </div>
-                <Zap className="h-8 w-8 text-primary" />
+        {/* Enterprise dashboard panel */}
+        <div className="mt-12 overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 lg:p-8">
+          <div className="flex items-center justify-between border-b border-white/8 pb-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-2 w-2 items-center justify-center">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
               </div>
-              <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/10">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "78%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full bg-gradient-to-r from-primary to-primary-glow"
-                />
-              </div>
+              <div className="text-[13px] font-semibold text-white">Global Service Console</div>
+              <div className="hidden text-[11px] text-white/40 sm:block">/ MEA · Central & South Asia</div>
+            </div>
+            <div className="hidden gap-2 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/40 sm:flex">
+              <span>Today</span>
+              <span>·</span>
+              <span>7d</span>
+              <span>·</span>
+              <span className="text-primary">30d</span>
             </div>
           </div>
 
-          {/* Regional pulse map */}
-          <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br from-white/[0.04] to-transparent p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                Regional Coverage
-              </div>
-              <div className="text-[11px] font-semibold text-white/60">
-                MEA · Central & South Asia
-              </div>
-            </div>
-            <div className="relative mt-4 aspect-[16/10] w-full">
-              <div
-                aria-hidden
-                className="absolute inset-0 rounded-xl"
-                style={{
-                  background:
-                    "radial-gradient(circle at 60% 45%, rgba(220,38,38,0.10), transparent 55%)",
-                }}
-              />
-              {/* dotted world silhouette */}
-              <div
-                aria-hidden
-                className="absolute inset-0 rounded-xl opacity-40"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
-                  backgroundSize: "12px 12px",
-                  maskImage:
-                    "radial-gradient(ellipse 65% 55% at 55% 50%, black 60%, transparent 100%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 65% 55% at 55% 50%, black 60%, transparent 100%)",
-                }}
-              />
-              {REGION_PINS.map((p, i) => (
-                <div
-                  key={p.name}
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                >
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span
-                      className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70"
-                      style={{ animationDelay: `${i * 180}ms` }}
-                    />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_12px_rgba(220,38,38,0.9)]" />
-                  </span>
-                  <div className="mt-1.5 whitespace-nowrap text-[10px] font-semibold text-white/70">
-                    {p.name}
-                  </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {[
+              { label: "Active Engineers", value: 46, spark: [30, 38, 34, 41, 39, 44, 46] },
+              { label: "Open Tickets", value: 128, spark: [180, 172, 160, 155, 148, 138, 128] },
+              { label: "Avg Response", value: 2.4, decimals: 1, suffix: " hrs", spark: [3.2, 3.0, 2.9, 2.7, 2.6, 2.5, 2.4] },
+              { label: "Spare Parts", value: 2350, suffix: "+", spark: [2100, 2180, 2210, 2260, 2290, 2320, 2350] },
+              { label: "Equipment Health", value: 98, suffix: "%", spark: [95, 96, 96, 97, 97, 98, 98] },
+            ].map((m, i) => (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="rounded-2xl border border-white/8 bg-white/[0.02] p-5"
+              >
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                  {m.label}
                 </div>
-              ))}
-            </div>
-            <div className="mt-4 grid grid-cols-3 gap-3">
-              {[
-                { k: "10+", v: "Countries" },
-                { k: "26", v: "Cities" },
-                { k: "500+", v: "Installations" },
-              ].map((x) => (
-                <div
-                  key={x.v}
-                  className="rounded-xl border border-white/8 bg-white/[0.03] p-3"
-                >
-                  <div className="font-display text-xl font-extrabold text-white">
-                    {x.k}
-                  </div>
-                  <div className="text-[11px] text-white/55">{x.v}</div>
+                <div className="mt-3 font-display text-4xl font-extrabold tracking-tight text-white">
+                  <AnimatedNumber value={m.value} suffix={m.suffix ?? ""} decimals={m.decimals ?? 0} />
                 </div>
-              ))}
+                <div className="mt-3">
+                  <Sparkline data={m.spark} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* footer strip */}
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/8 bg-black/30 px-5 py-4 text-[12px] text-white/60">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5 text-primary" />
+              <span className="font-semibold text-white">10 countries</span> · 26 cities · 500+ installations under active care
+            </div>
+            <div className="flex items-center gap-2 text-white/50">
+              <Clock className="h-3.5 w-3.5" />
+              Last sync 12s ago
             </div>
           </div>
         </div>
@@ -358,13 +307,31 @@ function CommandCenter() {
 
 /* ---------------- REMOTE DIAGNOSTICS ---------------- */
 
+const REMOTE_FEATURES = [
+  {
+    icon: Radio,
+    t: "Remote Diagnostics",
+    d: "OEM-approved secure tunnels let our engineers inspect logs, run service utilities and resolve most issues without a site visit.",
+  },
+  {
+    icon: LineChart,
+    t: "Predictive Maintenance",
+    d: "Continuous anomaly detection on tube arc counts, coil temperature and image quality metrics — we act before a failure interrupts your schedule.",
+  },
+  {
+    icon: Activity,
+    t: "Live Monitoring",
+    d: "24/7 telemetry from every connected system, with a full audit trail for compliance and QA reviews.",
+  },
+];
+
 function RemoteDiagnostics() {
   return (
     <section className="relative overflow-hidden bg-background py-24 lg:py-28">
-      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10">
+      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-20 lg:px-10">
         <div className="relative">
           <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/25 to-transparent blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)]">
+          <div className="relative overflow-hidden rounded-3xl shadow-[0_50px_100px_-40px_rgba(0,0,0,0.55)]">
             <img
               src={remoteImg}
               alt="Engineer monitoring medical equipment telemetry from operations center"
@@ -373,7 +340,7 @@ function RemoteDiagnostics() {
               width={1600}
               height={1100}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-md">
               <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em]">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
@@ -388,7 +355,7 @@ function RemoteDiagnostics() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
             Remote Diagnostics
           </div>
-          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-[3.25rem]">
             We see problems before your team does.
           </h2>
           <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-muted-foreground">
@@ -397,27 +364,29 @@ function RemoteDiagnostics() {
             issues are resolved remotely, before they interrupt a patient
             schedule.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {[
-              { icon: Radio, t: "Secure Remote Access", d: "OEM-approved secure tunnels to service tools." },
-              { icon: Activity, t: "Predictive Alerts", d: "Anomaly detection on tube arc counts, coil temp and more." },
-              { icon: Clock, t: "72% First-Call Resolution", d: "Most tickets solved without a site visit." },
-              { icon: ShieldCheck, t: "Full Audit Trail", d: "Every action logged for compliance and QA." },
-            ].map(({ icon: Icon, t, d }) => (
-              <div
+          <div className="mt-10 divide-y divide-border/70 border-y border-border/70">
+            {REMOTE_FEATURES.map(({ icon: Icon, t, d }, i) => (
+              <motion.div
                 key={t}
-                className="rounded-2xl border border-border bg-card p-4"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group flex items-start gap-6 py-7"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="h-4 w-4" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                  <Icon className="h-6 w-6" strokeWidth={1.75} />
                 </div>
-                <div className="mt-3 text-[14px] font-bold text-foreground">
-                  {t}
+                <div className="flex-1">
+                  <div className="font-display text-xl font-bold text-foreground">
+                    {t}
+                  </div>
+                  <div className="mt-1.5 text-[14.5px] leading-relaxed text-muted-foreground">
+                    {d}
+                  </div>
                 </div>
-                <div className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">
-                  {d}
-                </div>
-              </div>
+                <ArrowUpRight className="mt-2 h-5 w-5 shrink-0 text-muted-foreground/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -432,16 +401,19 @@ const JOURNEY = [
   { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes." },
   { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause." },
   { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts." },
-  { icon: Truck, t: "Arrival", d: "On-site within our regional response SLA." },
-  { icon: Wrench, t: "Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts." },
-  { icon: Gauge, t: "Calibration", d: "Full QA and calibration to OEM performance specs." },
+  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours." },
+  { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts." },
+  { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs." },
   { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support." },
 ];
 
 function SupportJourney() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-120px" });
   return (
-    <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-28">
+    <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-32">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent" />
+      <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="max-w-3xl">
           <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
@@ -454,33 +426,47 @@ function SupportJourney() {
           </h2>
         </div>
 
-        <div className="relative mt-16">
-          {/* horizontal rail */}
-          <div className="pointer-events-none absolute left-0 right-0 top-[46px] hidden h-px bg-gradient-to-r from-transparent via-white/25 to-transparent lg:block" />
-          <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:gap-4">
+        <div ref={ref} className="relative mt-20">
+          {/* animated horizontal rail */}
+          <div className="pointer-events-none absolute left-0 right-0 top-[72px] hidden h-[2px] overflow-hidden rounded-full bg-white/10 lg:block">
+            <motion.div
+              initial={{ width: "0%" }}
+              animate={inView ? { width: "100%" } : {}}
+              transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
+              className="h-full bg-gradient-to-r from-primary via-primary-glow to-primary"
+            />
+          </div>
+
+          <div className="grid gap-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:gap-6">
             {JOURNEY.map((s, i) => (
               <motion.div
                 key={s.t}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
+                transition={{ duration: 0.55, delay: i * 0.09 }}
                 className="relative"
               >
-                <div className="relative mx-auto flex h-[92px] w-[92px] items-center justify-center rounded-full border border-white/10 bg-[#0f131c] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
-                  <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/40 to-transparent opacity-70 blur-md" />
-                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-[#0f131c]">
-                    <s.icon className="h-7 w-7 text-primary" />
+                <div className="relative mx-auto flex h-[144px] w-[144px] items-center justify-center">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/25 via-primary/5 to-transparent blur-xl" />
+                  <div className="absolute inset-2 rounded-full border border-white/10 bg-[#0f131c]" />
+                  <motion.div
+                    animate={{ scale: [1, 1.06, 1] }}
+                    transition={{ duration: 3, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-4 rounded-full border border-primary/25"
+                  />
+                  <div className="relative flex h-[104px] w-[104px] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                    <s.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
                   </div>
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-black tracking-widest text-white">
+                  <div className="absolute -top-2 right-2 rounded-full bg-primary px-2.5 py-0.5 text-[10.5px] font-black tracking-widest text-white shadow-[0_8px_20px_-6px_rgba(220,38,38,0.7)]">
                     0{i + 1}
                   </div>
                 </div>
-                <div className="mt-6 text-center">
-                  <div className="font-display text-[15px] font-bold text-white">
+                <div className="mt-7 text-center">
+                  <div className="font-display text-[16px] font-bold text-white">
                     {s.t}
                   </div>
-                  <div className="mt-1.5 text-[12px] leading-relaxed text-white/55">
+                  <div className="mt-2 text-[12.5px] leading-relaxed text-white/55">
                     {s.d}
                   </div>
                 </div>
@@ -493,17 +479,17 @@ function SupportJourney() {
   );
 }
 
-/* ---------------- EQUIPMENT GALLERY ---------------- */
+/* ---------------- EQUIPMENT GALLERY (Masonry) ---------------- */
 
 const EQUIPMENT = [
-  { name: "MRI Systems", img: mriImg },
-  { name: "CT Scanners", img: ctImg },
-  { name: "Cath Lab Systems", img: cathLabImg },
-  { name: "PET / CT", img: petctImg },
-  { name: "Ultrasound", img: ultrasoundImg },
-  { name: "X-Ray Systems", img: xrayImg },
-  { name: "Mammography", img: mammoImg },
-  { name: "C-Arm Systems", img: carmImg },
+  { name: "MRI Systems", img: mriImg, span: "lg:col-span-2 lg:row-span-2 aspect-[4/5] lg:aspect-auto" },
+  { name: "CT Scanners", img: ctImg, span: "aspect-[4/3]" },
+  { name: "Cath Lab Systems", img: cathLabImg, span: "aspect-[4/3]" },
+  { name: "PET / CT", img: petctImg, span: "lg:col-span-2 aspect-[16/9] lg:aspect-[2/1]" },
+  { name: "Ultrasound", img: ultrasoundImg, span: "aspect-[4/3]" },
+  { name: "X-Ray Systems", img: xrayImg, span: "aspect-[4/3]" },
+  { name: "Mammography", img: mammoImg, span: "aspect-[4/3]" },
+  { name: "C-Arm Systems", img: carmImg, span: "aspect-[4/3]" },
 ];
 
 function EquipmentGallery() {
@@ -516,7 +502,9 @@ function EquipmentGallery() {
               Equipment We Support
             </div>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              Every modality. Every major brand.
+              Every modality.
+              <br />
+              Every major brand.
             </h2>
           </div>
           <p className="max-w-md text-[15px] leading-relaxed text-muted-foreground">
@@ -526,7 +514,7 @@ function EquipmentGallery() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-14 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {EQUIPMENT.map((e, i) => (
             <motion.a
               key={e.name}
@@ -534,28 +522,23 @@ function EquipmentGallery() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: (i % 4) * 0.05 }}
-              className="group relative block overflow-hidden rounded-2xl bg-ink"
+              transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
+              className={`group relative block overflow-hidden rounded-2xl bg-ink ${e.span}`}
             >
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={e.img}
                   alt={e.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/95" />
               </div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
-                <div className="text-white">
-                  <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                    Full Service
-                  </div>
-                  <div className="mt-1 font-display text-lg font-bold">
-                    {e.name}
-                  </div>
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+                <div className="font-display text-xl font-bold text-white sm:text-2xl">
+                  {e.name}
                 </div>
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all group-hover:bg-primary">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all group-hover:bg-primary">
                   <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
@@ -570,47 +553,21 @@ function EquipmentGallery() {
 /* ---------------- ENGINEERING EXCELLENCE ---------------- */
 
 function Engineering() {
-  const points = [
-    { icon: ShieldCheck, t: "Certified Team", d: "Highly trained biomedical engineers with global OEM certifications." },
-    { icon: Cog, t: "OEM Standards", d: "We follow original manufacturer procedures and best practices." },
-    { icon: Users, t: "Clinical Support", d: "On-site training and clinical application support after every install." },
-    { icon: Activity, t: "Remote Assistance", d: "Advanced remote tools for rapid diagnosis and resolution." },
-    { icon: ClipboardCheck, t: "Warranty Coverage", d: "1-year free warranty plus full support for extended contracts." },
-    { icon: ArrowUpRight, t: "Lifetime Partnership", d: "We stay with you through the entire equipment lifecycle." },
+  const features = [
+    { icon: ShieldCheck, t: "OEM Certified Team", d: "Trained directly by Siemens, Philips, GE, Canon and more." },
+    { icon: Cog, t: "Factory Procedures", d: "Every service follows original manufacturer specifications." },
+    { icon: Users, t: "Clinical Application Support", d: "Hands-on training for radiographers and biomeds on every install." },
+    { icon: ClipboardCheck, t: "Full Warranty Coverage", d: "1-year free warranty plus extended service contracts." },
+  ];
+  const badges = [
+    { icon: Award, k: "12+", v: "OEM Certificates" },
+    { icon: Clock, k: "< 4h", v: "Response Time" },
+    { icon: Users, k: "15+", v: "OEM-Trained Engineers" },
+    { icon: Globe2, k: "10", v: "Countries Covered" },
   ];
   return (
     <section className="relative overflow-hidden bg-[#f6f4f0] py-24 lg:py-28">
-      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-20 lg:px-10">
-        <div>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            Engineering Excellence
-          </div>
-          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-            Our engineers.
-            <br />
-            Your reliability.
-          </h2>
-          <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-muted-foreground">
-            A field team of 15+ dedicated biomedical engineers — trained
-            directly by OEMs, backed by a regional operations center, and
-            trusted by leading hospitals since 1999.
-          </p>
-          <div className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2">
-            {points.map(({ icon: Icon, t, d }) => (
-              <div key={t} className="flex gap-4">
-                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
-                </div>
-                <div>
-                  <div className="text-[14.5px] font-bold text-foreground">{t}</div>
-                  <div className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
-                    {d}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20 lg:px-10">
         <div className="relative">
           <div className="overflow-hidden rounded-3xl shadow-[0_50px_100px_-40px_rgba(0,0,0,0.35)]">
             <img
@@ -622,7 +579,7 @@ function Engineering() {
               height={1100}
             />
           </div>
-          <div className="absolute -bottom-6 -left-6 hidden rounded-2xl border border-border bg-card p-5 shadow-xl sm:block">
+          <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-xl sm:block">
             <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               First-Time Fix Rate
             </div>
@@ -634,18 +591,71 @@ function Engineering() {
             </div>
           </div>
         </div>
+        <div>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+            Engineering Excellence
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-[3.25rem]">
+            Our engineers.
+            <br />
+            Your reliability.
+          </h2>
+          <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-muted-foreground">
+            A field team of 15+ dedicated biomedical engineers — trained
+            directly by OEMs, backed by a regional operations center, and
+            trusted by leading hospitals since 1999.
+          </p>
+
+          {/* vertical feature list */}
+          <div className="mt-8 space-y-5">
+            {features.map(({ icon: Icon, t, d }) => (
+              <div key={t} className="flex items-start gap-4">
+                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="text-[15px] font-bold text-foreground">{t}</div>
+                  <div className="mt-1 text-[13.5px] leading-relaxed text-muted-foreground">
+                    {d}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* small stat badges */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {badges.map(({ icon: Icon, k, v }) => (
+              <div key={v} className="rounded-xl border border-border bg-white px-3 py-3 text-center">
+                <Icon className="mx-auto h-4 w-4 text-primary" />
+                <div className="mt-2 font-display text-lg font-extrabold text-foreground">{k}</div>
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- OEM PARTS & LOGISTICS ---------------- */
+/* ---------------- OEM PARTS & LOGISTICS (interactive modules) ---------------- */
+
+const PART_MODULES = [
+  { id: "mri", label: "MRI Parts", count: "620+", note: "Coils, gradient amps, RF components" },
+  { id: "ct", label: "CT Parts", count: "540+", note: "X-ray tubes, detectors, DAS boards" },
+  { id: "cath", label: "Cath Lab Parts", count: "410+", note: "Flat panels, generators, table drives" },
+  { id: "petct", label: "PET / CT Parts", count: "280+", note: "PMT modules, crystals, cooling" },
+  { id: "cal", label: "Calibration Kits", count: "500+", note: "Phantoms, QA jigs, dosimetry" },
+];
 
 function PartsLogistics() {
+  const [active, setActive] = useState(PART_MODULES[0].id);
+  const activeModule = PART_MODULES.find((m) => m.id === active)!;
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[420px] lg:min-h-[640px]">
+      <div className="grid lg:grid-cols-[1.2fr_1fr]">
+        <div className="relative min-h-[520px] lg:min-h-[720px]">
           <img
             src={warehouseImg}
             alt="AbuFarha regional spare parts warehouse"
@@ -654,24 +664,24 @@ function PartsLogistics() {
             width={1600}
             height={1100}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-ink" />
-          <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-6 p-8">
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-ink" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-8 p-10">
             {[
               { k: "2,350+", v: "Parts in stock" },
               { k: "48 hrs", v: "Regional dispatch" },
               { k: "100%", v: "OEM certified" },
             ].map((x) => (
               <div key={x.v}>
-                <div className="font-display text-3xl font-extrabold">{x.k}</div>
-                <div className="text-[12px] uppercase tracking-[0.2em] text-white/60">
+                <div className="font-display text-4xl font-extrabold">{x.k}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/60">
                   {x.v}
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="flex items-center bg-[#0a0d14] px-6 py-20 lg:px-16 lg:py-24">
-          <div>
+        <div className="flex items-center bg-[#0a0d14] px-6 py-20 lg:px-14 lg:py-24">
+          <div className="w-full">
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
               OEM Parts & Logistics
             </div>
@@ -680,33 +690,65 @@ function PartsLogistics() {
               <br />
               Ready when you need them.
             </h2>
-            <p className="mt-5 max-w-md text-[16px] leading-relaxed text-white/70">
-              A dedicated regional inventory of OEM spare parts, calibration
-              kits and consumables — coordinated across our Amman and Cairo
-              hubs to reach any site fast.
+            <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-white/70">
+              A dedicated regional inventory across our Amman and Cairo hubs —
+              select a module to see live availability.
             </p>
-            <div className="mt-10 space-y-5">
-              {[
-                { icon: Package, t: "Genuine OEM Parts", d: "Directly sourced from Siemens, Philips, GE and more." },
-                { icon: Truck, t: "Fast Regional Shipping", d: "48-hour dispatch across MEA, expedited critical paths." },
-                { icon: Gauge, t: "Calibration & QA Kits", d: "Everything an engineer needs for factory-spec performance." },
-              ].map(({ icon: Icon, t, d }) => (
-                <div
-                  key={t}
-                  className="flex gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-4 transition-colors hover:border-primary/40"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-[14.5px] font-bold text-white">{t}</div>
-                    <div className="mt-0.5 text-[12.5px] leading-relaxed text-white/60">
-                      {d}
-                    </div>
-                  </div>
-                </div>
-              ))}
+
+            {/* interactive module tabs */}
+            <div className="mt-8 flex flex-wrap gap-2">
+              {PART_MODULES.map((m) => {
+                const isActive = m.id === active;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => setActive(m.id)}
+                    className={`rounded-full border px-4 py-2 text-[12px] font-semibold transition-all ${
+                      isActive
+                        ? "border-primary bg-primary text-white shadow-[0_10px_30px_-12px_rgba(220,38,38,0.8)]"
+                        : "border-white/12 bg-white/[0.03] text-white/70 hover:border-white/30 hover:text-white"
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                );
+              })}
             </div>
+
+            <motion.div
+              key={activeModule.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className="mt-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent p-6"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/50">
+                    In Regional Stock
+                  </div>
+                  <div className="mt-1 font-display text-4xl font-extrabold text-white">
+                    {activeModule.count}
+                  </div>
+                  <div className="mt-1 text-[13px] text-white/60">{activeModule.note}</div>
+                </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Package className="h-5 w-5" />
+                </div>
+              </div>
+              <div className="mt-5 flex items-center gap-4 border-t border-white/10 pt-4 text-[12px] text-white/60">
+                <div className="flex items-center gap-1.5">
+                  <Truck className="h-3.5 w-3.5 text-primary" /> 48h dispatch
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="h-3.5 w-3.5 text-primary" /> OEM sealed
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Gauge className="h-3.5 w-3.5 text-primary" /> QA verified
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -715,6 +757,101 @@ function PartsLogistics() {
 }
 
 /* ---------------- REQUEST SERVICE ---------------- */
+
+function SupportCenterPanel() {
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink via-[#0f131c] to-ink p-8 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)]">
+      <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+      <div className="relative">
+        <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/60">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+          Support Center
+        </div>
+        <div className="mt-3 font-display text-2xl font-extrabold">
+          We&apos;re here 24/7.
+        </div>
+        <p className="mt-2 text-[13px] leading-relaxed text-white/60">
+          Reach an engineer instantly through any channel below.
+        </p>
+
+        <div className="mt-6 space-y-3">
+          {[
+            { icon: Phone, label: "Emergency Hotline", value: "+962 79 974 1318", href: "tel:+962799741318", accent: "text-primary" },
+            { icon: MessageSquare, label: "WhatsApp", value: "Chat with support", href: "https://wa.me/962799741318", accent: "text-emerald-400" },
+            { icon: Mail, label: "Email", value: "support@abufarhamedical.com", href: "mailto:support@abufarhamedical.com", accent: "text-sky-400" },
+          ].map(({ icon: Icon, label, value, href, accent }) => (
+            <a
+              key={label}
+              href={href}
+              className="group flex items-center gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-3.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.06]"
+            >
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] ${accent}`}>
+                <Icon className="h-4.5 w-4.5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/45">
+                  {label}
+                </div>
+                <div className="truncate text-[13.5px] font-semibold text-white">
+                  {value}
+                </div>
+              </div>
+              <ArrowUpRight className="h-4 w-4 text-white/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              <Clock className="h-3 w-3" /> Support Hours
+            </div>
+            <div className="mt-1.5 text-[14px] font-bold text-white">24 / 7</div>
+            <div className="text-[11px] text-white/50">Year-round coverage</div>
+          </div>
+          <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
+            <div className="flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              <Zap className="h-3 w-3" /> Avg Response
+            </div>
+            <div className="mt-1.5 text-[14px] font-bold text-white">&lt; 4 hrs</div>
+            <div className="text-[11px] text-white/50">Regional SLA</div>
+          </div>
+        </div>
+
+        {/* mini map */}
+        <div className="relative mt-6 h-32 overflow-hidden rounded-2xl border border-white/8 bg-black/40">
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
+              backgroundSize: "10px 10px",
+              maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 60%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 60%, transparent 100%)",
+            }}
+          />
+          {[
+            { x: 42, y: 55 }, { x: 52, y: 45 }, { x: 58, y: 40 }, { x: 48, y: 60 }, { x: 72, y: 35 }, { x: 82, y: 55 },
+          ].map((p, i) => (
+            <span
+              key={i}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${p.x}%`, top: `${p.y}%` }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" style={{ animationDelay: `${i * 250}ms` }} />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(220,38,38,0.9)]" />
+              </span>
+            </span>
+          ))}
+          <div className="absolute bottom-2 left-3 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
+            <MapPin className="h-3 w-3 text-primary" /> MEA · Central Asia
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function RequestService() {
   return (
@@ -737,44 +874,7 @@ function RequestService() {
         </div>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          {/* Sidebar: 3 steps */}
-          <div className="rounded-3xl border border-border bg-card p-8">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              How it works
-            </div>
-            <ol className="mt-6 space-y-6">
-              {[
-                { t: "Submit Request", d: "Fill the form with details about your issue." },
-                { t: "Our Team Reviews", d: "We analyze and assign the right engineer." },
-                { t: "We Act Quickly", d: "We respond fast and solve the issue." },
-              ].map((s, i) => (
-                <li key={s.t} className="flex gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <div className="text-[14.5px] font-bold text-foreground">
-                      {s.t}
-                    </div>
-                    <div className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">
-                      {s.d}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="mt-8 rounded-2xl bg-ink p-5 text-white">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                Emergency Line
-              </div>
-              <div className="mt-2 font-display text-xl font-extrabold">
-                +962 79 974 1318
-              </div>
-              <div className="mt-1 text-[12px] text-white/60">
-                24/7 for critical downtime
-              </div>
-            </div>
-          </div>
+          <SupportCenterPanel />
 
           {/* Form card */}
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card/80 p-8 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.25)] backdrop-blur-xl lg:p-10">
@@ -866,9 +966,9 @@ function RequestService() {
   );
 }
 
-/* ---------------- FAQ ---------------- */
+/* ---------------- FAQ / KNOWLEDGE CENTER ---------------- */
 
-const FAQS = [
+const FAQS: [string, string][] = [
   ["How can I request a service?", "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and an engineer is assigned within minutes."],
   ["How fast can an engineer reach our site?", "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region."],
   ["What is the warranty coverage?", "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available."],
@@ -880,48 +980,66 @@ const FAQS = [
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="relative bg-[#f6f4f0] py-24 lg:py-28">
+    <section className="relative bg-[#f6f4f0] py-24 lg:py-32">
       <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
-        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
+        <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-              Frequently Asked
+              Knowledge Center
             </div>
-            <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-              Everything you need
-              <br /> to know.
+            <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[3.5rem]">
+              Everything
+              <br />
+              you need
+              <br />
+              to know.
             </h2>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
-              Can&apos;t find what you&apos;re looking for? Our support team is
-              available around the clock.
+            <p className="mt-6 max-w-md text-[15.5px] leading-relaxed text-muted-foreground">
+              Answers to the most common questions from biomedical engineers,
+              procurement teams and hospital directors.
             </p>
-            <a
-              href="tel:+96264026063"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5"
-            >
-              <Phone className="h-4 w-4" /> Talk to Support
-            </a>
+
+            {/* still need help */}
+            <div className="mt-10 rounded-2xl border border-border bg-white p-6">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                Still Need Help?
+              </div>
+              <div className="mt-2 font-display text-xl font-bold text-foreground">
+                Talk to an engineer directly.
+              </div>
+              <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                Our support engineers are on call around the clock for any
+                technical or clinical question.
+              </p>
+              <a
+                href="tel:+96264026063"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[13px] font-bold text-white transition-all hover:-translate-y-0.5"
+              >
+                <Phone className="h-4 w-4" /> Talk to an Engineer
+              </a>
+            </div>
           </div>
-          <div className="space-y-3">
+
+          <div className="space-y-4">
             {FAQS.map(([q, a], i) => {
               const isOpen = open === i;
               return (
                 <div
                   key={q}
-                  className={`overflow-hidden rounded-2xl border transition-colors ${
-                    isOpen ? "border-primary/30 bg-card" : "border-border bg-card/70"
+                  className={`overflow-hidden rounded-2xl border transition-all ${
+                    isOpen ? "border-primary/30 bg-card shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]" : "border-border bg-card/70"
                   }`}
                 >
                   <button
                     type="button"
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                    className="flex w-full items-center justify-between gap-6 px-7 py-6 text-left"
                   >
-                    <span className="text-[15px] font-semibold text-foreground">
+                    <span className="text-[17px] font-semibold text-foreground sm:text-[18px]">
                       {q}
                     </span>
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${
                         isOpen ? "bg-primary text-white" : "bg-muted text-foreground"
                       }`}
                     >
@@ -931,10 +1049,10 @@ function FAQ() {
                   <motion.div
                     initial={false}
                     animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-[14px] leading-relaxed text-muted-foreground">
+                    <div className="px-7 pb-7 text-[15px] leading-relaxed text-muted-foreground">
                       {a}
                     </div>
                   </motion.div>
@@ -957,21 +1075,22 @@ function FinalCTA() {
         <img
           src={ctaImg}
           alt=""
-          className="h-full w-full object-cover object-center opacity-45"
+          className="h-full w-full object-cover object-center opacity-55"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/30" />
+        <div className="pointer-events-none absolute -right-32 top-1/2 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-primary/20 blur-[120px]" />
       </div>
-      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-28">
+      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-32">
         <div className="max-w-2xl">
           <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
             24/7 Technical Support
           </div>
-          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl lg:text-[4.25rem]">
             Need immediate
             <br /> technical support?
           </h2>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/80">
             Our team is ready to help you around the clock — from remote
             diagnostics to on-site emergency repair.
           </p>
@@ -1008,7 +1127,7 @@ export function AfterSalesPage() {
   return (
     <>
       <Hero />
-      <CommandCenter />
+      <OperationsDashboard />
       <RemoteDiagnostics />
       <SupportJourney />
       <EquipmentGallery />
