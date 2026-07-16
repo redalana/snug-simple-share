@@ -1711,17 +1711,18 @@ function FinalCTA() {
             A certified engineer is on call around the clock — from remote
             diagnostics to on-site emergency repair, wherever your hospital is.
           </p>
-          <div className="mt-8 flex items-center gap-6 text-[13px] font-medium text-white/70">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] font-medium text-white/70">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Avg response &lt; 4 hours
             </div>
             <div className="hidden h-4 w-px bg-white/15 sm:block" />
-            <div className="hidden items-center gap-2 sm:flex">
+            <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               98% first-time fix rate
             </div>
           </div>
+
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-[280px]">
           <a
