@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { COUNTRIES as WORLD_COUNTRIES, MAP_W, MAP_H } from "./africaMapData";
+import { COUNTRY_PATHS as WORLD_COUNTRIES, MAP_W, MAP_H, GEO, HIGHLIGHT_NAMES } from "./turnkey/worldMap";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -652,22 +652,7 @@ function FeaturedProjects() {
    06 — GLOBAL PRESENCE  (rebuilt)
    ========================================================= */
 
-// Coordinates in the shared world-map viewBox (1000 x 732)
-// Values verified against real geography (equirectangular projection used by africaMapData).
-const GEO: Record<string, { x: number; y: number }> = {
-  Jordan: { x: 560, y: 118 },
-  Syria: { x: 578, y: 88 },
-  Iraq: { x: 620, y: 105 },
-  Egypt: { x: 505, y: 155 },
-  Libya: { x: 385, y: 155 },
-  Yemen: { x: 665, y: 250 },
-  Somaliland: { x: 665, y: 295 },
-  Somalia: { x: 700, y: 335 },
-  Uzbekistan: { x: 770, y: 40 },
-  Bangladesh: { x: 975, y: 178 },
-};
-
-const HIGHLIGHT = new Set(Object.keys(GEO));
+const HIGHLIGHT = HIGHLIGHT_NAMES;
 
 function useCountUp(target: number, inView: boolean, dur = 1400) {
   const [v, setV] = useState(0);
@@ -885,12 +870,12 @@ function GlobalPresence() {
             >
               <defs>
                 <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#f1f4f8" />
-                  <stop offset="100%" stopColor="#e6ebf1" />
+                  <stop offset="0%" stopColor="#cbd5e1" />
+                  <stop offset="100%" stopColor="#94a3b8" />
                 </linearGradient>
                 <linearGradient id="activeGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="color-mix(in oklab, var(--primary) 42%, white)" />
-                  <stop offset="100%" stopColor="color-mix(in oklab, var(--primary) 28%, white)" />
+                  <stop offset="0%" stopColor="color-mix(in oklab, var(--primary) 85%, white)" />
+                  <stop offset="100%" stopColor="var(--primary)" />
                 </linearGradient>
                 <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.15" />
@@ -916,8 +901,9 @@ function GlobalPresence() {
                   key={c.name}
                   d={c.d}
                   fill="url(#landGrad)"
-                  stroke="rgba(15,23,42,0.08)"
-                  strokeWidth={0.4}
+                  stroke="rgba(15,23,42,0.18)"
+                  strokeWidth={0.6}
+                  strokeLinejoin="round"
                 />
               ))}
               {/* Highlighted countries */}
@@ -929,8 +915,9 @@ function GlobalPresence() {
                     d={c.d}
                     fill="url(#activeGrad)"
                     stroke="var(--primary)"
-                    strokeOpacity={isHov ? 0.9 : 0.45}
-                    strokeWidth={isHov ? 0.9 : 0.5}
+                    strokeOpacity={isHov ? 1 : 0.7}
+                    strokeWidth={isHov ? 1.2 : 0.8}
+                    strokeLinejoin="round"
                     style={{
                       filter: isHov ? "drop-shadow(0 0 4px rgba(225,29,46,0.55))" : undefined,
                       transition: "all 0.3s ease",
