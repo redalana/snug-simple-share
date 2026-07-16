@@ -68,7 +68,7 @@ function Hero() {
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] items-center gap-16 px-6 pb-14 pt-20 lg:min-h-[520px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-20 lg:pt-24">
+      <div className="relative mx-auto grid min-h-[440px] max-w-[100rem] items-center gap-16 px-6 pb-12 pt-20 lg:min-h-[480px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-16 lg:pt-24">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
@@ -563,14 +563,15 @@ function RemoteDiagnostics() {
 /* ---------------- SUPPORT JOURNEY ---------------- */
 
 const JOURNEY = [
-  { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes." },
-  { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause." },
-  { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts." },
-  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours." },
-  { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts." },
-  { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs." },
-  { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support." },
+  { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes.", detail: "Multi-channel intake with automatic triage and ticket routing." },
+  { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause.", detail: "OEM-approved secure tunnels; most issues resolved without a visit." },
+  { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts.", detail: "Dispatched from the closest regional hub with pre-picked parts." },
+  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours.", detail: "GPS-tracked ETA shared with your biomed team in real time." },
+  { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts.", detail: "Every intervention logged for full audit and compliance trail." },
+  { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs.", detail: "Image quality, dose and mechanical checks all restored to spec." },
+  { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support.", detail: "Signed service report, warranty update and 7-day follow-up call." },
 ];
+
 
 function SupportJourney() {
   const ref = useRef<HTMLDivElement>(null);
@@ -610,17 +611,17 @@ function SupportJourney() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.55, delay: i * 0.09 }}
-                className="relative"
+                className="group relative"
               >
                 <div className="relative mx-auto flex h-[144px] w-[144px] items-center justify-center">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/25 via-primary/5 to-transparent blur-xl" />
-                  <div className="absolute inset-2 rounded-full border border-white/10 bg-[#0f131c]" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/25 via-primary/5 to-transparent blur-xl transition-opacity duration-300 group-hover:opacity-100 group-hover:blur-2xl" />
+                  <div className="absolute inset-2 rounded-full border border-white/10 bg-[#0f131c] transition-colors group-hover:border-primary/40" />
                   <motion.div
                     animate={{ scale: [1, 1.06, 1] }}
                     transition={{ duration: 3, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute inset-4 rounded-full border border-primary/25"
                   />
-                  <div className="relative flex h-[104px] w-[104px] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                  <div className="relative flex h-[104px] w-[104px] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-transform duration-300 group-hover:scale-105">
                     <s.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
                   </div>
                   <div className="absolute -top-2 right-2 rounded-full bg-primary px-2.5 py-0.5 text-[10.5px] font-black tracking-widest text-white shadow-[0_8px_20px_-6px_rgba(220,38,38,0.7)]">
@@ -634,10 +635,18 @@ function SupportJourney() {
                   <div className="mt-2 text-[12.5px] leading-relaxed text-white/55">
                     {s.d}
                   </div>
+                  <div className="mt-2 grid grid-rows-[0fr] overflow-hidden opacity-0 transition-[grid-template-rows,opacity] duration-300 group-hover:grid-rows-[1fr] group-hover:opacity-100">
+                    <div className="min-h-0">
+                      <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[11.5px] leading-relaxed text-white/70">
+                        {s.detail}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
@@ -732,11 +741,12 @@ function EquipmentGallery() {
 
 function Engineering() {
   const features = [
-    { icon: ShieldCheck, t: "OEM Certified Team", d: "Trained directly by Siemens, Philips, GE, Canon and more." },
-    { icon: Cog, t: "Factory Procedures", d: "Every service follows original manufacturer specifications." },
-    { icon: Users, t: "Clinical Application Support", d: "Hands-on training for radiographers and biomeds on every install." },
-    { icon: ClipboardCheck, t: "Full Warranty Coverage", d: "1-year free warranty plus extended service contracts." },
+    { icon: ShieldCheck, t: "OEM Certified Team", d: "Trained by Siemens, Philips, GE and Canon." },
+    { icon: Cog, t: "Factory Procedures", d: "Every service follows original OEM specifications." },
+    { icon: Users, t: "Clinical Support", d: "Hands-on training for radiographers and biomeds." },
+    { icon: ClipboardCheck, t: "Full Warranty", d: "1-year coverage plus extended service contracts." },
   ];
+
   const badges = [
     { icon: Award, k: "12+", v: "OEM Certificates" },
     { icon: Clock, k: "< 4h", v: "Response Time" },
@@ -1505,17 +1515,30 @@ function RequestService() {
 
 /* ---------------- FAQ / KNOWLEDGE CENTER ---------------- */
 
-const FAQS: [string, string][] = [
-  ["How can I request a service?", "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and an engineer is assigned within minutes."],
-  ["How fast can an engineer reach our site?", "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region."],
-  ["What is the warranty coverage?", "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available."],
-  ["Do you provide training for our staff?", "Yes — clinical and biomedical training is included with every installation and available on demand."],
-  ["Do you provide preventive maintenance?", "Yes. Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment."],
-  ["Do you supply spare parts for all models?", "We stock genuine OEM parts for every brand and modality we install, and can source rare parts through our OEM partners."],
+const FAQ_CATS = ["All", "Service", "Warranty", "Parts", "Training"] as const;
+type FaqCat = (typeof FAQ_CATS)[number];
+
+const FAQS: { q: string; a: string; cat: Exclude<FaqCat, "All"> }[] = [
+  { q: "How can I request a service?", a: "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and a certified engineer is assigned within minutes.", cat: "Service" },
+  { q: "How fast can an engineer reach our site?", a: "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region — dispatched from the nearest field hub with the right parts on board.", cat: "Service" },
+  { q: "What is the warranty coverage?", a: "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available for multi-year coverage, uptime guarantees and preventive maintenance.", cat: "Warranty" },
+  { q: "Do you provide training for our staff?", a: "Yes — clinical and biomedical training is included with every installation and available on demand. Sessions are led by OEM-certified application specialists on your own equipment.", cat: "Training" },
+  { q: "Do you provide preventive maintenance?", a: "Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment, following original OEM procedures and checklists.", cat: "Service" },
+  { q: "Do you supply spare parts for all models?", a: "We stock genuine OEM parts for every brand and modality we install and can source rare parts through our OEM partners with fully traceable documentation.", cat: "Parts" },
 ];
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const [query, setQuery] = useState("");
+  const [cat, setCat] = useState<FaqCat>("All");
+
+  const filtered = FAQS.map((f, i) => ({ ...f, i })).filter((f) => {
+    const matchCat = cat === "All" || f.cat === cat;
+    const q = query.trim().toLowerCase();
+    const matchQ = !q || f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
   return (
     <section className="relative bg-[#f6f4f0] py-24 lg:py-32">
       <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
@@ -1537,7 +1560,7 @@ function FAQ() {
             </p>
 
             {/* still need help */}
-            <div className="mt-10 rounded-2xl border border-border bg-white p-6">
+            <div className="mt-10 rounded-2xl border border-border bg-white p-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.15)]">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
                 Still Need Help?
               </div>
@@ -1557,51 +1580,100 @@ function FAQ() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            {FAQS.map(([q, a], i) => {
-              const isOpen = open === i;
-              return (
-                <div
-                  key={q}
-                  className={`overflow-hidden rounded-2xl border transition-all ${
-                    isOpen ? "border-primary/30 bg-card shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]" : "border-border bg-card/70"
+          <div>
+            {/* Search + categories */}
+            <div className="mb-6 rounded-2xl border border-border bg-white p-3 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.15)]">
+              <div className="flex items-center gap-3 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-muted-foreground"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search questions — e.g. warranty, parts, training"
+                  className="w-full bg-transparent py-3 text-[14.5px] text-foreground outline-none placeholder:text-muted-foreground/70"
+                />
+              </div>
+            </div>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {FAQ_CATS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCat(c)}
+                  className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition-all ${
+                    cat === c
+                      ? "border-ink bg-ink text-white"
+                      : "border-border bg-white text-foreground hover:border-foreground/40"
                   }`}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-6 px-7 py-6 text-left"
-                  >
-                    <span className="text-[17px] font-semibold text-foreground sm:text-[18px]">
-                      {q}
-                    </span>
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${
-                        isOpen ? "bg-primary text-white" : "bg-muted text-foreground"
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            {filtered.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-border bg-white/50 p-10 text-center text-[14px] text-muted-foreground">
+                No questions match your search. Try a different keyword.
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filtered.map(({ q, a, cat: fcat, i }) => {
+                  const isOpen = open === i;
+                  return (
+                    <div
+                      key={q}
+                      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                        isOpen
+                          ? "border-primary/30 bg-white shadow-[0_25px_60px_-30px_rgba(0,0,0,0.28)]"
+                          : "border-border bg-white/70 hover:border-foreground/25 hover:bg-white hover:shadow-[0_15px_40px_-25px_rgba(0,0,0,0.2)]"
                       }`}
                     >
-                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                    </span>
-                  </button>
-                  <motion.div
-                    initial={false}
-                    animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-7 pb-7 text-[15px] leading-relaxed text-muted-foreground">
-                      {a}
+                      <button
+                        type="button"
+                        onClick={() => setOpen(isOpen ? null : i)}
+                        aria-expanded={isOpen}
+                        className="flex w-full items-center justify-between gap-6 px-7 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                      >
+                        <div className="min-w-0">
+                          <div className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-primary">
+                            {fcat}
+                          </div>
+                          <div className="mt-1.5 text-[17.5px] font-semibold leading-snug text-foreground sm:text-[19px]">
+                            {q}
+                          </div>
+                        </div>
+                        <span
+                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                            isOpen
+                              ? "rotate-180 bg-primary text-white"
+                              : "bg-muted text-foreground"
+                          }`}
+                        >
+                          {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                        </span>
+                      </button>
+                      <motion.div
+                        initial={false}
+                        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-7 pb-8 text-[15.5px] leading-[1.75] text-muted-foreground">
+                          {a}
+                        </div>
+                      </motion.div>
                     </div>
-                  </motion.div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------------- FINAL CTA ---------------- */
 
@@ -1612,51 +1684,87 @@ function FinalCTA() {
         <img
           src={ctaImg}
           alt=""
-          className="h-full w-full object-cover object-center opacity-55"
+          className="h-full w-full object-cover object-center opacity-45"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/30" />
-        <div className="pointer-events-none absolute -right-32 top-1/2 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-primary/20 blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
+        <div className="pointer-events-none absolute -right-40 top-1/3 h-[38rem] w-[38rem] rounded-full bg-primary/25 blur-[140px]" />
+        <div className="pointer-events-none absolute -left-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-primary/10 blur-[120px]" />
       </div>
-      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-10 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-32">
+      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-12 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:px-10 lg:py-32">
         <div className="max-w-2xl">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            24/7 Technical Support
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white backdrop-blur">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
+            24/7 Emergency Support
           </div>
-          <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl lg:text-[4.25rem]">
-            Need immediate
-            <br /> technical support?
+          <h2 className="mt-6 font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight sm:text-[3.75rem] lg:text-[4.75rem]">
+            When downtime is not
+            <br />
+            <span className="text-primary">an option</span>
+            <span className="text-white">.</span>
           </h2>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/80">
-            Our team is ready to help you around the clock — from remote
-            diagnostics to on-site emergency repair.
+          <p className="mt-7 max-w-xl text-lg leading-[1.7] text-white/80">
+            A certified engineer is on call around the clock — from remote
+            diagnostics to on-site emergency repair, wherever your hospital is.
           </p>
+          <div className="mt-8 flex items-center gap-6 text-[13px] font-medium text-white/70">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              Avg response &lt; 4 hours
+            </div>
+            <div className="hidden h-4 w-px bg-white/15 sm:block" />
+            <div className="hidden items-center gap-2 sm:flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              98% first-time fix rate
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-3">
-          <a
-            href="#request"
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-white shadow-[0_18px_50px_-18px_rgba(220,38,38,0.85)] transition-all hover:-translate-y-0.5"
-          >
-            Request Service
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-[280px]">
           <a
             href="tel:+96264026063"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
+            className="group inline-flex items-center justify-between gap-4 rounded-2xl bg-primary px-6 py-5 text-left text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
           >
-            <Phone className="h-4 w-4" /> Call Engineer
+            <div>
+              <div className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/80">
+                Emergency Line
+              </div>
+              <div className="mt-0.5 font-display text-lg font-extrabold">
+                +962 6 402 6063
+              </div>
+            </div>
+            <Phone className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-12" />
           </a>
           <a
             href="https://wa.me/962799741318"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
+            className="group inline-flex items-center justify-between gap-4 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-6 py-4 text-left text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
           >
-            <MessageSquare className="h-4 w-4" /> Chat on WhatsApp
+            <div>
+              <div className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-emerald-300">
+                WhatsApp
+              </div>
+              <div className="mt-0.5 text-[14px] font-semibold">
+                Chat with an engineer
+              </div>
+            </div>
+            <MessageSquare className="h-5 w-5 shrink-0" />
+          </a>
+          <a
+            href="#request"
+            className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-6 py-4 text-[13px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
+          >
+            Submit Service Request
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------------- PAGE ---------------- */
 
