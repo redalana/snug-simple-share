@@ -169,19 +169,20 @@ function Hero() {
 
 // ---------- Journey ----------
 const JOURNEY = [
-  { year: "1999", title: "Our Beginning", img: hqImg,
-    desc: "AbuFarha was founded with a vision to bring advanced medical technology and engineering excellence to our region." },
-  { year: "2005", title: "Regional Expansion", img: p1,
-    desc: "Operations extended across key countries in Africa and the Middle East, with permanent local engineering teams." },
-  { year: "2010", title: "Turnkey Projects", img: p2,
-    desc: "Delivered complex turnkey installations for hospitals, imaging and diagnostic centers — from planning to handover." },
-  { year: "2015", title: "After-Sales Network", img: engImg,
-    desc: "Built a full after-sales network of certified biomedical engineers with regional spare-parts stock and rapid response." },
-  { year: "2020", title: "Continuous Growth", img: p3,
-    desc: "Strengthened partnerships with global OEMs and scaled clinical training programs for radiologists and technologists." },
-  { year: "Today", title: "Looking Ahead", img: cathlab,
-    desc: "Committed to advancing healthcare through engineering, service and long-term hospital partnerships." },
+  { year: "1999", title: "Company Founded in Jordan", img: hqImg,
+    desc: "AbuFarha Medical Supplies is founded in Jordan to bring reliable medical equipment and engineering support to regional hospitals." },
+  { year: "2005", title: "Expansion into Hospital Projects", img: p1,
+    desc: "Moves beyond equipment supply into full hospital equipping projects — planning, installation and clinical commissioning." },
+  { year: "2010", title: "Regional Growth", img: p2,
+    desc: "Establishes a network of biomedical engineers and application specialists serving hospitals across the Middle East." },
+  { year: "2015", title: "Large Turnkey Healthcare Projects", img: engImg,
+    desc: "Delivers multi-department turnkey healthcare projects covering imaging, cath lab, ICU, OR and sterilization from a single accountable partner." },
+  { year: "2020", title: "Expansion Across Africa & Middle East", img: p3,
+    desc: "Extends operations into North and East Africa and Central Asia, with permanent field engineering teams and regional spare-parts stock." },
+  { year: "Today", title: "Complete Healthcare Engineering Partner", img: cathlab,
+    desc: "A complete healthcare engineering partner — supply, installation, commissioning, clinical training and lifetime technical support." },
 ];
+
 
 function Journey() {
   return (
