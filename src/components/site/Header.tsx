@@ -78,9 +78,11 @@ const SOCIALS = [
 ];
 
 const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "fr", label: "Français" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "ar", label: "العربية", flag: "🇸🇦" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
 ] as const;
+
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
