@@ -3,11 +3,11 @@ import { useMemo, useState } from "react";
 import {
   ArrowRight,
   Award,
+  CalendarClock,
   FileText,
   Globe2,
   GitCompare,
   HeadphonesIcon,
-  Lightbulb,
   Search,
   ShieldCheck,
   Sparkles,
