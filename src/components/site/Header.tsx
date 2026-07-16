@@ -375,10 +375,10 @@ function MobileProductsAccordion({
           aria-expanded={expanded}
           aria-label={expanded ? "Collapse product categories" : "Expand product categories"}
           onClick={() => setExpanded((v) => !v)}
-          className="ml-2 flex h-9 w-9 items-center justify-center rounded-full text-foreground/60 transition-colors hover:bg-muted hover:text-primary"
+          className="ml-2 flex h-12 w-12 items-center justify-center rounded-full text-foreground/60 transition-colors hover:bg-muted hover:text-primary"
         >
           <ChevronDown
-            className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+            className={`h-5 w-5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
           />
         </button>
       </div>
