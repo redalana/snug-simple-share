@@ -361,6 +361,15 @@ export function PortfolioBrowser() {
     }
   }, []);
 
+  // If arriving with ?category=<name>, preselect that category pill.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("category");
+    if (cat && (CATEGORIES as readonly string[]).includes(cat)) {
+      setActiveCat(cat);
+    }
+  }, []);
+
   const toggleSection = (key: string) => {
     setOpenFilters((prev) => {
       const next = { ...prev, [key]: !prev[key] };
