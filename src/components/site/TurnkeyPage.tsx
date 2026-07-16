@@ -94,7 +94,7 @@ const HOTSPOTS = [
 
 const PROJECTS = [
   { country: "Egypt", title: "National Heart Institute", scope: "Cath Lab Department", tag: "Cath Lab", year: "2024", image: project1 },
-  { country: "Saudi Arabia", title: "King Fahd Hospital", scope: "MRI Center", tag: "MRI", year: "2023", image: project2 },
+  { country: "Yemen", title: "Al-Thawra General Hospital", scope: "MRI Center", tag: "MRI", year: "2023", image: project2 },
   { country: "Jordan", title: "Al Bashir Hospital", scope: "CT Department", tag: "CT", year: "2023", image: project3 },
   { country: "Iraq", title: "Baghdad Teaching Hospital", scope: "Hybrid OR", tag: "Hybrid OR", year: "2024", image: heroOr },
 ];
@@ -246,7 +246,7 @@ function Hero() {
 function DepartmentNav() {
   const [active, setActive] = useState<string>(DEPARTMENTS[0].id);
   return (
-    <section className="bg-[#0b1220] py-10 text-white lg:py-12">
+    <section className="bg-[#111315] py-10 text-white lg:py-12">
       <div className="mx-auto grid max-w-[100rem] items-center gap-8 px-6 lg:grid-cols-[1fr_2.8fr] lg:gap-10 lg:px-10">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary">
