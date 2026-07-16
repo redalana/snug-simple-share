@@ -652,101 +652,305 @@ function FeaturedProjects() {
    ========================================================= */
 
 function GlobalPresence() {
-  const [active, setActive] = useState(REGIONS[0]);
-  return (
-    <section className="bg-[#f7f8fa] py-20 lg:py-24">
-      <div className="mx-auto grid max-w-[100rem] gap-12 px-6 lg:grid-cols-[1fr_1.6fr] lg:items-center lg:gap-14 lg:px-10">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary">
-            Global Footprint
-          </p>
-          <h2 className="mt-4 font-display text-[34px] font-extrabold leading-[1.05] sm:text-[40px]">
-            Delivering Excellence<br />Across Regions
-          </h2>
-          <p className="mt-4 max-w-md text-[14px] leading-relaxed text-muted-foreground">
-            We are proud to support healthcare providers across Africa, the
-            Middle East, and Central Asia with reliable medical solutions.
-          </p>
+  const jordan = REGIONS.find((r) => r.hub)!;
+  const spokes = REGIONS.filter((r) => !r.hub);
+  const [active, setActive] = useState<Region>(REGIONS.find((r) => r.name === "Iraq")!);
 
-          <div className="mt-8 grid grid-cols-3 gap-6">
-            {[
-              { v: "10+", l: "Countries" },
-              { v: "250+", l: "Departments Delivered" },
-              { v: "50+", l: "Partner Hospitals" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="font-display text-2xl font-extrabold text-foreground">{s.v}</div>
-                <div className="mt-1 text-[11px] leading-tight text-muted-foreground">{s.l}</div>
-              </div>
-            ))}
+  const STATS = [
+    { icon: Globe, v: "10", suf: "+", l: "Countries" },
+    { icon: Building2, v: "100", suf: "+", l: "Projects Delivered" },
+    { icon: Stethoscope, v: "250", suf: "+", l: "Medical Systems" },
+    { icon: Heart, v: "50", suf: "+", l: "Healthcare Facilities" },
+  ];
+
+  const FEATURES = [
+    { icon: Globe, title: "Three Regions", copy: "Africa • Middle East • Central Asia" },
+    { icon: Handshake, title: "Trusted Partner", copy: "Healthcare providers rely on AbuFarha" },
+    { icon: ShieldCheck, title: "Proven Track Record", copy: "Delivering projects since 1999" },
+    { icon: Cog, title: "End-to-End Solutions", copy: "Planning to commissioning" },
+    { icon: Headphones, title: "Lifetime Support", copy: "24/7 after-sales support" },
+  ];
+
+  // Convert % to SVG viewBox coords (100 x 100)
+  const toXY = (r: Region) => ({
+    x: parseFloat(r.left),
+    y: parseFloat(r.top),
+  });
+  const jc = toXY(jordan);
+
+  return (
+    <section id="footprint" className="relative overflow-hidden bg-gradient-to-b from-white via-[#fafbfc] to-[#f4f6f9] py-20 lg:py-28">
+      {/* subtle dot pattern */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.06) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
+          {/* LEFT */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary"
+            >
+              Global Footprint
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.05 }}
+              className="mt-4 font-display text-[38px] font-extrabold leading-[1.02] tracking-[-0.02em] text-foreground sm:text-[48px]"
+            >
+              Delivering Excellence
+              <br />
+              Across Regions
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground"
+            >
+              We deliver <span className="font-semibold text-primary">turnkey</span> medical
+              departments, advanced imaging systems and biomedical engineering solutions across
+              Africa, the Middle East and Central Asia.
+            </motion.p>
+
+            {/* Stat cards 2x2 */}
+            <div className="mt-10 grid grid-cols-2 gap-4 max-w-md">
+              {STATS.map((s, i) => (
+                <motion.div
+                  key={s.l}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.15 + i * 0.07 }}
+                  className="rounded-2xl bg-white p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] ring-1 ring-black/[0.04]"
+                >
+                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <s.icon className="h-5 w-5" strokeWidth={1.8} />
+                  </div>
+                  <div className="mt-4 font-display text-[30px] font-extrabold leading-none text-foreground">
+                    {s.v}
+                    <span className="ml-0.5 text-primary">{s.suf}</span>
+                  </div>
+                  <div className="mt-2 text-[12px] font-medium text-muted-foreground">{s.l}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.a
+              href="#projects"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_18px_40px_-16px_color-mix(in_oklab,var(--primary)_65%,transparent)] transition-transform hover:-translate-y-0.5"
+            >
+              Explore Global Projects
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </motion.a>
           </div>
 
-          <a href="#" className="mt-8 inline-flex items-center gap-1 text-sm font-bold text-primary">
-            View Our Global Reach <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-
-        {/* MAP */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-[#eef2f7] ring-1 ring-black/5">
-          <svg viewBox="0 0 800 500" className="absolute inset-0 h-full w-full text-neutral-300" fill="currentColor" aria-hidden>
-            {/* Africa */}
-            <path opacity="0.6" d="M380 180 Q430 170 470 190 L500 240 Q510 300 490 340 L460 400 Q420 440 380 430 L350 400 Q330 340 340 280 Q350 220 380 180 Z" />
-            {/* Middle East / Arabia */}
-            <path opacity="0.6" d="M470 190 Q520 180 545 210 L555 250 Q540 290 505 300 L480 285 Q465 240 470 210 Z" />
-            {/* Europe */}
-            <path opacity="0.5" d="M360 120 Q420 110 470 130 L490 160 Q470 180 430 175 L380 170 Q350 155 360 130 Z" />
-            {/* Asia */}
-            <path opacity="0.55" d="M545 150 Q620 130 700 160 L730 200 Q720 260 680 290 L620 310 Q580 290 560 250 Q545 210 545 170 Z" />
-            {/* South Asia */}
-            <path opacity="0.55" d="M660 300 Q690 300 700 330 L695 360 Q670 370 655 355 Q650 330 660 300 Z" />
-          </svg>
-
-          {REGIONS.map((r) => (
-            <button
-              key={r.name}
-              onClick={() => setActive(r)}
-              style={{ top: r.top, left: r.left }}
-              className="absolute -translate-x-1/2 -translate-y-1/2"
-              aria-label={r.name}
+          {/* RIGHT — MAP */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#f1f4f8] ring-1 ring-black/5 shadow-[0_40px_100px_-40px_rgba(15,23,42,0.25)]"
+          >
+            {/* soft continents backdrop */}
+            <svg
+              viewBox="0 0 800 640"
+              className="absolute inset-0 h-full w-full text-neutral-300/70"
+              fill="currentColor"
+              aria-hidden
             >
-              <span className="relative grid h-6 w-6 place-items-center rounded-full bg-primary text-white shadow-md ring-4 ring-primary/20">
-                <span className="h-2 w-2 rounded-full bg-white" />
-              </span>
-            </button>
-          ))}
+              <path opacity="0.45" d="M340 200 Q420 180 500 210 L540 280 Q550 360 520 430 L470 510 Q420 550 370 530 L330 490 Q300 400 310 320 Q320 240 340 200 Z" />
+              <path opacity="0.4" d="M500 210 Q560 195 600 230 L620 290 Q600 340 555 350 L520 335 Q500 280 500 230 Z" />
+              <path opacity="0.35" d="M600 150 Q690 130 770 170 L790 240 Q770 300 720 320 L640 320 Q600 280 590 220 Q580 180 600 150 Z" />
+              <path opacity="0.4" d="M720 340 Q760 340 775 380 L770 420 Q740 435 720 415 Q710 380 720 340 Z" />
+            </svg>
 
-          {/* Floating country card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.name}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.25 }}
-              className="absolute left-1/2 top-6 w-[220px] -translate-x-1/2 rounded-xl bg-white p-4 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/5 lg:left-auto lg:right-8 lg:top-10 lg:translate-x-0"
+            {/* CONNECTION LINES (SVG overlay in % coords) */}
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              className="absolute inset-0 h-full w-full"
+              aria-hidden
             >
-              <div className="font-display text-[15px] font-bold text-foreground">{active.name}</div>
-              <div className="mt-3 space-y-1.5 text-[12.5px]">
-                <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Projects</span>
-                  <span className="font-bold text-foreground">{active.projects}</span>
-                </div>
-                <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Hospitals</span>
-                  <span className="font-bold text-foreground">{active.hospitals}</span>
-                </div>
-                <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Systems</span>
-                  <span className="font-bold text-foreground">{active.systems}</span>
+              <defs>
+                <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.15" />
+                  <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.75" />
+                  <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.15" />
+                </linearGradient>
+              </defs>
+              {spokes.map((r, i) => {
+                const p = toXY(r);
+                // Curve control point offset perpendicular
+                const mx = (jc.x + p.x) / 2;
+                const my = (jc.y + p.y) / 2 - 6;
+                const pathId = `route-${i}`;
+                const d = `M ${p.x} ${p.y} Q ${mx} ${my} ${jc.x} ${jc.y}`;
+                return (
+                  <g key={r.name}>
+                    <path id={pathId} d={d} fill="none" stroke="url(#lineGrad)" strokeWidth={0.35} vectorEffect="non-scaling-stroke" />
+                    <circle r={0.6} fill="var(--primary)">
+                      <animateMotion dur={`${3 + (i % 4)}s`} repeatCount="indefinite" begin={`${i * 0.35}s`}>
+                        <mpath href={`#${pathId}`} />
+                      </animateMotion>
+                    </circle>
+                  </g>
+                );
+              })}
+            </svg>
+
+            {/* Central Jordan hub badge */}
+            <div
+              className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+              style={{ top: jordan.top, left: jordan.left }}
+            >
+              <div className="relative">
+                <span className="absolute inset-0 -m-2 animate-ping rounded-full bg-primary/25" />
+                <div className="relative flex flex-col items-center gap-1 rounded-full bg-white px-3 py-2 shadow-[0_10px_30px_-8px_rgba(15,23,42,0.25)] ring-1 ring-primary/30">
+                  <Activity className="h-4 w-4 text-primary" strokeWidth={2.2} />
+                  <span className="font-display text-[10px] font-extrabold tracking-tight text-foreground">
+                    AbuFarha
+                  </span>
+                  <span className="-mt-0.5 text-[7px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                    Jordan · HQ
+                  </span>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+
+            {/* Country nodes */}
+            {spokes.map((r) => {
+              const isActive = active.name === r.name;
+              return (
+                <button
+                  key={r.name}
+                  type="button"
+                  onMouseEnter={() => setActive(r)}
+                  onFocus={() => setActive(r)}
+                  onClick={() => setActive(r)}
+                  aria-label={r.name}
+                  className="group absolute z-10 -translate-x-1/2 -translate-y-1/2"
+                  style={{ top: r.top, left: r.left }}
+                >
+                  <span className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40 ${isActive ? "h-6 w-6 animate-ping" : "h-4 w-4 animate-ping"}`} />
+                  <span className={`relative block rounded-full bg-primary ring-2 ring-white shadow-[0_4px_12px_rgba(225,29,46,0.45)] transition-transform group-hover:scale-125 ${isActive ? "h-3.5 w-3.5" : "h-2.5 w-2.5"}`} />
+                  <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-white/90 px-1.5 py-0.5 text-[10px] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
+                    {r.name}
+                  </span>
+                </button>
+              );
+            })}
+
+            {/* Floating hover card */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.name}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28 }}
+                className="absolute bottom-5 right-5 z-30 w-[260px] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_60px_-25px_rgba(15,23,42,0.35)] ring-1 ring-black/[0.06]"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-neutral-100 text-lg leading-none">
+                    {active.flag}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="font-display text-[15px] font-extrabold text-foreground">
+                      {active.name}
+                    </div>
+                    {active.note && (
+                      <div className="text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        {active.note}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <ul className="mt-4 space-y-2 border-t border-black/5 pt-3">
+                  {active.equipment.map((e) => (
+                    <li key={e.label} className="flex items-center justify-between text-[12.5px]">
+                      <span className="flex items-center gap-2 text-muted-foreground">
+                        <Stethoscope className="h-3.5 w-3.5 text-primary/70" strokeWidth={1.8} />
+                        {e.label}
+                      </span>
+                      <span className="font-bold text-foreground">{e.qty}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-3 overflow-hidden rounded-lg">
+                  <img
+                    src={active.img}
+                    alt={active.name}
+                    className="h-24 w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+
+                <a
+                  href="#projects"
+                  className="mt-3 inline-flex items-center gap-1 text-[12px] font-bold text-primary hover:text-primary/80"
+                >
+                  View Projects <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
+
+        {/* BOTTOM FEATURE STRIP */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-14 rounded-3xl bg-white/80 p-6 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.2)] ring-1 ring-black/[0.05] backdrop-blur-xl lg:mt-16 lg:p-8"
+        >
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+            {FEATURES.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/8 text-primary">
+                  <f.icon className="h-5 w-5" strokeWidth={1.8} />
+                </div>
+                <div className="mt-3 font-display text-[14px] font-extrabold text-foreground">
+                  {f.title}
+                </div>
+                <p className="mt-1.5 text-[12px] leading-snug text-muted-foreground">{f.copy}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+
 
 /* =========================================================
    07 — SUPPORT ECOSYSTEM
