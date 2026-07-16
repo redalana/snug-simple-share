@@ -753,12 +753,16 @@ function Team() {
 
 // ---------- Why Trust ----------
 const WHY = [
-  { icon: ShieldCheck, title: "25+ Years Experience", desc: "A quarter-century of engineering track record across imaging, cath lab and biomedical systems — with reference sites across two continents.", feature: true },
-  { icon: BadgeCheck, title: "OEM Standards", desc: "Every install, calibration and maintenance action follows manufacturer specifications and is fully documented." },
-  { icon: Clock, title: "Rapid Response", desc: "Regionally-stationed engineers deliver fast on-site turnaround, backed by 24/7 remote diagnostics." },
-  { icon: MapPinned, title: "Regional Presence", desc: "Local teams across Africa and the Middle East with regional spare-parts stock — always close to your facility." },
-  { icon: Handshake, title: "Long-Term Partnership", desc: "We stay engaged across the full equipment lifecycle — not just at handover." },
+  { icon: Globe2, title: "Regional Experience", desc: "More than two decades supporting hospitals across the Middle East and Africa — we understand the region's infrastructure, workflows and clinical realities.", feature: true },
+  { icon: ClipboardCheck, title: "Hospital Planning Expertise", desc: "We help hospitals scope new departments — room layouts, equipment lists, electrical and HVAC requirements and phased delivery plans." },
+  { icon: Wrench, title: "Installation & Commissioning", desc: "In-house engineers install and commission every system to OEM standards, with a documented acceptance report handed over at go-live." },
+  { icon: GraduationCap, title: "Clinical Training", desc: "Application specialists train radiographers, technologists, nurses and clinicians on protocols and safe daily operation — on-site and after go-live." },
+  { icon: ShieldCheck, title: "Preventive Maintenance", desc: "Scheduled OEM-aligned preventive maintenance keeps systems within manufacturer tolerance and extends equipment lifetime." },
+  { icon: LifeBuoy, title: "Long-Term Technical Support", desc: "24/7 remote diagnostics plus regional field engineers and spare-parts stock — rapid response wherever the hospital is." },
+  { icon: BadgeCheck, title: "OEM Standards", desc: "Every install, calibration and service action follows manufacturer specifications and is fully traceable and documented." },
+  { icon: Award, title: "One-Year Warranty", desc: "Every new installation is backed by a one-year warranty covering parts and engineering labor — with clear escalation paths." },
 ];
+
 
 function WhyTrust() {
   return (
