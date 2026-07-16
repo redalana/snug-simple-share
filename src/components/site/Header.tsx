@@ -339,18 +339,19 @@ function MobileProductsAccordion({
   onNavigate: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <div className="border-b border-border/60 py-3 last:border-0">
       <div className="flex items-center justify-between">
-        <a
-          href="/products"
+        <Link
+          to="/products"
           onClick={onNavigate}
           className={`flex-1 text-[16px] font-medium transition-colors ${
             active ? "text-primary" : "text-foreground/80 hover:text-primary"
           }`}
         >
           All Products
-        </a>
+        </Link>
         <button
           type="button"
           aria-expanded={expanded}
@@ -377,27 +378,36 @@ function MobileProductsAccordion({
                 Product Categories
               </span>
               <ul className="flex flex-col">
-                {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      onClick={onNavigate}
-                      className="flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium text-foreground/75 transition-colors hover:bg-muted hover:text-foreground"
-                    >
-                      <Icon className="h-[18px] w-[18px] text-foreground/55" strokeWidth={1.75} />
-                      <span className="flex-1">{label}</span>
-                    </a>
-                  </li>
-                ))}
+                {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => {
+                  const isActive = pathname === href;
+                  return (
+                    <li key={label}>
+                      <Link
+                        to={href}
+                        onClick={onNavigate}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
+                          isActive ? "bg-muted text-foreground" : "text-foreground/75"
+                        }`}
+                      >
+                        <Icon
+                          className={`h-[18px] w-[18px] ${isActive ? "text-primary" : "text-foreground/55"}`}
+                          strokeWidth={1.75}
+                        />
+                        <span className="flex-1">{label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
-              <a
-                href="/products"
+              <Link
+                to="/products"
                 onClick={onNavigate}
                 className="mt-1 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-[13px] font-semibold text-foreground hover:text-primary"
               >
                 <span>View All Products</span>
                 <ArrowRight className="h-4 w-4 text-primary" strokeWidth={2.25} />
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
