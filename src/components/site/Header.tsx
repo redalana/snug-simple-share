@@ -669,14 +669,17 @@ export function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-3 text-[16px] font-medium transition-colors last:border-0 ${
-                      active ? "text-primary" : "text-foreground/80 hover:text-primary"
+                    className={`block border-b border-border/60 py-3 text-[16px] transition-colors last:border-0 ${
+                      item.label === "Contact Us"
+                        ? "font-bold text-primary hover:text-primary-dark"
+                        : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
                     }`}
                   >
                     {item.label}
                   </a>
                 );
               })}
+
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
