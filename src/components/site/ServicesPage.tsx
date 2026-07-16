@@ -563,7 +563,7 @@ function Coverage() {
                 <input type="email" required className={inputCls} />
               </Field>
               <Field label="Phone Number" required>
-                <PhoneField />
+                <PhoneFieldWrapper />
               </Field>
               <Field label="Country" required>
                 <select required className={inputCls} defaultValue="">
