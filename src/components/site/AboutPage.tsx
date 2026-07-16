@@ -688,12 +688,13 @@ function Partners() {
 
 // ---------- Team ----------
 const TEAM_ROLES = [
-  { icon: Cpu, title: "Biomedical Engineers", desc: "Installation, commissioning and preventive maintenance across imaging, cath lab and monitoring platforms." },
-  { icon: Stethoscope, title: "Clinical Specialists", desc: "Application and workflow experts working alongside radiologists, cardiologists and technologists." },
-  { icon: Activity, title: "Applications Team", desc: "Modality specialists optimizing clinical protocols for MRI, CT, cath lab and ultrasound." },
-  { icon: UserCog, title: "Project Managers", desc: "Coordinating design, civil works, delivery, installation and handover for complex turnkey projects." },
-  { icon: Wrench, title: "Field Service Engineers", desc: "On-ground technical support, calibration and corrective maintenance across the region." },
+  { icon: Cpu, title: "Biomedical Engineers", desc: "Certified engineers responsible for installation, commissioning, preventive maintenance and corrective service across every system we deliver." },
+  { icon: Activity, title: "Application Specialists", desc: "Modality specialists with deep expertise in MRI, CT and Cath Lab systems — tuning imaging protocols and validating clinical performance." },
+  { icon: GraduationCap, title: "Clinical Trainers", desc: "Trainers who work on-site with radiographers, technologists and nurses so departments operate confidently from day one and after staff rotation." },
+  { icon: Stethoscope, title: "Healthcare Consultants", desc: "Advisors who help hospitals plan new departments, choose the right technology and phase delivery across large multi-year projects." },
+  { icon: UserCog, title: "MRI, CT & Cath Lab Engineers", desc: "Modality-specific field engineers with hands-on experience on advanced imaging and interventional platforms across leading OEMs." },
 ];
+
 
 const TEAM_BADGES = ["OEM Certified", "ISO 13485", "ISO 9001", "Radiation Safety"];
 
