@@ -176,7 +176,7 @@ export function Hero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[124px] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[132px] xl:pt-[180px]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[144px] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[152px] xl:pt-[204px]"
     >
       {/* ── Background scene (crossfade) ─────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
