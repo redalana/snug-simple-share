@@ -1,7 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check, Star } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  X,
+  Facebook,
+  Linkedin,
+  Check,
+  Star,
+  HeartPulse,
+  Activity,
+  ScanLine,
+  Magnet,
+  Aperture,
+  Radiation,
+  CircleDot,
+  Bone,
+  Waves,
+  LayoutGrid,
+  ArrowRight,
+} from "lucide-react";
 
 import { Logo } from "./Logo";
 
