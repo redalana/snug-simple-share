@@ -399,6 +399,39 @@ export function Header() {
             <div className="mx-auto max-w-[100rem] px-6 py-4 lg:px-10">
               {NAV.map((item) => {
                 const active = isActive(item.href);
+                if (item.label === "Brands") {
+                  return (
+                    <div key={item.label} className="border-b border-border/60 py-3 last:border-0">
+                      <a
+                        href="/brands"
+                        onClick={() => setOpen(false)}
+                        className="flex items-center gap-2 text-[16px] font-medium text-foreground/80 hover:text-primary"
+                      >
+                        <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
+                        All Brands
+                      </a>
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        {BRAND_ITEMS.map((b) => (
+                          <a
+                            key={b.name}
+                            href={b.href}
+                            onClick={() => setOpen(false)}
+                            className="flex items-center gap-2 rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-primary/60"
+                          >
+                            <BrandMark item={b} />
+                            <span
+                              className="font-display text-[13px] font-extrabold leading-tight tracking-tight"
+                              style={{ color: b.color }}
+                            >
+                              {b.name}
+                              {b.sub && <span className="ml-1 text-[9px] uppercase opacity-75">{b.sub}</span>}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
                 return (
                   <a
                     key={item.label}
