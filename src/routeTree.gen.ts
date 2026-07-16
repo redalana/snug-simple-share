@@ -16,6 +16,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AfterSalesRouteImport } from './routes/after-sales'
 import { Route as IndexRouteImport } from './routes/index'
@@ -62,6 +63,11 @@ const ContactRoute = ContactRouteImport.update({
 const CategoriesRoute = CategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/after-sales': typeof AfterSalesRoute
   '/blog': typeof BlogRouteWithChildren
+  '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/after-sales': typeof AfterSalesRoute
+  '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/after-sales': typeof AfterSalesRoute
   '/blog': typeof BlogRouteWithChildren
+  '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/'
     | '/after-sales'
     | '/blog'
+    | '/brands'
     | '/categories'
     | '/contact'
     | '/hospital-readiness-assessment'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/after-sales'
+    | '/brands'
     | '/categories'
     | '/contact'
     | '/hospital-readiness-assessment'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/'
     | '/after-sales'
     | '/blog'
+    | '/brands'
     | '/categories'
     | '/contact'
     | '/hospital-readiness-assessment'
@@ -247,6 +259,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AfterSalesRoute: typeof AfterSalesRoute
   BlogRoute: typeof BlogRouteWithChildren
+  BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
   ContactRoute: typeof ContactRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
@@ -309,6 +322,13 @@ declare module '@tanstack/react-router' {
       path: '/categories'
       fullPath: '/categories'
       preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AfterSalesRoute: AfterSalesRoute,
   BlogRoute: BlogRouteWithChildren,
+  BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
   ContactRoute: ContactRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
