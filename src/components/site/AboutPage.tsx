@@ -115,6 +115,8 @@ function Hero() {
             commissioning and supporting medical equipment for hospitals across
             Africa and the Middle East since 1999 — combining biomedical
             engineering expertise with long-term healthcare partnership.
+          </p>
+
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
