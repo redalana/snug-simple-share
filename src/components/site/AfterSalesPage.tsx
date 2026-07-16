@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
@@ -485,18 +484,55 @@ function SupportJourney() {
   );
 }
 
-/* ---------------- EQUIPMENT GALLERY (Masonry) ---------------- */
+/* ---------------- EQUIPMENT GALLERY ---------------- */
 
 const EQUIPMENT = [
-  { name: "MRI Systems", category: "MRI Scanners", img: mriImg, span: "lg:col-span-2 lg:row-span-2 aspect-[4/5] lg:aspect-auto" },
-  { name: "CT Scanners", category: "CT Scanners", img: ctImg, span: "aspect-[4/3]" },
-  { name: "Cath Lab Systems", category: "Cath Lab Systems", img: cathLabImg, span: "aspect-[4/3]" },
-  { name: "PET / CT", category: "PET/CT Scanners", img: petctImg, span: "lg:col-span-2 aspect-[16/9] lg:aspect-[2/1]" },
-  { name: "Ultrasound", category: "Ultrasound", img: ultrasoundImg, span: "aspect-[4/3]" },
-  { name: "X-Ray Systems", category: "X-Ray Systems", img: xrayImg, span: "aspect-[4/3]" },
-  { name: "Mammography", category: "Mammography", img: mammoImg, span: "aspect-[4/3]" },
-  { name: "C-Arm Systems", category: "C-Arms", img: carmImg, span: "aspect-[4/3]" },
+  { name: "MRI Systems", href: "/products/mri-scanners", img: mriImg },
+  { name: "CT Scanners", href: "/products/ct-scanners", img: ctImg },
+  { name: "Cath Lab Systems", href: "/products/cath-lab", img: cathLabImg },
+  { name: "PET / CT", href: "/products/pet-ct", img: petctImg },
+  { name: "Ultrasound", href: "/products/ultrasound", img: ultrasoundImg },
+  { name: "X-Ray Systems", href: "/products/x-ray", img: xrayImg },
+  { name: "Mammography", href: "/products/mammography", img: mammoImg },
+  { name: "C-Arm Systems", href: "/products/c-arm", img: carmImg },
 ];
+
+type EquipmentItem = (typeof EQUIPMENT)[number];
+
+function EquipmentCard({ item, index }: { item: EquipmentItem; index: number }) {
+  return (
+    <motion.a
+      href={item.href}
+      aria-label={`View ${item.name} in our product portfolio`}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.3, delay: (index % 4) * 0.05 }}
+      className="group block min-w-0 overflow-hidden rounded-2xl bg-ink shadow-sm transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_55px_-20px_rgba(0,0,0,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+    >
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img
+          src={item.img}
+          alt={item.name}
+          loading="lazy"
+          width={800}
+          height={600}
+          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/5 to-transparent transition-colors duration-300 group-hover:from-ink/85 group-hover:via-ink/15" />
+      </div>
+
+      <div className="grid min-h-[96px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-ink px-5 py-4 sm:px-6">
+        <h3 className="min-w-0 font-display text-[1.35rem] font-extrabold leading-tight text-white sm:text-[1.5rem]">
+          {item.name}
+        </h3>
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-[transform,background-color] duration-300 group-hover:translate-x-1 group-hover:bg-primary">
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </span>
+      </div>
+    </motion.a>
+  );
+}
 
 function EquipmentGallery() {
   return (
@@ -520,46 +556,9 @@ function EquipmentGallery() {
           </p>
         </div>
 
-        <div className="mt-14 grid auto-rows-[260px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {EQUIPMENT.map((e, i) => (
-            <motion.div
-              key={e.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
-              className={`group relative flex flex-col overflow-hidden rounded-2xl bg-ink shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] ${e.span}`}
-            >
-              <Link
-                to="/products"
-                search={{ category: e.category }}
-                aria-label={`View ${e.name} in our product portfolio`}
-                className="absolute inset-0 z-20"
-              >
-                <span className="sr-only">{e.name}</span>
-              </Link>
-
-              {/* Image area — takes all remaining space above the fixed content bar */}
-              <div className="relative min-h-0 flex-1 overflow-hidden">
-                <img
-                  src={e.img}
-                  alt={e.name}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent transition-opacity duration-500 group-hover:from-ink/95" />
-              </div>
-
-              {/* Dedicated bottom content area — fixed height, never overlapped */}
-              <div className="relative z-10 flex h-[92px] shrink-0 items-center justify-between gap-4 bg-ink px-5 py-4 sm:px-6">
-                <div className="min-w-0 font-display text-[1.35rem] font-extrabold leading-tight text-white sm:text-[1.5rem]">
-                  {e.name}
-                </div>
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 group-hover:bg-primary group-hover:translate-x-1 group-hover:-translate-y-1">
-                  <ArrowUpRight className="h-4 w-4" />
-                </div>
-              </div>
-            </motion.div>
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          {EQUIPMENT.map((item, index) => (
+            <EquipmentCard key={item.name} item={item} index={index} />
           ))}
         </div>
 
