@@ -539,20 +539,23 @@ export function Header() {
           <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
             {NAV.map((item) => {
               const active = isActive(item.href);
+              const isContact = item.label === "Contact Us";
+              const baseColor = isContact
+                ? "text-primary hover:text-primary-dark"
+                : active
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-primary";
+              const weight = isContact ? "font-bold" : "font-semibold";
               return (
-                <div key={item.label} className="group relative">
+                <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-3 text-[16px] font-medium transition-colors ${
-                      active
-                        ? "text-primary"
-                        : "text-foreground/75 hover:text-primary"
-                    }`}
+                    className={`flex items-center gap-1 px-5 py-3.5 text-[15px] tracking-[0.005em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
                     {item.dropdown && (
-                      <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
+                      <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                     )}
                     <span
                       className={`absolute inset-x-5 bottom-1.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
@@ -562,6 +565,7 @@ export function Header() {
                       }`}
                     />
                   </a>
+
 
                   {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
                   {item.label === "All Products" && <ProductsMegaDropdown />}
