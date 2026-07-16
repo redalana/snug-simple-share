@@ -725,8 +725,12 @@ function Team() {
               People who install it, train on it and stand behind it.
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-              A multi-disciplinary team of certified professionals covering every step from clinical planning to lifetime support.
+              AbuFarha's people are the reason hospitals stay with us long after handover.
+              Biomedical engineers, application specialists, clinical trainers and healthcare
+              consultants work as one multi-disciplinary team — collaborating with doctors,
+              nurses and biomedical departments on every project.
             </p>
+
             <div className="mt-8 space-y-3">
               {TEAM_ROLES.map(r => (
                 <div key={r.title} className="group flex gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-[0_20px_36px_-20px_rgba(15,23,42,0.28)]">
