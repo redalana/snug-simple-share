@@ -236,26 +236,27 @@ function Journey() {
 const BENTO = [
   {
     key: "eng", img: engImg, span: "lg:col-span-2 lg:row-span-2 min-h-[620px]",
-    title: "Engineering First, Not Trading",
-    desc: "We are biomedical engineers who happen to distribute equipment — not distributors who happen to service it. Every system we deliver is planned, installed and supported by our own certified engineering team.",
+    title: "Engineering First",
+    desc: "AbuFarha is an engineering company that supplies medical equipment — not a reseller. Every project is scoped, installed and supported by our own biomedical engineers, from first site visit to lifetime service.",
     featured: true,
   },
   {
     key: "cert", img: warehouseImg, span: "min-h-[290px]",
     title: "Certified Biomedical Engineers",
-    desc: "OEM-trained field engineers with hands-on experience across imaging, cath lab, monitoring and life-support platforms.",
+    desc: "OEM-trained field engineers with hands-on experience across MRI, CT, cath lab, ultrasound, monitoring and life-support systems.",
   },
   {
     key: "turnkey", img: beyond, span: "min-h-[290px]",
-    title: "Turnkey Project Delivery",
-    desc: "From site survey and design to civil coordination, installation, training and handover — one accountable engineering partner.",
+    title: "Turnkey Healthcare Projects",
+    desc: "One accountable partner for planning, procurement, installation, commissioning, training and handover of complete hospital departments.",
   },
   {
     key: "partner", img: remoteImg, span: "lg:col-span-2 min-h-[290px]",
     title: "Long-Term Partnership",
-    desc: "Relationships built on transparency and continuous engineering support across the full equipment lifecycle — long after commissioning.",
+    desc: "We stay engaged long after go-live — preventive maintenance, spare parts, clinical retraining and technology upgrades across the equipment lifecycle.",
   },
 ];
+
 
 function Bento() {
   return (
