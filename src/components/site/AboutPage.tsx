@@ -883,7 +883,7 @@ function MetricCard({ m, i }: { m: Metric; i: number }) {
           </div>
         </div>
         <div className="relative mt-8 font-display text-[3.5rem] font-extrabold leading-none tracking-tight text-white">
-          <span ref={ref} className="tabular-nums">{value.toLocaleString()}</span>
+          <span ref={ref} className="tabular-nums">{m.value >= 1900 && m.value < 2100 ? value : value.toLocaleString()}</span>
           <span className="text-primary">{m.suffix}</span>
         </div>
         <div className="relative mt-4 font-display text-[1.05rem] font-bold text-white">{m.label}</div>
