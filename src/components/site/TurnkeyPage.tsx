@@ -94,7 +94,7 @@ const HOTSPOTS = [
 
 const PROJECTS = [
   { country: "Egypt", title: "National Heart Institute", scope: "Cath Lab Department", tag: "Cath Lab", year: "2024", image: project1 },
-  { country: "Saudi Arabia", title: "King Fahd Hospital", scope: "MRI Center", tag: "MRI", year: "2023", image: project2 },
+  { country: "Yemen", title: "Al-Thawra General Hospital", scope: "MRI Center", tag: "MRI", year: "2023", image: project2 },
   { country: "Jordan", title: "Al Bashir Hospital", scope: "CT Department", tag: "CT", year: "2023", image: project3 },
   { country: "Iraq", title: "Baghdad Teaching Hospital", scope: "Hybrid OR", tag: "Hybrid OR", year: "2024", image: heroOr },
 ];
