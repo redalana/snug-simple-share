@@ -1,0 +1,38 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { AfterSalesPage } from "@/components/site/AfterSalesPage";
+
+const TITLE = "After Sales Support | AbuFarha Medical Equipment";
+const DESC =
+  "24/7 after sales support from AbuFarha — preventive maintenance, emergency response, genuine spare parts, calibration, biomedical engineering and clinical training across the Middle East, Africa and Central Asia.";
+
+export const Route = createFileRoute("/after-sales")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/after-sales" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
+    ],
+    links: [{ rel: "canonical", href: "/after-sales" }],
+  }),
+  component: AfterSalesRoute,
+});
+
+function AfterSalesRoute() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-[112px]">
+        <AfterSalesPage />
+      </main>
+      <Footer />
+    </div>
+  );
+}
