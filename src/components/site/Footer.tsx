@@ -163,15 +163,15 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Top footer — 5 columns */}
-        <div className="grid gap-x-10 gap-y-14 py-20 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
+        <div className="grid gap-x-10 gap-y-10 py-14 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
           <div>
             <Logo light />
-            <p className="mt-6 max-w-sm text-[13.5px] leading-[1.75] text-white/50">
+            <p className="mt-4 max-w-sm text-[13.5px] leading-[1.7] text-white/50">
               Delivering advanced medical technologies, turnkey project delivery,
               biomedical engineering and long-term support for healthcare providers
               across Africa, the Middle East and emerging healthcare markets.
             </p>
-            <div className="mt-8 flex items-center gap-6">
+            <div className="mt-5 flex items-center gap-6">
               {SOCIALS.map(({ label, Icon, color }) => (
                 <a
                   key={label}
@@ -191,7 +191,7 @@ export function Footer() {
               <h4 className="font-display text-[12px] font-semibold uppercase tracking-[0.2em] text-white/85">
                 {col.title}
               </h4>
-              <ul className="mt-6 space-y-3.5 text-[13.5px]">
+              <ul className="mt-4 space-y-2.5 text-[13.5px]">
                 {col.links.map((l) => (
                   <li key={l}>
                     <a
@@ -209,17 +209,17 @@ export function Footer() {
 
         {/* Premium divider + contact bar */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="py-10">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="py-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
-                <div className="flex items-start gap-3.5">
+                <div className="flex items-start gap-3">
                   <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-white/45" strokeWidth={1.5} />
                   <div className="min-w-0">
                     <div className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}
                     </div>
-                    <div className="mt-1.5 truncate text-[13.5px] text-white/75">{value}</div>
+                    <div className="mt-1 truncate text-[13.5px] text-white/75">{value}</div>
                   </div>
                 </div>
               );
@@ -236,7 +236,8 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 py-5 sm:flex-row">
+
           <div className="text-[12.5px] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
