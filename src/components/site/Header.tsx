@@ -25,12 +25,12 @@ const NAV: NavItem[] = [
   },
   {
     label: "Services",
-    href: "#why",
+    href: "/services",
     dropdown: [
-      { label: "Supply & Installation", href: "#why" },
-      { label: "Commissioning", href: "#why" },
-      { label: "Training", href: "#process" },
-      { label: "Maintenance", href: "#process" },
+      { label: "All Services", href: "/services" },
+      { label: "Installation & Commissioning", href: "/services#capabilities" },
+      { label: "Preventive Maintenance", href: "/services#capabilities" },
+      { label: "Training & Support", href: "/services#capabilities" },
     ],
   },
   { label: "Turnkey", href: "/turnkey" },
