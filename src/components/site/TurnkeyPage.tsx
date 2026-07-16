@@ -28,6 +28,8 @@ import {
   FileCheck2,
   Minus,
   ShieldCheck,
+  Handshake,
+  Cog,
 } from "lucide-react";
 
 import heroCath from "@/assets/sol-carm.jpg";
