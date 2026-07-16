@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check } from "lucide-react";
+import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check, Star } from "lucide-react";
 
 import { Logo } from "./Logo";
 
