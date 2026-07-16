@@ -550,10 +550,11 @@ export function Header() {
                 <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-3.5 text-[15px] tracking-[0.005em] transition-colors ${weight} ${baseColor}`}
+                    className={`flex items-center gap-1 px-5 py-4 text-[16px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
+
                     {item.dropdown && (
                       <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                     )}
