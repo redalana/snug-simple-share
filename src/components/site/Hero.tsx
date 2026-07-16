@@ -28,6 +28,8 @@ import turnkeyInstall from "@/assets/turnkey-hero.jpg";
 import engineerService from "@/assets/aftersales-engineering.jpg";
 
 
+type TrustItem = { icon: LucideIcon; label: string };
+
 type Slide = {
   theme: string;
   eyebrow: string;
@@ -36,7 +38,7 @@ type Slide = {
   image: string;
   imageAlt: string;
   card: { title: string; body: string };
-  stats: { value: string; label: string }[];
+  trust: TrustItem[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string; icon?: boolean };
 };
@@ -53,21 +55,20 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "AbuFarha supplies certified medical imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — to leading hospitals across Africa and the Middle East.",
+      "AbuFarha supplies certified imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — from the world's leading OEMs to hospitals across Africa and the Middle East.",
     image: heroCath,
     imageAlt: "Modern cath lab suite with advanced interventional imaging system",
     card: { title: "Certified Medical Systems", body: "Imaging and interventional technology, delivered." },
-    stats: [
-      { value: "✓", label: "Certified Systems" },
-      { value: "✓", label: "Factory Refurbished" },
-      { value: "✓", label: "OEM Quality Standards" },
-      { value: "1Y", label: "Warranty Included" },
+    trust: [
+      { icon: BadgeCheck, label: "Certified Systems" },
+      { icon: Factory, label: "OEM Brands" },
+      { icon: ShieldCheck, label: "Factory Refurbished Available" },
     ],
     primary: { label: "Explore Products", href: "/products" },
     secondary: { label: "Request a Quote", href: "/contact" },
   },
   {
-    theme: "Turnkey Healthcare Projects",
+    theme: "Turnkey Projects",
     eyebrow: "Design · Supply · Install · Commission",
     headline: (
       <>
@@ -77,22 +78,22 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "We plan, supply, install, commission and hand over complete healthcare facilities — from radiology and cath lab departments to full imaging centers — ready for clinical use on day one.",
-    image: heroMri,
-    imageAlt: "Biomedical engineers installing an MRI imaging system",
+      "A single partner across the full project lifecycle — site planning and shielding, equipment supply, installation, commissioning and clinical training — so departments open on schedule, fully compliant, and ready to treat patients.",
+    image: turnkeyInstall,
+    imageAlt: "Biomedical engineers installing and commissioning medical imaging equipment",
     card: { title: "Turnkey Delivery", body: "One partner, from blueprint to first patient." },
-    stats: [
-      { value: "✓", label: "Planning" },
-      { value: "✓", label: "Installation" },
-      { value: "✓", label: "Commissioning" },
-      { value: "✓", label: "Clinical Training" },
+    trust: [
+      { icon: ClipboardList, label: "Planning" },
+      { icon: Wrench, label: "Installation" },
+      { icon: BadgeCheck, label: "Commissioning" },
+      { icon: GraduationCap, label: "Clinical Training" },
     ],
     primary: { label: "Explore Turnkey Projects", href: "/turnkey" },
     secondary: { label: "Talk to an Engineer", href: "/contact" },
   },
   {
-    theme: "After-Sales & Biomedical Engineering",
-    eyebrow: "Lifecycle Support That Keeps Hospitals Running",
+    theme: "After-Sales",
+    eyebrow: "Lifecycle Biomedical Engineering Support",
     headline: (
       <>
         Reliable After-Sales Support
@@ -101,20 +102,20 @@ const SLIDES: Slide[] = [
       </>
     ),
     subtitle:
-      "Preventive and corrective maintenance, genuine spare parts, software updates and long-term biomedical engineering support — delivered by certified engineers on the ground.",
-    image: heroService,
-    imageAlt: "Biomedical engineer servicing advanced MRI imaging equipment",
+      "Preventive and corrective maintenance, genuine OEM spare parts, software updates, warranty coverage and 24/7 technical support — delivered by certified biomedical engineers on the ground.",
+    image: engineerService,
+    imageAlt: "Certified biomedical engineer servicing advanced medical imaging equipment",
     card: { title: "Always-On Support", body: "Certified engineers, genuine parts, 24/7." },
-    stats: [
-      { value: "24/7", label: "Technical Support" },
-      { value: "✓", label: "Preventive Maintenance" },
-      { value: "OEM", label: "Spare Parts" },
-      { value: "✓", label: "Warranty Coverage" },
+    trust: [
+      { icon: LifeBuoy, label: "24/7 Support" },
+      { icon: Zap, label: "Fast Response" },
+      { icon: Package, label: "OEM Spare Parts" },
     ],
     primary: { label: "Explore Services", href: "/after-sales" },
     secondary: { label: "Contact Support", href: "/contact" },
   },
 ];
+
 
 const AUTOPLAY_MS = 7500;
 const EASE = [0.22, 1, 0.36, 1] as const;
