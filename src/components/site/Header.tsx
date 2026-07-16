@@ -670,7 +670,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-3 text-[16px] transition-colors last:border-0 ${
+                    className={`block border-b border-border/60 py-4 text-[16px] transition-colors last:border-0 ${
                       item.label === "Contact Us"
                         ? "font-bold text-primary hover:text-primary-dark"
                         : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
@@ -681,6 +681,24 @@ export function Header() {
                 );
               })}
 
+              {/* Mobile language selector */}
+              <div className="mt-4 border-t border-border/60 pt-4">
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Language
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {LANGUAGES.map((l) => (
+                    <button
+                      key={l.code}
+                      type="button"
+                      className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
+                    >
+                      <span aria-hidden className="text-base leading-none">{l.flag}</span>
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -689,7 +707,7 @@ export function Header() {
                       key={label}
                       href={href}
                       aria-label={label}
-                      className="text-muted-foreground transition-colors hover:text-primary"
+                      className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                     >
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </a>
@@ -697,7 +715,7 @@ export function Header() {
                   <a
                     href="#"
                     aria-label="WhatsApp"
-                    className="text-muted-foreground transition-colors hover:text-primary"
+                    className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                   >
                     <WhatsAppIcon className="h-5 w-5" />
                   </a>
@@ -706,7 +724,7 @@ export function Header() {
                   to="/contact"
                   hash="contact-form"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+                  className="inline-flex min-h-[48px] items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground"
                 >
                   Request a Quote
                 </Link>
