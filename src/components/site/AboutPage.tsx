@@ -111,10 +111,11 @@ function Hero() {
             <span className="text-primary">Trusted Across Africa &amp; The Middle East.</span>
           </h1>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/75">
-            AbuFarha delivers advanced medical imaging, biomedical engineering
-            and end-to-end turnkey solutions that empower hospitals, improve
-            clinical outcomes and build a healthier future across the region.
-          </p>
+            AbuFarha Medical Supplies has been supplying, installing,
+            commissioning and supporting medical equipment for hospitals across
+            Africa and the Middle East since 1999 — combining biomedical
+            engineering expertise with long-term healthcare partnership.
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/contact"
