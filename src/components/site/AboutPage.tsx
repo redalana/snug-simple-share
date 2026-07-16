@@ -370,37 +370,38 @@ function HowWeWork() {
 const EXPERTISE = [
   {
     icon: Cpu, title: "Biomedical Engineering", thumb: engImg,
-    desc: "Our in-house biomedical engineering team specializes in advanced imaging, interventional cath lab, patient monitoring and life-support platforms. Engineers hold OEM-level certifications across the systems they service, and every intervention is documented against manufacturer specifications.",
+    desc: "Our in-house biomedical engineering team is the backbone of AbuFarha. Engineers are trained on the specific OEM platforms they service — from MRI and CT to cath lab, monitoring and life-support systems — and every intervention follows manufacturer specifications and is fully documented.",
   },
   {
     icon: Stethoscope, title: "Clinical Applications", thumb: cathlab,
-    desc: "Clinical application specialists work directly with radiologists, cardiologists and technologists to build imaging protocols, optimize dose, refine workflows and validate clinical performance — turning capable equipment into confident daily practice.",
+    desc: "Application specialists work directly with radiologists, cardiologists, technologists and nurses to build imaging protocols, optimize dose, refine clinical workflows and validate performance — turning capable equipment into confident daily clinical practice.",
   },
   {
     icon: Wrench, title: "Installation & Commissioning", thumb: warehouseImg,
-    desc: "Complete site preparation, rigging, mechanical installation, electrical hook-up, calibration and clinical acceptance testing — all executed to OEM standards, with a documented commissioning report handed to the biomedical department.",
-  },
-  {
-    icon: Gauge, title: "Calibration & Testing", thumb: p2,
-    desc: "Scheduled calibration, image-quality checks, dose verification and performance validation keep every system within manufacturer tolerance — protecting image quality, patient safety and regulatory compliance year after year.",
-  },
-  {
-    icon: GraduationCap, title: "Clinical Training", thumb: p1,
-    desc: "Structured on-site training programs for radiographers, biomedical engineers and clinicians, complemented by advanced sessions at reference centers. Training is protocol-based, scenario-driven and continues after go-live.",
+    desc: "Complete site preparation, rigging, mechanical installation, electrical hook-up, calibration and clinical acceptance testing — executed to OEM standards, with a signed commissioning report handed to the biomedical department at handover.",
   },
   {
     icon: ShieldCheck, title: "Preventive Maintenance", thumb: remoteImg,
-    desc: "OEM-aligned preventive maintenance contracts reduce unplanned downtime, extend equipment lifetime and protect long-term image quality — with predictable service windows and full documentation for every visit.",
+    desc: "Scheduled OEM-aligned preventive maintenance keeps every system within manufacturer tolerance, reduces unplanned downtime and extends equipment lifetime — with predictable service windows and full documentation for every visit.",
+  },
+  {
+    icon: Settings2, title: "Corrective Maintenance", thumb: p2,
+    desc: "When a system fails, our engineers diagnose, source certified spare parts from our regional stock and restore operation quickly — with root-cause analysis and a corrective report so the same fault does not repeat.",
+  },
+  {
+    icon: GraduationCap, title: "Clinical Training", thumb: p1,
+    desc: "Structured on-site training programs for radiographers, biomedical engineers, nurses and clinicians. Training is protocol-based, scenario-driven and continues after go-live so departments stay confident as staff rotate.",
   },
   {
     icon: Headphones, title: "Technical Support", thumb: p3,
-    desc: "24/7 remote diagnostics combined with rapid on-site response from engineers stationed regionally. First-line triage, root-cause analysis and escalation paths are defined for every contracted customer.",
+    desc: "24/7 remote diagnostics combined with rapid on-site response from engineers stationed regionally. First-line triage, escalation to OEM engineering and clear service-level commitments for every contracted customer.",
   },
   {
-    icon: ClipboardCheck, title: "Project Management", thumb: beyond,
-    desc: "Dedicated project managers coordinate design, civil works, procurement, installation, training and handover — giving hospitals one accountable partner for complex, multi-modality turnkey builds.",
+    icon: ClipboardCheck, title: "Hospital Planning", thumb: beyond,
+    desc: "We help hospitals plan new departments — room layouts, equipment lists, electrical and HVAC requirements, workflow mapping and phased delivery — so the finished department works clinically from day one.",
   },
 ];
+
 
 function Expertise() {
   const [open, setOpen] = useState<number>(0);
