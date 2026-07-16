@@ -464,12 +464,6 @@ function BrandsPage() {
                   to: "/products",
                 },
                 {
-                  icon: Lightbulb,
-                  title: "Help Me Choose",
-                  desc: "Answer a few questions and get a shortlist that fits your case mix.",
-                  to: "/hospital-readiness-assessment",
-                },
-                {
                   icon: HeadphonesIcon,
                   title: "Talk to an Engineer",
                   desc: "Independent biomedical guidance from our senior team.",
@@ -480,6 +474,12 @@ function BrandsPage() {
                   title: "Request a Quote",
                   desc: "Get pricing, availability and lead times within one working day.",
                   to: "/contact",
+                },
+                {
+                  icon: CalendarClock,
+                  title: "Book Consultation",
+                  desc: "Schedule a 30-minute call to review your project scope.",
+                  to: "/hospital-readiness-assessment",
                 },
               ].map((a) => (
                 <Link
