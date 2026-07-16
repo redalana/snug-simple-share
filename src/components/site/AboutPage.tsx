@@ -312,14 +312,15 @@ function Bento() {
 
 // ---------- How We Work (DARK for rhythm) ----------
 const STEPS = [
-  { n: "01", icon: MessageSquare, title: "Consultation", desc: "Clinical needs, infrastructure, workflow and long-term goals are assessed before any solution is proposed." },
-  { n: "02", icon: ClipboardCheck, title: "Planning", desc: "Engineers design the optimal solution for your facility with full technical documentation and layout planning." },
-  { n: "03", icon: Boxes, title: "Procurement", desc: "Equipment is sourced directly from OEM partners with full warranty, traceability and cold-chain integrity." },
-  { n: "04", icon: Wrench, title: "Installation", desc: "Certified engineers install, calibrate and clinically commission every system to strict OEM standards." },
-  { n: "05", icon: GraduationCap, title: "Training", desc: "Clinical and technical teams receive structured, protocol-based training for confident day-one operation." },
-  { n: "06", icon: Settings2, title: "Maintenance", desc: "Preventive and corrective maintenance keep systems performing to manufacturer specification over time." },
-  { n: "07", icon: LifeBuoy, title: "Lifetime Support", desc: "24/7 technical support, regional spare parts and lifecycle engineering long after handover." },
+  { n: "01", icon: MessageSquare, title: "Consultation", desc: "We meet with clinical and biomedical teams to understand the department, patient workload, workflow and long-term clinical goals." },
+  { n: "02", icon: ClipboardCheck, title: "Planning & Design", desc: "Engineers produce room layouts, technical specifications, electrical and HVAC requirements and full equipment lists tailored to the facility." },
+  { n: "03", icon: Boxes, title: "Equipment Procurement", desc: "Systems are procured directly from OEM partners with full warranty and traceability — matched to the approved technical specification." },
+  { n: "04", icon: Wrench, title: "Installation", desc: "Certified engineers manage rigging, mechanical and electrical installation and site coordination against manufacturer standards." },
+  { n: "05", icon: Gauge, title: "Commissioning", desc: "Every system is calibrated, tested and clinically accepted with a documented commissioning report handed to the biomedical department." },
+  { n: "06", icon: GraduationCap, title: "Clinical Training", desc: "Application specialists train radiographers, technologists, nurses and biomedical staff on protocols, workflows and safe daily operation." },
+  { n: "07", icon: LifeBuoy, title: "After-Sales Support", desc: "Preventive maintenance contracts, corrective service, spare parts and 24/7 technical support across the full equipment lifetime." },
 ];
+
 
 function HowWeWork() {
   return (
