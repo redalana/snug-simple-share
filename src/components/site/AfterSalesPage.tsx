@@ -563,14 +563,15 @@ function RemoteDiagnostics() {
 /* ---------------- SUPPORT JOURNEY ---------------- */
 
 const JOURNEY = [
-  { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes." },
-  { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause." },
-  { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts." },
-  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours." },
-  { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts." },
-  { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs." },
-  { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support." },
+  { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes.", detail: "Multi-channel intake with automatic triage and ticket routing." },
+  { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause.", detail: "OEM-approved secure tunnels; most issues resolved without a visit." },
+  { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts.", detail: "Dispatched from the closest regional hub with pre-picked parts." },
+  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours.", detail: "GPS-tracked ETA shared with your biomed team in real time." },
+  { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts.", detail: "Every intervention logged for full audit and compliance trail." },
+  { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs.", detail: "Image quality, dose and mechanical checks all restored to spec." },
+  { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support.", detail: "Signed service report, warranty update and 7-day follow-up call." },
 ];
+
 
 function SupportJourney() {
   const ref = useRef<HTMLDivElement>(null);
