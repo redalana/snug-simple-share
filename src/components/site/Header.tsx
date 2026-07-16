@@ -131,6 +131,95 @@ function LanguageSelector() {
   );
 }
 
+type BrandItem = {
+  name: string;
+  sub?: string;
+  color: string;
+  mark: "dot" | "square" | "ring" | "bars";
+  href: string;
+};
+
+const BRAND_ITEMS: BrandItem[] = [
+  { name: "Philips", color: "#0B5ED7", mark: "ring", href: "/brands/philips" },
+  { name: "Toshiba – Canon", color: "#CC0000", mark: "bars", href: "/brands/toshiba-canon" },
+  { name: "Siemens", sub: "Healthineers", color: "#EC6602", mark: "square", href: "/brands/siemens" },
+  { name: "Mindray", color: "#005BAC", mark: "dot", href: "/brands/mindray" },
+  { name: "Esaote", color: "#003DA5", mark: "dot", href: "/brands/esaote" },
+  { name: "Richard Wolf", color: "#C8102E", mark: "square", href: "/brands/richard-wolf" },
+  { name: "Hitachi", color: "#E60027", mark: "square", href: "/brands/hitachi" },
+  { name: "GE", sub: "HealthCare", color: "#005EB8", mark: "ring", href: "/brands/ge-healthcare" },
+  { name: "Shimadzu", color: "#C8161D", mark: "square", href: "/brands/shimadzu" },
+  { name: "Abbott", color: "#008FC7", mark: "dot", href: "/brands/abbott" },
+  { name: "Medtronic", color: "#170F5F", mark: "bars", href: "/brands/medtronic" },
+  { name: "Boston Scientific", color: "#0072CE", mark: "ring", href: "/brands/boston-scientific" },
+];
+
+function BrandMark({ item }: { item: BrandItem }) {
+  const c = item.color;
+  switch (item.mark) {
+    case "square":
+      return <span className="h-4 w-4 rounded-[3px]" style={{ backgroundColor: c }} />;
+    case "ring":
+      return <span className="h-4 w-4 rounded-full border-[3px]" style={{ borderColor: c }} />;
+    case "bars":
+      return (
+        <span className="flex items-end gap-[2px]">
+          <span className="h-2.5 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
+          <span className="h-4 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
+          <span className="h-3 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
+        </span>
+      );
+    default:
+      return <span className="h-3.5 w-3.5 rounded-full" style={{ backgroundColor: c }} />;
+  }
+}
+
+function BrandsMegaDropdown() {
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-full z-10 w-[min(92vw,660px)] -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+      <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
+        <a
+          href="/brands"
+          className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-accent hover:text-primary"
+        >
+          <Star className="h-4 w-4 text-primary" strokeWidth={2.25} fill="currentColor" />
+          All Brands
+        </a>
+        <div className="my-2 h-px bg-border/70" />
+        <div className="grid grid-cols-3 gap-2">
+          {BRAND_ITEMS.map((b) => (
+            <a
+              key={b.name}
+              href={b.href}
+              className="group/brand flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-transparent px-3 py-3 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-white hover:shadow-[0_10px_24px_-14px_rgba(0,0,0,0.25)]"
+            >
+              <span className="flex h-6 items-center justify-center">
+                <BrandMark item={b} />
+              </span>
+              <span className="flex flex-col items-center leading-none">
+                <span
+                  className="font-display text-[13px] font-extrabold tracking-tight"
+                  style={{ color: b.color }}
+                >
+                  {b.name}
+                </span>
+                {b.sub && (
+                  <span
+                    className="mt-1 text-[9px] font-semibold uppercase tracking-[0.16em]"
+                    style={{ color: b.color, opacity: 0.75 }}
+                  >
+                    {b.sub}
+                  </span>
+                )}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
