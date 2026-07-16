@@ -520,16 +520,16 @@ export function Header() {
             <button
               aria-label="Search"
               onClick={() => setMobileSearch((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-5 w-5" />
             </button>
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border"
             >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
