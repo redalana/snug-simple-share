@@ -268,22 +268,22 @@ function BrandsPage() {
             <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
             <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
           </div>
-          <div className="mx-auto max-w-[100rem] px-6 pt-14 lg:px-10 lg:pt-16">
+          <div className="mx-auto max-w-[100rem] px-6 pt-11 lg:px-10 lg:pt-12">
             <div className="mx-auto max-w-4xl text-center">
               <div className="flex justify-center">
                 <Eyebrow index="01">Our Brand Portfolio</Eyebrow>
               </div>
-              <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3.6rem]">
+              <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3.6rem]">
                 Twelve world-leading manufacturers.
                 <br />
                 <span className="text-primary">One trusted partner.</span>
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 AbuFarha Medical is the authorized channel for the medical technology
                 brands hospitals rely on every day — supplied, installed, commissioned
                 and supported by our engineers.
               </p>
-              <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <a
                   href="#brand-grid"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
@@ -301,11 +301,12 @@ function BrandsPage() {
             </div>
 
             {/* ANIMATED LOGO WALL */}
-            <div className="mt-14 pb-16 lg:mt-16 lg:pb-20">
+            <div className="mt-10 pb-12 lg:mt-12 lg:pb-16">
               <LogoWall />
             </div>
           </div>
         </section>
+
 
         {/* METRICS */}
         <section className="border-b border-border bg-accent/30">
