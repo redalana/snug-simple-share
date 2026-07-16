@@ -312,48 +312,59 @@ function OperationsDashboard() {
 
 /* ---------------- REMOTE DIAGNOSTICS ---------------- */
 
-const REMOTE_FEATURES = [
-  {
-    icon: Radio,
-    t: "Remote Diagnostics",
-    d: "Detect software and hardware issues before failure.",
-  },
-  {
-    icon: LineChart,
-    t: "Predictive Monitoring",
-    d: "Continuous health monitoring for installed equipment.",
-  },
-  {
-    icon: Cog,
-    t: "Software Updates",
-    d: "OEM software updates and configuration support.",
-  },
-  {
-    icon: Zap,
-    t: "Rapid Engineer Response",
-    d: "Fast engineering response for critical service cases.",
-  },
-];
-
 const LIVE_STATUS = [
-  { name: "MRI Systems", status: "Online", tone: "emerald" },
-  { name: "CT Systems", status: "Healthy", tone: "emerald" },
-  { name: "Cath Labs", status: "Connected", tone: "sky" },
-  { name: "Ultrasound", status: "Monitoring", tone: "sky" },
-  { name: "PET/CT", status: "Scheduled Maintenance", tone: "amber" },
+  { name: "MRI Systems", status: "Online", health: 99, last: "18 sec ago", tone: "emerald" },
+  { name: "CT Systems", status: "Healthy", health: 98, last: "42 sec ago", tone: "emerald" },
+  { name: "Cath Lab", status: "Connected", health: 100, last: "9 sec ago", tone: "sky" },
+  { name: "PET/CT", status: "Scheduled Maintenance", health: null, last: "Next: Tomorrow", tone: "amber" },
 ] as const;
 
-const TONE_MAP: Record<string, { dot: string; text: string; bg: string }> = {
-  emerald: { dot: "bg-emerald-400", text: "text-emerald-300", bg: "bg-emerald-400/10" },
-  sky: { dot: "bg-sky-400", text: "text-sky-300", bg: "bg-sky-400/10" },
-  amber: { dot: "bg-amber-400", text: "text-amber-300", bg: "bg-amber-400/10" },
+const TONE_MAP: Record<string, { dot: string; text: string; bg: string; bar: string }> = {
+  emerald: { dot: "bg-emerald-500", text: "text-emerald-600", bg: "bg-emerald-50", bar: "bg-emerald-500" },
+  sky: { dot: "bg-sky-500", text: "text-sky-600", bg: "bg-sky-50", bar: "bg-sky-500" },
+  amber: { dot: "bg-amber-500", text: "text-amber-600", bg: "bg-amber-50", bar: "bg-amber-500" },
 };
+
+function FeatureCard({
+  icon: Icon,
+  title,
+  desc,
+  className = "",
+  delay = 0,
+}: {
+  icon: typeof Radio;
+  title: string;
+  desc: string;
+  className?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay }}
+      className={`group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_45px_-20px_rgba(0,0,0,0.2)] ${className}`}
+    >
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-primary/20 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+        <Icon className="h-5 w-5" strokeWidth={1.75} />
+      </div>
+      <div className="mt-5 font-display text-[1.1rem] font-bold text-foreground">
+        {title}
+      </div>
+      <div className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+        {desc}
+      </div>
+    </motion.div>
+  );
+}
 
 function RemoteDiagnostics() {
   return (
-    <section className="relative overflow-hidden bg-background py-24 lg:py-28">
-      <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-16 lg:px-10">
-        {/* LEFT — Image with parallax */}
+    <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+      <div className="mx-auto grid max-w-[100rem] gap-16 px-6 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-20 lg:px-10">
+        {/* LEFT — Image with parallax + glass card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -370,28 +381,39 @@ function RemoteDiagnostics() {
               loading="lazy"
               width={1600}
               height={1408}
-              initial={{ scale: 1.08 }}
+              initial={{ scale: 1.06 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.4, ease: "easeOut" }}
+              transition={{ duration: 1.6, ease: "easeOut" }}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
 
-            {/* Floating status badge */}
+            {/* Floating glass status card */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="absolute left-5 top-5 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-xl"
+              className="absolute bottom-6 left-6 right-6 sm:right-auto sm:min-w-[280px] overflow-hidden rounded-2xl border border-white/25 bg-white/15 p-4 text-white shadow-[0_20px_45px_-15px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              </span>
-              <div className="leading-tight">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.22em]">Connected</div>
-                <div className="text-[12px] text-white/80">24/7 Live Monitoring</div>
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                </span>
+                <div className="text-[11px] font-semibold uppercase tracking-[0.22em]">
+                  Connected
+                </div>
+                <div className="ml-auto text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+                  Live
+                </div>
+              </div>
+              <div className="mt-2 text-[13px] font-medium text-white/90">
+                24/7 Live Monitoring
+              </div>
+              <div className="mt-3 flex items-center justify-between border-t border-white/15 pt-3 text-[11px] text-white/70">
+                <span className="uppercase tracking-[0.18em]">Last Sync</span>
+                <span className="font-semibold text-white">18 sec ago</span>
               </div>
             </motion.div>
           </div>
@@ -407,88 +429,135 @@ function RemoteDiagnostics() {
             <br />
             Always Connected.
           </h2>
-          <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-muted-foreground">
-            Our biomedical engineers continuously monitor installed systems,
-            detect issues early, and provide remote support before downtime
-            impacts your hospital — from performance telemetry and predictive
-            alerts to OEM software support and rapid engineering response.
+          <p className="mt-6 max-w-lg text-[16px] leading-[1.75] text-muted-foreground">
+            Our biomedical engineers monitor installed systems around the clock
+            — detecting issues early and resolving them remotely before
+            downtime reaches your hospital.
           </p>
 
-          {/* 4 feature cards */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {REMOTE_FEATURES.map(({ icon: Icon, t, d }, i) => (
-              <motion.div
-                key={t}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.25)]"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
-                </div>
-                <div className="mt-4 font-display text-[1.05rem] font-bold text-foreground">
-                  {t}
-                </div>
-                <div className="mt-1.5 text-[13.5px] leading-relaxed text-muted-foreground">
-                  {d}
-                </div>
-              </motion.div>
-            ))}
+          {/* Asymmetric feature grid */}
+          <div className="mt-14 grid gap-5 sm:grid-cols-2">
+            <FeatureCard
+              icon={Radio}
+              title="Remote Diagnostics"
+              desc="Real-time remote troubleshooting and issue detection across every connected system."
+              className="sm:col-span-2 sm:p-7"
+              delay={0}
+            />
+            <FeatureCard
+              icon={LineChart}
+              title="Predictive Monitoring"
+              desc="Continuous health telemetry on every installed device."
+              delay={0.08}
+            />
+            <FeatureCard
+              icon={Cog}
+              title="OEM Software Updates"
+              desc="Manufacturer-approved updates and configuration support."
+              delay={0.16}
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Rapid Engineer Response"
+              desc="Certified biomedical engineers available for critical support across the region."
+              className="sm:col-span-2"
+              delay={0.24}
+            />
           </div>
 
-          {/* Live Equipment Status */}
+          {/* Live Equipment Status — premium dashboard */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-ink text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]"
+            className="mt-16 overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]"
           >
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
+            <div className="flex items-center justify-between border-b border-border/70 bg-muted/40 px-6 py-4">
               <div className="flex items-center gap-2.5">
-                <Signal className="h-4 w-4 text-emerald-400" strokeWidth={2} />
-                <span className="text-[12px] font-semibold uppercase tracking-[0.22em] text-white/90">
+                <Signal className="h-4 w-4 text-emerald-500" strokeWidth={2} />
+                <span className="text-[11.5px] font-semibold uppercase tracking-[0.22em] text-foreground">
                   Live Equipment Status
                 </span>
               </div>
-              <span className="text-[11px] font-medium text-white/50">
+              <span className="text-[11px] font-medium text-muted-foreground">
                 Updated · just now
               </span>
             </div>
-            <ul className="divide-y divide-white/5">
-              {LIVE_STATUS.map(({ name, status, tone }) => {
+            <ul className="divide-y divide-border/60">
+              {LIVE_STATUS.map(({ name, status, health, last, tone }) => {
                 const c = TONE_MAP[tone];
                 return (
                   <li
                     key={name}
-                    className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-white/[0.03]"
+                    className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-6 py-4 transition-colors hover:bg-muted/30 sm:grid-cols-[1.2fr_1.4fr_1fr]"
                   >
-                    <span className="text-[14px] font-medium text-white/90">{name}</span>
-                    <span
-                      className={`inline-flex items-center gap-2 rounded-full ${c.bg} px-3 py-1 text-[12px] font-semibold ${c.text}`}
-                    >
-                      <span className="relative flex h-2 w-2">
-                        <span
-                          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${c.dot} opacity-60`}
-                        />
-                        <span
-                          className={`relative inline-flex h-2 w-2 rounded-full ${c.dot}`}
-                        />
+                    <div>
+                      <div className="text-[14.5px] font-semibold text-foreground">
+                        {name}
+                      </div>
+                      <div className="mt-0.5 text-[12px] text-muted-foreground">
+                        {last}
+                      </div>
+                    </div>
+
+                    <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
+                      <span
+                        className={`inline-flex items-center gap-2 rounded-full ${c.bg} px-2.5 py-1 text-[11.5px] font-semibold ${c.text}`}
+                      >
+                        <span className="relative flex h-2 w-2">
+                          <span
+                            className={`absolute inline-flex h-full w-full animate-ping rounded-full ${c.dot} opacity-60`}
+                          />
+                          <span
+                            className={`relative inline-flex h-2 w-2 rounded-full ${c.dot}`}
+                          />
+                        </span>
+                        {status}
                       </span>
-                      {status}
-                    </span>
+                    </div>
+
+                    <div className="col-span-2 flex items-center gap-3 sm:col-span-1 sm:justify-end">
+                      {health !== null ? (
+                        <>
+                          <div className="h-1.5 w-24 overflow-hidden rounded-full bg-muted">
+                            <div
+                              className={`h-full rounded-full ${c.bar}`}
+                              style={{ width: `${health}%` }}
+                            />
+                          </div>
+                          <span className="w-14 text-right text-[12.5px] font-semibold tabular-nums text-foreground">
+                            {health}%
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-[12px] font-medium text-muted-foreground">
+                          Maintenance window
+                        </span>
+                      )}
+                    </div>
                   </li>
                 );
               })}
             </ul>
           </motion.div>
+
+          {/* Secondary CTA */}
+          <div className="mt-8">
+            <a
+              href="#services"
+              className="group inline-flex items-center gap-2 border-b border-foreground/30 pb-1 text-[13.5px] font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              Explore Our Support Services
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 
 /* ---------------- SUPPORT JOURNEY ---------------- */
