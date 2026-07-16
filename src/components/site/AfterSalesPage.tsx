@@ -522,35 +522,43 @@ function EquipmentGallery() {
 
         <div className="mt-14 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {EQUIPMENT.map((e, i) => (
-            <motion.a
+            <motion.div
               key={e.name}
-              href="#"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
-              className={`group relative block overflow-hidden rounded-2xl bg-ink ${e.span}`}
+              className={`group relative overflow-hidden rounded-2xl bg-ink transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] ${e.span}`}
             >
+              <Link
+                to="/products"
+                search={{ category: e.category }}
+                aria-label={`View ${e.name} in our product portfolio`}
+                className="absolute inset-0 z-10"
+              >
+                <span className="sr-only">{e.name}</span>
+              </Link>
               <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={e.img}
                   alt={e.name}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent transition-opacity duration-500 group-hover:from-ink/95" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent transition-opacity duration-500 group-hover:from-ink group-hover:via-ink/75" />
               </div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
-                <div className="font-display text-xl font-bold text-white sm:text-2xl">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 pt-16 sm:p-7 sm:pt-20">
+                <div className="font-display text-2xl font-extrabold leading-tight text-white drop-shadow-md sm:text-[1.75rem]">
                   {e.name}
                 </div>
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all group-hover:bg-primary">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all duration-300 group-hover:bg-primary group-hover:translate-x-1 group-hover:-translate-y-1">
                   <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
