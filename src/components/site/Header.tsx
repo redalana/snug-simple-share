@@ -359,12 +359,12 @@ function MobileProductsAccordion({
   const activeCategory = new URLSearchParams(searchStr).get("category");
 
   return (
-    <div className="border-b border-border/60 py-3 last:border-0">
+    <div className="border-b border-border/60 py-2 last:border-0">
       <div className="flex items-center justify-between">
         <Link
           to="/products"
           onClick={onNavigate}
-          className={`flex-1 text-[16px] font-medium transition-colors ${
+          className={`flex min-h-[48px] flex-1 items-center text-[16px] font-medium transition-colors ${
             active ? "text-primary" : "text-foreground/80 hover:text-primary"
           }`}
         >
@@ -375,10 +375,10 @@ function MobileProductsAccordion({
           aria-expanded={expanded}
           aria-label={expanded ? "Collapse product categories" : "Expand product categories"}
           onClick={() => setExpanded((v) => !v)}
-          className="ml-2 flex h-9 w-9 items-center justify-center rounded-full text-foreground/60 transition-colors hover:bg-muted hover:text-primary"
+          className="ml-2 flex h-12 w-12 items-center justify-center rounded-full text-foreground/60 transition-colors hover:bg-muted hover:text-primary"
         >
           <ChevronDown
-            className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+            className={`h-5 w-5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
           />
         </button>
       </div>
@@ -406,12 +406,12 @@ function MobileProductsAccordion({
                         search={category ? { category } : {}}
                         onClick={onNavigate}
                         aria-current={isActive ? "page" : undefined}
-                        className={`flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
+                        className={`flex min-h-[48px] items-center gap-3 rounded-[4px] px-2 text-[15px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
                           isActive ? "bg-muted text-foreground" : "text-foreground/75"
                         }`}
                       >
                         <Icon
-                          className={`h-[18px] w-[18px] ${isActive ? "text-primary" : "text-foreground/55"}`}
+                          className={`h-5 w-5 ${isActive ? "text-primary" : "text-foreground/55"}`}
                           strokeWidth={1.75}
                         />
                         <span className="flex-1">{label}</span>
@@ -520,16 +520,16 @@ export function Header() {
             <button
               aria-label="Search"
               onClick={() => setMobileSearch((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-5 w-5" />
             </button>
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border"
             >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -670,7 +670,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-3 text-[16px] transition-colors last:border-0 ${
+                    className={`block border-b border-border/60 py-4 text-[16px] transition-colors last:border-0 ${
                       item.label === "Contact Us"
                         ? "font-bold text-primary hover:text-primary-dark"
                         : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
@@ -681,6 +681,24 @@ export function Header() {
                 );
               })}
 
+              {/* Mobile language selector */}
+              <div className="mt-4 border-t border-border/60 pt-4">
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Language
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {LANGUAGES.map((l) => (
+                    <button
+                      key={l.code}
+                      type="button"
+                      className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
+                    >
+                      <span aria-hidden className="text-base leading-none">{l.flag}</span>
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -689,7 +707,7 @@ export function Header() {
                       key={label}
                       href={href}
                       aria-label={label}
-                      className="text-muted-foreground transition-colors hover:text-primary"
+                      className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                     >
                       <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </a>
@@ -697,7 +715,7 @@ export function Header() {
                   <a
                     href="#"
                     aria-label="WhatsApp"
-                    className="text-muted-foreground transition-colors hover:text-primary"
+                    className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                   >
                     <WhatsAppIcon className="h-5 w-5" />
                   </a>
@@ -706,7 +724,7 @@ export function Header() {
                   to="/contact"
                   hash="contact-form"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+                  className="inline-flex min-h-[48px] items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground"
                 >
                   Request a Quote
                 </Link>
