@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
+
 import { motion } from "framer-motion";
 import {
   Search,
@@ -361,14 +362,20 @@ export function PortfolioBrowser() {
     }
   }, []);
 
-  // If arriving with ?category=<name>, preselect that category pill.
+  // Reactively mirror ?category=<name> from the URL. Header dropdown navigates
+  // here with a category query so filtering feels instant without a full reload.
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchStr);
     const cat = params.get("category");
     if (cat && (CATEGORIES as readonly string[]).includes(cat)) {
       setActiveCat(cat);
+      setPage(1);
+    } else if (!cat) {
+      setActiveCat("All Categories");
     }
-  }, []);
+  }, [searchStr]);
+
 
   const toggleSection = (key: string) => {
     setOpenFilters((prev) => {

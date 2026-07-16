@@ -51,22 +51,26 @@ const NAV: NavItem[] = [
 
 type ProductCategory = {
   label: string;
-  href: string;
+  /** Full category name used by the PortfolioBrowser filter (matches PRIMARY_CATEGORIES). */
+  category: string | null;
+  /** SEO landing page path (kept for direct URL / search-engine access). */
+  seoPath: string;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
 const PRODUCT_CATEGORIES: ProductCategory[] = [
-  { label: "Cath Lab Systems", href: "/products/cath-lab", Icon: HeartPulse },
-  { label: "Drug-Eluting Stents (DES)", href: "/products/drug-eluting-stents", Icon: Activity },
-  { label: "PET/CT Scanners", href: "/products/pet-ct-scanners", Icon: ScanLine },
-  { label: "MRI Scanners", href: "/products/mri-scanners", Icon: Magnet },
-  { label: "C-Arm Systems", href: "/products/c-arm-systems", Icon: Aperture },
-  { label: "X-Ray Systems", href: "/products/x-ray-systems", Icon: Radiation },
-  { label: "Mammography Systems", href: "/products/mammography-systems", Icon: CircleDot },
-  { label: "Bone Densitometers (DEXA)", href: "/products/bone-densitometers", Icon: Bone },
-  { label: "Lithotripsy (ESWL)", href: "/products/lithotripsy-eswl", Icon: Waves },
-  { label: "Others", href: "/products/others", Icon: LayoutGrid },
+  { label: "Cath Lab Systems", category: "Cath Lab Systems", seoPath: "/products/cath-lab", Icon: HeartPulse },
+  { label: "Drug-Eluting Stents (DES)", category: null, seoPath: "/products/drug-eluting-stents", Icon: Activity },
+  { label: "PET/CT Scanners", category: "PET/CT Scanners", seoPath: "/products/pet-ct-scanners", Icon: ScanLine },
+  { label: "MRI Scanners", category: "MRI Scanners", seoPath: "/products/mri-scanners", Icon: Magnet },
+  { label: "C-Arm Systems", category: "C-Arms", seoPath: "/products/c-arm-systems", Icon: Aperture },
+  { label: "X-Ray Systems", category: "X-Ray Systems", seoPath: "/products/x-ray-systems", Icon: Radiation },
+  { label: "Mammography Systems", category: "Mammography", seoPath: "/products/mammography-systems", Icon: CircleDot },
+  { label: "Bone Densitometers (DEXA)", category: "Bone Densitometers (DEXA)", seoPath: "/products/bone-densitometers", Icon: Bone },
+  { label: "Lithotripsy (ESWL)", category: "Lithotripsy Systems", seoPath: "/products/lithotripsy-eswl", Icon: Waves },
+  { label: "Others", category: null, seoPath: "/products/others", Icon: LayoutGrid },
 ];
+
 
 const SOCIALS = [
   { label: "Facebook", href: "#", Icon: Facebook, hover: "hover:text-[#1877F2]" },
@@ -237,17 +241,19 @@ function BrandsMegaDropdown() {
 
 function ProductsMegaDropdown() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
+  const activeCategory = new URLSearchParams(searchStr).get("category");
+
   const [closed, setClosed] = useState(false);
-  const lastPath = useRef(pathname);
+  const lastKey = useRef(`${pathname}?${activeCategory ?? ""}`);
 
   useEffect(() => {
-    // Reset the "closed after navigation" flag once the URL actually changes,
-    // so the next hover shows the dropdown again.
-    if (lastPath.current !== pathname) {
-      lastPath.current = pathname;
+    const key = `${pathname}?${activeCategory ?? ""}`;
+    if (lastKey.current !== key) {
+      lastKey.current = key;
       setClosed(false);
     }
-  }, [pathname]);
+  }, [pathname, activeCategory]);
 
   const closedClass = closed
     ? "pointer-events-none !opacity-0"
@@ -267,12 +273,15 @@ function ProductsMegaDropdown() {
           </span>
         </div>
         <ul className="flex flex-col gap-0.5">
-          {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => {
-            const isActive = pathname === href;
+          {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
+            const isActive =
+              pathname === "/products" &&
+              ((category && activeCategory === category) || (!category && !activeCategory && false));
             return (
               <li key={label}>
                 <Link
-                  to={href}
+                  to="/products"
+                  search={category ? { category } : {}}
                   role="menuitem"
                   aria-current={isActive ? "page" : undefined}
                   onClick={(e) => {
@@ -331,6 +340,7 @@ function ProductsMegaDropdown() {
   );
 }
 
+
 function MobileProductsAccordion({
   active,
   onNavigate,
@@ -340,6 +350,9 @@ function MobileProductsAccordion({
 }) {
   const [expanded, setExpanded] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
+  const activeCategory = new URLSearchParams(searchStr).get("category");
+
   return (
     <div className="border-b border-border/60 py-3 last:border-0">
       <div className="flex items-center justify-between">
@@ -378,12 +391,14 @@ function MobileProductsAccordion({
                 Product Categories
               </span>
               <ul className="flex flex-col">
-                {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => {
-                  const isActive = pathname === href;
+                {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
+                  const isActive =
+                    pathname === "/products" && !!category && activeCategory === category;
                   return (
                     <li key={label}>
                       <Link
-                        to={href}
+                        to="/products"
+                        search={category ? { category } : {}}
                         onClick={onNavigate}
                         aria-current={isActive ? "page" : undefined}
                         className={`flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
@@ -400,6 +415,7 @@ function MobileProductsAccordion({
                   );
                 })}
               </ul>
+
               <Link
                 to="/products"
                 onClick={onNavigate}
