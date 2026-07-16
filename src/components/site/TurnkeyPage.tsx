@@ -649,50 +649,165 @@ function FeaturedProjects() {
 }
 
 /* =========================================================
-   06 — GLOBAL PRESENCE
+   06 — GLOBAL PRESENCE  (rebuilt)
    ========================================================= */
 
+// Coordinates in the shared world-map viewBox (1000 x 732)
+// Values verified against real geography (equirectangular projection used by africaMapData).
+const GEO: Record<string, { x: number; y: number }> = {
+  Jordan: { x: 560, y: 118 },
+  Syria: { x: 578, y: 88 },
+  Iraq: { x: 620, y: 105 },
+  Egypt: { x: 505, y: 155 },
+  Libya: { x: 385, y: 155 },
+  Yemen: { x: 665, y: 250 },
+  Somaliland: { x: 665, y: 295 },
+  Somalia: { x: 700, y: 335 },
+  Uzbekistan: { x: 770, y: 40 },
+  Bangladesh: { x: 975, y: 178 },
+};
+
+const HIGHLIGHT = new Set(Object.keys(GEO));
+
+function useCountUp(target: number, inView: boolean, dur = 1400) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    let raf = 0;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setV(Math.round(target * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, inView, dur]);
+  return v;
+}
+
+function StatCard({
+  icon: Icon,
+  value,
+  label,
+  delay,
+  inView,
+}: {
+  icon: typeof Globe;
+  value: number;
+  label: string;
+  delay: number;
+  inView: boolean;
+}) {
+  const n = useCountUp(value, inView);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      whileHover={{ y: -4 }}
+      className="group rounded-2xl bg-white p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] ring-1 ring-black/[0.05] transition-shadow hover:shadow-[0_25px_50px_-20px_rgba(225,29,46,0.35)]"
+    >
+      <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+        <Icon className="h-5 w-5" strokeWidth={1.8} />
+      </div>
+      <div className="mt-4 font-display text-[32px] font-extrabold leading-none text-foreground">
+        {n}
+        <span className="ml-0.5 text-primary">+</span>
+      </div>
+      <div className="mt-2 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
+        {label}
+      </div>
+    </motion.div>
+  );
+}
+
 function GlobalPresence() {
-  const jordan = REGIONS.find((r) => r.hub)!;
-  const spokes = REGIONS.filter((r) => !r.hub);
+  const spokeNames = ["Syria", "Iraq", "Egypt", "Libya", "Yemen", "Somaliland", "Somalia", "Uzbekistan", "Bangladesh"];
+  const jordan = REGIONS.find((r) => r.name === "Jordan")!;
+  const spokes = spokeNames.map((n) => REGIONS.find((r) => r.name === n)!).filter(Boolean);
   const [active, setActive] = useState<Region>(REGIONS.find((r) => r.name === "Iraq")!);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => e.isIntersecting && setInView(true),
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const STATS = [
-    { icon: Globe, v: "10", suf: "+", l: "Countries" },
-    { icon: Building2, v: "100", suf: "+", l: "Projects Delivered" },
-    { icon: Stethoscope, v: "250", suf: "+", l: "Medical Systems" },
-    { icon: Heart, v: "50", suf: "+", l: "Healthcare Facilities" },
+    { icon: Globe, value: 10, label: "Countries" },
+    { icon: Building2, value: 100, label: "Projects Delivered" },
+    { icon: Stethoscope, value: 250, label: "Medical Systems" },
+    { icon: Heart, value: 50, label: "Healthcare Facilities" },
   ];
 
   const FEATURES = [
-    { icon: Globe, title: "Three Regions", copy: "Africa • Middle East • Central Asia" },
-    { icon: Handshake, title: "Trusted Partner", copy: "Healthcare providers rely on AbuFarha" },
-    { icon: ShieldCheck, title: "Proven Track Record", copy: "Delivering projects since 1999" },
-    { icon: Cog, title: "End-to-End Solutions", copy: "Planning to commissioning" },
-    { icon: Headphones, title: "Lifetime Support", copy: "24/7 after-sales support" },
+    { icon: Globe, title: "Three Regions", copy: "Africa, Middle East & Central Asia" },
+    { icon: Handshake, title: "Trusted Partner", copy: "Healthcare providers rely on us" },
+    { icon: ShieldCheck, title: "Proven Track Record", copy: "Projects delivered since 1999" },
+    { icon: Cog, title: "End-to-End Solutions", copy: "From concept to commissioning" },
+    { icon: Headphones, title: "Lifetime Support", copy: "After-sales & technical support 24/7" },
   ];
 
-  // Convert % to SVG viewBox coords (100 x 100)
-  const toXY = (r: Region) => ({
-    x: parseFloat(r.left),
-    y: parseFloat(r.top),
-  });
-  const jc = toXY(jordan);
+  const jc = GEO.Jordan;
+
+  // Build curved SVG path from Jordan to a spoke
+  const buildPath = (name: string) => {
+    const p = GEO[name];
+    if (!p) return "";
+    const mx = (jc.x + p.x) / 2;
+    const my = (jc.y + p.y) / 2 - Math.abs(p.x - jc.x) * 0.25 - 15;
+    return `M ${jc.x} ${jc.y} Q ${mx} ${my} ${p.x} ${p.y}`;
+  };
 
   return (
-    <section id="footprint" className="relative overflow-hidden bg-gradient-to-b from-white via-[#fafbfc] to-[#f4f6f9] py-20 lg:py-28">
-      {/* subtle dot pattern */}
+    <section
+      id="footprint"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-20 lg:py-28"
+    >
+      {/* soft radial gradients */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(1200px 600px at 85% 10%, rgba(225,29,46,0.06), transparent 60%), radial-gradient(900px 500px at 10% 80%, rgba(15,23,42,0.05), transparent 60%)",
+        }}
+      />
+      {/* medical blueprint grid */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.06) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+          backgroundImage:
+            "linear-gradient(to right, rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,23,42,0.04) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+        }}
+      />
+      {/* dotted accent (bottom-left) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-16 left-8 h-40 w-40 opacity-40"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) 1.2px, transparent 1.2px)",
+          backgroundSize: "14px 14px",
         }}
       />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[45fr_55fr] lg:items-center lg:gap-16">
           {/* LEFT */}
           <div>
             <motion.p
@@ -700,7 +815,7 @@ function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary"
+              className="text-[12px] font-bold uppercase tracking-[0.28em] text-primary"
             >
               Global Footprint
             </motion.p>
@@ -709,7 +824,7 @@ function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.05 }}
-              className="mt-4 font-display text-[38px] font-extrabold leading-[1.02] tracking-[-0.02em] text-foreground sm:text-[48px]"
+              className="mt-4 font-display text-[40px] font-extrabold leading-[1.02] tracking-[-0.02em] text-foreground sm:text-[52px]"
             >
               Delivering Excellence
               <br />
@@ -727,26 +842,16 @@ function GlobalPresence() {
               Africa, the Middle East and Central Asia.
             </motion.p>
 
-            {/* Stat cards 2x2 */}
             <div className="mt-10 grid grid-cols-2 gap-4 max-w-md">
               {STATS.map((s, i) => (
-                <motion.div
-                  key={s.l}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.15 + i * 0.07 }}
-                  className="rounded-2xl bg-white p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] ring-1 ring-black/[0.04]"
-                >
-                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
-                    <s.icon className="h-5 w-5" strokeWidth={1.8} />
-                  </div>
-                  <div className="mt-4 font-display text-[30px] font-extrabold leading-none text-foreground">
-                    {s.v}
-                    <span className="ml-0.5 text-primary">{s.suf}</span>
-                  </div>
-                  <div className="mt-2 text-[12px] font-medium text-muted-foreground">{s.l}</div>
-                </motion.div>
+                <StatCard
+                  key={s.label}
+                  icon={s.icon}
+                  value={s.value}
+                  label={s.label}
+                  delay={0.15 + i * 0.08}
+                  inView={inView}
+                />
               ))}
             </div>
 
@@ -755,8 +860,8 @@ function GlobalPresence() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_18px_40px_-16px_color-mix(in_oklab,var(--primary)_65%,transparent)] transition-transform hover:-translate-y-0.5"
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-[15px] font-bold text-primary-foreground shadow-[0_20px_45px_-16px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:-translate-y-0.5"
             >
               Explore Global Projects
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -769,113 +874,218 @@ function GlobalPresence() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#f1f4f8] ring-1 ring-black/5 shadow-[0_40px_100px_-40px_rgba(15,23,42,0.25)]"
+            className="relative w-full"
+            style={{ aspectRatio: `${MAP_W} / ${MAP_H}` }}
           >
-            {/* soft continents backdrop */}
+            {/* Base world-geography backdrop */}
             <svg
-              viewBox="0 0 800 640"
-              className="absolute inset-0 h-full w-full text-neutral-300/70"
-              fill="currentColor"
-              aria-hidden
-            >
-              <path opacity="0.45" d="M340 200 Q420 180 500 210 L540 280 Q550 360 520 430 L470 510 Q420 550 370 530 L330 490 Q300 400 310 320 Q320 240 340 200 Z" />
-              <path opacity="0.4" d="M500 210 Q560 195 600 230 L620 290 Q600 340 555 350 L520 335 Q500 280 500 230 Z" />
-              <path opacity="0.35" d="M600 150 Q690 130 770 170 L790 240 Q770 300 720 320 L640 320 Q600 280 590 220 Q580 180 600 150 Z" />
-              <path opacity="0.4" d="M720 340 Q760 340 775 380 L770 420 Q740 435 720 415 Q710 380 720 340 Z" />
-            </svg>
-
-            {/* CONNECTION LINES (SVG overlay in % coords) */}
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
+              viewBox={`0 0 ${MAP_W} ${MAP_H}`}
               className="absolute inset-0 h-full w-full"
-              aria-hidden
+              aria-label="Map showing AbuFarha's operations across the Middle East, Africa and Central Asia"
             >
               <defs>
-                <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+                <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#f1f4f8" />
+                  <stop offset="100%" stopColor="#e6ebf1" />
+                </linearGradient>
+                <linearGradient id="activeGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="color-mix(in oklab, var(--primary) 42%, white)" />
+                  <stop offset="100%" stopColor="color-mix(in oklab, var(--primary) 28%, white)" />
+                </linearGradient>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.15" />
-                  <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.75" />
+                  <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.9" />
                   <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.15" />
                 </linearGradient>
+                <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.5" />
+                  <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+                </radialGradient>
+                <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.6" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
+
+              {/* Countries — neutral */}
+              {WORLD_COUNTRIES.filter((c) => !HIGHLIGHT.has(c.name)).map((c) => (
+                <path
+                  key={c.name}
+                  d={c.d}
+                  fill="url(#landGrad)"
+                  stroke="rgba(15,23,42,0.08)"
+                  strokeWidth={0.4}
+                />
+              ))}
+              {/* Highlighted countries */}
+              {WORLD_COUNTRIES.filter((c) => HIGHLIGHT.has(c.name)).map((c) => {
+                const isHov = hovered === c.name || active.name === c.name;
+                return (
+                  <path
+                    key={c.name}
+                    d={c.d}
+                    fill="url(#activeGrad)"
+                    stroke="var(--primary)"
+                    strokeOpacity={isHov ? 0.9 : 0.45}
+                    strokeWidth={isHov ? 0.9 : 0.5}
+                    style={{
+                      filter: isHov ? "drop-shadow(0 0 4px rgba(225,29,46,0.55))" : undefined,
+                      transition: "all 0.3s ease",
+                    }}
+                  />
+                );
+              })}
+
+              {/* Hub ambient glow */}
+              <circle cx={jc.x} cy={jc.y} r={70} fill="url(#hubGlow)" />
+
+              {/* Connection curves */}
               {spokes.map((r, i) => {
-                const p = toXY(r);
-                // Curve control point offset perpendicular
-                const mx = (jc.x + p.x) / 2;
-                const my = (jc.y + p.y) / 2 - 6;
-                const pathId = `route-${i}`;
-                const d = `M ${p.x} ${p.y} Q ${mx} ${my} ${jc.x} ${jc.y}`;
+                const d = buildPath(r.name);
+                const isHov = hovered === r.name || active.name === r.name;
+                const pathId = `gf-route-${i}`;
                 return (
                   <g key={r.name}>
-                    <path id={pathId} d={d} fill="none" stroke="url(#lineGrad)" strokeWidth={0.35} vectorEffect="non-scaling-stroke" />
-                    <circle r={0.6} fill="var(--primary)">
-                      <animateMotion dur={`${3 + (i % 4)}s`} repeatCount="indefinite" begin={`${i * 0.35}s`}>
+                    <motion.path
+                      id={pathId}
+                      d={d}
+                      fill="none"
+                      stroke={isHov ? "var(--primary)" : "url(#lineGrad)"}
+                      strokeWidth={isHov ? 1.4 : 0.7}
+                      strokeLinecap="round"
+                      filter="url(#lineGlow)"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+                      transition={{ duration: 1.4, delay: 0.2 + i * 0.08, ease: "easeInOut" }}
+                    />
+                    {/* Traveling particles from hub → node */}
+                    <circle r={1.6} fill="var(--primary)">
+                      <animateMotion
+                        dur={`${3.2 + (i % 4) * 0.4}s`}
+                        repeatCount="indefinite"
+                        begin={`${i * 0.4}s`}
+                        rotate="auto"
+                      >
+                        <mpath href={`#${pathId}`} />
+                      </animateMotion>
+                    </circle>
+                    <circle r={1.1} fill="white" opacity="0.9">
+                      <animateMotion
+                        dur={`${3.2 + (i % 4) * 0.4}s`}
+                        repeatCount="indefinite"
+                        begin={`${i * 0.4 + 0.6}s`}
+                      >
                         <mpath href={`#${pathId}`} />
                       </animateMotion>
                     </circle>
                   </g>
                 );
               })}
+
+              {/* Country nodes (dots) rendered inside SVG for perfect alignment */}
+              {spokes.map((r) => {
+                const p = GEO[r.name];
+                const isHov = hovered === r.name || active.name === r.name;
+                return (
+                  <g key={`node-${r.name}`}>
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isHov ? 8 : 6}
+                      fill="var(--primary)"
+                      opacity={0.25}
+                    >
+                      <animate attributeName="r" values={`${isHov ? 8 : 6};${isHov ? 14 : 11};${isHov ? 8 : 6}`} dur="2.4s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.4;0;0.4" dur="2.4s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx={p.x} cy={p.y} r={isHov ? 4.5 : 3.5} fill="var(--primary)" stroke="white" strokeWidth={1.2} />
+                  </g>
+                );
+              })}
             </svg>
 
-            {/* Central Jordan hub badge */}
-            <div
-              className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
-              style={{ top: jordan.top, left: jordan.left }}
-            >
-              <div className="relative">
-                <span className="absolute inset-0 -m-2 animate-ping rounded-full bg-primary/25" />
-                <div className="relative flex flex-col items-center gap-1 rounded-full bg-white px-3 py-2 shadow-[0_10px_30px_-8px_rgba(15,23,42,0.25)] ring-1 ring-primary/30">
-                  <Activity className="h-4 w-4 text-primary" strokeWidth={2.2} />
-                  <span className="font-display text-[10px] font-extrabold tracking-tight text-foreground">
-                    AbuFarha
-                  </span>
-                  <span className="-mt-0.5 text-[7px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                    Jordan · HQ
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Country nodes */}
+            {/* Country labels + hover targets (HTML overlay, aligned to SVG coords via %) */}
             {spokes.map((r) => {
-              const isActive = active.name === r.name;
+              const p = GEO[r.name];
               return (
                 <button
-                  key={r.name}
+                  key={`lbl-${r.name}`}
                   type="button"
-                  onMouseEnter={() => setActive(r)}
-                  onFocus={() => setActive(r)}
-                  onClick={() => setActive(r)}
+                  onMouseEnter={() => {
+                    setHovered(r.name);
+                    setActive(r);
+                  }}
+                  onMouseLeave={() => setHovered(null)}
+                  onFocus={() => {
+                    setHovered(r.name);
+                    setActive(r);
+                  }}
+                  onBlur={() => setHovered(null)}
                   aria-label={r.name}
-                  className="group absolute z-10 -translate-x-1/2 -translate-y-1/2"
-                  style={{ top: r.top, left: r.left }}
+                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                  style={{ left: `${(p.x / MAP_W) * 100}%`, top: `${(p.y / MAP_H) * 100}%` }}
                 >
-                  <span className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40 ${isActive ? "h-6 w-6 animate-ping" : "h-4 w-4 animate-ping"}`} />
-                  <span className={`relative block rounded-full bg-primary ring-2 ring-white shadow-[0_4px_12px_rgba(225,29,46,0.45)] transition-transform group-hover:scale-125 ${isActive ? "h-3.5 w-3.5" : "h-2.5 w-2.5"}`} />
-                  <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-white/90 px-1.5 py-0.5 text-[10px] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
+                  <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[11px] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
                     {r.name}
                   </span>
+                  {/* invisible hit-area */}
+                  <span className="block h-6 w-6" />
                 </button>
               );
             })}
 
-            {/* Floating hover card */}
+            {/* Jordan HUB badge (large, elegant) */}
+            <div
+              className="pointer-events-none absolute z-20 -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${(jc.x / MAP_W) * 100}%`, top: `${(jc.y / MAP_H) * 100}%` }}
+            >
+              <div className="relative">
+                <span className="absolute inset-0 -m-4 animate-ping rounded-full bg-primary/20" />
+                <span className="absolute inset-0 -m-2 rounded-full bg-white/70 blur-xl" />
+                <div className="relative flex h-[92px] w-[92px] flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_45px_-12px_rgba(15,23,42,0.35)] ring-1 ring-primary/25">
+                  {/* heart-pulse line */}
+                  <svg viewBox="0 0 60 20" className="h-3 w-14 text-primary">
+                    <path
+                      d="M0 10 H12 L15 3 L20 17 L25 6 L30 14 L34 10 H60"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <div className="mt-0.5 font-display text-[13px] font-extrabold leading-none tracking-tight text-foreground">
+                    Abu<span className="text-primary">Farha</span>
+                  </div>
+                  <div className="mt-0.5 text-[6.5px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                    Medical Equipment
+                  </div>
+                </div>
+              </div>
+              <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[11px] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
+                Jordan
+              </div>
+            </div>
+
+            {/* Floating country card */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.name}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28 }}
-                className="absolute bottom-5 right-5 z-30 w-[260px] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_60px_-25px_rgba(15,23,42,0.35)] ring-1 ring-black/[0.06]"
+                initial={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -8, scale: 0.98, filter: "blur(4px)" }}
+                transition={{ duration: 0.32, ease: "easeOut" }}
+                className="absolute bottom-4 right-4 z-30 w-[270px] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_70px_-25px_rgba(15,23,42,0.4)] ring-1 ring-black/[0.06]"
               >
                 <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-neutral-100 text-lg leading-none">
+                  <span className="grid h-10 w-10 place-items-center rounded-lg bg-neutral-100 text-xl leading-none">
                     {active.flag}
                   </span>
                   <div className="min-w-0">
-                    <div className="font-display text-[15px] font-extrabold text-foreground">
+                    <div className="font-display text-[16px] font-extrabold text-foreground">
                       {active.name}
                     </div>
                     {active.note && (
@@ -886,7 +1096,7 @@ function GlobalPresence() {
                   </div>
                 </div>
 
-                <ul className="mt-4 space-y-2 border-t border-black/5 pt-3">
+                <ul className="mt-3 space-y-1.5 border-t border-black/5 pt-3">
                   {active.equipment.map((e) => (
                     <li key={e.label} className="flex items-center justify-between text-[12.5px]">
                       <span className="flex items-center gap-2 text-muted-foreground">
@@ -902,14 +1112,14 @@ function GlobalPresence() {
                   <img
                     src={active.img}
                     alt={active.name}
-                    className="h-24 w-full object-cover"
+                    className="h-24 w-full object-cover transition-transform duration-500 hover:scale-105"
                     loading="lazy"
                   />
                 </div>
 
                 <a
                   href="#projects"
-                  className="mt-3 inline-flex items-center gap-1 text-[12px] font-bold text-primary hover:text-primary/80"
+                  className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-bold text-primary hover:text-primary/80"
                 >
                   View Projects <ArrowRight className="h-3.5 w-3.5" />
                 </a>
@@ -920,23 +1130,24 @@ function GlobalPresence() {
 
         {/* BOTTOM FEATURE STRIP */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-14 rounded-3xl bg-white/80 p-6 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.2)] ring-1 ring-black/[0.05] backdrop-blur-xl lg:mt-16 lg:p-8"
+          className="mt-14 rounded-3xl bg-white/85 p-6 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.22)] ring-1 ring-black/[0.05] backdrop-blur-xl lg:mt-16 lg:p-8"
         >
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {FEATURES.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
-                className="flex flex-col items-center text-center"
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                whileHover={{ y: -4 }}
+                className="group flex flex-col items-center rounded-2xl px-3 py-2 text-center transition-colors hover:bg-white"
               >
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/8 text-primary">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
                   <f.icon className="h-5 w-5" strokeWidth={1.8} />
                 </div>
                 <div className="mt-3 font-display text-[14px] font-extrabold text-foreground">
@@ -951,6 +1162,7 @@ function GlobalPresence() {
     </section>
   );
 }
+
 
 
 /* =========================================================
