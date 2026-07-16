@@ -241,17 +241,18 @@ function BrandsMegaDropdown() {
 
 function ProductsMegaDropdown() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const search = useRouterState({ select: (s) => s.location.search }) as Record<string, unknown>;
+  const activeCategory = typeof search.category === "string" ? search.category : null;
   const [closed, setClosed] = useState(false);
-  const lastPath = useRef(pathname);
+  const lastKey = useRef(`${pathname}?${activeCategory ?? ""}`);
 
   useEffect(() => {
-    // Reset the "closed after navigation" flag once the URL actually changes,
-    // so the next hover shows the dropdown again.
-    if (lastPath.current !== pathname) {
-      lastPath.current = pathname;
+    const key = `${pathname}?${activeCategory ?? ""}`;
+    if (lastKey.current !== key) {
+      lastKey.current = key;
       setClosed(false);
     }
-  }, [pathname]);
+  }, [pathname, activeCategory]);
 
   const closedClass = closed
     ? "pointer-events-none !opacity-0"
@@ -271,12 +272,15 @@ function ProductsMegaDropdown() {
           </span>
         </div>
         <ul className="flex flex-col gap-0.5">
-          {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => {
-            const isActive = pathname === href;
+          {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
+            const isActive =
+              pathname === "/products" &&
+              ((category && activeCategory === category) || (!category && !activeCategory && false));
             return (
               <li key={label}>
                 <Link
-                  to={href}
+                  to="/products"
+                  search={category ? { category } : {}}
                   role="menuitem"
                   aria-current={isActive ? "page" : undefined}
                   onClick={(e) => {
@@ -334,6 +338,7 @@ function ProductsMegaDropdown() {
     </div>
   );
 }
+
 
 function MobileProductsAccordion({
   active,
