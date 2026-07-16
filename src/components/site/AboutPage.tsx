@@ -23,11 +23,8 @@ import {
   Radar,
   Building,
   Microscope,
-  School,
   Ribbon,
   HeartPulse,
-  ShieldAlert,
-  Landmark,
   Award,
   BadgeCheck,
   Clock,
@@ -40,7 +37,14 @@ import {
   TrendingUp,
   Headphones,
   Star,
+  Baby,
+  Droplets,
+  ScanLine,
+  Scissors,
+  CalendarClock,
+  HardHat,
 } from "lucide-react";
+
 import { Eyebrow } from "./Eyebrow";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 import { useCountUp } from "@/hooks/use-count-up";
