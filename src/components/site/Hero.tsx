@@ -324,27 +324,24 @@ export function Hero() {
                 Backed by a 1-year free warranty on every installation.
               </motion.div>
 
-              <div className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6 sm:grid-cols-4">
-                {slide.stats.map((s, i) => (
-                  <motion.div
-                    key={`${index}-${s.label}`}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.55,
-                      ease: EASE,
-                      delay: 0.5 + i * 0.08,
-                    }}
-                  >
-                    <div className="font-display text-2xl font-extrabold leading-none text-ink">
-                      {s.value}
-                    </div>
-                    <div className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                      {s.label}
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-border pt-6">
+                {slide.trust.map((t, i) => {
+                  const Icon = t.icon;
+                  return (
+                    <motion.span
+                      key={`${index}-${t.label}`}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, ease: EASE, delay: 0.5 + i * 0.07 }}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/70 px-3 py-1.5 text-[12px] font-semibold text-ink shadow-sm backdrop-blur"
+                    >
+                      <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={2.4} />
+                      {t.label}
+                    </motion.span>
+                  );
+                })}
               </div>
+
             </motion.div>
           </AnimatePresence>
         </motion.div>
