@@ -359,12 +359,12 @@ function MobileProductsAccordion({
   const activeCategory = new URLSearchParams(searchStr).get("category");
 
   return (
-    <div className="border-b border-border/60 py-3 last:border-0">
+    <div className="border-b border-border/60 py-2 last:border-0">
       <div className="flex items-center justify-between">
         <Link
           to="/products"
           onClick={onNavigate}
-          className={`flex-1 text-[16px] font-medium transition-colors ${
+          className={`flex min-h-[48px] flex-1 items-center text-[16px] font-medium transition-colors ${
             active ? "text-primary" : "text-foreground/80 hover:text-primary"
           }`}
         >
