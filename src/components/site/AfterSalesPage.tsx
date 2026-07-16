@@ -1505,17 +1505,30 @@ function RequestService() {
 
 /* ---------------- FAQ / KNOWLEDGE CENTER ---------------- */
 
-const FAQS: [string, string][] = [
-  ["How can I request a service?", "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and an engineer is assigned within minutes."],
-  ["How fast can an engineer reach our site?", "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region."],
-  ["What is the warranty coverage?", "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available."],
-  ["Do you provide training for our staff?", "Yes — clinical and biomedical training is included with every installation and available on demand."],
-  ["Do you provide preventive maintenance?", "Yes. Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment."],
-  ["Do you supply spare parts for all models?", "We stock genuine OEM parts for every brand and modality we install, and can source rare parts through our OEM partners."],
+const FAQ_CATS = ["All", "Service", "Warranty", "Parts", "Training"] as const;
+type FaqCat = (typeof FAQ_CATS)[number];
+
+const FAQS: { q: string; a: string; cat: Exclude<FaqCat, "All"> }[] = [
+  { q: "How can I request a service?", a: "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and a certified engineer is assigned within minutes.", cat: "Service" },
+  { q: "How fast can an engineer reach our site?", a: "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region — dispatched from the nearest field hub with the right parts on board.", cat: "Service" },
+  { q: "What is the warranty coverage?", a: "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available for multi-year coverage, uptime guarantees and preventive maintenance.", cat: "Warranty" },
+  { q: "Do you provide training for our staff?", a: "Yes — clinical and biomedical training is included with every installation and available on demand. Sessions are led by OEM-certified application specialists on your own equipment.", cat: "Training" },
+  { q: "Do you provide preventive maintenance?", a: "Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment, following original OEM procedures and checklists.", cat: "Service" },
+  { q: "Do you supply spare parts for all models?", a: "We stock genuine OEM parts for every brand and modality we install and can source rare parts through our OEM partners with fully traceable documentation.", cat: "Parts" },
 ];
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const [query, setQuery] = useState("");
+  const [cat, setCat] = useState<FaqCat>("All");
+
+  const filtered = FAQS.map((f, i) => ({ ...f, i })).filter((f) => {
+    const matchCat = cat === "All" || f.cat === cat;
+    const q = query.trim().toLowerCase();
+    const matchQ = !q || f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
   return (
     <section className="relative bg-[#f6f4f0] py-24 lg:py-32">
       <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
@@ -1537,7 +1550,7 @@ function FAQ() {
             </p>
 
             {/* still need help */}
-            <div className="mt-10 rounded-2xl border border-border bg-white p-6">
+            <div className="mt-10 rounded-2xl border border-border bg-white p-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.15)]">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
                 Still Need Help?
               </div>
@@ -1557,51 +1570,100 @@ function FAQ() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            {FAQS.map(([q, a], i) => {
-              const isOpen = open === i;
-              return (
-                <div
-                  key={q}
-                  className={`overflow-hidden rounded-2xl border transition-all ${
-                    isOpen ? "border-primary/30 bg-card shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]" : "border-border bg-card/70"
+          <div>
+            {/* Search + categories */}
+            <div className="mb-6 rounded-2xl border border-border bg-white p-3 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.15)]">
+              <div className="flex items-center gap-3 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-muted-foreground"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search questions — e.g. warranty, parts, training"
+                  className="w-full bg-transparent py-3 text-[14.5px] text-foreground outline-none placeholder:text-muted-foreground/70"
+                />
+              </div>
+            </div>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {FAQ_CATS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCat(c)}
+                  className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition-all ${
+                    cat === c
+                      ? "border-ink bg-ink text-white"
+                      : "border-border bg-white text-foreground hover:border-foreground/40"
                   }`}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-6 px-7 py-6 text-left"
-                  >
-                    <span className="text-[17px] font-semibold text-foreground sm:text-[18px]">
-                      {q}
-                    </span>
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${
-                        isOpen ? "bg-primary text-white" : "bg-muted text-foreground"
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            {filtered.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-border bg-white/50 p-10 text-center text-[14px] text-muted-foreground">
+                No questions match your search. Try a different keyword.
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filtered.map(({ q, a, cat: fcat, i }) => {
+                  const isOpen = open === i;
+                  return (
+                    <div
+                      key={q}
+                      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                        isOpen
+                          ? "border-primary/30 bg-white shadow-[0_25px_60px_-30px_rgba(0,0,0,0.28)]"
+                          : "border-border bg-white/70 hover:border-foreground/25 hover:bg-white hover:shadow-[0_15px_40px_-25px_rgba(0,0,0,0.2)]"
                       }`}
                     >
-                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                    </span>
-                  </button>
-                  <motion.div
-                    initial={false}
-                    animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-7 pb-7 text-[15px] leading-relaxed text-muted-foreground">
-                      {a}
+                      <button
+                        type="button"
+                        onClick={() => setOpen(isOpen ? null : i)}
+                        aria-expanded={isOpen}
+                        className="flex w-full items-center justify-between gap-6 px-7 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                      >
+                        <div className="min-w-0">
+                          <div className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-primary">
+                            {fcat}
+                          </div>
+                          <div className="mt-1.5 text-[17.5px] font-semibold leading-snug text-foreground sm:text-[19px]">
+                            {q}
+                          </div>
+                        </div>
+                        <span
+                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                            isOpen
+                              ? "rotate-180 bg-primary text-white"
+                              : "bg-muted text-foreground"
+                          }`}
+                        >
+                          {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                        </span>
+                      </button>
+                      <motion.div
+                        initial={false}
+                        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-7 pb-8 text-[15.5px] leading-[1.75] text-muted-foreground">
+                          {a}
+                        </div>
+                      </motion.div>
                     </div>
-                  </motion.div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------------- FINAL CTA ---------------- */
 
