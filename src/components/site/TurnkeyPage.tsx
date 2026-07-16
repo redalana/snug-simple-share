@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { COUNTRIES as WORLD_COUNTRIES, MAP_W, MAP_H } from "./africaMapData";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
