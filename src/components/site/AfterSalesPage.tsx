@@ -15,7 +15,6 @@ import {
   Boxes,
   Stethoscope,
   Cpu,
-  MessageSquare,
   CheckCircle2,
   Circle,
   MapPin,
@@ -28,21 +27,20 @@ import {
   ClipboardList,
   UserCheck,
   Truck,
-  ShieldCheck as ShieldIcon,
-  ArrowUpRight,
+  MessageSquare,
+  Zap,
+  Radio,
+  Cable,
+  Cpu as ChipIcon,
+  Battery,
+  Syringe,
+  ScanLine,
+  Monitor,
+  MoreHorizontal,
 } from "lucide-react";
 import heroImg from "@/assets/aftersales-hero.jpg";
 import ctaImg from "@/assets/aftersales-cta.jpg";
-import imgCath from "@/assets/sol-carm.jpg";
-import imgMri from "@/assets/sol-mri.jpg";
-import imgCt from "@/assets/sol-ct.jpg";
-import imgUs from "@/assets/sol-ultrasound.jpg";
-import imgMammo from "@/assets/sol-mammo.jpg";
-import imgXray from "@/assets/sol-xray.jpg";
-import imgPet from "@/assets/sol-petct.jpg";
-import imgOr from "@/assets/sol-or.jpg";
-import imgDexa from "@/assets/sol-dexa.jpg";
-import imgDes from "@/assets/sol-des.jpg";
+import { COUNTRY_PATHS, GEO, HIGHLIGHT_NAMES, MAP_H, MAP_W, projection } from "./turnkey/worldMap";
 
 /* ---------- data ---------- */
 
@@ -74,14 +72,14 @@ const LIVE_STATUS = [
 ] as const;
 
 const SUPPORT_SERVICES = [
-  { label: "Preventive Maintenance", img: imgCath },
-  { label: "Emergency Support", img: imgOr },
-  { label: "Corrective Maintenance", img: imgCt },
-  { label: "Spare Parts Supply", img: imgXray },
-  { label: "Calibration & QA", img: imgMri },
-  { label: "Clinical Training", img: imgUs },
-  { label: "Biomedical Engineering", img: imgPet },
-  { label: "Technical Consultation", img: imgMammo },
+  { label: "Preventive Maintenance", icon: Wrench },
+  { label: "Emergency Support", icon: AlertTriangle },
+  { label: "Corrective Maintenance", icon: Cog },
+  { label: "Spare Parts Supply", icon: Boxes },
+  { label: "Calibration & QA", icon: Gauge },
+  { label: "Clinical Training", icon: GraduationCap },
+  { label: "Biomedical Engineering", icon: Cpu },
+  { label: "Technical Consultation", icon: MessageSquare },
 ];
 
 const PERFORMANCE = [
@@ -92,14 +90,14 @@ const PERFORMANCE = [
 ];
 
 const SPARE_PARTS = [
-  { label: "Cath Lab Parts", img: imgCath },
-  { label: "MRI Parts", img: imgMri },
-  { label: "CT Parts", img: imgCt },
-  { label: "Ultrasound Parts", img: imgUs },
-  { label: "Monitors & Displays", img: imgOr },
-  { label: "Injectors", img: imgDes },
-  { label: "UPS & Power Systems", img: imgDexa },
-  { label: "And More", img: null },
+  { label: "Cath Lab Parts", icon: Zap },
+  { label: "MRI Parts", icon: Radio },
+  { label: "CT Parts", icon: ScanLine },
+  { label: "Ultrasound Parts", icon: Activity },
+  { label: "Monitors & Displays", icon: Monitor },
+  { label: "Injectors", icon: Syringe },
+  { label: "UPS & Power Systems", icon: Battery },
+  { label: "And More", icon: MoreHorizontal },
 ];
 
 const REGIONS = {
@@ -130,7 +128,7 @@ const PROCESS = [
   { n: 4, label: "On-site Visit", icon: Truck },
   { n: 5, label: "Repair & Calibration", icon: Wrench },
   { n: 6, label: "Performance Verification", icon: Gauge },
-  { n: 7, label: "Follow-up Support", icon: ShieldIcon },
+  { n: 7, label: "Follow-up Support", icon: ShieldCheck },
 ];
 
 const FAQ = [
@@ -208,7 +206,6 @@ function Hero() {
             </a>
           </div>
 
-          {/* stat strip */}
           <div className="mt-10 grid gap-2 rounded-2xl border border-border bg-white p-3 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.35)] sm:grid-cols-4">
             {HERO_STATS.map((s) => (
               <div key={s.label} className="flex items-center gap-3 rounded-xl px-3 py-2.5">
@@ -233,10 +230,10 @@ function Hero() {
           <div className="relative aspect-[5/6] overflow-hidden rounded-[28px] shadow-[0_40px_100px_-40px_rgba(15,23,42,0.4)] lg:aspect-auto lg:h-full">
             <img
               src={heroImg}
-              alt="AbuFarha biomedical engineer servicing a hospital imaging system"
+              alt="AbuFarha biomedical engineer servicing hospital medical equipment"
               className="h-full w-full object-cover"
-              width={1600}
-              height={1100}
+              width={1408}
+              height={1600}
             />
           </div>
 
@@ -297,6 +294,121 @@ function Hero() {
   );
 }
 
+/* ---------- street-map for Live Service Status ---------- */
+
+function StreetMap() {
+  // A believable stylized city street map: soft neutral background, a grid
+  // of streets with a few diagonals, park + water shapes, and a red route
+  // ending in a destination pin. Purely SVG so it stays crisp at any size.
+  return (
+    <svg
+      viewBox="0 0 400 200"
+      className="absolute inset-0 h-full w-full"
+      aria-label="Live route to service location"
+    >
+      <defs>
+        <pattern id="afs-blocks" width="34" height="34" patternUnits="userSpaceOnUse">
+          <rect width="34" height="34" fill="#f2f3f5" />
+          <rect x="2" y="2" width="12" height="12" fill="#e6e8ec" />
+          <rect x="18" y="2" width="14" height="10" fill="#e6e8ec" />
+          <rect x="2" y="18" width="10" height="14" fill="#e6e8ec" />
+          <rect x="16" y="16" width="16" height="16" fill="#e6e8ec" />
+        </pattern>
+      </defs>
+
+      {/* base */}
+      <rect width="400" height="200" fill="url(#afs-blocks)" />
+
+      {/* park */}
+      <path
+        d="M40 130 Q 70 100 110 118 Q 140 140 120 168 Q 90 180 55 172 Q 30 160 40 130 Z"
+        fill="#dcead1"
+      />
+      {/* river */}
+      <path
+        d="M-5 60 Q 80 50 160 80 Q 240 108 330 92 Q 390 82 405 96 L 405 108 Q 380 100 330 108 Q 240 122 160 96 Q 80 68 -5 78 Z"
+        fill="#cfe1f2"
+      />
+
+      {/* main streets (white) */}
+      {[30, 70, 110, 150].map((y) => (
+        <line
+          key={"h" + y}
+          x1="0"
+          y1={y}
+          x2="400"
+          y2={y}
+          stroke="#ffffff"
+          strokeWidth="3"
+        />
+      ))}
+      {[60, 130, 200, 270, 340].map((x) => (
+        <line
+          key={"v" + x}
+          x1={x}
+          y1="0"
+          x2={x}
+          y2="200"
+          stroke="#ffffff"
+          strokeWidth="3"
+        />
+      ))}
+      {/* diagonals */}
+      <line x1="0" y1="200" x2="400" y2="0" stroke="#ffffff" strokeWidth="2.5" opacity="0.9" />
+      <line x1="80" y1="200" x2="360" y2="0" stroke="#ffffff" strokeWidth="2" opacity="0.75" />
+
+      {/* thin secondary streets */}
+      {[15, 45, 90, 175, 190].map((y) => (
+        <line
+          key={"hs" + y}
+          x1="0"
+          y1={y}
+          x2="400"
+          y2={y}
+          stroke="#ffffff"
+          strokeWidth="1"
+          opacity="0.75"
+        />
+      ))}
+      {[20, 95, 170, 240, 310, 380].map((x) => (
+        <line
+          key={"vs" + x}
+          x1={x}
+          y1="0"
+          x2={x}
+          y2="200"
+          stroke="#ffffff"
+          strokeWidth="1"
+          opacity="0.75"
+        />
+      ))}
+
+      {/* route */}
+      <path
+        d="M40 170 L 90 170 L 90 130 L 200 130 L 200 90 L 300 90 L 300 55 L 340 40"
+        fill="none"
+        stroke="var(--primary)"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* start dot */}
+      <circle cx="40" cy="170" r="4.5" fill="var(--primary)" />
+      <circle cx="40" cy="170" r="8" fill="none" stroke="var(--primary)" strokeOpacity="0.4" />
+
+      {/* destination pin */}
+      <g transform="translate(340 40)">
+        <circle r="16" fill="var(--primary)" fillOpacity="0.14" />
+        <path
+          d="M0 -14 C -8 -14 -14 -8 -14 0 C -14 8 0 18 0 18 C 0 18 14 8 14 0 C 14 -8 8 -14 0 -14 Z"
+          fill="var(--primary)"
+        />
+        <circle r="4" cx="0" cy="0" fill="#ffffff" />
+      </g>
+    </svg>
+  );
+}
+
 function EcosystemAndStatus() {
   return (
     <section className="bg-secondary/40 py-14 lg:py-16">
@@ -307,7 +419,6 @@ function EcosystemAndStatus() {
             Our Service Ecosystem
           </span>
           <div className="relative mx-auto mt-8 aspect-square max-w-[460px]">
-            {/* connecting spokes SVG */}
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden>
               {ECOSYSTEM.map((s) => {
                 const p = polar(s.angle, 34);
@@ -330,7 +441,6 @@ function EcosystemAndStatus() {
                 return <circle key={s.label} cx={p.x} cy={p.y} r="0.9" fill="var(--primary)" />;
               })}
             </svg>
-            {/* center hub */}
             <div className="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-primary/20 bg-white shadow-[0_20px_40px_-20px_rgba(15,23,42,0.25)]">
               <span className="font-display text-sm font-extrabold text-ink">
                 Abu<span className="text-primary">Farha</span>
@@ -339,7 +449,6 @@ function EcosystemAndStatus() {
                 Medical Equipment
               </span>
             </div>
-            {/* spokes */}
             {ECOSYSTEM.map((s) => {
               const p = polar(s.angle, 42);
               return (
@@ -364,19 +473,23 @@ function EcosystemAndStatus() {
           </div>
         </div>
 
-        {/* live status timeline */}
+        {/* live status */}
         <div className="rounded-3xl border border-border bg-white p-8 lg:p-10">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
               Live Service Status
             </span>
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                Ticket #AF-24017
+              </span>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
+              </span>
+            </div>
           </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-[1fr_1.15fr]">
-            {/* timeline */}
             <ol className="relative space-y-3.5">
               {LIVE_STATUS.map((s) => {
                 const Icon =
@@ -406,31 +519,25 @@ function EcosystemAndStatus() {
               })}
             </ol>
 
-            {/* map + engineer card */}
             <div className="rounded-2xl border border-border bg-white p-4">
-              <div className="relative h-28 overflow-hidden rounded-xl bg-secondary/50">
-                <svg
-                  viewBox="0 0 300 120"
-                  className="absolute inset-0 h-full w-full"
-                  aria-hidden
-                >
-                  <defs>
-                    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse">
-                      <path d="M18 0H0V18" fill="none" stroke="oklch(0.9 0 0)" strokeWidth="0.5" />
-                    </pattern>
-                  </defs>
-                  <rect width="300" height="120" fill="url(#grid)" />
-                  <path
-                    d="M20 90 Q 120 40 200 60 T 270 30"
-                    fill="none"
-                    stroke="var(--primary)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="20" cy="90" r="4" fill="var(--primary)" />
-                </svg>
-                <MapPin className="absolute right-4 top-3 h-6 w-6 text-primary drop-shadow" />
+              <div className="relative h-32 overflow-hidden rounded-xl bg-[#f2f3f5] ring-1 ring-border">
+                <StreetMap />
               </div>
+
+              {/* ETA progress */}
+              <div className="mt-3">
+                <div className="mb-1 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
+                  <span className="text-muted-foreground">ETA Progress</span>
+                  <span className="text-primary">72%</span>
+                </div>
+                <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+                  <div
+                    className="h-full rounded-full bg-primary"
+                    style={{ width: "72%" }}
+                  />
+                </div>
+              </div>
+
               <dl className="mt-4 space-y-3 text-[12px]">
                 {[
                   ["Engineer", "Mohamed Ahmed"],
@@ -484,21 +591,16 @@ function ServicesAndPerformance() {
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Our Support Services
           </span>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
             {SUPPORT_SERVICES.map((s) => (
               <motion.div
                 key={s.label}
                 whileHover={{ y: -3 }}
-                className="group flex flex-col items-center gap-2 text-center"
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-4 text-center transition-colors hover:border-primary/40 hover:shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)]"
               >
-                <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
-                  <img
-                    src={s.img}
-                    alt={s.label}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
+                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/8 text-primary ring-1 ring-primary/15 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <s.icon className="h-6 w-6" strokeWidth={1.75} />
+                </span>
                 <span className="text-[11px] font-bold leading-tight text-ink">{s.label}</span>
               </motion.div>
             ))}
@@ -540,6 +642,76 @@ function ServicesAndPerformance() {
   );
 }
 
+/* ---------- coverage map (real geography) ---------- */
+
+// Country-based region focus windows [minLon, minLat, maxLon, maxLat]
+const REGION_WINDOWS: Record<RegionKey, [number, number, number, number]> = {
+  "Middle East": [25, 12, 55, 40],
+  Africa: [10, -5, 55, 35],
+  "Central Asia": [50, 35, 80, 55],
+  "South Asia": [65, 5, 95, 32],
+};
+
+function CoverageMap({ region, countries }: { region: RegionKey; countries: readonly { name: string; flag: string }[] }) {
+  // Project region window corners to figure out the crop transform.
+  const [lonMin, latMin, lonMax, latMax] = REGION_WINDOWS[region];
+  const p1 = projection([lonMin, latMax])!;
+  const p2 = projection([lonMax, latMin])!;
+  const cropX = Math.min(p1[0], p2[0]);
+  const cropY = Math.min(p1[1], p2[1]);
+  const cropW = Math.abs(p2[0] - p1[0]);
+  const cropH = Math.abs(p2[1] - p1[1]);
+
+  const active = new Set(countries.map((c) => c.name));
+
+  return (
+    <svg
+      viewBox={`${cropX} ${cropY} ${cropW} ${cropH}`}
+      className="h-full w-full"
+      aria-label={`Coverage map for ${region}`}
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <rect
+        x={cropX}
+        y={cropY}
+        width={cropW}
+        height={cropH}
+        fill="#f4f5f7"
+      />
+      {COUNTRY_PATHS.map((c) => {
+        const isActive = active.has(c.name) || (active.has("Somaliland") && c.name === "Somalia");
+        const isHighlightable = HIGHLIGHT_NAMES.has(c.name);
+        return (
+          <path
+            key={c.name}
+            d={c.d}
+            fill={
+              isActive
+                ? "var(--primary)"
+                : isHighlightable
+                ? "#e9ebef"
+                : "#ffffff"
+            }
+            fillOpacity={isActive ? 0.72 : 1}
+            stroke="#d5d8dd"
+            strokeWidth={0.6}
+            vectorEffect="non-scaling-stroke"
+          />
+        );
+      })}
+      {countries.map((c) => {
+        const g = GEO[c.name];
+        if (!g) return null;
+        return (
+          <g key={c.name}>
+            <circle cx={g.x} cy={g.y} r={4} fill="var(--primary)" stroke="#fff" strokeWidth={1.2} vectorEffect="non-scaling-stroke" />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 function SparePartsAndCoverage() {
   const [region, setRegion] = useState<RegionKey>("Middle East");
   return (
@@ -550,25 +722,16 @@ function SparePartsAndCoverage() {
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Spare Parts We Supply
           </span>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
             {SPARE_PARTS.map((s) => (
               <motion.div
                 key={s.label}
                 whileHover={{ y: -3 }}
-                className="group flex flex-col items-center gap-2 text-center"
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-white p-4 text-center transition-colors hover:border-primary/40 hover:shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)]"
               >
-                <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
-                  {s.img ? (
-                    <img
-                      src={s.img}
-                      alt={s.label}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <ArrowUpRight className="h-8 w-8 text-primary" />
-                  )}
-                </div>
+                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/8 text-primary ring-1 ring-primary/15 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <s.icon className="h-6 w-6" strokeWidth={1.75} />
+                </span>
                 <span className="text-[11px] font-bold leading-tight text-ink">{s.label}</span>
               </motion.div>
             ))}
@@ -595,7 +758,7 @@ function SparePartsAndCoverage() {
               </button>
             ))}
           </div>
-          <div className="mt-5 grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
+          <div className="mt-5 grid gap-4 sm:grid-cols-[0.85fr_1.15fr]">
             <ul className="space-y-2.5">
               {REGIONS[region].map((c) => (
                 <li
@@ -607,20 +770,8 @@ function SparePartsAndCoverage() {
                 </li>
               ))}
             </ul>
-            <div className="relative h-40 overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
-              <svg viewBox="0 0 200 140" className="absolute inset-0 h-full w-full">
-                <path
-                  d="M20,80 Q40,40 80,50 T140,60 T180,50 L180,110 L20,110 Z"
-                  fill="oklch(0.94 0.02 30)"
-                  stroke="oklch(0.85 0.05 30)"
-                  strokeWidth="0.6"
-                />
-                <path
-                  d="M60,60 L100,50 L140,55 L160,70 L150,95 L110,100 L70,90 Z"
-                  fill="var(--primary)"
-                  opacity="0.55"
-                />
-              </svg>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#f4f5f7] ring-1 ring-border">
+              <CoverageMap region={region} countries={REGIONS[region]} />
             </div>
           </div>
         </div>
@@ -637,31 +788,33 @@ function SupportProcess() {
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Our Support Process
           </span>
-          <div className="relative mt-10">
-            {/* connecting line */}
-            <div className="absolute left-[6%] right-[6%] top-7 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-            <ol className="relative grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-7">
-              {PROCESS.map((p, i) => (
-                <motion.li
-                  key={p.n}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_14px_28px_-14px_rgba(15,23,42,0.25)]">
-                    <p.icon className="h-5 w-5" strokeWidth={1.9} />
-                    <span className="absolute -bottom-1.5 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                      {p.n}
+          <div className="relative mt-10 overflow-x-auto">
+            <div className="relative min-w-[720px] px-2">
+              {/* connecting line */}
+              <div className="absolute left-[6%] right-[6%] top-7 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+              <ol className="relative grid grid-cols-7 gap-3">
+                {PROCESS.map((p, i) => (
+                  <motion.li
+                    key={p.n}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_14px_28px_-14px_rgba(15,23,42,0.25)]">
+                      <p.icon className="h-5 w-5" strokeWidth={1.9} />
+                      <span className="absolute -bottom-1.5 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                        {p.n}
+                      </span>
+                    </div>
+                    <span className="mt-4 text-[12px] font-bold leading-tight text-ink">
+                      {p.label}
                     </span>
-                  </div>
-                  <span className="mt-4 text-[12px] font-bold leading-tight text-ink">
-                    {p.label}
-                  </span>
-                </motion.li>
-              ))}
-            </ol>
+                  </motion.li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </div>

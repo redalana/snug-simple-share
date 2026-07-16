@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check } from "lucide-react";
+
 import { Logo } from "./Logo";
 
 type NavItem = {
@@ -139,6 +140,13 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const isActive = (href: string) => {
+    if (!href.startsWith("/")) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -146,6 +154,7 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -227,36 +236,51 @@ export function Header() {
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
           <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
-            {NAV.map((item) => (
-              <div key={item.label} className="group relative">
-                <a
-                  href={item.href}
-                  className="flex items-center gap-1 px-5 py-3 text-[16px] font-medium text-foreground/75 transition-colors hover:text-primary"
-                >
-                  {item.label}
-                  {item.dropdown && (
-                    <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
-                  )}
-                  <span className="absolute inset-x-5 bottom-1.5 h-0.5 origin-left scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100" />
-                </a>
+            {NAV.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <div key={item.label} className="group relative">
+                  <a
+                    href={item.href}
+                    className={`flex items-center gap-1 px-5 py-3 text-[16px] font-medium transition-colors ${
+                      active
+                        ? "text-primary"
+                        : "text-foreground/75 hover:text-primary"
+                    }`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.label}
+                    {item.dropdown && (
+                      <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
+                    )}
+                    <span
+                      className={`absolute inset-x-5 bottom-1.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
+                        active
+                          ? "scale-x-100"
+                          : "origin-left scale-x-0 group-hover:scale-x-100"
+                      }`}
+                    />
+                  </a>
 
-                {item.dropdown && (
-                  <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                    <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
-                      {item.dropdown.map((sub) => (
-                        <a
-                          key={sub.label}
-                          href={sub.href}
-                          className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/75 transition-colors hover:bg-accent hover:text-primary"
-                        >
-                          {sub.label}
-                        </a>
-                      ))}
+                  {item.dropdown && (
+                    <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+                      <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
+                        {item.dropdown.map((sub) => (
+                          <a
+                            key={sub.label}
+                            href={sub.href}
+                            className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/75 transition-colors hover:bg-accent hover:text-primary"
+                          >
+                            {sub.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
+
           </div>
         </nav>
       </div>
@@ -287,16 +311,23 @@ export function Header() {
             className="overflow-hidden border-t border-border bg-white xl:hidden"
           >
             <div className="mx-auto max-w-[100rem] px-6 py-4 lg:px-10">
-              {NAV.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block border-b border-border/60 py-3 text-[16px] font-medium text-foreground/80 transition-colors last:border-0 hover:text-primary"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {NAV.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`block border-b border-border/60 py-3 text-[16px] font-medium transition-colors last:border-0 ${
+                      active ? "text-primary" : "text-foreground/80 hover:text-primary"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   {SOCIALS.map(({ label, href, Icon }) => (
