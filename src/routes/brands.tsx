@@ -397,7 +397,7 @@ function BrandsPage() {
         )}
 
         {/* BRAND GRID */}
-        <section id="brand-grid" className="bg-accent/25 py-20 lg:py-28">
+        <section id="brand-grid" className="bg-[#FAFAFA] py-20 lg:py-28">
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
