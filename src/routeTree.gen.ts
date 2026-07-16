@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TurnkeyRouteImport } from './routes/turnkey'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -32,6 +33,11 @@ import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[
 const TurnkeyRoute = TurnkeyRouteImport.update({
   id: '/turnkey',
   path: '/turnkey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/mcp': typeof McpRoute
   '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/services': typeof ServicesRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -204,6 +213,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/products'
     | '/projects'
+    | '/services'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/hospital-readiness-assessment'
     | '/mcp'
     | '/projects'
+    | '/services'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/products'
     | '/projects'
+    | '/services'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
+  ServicesRoute: typeof ServicesRoute
   TurnkeyRoute: typeof TurnkeyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -280,6 +293,13 @@ declare module '@tanstack/react-router' {
       path: '/turnkey'
       fullPath: '/turnkey'
       preLoaderRoute: typeof TurnkeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
+  ServicesRoute: ServicesRoute,
   TurnkeyRoute: TurnkeyRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
