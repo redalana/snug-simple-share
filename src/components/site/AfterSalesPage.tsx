@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   Wrench,
   AlertTriangle,
-  PackageSearch,
   GraduationCap,
   Gauge,
   MonitorSmartphone,
@@ -16,7 +15,7 @@ import {
   Boxes,
   Stethoscope,
   Cpu,
-  FileText,
+  MessageSquare,
   CheckCircle2,
   Circle,
   MapPin,
@@ -25,9 +24,25 @@ import {
   Minus,
   Globe,
   Activity,
+  FileText,
+  ClipboardList,
+  UserCheck,
+  Truck,
+  ShieldCheck as ShieldIcon,
+  ArrowUpRight,
 } from "lucide-react";
 import heroImg from "@/assets/aftersales-hero.jpg";
 import ctaImg from "@/assets/aftersales-cta.jpg";
+import imgCath from "@/assets/sol-carm.jpg";
+import imgMri from "@/assets/sol-mri.jpg";
+import imgCt from "@/assets/sol-ct.jpg";
+import imgUs from "@/assets/sol-ultrasound.jpg";
+import imgMammo from "@/assets/sol-mammo.jpg";
+import imgXray from "@/assets/sol-xray.jpg";
+import imgPet from "@/assets/sol-petct.jpg";
+import imgOr from "@/assets/sol-or.jpg";
+import imgDexa from "@/assets/sol-dexa.jpg";
+import imgDes from "@/assets/sol-des.jpg";
 
 /* ---------- data ---------- */
 
@@ -42,7 +57,7 @@ const ECOSYSTEM = [
   { label: "Spare Parts Supply", icon: Boxes, angle: -90 },
   { label: "Preventive Maintenance", icon: Wrench, angle: -30 },
   { label: "Emergency Support", icon: AlertTriangle, angle: 30 },
-  { label: "Calibration & QA", icon: Gauge, angle: 90 },
+  { label: "Calibration & Quality Assurance", icon: Gauge, angle: 90 },
   { label: "Clinical Training", icon: GraduationCap, angle: 150 },
   { label: "Remote Diagnostics", icon: MonitorSmartphone, angle: 210 },
 ];
@@ -52,21 +67,21 @@ const LIVE_STATUS = [
   { label: "Engineer Assigned", state: "done" },
   { label: "Engineer En Route", state: "active" },
   { label: "On Site", state: "todo" },
-  { label: "Repair in Progress", state: "todo" },
+  { label: "Repair In Progress", state: "todo" },
   { label: "Calibration & Testing", state: "todo" },
   { label: "Clinical Validation", state: "todo" },
   { label: "Service Completed", state: "todo" },
 ] as const;
 
 const SUPPORT_SERVICES = [
-  { label: "Preventive Maintenance", icon: Wrench },
-  { label: "Emergency Support", icon: AlertTriangle },
-  { label: "Corrective Maintenance", icon: Cog },
-  { label: "Spare Parts Supply", icon: Boxes },
-  { label: "Calibration & QA", icon: Gauge },
-  { label: "Clinical Training", icon: GraduationCap },
-  { label: "Biomedical Engineering", icon: Cpu },
-  { label: "Service Contracts", icon: FileText },
+  { label: "Preventive Maintenance", img: imgCath },
+  { label: "Emergency Support", img: imgOr },
+  { label: "Corrective Maintenance", img: imgCt },
+  { label: "Spare Parts Supply", img: imgXray },
+  { label: "Calibration & QA", img: imgMri },
+  { label: "Clinical Training", img: imgUs },
+  { label: "Biomedical Engineering", img: imgPet },
+  { label: "Technical Consultation", img: imgMammo },
 ];
 
 const PERFORMANCE = [
@@ -77,57 +92,45 @@ const PERFORMANCE = [
 ];
 
 const SPARE_PARTS = [
-  "Cath Lab Parts",
-  "MRI Parts",
-  "CT Parts",
-  "Ultrasound Parts",
-  "Monitors & Displays",
-  "Injectors",
-  "UPS & Power Systems",
-  "And More",
+  { label: "Cath Lab Parts", img: imgCath },
+  { label: "MRI Parts", img: imgMri },
+  { label: "CT Parts", img: imgCt },
+  { label: "Ultrasound Parts", img: imgUs },
+  { label: "Monitors & Displays", img: imgOr },
+  { label: "Injectors", img: imgDes },
+  { label: "UPS & Power Systems", img: imgDexa },
+  { label: "And More", img: null },
 ];
 
 const REGIONS = {
-  "Middle East": ["Jordan", "Iraq", "Syria", "Yemen", "Egypt", "Libya"],
-  Africa: ["Somalia", "Somaliland", "Libya", "Egypt"],
-  "Central Asia": ["Uzbekistan"],
-  "South Asia": ["Bangladesh"],
+  "Middle East": [
+    { name: "Jordan", flag: "🇯🇴" },
+    { name: "Iraq", flag: "🇮🇶" },
+    { name: "Syria", flag: "🇸🇾" },
+    { name: "Yemen", flag: "🇾🇪" },
+    { name: "Egypt", flag: "🇪🇬" },
+    { name: "Libya", flag: "🇱🇾" },
+  ],
+  Africa: [
+    { name: "Egypt", flag: "🇪🇬" },
+    { name: "Libya", flag: "🇱🇾" },
+    { name: "Somalia", flag: "🇸🇴" },
+    { name: "Somaliland", flag: "🏳️" },
+  ],
+  "Central Asia": [{ name: "Uzbekistan", flag: "🇺🇿" }],
+  "South Asia": [{ name: "Bangladesh", flag: "🇧🇩" }],
 } as const;
 
 type RegionKey = keyof typeof REGIONS;
 
-const PLANS = [
-  {
-    name: "Essential",
-    tag: null as string | null,
-    tagline: "Core protection for your equipment",
-    price: "$2,500",
-    features: ["Preventive Maintenance", "Remote Support", "Software Updates"],
-  },
-  {
-    name: "Professional",
-    tag: "Most Popular",
-    tagline: "Complete support for maximum uptime",
-    price: "$4,500",
-    features: [
-      "All in Essential",
-      "Emergency Support",
-      "Calibration & QA",
-      "Priority Response",
-    ],
-  },
-  {
-    name: "Enterprise",
-    tag: null,
-    tagline: "Comprehensive coverage for peace of mind",
-    price: "$7,500",
-    features: [
-      "All in Professional",
-      "Spare Parts Included",
-      "Clinical Training",
-      "Dedicated Account Manager",
-    ],
-  },
+const PROCESS = [
+  { n: 1, label: "Submit Request", icon: FileText },
+  { n: 2, label: "Technical Assessment", icon: ClipboardList },
+  { n: 3, label: "Engineer Assignment", icon: UserCheck },
+  { n: 4, label: "On-site Visit", icon: Truck },
+  { n: 5, label: "Repair & Calibration", icon: Wrench },
+  { n: 6, label: "Performance Verification", icon: Gauge },
+  { n: 7, label: "Follow-up Support", icon: ShieldIcon },
 ];
 
 const FAQ = [
@@ -159,11 +162,9 @@ const FAQ = [
 
 /* ---------- helpers ---------- */
 
-function useCircle(radius: number) {
-  return (angle: number) => {
-    const rad = (angle * Math.PI) / 180;
-    return { x: 50 + (radius * Math.cos(rad)) / 5, y: 50 + (radius * Math.sin(rad)) / 5 };
-  };
+function polar(angleDeg: number, radiusPct: number) {
+  const rad = (angleDeg * Math.PI) / 180;
+  return { x: 50 + radiusPct * Math.cos(rad), y: 50 + radiusPct * Math.sin(rad) };
 }
 
 /* ---------- sections ---------- */
@@ -171,18 +172,18 @@ function useCircle(radius: number) {
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:px-10 lg:py-20">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:px-10 lg:py-16">
         {/* left */}
         <div className="relative z-10 flex flex-col justify-center">
           <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
             After Sales Support
           </span>
-          <h1 className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[3.4rem]">
+          <h1 className="mt-5 font-display text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[3.2rem]">
             Keeping Your
             <br />
             Equipment Performing
             <br />
-            <span className="text-primary">at Its Best.</span>
+            at <span className="text-primary">Its Best.</span>
           </h1>
           <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
             We provide comprehensive after sales support including preventive
@@ -199,7 +200,7 @@ function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="#plans"
+              href="#services"
               className="inline-flex h-[52px] items-center gap-2 rounded-full border border-border bg-white px-7 text-sm font-bold text-ink transition-colors hover:border-primary hover:text-primary"
             >
               Explore Service Plans
@@ -208,12 +209,9 @@ function Hero() {
           </div>
 
           {/* stat strip */}
-          <div className="mt-10 grid gap-3 rounded-2xl border border-border bg-white p-3 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.35)] sm:grid-cols-4">
+          <div className="mt-10 grid gap-2 rounded-2xl border border-border bg-white p-3 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.35)] sm:grid-cols-4">
             {HERO_STATS.map((s) => (
-              <div
-                key={s.label}
-                className="flex items-center gap-3 rounded-xl px-3 py-2.5"
-              >
+              <div key={s.label} className="flex items-center gap-3 rounded-xl px-3 py-2.5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <s.icon className="h-5 w-5" strokeWidth={1.9} />
                 </span>
@@ -240,16 +238,14 @@ function Hero() {
               width={1600}
               height={1100}
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-transparent" />
           </div>
 
           {/* live ticket card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="absolute -bottom-4 right-4 w-[300px] rounded-2xl border border-border bg-white p-5 shadow-[0_30px_60px_-25px_rgba(15,23,42,0.35)] sm:right-6 lg:-right-4"
+            animate={{ y: [0, -6, 0] }}
+            transition={{ y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
+            className="absolute right-4 top-6 w-[280px] rounded-2xl border border-border bg-white p-5 shadow-[0_30px_60px_-25px_rgba(15,23,42,0.35)] sm:right-6 lg:-right-4"
           >
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
@@ -260,9 +256,7 @@ function Hero() {
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
               </span>
             </div>
-            <div className="mt-3 text-[13px] font-semibold text-ink">
-              Ticket #AF-24017
-            </div>
+            <div className="mt-3 text-[13px] font-semibold text-ink">Ticket #AF-24017</div>
             <div className="mt-4 border-t border-border pt-4">
               <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                 Engineer
@@ -304,21 +298,40 @@ function Hero() {
 }
 
 function EcosystemAndStatus() {
-  const pos = useCircle(38);
   return (
-    <section className="bg-secondary/50 py-16 lg:py-20">
+    <section className="bg-secondary/40 py-14 lg:py-16">
       <div className="mx-auto grid max-w-[100rem] gap-6 px-6 lg:grid-cols-2 lg:px-10">
         {/* ecosystem hub */}
         <div className="rounded-3xl border border-border bg-white p-8 lg:p-10">
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Our Service Ecosystem
           </span>
-          <div className="relative mx-auto mt-8 aspect-square max-w-[440px]">
-            {/* rings */}
-            <div className="absolute inset-8 rounded-full border border-dashed border-border" />
-            <div className="absolute inset-16 rounded-full border border-dashed border-border/70" />
+          <div className="relative mx-auto mt-8 aspect-square max-w-[460px]">
+            {/* connecting spokes SVG */}
+            <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden>
+              {ECOSYSTEM.map((s) => {
+                const p = polar(s.angle, 34);
+                return (
+                  <line
+                    key={s.label}
+                    x1="50"
+                    y1="50"
+                    x2={p.x}
+                    y2={p.y}
+                    stroke="var(--primary)"
+                    strokeOpacity="0.25"
+                    strokeWidth="0.3"
+                    strokeDasharray="1 1.2"
+                  />
+                );
+              })}
+              {ECOSYSTEM.map((s) => {
+                const p = polar(s.angle, 34);
+                return <circle key={s.label} cx={p.x} cy={p.y} r="0.9" fill="var(--primary)" />;
+              })}
+            </svg>
             {/* center hub */}
-            <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-primary/20 bg-white shadow-[0_20px_40px_-20px_rgba(15,23,42,0.25)]">
+            <div className="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-primary/20 bg-white shadow-[0_20px_40px_-20px_rgba(15,23,42,0.25)]">
               <span className="font-display text-sm font-extrabold text-ink">
                 Abu<span className="text-primary">Farha</span>
               </span>
@@ -328,11 +341,15 @@ function EcosystemAndStatus() {
             </div>
             {/* spokes */}
             {ECOSYSTEM.map((s) => {
-              const p = pos(s.angle);
+              const p = polar(s.angle, 42);
               return (
-                <div
+                <motion.div
                   key={s.label}
-                  className="absolute w-28 -translate-x-1/2 -translate-y-1/2 text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute w-[110px] -translate-x-1/2 -translate-y-1/2 text-center"
                   style={{ left: `${p.x}%`, top: `${p.y}%` }}
                 >
                   <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_10px_25px_-14px_rgba(15,23,42,0.3)]">
@@ -341,7 +358,7 @@ function EcosystemAndStatus() {
                   <span className="mt-1.5 block text-[11px] font-bold leading-tight text-ink">
                     {s.label}
                   </span>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -358,16 +375,12 @@ function EcosystemAndStatus() {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
             </span>
           </div>
-          <div className="mt-6 grid gap-6 sm:grid-cols-[1fr_1.1fr]">
+          <div className="mt-6 grid gap-6 sm:grid-cols-[1fr_1.15fr]">
             {/* timeline */}
             <ol className="relative space-y-3.5">
               {LIVE_STATUS.map((s) => {
                 const Icon =
-                  s.state === "done"
-                    ? CheckCircle2
-                    : s.state === "active"
-                    ? Activity
-                    : Circle;
+                  s.state === "done" ? CheckCircle2 : s.state === "active" ? Activity : Circle;
                 const color =
                   s.state === "done"
                     ? "text-emerald-500"
@@ -394,8 +407,8 @@ function EcosystemAndStatus() {
             </ol>
 
             {/* map + engineer card */}
-            <div className="rounded-2xl border border-border bg-secondary/40 p-4">
-              <div className="relative h-32 overflow-hidden rounded-xl bg-white">
+            <div className="rounded-2xl border border-border bg-white p-4">
+              <div className="relative h-28 overflow-hidden rounded-xl bg-secondary/50">
                 <svg
                   viewBox="0 0 300 120"
                   className="absolute inset-0 h-full w-full"
@@ -411,14 +424,12 @@ function EcosystemAndStatus() {
                     d="M20 90 Q 120 40 200 60 T 270 30"
                     fill="none"
                     stroke="var(--primary)"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
-                    strokeDasharray="4 4"
                   />
                   <circle cx="20" cy="90" r="4" fill="var(--primary)" />
-                  <circle cx="270" cy="30" r="5" fill="var(--primary)" />
                 </svg>
-                <MapPin className="absolute right-4 top-3 h-5 w-5 text-primary" />
+                <MapPin className="absolute right-4 top-3 h-6 w-6 text-primary drop-shadow" />
               </div>
               <dl className="mt-4 space-y-3 text-[12px]">
                 {[
@@ -441,7 +452,7 @@ function EcosystemAndStatus() {
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" /> High
                   </dd>
                 </div>
-                <div className="flex gap-4 border-t border-border pt-3">
+                <div className="flex gap-6 border-t border-border pt-3">
                   <div>
                     <dt className="font-bold uppercase tracking-wider text-muted-foreground">
                       Status
@@ -450,7 +461,7 @@ function EcosystemAndStatus() {
                   </div>
                   <div>
                     <dt className="font-bold uppercase tracking-wider text-muted-foreground">
-                      ETA
+                      Estimated Arrival
                     </dt>
                     <dd className="mt-0.5 font-semibold text-ink">2 Hours</dd>
                   </div>
@@ -466,28 +477,38 @@ function EcosystemAndStatus() {
 
 function ServicesAndPerformance() {
   return (
-    <section className="bg-white py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[100rem] gap-6 px-6 lg:grid-cols-[1.5fr_1fr] lg:px-10">
+    <section id="services" className="bg-white py-14 lg:py-16">
+      <div className="mx-auto grid max-w-[100rem] gap-6 px-6 lg:grid-cols-[1.7fr_1fr] lg:px-10">
         {/* services grid */}
         <div className="rounded-3xl border border-border bg-white p-8">
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Our Support Services
           </span>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
             {SUPPORT_SERVICES.map((s) => (
-              <div
+              <motion.div
                 key={s.label}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-border bg-secondary/40 p-4 text-center transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)]"
+                whileHover={{ y: -3 }}
+                className="group flex flex-col items-center gap-2 text-center"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary ring-1 ring-primary/10 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <s.icon className="h-6 w-6" strokeWidth={1.8} />
-                </span>
-                <span className="text-[11px] font-bold leading-tight text-ink">
-                  {s.label}
-                </span>
-              </div>
+                <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
+                  <img
+                    src={s.img}
+                    alt={s.label}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="text-[11px] font-bold leading-tight text-ink">{s.label}</span>
+              </motion.div>
             ))}
           </div>
+          <a
+            href="#"
+            className="mt-6 inline-flex items-center gap-1.5 text-[12px] font-bold text-primary hover:underline"
+          >
+            View All Services <ArrowRight className="h-3.5 w-3.5" />
+          </a>
         </div>
 
         {/* performance */}
@@ -499,10 +520,10 @@ function ServicesAndPerformance() {
             {PERFORMANCE.map((p) => (
               <div
                 key={p.label}
-                className="rounded-2xl border border-border bg-secondary/40 p-5"
+                className="rounded-2xl border border-border bg-secondary/30 p-5"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <p.icon className="h-4.5 w-4.5" strokeWidth={1.9} />
+                  <p.icon className="h-4 w-4" strokeWidth={1.9} />
                 </span>
                 <div className="mt-3 font-display text-2xl font-extrabold text-ink">
                   {p.value}
@@ -522,28 +543,34 @@ function ServicesAndPerformance() {
 function SparePartsAndCoverage() {
   const [region, setRegion] = useState<RegionKey>("Middle East");
   return (
-    <section className="bg-secondary/40 py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[100rem] gap-6 px-6 lg:grid-cols-[1.5fr_1fr] lg:px-10">
+    <section className="bg-secondary/40 py-14 lg:py-16">
+      <div className="mx-auto grid max-w-[100rem] gap-6 px-6 lg:grid-cols-[1.7fr_1fr] lg:px-10">
         {/* spare parts */}
         <div className="rounded-3xl border border-border bg-white p-8">
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Spare Parts We Supply
           </span>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {SPARE_PARTS.map((label, i) => (
-              <div
-                key={label}
-                className="group flex flex-col items-center gap-2 rounded-2xl border border-border bg-secondary/40 p-4 text-center transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white"
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+            {SPARE_PARTS.map((s) => (
+              <motion.div
+                key={s.label}
+                whileHover={{ y: -3 }}
+                className="group flex flex-col items-center gap-2 text-center"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary ring-1 ring-primary/10">
-                  {i === SPARE_PARTS.length - 1 ? (
-                    <ArrowRight className="h-5 w-5" />
+                <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
+                  {s.img ? (
+                    <img
+                      src={s.img}
+                      alt={s.label}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
                   ) : (
-                    <PackageSearch className="h-6 w-6" strokeWidth={1.8} />
+                    <ArrowUpRight className="h-8 w-8 text-primary" />
                   )}
-                </span>
-                <span className="text-[11px] font-bold text-ink">{label}</span>
-              </div>
+                </div>
+                <span className="text-[11px] font-bold leading-tight text-ink">{s.label}</span>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -553,7 +580,7 @@ function SparePartsAndCoverage() {
           <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
             Our Coverage
           </span>
-          <div className="mt-5 flex flex-wrap gap-4 border-b border-border">
+          <div className="mt-5 flex flex-wrap gap-5 border-b border-border">
             {(Object.keys(REGIONS) as RegionKey[]).map((r) => (
               <button
                 key={r}
@@ -568,26 +595,31 @@ function SparePartsAndCoverage() {
               </button>
             ))}
           </div>
-          <div className="mt-5 grid gap-6 sm:grid-cols-[1fr_1.1fr]">
+          <div className="mt-5 grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
             <ul className="space-y-2.5">
               {REGIONS[region].map((c) => (
-                <li key={c} className="flex items-center gap-2.5 text-[13px] font-semibold text-ink">
-                  <span className="inline-block h-3 w-4 rounded-sm bg-primary/80" />
-                  {c}
+                <li
+                  key={c.name}
+                  className="flex items-center gap-2.5 text-[13px] font-semibold text-ink"
+                >
+                  <span className="text-base leading-none">{c.flag}</span>
+                  {c.name}
                 </li>
               ))}
             </ul>
-            <div className="relative h-40 overflow-hidden rounded-xl bg-secondary/50">
+            <div className="relative h-40 overflow-hidden rounded-xl bg-secondary/50 ring-1 ring-border">
               <svg viewBox="0 0 200 140" className="absolute inset-0 h-full w-full">
                 <path
                   d="M20,80 Q40,40 80,50 T140,60 T180,50 L180,110 L20,110 Z"
-                  fill="oklch(0.92 0.02 30)"
-                  stroke="oklch(0.85 0.02 30)"
+                  fill="oklch(0.94 0.02 30)"
+                  stroke="oklch(0.85 0.05 30)"
+                  strokeWidth="0.6"
                 />
-                <circle cx="90" cy="70" r="5" fill="var(--primary)" opacity="0.85" />
-                <circle cx="110" cy="60" r="4" fill="var(--primary)" opacity="0.75" />
-                <circle cx="130" cy="75" r="6" fill="var(--primary)" />
-                <circle cx="70" cy="85" r="4" fill="var(--primary)" opacity="0.7" />
+                <path
+                  d="M60,60 L100,50 L140,55 L160,70 L150,95 L110,100 L70,90 Z"
+                  fill="var(--primary)"
+                  opacity="0.55"
+                />
               </svg>
             </div>
           </div>
@@ -597,69 +629,53 @@ function SparePartsAndCoverage() {
   );
 }
 
-function PlansAndFAQ() {
+function SupportProcess() {
+  return (
+    <section className="bg-white py-14 lg:py-16">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+        <div className="rounded-3xl border border-border bg-white p-8 lg:p-10">
+          <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+            Our Support Process
+          </span>
+          <div className="relative mt-10">
+            {/* connecting line */}
+            <div className="absolute left-[6%] right-[6%] top-7 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+            <ol className="relative grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-7">
+              {PROCESS.map((p, i) => (
+                <motion.li
+                  key={p.n}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-white text-primary shadow-[0_14px_28px_-14px_rgba(15,23,42,0.25)]">
+                    <p.icon className="h-5 w-5" strokeWidth={1.9} />
+                    <span className="absolute -bottom-1.5 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                      {p.n}
+                    </span>
+                  </div>
+                  <span className="mt-4 text-[12px] font-bold leading-tight text-ink">
+                    {p.label}
+                  </span>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
   return (
-    <section id="plans" className="bg-white py-16 lg:py-20">
+    <section className="bg-white pb-14 lg:pb-16">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        {/* plans header row */}
-        <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          <div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
-              Service Contracts
-            </span>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-              {PLANS.map((p) => {
-                const featured = p.tag === "Most Popular";
-                return (
-                  <div
-                    key={p.name}
-                    className={`relative rounded-2xl border p-5 transition-all ${
-                      featured
-                        ? "border-primary bg-primary/[0.03] shadow-[0_30px_60px_-30px_rgba(220,38,38,0.35)]"
-                        : "border-border bg-white"
-                    }`}
-                  >
-                    {featured && (
-                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
-                        Most Popular
-                      </span>
-                    )}
-                    <div className="font-display text-lg font-extrabold text-ink">
-                      {p.name}
-                    </div>
-                    <p className="mt-1.5 text-[12px] leading-snug text-muted-foreground">
-                      {p.tagline}
-                    </p>
-                    <ul className="mt-4 space-y-2">
-                      {p.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-[12px] font-medium text-ink">
-                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-6 border-t border-border pt-3">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                        Starting from
-                      </div>
-                      <div className="mt-1 flex items-baseline gap-1">
-                        <span className="font-display text-xl font-extrabold text-primary">
-                          {p.price}
-                        </span>
-                        <span className="text-[11px] font-semibold text-muted-foreground">
-                          / year
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* faq */}
-          <div>
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <div className="rounded-3xl border border-border bg-white p-8">
             <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
               Frequently Asked Questions
             </span>
@@ -670,7 +686,9 @@ function PlansAndFAQ() {
                   <div
                     key={f.q}
                     className={`rounded-xl border transition-colors ${
-                      open ? "border-primary/40 bg-primary/[0.03]" : "border-border bg-white"
+                      open
+                        ? "border-primary/40 bg-primary/[0.03]"
+                        : "border-border bg-white"
                     }`}
                   >
                     <button
@@ -693,6 +711,14 @@ function PlansAndFAQ() {
                 );
               })}
             </div>
+          </div>
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-secondary/40">
+            <img
+              src={heroImg}
+              alt="AbuFarha engineer performing on-site diagnostics"
+              className="h-full min-h-[320px] w-full object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
@@ -757,7 +783,8 @@ export function AfterSalesPage() {
       <EcosystemAndStatus />
       <ServicesAndPerformance />
       <SparePartsAndCoverage />
-      <PlansAndFAQ />
+      <SupportProcess />
+      <FAQSection />
       <FinalCTABar />
     </>
   );
