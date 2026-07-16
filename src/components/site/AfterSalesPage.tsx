@@ -35,7 +35,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { PhoneField } from "@/components/site/PhoneField";
 import heroImg from "@/assets/aftersales-hero.jpg";
-import remoteImg from "@/assets/aftersales-remote.jpg";
+import remoteImg from "@/assets/aftersales-remote-engineer.jpg";
 import warehouseImg from "@/assets/aftersales-warehouse.jpg";
 import engineeringImg from "@/assets/aftersales-engineering.jpg";
 import ctaImg from "@/assets/aftersales-cta.jpg";
