@@ -8,11 +8,9 @@ import {
 import {
   ArrowRight,
   BadgeCheck,
-  Boxes,
   ChevronLeft,
   ChevronRight,
   ClipboardList,
-  Clock,
   Factory,
   GraduationCap,
   LifeBuoy,
@@ -23,6 +21,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
+
 import heroCath from "@/assets/hero-cathlab.jpg";
 import turnkeyInstall from "@/assets/turnkey-hero.jpg";
 import engineerService from "@/assets/aftersales-engineering.jpg";
