@@ -817,13 +817,13 @@ function WhyTrust() {
 
 // ---------- Certifications ----------
 const CERTS = [
-  { icon: Award, title: "ISO 9001:2015", sub: "Quality Management", desc: "Company-wide quality management system audited to the ISO 9001:2015 international standard." },
-  { icon: Award, title: "ISO 13485:2016", sub: "Medical Devices Quality", desc: "Dedicated quality system for medical-device supply and servicing under ISO 13485:2016." },
-  { icon: BadgeCheck, title: "OEM Certified Engineers", sub: "Manufacturer trained", desc: "Field engineers hold current OEM certifications for the specific platforms they install and service." },
-  { icon: ShieldCheck, title: "Safety & Compliance", sub: "International standards", desc: "Radiation safety, electrical safety and installation practices aligned with IEC and local regulations." },
-  { icon: Stethoscope, title: "Clinical Standards", sub: "Patient safety first", desc: "Clinical acceptance testing and image-quality validation on every commissioned system." },
-  { icon: Radar, title: "Quality Assurance", sub: "Documented processes", desc: "Every intervention is documented with a QA report handed to the biomedical department." },
+  { icon: BadgeCheck, title: "OEM Standards", sub: "Manufacturer-aligned", desc: "Every installation, calibration and service action follows manufacturer specifications — with engineers trained on the exact platforms they support." },
+  { icon: Radar, title: "Quality Assurance", sub: "Documented processes", desc: "Every intervention is logged with a QA report handed to the biomedical department, so hospitals have a full engineering history for each system." },
+  { icon: Wrench, title: "Professional Installation", sub: "Certified engineers", desc: "Rigging, mechanical, electrical and clinical acceptance testing carried out by AbuFarha's in-house engineering team, not subcontractors." },
+  { icon: ShieldCheck, title: "Clinical Safety", sub: "Patient safety first", desc: "Radiation safety, electrical safety and clinical acceptance testing on every commissioned system, aligned with international standards." },
+  { icon: Award, title: "Engineering Excellence", sub: "Long-term reliability", desc: "Preventive maintenance, corrective service and lifecycle support delivered to a consistent engineering standard — the same discipline on day one and year ten." },
 ];
+
 
 function Certifications() {
   return (
