@@ -25,6 +25,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
+import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
+import { Route as ProductsPetCtScannersRouteImport } from './routes/products.pet-ct-scanners'
+import { Route as ProductsOthersRouteImport } from './routes/products.others'
+import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-scanners'
+import { Route as ProductsMammographySystemsRouteImport } from './routes/products.mammography-systems'
+import { Route as ProductsLithotripsyEswlRouteImport } from './routes/products.lithotripsy-eswl'
+import { Route as ProductsDrugElutingStentsRouteImport } from './routes/products.drug-eluting-stents'
+import { Route as ProductsCathLabRouteImport } from './routes/products.cath-lab'
+import { Route as ProductsCArmSystemsRouteImport } from './routes/products.c-arm-systems'
+import { Route as ProductsBoneDensitometersRouteImport } from './routes/products.bone-densitometers'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -112,6 +122,59 @@ const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
   path: '/programs/stroke-care',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsXRaySystemsRoute = ProductsXRaySystemsRouteImport.update({
+  id: '/x-ray-systems',
+  path: '/x-ray-systems',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsPetCtScannersRoute = ProductsPetCtScannersRouteImport.update({
+  id: '/pet-ct-scanners',
+  path: '/pet-ct-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsOthersRoute = ProductsOthersRouteImport.update({
+  id: '/others',
+  path: '/others',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsMriScannersRoute = ProductsMriScannersRouteImport.update({
+  id: '/mri-scanners',
+  path: '/mri-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsMammographySystemsRoute =
+  ProductsMammographySystemsRouteImport.update({
+    id: '/mammography-systems',
+    path: '/mammography-systems',
+    getParentRoute: () => ProductsRoute,
+  } as any)
+const ProductsLithotripsyEswlRoute = ProductsLithotripsyEswlRouteImport.update({
+  id: '/lithotripsy-eswl',
+  path: '/lithotripsy-eswl',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsDrugElutingStentsRoute =
+  ProductsDrugElutingStentsRouteImport.update({
+    id: '/drug-eluting-stents',
+    path: '/drug-eluting-stents',
+    getParentRoute: () => ProductsRoute,
+  } as any)
+const ProductsCathLabRoute = ProductsCathLabRouteImport.update({
+  id: '/cath-lab',
+  path: '/cath-lab',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsCArmSystemsRoute = ProductsCArmSystemsRouteImport.update({
+  id: '/c-arm-systems',
+  path: '/c-arm-systems',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsBoneDensitometersRoute =
+  ProductsBoneDensitometersRouteImport.update({
+    id: '/bone-densitometers',
+    path: '/bone-densitometers',
+    getParentRoute: () => ProductsRoute,
+  } as any)
 const ProductsSlugRoute = ProductsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -159,6 +222,16 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
+  '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
+  '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
+  '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
+  '/products/mammography-systems': typeof ProductsMammographySystemsRoute
+  '/products/mri-scanners': typeof ProductsMriScannersRoute
+  '/products/others': typeof ProductsOthersRoute
+  '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
+  '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
@@ -180,6 +253,16 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
+  '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
+  '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
+  '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
+  '/products/mammography-systems': typeof ProductsMammographySystemsRoute
+  '/products/mri-scanners': typeof ProductsMriScannersRoute
+  '/products/others': typeof ProductsOthersRoute
+  '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
+  '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog': typeof BlogIndexRoute
   '/products': typeof ProductsIndexRoute
@@ -204,6 +287,16 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
+  '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
+  '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
+  '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
+  '/products/mammography-systems': typeof ProductsMammographySystemsRoute
+  '/products/mri-scanners': typeof ProductsMriScannersRoute
+  '/products/others': typeof ProductsOthersRoute
+  '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
+  '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
@@ -229,6 +322,16 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
     | '/products/$slug'
+    | '/products/bone-densitometers'
+    | '/products/c-arm-systems'
+    | '/products/cath-lab'
+    | '/products/drug-eluting-stents'
+    | '/products/lithotripsy-eswl'
+    | '/products/mammography-systems'
+    | '/products/mri-scanners'
+    | '/products/others'
+    | '/products/pet-ct-scanners'
+    | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog/'
     | '/products/'
@@ -250,6 +353,16 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
     | '/products/$slug'
+    | '/products/bone-densitometers'
+    | '/products/c-arm-systems'
+    | '/products/cath-lab'
+    | '/products/drug-eluting-stents'
+    | '/products/lithotripsy-eswl'
+    | '/products/mammography-systems'
+    | '/products/mri-scanners'
+    | '/products/others'
+    | '/products/pet-ct-scanners'
+    | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog'
     | '/products'
@@ -273,6 +386,16 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
     | '/products/$slug'
+    | '/products/bone-densitometers'
+    | '/products/c-arm-systems'
+    | '/products/cath-lab'
+    | '/products/drug-eluting-stents'
+    | '/products/lithotripsy-eswl'
+    | '/products/mammography-systems'
+    | '/products/mri-scanners'
+    | '/products/others'
+    | '/products/pet-ct-scanners'
+    | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog/'
     | '/products/'
@@ -413,6 +536,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsStrokeCareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/x-ray-systems': {
+      id: '/products/x-ray-systems'
+      path: '/x-ray-systems'
+      fullPath: '/products/x-ray-systems'
+      preLoaderRoute: typeof ProductsXRaySystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/pet-ct-scanners': {
+      id: '/products/pet-ct-scanners'
+      path: '/pet-ct-scanners'
+      fullPath: '/products/pet-ct-scanners'
+      preLoaderRoute: typeof ProductsPetCtScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/others': {
+      id: '/products/others'
+      path: '/others'
+      fullPath: '/products/others'
+      preLoaderRoute: typeof ProductsOthersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/mri-scanners': {
+      id: '/products/mri-scanners'
+      path: '/mri-scanners'
+      fullPath: '/products/mri-scanners'
+      preLoaderRoute: typeof ProductsMriScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/mammography-systems': {
+      id: '/products/mammography-systems'
+      path: '/mammography-systems'
+      fullPath: '/products/mammography-systems'
+      preLoaderRoute: typeof ProductsMammographySystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/lithotripsy-eswl': {
+      id: '/products/lithotripsy-eswl'
+      path: '/lithotripsy-eswl'
+      fullPath: '/products/lithotripsy-eswl'
+      preLoaderRoute: typeof ProductsLithotripsyEswlRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/drug-eluting-stents': {
+      id: '/products/drug-eluting-stents'
+      path: '/drug-eluting-stents'
+      fullPath: '/products/drug-eluting-stents'
+      preLoaderRoute: typeof ProductsDrugElutingStentsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/cath-lab': {
+      id: '/products/cath-lab'
+      path: '/cath-lab'
+      fullPath: '/products/cath-lab'
+      preLoaderRoute: typeof ProductsCathLabRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/c-arm-systems': {
+      id: '/products/c-arm-systems'
+      path: '/c-arm-systems'
+      fullPath: '/products/c-arm-systems'
+      preLoaderRoute: typeof ProductsCArmSystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/bone-densitometers': {
+      id: '/products/bone-densitometers'
+      path: '/bone-densitometers'
+      fullPath: '/products/bone-densitometers'
+      preLoaderRoute: typeof ProductsBoneDensitometersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
     '/products/$slug': {
       id: '/products/$slug'
       path: '/$slug'
@@ -465,11 +658,31 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface ProductsRouteChildren {
   ProductsSlugRoute: typeof ProductsSlugRoute
+  ProductsBoneDensitometersRoute: typeof ProductsBoneDensitometersRoute
+  ProductsCArmSystemsRoute: typeof ProductsCArmSystemsRoute
+  ProductsCathLabRoute: typeof ProductsCathLabRoute
+  ProductsDrugElutingStentsRoute: typeof ProductsDrugElutingStentsRoute
+  ProductsLithotripsyEswlRoute: typeof ProductsLithotripsyEswlRoute
+  ProductsMammographySystemsRoute: typeof ProductsMammographySystemsRoute
+  ProductsMriScannersRoute: typeof ProductsMriScannersRoute
+  ProductsOthersRoute: typeof ProductsOthersRoute
+  ProductsPetCtScannersRoute: typeof ProductsPetCtScannersRoute
+  ProductsXRaySystemsRoute: typeof ProductsXRaySystemsRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 const ProductsRouteChildren: ProductsRouteChildren = {
   ProductsSlugRoute: ProductsSlugRoute,
+  ProductsBoneDensitometersRoute: ProductsBoneDensitometersRoute,
+  ProductsCArmSystemsRoute: ProductsCArmSystemsRoute,
+  ProductsCathLabRoute: ProductsCathLabRoute,
+  ProductsDrugElutingStentsRoute: ProductsDrugElutingStentsRoute,
+  ProductsLithotripsyEswlRoute: ProductsLithotripsyEswlRoute,
+  ProductsMammographySystemsRoute: ProductsMammographySystemsRoute,
+  ProductsMriScannersRoute: ProductsMriScannersRoute,
+  ProductsOthersRoute: ProductsOthersRoute,
+  ProductsPetCtScannersRoute: ProductsPetCtScannersRoute,
+  ProductsXRaySystemsRoute: ProductsXRaySystemsRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 
