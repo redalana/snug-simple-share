@@ -861,13 +861,14 @@ function Certifications() {
 // ---------- Engineering by the Numbers (NEW, dark) ----------
 type Metric = { value: number; suffix: string; label: string; sub: string; icon: React.ComponentType<{ className?: string }>; };
 const METRICS: Metric[] = [
-  { value: 25, suffix: "+", label: "Years of Experience", sub: "Engineering since 1999", icon: ShieldCheck },
-  { value: 500, suffix: "+", label: "Systems Installed", sub: "Across every major modality", icon: MonitorCheck },
-  { value: 30, suffix: "+", label: "Healthcare Projects", sub: "Turnkey builds delivered", icon: Building2 },
-  { value: 10, suffix: "+", label: "Countries Served", sub: "Africa & the Middle East", icon: Globe2 },
-  { value: 98, suffix: "%", label: "Customer Satisfaction", sub: "Long-term partnerships", icon: TrendingUp },
-  { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site coverage", icon: Headphones },
+  { value: 1999, suffix: "", label: "Established", sub: "Engineering healthcare since 1999", icon: CalendarClock },
+  { value: 10, suffix: "+", label: "Countries", sub: "Africa, Middle East & Central Asia", icon: Globe2 },
+  { value: 30, suffix: "+", label: "Hospital Projects", sub: "Across Africa & the Middle East", icon: Building2 },
+  { value: 40, suffix: "+", label: "Biomedical Engineers", sub: "In-house engineering team", icon: Cpu },
+  { value: 500, suffix: "+", label: "Turnkey Solutions Deployed", sub: "Systems installed & commissioned", icon: HardHat },
+  { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site, region-wide", icon: Headphones },
 ];
+
 
 function MetricCard({ m, i }: { m: Metric; i: number }) {
   const { ref, value } = useCountUp(m.value);
