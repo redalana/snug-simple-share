@@ -488,14 +488,14 @@ function SupportJourney() {
 /* ---------------- EQUIPMENT GALLERY (Masonry) ---------------- */
 
 const EQUIPMENT = [
-  { name: "MRI Systems", img: mriImg, span: "lg:col-span-2 lg:row-span-2 aspect-[4/5] lg:aspect-auto" },
-  { name: "CT Scanners", img: ctImg, span: "aspect-[4/3]" },
-  { name: "Cath Lab Systems", img: cathLabImg, span: "aspect-[4/3]" },
-  { name: "PET / CT", img: petctImg, span: "lg:col-span-2 aspect-[16/9] lg:aspect-[2/1]" },
-  { name: "Ultrasound", img: ultrasoundImg, span: "aspect-[4/3]" },
-  { name: "X-Ray Systems", img: xrayImg, span: "aspect-[4/3]" },
-  { name: "Mammography", img: mammoImg, span: "aspect-[4/3]" },
-  { name: "C-Arm Systems", img: carmImg, span: "aspect-[4/3]" },
+  { name: "MRI Systems", category: "MRI Scanners", img: mriImg, span: "lg:col-span-2 lg:row-span-2 aspect-[4/5] lg:aspect-auto" },
+  { name: "CT Scanners", category: "CT Scanners", img: ctImg, span: "aspect-[4/3]" },
+  { name: "Cath Lab Systems", category: "Cath Lab Systems", img: cathLabImg, span: "aspect-[4/3]" },
+  { name: "PET / CT", category: "PET/CT Scanners", img: petctImg, span: "lg:col-span-2 aspect-[16/9] lg:aspect-[2/1]" },
+  { name: "Ultrasound", category: "Ultrasound", img: ultrasoundImg, span: "aspect-[4/3]" },
+  { name: "X-Ray Systems", category: "X-Ray Systems", img: xrayImg, span: "aspect-[4/3]" },
+  { name: "Mammography", category: "Mammography", img: mammoImg, span: "aspect-[4/3]" },
+  { name: "C-Arm Systems", category: "C-Arms", img: carmImg, span: "aspect-[4/3]" },
 ];
 
 function EquipmentGallery() {
