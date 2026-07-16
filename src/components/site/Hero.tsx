@@ -375,44 +375,59 @@ export function Hero() {
 
         {/* ── Controls ────────────────────────────────────────────── */}
         <div className="relative z-30 mt-10 flex items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            {SLIDES.map((s, i) => (
-              <button
-                key={s.theme}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}: ${s.theme}`}
-                aria-current={i === index}
-                className="group flex items-center gap-2"
-              >
-                <span
-                  className={`relative block h-[3px] overflow-hidden rounded-full transition-all duration-500 ${
-                    i === index ? "w-14 bg-primary/25" : "w-6 bg-border"
+          <div className="flex flex-wrap items-center gap-2">
+            {SLIDES.map((s, i) => {
+              const active = i === index;
+              return (
+                <button
+                  key={s.theme}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}: ${s.theme}`}
+                  aria-current={active}
+                  className={`group flex min-w-[9rem] flex-col gap-2 rounded-lg px-3 py-2 text-left transition-colors sm:min-w-[11rem] ${
+                    active ? "bg-primary/[0.04]" : "hover:bg-secondary/60"
                   }`}
                 >
-                  {i === index && !reduce && !paused ? (
-                    <motion.span
-                      key={`prog-${index}`}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-                      style={{ transformOrigin: "left" }}
-                      className="absolute inset-0 bg-primary"
-                    />
-                  ) : i === index ? (
-                    <span className="absolute inset-0 bg-primary" />
-                  ) : null}
-                </span>
-                <span
-                  className={`hidden text-[11px] font-bold uppercase tracking-[0.18em] transition-colors md:inline ${
-                    i === index ? "text-ink" : "text-muted-foreground group-hover:text-ink"
-                  }`}
-                >
-                  0{i + 1}
-                </span>
-              </button>
-            ))}
+                  <span className="flex items-center gap-2">
+                    <span
+                      className={`font-display text-[11px] font-extrabold tabular-nums transition-colors ${
+                        active ? "text-primary" : "text-muted-foreground/70"
+                      }`}
+                    >
+                      0{i + 1}
+                    </span>
+                    <span
+                      className={`text-[11px] font-bold uppercase tracking-[0.18em] transition-colors ${
+                        active ? "text-ink" : "text-muted-foreground group-hover:text-ink"
+                      }`}
+                    >
+                      {s.theme}
+                    </span>
+                  </span>
+                  <span
+                    className={`relative block h-[3px] overflow-hidden rounded-full transition-colors ${
+                      active ? "bg-primary/20" : "bg-border"
+                    }`}
+                  >
+                    {active && !reduce && !paused ? (
+                      <motion.span
+                        key={`prog-${index}`}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+                        style={{ transformOrigin: "left" }}
+                        className="absolute inset-0 bg-primary"
+                      />
+                    ) : active ? (
+                      <span className="absolute inset-0 bg-primary" />
+                    ) : null}
+                  </span>
+                </button>
+              );
+            })}
           </div>
+
           <div className="flex items-center gap-2">
             <button
               type="button"
