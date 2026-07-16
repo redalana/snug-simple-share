@@ -80,11 +80,12 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 
 // ---------- Hero ----------
 const HERO_KPIS = [
-  { icon: ShieldCheck, value: "25+", label: "Years of Experience" },
-  { icon: Building2, value: "30+", label: "Major Healthcare Projects" },
+  { icon: CalendarClock, value: "Since 1999", label: "Established" },
   { icon: Globe2, value: "10+", label: "Countries Served" },
-  { icon: MonitorCheck, value: "500+", label: "Systems Installed" },
+  { icon: Building2, value: "Turnkey", label: "Hospital Projects" },
+  { icon: Cpu, value: "Biomedical", label: "Engineering Support" },
 ];
+
 
 function Hero() {
   return (
