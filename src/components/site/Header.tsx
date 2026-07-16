@@ -31,15 +31,8 @@ const NAV: NavItem[] = [
     href: "/brands",
     dropdown: [{ label: "All Brands", href: "/brands" }],
   },
-  {
-    label: "About Us",
-    href: "#stats",
-    dropdown: [
-      { label: "Our Story", href: "#why" },
-      { label: "Global Presence", href: "#global" },
-      { label: "Why AbuFarha", href: "#why" },
-    ],
-  },
+  { label: "About Us", href: "/about" },
+
   { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];

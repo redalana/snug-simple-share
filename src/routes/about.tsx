@@ -1,0 +1,38 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { AboutPage } from "@/components/site/AboutPage";
+
+const TITLE = "About AbuFarha | Medical Equipment Engineering Since 1999";
+const DESC =
+  "AbuFarha delivers medical imaging, biomedical engineering, installation, commissioning, clinical training and long-term support across Africa and the Middle East since 1999.";
+
+export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/about" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
+    ],
+    links: [{ rel: "canonical", href: "/about" }],
+  }),
+  component: AboutRoute,
+});
+
+function AboutRoute() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-[112px]">
+        <AboutPage />
+      </main>
+      <Footer />
+    </div>
+  );
+}
