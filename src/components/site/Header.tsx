@@ -56,16 +56,16 @@ type ProductCategory = {
 };
 
 const PRODUCT_CATEGORIES: ProductCategory[] = [
-  { label: "Cath Lab Systems", href: "/products", Icon: HeartPulse },
-  { label: "Drug-Eluting Stents (DES)", href: "/products", Icon: Activity },
-  { label: "PET/CT Scanners", href: "/products", Icon: ScanLine },
-  { label: "MRI Scanners", href: "/products", Icon: Magnet },
-  { label: "C-Arm Systems", href: "/products", Icon: Aperture },
-  { label: "X-Ray Systems", href: "/products", Icon: Radiation },
-  { label: "Mammography Systems", href: "/products", Icon: CircleDot },
-  { label: "Bone Densitometers (DEXA)", href: "/products", Icon: Bone },
-  { label: "Lithotripsy (ESWL)", href: "/products", Icon: Waves },
-  { label: "Others", href: "/products", Icon: LayoutGrid },
+  { label: "Cath Lab Systems", href: "/products/cath-lab", Icon: HeartPulse },
+  { label: "Drug-Eluting Stents (DES)", href: "/products/drug-eluting-stents", Icon: Activity },
+  { label: "PET/CT Scanners", href: "/products/pet-ct-scanners", Icon: ScanLine },
+  { label: "MRI Scanners", href: "/products/mri-scanners", Icon: Magnet },
+  { label: "C-Arm Systems", href: "/products/c-arm-systems", Icon: Aperture },
+  { label: "X-Ray Systems", href: "/products/x-ray-systems", Icon: Radiation },
+  { label: "Mammography Systems", href: "/products/mammography-systems", Icon: CircleDot },
+  { label: "Bone Densitometers (DEXA)", href: "/products/bone-densitometers", Icon: Bone },
+  { label: "Lithotripsy (ESWL)", href: "/products/lithotripsy-eswl", Icon: Waves },
+  { label: "Others", href: "/products/others", Icon: LayoutGrid },
 ];
 
 const SOCIALS = [
