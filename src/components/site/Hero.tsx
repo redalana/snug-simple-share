@@ -5,11 +5,28 @@ import {
   useReducedMotion,
   type PanInfo,
 } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Play, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Boxes,
+  ChevronLeft,
+  ChevronRight,
+  ClipboardList,
+  Clock,
+  Factory,
+  GraduationCap,
+  LifeBuoy,
+  Package,
+  Play,
+  ShieldCheck,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import heroCath from "@/assets/hero-cathlab.jpg";
-import heroMri from "@/assets/sol-mri.jpg";
-import heroOr from "@/assets/sol-or.jpg";
-import heroService from "@/assets/beyond-cathlab.jpg";
+import turnkeyInstall from "@/assets/turnkey-hero.jpg";
+import engineerService from "@/assets/aftersales-engineering.jpg";
+
 
 type Slide = {
   theme: string;
