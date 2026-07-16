@@ -78,9 +78,11 @@ const SOCIALS = [
 ];
 
 const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "fr", label: "Français" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "ar", label: "العربية", flag: "🇸🇦" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
 ] as const;
+
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -112,6 +114,7 @@ function LanguageSelector() {
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-1.5 text-[15px] font-medium text-foreground/75 transition-colors hover:text-primary"
       >
+        <span aria-hidden className="text-base leading-none">{lang.flag}</span>
         {lang.label}
         <ChevronDown
           className={`h-3.5 w-3.5 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
@@ -124,7 +127,7 @@ function LanguageSelector() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full z-20 mt-2 w-40 rounded-[14px] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
+            className="absolute right-0 top-full z-20 mt-2 w-44 rounded-[14px] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
           >
             {LANGUAGES.map((l) => (
               <button
@@ -133,16 +136,18 @@ function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center gap-2.5 rounded-[10px] px-4 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
+                className={`flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
                   l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
+                <span aria-hidden className="text-base leading-none">{l.flag}</span>
+                <span className="flex-1">{l.label}</span>
                 <Check
                   className={`h-4 w-4 text-primary ${l.code === lang.code ? "opacity-100" : "opacity-0"}`}
                 />
-                {l.label}
               </button>
             ))}
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -534,20 +539,23 @@ export function Header() {
           <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
             {NAV.map((item) => {
               const active = isActive(item.href);
+              const isContact = item.label === "Contact Us";
+              const baseColor = isContact
+                ? "text-primary hover:text-primary-dark"
+                : active
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-primary";
+              const weight = isContact ? "font-bold" : "font-semibold";
               return (
-                <div key={item.label} className="group relative">
+                <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-3 text-[16px] font-medium transition-colors ${
-                      active
-                        ? "text-primary"
-                        : "text-foreground/75 hover:text-primary"
-                    }`}
+                    className={`flex items-center gap-1 px-5 py-3.5 text-[15px] tracking-[0.005em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
                     {item.dropdown && (
-                      <ChevronDown className="h-3 w-3 opacity-40 transition-transform group-hover:rotate-180" />
+                      <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                     )}
                     <span
                       className={`absolute inset-x-5 bottom-1.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
@@ -557,6 +565,7 @@ export function Header() {
                       }`}
                     />
                   </a>
+
 
                   {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
                   {item.label === "All Products" && <ProductsMegaDropdown />}
@@ -660,14 +669,17 @@ export function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-3 text-[16px] font-medium transition-colors last:border-0 ${
-                      active ? "text-primary" : "text-foreground/80 hover:text-primary"
+                    className={`block border-b border-border/60 py-3 text-[16px] transition-colors last:border-0 ${
+                      item.label === "Contact Us"
+                        ? "font-bold text-primary hover:text-primary-dark"
+                        : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
                     }`}
                   >
                     {item.label}
                   </a>
                 );
               })}
+
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -709,12 +721,13 @@ export function Header() {
 function SearchField() {
   return (
     <div className="relative">
-      <Search className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
+      <Search className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-primary/70" />
       <input
         type="search"
         placeholder="Search products, brands or categories..."
-        className="h-12 w-full rounded-full bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-8px_rgba(0,0,0,0.15)] ring-1 ring-black/5 outline-none transition-all placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/30"
+        className="h-12 w-full rounded-full border-[1.5px] border-primary/45 bg-white pl-11 pr-4 text-sm text-foreground shadow-[0_4px_20px_-10px_rgba(229,57,53,0.18)] outline-none transition-all placeholder:text-muted-foreground/80 hover:border-primary/70 focus:border-primary focus:shadow-[0_0_0_4px_rgba(229,57,53,0.12)]"
       />
     </div>
   );
 }
+
