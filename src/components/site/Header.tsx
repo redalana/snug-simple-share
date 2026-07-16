@@ -1,7 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Menu, X, Facebook, Linkedin, Check, Star } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  X,
+  Facebook,
+  Linkedin,
+  Check,
+  Star,
+  HeartPulse,
+  Activity,
+  ScanLine,
+  Magnet,
+  Aperture,
+  Radiation,
+  CircleDot,
+  Bone,
+  Waves,
+  LayoutGrid,
+  ArrowRight,
+} from "lucide-react";
 
 import { Logo } from "./Logo";
 
@@ -13,16 +34,7 @@ type NavItem = {
 
 const NAV: NavItem[] = [
   { label: "Home", href: "/" },
-  {
-    label: "All Products",
-    href: "/products",
-    dropdown: [
-      { label: "Cardiac Care", href: "#solutions" },
-      { label: "Imaging & Radiology", href: "#solutions" },
-      { label: "Surgical Systems", href: "#solutions" },
-      { label: "Patient Monitoring", href: "#solutions" },
-    ],
-  },
+  { label: "All Products", href: "/products", dropdown: [] },
   { label: "Services", href: "/services" },
   { label: "Turnkey", href: "/turnkey" },
   { label: "After Sales", href: "/after-sales" },
@@ -35,6 +47,25 @@ const NAV: NavItem[] = [
 
   { label: "Blog", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
+];
+
+type ProductCategory = {
+  label: string;
+  href: string;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+const PRODUCT_CATEGORIES: ProductCategory[] = [
+  { label: "Cath Lab Systems", href: "/products", Icon: HeartPulse },
+  { label: "Drug-Eluting Stents (DES)", href: "/products", Icon: Activity },
+  { label: "PET/CT Scanners", href: "/products", Icon: ScanLine },
+  { label: "MRI Scanners", href: "/products", Icon: Magnet },
+  { label: "C-Arm Systems", href: "/products", Icon: Aperture },
+  { label: "X-Ray Systems", href: "/products", Icon: Radiation },
+  { label: "Mammography Systems", href: "/products", Icon: CircleDot },
+  { label: "Bone Densitometers (DEXA)", href: "/products", Icon: Bone },
+  { label: "Lithotripsy (ESWL)", href: "/products", Icon: Waves },
+  { label: "Others", href: "/products", Icon: LayoutGrid },
 ];
 
 const SOCIALS = [
@@ -204,6 +235,133 @@ function BrandsMegaDropdown() {
   );
 }
 
+function ProductsMegaDropdown() {
+  return (
+    <div
+      role="menu"
+      aria-label="Product categories"
+      className="pointer-events-none absolute left-1/2 top-full z-10 w-[336px] -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100"
+    >
+      <div className="translate-y-1 rounded-2xl bg-white p-5 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)] ring-1 ring-black/5 transition-transform duration-200 group-hover:translate-y-0 group-focus-within:translate-y-0">
+        <div className="mb-2 border-b border-border/60 pb-2">
+          <span className="block px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Product Categories
+          </span>
+        </div>
+        <ul className="flex flex-col gap-0.5">
+          {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => (
+            <li key={label}>
+              <a
+                href={href}
+                role="menuitem"
+                className="group/item relative flex items-center gap-3 rounded-[4px] px-3 py-2.5 text-[14px] font-medium text-foreground/75 outline-none transition-all duration-200 hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-primary/30"
+              >
+                <span className="pointer-events-none absolute inset-y-1 left-0 w-[3px] scale-y-0 rounded-r bg-primary transition-transform duration-200 group-hover/item:scale-y-100 group-focus-visible/item:scale-y-100" />
+                <Icon
+                  className="h-[18px] w-[18px] shrink-0 text-foreground/55 transition-colors duration-200 group-hover/item:text-primary group-focus-visible/item:text-primary"
+                  strokeWidth={1.75}
+                />
+                <span className="flex-1">{label}</span>
+                <ChevronRight
+                  className="h-4 w-4 -translate-x-1 text-foreground/30 opacity-0 transition-all duration-200 group-hover/item:translate-x-0 group-hover/item:opacity-100 group-focus-visible/item:translate-x-0 group-focus-visible/item:opacity-100"
+                  strokeWidth={2}
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-3 border-t border-border/60 pt-3">
+          <a
+            href="/products"
+            className="group/cta flex items-center justify-between rounded-[4px] px-3 py-2 text-[13px] font-semibold text-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
+          >
+            <span>View All Products</span>
+            <ArrowRight
+              className="h-4 w-4 text-primary transition-transform duration-200 group-hover/cta:translate-x-1"
+              strokeWidth={2.25}
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileProductsAccordion({
+  active,
+  onNavigate,
+}: {
+  active: boolean;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="border-b border-border/60 py-3 last:border-0">
+      <div className="flex items-center justify-between">
+        <a
+          href="/products"
+          onClick={onNavigate}
+          className={`flex-1 text-[16px] font-medium transition-colors ${
+            active ? "text-primary" : "text-foreground/80 hover:text-primary"
+          }`}
+        >
+          All Products
+        </a>
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-label={expanded ? "Collapse product categories" : "Expand product categories"}
+          onClick={() => setExpanded((v) => !v)}
+          className="ml-2 flex h-9 w-9 items-center justify-center rounded-full text-foreground/60 transition-colors hover:bg-muted hover:text-primary"
+        >
+          <ChevronDown
+            className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+          />
+        </button>
+      </div>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-3 border-t border-border/60 pt-2">
+              <span className="mb-1 block px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Product Categories
+              </span>
+              <ul className="flex flex-col">
+                {PRODUCT_CATEGORIES.map(({ label, href, Icon }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      onClick={onNavigate}
+                      className="flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium text-foreground/75 transition-colors hover:bg-muted hover:text-foreground"
+                    >
+                      <Icon className="h-[18px] w-[18px] text-foreground/55" strokeWidth={1.75} />
+                      <span className="flex-1">{label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/products"
+                onClick={onNavigate}
+                className="mt-1 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-[13px] font-semibold text-foreground hover:text-primary"
+              >
+                <span>View All Products</span>
+                <ArrowRight className="h-4 w-4 text-primary" strokeWidth={2.25} />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -331,8 +489,9 @@ export function Header() {
                   </a>
 
                   {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
+                  {item.label === "All Products" && <ProductsMegaDropdown />}
 
-                  {item.dropdown && item.label !== "Brands" && (
+                  {item.dropdown && item.label !== "Brands" && item.label !== "All Products" && (
                     <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
                       <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
                         {item.dropdown.map((sub) => (
@@ -414,6 +573,15 @@ export function Header() {
                         ))}
                       </div>
                     </div>
+                  );
+                }
+                if (item.label === "All Products") {
+                  return (
+                    <MobileProductsAccordion
+                      key={item.label}
+                      active={active}
+                      onNavigate={() => setOpen(false)}
+                    />
                   );
                 }
                 return (
