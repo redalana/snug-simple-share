@@ -246,7 +246,7 @@ function Hero() {
 function DepartmentNav() {
   const [active, setActive] = useState<string>(DEPARTMENTS[0].id);
   return (
-    <section className="bg-[#0b1220] py-10 text-white lg:py-12">
+    <section className="bg-[#111315] py-10 text-white lg:py-12">
       <div className="mx-auto grid max-w-[100rem] items-center gap-8 px-6 lg:grid-cols-[1fr_2.8fr] lg:gap-10 lg:px-10">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary">
