@@ -69,7 +69,7 @@ function Hero() {
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[780px] max-w-[100rem] items-center gap-16 px-6 pb-24 pt-32 lg:min-h-[820px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-32 lg:pt-40">
+      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] items-center gap-16 px-6 pb-14 pt-20 lg:min-h-[520px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-20 lg:pt-24">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
