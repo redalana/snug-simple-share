@@ -335,7 +335,7 @@ function BrandsPage() {
         {/* STICKY SEARCH + FILTERS */}
         <div className="sticky top-[88px] z-30 border-b border-border bg-white/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-[100rem] flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:gap-6 lg:px-10">
-            <div className="relative flex-1 lg:max-w-xl">
+            <div className="relative flex-1 lg:max-w-[52rem]">
               <Search
                 className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-muted-foreground"
                 strokeWidth={2}
