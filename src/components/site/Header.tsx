@@ -414,6 +414,7 @@ export function Header() {
                   </a>
 
                   {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
+                  {item.label === "All Products" && <ProductsMegaDropdown />}
 
                   {item.dropdown && item.label !== "Brands" && (
                     <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
