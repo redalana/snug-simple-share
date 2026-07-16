@@ -758,9 +758,24 @@ function PartsLogistics() {
 
 /* ---------------- REQUEST SERVICE ---------------- */
 
+const CONTACT_CHANNELS = [
+  { icon: Phone, label: "Emergency Hotline", value: "+962 79 974 1318", href: "tel:+962799741318", accent: "text-primary" },
+  { icon: MessageSquare, label: "WhatsApp Support", value: "+962 79 974 1318", href: "https://wa.me/962799741318", accent: "text-emerald-400" },
+  { icon: Mail, label: "Email Support", value: "support@abufarhamedical.com", href: "mailto:support@abufarhamedical.com", accent: "text-sky-400" },
+];
+
+const REASONS = [
+  "Emergency Breakdown",
+  "Preventive Maintenance",
+  "Spare Parts Request",
+  "Installation Support",
+  "Clinical Training",
+  "Warranty Assistance",
+];
+
 function SupportCenterPanel() {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink via-[#0f131c] to-ink p-8 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)]">
+    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink via-[#0f131c] to-ink p-7 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)] lg:p-8">
       <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
       <div className="relative">
         <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/60">
@@ -774,12 +789,9 @@ function SupportCenterPanel() {
           Reach an engineer instantly through any channel below.
         </p>
 
+        {/* Contact channels */}
         <div className="mt-6 space-y-3">
-          {[
-            { icon: Phone, label: "Emergency Hotline", value: "+962 79 974 1318", href: "tel:+962799741318", accent: "text-primary" },
-            { icon: MessageSquare, label: "WhatsApp", value: "Chat with support", href: "https://wa.me/962799741318", accent: "text-emerald-400" },
-            { icon: Mail, label: "Email", value: "support@abufarhamedical.com", href: "mailto:support@abufarhamedical.com", accent: "text-sky-400" },
-          ].map(({ icon: Icon, label, value, href, accent }) => (
+          {CONTACT_CHANNELS.map(({ icon: Icon, label, value, href, accent }) => (
             <a
               key={label}
               href={href}
@@ -801,7 +813,8 @@ function SupportCenterPanel() {
           ))}
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        {/* Hours + response */}
+        <div className="mt-4 grid grid-cols-2 gap-3">
           <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
             <div className="flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/50">
               <Clock className="h-3 w-3" /> Support Hours
@@ -818,34 +831,54 @@ function SupportCenterPanel() {
           </div>
         </div>
 
-        {/* mini map */}
-        <div className="relative mt-6 h-32 overflow-hidden rounded-2xl border border-white/8 bg-black/40">
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-40"
-            style={{
-              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
-              backgroundSize: "10px 10px",
-              maskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 60%, transparent 100%)",
-              WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 50%, black 60%, transparent 100%)",
-            }}
-          />
-          {[
-            { x: 42, y: 55 }, { x: 52, y: 45 }, { x: 58, y: 40 }, { x: 48, y: 60 }, { x: 72, y: 35 }, { x: 82, y: 55 },
-          ].map((p, i) => (
-            <span
-              key={i}
-              className="absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${p.x}%`, top: `${p.y}%` }}
-            >
+        {/* Why hospitals contact us */}
+        <div className="mt-6 rounded-2xl border border-white/8 bg-white/[0.02] p-5">
+          <div className="text-[10.5px] font-semibold uppercase tracking-[0.24em] text-white/50">
+            Why Hospitals Contact Us
+          </div>
+          <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+            {REASONS.map((r) => (
+              <li key={r} className="flex items-center gap-2 text-[13px] text-white/80">
+                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
+                  <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
+                </span>
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Bottom emergency card */}
+        <div className="relative mt-6 overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent p-6">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/30 blur-2xl" />
+          <div className="relative">
+            <div className="flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-primary">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" style={{ animationDelay: `${i * 250}ms` }} />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(220,38,38,0.9)]" />
+                <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-primary opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-            </span>
-          ))}
-          <div className="absolute bottom-2 left-3 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
-            <MapPin className="h-3 w-3 text-primary" /> MEA · Central Asia
+              24/7 Technical Support
+            </div>
+            <div className="mt-3 font-display text-xl font-extrabold text-white">
+              Need immediate help?
+            </div>
+            <div className="mt-1 text-[13px] text-white/70">
+              Call our engineer now — always on standby.
+            </div>
+            <div className="mt-5 space-y-2.5">
+              <a
+                href="tel:+962799741318"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-[14px] font-bold text-white shadow-[0_18px_40px_-16px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
+              >
+                <Phone className="h-4 w-4" /> Call +962 79 974 1318
+              </a>
+              <a
+                href="https://wa.me/962799741318"
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-3 text-[13.5px] font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
+              >
+                <MessageSquare className="h-4 w-4" /> WhatsApp Engineer
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -853,7 +886,241 @@ function SupportCenterPanel() {
   );
 }
 
+/* ---------- image upload ---------- */
+
+type UploadItem = {
+  id: string;
+  file: File;
+  preview: string;
+  progress: number;
+};
+
+const MAX_SIZE = 5 * 1024 * 1024;
+const ACCEPT = ["image/jpeg", "image/png", "image/webp"];
+
+function ImageUpload({
+  items,
+  setItems,
+}: {
+  items: UploadItem[];
+  setItems: React.Dispatch<React.SetStateAction<UploadItem[]>>;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dragOver, setDragOver] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const addFiles = (files: FileList | File[]) => {
+    setError(null);
+    const arr = Array.from(files);
+    const accepted: UploadItem[] = [];
+    for (const file of arr) {
+      if (!ACCEPT.includes(file.type)) {
+        setError(`"${file.name}" — unsupported format. Use JPG, PNG or WEBP.`);
+        continue;
+      }
+      if (file.size > MAX_SIZE) {
+        setError(`"${file.name}" is larger than 5MB.`);
+        continue;
+      }
+      accepted.push({
+        id: `${file.name}-${file.size}-${Date.now()}-${Math.random()}`,
+        file,
+        preview: URL.createObjectURL(file),
+        progress: 0,
+      });
+    }
+    if (accepted.length === 0) return;
+    setItems((prev) => [...prev, ...accepted]);
+    accepted.forEach((it) => {
+      const interval = window.setInterval(() => {
+        setItems((prev) =>
+          prev.map((p) =>
+            p.id === it.id ? { ...p, progress: Math.min(100, p.progress + 12 + Math.random() * 10) } : p,
+          ),
+        );
+      }, 140);
+      window.setTimeout(() => window.clearInterval(interval), 1400);
+    });
+  };
+
+  const remove = (id: string) => {
+    setItems((prev) => {
+      const target = prev.find((p) => p.id === id);
+      if (target) URL.revokeObjectURL(target.preview);
+      return prev.filter((p) => p.id !== id);
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      items.forEach((i) => URL.revokeObjectURL(i.preview));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragOver(true);
+        }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragOver(false);
+          if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
+        }}
+        className={`flex w-full flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors ${
+          dragOver ? "border-primary bg-primary/5" : "border-border bg-background/60 hover:border-primary/60"
+        }`}
+      >
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <UploadCloud className="h-6 w-6" />
+        </div>
+        <div className="mt-3 text-sm font-semibold text-foreground">
+          Click or drag &amp; drop images
+        </div>
+        <div className="mt-1 text-[12px] text-muted-foreground">
+          JPG, PNG or WEBP · up to 5MB each · multiple allowed
+        </div>
+      </button>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        multiple
+        className="hidden"
+        onChange={(e) => {
+          if (e.target.files) addFiles(e.target.files);
+          e.target.value = "";
+        }}
+      />
+
+      {error && (
+        <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-[12.5px] font-medium text-destructive">
+          {error}
+        </div>
+      )}
+
+      {items.length > 0 && (
+        <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
+          {items.map((it) => (
+            <div
+              key={it.id}
+              className="group relative overflow-hidden rounded-xl border border-border bg-background"
+            >
+              <div className="aspect-square w-full overflow-hidden">
+                <img src={it.preview} alt={it.file.name} className="h-full w-full object-cover" />
+              </div>
+              {it.progress < 100 && (
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-black/20">
+                  <div
+                    className="h-full bg-primary transition-[width] duration-200"
+                    style={{ width: `${it.progress}%` }}
+                  />
+                </div>
+              )}
+              {it.progress >= 100 && (
+                <div className="absolute bottom-1 left-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-white shadow">
+                  <CheckCircle2 className="h-3 w-3" strokeWidth={3} />
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={() => remove(it.id)}
+                aria-label={`Remove ${it.file.name}`}
+                className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-ink/80 text-white opacity-90 transition-all hover:bg-primary"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---------- form ---------- */
+
+const requestSchema = z.object({
+  name: z.string().trim().min(2, "Please enter your full name.").max(100),
+  phone: z.string().trim().min(6, "Please enter a valid phone number.").max(30),
+  email: z.string().trim().email("Please enter a valid email address.").max(255),
+  facility: z.string().trim().min(2, "Please enter your facility name.").max(150),
+  equipment: z.string().min(1, "Please select the equipment type."),
+  serial: z.string().max(80).optional(),
+  description: z.string().trim().min(10, "Please describe the issue (10+ characters).").max(1500),
+});
+
+type FormValues = z.infer<typeof requestSchema>;
+type FieldKey = keyof FormValues;
+type Errors = Partial<Record<FieldKey, string>>;
+
 function RequestService() {
+  const [values, setValues] = useState<FormValues>({
+    name: "",
+    phone: "",
+    email: "",
+    facility: "",
+    equipment: "",
+    serial: "",
+    description: "",
+  });
+  const [errors, setErrors] = useState<Errors>({});
+  const [images, setImages] = useState<UploadItem[]>([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
+
+  const set = (k: FieldKey, v: string) => {
+    setValues((prev) => ({ ...prev, [k]: v }));
+    if (errors[k]) setErrors((prev) => ({ ...prev, [k]: undefined }));
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = requestSchema.safeParse(values);
+    if (!result.success) {
+      const errs: Errors = {};
+      const order: FieldKey[] = ["name", "phone", "email", "facility", "equipment", "serial", "description"];
+      for (const issue of result.error.issues) {
+        const key = issue.path[0] as FieldKey;
+        if (!errs[key]) errs[key] = issue.message;
+      }
+      setErrors(errs);
+      toast.error("Please fix the highlighted fields.");
+      for (const k of order) {
+        if (errs[k]) {
+          fieldRefs.current[k]?.focus();
+          break;
+        }
+      }
+      return;
+    }
+    setSubmitting(true);
+    await new Promise((r) => setTimeout(r, 1200));
+    setSubmitting(false);
+    setSubmitted(true);
+    toast.success("Request submitted — our team will reach out within 1 business hour.");
+  };
+
+  const reset = () => {
+    setValues({ name: "", phone: "", email: "", facility: "", equipment: "", serial: "", description: "" });
+    setErrors({});
+    images.forEach((i) => URL.revokeObjectURL(i.preview));
+    setImages([]);
+    setSubmitted(false);
+  };
+
+  const labelCls = "text-[12.5px] font-semibold text-foreground";
+  const inputCls =
+    "mt-2 h-12 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10";
+  const errCls = "border-destructive focus:border-destructive focus:ring-destructive/15";
+
   return (
     <section id="request" className="relative overflow-hidden bg-background py-24 lg:py-28">
       <div className="pointer-events-none absolute -top-32 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
@@ -873,92 +1140,184 @@ function RequestService() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <SupportCenterPanel />
 
-          {/* Form card */}
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card/80 p-8 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.25)] backdrop-blur-xl lg:p-10">
-            <form className="grid gap-5 sm:grid-cols-2">
-              {[
-                ["Full Name", "text", "Enter your full name", true],
-                ["Phone Number", "tel", "Enter phone number", true],
-                ["Email Address", "email", "Enter email address", true],
-                ["Facility / Hospital", "text", "Enter facility name", true],
-              ].map(([label, type, ph, req]) => (
-                <label key={label as string} className="block">
-                  <span className="text-[12px] font-semibold text-foreground">
-                    {label} {req ? <span className="text-primary">*</span> : null}
+            {submitted ? (
+              <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500">
+                  <CheckCircle2 className="h-8 w-8" strokeWidth={2} />
+                </div>
+                <div className="mt-6 font-display text-2xl font-extrabold text-foreground">
+                  Request received.
+                </div>
+                <p className="mt-3 max-w-md text-[14.5px] leading-relaxed text-muted-foreground">
+                  A service coordinator has been notified and will contact you
+                  within one business hour. For critical downtime, please also
+                  call our 24/7 emergency line.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="tel:+962799741318"
+                    className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_16px_40px_-16px_rgba(220,38,38,0.8)]"
+                  >
+                    <Phone className="h-4 w-4" /> Call Emergency Line
+                  </a>
+                  <button
+                    type="button"
+                    onClick={reset}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-bold text-foreground hover:bg-muted"
+                  >
+                    Submit another request
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form className="grid gap-6 sm:grid-cols-2" onSubmit={onSubmit} noValidate>
+                <label className="block">
+                  <span className={labelCls}>
+                    Full Name <span className="text-primary">*</span>
                   </span>
                   <input
-                    type={type as string}
-                    placeholder={ph as string}
-                    className="mt-2 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    ref={(el) => {
+                      fieldRefs.current.name = el;
+                    }}
+                    value={values.name}
+                    onChange={(e) => set("name", e.target.value)}
+                    placeholder="Enter your full name"
+                    className={`${inputCls} ${errors.name ? errCls : ""}`}
+                    aria-invalid={!!errors.name}
+                  />
+                  {errors.name && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.name}</span>}
+                </label>
+
+                <label className="block">
+                  <span className={labelCls}>
+                    Phone Number <span className="text-primary">*</span>
+                  </span>
+                  <div className="mt-2">
+                    <PhoneField
+                      value={values.phone}
+                      onChange={(v) => set("phone", v)}
+                      hasError={!!errors.phone}
+                    />
+                  </div>
+                  {errors.phone && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.phone}</span>}
+                </label>
+
+                <label className="block">
+                  <span className={labelCls}>
+                    Email Address <span className="text-primary">*</span>
+                  </span>
+                  <input
+                    ref={(el) => {
+                      fieldRefs.current.email = el;
+                    }}
+                    type="email"
+                    value={values.email}
+                    onChange={(e) => set("email", e.target.value)}
+                    placeholder="Enter email address"
+                    className={`${inputCls} ${errors.email ? errCls : ""}`}
+                    aria-invalid={!!errors.email}
+                  />
+                  {errors.email && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.email}</span>}
+                </label>
+
+                <label className="block">
+                  <span className={labelCls}>
+                    Facility / Hospital <span className="text-primary">*</span>
+                  </span>
+                  <input
+                    ref={(el) => {
+                      fieldRefs.current.facility = el;
+                    }}
+                    value={values.facility}
+                    onChange={(e) => set("facility", e.target.value)}
+                    placeholder="Enter facility name"
+                    className={`${inputCls} ${errors.facility ? errCls : ""}`}
+                    aria-invalid={!!errors.facility}
+                  />
+                  {errors.facility && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.facility}</span>}
+                </label>
+
+                <label className="block">
+                  <span className={labelCls}>
+                    Equipment Type <span className="text-primary">*</span>
+                  </span>
+                  <select
+                    ref={(el) => {
+                      fieldRefs.current.equipment = el;
+                    }}
+                    value={values.equipment}
+                    onChange={(e) => set("equipment", e.target.value)}
+                    className={`${inputCls} px-3 ${errors.equipment ? errCls : ""}`}
+                    aria-invalid={!!errors.equipment}
+                  >
+                    <option value="" disabled>Select equipment</option>
+                    {EQUIPMENT.map((e) => (
+                      <option key={e.name}>{e.name}</option>
+                    ))}
+                  </select>
+                  {errors.equipment && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.equipment}</span>}
+                </label>
+
+                <label className="block">
+                  <span className={labelCls}>Serial Number</span>
+                  <input
+                    value={values.serial ?? ""}
+                    onChange={(e) => set("serial", e.target.value)}
+                    placeholder="Enter serial number"
+                    className={inputCls}
                   />
                 </label>
-              ))}
 
-              <label className="block">
-                <span className="text-[12px] font-semibold text-foreground">
-                  Equipment Type <span className="text-primary">*</span>
-                </span>
-                <select
-                  className="mt-2 h-11 w-full rounded-xl border border-border bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  defaultValue=""
-                >
-                  <option value="" disabled>Select equipment</option>
-                  {EQUIPMENT.map((e) => (
-                    <option key={e.name}>{e.name}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="block">
-                <span className="text-[12px] font-semibold text-foreground">
-                  Serial Number
-                </span>
-                <input
-                  placeholder="Enter serial number"
-                  className="mt-2 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </label>
+                <label className="block sm:col-span-2">
+                  <span className={labelCls}>
+                    Problem Description <span className="text-primary">*</span>
+                  </span>
+                  <textarea
+                    ref={(el) => {
+                      fieldRefs.current.description = el;
+                    }}
+                    rows={5}
+                    value={values.description}
+                    onChange={(e) => set("description", e.target.value)}
+                    placeholder="Describe the issue in detail — symptoms, error codes, when it started"
+                    className={`mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 ${errors.description ? errCls : ""}`}
+                    aria-invalid={!!errors.description}
+                  />
+                  {errors.description && <span className="mt-1.5 block text-[12px] font-medium text-destructive">{errors.description}</span>}
+                </label>
 
-              <label className="block sm:col-span-2">
-                <span className="text-[12px] font-semibold text-foreground">
-                  Problem Description <span className="text-primary">*</span>
-                </span>
-                <textarea
-                  rows={4}
-                  placeholder="Describe the issue in detail"
-                  className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20"
-                />
-              </label>
-
-              <label className="block sm:col-span-2">
-                <span className="text-[12px] font-semibold text-foreground">
-                  Upload Images (Optional)
-                </span>
-                <div className="mt-2 flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-background/60 px-6 py-8 text-center transition-colors hover:border-primary/60">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <UploadCloud className="h-6 w-6" />
-                  </div>
-                  <div className="mt-3 text-sm font-semibold text-foreground">
-                    Click or drag &amp; drop images
-                  </div>
-                  <div className="mt-1 text-[12px] text-muted-foreground">
-                    JPG, PNG up to 5MB
+                <div className="block sm:col-span-2">
+                  <span className={labelCls}>Upload Images (Optional)</span>
+                  <div className="mt-2">
+                    <ImageUpload items={images} setItems={setImages} />
                   </div>
                 </div>
-              </label>
 
-              <div className="sm:col-span-2">
-                <button
-                  type="button"
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold text-white shadow-[0_18px_50px_-18px_rgba(220,38,38,0.7)] transition-all hover:-translate-y-0.5 sm:w-auto"
-                >
-                  Submit Request
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </form>
+                <div className="sm:col-span-2">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold text-white shadow-[0_18px_50px_-18px_rgba(220,38,38,0.7)] transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 sm:w-auto"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Submitting…
+                      </>
+                    ) : (
+                      <>
+                        Submit Request
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>
