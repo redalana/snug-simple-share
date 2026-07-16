@@ -92,7 +92,7 @@ function Hero() {
               href="tel:+96264026063"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
             >
-              <HeadphonesIcon className="h-4 w-4" />
+              <Headphones className="h-4 w-4" />
               Emergency Support
             </a>
           </div>
