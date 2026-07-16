@@ -788,7 +788,7 @@ function WhyTrust() {
                 <div className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur">
                   <Star className="h-3 w-3" /> Our Foundation
                 </div>
-                <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">25+ Years of Engineering Trust</h3>
+                <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">Regional Experience Since 1999</h3>
                 <p className="mt-4 text-[14.5px] leading-relaxed text-white/85">
                   {WHY[0].desc}
                 </p>
