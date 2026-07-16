@@ -500,6 +500,15 @@ export function Header() {
                     </div>
                   );
                 }
+                if (item.label === "All Products") {
+                  return (
+                    <MobileProductsAccordion
+                      key={item.label}
+                      active={active}
+                      onNavigate={() => setOpen(false)}
+                    />
+                  );
+                }
                 return (
                   <a
                     key={item.label}
