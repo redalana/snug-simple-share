@@ -406,12 +406,12 @@ function MobileProductsAccordion({
                         search={category ? { category } : {}}
                         onClick={onNavigate}
                         aria-current={isActive ? "page" : undefined}
-                        className={`flex items-center gap-3 rounded-[4px] px-2 py-2.5 text-[14px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
+                        className={`flex min-h-[48px] items-center gap-3 rounded-[4px] px-2 text-[15px] font-medium transition-colors hover:bg-muted hover:text-foreground ${
                           isActive ? "bg-muted text-foreground" : "text-foreground/75"
                         }`}
                       >
                         <Icon
-                          className={`h-[18px] w-[18px] ${isActive ? "text-primary" : "text-foreground/55"}`}
+                          className={`h-5 w-5 ${isActive ? "text-primary" : "text-foreground/55"}`}
                           strokeWidth={1.75}
                         />
                         <span className="flex-1">{label}</span>
