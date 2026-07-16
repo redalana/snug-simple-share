@@ -26,107 +26,80 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    theme: "Turnkey Solutions",
-    eyebrow: "Trusted Healthcare Technology Partner",
+    theme: "Medical Equipment",
+    eyebrow: "Advanced Medical Imaging & Intervention",
     headline: (
       <>
-        Complete Departments.
+        Advanced Medical Technology
         <br />
-        <span className="text-primary">Ready to Perform.</span>
+        <span className="text-primary">for Better Patient Outcomes.</span>
       </>
     ),
     subtitle:
-      "From planning to performance, we deliver fully integrated medical departments engineered for better care and built to last.",
+      "AbuFarha supplies certified medical imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — to leading hospitals across Africa and the Middle East.",
     image: heroCath,
-    imageAlt: "Modern cath lab with biplane angiography imaging system",
-    card: { title: "Turnkey. Total Care.", body: "One partner for every step." },
+    imageAlt: "Modern cath lab suite with advanced interventional imaging system",
+    card: { title: "Certified Medical Systems", body: "Imaging and interventional technology, delivered." },
     stats: [
-      { value: "30+", label: "Major Projects" },
-      { value: "10+", label: "Countries" },
-      { value: "250+", label: "Departments Delivered" },
-      { value: "24/7", label: "Support" },
+      { value: "✓", label: "Certified Systems" },
+      { value: "✓", label: "Factory Refurbished" },
+      { value: "✓", label: "OEM Quality Standards" },
+      { value: "1Y", label: "Warranty Included" },
     ],
-    primary: { label: "Explore Departments", href: "/turnkey" },
-    secondary: { label: "Watch Full Overview", href: "#overview", icon: true },
+    primary: { label: "Explore Products", href: "/products" },
+    secondary: { label: "Request a Quote", href: "/contact" },
   },
   {
-    theme: "MRI Centers",
-    eyebrow: "Advanced Diagnostic Imaging",
+    theme: "Turnkey Healthcare Projects",
+    eyebrow: "Design · Supply · Install · Commission",
     headline: (
       <>
-        Complete MRI Centers.
+        Complete Turnkey Healthcare Projects.
         <br />
-        <span className="text-primary">Designed. Installed. Commissioned.</span>
+        <span className="text-primary">From Design to Commissioning.</span>
       </>
     ),
     subtitle:
-      "MRI departments delivered from planning through installation, shielding, commissioning and clinical training.",
+      "We plan, supply, install, commission and hand over complete healthcare facilities — from radiology and cath lab departments to full imaging centers — ready for clinical use on day one.",
     image: heroMri,
-    imageAlt: "High-field MRI suite with premium finishes",
-    card: {
-      title: "MRI Turnkey Center",
-      body: "High-performance diagnostic environments.",
-    },
+    imageAlt: "Biomedical engineers installing an MRI imaging system",
+    card: { title: "Turnkey Delivery", body: "One partner, from blueprint to first patient." },
     stats: [
-      { value: "MRI", label: "1.5T · 3T Systems" },
-      { value: "CT", label: "Multi-Slice" },
-      { value: "PET/CT", label: "Molecular Imaging" },
-      { value: "Suite", label: "Advanced Imaging" },
+      { value: "✓", label: "Planning" },
+      { value: "✓", label: "Installation" },
+      { value: "✓", label: "Commissioning" },
+      { value: "✓", label: "Clinical Training" },
     ],
-    primary: { label: "Explore MRI", href: "/products" },
-    secondary: { label: "View MRI Projects", href: "/projects" },
+    primary: { label: "Explore Turnkey Projects", href: "/turnkey" },
+    secondary: { label: "Talk to an Engineer", href: "/contact" },
   },
   {
-    theme: "Operating Rooms",
-    eyebrow: "Surgical Infrastructure",
+    theme: "After-Sales & Biomedical Engineering",
+    eyebrow: "Lifecycle Support That Keeps Hospitals Running",
     headline: (
       <>
-        Integrated Surgical Environments.
+        Reliable After-Sales Support
         <br />
-        <span className="text-primary">Built For Performance.</span>
+        <span className="text-primary">That Keeps Hospitals Running.</span>
       </>
     ),
     subtitle:
-      "Operating Rooms engineered for workflow efficiency, patient safety and surgical precision.",
-    image: heroOr,
-    imageAlt: "Modern hybrid operating room with integrated imaging",
-    card: { title: "Hybrid OR", body: "Turnkey operating room solution." },
-    stats: [
-      { value: "Hybrid", label: "OR Suites" },
-      { value: "OR", label: "Operating Rooms" },
-      { value: "ICU", label: "Critical Care" },
-      { value: "MEP", label: "Infrastructure" },
-    ],
-    primary: { label: "Explore Operating Rooms", href: "/turnkey" },
-    secondary: { label: "See Turnkey Process", href: "/turnkey#process" },
-  },
-  {
-    theme: "After Sales",
-    eyebrow: "Lifecycle Partnership",
-    headline: (
-      <>
-        Supporting Hospitals
-        <br />
-        <span className="text-primary">Beyond Installation.</span>
-      </>
-    ),
-    subtitle:
-      "Preventive maintenance, spare parts, biomedical engineering, upgrades and clinical support throughout the equipment lifecycle.",
+      "Preventive and corrective maintenance, genuine spare parts, software updates and long-term biomedical engineering support — delivered by certified engineers on the ground.",
     image: heroService,
-    imageAlt: "Biomedical engineer servicing advanced imaging equipment",
-    card: { title: "After Sales Support", body: "Long-term partnership." },
+    imageAlt: "Biomedical engineer servicing advanced MRI imaging equipment",
+    card: { title: "Always-On Support", body: "Certified engineers, genuine parts, 24/7." },
     stats: [
-      { value: "24/7", label: "Response" },
-      { value: "PM", label: "Maintenance" },
+      { value: "24/7", label: "Technical Support" },
+      { value: "✓", label: "Preventive Maintenance" },
       { value: "OEM", label: "Spare Parts" },
-      { value: "Clinical", label: "Training" },
+      { value: "✓", label: "Warranty Coverage" },
     ],
-    primary: { label: "Explore After Sales", href: "/#after-sales" },
+    primary: { label: "Explore Services", href: "/after-sales" },
     secondary: { label: "Contact Support", href: "/contact" },
   },
 ];
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 7500;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
