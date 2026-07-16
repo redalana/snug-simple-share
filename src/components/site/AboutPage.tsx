@@ -940,9 +940,12 @@ function FinalCTA() {
               Let's Build Better Healthcare <span className="text-primary">Together.</span>
             </h2>
             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70">
-              Partner with AbuFarha for reliable solutions, exceptional service and long-term success.
-              Our engineers are ready to design the right system for your facility.
+              We don't just sell equipment — we become your long-term healthcare
+              engineering partner. From planning and installation to clinical
+              training and lifetime technical support, AbuFarha stays with your
+              hospital every step of the way.
             </p>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact"
                 className="inline-flex h-[50px] items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark">
