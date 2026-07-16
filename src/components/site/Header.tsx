@@ -350,6 +350,9 @@ function MobileProductsAccordion({
 }) {
   const [expanded, setExpanded] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
+  const activeCategory = new URLSearchParams(searchStr).get("category");
+
   return (
     <div className="border-b border-border/60 py-3 last:border-0">
       <div className="flex items-center justify-between">
