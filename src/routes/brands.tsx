@@ -190,6 +190,11 @@ function productCount(brand: Brand): number {
   return PRODUCTS.filter((p) => p.brand === brand.productKey).length;
 }
 
+function firstProductImage(brand: Brand): string | undefined {
+  if (!brand.productKey) return undefined;
+  return PRODUCTS.find((p) => p.brand === brand.productKey)?.image;
+}
+
 function BrandMark({ brand, size = "md" }: { brand: Brand; size?: "md" | "lg" }) {
   const c = brand.color;
   const d = size === "lg" ? 7 : 5;
