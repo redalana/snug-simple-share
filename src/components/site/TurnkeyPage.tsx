@@ -99,14 +99,130 @@ const PROJECTS = [
   { country: "Iraq", title: "Baghdad Teaching Hospital", scope: "Hybrid OR", tag: "Hybrid OR", year: "2024", image: heroOr },
 ];
 
-const REGIONS = [
-  { name: "Egypt", top: "38%", left: "54%", projects: 12, hospitals: 18, systems: "45+" },
-  { name: "Jordan", top: "32%", left: "58%", projects: 8, hospitals: 11, systems: "30+" },
-  { name: "Iraq", top: "30%", left: "62%", projects: 6, hospitals: 9, systems: "22+" },
-  { name: "Libya", top: "40%", left: "48%", projects: 5, hospitals: 7, systems: "18+" },
-  { name: "Somaliland", top: "56%", left: "62%", projects: 4, hospitals: 5, systems: "12+" },
-  { name: "Uzbekistan", top: "22%", left: "72%", projects: 5, hospitals: 6, systems: "16+" },
-  { name: "Bangladesh", top: "38%", left: "82%", projects: 3, hospitals: 4, systems: "10+" },
+type Region = {
+  name: string;
+  flag: string;
+  note?: string;
+  top: string;
+  left: string;
+  hub?: boolean;
+  img: string;
+  equipment: { label: string; qty: string }[];
+};
+
+const REGIONS: Region[] = [
+  {
+    name: "Jordan",
+    flag: "🇯🇴",
+    note: "Headquarters",
+    top: "46%",
+    left: "50%",
+    hub: true,
+    img: abufarhaHq,
+    equipment: [{ label: "Cath Lab / Heart Center", qty: "3" }],
+  },
+  {
+    name: "Syria",
+    flag: "🇸🇾",
+    top: "34%",
+    left: "48%",
+    img: project1,
+    equipment: [
+      { label: "Cath Lab", qty: "11" },
+      { label: "MRI", qty: "2" },
+      { label: "Eye LASIK Center", qty: "3" },
+      { label: "IVF Center", qty: "2" },
+    ],
+  },
+  {
+    name: "Iraq",
+    flag: "🇮🇶",
+    note: "Including Erbil",
+    top: "38%",
+    left: "58%",
+    img: project2,
+    equipment: [
+      { label: "Cath Lab", qty: "9" },
+      { label: "MRI", qty: "3" },
+      { label: "Ultrasound", qty: "55" },
+      { label: "CT Scanner", qty: "1" },
+    ],
+  },
+  {
+    name: "Yemen",
+    flag: "🇾🇪",
+    top: "66%",
+    left: "58%",
+    img: project3,
+    equipment: [
+      { label: "Cath Lab", qty: "7" },
+      { label: "MRI", qty: "2" },
+      { label: "CT Scanner", qty: "1" },
+      { label: "Cardiology Supplies", qty: "—" },
+    ],
+  },
+  {
+    name: "Egypt",
+    flag: "🇪🇬",
+    top: "56%",
+    left: "42%",
+    img: heroCath,
+    equipment: [{ label: "Cardiology Supplies", qty: "—" }],
+  },
+  {
+    name: "Libya",
+    flag: "🇱🇾",
+    top: "48%",
+    left: "30%",
+    img: heroMri,
+    equipment: [
+      { label: "Cath Lab", qty: "1" },
+      { label: "IVF Center", qty: "1" },
+      { label: "Ultrasound", qty: "3" },
+      { label: "Digital X-ray", qty: "1" },
+    ],
+  },
+  {
+    name: "Somaliland",
+    flag: "🇸🇴",
+    top: "76%",
+    left: "56%",
+    img: icuImg,
+    equipment: [
+      { label: "Cath Lab", qty: "1" },
+      { label: "Cardiology Supplies", qty: "—" },
+    ],
+  },
+  {
+    name: "Somalia",
+    flag: "🇸🇴",
+    top: "84%",
+    left: "60%",
+    img: icuImg,
+    equipment: [
+      { label: "Cath Lab", qty: "1" },
+      { label: "Cardiology Supplies", qty: "—" },
+    ],
+  },
+  {
+    name: "Uzbekistan",
+    flag: "🇺🇿",
+    top: "18%",
+    left: "72%",
+    img: heroCt,
+    equipment: [
+      { label: "Cath Lab", qty: "1" },
+      { label: "Cardiology Supplies", qty: "—" },
+    ],
+  },
+  {
+    name: "Bangladesh",
+    flag: "🇧🇩",
+    top: "48%",
+    left: "90%",
+    img: heroOr,
+    equipment: [{ label: "Bone Density", qty: "2" }],
+  },
 ];
 
 const SUPPORT = [
