@@ -1,18 +1,13 @@
 import type { ContentBlock, TocItem } from "./blog";
 
 export type MedicalTopic = {
-  /** Short "what this article covers" line for the overview section. */
   overview: string;
-  /** 1–2 sentence description of the underlying condition, procedure, or subject. */
   medicalBackground: string;
-  /** Bullet points explaining why the topic matters clinically & operationally. */
   whyMatters: string[];
   symptoms?: string[];
   causes?: string[];
   riskFactors?: string[];
-  /** How the condition or need is diagnosed / assessed. */
   diagnosis: string[];
-  /** Modern medical technologies used and their clinical role. */
   technologies: { name: string; role: string }[];
   clinicalBenefits: string[];
   patientBenefits: string[];
@@ -24,11 +19,21 @@ export type MedicalTopic = {
   relatedTech: string[];
   clinicalTip?: string;
   importantNote?: string;
-  /** Optional subject noun used in prose (e.g. "Cath Lab", "MRI scanner"). Defaults to article category. */
   subject?: string;
-  /** Optional short label for the condition (e.g. "coronary artery disease"). */
   conditionLabel?: string;
+  /** Optional overrides — otherwise category-based defaults are used. */
+  quickFacts?: string[];
+  comparison?: {
+    title?: string;
+    headers: string[];
+    rows: string[][];
+    caption?: string;
+  };
+  relatedDiseases?: string[];
+  references?: { label: string; url?: string }[];
+  audience?: string;
 };
+
 
 /**
  * Per-slug medical knowledge. When a slug is missing here, the generator
