@@ -2611,8 +2611,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Brain metastases",
     ],
     references: [
-      { label: "IAEA Human Health Series — Radiotherapy QA" },
-      { label: "ASTRO Clinical Practice Guidelines" },
+      { label: "IAEA Human Health Series — Radiotherapy Quality Assurance", url: "https://www.iaea.org/publications/search/type/human-health-series" },
+      { label: "ASTRO — Clinical Practice Guidelines", url: "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines" },
+      { label: "ESTRO — European Society for Radiotherapy and Oncology", url: "https://www.estro.org/Science/Guidelines" },
     ],
   },
   "Turnkey Projects": {
