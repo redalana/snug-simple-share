@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BlogPage } from "@/components/site/BlogPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -14,6 +15,8 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: "AbuFarha Medical — Blog & Insights" },
       { property: "og:description", content: "Perspectives on medical equipment, imaging technology, biomedical engineering and healthcare operations." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.blog },
+      { name: "twitter:image", content: OG_IMAGES.blog },
       { property: "og:url", content: "/blog" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -4,6 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProjectsGrid } from "@/components/site/ProjectsGrid";
 import { FinalCTA } from "@/components/site/FinalCTA";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -21,8 +22,12 @@ export const Route = createFileRoute("/projects")({
           "Hospitals and medical centers where AbuFarha supplied, installed, commissioned and supported advanced medical technology.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/projects" },
+      { property: "og:image", content: OG_IMAGES.projects },
+      { name: "twitter:image", content: OG_IMAGES.projects },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL + "/projects" }],
   }),
   component: ProjectsPage,
 });

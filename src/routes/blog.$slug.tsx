@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BlogArticlePage } from "@/components/site/BlogArticlePage";
 import { getArticle } from "@/lib/blog";
+import { SITE_URL, absUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => {
@@ -58,12 +59,14 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: article.metaDescription },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: articlePath },
+        { property: "og:url", content: `${SITE_URL}${articlePath}` },
+        { property: "og:image", content: absUrl(article.coverImage) },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: article.metaDescription },
+        { name: "twitter:image", content: absUrl(article.coverImage) },
       ],
-      links: [{ rel: "canonical", href: articlePath }],
+      links: [{ rel: "canonical", href: `${SITE_URL}${articlePath}` }],
       scripts: schemas.map((schema) => ({
         type: "application/ld+json",
         children: JSON.stringify(schema),

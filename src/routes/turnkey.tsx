@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { TurnkeyPage } from "@/components/site/TurnkeyPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 const TITLE = "Turnkey Healthcare Solutions | AbuFarha Medical Equipment";
 const DESC =
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/turnkey")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.turnkey },
+      { name: "twitter:image", content: OG_IMAGES.turnkey },
       { property: "og:url", content: "/turnkey" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },

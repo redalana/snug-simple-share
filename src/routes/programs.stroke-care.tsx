@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StrokeCareProgram } from "@/components/site/StrokeCareProgram";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/programs/stroke-care")({
   head: () => ({
@@ -20,8 +21,12 @@ export const Route = createFileRoute("/programs/stroke-care")({
           "A stroke program is an ecosystem, not a single device. Explore how AbuFarha plans, engineers, implements and supports advanced stroke care.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/programs/stroke-care" },
+      { property: "og:image", content: OG_IMAGES.strokeCare },
+      { name: "twitter:image", content: OG_IMAGES.strokeCare },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL + "/programs/stroke-care" }],
   }),
   component: StrokeCarePage,
 });

@@ -12,8 +12,29 @@ import { ReadinessTeaser } from "@/components/site/ReadinessTeaser";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Footer } from "@/components/site/Footer";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+
+const HOME_TITLE = "AbuFarha Medical Equipment | Advanced Medical Technology Solutions";
+const HOME_DESC =
+  "AbuFarha supplies, installs, commissions, trains and supports world-class medical equipment across Africa and the Middle East. 25+ years, 250+ hospitals, 40+ countries.";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/" },
+      { property: "og:image", content: OG_IMAGES.home },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: HOME_TITLE },
+      { name: "twitter:description", content: HOME_DESC },
+      { name: "twitter:image", content: OG_IMAGES.home },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+  }),
   component: Index,
 });
 

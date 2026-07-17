@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { AfterSalesPage } from "@/components/site/AfterSalesPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 const TITLE = "After Sales Support | AbuFarha Medical Equipment";
 const DESC =
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/after-sales")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.afterSales },
+      { name: "twitter:image", content: OG_IMAGES.afterSales },
       { property: "og:url", content: "/after-sales" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },

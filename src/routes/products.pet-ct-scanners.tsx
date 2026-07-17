@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/pet-ct-scanners")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/products/pet-ct-scanners")({
           "Digital PET/CT platforms with time-of-flight imaging, clinical training and long-term service support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory["pet-ct-scanners"] },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory["pet-ct-scanners"] },
     ],
     links: [{ rel: "canonical", href: "/products/pet-ct-scanners" }],
   }),

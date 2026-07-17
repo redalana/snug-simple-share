@@ -23,6 +23,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PRODUCTS } from "@/lib/products";
+import { OG_IMAGES } from "@/lib/seo";
 
 type BrandCategory =
   | "Imaging"
@@ -324,6 +325,8 @@ export const Route = createFileRoute("/brands")({
           "12 world-leading manufacturers — one trusted partner for supply, installation, commissioning and after-sales.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.brands },
+      { name: "twitter:image", content: OG_IMAGES.brands },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/brands" }],
