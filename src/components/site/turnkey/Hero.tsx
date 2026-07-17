@@ -5,7 +5,7 @@ import { turnkeyHero } from "./data";
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[560px] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-28 lg:pb-24">
+      <div className="mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[520px] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-24 lg:pb-20">
         {/* LEFT */}
         <div className="flex flex-col justify-center">
           <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
