@@ -62,6 +62,8 @@ export type Product = {
   /** True when the source catalog marks the unit as sold. */
   sold?: boolean;
   warranty: string;
+  /** Standardized refurbishment / preparation statement for pre-owned systems. */
+  refurbishment?: string;
   installation: boolean;
   training: boolean;
   /** Country of manufacture. */
