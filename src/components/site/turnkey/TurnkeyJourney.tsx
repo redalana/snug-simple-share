@@ -8,13 +8,13 @@ export function TurnkeyJourney() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_3.2fr] lg:gap-14">
           <div>
-            <p className="inline-flex items-center gap-2 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
+            <p className="inline-flex items-center gap-2 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
               The Turnkey Journey <ArrowRight className="h-3 w-3" />
             </p>
-            <h2 className="mt-4 font-display text-[calc(34 * var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40 * var(--desktop-px-unit))]">
+            <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
               From Vision<br />To Performance
             </h2>
-            <p className="mt-4 max-w-sm text-[calc(14 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-sm text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
               Our proven process ensures every department is delivered on time,
               on budget, and to the highest clinical standards.
             </p>
@@ -38,13 +38,13 @@ export function TurnkeyJourney() {
               >
                 <div className="relative aspect-square overflow-hidden rounded-xl bg-neutral-100 ring-1 ring-black/5">
                   <img src={p.img} alt={p.title} className="h-full w-full object-cover" />
-                  <span className="absolute -bottom-3 left-1/2 grid h-7 w-7 -translate-x-1/2 place-items-center rounded-full bg-primary text-[calc(10 * var(--desktop-px-unit))] font-bold text-white ring-4 ring-white">
+                  <span className="absolute -bottom-3 left-1/2 grid h-7 w-7 -translate-x-1/2 place-items-center rounded-full bg-primary text-[calc(10*var(--desktop-px-unit))] font-bold text-white ring-4 ring-white">
                     {p.n}
                   </span>
                 </div>
                 <div className="mt-5 text-center">
-                  <div className="font-display text-[calc(15 * var(--desktop-px-unit))] font-bold text-foreground">{p.title}</div>
-                  <p className="mt-1.5 text-[calc(12 * var(--desktop-px-unit))] leading-snug text-muted-foreground">{p.copy}</p>
+                  <div className="font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">{p.title}</div>
+                  <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">{p.copy}</p>
                 </div>
               </motion.div>
             ))}

@@ -60,10 +60,10 @@ function HeroSlider() {
   const slide = slides[active];
 
   return (
-    <section className="bg-white pt-[calc(100 * var(--desktop-px-unit))] xl:pt-[calc(150 * var(--desktop-px-unit))]">
+    <section className="bg-white pt-[calc(100*var(--desktop-px-unit))] xl:pt-[calc(150*var(--desktop-px-unit))]">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div
-          className="relative h-[calc(460 * var(--desktop-px-unit))] w-full overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] sm:h-[calc(520 * var(--desktop-px-unit))] lg:h-[calc(580 * var(--desktop-px-unit))]"
+          className="relative h-[calc(460*var(--desktop-px-unit))] w-full overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] sm:h-[calc(520*var(--desktop-px-unit))] lg:h-[calc(580*var(--desktop-px-unit))]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -92,7 +92,7 @@ function HeroSlider() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
+                <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
                   {slide.category}
                 </span>
                 <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
@@ -190,7 +190,7 @@ function SearchBar() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-11 min-w-[calc(160 * var(--desktop-px-unit))] items-center justify-between gap-2 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40"
+              className="inline-flex h-11 min-w-[calc(160*var(--desktop-px-unit))] items-center justify-between gap-2 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40"
             >
               {sort}
               <ChevronDown
@@ -199,7 +199,7 @@ function SearchBar() {
             </button>
             {open && (
               <div
-                className="absolute right-0 top-full z-30 mt-2 w-[calc(180 * var(--desktop-px-unit))] overflow-hidden rounded-2xl border border-border bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)]"
+                className="absolute right-0 top-full z-30 mt-2 w-[calc(180*var(--desktop-px-unit))] overflow-hidden rounded-2xl border border-border bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)]"
                 onMouseLeave={() => setOpen(false)}
               >
                 {SORTS.map((s) => (
@@ -269,7 +269,7 @@ function ArticleCard({ a }: { a: Article }) {
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+          <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
             {a.category}
           </span>
           <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
@@ -439,7 +439,7 @@ function Newsletter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-12 w-full min-w-[calc(240 * var(--desktop-px-unit))] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[calc(260 * var(--desktop-px-unit))]"
+                className="h-12 w-full min-w-[calc(240*var(--desktop-px-unit))] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[calc(260*var(--desktop-px-unit))]"
               />
               <button
                 type="submit"

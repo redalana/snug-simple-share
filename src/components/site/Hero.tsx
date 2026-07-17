@@ -176,7 +176,7 @@ export function Hero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[calc(144 * var(--desktop-px-unit))] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[calc(152 * var(--desktop-px-unit))] xl:pt-[calc(204 * var(--desktop-px-unit))]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[calc(144*var(--desktop-px-unit))] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[calc(152*var(--desktop-px-unit))] xl:pt-[calc(204*var(--desktop-px-unit))]"
     >
       {/* ── Background scene (crossfade) ─────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
@@ -223,9 +223,9 @@ export function Hero() {
                   <motion.div
                     animate={reduce ? undefined : { y: [0, -8, 0] }}
                     transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-                    className="w-[calc(280 * var(--desktop-px-unit))] rounded-2xl border border-white/60 bg-white/85 p-5 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)] backdrop-blur-xl"
+                    className="w-[calc(280*var(--desktop-px-unit))] rounded-2xl border border-white/60 bg-white/85 p-5 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)] backdrop-blur-xl"
                   >
-                    <div className="mb-1 text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
+                    <div className="mb-1 text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
                       {slide.theme}
                     </div>
                     <div className="font-display text-lg font-extrabold text-ink">
@@ -242,7 +242,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute -left-40 top-24 h-[calc(520 * var(--desktop-px-unit))] w-[calc(520 * var(--desktop-px-unit))] rounded-full bg-primary/5 blur-3xl lg:hidden" />
+      <div className="pointer-events-none absolute -left-40 top-24 h-[calc(520*var(--desktop-px-unit))] w-[calc(520*var(--desktop-px-unit))] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content ─────────────────────────────────────────────────── */}
       <div className="relative mx-auto max-w-[100rem] px-6 py-9 lg:px-10 lg:py-14">
@@ -252,7 +252,7 @@ export function Hero() {
           dragElastic={0.15}
           onDragEnd={onDragEnd}
           className="pl-0 lg:max-w-[46%] lg:pl-12"
-          style={{ minHeight: "clamp(calc(560 * var(--desktop-px-unit)), 62vh, calc(680 * var(--desktop-px-unit)))" }}
+          style={{ minHeight: "clamp(calc(560*var(--desktop-px-unit)), 62vh, calc(680*var(--desktop-px-unit)))" }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -267,7 +267,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: EASE, delay: 0.05 }}
-                className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-primary"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-primary"
               >
                 {slide.eyebrow}
               </motion.span>
@@ -283,7 +283,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: EASE, delay: 0.22 }}
-                className="mt-5 max-w-md text-[calc(17 * var(--desktop-px-unit))] leading-[1.65] text-muted-foreground"
+                className="mt-5 max-w-md text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-muted-foreground"
               >
                 {slide.subtitle}
               </motion.p>
@@ -317,7 +317,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, ease: EASE, delay: 0.48 }}
-                className="mt-4 flex items-center gap-2 text-[calc(13 * var(--desktop-px-unit))] font-medium text-muted-foreground"
+                className="mt-4 flex items-center gap-2 text-[calc(13*var(--desktop-px-unit))] font-medium text-muted-foreground"
               >
                 <ShieldCheck className="h-4 w-4 text-primary" />
                 Backed by a 1-year free warranty on every installation.
@@ -332,7 +332,7 @@ export function Hero() {
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, ease: EASE, delay: 0.5 + i * 0.07 }}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/70 px-3 py-1.5 text-[calc(12 * var(--desktop-px-unit))] font-semibold text-ink shadow-sm backdrop-blur"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/70 px-3 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-ink shadow-sm backdrop-blur"
                     >
                       <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={2.4} />
                       {t.label}
@@ -361,9 +361,9 @@ export function Hero() {
               className="absolute inset-0 h-full w-full object-cover"
             />
           </AnimatePresence>
-          <div className="relative h-[calc(440 * var(--desktop-px-unit))] w-full" />
+          <div className="relative h-[calc(440*var(--desktop-px-unit))] w-full" />
           <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/60 bg-white/90 p-4 backdrop-blur-xl">
-            <div className="text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
+            <div className="text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
               {slide.theme}
             </div>
             <div className="mt-0.5 font-display text-base font-extrabold text-ink">
@@ -390,14 +390,14 @@ export function Hero() {
                 >
                   <span className="flex items-center gap-2">
                     <span
-                      className={`font-display text-[calc(11 * var(--desktop-px-unit))] font-extrabold tabular-nums transition-colors ${
+                      className={`font-display text-[calc(11*var(--desktop-px-unit))] font-extrabold tabular-nums transition-colors ${
                         active ? "text-primary" : "text-muted-foreground/70"
                       }`}
                     >
                       0{i + 1}
                     </span>
                     <span
-                      className={`text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] transition-colors ${
+                      className={`text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] transition-colors ${
                         active ? "text-ink" : "text-muted-foreground group-hover:text-ink"
                       }`}
                     >
@@ -405,7 +405,7 @@ export function Hero() {
                     </span>
                   </span>
                   <span
-                    className={`relative block h-[calc(3 * var(--desktop-px-unit))] overflow-hidden rounded-full transition-colors ${
+                    className={`relative block h-[calc(3*var(--desktop-px-unit))] overflow-hidden rounded-full transition-colors ${
                       active ? "bg-primary/20" : "bg-border"
                     }`}
                   >

@@ -288,20 +288,20 @@ function BrandMark({ brand, size = "md" }: { brand: Brand; size?: "sm" | "md" | 
     size === "lg" ? "h-6 w-6" : size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5";
   switch (brand.mark) {
     case "square":
-      return <span className={`${cls} rounded-[calc(3 * var(--desktop-px-unit))]`} style={{ backgroundColor: c }} />;
+      return <span className={`${cls} rounded-[calc(3*var(--desktop-px-unit))]`} style={{ backgroundColor: c }} />;
     case "ring":
       return (
         <span
-          className={`${cls} rounded-full border-[calc(3 * var(--desktop-px-unit))]`}
+          className={`${cls} rounded-full border-[calc(3*var(--desktop-px-unit))]`}
           style={{ borderColor: c }}
         />
       );
     case "bars":
       return (
-        <span className="flex items-end gap-[calc(2 * var(--desktop-px-unit))]">
-          <span className="w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(10 * var(--desktop-px-unit))" }} />
-          <span className="w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(16 * var(--desktop-px-unit))" }} />
-          <span className="w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(13 * var(--desktop-px-unit))" }} />
+        <span className="flex items-end gap-[calc(2*var(--desktop-px-unit))]">
+          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(10*var(--desktop-px-unit))" }} />
+          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(16*var(--desktop-px-unit))" }} />
+          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(13*var(--desktop-px-unit))" }} />
         </span>
       );
     default:
@@ -358,13 +358,13 @@ function BrandsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-[calc(96 * var(--desktop-px-unit))]">
+      <main className="pt-[calc(96*var(--desktop-px-unit))]">
         {/* ============ HERO ============ */}
         <section className="relative overflow-hidden bg-white">
           <div className="mx-auto grid max-w-[100rem] items-center gap-10 px-6 py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12 lg:px-10 lg:py-16">
             {/* LEFT: copy */}
             <div>
-              <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+              <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                 Our Global Partners
               </div>
               <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3rem]">
@@ -374,7 +374,7 @@ function BrandsPage() {
                 <br />
                 <span className="text-primary">One trusted partner.</span>
               </h1>
-              <p className="mt-6 max-w-md text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-md text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                 AbuFarha Medical is the authorized channel for the world's leading
                 medical technology brands. We supply, install, commission and support
                 advanced medical systems across Africa and the Middle East.
@@ -485,7 +485,7 @@ function BrandsPage() {
                   </h2>
                 </div>
                 <div className="hidden items-center gap-3 md:flex">
-                  <span className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                     {featured.length} of {BRANDS.length}
                   </span>
                   <div className="flex items-center gap-1.5">
@@ -557,13 +557,13 @@ function BrandsPage() {
               <table className="min-w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-accent/40 text-left">
-                    <th className="px-5 py-3.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <th className="px-5 py-3.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       Brand
                     </th>
                     {MODALITY_COLS.map((m) => (
                       <th
                         key={m}
-                        className="px-4 py-3.5 text-center text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                        className="px-4 py-3.5 text-center text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
                       >
                         {m}
                       </th>
@@ -735,7 +735,7 @@ function BrandEcosystem() {
   const activeBrand = BRANDS.find((b) => b.name === active) ?? BRANDS[0];
 
   return (
-    <div className="relative mx-auto aspect-[6/5] w-full max-w-[calc(640 * var(--desktop-px-unit))]">
+    <div className="relative mx-auto aspect-[6/5] w-full max-w-[calc(640*var(--desktop-px-unit))]">
       {/* World map dot-grid background */}
       <WorldDotMap />
 
@@ -765,7 +765,7 @@ function BrandEcosystem() {
         className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
         style={{ left: `${CENTER.x}%`, top: `${CENTER.y}%` }}
       >
-        <div className="flex h-[calc(140 * var(--desktop-px-unit))] w-[calc(140 * var(--desktop-px-unit))] flex-col items-center justify-center rounded-full border border-border bg-white text-center shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] md:h-[calc(160 * var(--desktop-px-unit))] md:w-[calc(160 * var(--desktop-px-unit))]">
+        <div className="flex h-[calc(140*var(--desktop-px-unit))] w-[calc(140*var(--desktop-px-unit))] flex-col items-center justify-center rounded-full border border-border bg-white text-center shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] md:h-[calc(160*var(--desktop-px-unit))] md:w-[calc(160*var(--desktop-px-unit))]">
           <div className="flex items-center gap-1">
             <span className="font-display text-xl font-extrabold text-foreground md:text-2xl">
               Abu
@@ -774,7 +774,7 @@ function BrandEcosystem() {
               Farha
             </span>
           </div>
-          <div className="mt-1.5 px-4 text-[calc(9 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <div className="mt-1.5 px-4 text-[calc(9*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             Authorized Medical
             <br />
             Technology Partner
@@ -806,14 +806,14 @@ function BrandEcosystem() {
             >
               <BrandMark brand={brand} size="sm" />
               <span
-                className="font-display text-xs font-extrabold tracking-tight md:text-[calc(13 * var(--desktop-px-unit))]"
+                className="font-display text-xs font-extrabold tracking-tight md:text-[calc(13*var(--desktop-px-unit))]"
                 style={{ color: brand.color }}
               >
                 {brand.name}
               </span>
               {brand.sub && (
                 <span
-                  className="hidden text-[calc(9 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] md:inline"
+                  className="hidden text-[calc(9*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] md:inline"
                   style={{ color: brand.color, opacity: 0.75 }}
                 >
                   {brand.sub}
@@ -826,7 +826,7 @@ function BrandEcosystem() {
 
       {/* Hover reveal card */}
       <div
-        className="absolute z-30 hidden w-[calc(190 * var(--desktop-px-unit))] rounded-xl border border-border bg-white p-4 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.2)] md:block"
+        className="absolute z-30 hidden w-[calc(190*var(--desktop-px-unit))] rounded-xl border border-border bg-white p-4 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.2)] md:block"
         style={{ left: "72%", top: "44%" }}
       >
         <div className="flex items-center justify-between">
@@ -845,7 +845,7 @@ function BrandEcosystem() {
           {activeBrand.categories.slice(0, 4).map((c) => (
             <li
               key={c}
-              className="flex items-center gap-1.5 text-[calc(11 * var(--desktop-px-unit))] text-foreground/80"
+              className="flex items-center gap-1.5 text-[calc(11*var(--desktop-px-unit))] text-foreground/80"
             >
               <Check className="h-3 w-3 text-emerald-500" strokeWidth={3} />
               {c}
@@ -854,7 +854,7 @@ function BrandEcosystem() {
         </ul>
         <Link
           to="/products"
-          className="mt-3 inline-flex items-center gap-1 text-[calc(11 * var(--desktop-px-unit))] font-semibold text-primary hover:gap-2 transition-all"
+          className="mt-3 inline-flex items-center gap-1 text-[calc(11*var(--desktop-px-unit))] font-semibold text-primary hover:gap-2 transition-all"
         >
           View Products
           <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
@@ -872,8 +872,8 @@ function WorldDotMap() {
       className="pointer-events-none absolute inset-0 opacity-40"
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgba(15,23,42,0.18) calc(1 * var(--desktop-px-unit)), transparent calc(1.4 * var(--desktop-px-unit)))",
-        backgroundSize: "calc(14 * var(--desktop-px-unit)) calc(14 * var(--desktop-px-unit))",
+          "radial-gradient(circle, rgba(15,23,42,0.18) calc(1*var(--desktop-px-unit)), transparent calc(1.4 * var(--desktop-px-unit)))",
+        backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
         maskImage:
           "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",
         WebkitMaskImage:
@@ -893,7 +893,7 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/70 hover:shadow-[0_30px_80px_-30px_rgba(230,57,70,0.35)]">
       <span
-        className="absolute inset-x-0 top-0 z-10 h-[calc(3 * var(--desktop-px-unit))]"
+        className="absolute inset-x-0 top-0 z-10 h-[calc(3*var(--desktop-px-unit))]"
         style={{ backgroundColor: brand.color }}
       />
 
@@ -938,7 +938,7 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
           {brand.categories.slice(0, 5).map((c) => (
             <span
               key={c}
-              className="rounded-full bg-accent/60 px-2.5 py-1 text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-wide text-foreground/70"
+              className="rounded-full bg-accent/60 px-2.5 py-1 text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-wide text-foreground/70"
             >
               {c}
             </span>
@@ -974,7 +974,7 @@ function BrandCard({ brand }: { brand: Brand }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_50px_-25px_rgba(230,57,70,0.35)]">
       <span
-        className="absolute inset-x-0 top-0 h-[calc(3 * var(--desktop-px-unit))]"
+        className="absolute inset-x-0 top-0 h-[calc(3*var(--desktop-px-unit))]"
         style={{ backgroundColor: brand.color }}
       />
       <div className="flex items-center justify-center gap-2 pt-2">
@@ -986,7 +986,7 @@ function BrandCard({ brand }: { brand: Brand }) {
           {brand.name}
         </span>
       </div>
-      <div className="mt-1 text-[calc(11 * var(--desktop-px-unit))] font-medium text-muted-foreground">
+      <div className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground">
         {brand.country}
       </div>
       <div className="mt-4 border-t border-border pt-3">

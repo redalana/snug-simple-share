@@ -22,7 +22,7 @@ export function MobileProductsAccordion({
         <Link
           to="/products"
           onClick={onNavigate}
-          className={`flex min-h-[calc(48 * var(--desktop-px-unit))] flex-1 items-center text-[calc(16 * var(--desktop-px-unit))] font-medium transition-colors ${
+          className={`flex min-h-[calc(48*var(--desktop-px-unit))] flex-1 items-center text-[calc(16*var(--desktop-px-unit))] font-medium transition-colors ${
             active ? "text-primary" : "text-foreground/80 hover:text-primary"
           }`}
         >
@@ -50,7 +50,7 @@ export function MobileProductsAccordion({
             className="overflow-hidden"
           >
             <div className="mt-3 border-t border-border/60 pt-2">
-              <span className="mb-1 block px-2 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="mb-1 block px-2 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Product Categories
               </span>
               <ul className="flex flex-col">
@@ -64,7 +64,7 @@ export function MobileProductsAccordion({
                         search={category ? { category } : {}}
                         onClick={onNavigate}
                         aria-current={isActive ? "page" : undefined}
-                        className={`flex min-h-[calc(48 * var(--desktop-px-unit))] items-center gap-3 rounded-[calc(4 * var(--desktop-px-unit))] px-2 text-[calc(15 * var(--desktop-px-unit))] font-medium transition-colors hover:bg-muted hover:text-foreground ${
+                        className={`flex min-h-[calc(48*var(--desktop-px-unit))] items-center gap-3 rounded-[calc(4*var(--desktop-px-unit))] px-2 text-[calc(15*var(--desktop-px-unit))] font-medium transition-colors hover:bg-muted hover:text-foreground ${
                           isActive ? "bg-muted text-foreground" : "text-foreground/75"
                         }`}
                       >
@@ -82,7 +82,7 @@ export function MobileProductsAccordion({
               <Link
                 to="/products"
                 onClick={onNavigate}
-                className="mt-1 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-[calc(13 * var(--desktop-px-unit))] font-semibold text-foreground hover:text-primary"
+                className="mt-1 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground hover:text-primary"
               >
                 <span>View All Products</span>
                 <ArrowRight className="h-4 w-4 text-primary" strokeWidth={2.25} />

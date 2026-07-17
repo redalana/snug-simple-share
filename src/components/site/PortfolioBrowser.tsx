@@ -182,7 +182,7 @@ function FilterAccordion({
         <span className="flex items-center gap-2">
           {title}
           {selected.length > 0 && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[calc(11 * var(--desktop-px-unit))] font-bold text-primary-foreground">
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold text-primary-foreground">
               {selected.length}
             </span>
           )}
@@ -218,7 +218,7 @@ function FilterAccordion({
                     type="checkbox"
                     checked={selected.includes(opt.value)}
                     onChange={() => onToggle(opt.value)}
-                    className="h-[calc(18 * var(--desktop-px-unit))] w-[calc(18 * var(--desktop-px-unit))] rounded-[calc(5 * var(--desktop-px-unit))] border-border text-primary accent-primary"
+                    className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
                   />
                   <span className="flex-1">{opt.value}</span>
                   <span className="text-xs font-medium text-muted-foreground/70">({opt.count})</span>
@@ -266,11 +266,11 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           />
         </div>
         <span
-          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[calc(11 * var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[product.status]}`}
+          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[product.status]}`}
         >
           {product.status}
         </span>
-        <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
+        <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.brand}
         </span>
       </div>
@@ -517,8 +517,8 @@ export function PortfolioBrowser() {
           className="pointer-events-none absolute inset-0 opacity-[0.5]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, color-mix(in srgb, var(--primary) 6%, transparent) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, color-mix(in srgb, var(--primary) 6%, transparent) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
-            backgroundSize: "calc(56 * var(--desktop-px-unit)) calc(56 * var(--desktop-px-unit))",
+              "linear-gradient(to right, color-mix(in srgb, var(--primary) 6%, transparent) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, color-mix(in srgb, var(--primary) 6%, transparent) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+            backgroundSize: "calc(56*var(--desktop-px-unit)) calc(56*var(--desktop-px-unit))",
             maskImage: "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 78%)",
             WebkitMaskImage: "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 78%)",
           }}
@@ -597,7 +597,7 @@ export function PortfolioBrowser() {
       </section>
 
       {/* CATEGORY NAV */}
-      <section className="sticky top-[calc(112 * var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
+      <section className="sticky top-[calc(112*var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
           <div className="flex w-full items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {CATEGORIES.map((cat) => (
@@ -647,7 +647,7 @@ export function PortfolioBrowser() {
                   }`}
                 >
                   <span>{brand.name}</span>
-                  <span className="mt-1 text-[calc(11 * var(--desktop-px-unit))] font-medium text-muted-foreground/70">
+                  <span className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground/70">
                     {brand.count} {brand.count === 1 ? "system" : "systems"}
                   </span>
                 </button>
@@ -659,10 +659,10 @@ export function PortfolioBrowser() {
 
       {/* MAIN */}
       <section className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-16">
-        <div className="lg:grid lg:grid-cols-[calc(320 * var(--desktop-px-unit))_1fr] lg:gap-10">
+        <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
           <aside className="mb-8 lg:mb-0">
-            <div className="lg:sticky lg:top-[calc(188 * var(--desktop-px-unit))]">
+            <div className="lg:sticky lg:top-[calc(188*var(--desktop-px-unit))]">
               <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
                 <div className="mb-1 flex items-center justify-between">
                   <div className="flex items-center gap-2 font-display font-bold text-foreground">

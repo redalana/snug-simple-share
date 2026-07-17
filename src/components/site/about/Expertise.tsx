@@ -13,9 +13,9 @@ export function Expertise() {
           <Reveal>
             <div className="sticky top-32">
               <div className="relative overflow-hidden rounded-3xl shadow-[0_30px_70px_-30px_rgba(0,0,0,0.45)]">
-                <img src={warehouseImg} alt="AbuFarha engineering team" className="h-full w-full min-h-[calc(520 * var(--desktop-px-unit))] object-cover" loading="lazy" />
+                <img src={warehouseImg} alt="AbuFarha engineering team" className="h-full w-full min-h-[calc(520*var(--desktop-px-unit))] object-cover" loading="lazy" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-7 text-white">
-                  <div className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/70">Engineering Excellence</div>
+                  <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/70">Engineering Excellence</div>
                   <div className="mt-2 font-display text-2xl font-extrabold">Deep expertise across every modality.</div>
                 </div>
               </div>
@@ -27,7 +27,7 @@ export function Expertise() {
               <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
                 Deep engineering across the full equipment lifecycle.
               </h2>
-              <p className="mt-4 max-w-xl text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+              <p className="mt-4 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                 Nine disciplines, one integrated team — from first clinical consultation to lifetime technical support.
               </p>
             </Reveal>
@@ -50,11 +50,11 @@ export function Expertise() {
                     </button>
                     <div className={`grid overflow-hidden transition-all duration-400 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                       <div className="min-h-0">
-                        <div className="grid gap-5 px-6 pb-6 sm:grid-cols-[calc(140 * var(--desktop-px-unit))_1fr]">
+                        <div className="grid gap-5 px-6 pb-6 sm:grid-cols-[calc(140*var(--desktop-px-unit))_1fr]">
                           <div className="hidden overflow-hidden rounded-xl sm:block">
                             <img src={e.thumb} alt="" className="h-full w-full object-cover" loading="lazy" />
                           </div>
-                          <p className="text-[calc(14 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                          <p className="text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                             {e.desc}
                           </p>
                         </div>

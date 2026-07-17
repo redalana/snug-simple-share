@@ -78,24 +78,24 @@ export function RemoteDiagnostics() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="absolute bottom-6 left-6 right-6 sm:right-auto sm:min-w-[calc(280 * var(--desktop-px-unit))] overflow-hidden rounded-2xl border border-white/25 bg-white/15 p-4 text-white shadow-[0_20px_45px_-15px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
+              className="absolute bottom-6 left-6 right-6 sm:right-auto sm:min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border border-white/25 bg-white/15 p-4 text-white shadow-[0_20px_45px_-15px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
             >
               <div className="flex items-center gap-3">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
                 </span>
-                <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em]">
+                <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em]">
                   Connected
                 </div>
-                <div className="ml-auto text-[calc(10 * var(--desktop-px-unit))] font-medium uppercase tracking-[0.18em] text-white/60">
+                <div className="ml-auto text-[calc(10*var(--desktop-px-unit))] font-medium uppercase tracking-[0.18em] text-white/60">
                   Live
                 </div>
               </div>
-              <div className="mt-2 text-[calc(13 * var(--desktop-px-unit))] font-medium text-white/90">
+              <div className="mt-2 text-[calc(13*var(--desktop-px-unit))] font-medium text-white/90">
                 24/7 Live Monitoring
               </div>
-              <div className="mt-3 flex items-center justify-between border-t border-white/15 pt-3 text-[calc(11 * var(--desktop-px-unit))] text-white/70">
+              <div className="mt-3 flex items-center justify-between border-t border-white/15 pt-3 text-[calc(11*var(--desktop-px-unit))] text-white/70">
                 <span className="uppercase tracking-[0.18em]">Last Sync</span>
                 <span className="font-semibold text-white">18 sec ago</span>
               </div>
@@ -105,7 +105,7 @@ export function RemoteDiagnostics() {
 
         {/* RIGHT — Content */}
         <div>
-          <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
             Proactive Support
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-[3.25rem]">
@@ -113,7 +113,7 @@ export function RemoteDiagnostics() {
             <br />
             Always Connected.
           </h2>
-          <p className="mt-6 max-w-lg text-[calc(16 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
+          <p className="mt-6 max-w-lg text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
             Our biomedical engineers monitor installed systems around the clock
             — detecting issues early and resolving them remotely before
             downtime reaches your hospital.
@@ -164,7 +164,7 @@ export function RemoteDiagnostics() {
                   Live Equipment Status
                 </span>
               </div>
-              <span className="text-[calc(11 * var(--desktop-px-unit))] font-medium text-muted-foreground">
+              <span className="text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground">
                 Updated · just now
               </span>
             </div>
@@ -180,7 +180,7 @@ export function RemoteDiagnostics() {
                       <div className="text-[calc(14.5 * var(--desktop-px-unit))] font-semibold text-foreground">
                         {name}
                       </div>
-                      <div className="mt-0.5 text-[calc(12 * var(--desktop-px-unit))] text-muted-foreground">
+                      <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] text-muted-foreground">
                         {last}
                       </div>
                     </div>
@@ -215,7 +215,7 @@ export function RemoteDiagnostics() {
                           </span>
                         </>
                       ) : (
-                        <span className="text-[calc(12 * var(--desktop-px-unit))] font-medium text-muted-foreground">
+                        <span className="text-[calc(12*var(--desktop-px-unit))] font-medium text-muted-foreground">
                           Maintenance window
                         </span>
                       )}

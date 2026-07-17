@@ -5,23 +5,23 @@ import { turnkeyHero } from "./data";
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto grid min-h-[calc(480 * var(--desktop-px-unit))] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[calc(460 * var(--desktop-px-unit))] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="mx-auto grid min-h-[calc(480*var(--desktop-px-unit))] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
         {/* LEFT */}
         <div className="flex flex-col justify-center">
-          <p className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.28em] text-primary">
+          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.28em] text-primary">
             Turnkey Solutions
           </p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mt-5 font-display text-[calc(44 * var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54 * var(--desktop-px-unit))] lg:text-[calc(56 * var(--desktop-px-unit))]"
+            className="mt-5 font-display text-[calc(44*var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
           >
             Complete Clinical<br />
             Departments.<br />
             <span className="text-primary">Ready for Life.</span>
           </motion.h1>
-          <p className="mt-6 max-w-lg text-[calc(15 * var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+          <p className="mt-6 max-w-lg text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
             From planning and engineering to installation and training, we
             deliver fully integrated medical departments that perform today and
             for years to come.
@@ -56,14 +56,14 @@ export function Hero() {
                 {s.icon ? (
                   <s.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
                 ) : (
-                  <span className="text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-primary">
+                  <span className="text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-primary">
                     {s.small}
                   </span>
                 )}
                 <div className="mt-2 font-display text-2xl font-extrabold text-foreground">
                   {s.value}
                 </div>
-                <div className="mt-1 text-[calc(11 * var(--desktop-px-unit))] leading-tight text-muted-foreground">
+                <div className="mt-1 text-[calc(11*var(--desktop-px-unit))] leading-tight text-muted-foreground">
                   {s.label}
                 </div>
               </div>
@@ -87,20 +87,20 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="absolute -bottom-6 right-6 w-[calc(280 * var(--desktop-px-unit))] rounded-2xl bg-white p-5 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.25)] ring-1 ring-black/5"
+            className="absolute -bottom-6 right-6 w-[calc(280*var(--desktop-px-unit))] rounded-2xl bg-white p-5 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.25)] ring-1 ring-black/5"
           >
             <div className="flex items-start gap-3">
               <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                 <ShieldCheck className="h-5 w-5" strokeWidth={1.6} />
               </div>
               <div>
-                <div className="font-display text-[calc(15 * var(--desktop-px-unit))] font-bold text-foreground">
+                <div className="font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">
                   Turnkey. Total Care.
                 </div>
-                <p className="mt-1 text-[calc(12 * var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                <p className="mt-1 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
                   One partner for every step. One standard of excellence.
                 </p>
-                <a href="#journey" className="mt-2 inline-flex items-center gap-1 text-[calc(12 * var(--desktop-px-unit))] font-bold text-primary">
+                <a href="#journey" className="mt-2 inline-flex items-center gap-1 text-[calc(12*var(--desktop-px-unit))] font-bold text-primary">
                   Explore Our Process <ArrowRight className="h-3 w-3" />
                 </a>
               </div>

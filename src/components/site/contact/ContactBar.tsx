@@ -48,11 +48,11 @@ export function ContactBar() {
                 <Icon className="h-6 w-6" />
               </span>
               <div className="min-w-0">
-                <div className="text-[calc(15 * var(--desktop-px-unit))] font-bold text-foreground">{title}</div>
+                <div className="text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">{title}</div>
                 <div className="mt-0.5 truncate text-sm text-muted-foreground">
                   {lines[0]}
                 </div>
-                <div className="truncate text-[calc(13 * var(--desktop-px-unit))] text-muted-foreground/80">
+                <div className="truncate text-[calc(13*var(--desktop-px-unit))] text-muted-foreground/80">
                   {lines[1]}
                 </div>
               </div>

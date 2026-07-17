@@ -275,8 +275,8 @@ export function Solutions() {
         className="pointer-events-none absolute inset-0 opacity-[0.2]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-border) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-border) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
-          backgroundSize: "calc(72 * var(--desktop-px-unit)) calc(72 * var(--desktop-px-unit))",
+            "linear-gradient(to right, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+          backgroundSize: "calc(72*var(--desktop-px-unit)) calc(72*var(--desktop-px-unit))",
           maskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 40%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 40%, transparent 100%)",
         }}
@@ -313,7 +313,7 @@ export function Solutions() {
                 <button
                   key={c.id}
                   onClick={() => selectCategory(i)}
-                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[calc(13 * var(--desktop-px-unit))] tracking-[0.01em] transition-all duration-300 ${
+                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[calc(13*var(--desktop-px-unit))] tracking-[0.01em] transition-all duration-300 ${
                     isActive
                       ? "font-semibold text-ink"
                       : "font-medium text-muted-foreground/70 hover:text-ink"
@@ -330,7 +330,7 @@ export function Solutions() {
                   )}
                   {/* premium product thumbnail */}
                   <span
-                    className={`relative z-10 overflow-hidden rounded-[calc(10 * var(--desktop-px-unit))] bg-secondary ring-1 transition-all duration-300 ${
+                    className={`relative z-10 overflow-hidden rounded-[calc(10*var(--desktop-px-unit))] bg-secondary ring-1 transition-all duration-300 ${
                       isActive
                         ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
                         : "opacity-70 shadow-sm ring-white/80 grayscale-[0.15] group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-[1.05]"
@@ -356,7 +356,7 @@ export function Solutions() {
                   {isActive && (
                     <motion.span
                       layoutId="cat-underline"
-                      className="absolute inset-x-3 -bottom-[calc(3 * var(--desktop-px-unit))] z-20 h-0.5 overflow-hidden rounded-full bg-ink/10"
+                      className="absolute inset-x-3 -bottom-[calc(3*var(--desktop-px-unit))] z-20 h-0.5 overflow-hidden rounded-full bg-ink/10"
                       transition={{ type: "spring", stiffness: 480, damping: 42 }}
                     >
                       {/* editorial autoplay progress line */}
@@ -402,7 +402,7 @@ export function Solutions() {
                 className="flex h-full flex-col will-change-[opacity,transform]"
               >
 
-                <span className="text-[calc(10 * var(--desktop-px-unit))] font-medium uppercase tracking-[0.28em] text-primary">
+                <span className="text-[calc(10*var(--desktop-px-unit))] font-medium uppercase tracking-[0.28em] text-primary">
                   Featured Category
                 </span>
                 <h3 className="mt-3.5 font-display text-[2.35rem] font-black leading-[0.98] tracking-[-0.03em] text-ink sm:text-[3rem]">
@@ -420,10 +420,10 @@ export function Solutions() {
                       initial={{ opacity: 0, x: -8 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.15 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-                      className="flex items-center gap-3.5 text-[calc(15 * var(--desktop-px-unit))] font-medium text-ink"
+                      className="flex items-center gap-3.5 text-[calc(15*var(--desktop-px-unit))] font-medium text-ink"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
-                        <Check className="h-[calc(15 * var(--desktop-px-unit))] w-[calc(15 * var(--desktop-px-unit))]" strokeWidth={2.75} />
+                        <Check className="h-[calc(15*var(--desktop-px-unit))] w-[calc(15*var(--desktop-px-unit))]" strokeWidth={2.75} />
                       </span>
                       <span className="leading-snug">{cap}</span>
                     </motion.li>
@@ -435,7 +435,7 @@ export function Solutions() {
                 <div className="mt-9 grid overflow-hidden rounded-2xl border border-border/80 bg-secondary/30 sm:grid-cols-3 sm:divide-x sm:divide-border/70">
                   {active.meta.map((m) => (
                     <div key={m.label} className="px-5 py-5 not-last:border-b not-last:border-border/70 sm:border-b-0">
-                      <div className="text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
+                      <div className="text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
                         {m.label}
                       </div>
                       <div className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] font-bold leading-snug text-ink">
