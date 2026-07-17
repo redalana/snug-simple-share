@@ -91,8 +91,10 @@ export function CountrySelect({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search country"
+              aria-label="Search country"
               className="h-10 rounded-lg border-border bg-secondary/40 pl-9 text-sm"
             />
+
           </div>
         </div>
         <div className="max-h-[calc(260*var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
