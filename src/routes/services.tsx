@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ServicesPage } from "@/components/site/ServicesPage";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 const TITLE = "Medical Equipment Services | AbuFarha Medical Equipment";
 const DESC =
@@ -18,12 +18,12 @@ export const Route = createFileRoute("/services")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.services },
       { name: "twitter:image", content: OG_IMAGES.services },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: SITE_URL + "/services" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/services" }],
   }),
   component: ServicesRoute,
 });

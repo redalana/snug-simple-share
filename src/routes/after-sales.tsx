@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { AfterSalesPage } from "@/components/site/AfterSalesPage";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 const TITLE = "After Sales Support | AbuFarha Medical Equipment";
 const DESC =
@@ -18,12 +18,12 @@ export const Route = createFileRoute("/after-sales")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.afterSales },
       { name: "twitter:image", content: OG_IMAGES.afterSales },
-      { property: "og:url", content: "/after-sales" },
+      { property: "og:url", content: SITE_URL + "/after-sales" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
     ],
-    links: [{ rel: "canonical", href: "/after-sales" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/after-sales" }],
   }),
   component: AfterSalesRoute,
 });

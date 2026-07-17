@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BlogPage } from "@/components/site/BlogPage";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -17,10 +17,10 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.blog },
       { name: "twitter:image", content: OG_IMAGES.blog },
-      { property: "og:url", content: "/blog" },
+      { property: "og:url", content: SITE_URL + "/blog" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/blog" }],
   }),
   component: BlogRoute,
 });

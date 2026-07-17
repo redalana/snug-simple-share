@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/c-arm-systems")({
   head: () => ({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/products/c-arm-systems")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["c-arm-systems"] },
     ],
-    links: [{ rel: "canonical", href: "/products/c-arm-systems" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/products/c-arm-systems" }],
   }),
   component: () => (
     <CategoryLandingPage
