@@ -26,6 +26,7 @@ const SORTS = ["Latest", "Oldest", "Most Popular"] as const;
 export function BlogPage() {
   return (
     <div className="bg-white">
+      <PageIntro />
       <HeroSlider />
       <SearchBar />
       <ArticleGrid heading="Latest Articles" items={LATEST_ARTICLES} />
@@ -34,6 +35,28 @@ export function BlogPage() {
       <Pagination />
       <Newsletter />
     </div>
+  );
+}
+
+/* ---------------- Page Intro ---------------- */
+
+function PageIntro() {
+  return (
+    <section className="bg-white pt-[calc(100*var(--desktop-px-unit))] xl:pt-[calc(140*var(--desktop-px-unit))]">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+        <span className="text-xs font-bold uppercase tracking-[0.24em] text-primary">
+          Healthcare Knowledge Center
+        </span>
+        <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-4xl lg:text-[2.75rem]">
+          Healthcare Knowledge Center
+        </h1>
+        <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
+          Evidence-based clinical articles, healthcare technology insights, buying guides,
+          educational resources, and expert knowledge designed for hospitals, physicians,
+          biomedical engineers, and healthcare professionals across Africa and the Middle East.
+        </p>
+      </div>
+    </section>
   );
 }
 
