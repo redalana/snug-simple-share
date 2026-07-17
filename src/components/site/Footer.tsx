@@ -227,7 +227,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="flex flex-col items-center justify-between gap-3 py-5 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row lg:py-5">
 
           <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
