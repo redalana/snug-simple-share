@@ -5,6 +5,7 @@ import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   ChevronLeft,
   ChevronUp,
   BarChart3,
@@ -12,8 +13,10 @@ import {
   CheckCircle2,
   ChevronRight,
   Clock,
+  Cpu,
   DollarSign,
   Facebook,
+  FileText,
   Info,
   Lightbulb,
   Linkedin,
@@ -30,8 +33,10 @@ import {
   Truck,
   TrendingUp,
   User,
+  Users,
   X,
 } from "lucide-react";
+
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
 import {
