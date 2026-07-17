@@ -229,3 +229,15 @@
   }
 }
 
+
+/* ==========================================================================
+   Lovable editor embed only — offset the fixed header so the host's top
+   toolbar cannot clip the second navigation row. Applied exclusively when
+   <html data-lovable-embed="true"> is set at runtime (iframe detection).
+   Standalone preview and production have no attribute → zero effect,
+   pixel-identical rendering.
+   ========================================================================== */
+html[data-lovable-embed="true"] > body > header,
+html[data-lovable-embed="true"] > body header.fixed {
+  top: 44px;
+}
