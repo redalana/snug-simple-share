@@ -86,7 +86,13 @@ export type ContentBlock =
       type: "relatedArticleLinks";
       items: { slug: string; title: string; category: string; readingTime: string }[];
     }
-  | { type: "references"; items: { label: string; url?: string }[] };
+  | { type: "references"; items: { label: string; url?: string }[] }
+  | {
+      type: "reviewedBy";
+      name: string;
+      specialty: string;
+      date: string;
+    };
 
 
 export type Article = {
