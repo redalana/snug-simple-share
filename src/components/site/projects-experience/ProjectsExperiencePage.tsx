@@ -761,7 +761,7 @@ export function ProjectsExperiencePage() {
       <ExperienceGrid />
       <CtaBanner />
       <Technologies />
-      <WhyAbuFarha />
+      <WhyAbuFarhaProjects />
     </>
   );
 }
