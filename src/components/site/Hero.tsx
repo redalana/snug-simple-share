@@ -275,7 +275,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-                className="mt-5 font-display text-[2.5rem] font-extrabold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3rem] lg:text-[2.25rem]"
+                className="mt-5 font-display text-[2.5rem] font-extrabold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3rem] lg:text-[3.25rem]"
               >
                 {slide.headline}
               </motion.h1>
