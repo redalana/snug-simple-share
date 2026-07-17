@@ -32,7 +32,7 @@ function AfterSalesRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[112px]">
+      <main id="main-content" className="pt-[110px]">
         <AfterSalesPage />
       </main>
       <Footer />

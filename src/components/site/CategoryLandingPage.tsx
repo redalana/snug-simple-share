@@ -40,7 +40,7 @@ export function CategoryLandingPage({
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[112px]">
+      <main id="main-content" className="pt-[110px]">
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
           <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
