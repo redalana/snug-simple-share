@@ -46,6 +46,7 @@ function StrokeCarePage() {
             Back to home
           </Link>
         </div>
+        <VisitAbuFarha />
         <StrokeCareProgram />
       </main>
       <Footer />
