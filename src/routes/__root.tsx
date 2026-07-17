@@ -132,6 +132,22 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Editor-only: when the app is loaded inside the Lovable Preview iframe,
+  // the host injects a top toolbar that can visually clip our fixed header's
+  // second nav row. Tag <html> so a scoped CSS rule can offset the header.
+  // Standalone preview and production: window.self === window.top → no-op.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (window.self !== window.top) {
+        document.documentElement.setAttribute("data-lovable-embed", "true");
+      }
+    } catch {
+      // Cross-origin access to window.top throws → we're embedded.
+      document.documentElement.setAttribute("data-lovable-embed", "true");
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Skip-to-content link — visible on keyboard focus only. */}
@@ -147,3 +163,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
