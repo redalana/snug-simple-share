@@ -2689,8 +2689,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Any interruption to imaging or interventional services affects patient care.",
     ],
     references: [
-      { label: "AAMI TIR56 — Medical device recall management" },
-      { label: "ISO 55000 — Asset management" },
+      { label: "AAMI TIR56 — Medical device recall management", url: "https://array.aami.org/doi/10.2345/9781570206481.ch1" },
+      { label: "ISO 55000 — Asset management overview", url: "https://www.iso.org/standard/55088.html" },
+      { label: "ECRI — Health Devices resources", url: "https://www.ecri.org/" },
     ],
   },
   "Imaging Solutions": {
