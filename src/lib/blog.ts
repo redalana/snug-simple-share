@@ -54,7 +54,18 @@ export type ContentBlock =
       bullets: string[];
       callout: { title: string; lines: string[] };
     }
-  | { type: "faq"; items: { q: string; a: string }[] };
+  | { type: "faq"; items: { q: string; a: string }[] }
+  | {
+      type: "callout";
+      variant: "tip" | "note" | "important" | "clinical";
+      title?: string;
+      text: string;
+    }
+  | {
+      type: "stats";
+      items: { value: string; label: string; source?: string }[];
+    }
+  | { type: "takeaways"; items: string[] };
 
 export type Article = {
   slug: string;
