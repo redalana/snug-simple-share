@@ -1043,26 +1043,426 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
   },
 };
 
+/* ---------- Category defaults for premium educational blocks ---------- */
+
+type CategoryDefaults = {
+  audience: string;
+  technology: string;
+  quickFacts: string[];
+  comparison?: {
+    title?: string;
+    headers: string[];
+    rows: string[][];
+    caption?: string;
+  };
+  relatedDiseases: string[];
+  references: { label: string; url?: string }[];
+};
+
+const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
+  "Cath Lab": {
+    audience: "Cardiologists, hospital administrators, biomedical engineers",
+    technology: "Fixed C-arm cardiovascular imaging system",
+    quickFacts: [
+      "Early revascularization after a STEMI improves survival dramatically.",
+      "Modern flat-panel detectors reduce patient radiation dose by up to 50%.",
+      "PCI has replaced many open-heart procedures for eligible patients.",
+      "Door-to-balloon under 90 minutes is the global standard of care.",
+      "IVUS and FFR guidance improves long-term stent outcomes.",
+    ],
+    relatedDiseases: [
+      "Coronary artery disease",
+      "Acute myocardial infarction (STEMI/NSTEMI)",
+      "Peripheral arterial disease",
+      "Structural heart disease",
+      "Cardiac arrhythmia",
+    ],
+    references: [
+      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet" },
+      { label: "ACC/AHA Guideline for Coronary Artery Revascularization" },
+      { label: "ESC Guidelines on Acute Coronary Syndromes" },
+    ],
+  },
+  MRI: {
+    audience: "Radiologists, imaging directors, hospital planners",
+    technology: "Magnetic Resonance Imaging (1.5T / 3T)",
+    quickFacts: [
+      "MRI uses no ionizing radiation — safe for repeat and pediatric imaging.",
+      "3T doubles the signal-to-noise ratio of 1.5T for advanced neuro & cardiac work.",
+      "AI reconstruction can shorten scans by 30–50% without image-quality loss.",
+      "Wide-bore (70 cm) magnets improve comfort for claustrophobic patients.",
+      "MRI is the definitive modality for soft-tissue characterization.",
+    ],
+    comparison: {
+      title: "MRI vs CT — quick reference",
+      headers: ["Criterion", "MRI", "CT"],
+      rows: [
+        ["Radiation", "None", "Ionizing X-ray"],
+        ["Soft tissue contrast", "Excellent", "Moderate"],
+        ["Scan time", "10–40 minutes", "Seconds – few minutes"],
+        ["Emergency trauma", "Limited", "First-line"],
+        ["Neurology / MSK / oncology", "Preferred", "Complementary"],
+        ["Siting complexity", "High (shielding, cryogens)", "Moderate"],
+      ],
+      caption: "General guidance — modality selection is always clinical and patient-specific.",
+    },
+    relatedDiseases: [
+      "Stroke and cerebrovascular disease",
+      "Multiple sclerosis",
+      "Musculoskeletal injuries",
+      "Prostate and pelvic cancers",
+      "Cardiac tissue characterization",
+    ],
+    references: [
+      { label: "ACR Appropriateness Criteria" },
+      { label: "ESR Guidelines on MRI Safety" },
+      { label: "RSNA — Magnetic Resonance Imaging (MRI) safety information" },
+    ],
+  },
+  "MRI Scanners": {
+    audience: "Hospital investors, procurement leads, radiologists",
+    technology: "Refurbished and new MRI systems",
+    quickFacts: [
+      "Certified refurbished MRIs deliver the same clinical protocols as new.",
+      "Total cost of ownership includes cryogens, service, coils and siting.",
+      "Wide-bore designs improve patient throughput and comfort.",
+      "AI-based acceleration is now standard on modern platforms.",
+      "Planned magnet lifetime with proper service reaches 10–15 years.",
+    ],
+    comparison: {
+      title: "1.5T vs 3T — clinical fit",
+      headers: ["Consideration", "1.5T", "3T"],
+      rows: [
+        ["General clinical range", "Broad", "Broad + advanced"],
+        ["Neuro / functional / prostate", "Good", "Excellent"],
+        ["Musculoskeletal", "Excellent", "Excellent (with tuning)"],
+        ["Implant compatibility", "Wider", "More restricted"],
+        ["Siting cost & shielding", "Lower", "Higher"],
+        ["Total cost of ownership", "Lower", "Higher"],
+      ],
+      caption: "Field strength should match the intended case mix, not marketing preference.",
+    },
+    relatedDiseases: [
+      "Neurological disorders",
+      "Oncology staging",
+      "Musculoskeletal pathology",
+      "Cardiac disease",
+    ],
+    references: [
+      { label: "ACR Practice Parameter for Performing MRI" },
+      { label: "IEC 60601-2-33 — MRI safety standard" },
+    ],
+  },
+  "CT Scanners": {
+    audience: "Radiologists, emergency physicians, imaging directors",
+    technology: "Multi-detector Computed Tomography (CT)",
+    quickFacts: [
+      "CT is the first-line modality for acute trauma and stroke work-up.",
+      "Iterative and AI reconstruction cut effective dose by up to 60%.",
+      "Cardiac CTA can rule out coronary disease non-invasively.",
+      "Dual-energy CT enables material differentiation (e.g. urate, iodine).",
+      "Slice count alone doesn't define quality — detector design matters.",
+    ],
+    comparison: {
+      title: "CT vs MRI — when to choose which",
+      headers: ["Scenario", "Preferred modality"],
+      rows: [
+        ["Acute trauma / bleeding", "CT"],
+        ["Stroke — first hour", "CT (then MRI)"],
+        ["Soft-tissue tumor characterization", "MRI"],
+        ["Lung nodule detection", "CT"],
+        ["Musculoskeletal internal derangement", "MRI"],
+        ["Coronary artery calcium & CTA", "CT"],
+      ],
+    },
+    relatedDiseases: [
+      "Stroke and intracranial hemorrhage",
+      "Pulmonary embolism",
+      "Trauma injuries",
+      "Lung and abdominal cancers",
+    ],
+    references: [
+      { label: "ACR–SPR Practice Parameter for CT" },
+      { label: "ICRP — Radiological Protection in Medicine" },
+    ],
+  },
+  "PET/CT": {
+    audience: "Oncologists, nuclear medicine physicians, hospital planners",
+    technology: "Positron Emission Tomography / Computed Tomography",
+    quickFacts: [
+      "PET/CT changes cancer staging in up to 40% of patients.",
+      "Digital SiPM detectors deliver 2–4× the sensitivity of legacy PMTs.",
+      "Whole-body scans on modern systems complete in 15–20 minutes.",
+      "FDG is used in the majority of oncology studies worldwide.",
+      "Radiopharmacy logistics define go-live success as much as the scanner.",
+    ],
+    comparison: {
+      title: "PET/CT vs CT alone",
+      headers: ["Criterion", "PET/CT", "CT alone"],
+      rows: [
+        ["Metabolic information", "Yes", "No"],
+        ["Whole-body oncology staging", "Preferred", "Complementary"],
+        ["Treatment response (SUV metrics)", "Yes", "Indirect"],
+        ["Infrastructure requirements", "High (hot lab, shielding)", "Standard"],
+        ["Typical cost per exam", "Higher", "Lower"],
+      ],
+    },
+    relatedDiseases: [
+      "Lymphoma and solid tumors",
+      "Neuroendocrine tumors",
+      "Alzheimer's disease (amyloid imaging)",
+      "Myocardial viability assessment",
+    ],
+    references: [
+      { label: "EANM Procedure Guidelines for PET/CT" },
+      { label: "SNMMI Practice Guidelines" },
+    ],
+  },
+  Ultrasound: {
+    audience: "Radiologists, sonographers, point-of-care clinicians",
+    technology: "Diagnostic ultrasound & point-of-care systems",
+    quickFacts: [
+      "Ultrasound is radiation-free and safe in pregnancy.",
+      "High-frequency transducers reveal superficial detail (breast, thyroid, MSK).",
+      "AI-guided acquisition is shortening the learning curve for POCUS.",
+      "Elastography quantifies tissue stiffness for liver and thyroid work-up.",
+      "Portable systems are transforming bedside and emergency care.",
+    ],
+    comparison: {
+      title: "Ultrasound vs X-Ray — first-line use",
+      headers: ["Clinical question", "Ultrasound", "X-Ray"],
+      rows: [
+        ["Abdominal pain / gallbladder", "Preferred", "Limited"],
+        ["Bone fracture", "Limited", "Preferred"],
+        ["Pregnancy imaging", "Preferred", "Contraindicated"],
+        ["Chest disease overview", "Complementary", "First-line"],
+        ["Soft-tissue guidance for procedures", "Preferred", "No"],
+      ],
+    },
+    relatedDiseases: [
+      "Gallstone and biliary disease",
+      "Thyroid nodules",
+      "Deep-vein thrombosis",
+      "Obstetric assessment",
+    ],
+    references: [
+      { label: "AIUM Practice Parameters" },
+      { label: "WFUMB — Safety of ultrasound" },
+    ],
+  },
+  "Operating Room": {
+    audience: "Surgeons, OR managers, biomedical engineers, hospital planners",
+    technology: "Integrated modular operating room systems",
+    quickFacts: [
+      "Integrated ORs cut set-up time and improve surgical throughput.",
+      "Laminar-flow ventilation lowers surgical site infection risk.",
+      "Video routing enables tele-mentoring and academic collaboration.",
+      "Hybrid ORs combine imaging and surgery for complex procedures.",
+      "Ergonomics reduces surgeon fatigue and long-term musculoskeletal strain.",
+    ],
+    relatedDiseases: [
+      "Cardiovascular disease requiring hybrid procedures",
+      "Oncologic surgery",
+      "Orthopedic and spine surgery",
+      "Trauma",
+    ],
+    references: [
+      { label: "AORN Guidelines for Perioperative Practice" },
+      { label: "WHO Surgical Safety Checklist" },
+    ],
+  },
+  "Radiation Therapy": {
+    audience: "Radiation oncologists, medical physicists, hospital planners",
+    technology: "Linear accelerators and treatment planning systems",
+    quickFacts: [
+      "Modern linacs deliver sub-millimeter precision with IGRT.",
+      "SBRT and SRS enable ablative doses to small targets in few fractions.",
+      "Adaptive planning adjusts for anatomical change during treatment.",
+      "Multi-leaf collimators shape dose to conform to tumor geometry.",
+      "Independent dose auditing is a cornerstone of quality assurance.",
+    ],
+    relatedDiseases: [
+      "Prostate cancer",
+      "Breast cancer",
+      "Lung cancer",
+      "Head-and-neck tumors",
+      "Brain metastases",
+    ],
+    references: [
+      { label: "IAEA Human Health Series — Radiotherapy QA" },
+      { label: "ASTRO Clinical Practice Guidelines" },
+    ],
+  },
+  "Turnkey Projects": {
+    audience: "Hospital owners, project directors, ministries of health",
+    technology: "End-to-end departmental delivery",
+    quickFacts: [
+      "Late medical-equipment planning is the top cause of project rework.",
+      "Coordinated shielding, HVAC and IT design accelerates go-live.",
+      "Structured commissioning protects patient safety from day one.",
+      "Vendor-neutral biomedical support reduces long-term lifecycle cost.",
+      "Training is what turns commissioning into clinical productivity.",
+    ],
+    relatedDiseases: [
+      "Complex cardiovascular and oncology programs",
+      "Trauma and critical care services",
+      "Advanced diagnostic imaging",
+    ],
+    references: [
+      { label: "WHO — Health Facility Planning Guidelines" },
+      { label: "IEC 60601 — Medical electrical equipment" },
+    ],
+  },
+  "After Sales": {
+    audience: "Biomedical engineers, hospital administrators, clinical directors",
+    technology: "Preventive maintenance & lifecycle service",
+    quickFacts: [
+      "Preventive maintenance reduces unplanned downtime by up to 70%.",
+      "OEM-grade spare parts protect image quality and patient safety.",
+      "Remote diagnostics resolve many issues without an on-site visit.",
+      "A structured PM plan can extend equipment life by several years.",
+      "Uptime SLAs should be measured against tracked, auditable data.",
+    ],
+    relatedDiseases: [
+      "Continuity of care across cardiology, oncology and imaging services",
+    ],
+    references: [
+      { label: "IEC 62353 — Recurrent test and testing after repair" },
+      { label: "ISO 13485 — Medical devices quality management" },
+    ],
+  },
+  Biomedical: {
+    audience: "Biomedical engineers, hospital leadership, procurement",
+    technology: "Clinical engineering & equipment lifecycle management",
+    quickFacts: [
+      "Biomedical engineering safeguards patient safety and equipment reliability.",
+      "Structured inventory management is the foundation of compliance.",
+      "Electrical safety testing (IEC 62353) protects patients and staff.",
+      "Lifecycle planning avoids reactive, high-cost equipment replacement.",
+      "Training bridges design intent and daily clinical practice.",
+    ],
+    relatedDiseases: [
+      "All clinical services depend on well-maintained medical technology.",
+    ],
+    references: [
+      { label: "IEC 60601 series — Medical electrical equipment" },
+      { label: "WHO — Medical devices management" },
+    ],
+  },
+  "Technical Support": {
+    audience: "Biomedical engineers, service managers, hospital operations",
+    technology: "Preventive maintenance & remote diagnostics",
+    quickFacts: [
+      "Every hour of downtime affects both revenue and patient safety.",
+      "PM schedules should be evidence-based, not calendar-only.",
+      "Spare-parts strategy is as important as the service contract itself.",
+      "Data-driven service improves budget forecasting.",
+      "Trained in-house biomeds shorten mean-time-to-repair.",
+    ],
+    relatedDiseases: [
+      "Any interruption to imaging or interventional services affects patient care.",
+    ],
+    references: [
+      { label: "AAMI TIR56 — Medical device recall management" },
+      { label: "ISO 55000 — Asset management" },
+    ],
+  },
+  "Imaging Solutions": {
+    audience: "Radiologists, imaging directors, hospital planners",
+    technology: "Diagnostic imaging portfolio (CT, MRI, US, X-ray, PET/CT)",
+    quickFacts: [
+      "Modality selection should follow the clinical question, not the price tag.",
+      "MRI is the reference standard for soft-tissue characterization.",
+      "CT dominates emergency and trauma imaging.",
+      "Ultrasound is safe, portable and the workhorse of point-of-care.",
+      "PET/CT anchors modern oncology programs.",
+    ],
+    comparison: {
+      title: "Imaging modality — clinical fit at a glance",
+      headers: ["Modality", "Best for", "Radiation"],
+      rows: [
+        ["MRI", "Neuro, MSK, oncology soft-tissue", "None"],
+        ["CT", "Trauma, chest, abdomen, emergency", "Ionizing"],
+        ["Ultrasound", "Bedside, abdomen, obstetrics, MSK", "None"],
+        ["X-Ray", "Fractures, chest overview", "Ionizing (low)"],
+        ["PET/CT", "Oncology staging & response", "Ionizing"],
+      ],
+    },
+    relatedDiseases: [
+      "Cardiovascular disease",
+      "Cancer",
+      "Trauma",
+      "Neurological disorders",
+    ],
+    references: [
+      { label: "ACR Appropriateness Criteria" },
+      { label: "ESR — European Society of Radiology guidelines" },
+    ],
+  },
+  "Hospital Planning": {
+    audience: "Hospital owners, health-system executives, architects, ministries",
+    technology: "Master planning & clinical service design",
+    quickFacts: [
+      "Design decisions outlive every executive who makes them.",
+      "Early medical-equipment planning prevents costly civil rework.",
+      "Flexibility matters more than optimization — clinical practice evolves.",
+      "IT and clinical workflow must be designed together, not sequentially.",
+      "Accreditation readiness should be built in from day one.",
+    ],
+    relatedDiseases: [
+      "All patient populations benefit from thoughtful facility design.",
+    ],
+    references: [
+      { label: "WHO — Hospital Planning and Design" },
+      { label: "FGI Guidelines for Design and Construction of Hospitals" },
+    ],
+  },
+};
+
+const GENERIC_DEFAULTS: CategoryDefaults = {
+  audience: "Hospital leadership, clinicians, biomedical engineers",
+  technology: "Modern medical technology",
+  quickFacts: [
+    "Early diagnosis improves patient outcomes across most conditions.",
+    "Technology is only as valuable as the workflow it supports.",
+    "Training and after-sales support are decisive for long-term success.",
+    "Evidence-based investment beats trend-driven procurement.",
+  ],
+  relatedDiseases: [
+    "Common conditions relevant to the specialty covered in this article.",
+  ],
+  references: [
+    { label: "World Health Organization — Medical devices" },
+    { label: "International clinical practice guidelines" },
+  ],
+};
+
 /* ---------- Generator ---------- */
 
 const HEADINGS: { id: string; title: string }[] = [
+  { id: "key-facts", title: "Key Facts" },
   { id: "introduction", title: "Introduction" },
   { id: "overview", title: "Overview" },
   { id: "medical-background", title: "Medical Background" },
   { id: "why-matters", title: "Why This Matters" },
+  { id: "quick-facts", title: "Quick Facts" },
   { id: "symptoms", title: "Symptoms" },
   { id: "causes", title: "Causes" },
   { id: "risk-factors", title: "Risk Factors" },
   { id: "diagnosis", title: "Diagnosis" },
   { id: "technologies", title: "Medical Technologies" },
+  { id: "comparison", title: "At-a-Glance Comparison" },
   { id: "clinical-benefits", title: "Clinical Benefits" },
   { id: "benefits-overview", title: "Benefits at a Glance" },
   { id: "stakeholders", title: "Patients, Physicians & Hospitals" },
   { id: "faq", title: "Frequently Asked Questions" },
   { id: "takeaways", title: "Key Takeaways" },
+  { id: "related-diseases", title: "Related Conditions" },
   { id: "related-tech", title: "Related Technologies" },
+  { id: "references", title: "References & Guidelines" },
   { id: "conclusion", title: "Conclusion" },
 ];
+
 
 export function makeMedicalContent(
   a: { title: string; category: string; coverImage: string; slug: string },
