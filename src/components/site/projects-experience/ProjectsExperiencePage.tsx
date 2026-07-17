@@ -123,6 +123,8 @@ function Hero() {
  * ==========================================================*/
 function RegionalPresence() {
   const highlighted = REGIONS.filter((r) => r.name !== "Somaliland" || true);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const regionByName = new Map(REGIONS.map((r) => [r.name, r]));
   return (
     <section className="relative bg-secondary/40 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
@@ -137,7 +139,7 @@ function RegionalPresence() {
           <Link
             to="/projects"
             hash="countries"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-primary"
+            className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
           >
             View All Countries
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -171,13 +173,52 @@ function RegionalPresence() {
               {WORLD_COUNTRIES.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => (
                 <path key={c.name} d={c.d} fill="url(#rp-active)" stroke="#0f2544" strokeWidth={0.5} />
               ))}
-              {Object.entries(GEO).map(([name, p]) => (
-                <g key={name}>
-                  <circle cx={p.x} cy={p.y} r={9} fill="var(--primary)" opacity={0.2} />
-                  <circle cx={p.x} cy={p.y} r={4} fill="var(--primary)" />
-                </g>
-              ))}
+              {Object.entries(GEO).map(([name, p]) => {
+                const isA = hovered === name;
+                return (
+                  <g
+                    key={name}
+                    onMouseEnter={() => setHovered(name)}
+                    onMouseLeave={() => setHovered(null)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <circle cx={p.x} cy={p.y} r={isA ? 14 : 9} fill="var(--primary)" opacity={isA ? 0.28 : 0.2} style={{ transition: "all .25s ease" }} />
+                    <circle cx={p.x} cy={p.y} r={isA ? 5.5 : 4} fill="var(--primary)" style={{ transition: "all .25s ease" }} />
+                  </g>
+                );
+              })}
             </svg>
+
+            {/* Tooltip overlay */}
+            {Object.entries(GEO).map(([name, p]) => {
+              const r = regionByName.get(name);
+              if (!r) return null;
+              const isA = hovered === name;
+              const count = r.equipment.reduce((s, e) => s + (parseInt(e.qty, 10) || 0), 0);
+              const specialties = r.equipment.slice(0, 2).map((e) => e.label).join(" · ");
+              return (
+                <div
+                  key={name}
+                  className={`pointer-events-none absolute z-10 w-52 -translate-x-1/2 rounded-xl border border-black/5 bg-white p-3 text-left shadow-[0_20px_40px_-16px_rgba(15,23,42,0.35)] transition-opacity duration-200 ${
+                    isA ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ left: `${(p.x / MAP_W) * 100}%`, top: `calc(${(p.y / MAP_H) * 100}% - calc(14*var(--desktop-px-unit)))`, transform: "translate(-50%, -100%)" }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-base leading-none">{r.flag}</span>
+                    <span className="font-display text-sm font-extrabold text-ink">{r.name}</span>
+                  </div>
+                  <div className="mt-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+                    {count}+ systems delivered
+                  </div>
+                  {specialties && (
+                    <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                      {specialties}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </motion.div>
 
           {/* COUNTRY LIST */}
@@ -188,7 +229,9 @@ function RegionalPresence() {
             {highlighted.map((r) => (
               <li
                 key={r.name}
-                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/5"
+                onMouseEnter={() => setHovered(r.name)}
+                onMouseLeave={() => setHovered(null)}
+                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] hover:ring-primary/25"
               >
                 <span className="text-xl leading-none">{r.flag}</span>
                 <span className="text-sm font-semibold text-ink">{r.name}</span>
