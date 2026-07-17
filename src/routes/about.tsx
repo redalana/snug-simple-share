@@ -32,7 +32,7 @@ function AboutRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[112px]">
+      <main id="main-content" className="pt-[96px]">
         <AboutPage />
       </main>
       <Footer />
