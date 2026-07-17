@@ -2429,9 +2429,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac tissue characterization",
     ],
     references: [
-      { label: "ACR Appropriateness Criteria" },
-      { label: "ESR Guidelines on MRI Safety" },
-      { label: "RSNA — Magnetic Resonance Imaging (MRI) safety information" },
+      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+      { label: "ESR — European Society of Radiology, MRI safety guidance", url: "https://www.myesr.org/" },
+      { label: "RSNA — MRI safety information", url: "https://www.rsna.org/patient-resources" },
+      { label: "ACR Manual on MR Safety (2024)", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
     ],
   },
   "MRI Scanners": {
