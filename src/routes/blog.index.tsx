@@ -7,13 +7,14 @@ import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog & Insights — AbuFarha Medical Equipment" },
+      { title: "Healthcare Knowledge Center — AbuFarha Medical Equipment" },
       {
         name: "description",
-        content: "Guides, technology deep-dives and clinical insights on medical equipment, imaging, engineering and after-sales support from AbuFarha Medical.",
+        content:
+          "Evidence-based clinical articles, healthcare technology insights, buying guides, educational resources, and expert knowledge for hospitals, physicians and biomedical engineers across Africa and the Middle East.",
       },
-      { property: "og:title", content: "AbuFarha Medical — Blog & Insights" },
-      { property: "og:description", content: "Perspectives on medical equipment, imaging technology, biomedical engineering and healthcare operations." },
+      { property: "og:title", content: "Healthcare Knowledge Center — AbuFarha Medical" },
+      { property: "og:description", content: "Evidence-based clinical articles, healthcare technology insights and expert knowledge for healthcare professionals across Africa and the Middle East." },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.blog },
       { name: "twitter:image", content: OG_IMAGES.blog },
