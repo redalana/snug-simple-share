@@ -2670,8 +2670,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "All clinical services depend on well-maintained medical technology.",
     ],
     references: [
-      { label: "IEC 60601 series — Medical electrical equipment" },
-      { label: "WHO — Medical devices management" },
+      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
+      { label: "WHO — Medical devices management publications", url: "https://www.who.int/health-topics/medical-devices" },
+      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
     ],
   },
   "Technical Support": {
