@@ -23,7 +23,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PRODUCTS } from "@/lib/products";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 type BrandCategory =
   | "Imaging"
@@ -329,7 +329,7 @@ export const Route = createFileRoute("/brands")({
       { name: "twitter:image", content: OG_IMAGES.brands },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/brands" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/brands" }],
   }),
   component: BrandsPage,
 });

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
-import { OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 const NAMED_CATEGORIES = [
   "Cath Lab Systems",
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/products/others")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory.others },
     ],
-    links: [{ rel: "canonical", href: "/products/others" }],
+    links: [{ rel: "canonical", href: SITE_URL + "/products/others" }],
   }),
   component: () => (
     <CategoryLandingPage
