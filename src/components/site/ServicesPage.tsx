@@ -220,7 +220,7 @@ function Hero() {
               )}
             >
               <Eyebrow tone="light">{s.eyebrow}</Eyebrow>
-              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[calc(46*var(--desktop-px-unit))]">
+              <h1 className="mt-6 max-w-2xl font-display text-[2.375rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[calc(46*var(--desktop-px-unit))]">
                 {s.title}
               </h1>
               <p className="mt-6 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-[1.75] text-white/70">
