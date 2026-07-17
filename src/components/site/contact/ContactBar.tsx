@@ -35,7 +35,7 @@ export function ContactBar() {
               key={title}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label={`${title}: ${lines[0]}`}
               className="group flex h-full items-center gap-4 rounded-xl p-7 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_18px_40px_-20px_rgba(15,23,42,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
