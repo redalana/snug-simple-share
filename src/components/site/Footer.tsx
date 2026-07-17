@@ -153,7 +153,7 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Top footer — 5 columns */}
-        <div className="grid gap-x-10 gap-y-10 py-14 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
+        <div className="grid gap-x-10 gap-y-8 py-10 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-y-10 lg:py-14">
           <div>
             <Logo light />
             <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
