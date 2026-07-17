@@ -30,12 +30,13 @@ import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { WhyAbuFarhaProjects } from "./WhyAbuFarhaProjects";
 import {
-  COUNTRY_PATHS as WORLD_COUNTRIES,
-  MAP_W,
-  MAP_H,
-  GEO,
-  HIGHLIGHT_NAMES,
-} from "../turnkey/worldMap";
+  WORLD_COUNTRY_PATHS,
+  WORLD_MAP_W as MAP_W,
+  WORLD_MAP_H as MAP_H,
+  WORLD_GEO as GEO,
+  WORLD_HIGHLIGHT_NAMES as HIGHLIGHT_NAMES,
+  SPHERE_D,
+} from "./worldMapFull";
 import { REGIONS } from "../turnkey/data";
 import heroImg from "@/assets/hero-cathlab.jpg";
 import p1 from "@/assets/project-1.jpg";
@@ -122,17 +123,47 @@ function Hero() {
  * 2. REGIONAL PRESENCE  — compact map + country list
  * ==========================================================*/
 const COUNTRY_SUMMARY: Record<string, string> = {
-  Jordan: "Cath Lab Projects",
+  Jordan: "Heart Center",
   Iraq: "Cath Lab • MRI • Ultrasound",
   Syria: "Cath Lab • MRI • IVF",
   Yemen: "Cath Lab • MRI • CT",
   Libya: "Cath Lab • IVF • Digital X-Ray",
-  Somalia: "Cardiology Solutions",
+  Somalia: "Cardiology Consumables",
   Somaliland: "Cath Lab Projects",
   Egypt: "Cardiology Consumables",
-  Uzbekistan: "Cath Lab Projects",
-  Bangladesh: "Bone Density Systems",
+  Uzbekistan: "Heart Center",
+  Bangladesh: "Bone Density",
 };
+
+// ISO-2 codes for flagcdn.com (official SVG country flags).
+// Somaliland is not internationally recognized as an independent country
+// and has no ISO-2 code; it is represented under the Somalia flag.
+const FLAG_CODE: Record<string, string> = {
+  Jordan: "jo",
+  Iraq: "iq",
+  Syria: "sy",
+  Yemen: "ye",
+  Libya: "ly",
+  Somalia: "so",
+  Somaliland: "so",
+  Egypt: "eg",
+  Uzbekistan: "uz",
+  Bangladesh: "bd",
+};
+
+function CountryFlag({ name, className = "" }: { name: string; className?: string }) {
+  const code = FLAG_CODE[name];
+  if (!code) return null;
+  return (
+    <img
+      src={`https://flagcdn.com/${code}.svg`}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className={`inline-block shrink-0 rounded-[3px] object-cover shadow-[0_1px_2px_rgba(15,23,42,0.15)] ring-1 ring-black/5 ${className}`}
+    />
+  );
+}
 
 function RegionalPresence() {
   const highlighted = REGIONS;
@@ -172,7 +203,7 @@ function RegionalPresence() {
             <svg
               viewBox={`0 0 ${MAP_W} ${MAP_H}`}
               className="absolute inset-0 h-full w-full"
-              aria-label="Map showing AbuFarha's operating countries across Africa, the Middle East and Central Asia"
+              aria-label="World map showing AbuFarha's operating countries across Africa, the Middle East and Central Asia"
             >
               <defs>
                 <linearGradient id="rp-active" x1="0" y1="0" x2="0" y2="1">
@@ -180,11 +211,13 @@ function RegionalPresence() {
                   <stop offset="100%" stopColor="#0f2544" />
                 </linearGradient>
               </defs>
-              {WORLD_COUNTRIES.filter((c) => !HIGHLIGHT_NAMES.has(c.name)).map((c) => (
-                <path key={c.name} d={c.d} fill="#e2e8f0" stroke="#cbd5e1" strokeWidth={0.4} />
+              {/* Soft ocean/sphere backdrop */}
+              <path d={SPHERE_D} fill="#f5f7fa" stroke="#e2e8f0" strokeWidth={0.5} />
+              {WORLD_COUNTRY_PATHS.filter((c) => !HIGHLIGHT_NAMES.has(c.name)).map((c) => (
+                <path key={c.name} d={c.d} fill="#eef1f5" stroke="#dfe4ea" strokeWidth={0.3} />
               ))}
-              {WORLD_COUNTRIES.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => (
-                <path key={c.name} d={c.d} fill="url(#rp-active)" stroke="#0f2544" strokeWidth={0.5} />
+              {WORLD_COUNTRY_PATHS.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => (
+                <path key={c.name} d={c.d} fill="url(#rp-active)" stroke="#0f2544" strokeWidth={0.4} />
               ))}
               {Object.entries(GEO).map(([name, p]) => {
                 const isA = hovered === name;
@@ -195,8 +228,8 @@ function RegionalPresence() {
                     onMouseLeave={() => setHovered(null)}
                     style={{ cursor: "pointer" }}
                   >
-                    <circle cx={p.x} cy={p.y} r={isA ? 14 : 9} fill="var(--primary)" opacity={isA ? 0.28 : 0.2} style={{ transition: "all .25s ease" }} />
-                    <circle cx={p.x} cy={p.y} r={isA ? 5.5 : 4} fill="var(--primary)" style={{ transition: "all .25s ease" }} />
+                    <circle cx={p.x} cy={p.y} r={isA ? 12 : 8} fill="var(--primary)" opacity={isA ? 0.28 : 0.2} style={{ transition: "all .25s ease" }} />
+                    <circle cx={p.x} cy={p.y} r={isA ? 5 : 3.5} fill="var(--primary)" style={{ transition: "all .25s ease" }} />
                   </g>
                 );
               })}
@@ -217,7 +250,7 @@ function RegionalPresence() {
                   style={{ left: `${(p.x / MAP_W) * 100}%`, top: `calc(${(p.y / MAP_H) * 100}% - calc(14*var(--desktop-px-unit)))`, transform: "translate(-50%, -100%)" }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-base leading-none">{r.flag}</span>
+                    <CountryFlag name={r.name} className="h-3.5 w-5" />
                     <span className="font-display text-sm font-extrabold text-ink">
                       {r.name}
                     </span>
@@ -248,30 +281,38 @@ function RegionalPresence() {
             id="countries"
             className="grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2 sm:gap-y-4"
           >
-            {highlighted.map((r) => (
-              <li
-                key={r.name}
-                onMouseEnter={() => setHovered(r.name)}
-                onMouseLeave={() => setHovered(null)}
-                className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] hover:ring-primary/25"
-              >
-                <span className="mt-0.5 text-xl leading-none">{r.flag}</span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-ink">{r.name}</div>
-                  {COUNTRY_SUMMARY[r.name] && (
-                    <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
-                      {COUNTRY_SUMMARY[r.name]}
-                    </div>
-                  )}
-                </div>
-              </li>
-            ))}
+            {highlighted.map((r) => {
+              const isA = hovered === r.name;
+              return (
+                <li
+                  key={r.name}
+                  onMouseEnter={() => setHovered(r.name)}
+                  onMouseLeave={() => setHovered(null)}
+                  className={`flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] ${
+                    isA
+                      ? "-translate-y-0.5 shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] ring-primary/40"
+                      : "ring-black/5 hover:ring-primary/25"
+                  }`}
+                >
+                  <CountryFlag name={r.name} className="mt-0.5 h-4 w-6" />
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-ink">{r.name}</div>
+                    {COUNTRY_SUMMARY[r.name] && (
+                      <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                        {COUNTRY_SUMMARY[r.name]}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
     </section>
   );
 }
+
 
 
 /* ============================================================
