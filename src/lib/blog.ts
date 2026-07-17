@@ -326,6 +326,7 @@ export const ARTICLES: Article[] = RAW.map((a) => {
     return a as Article;
   }
   const { content, toc } = makeDefaultContent({
+    slug: a.slug,
     title: a.title,
     category: a.category,
     coverImage: a.coverImage,
