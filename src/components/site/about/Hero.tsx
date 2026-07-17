@@ -15,10 +15,10 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/25" />
       </div>
-      <div className="relative mx-auto grid min-h-[calc(440*var(--desktop-px-unit))] max-w-[100rem] gap-10 px-6 pt-20 pb-16 lg:min-h-[calc(420*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pt-16 lg:pb-14">
+      <div className="relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(420*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pt-16 lg:pb-14">
         <div className="max-w-xl">
           <Eyebrow tone="light" index="01">About Us</Eyebrow>
-          <h1 className="mt-6 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[2.875rem]">
+          <h1 className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[2.875rem]">
             Engineering Healthcare
             <br />
             Since 1999.
@@ -33,16 +33,16 @@ export function Hero() {
           </p>
 
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link
               to="/contact"
-              className="inline-flex h-[calc(50*var(--desktop-px-unit))] items-center rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="inline-flex min-h-[48px] items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark sm:h-[calc(50*var(--desktop-px-unit))] sm:px-7"
             >
               Talk to an Engineer
             </Link>
             <Link
               to="/contact"
-              className="inline-flex h-[calc(50*var(--desktop-px-unit))] items-center rounded-full border border-white/30 bg-white/5 px-7 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              className="inline-flex min-h-[48px] items-center rounded-full border border-white/30 bg-white/5 px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10 sm:h-[calc(50*var(--desktop-px-unit))] sm:px-7"
             >
               Request Consultation
             </Link>
