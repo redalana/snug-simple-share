@@ -65,7 +65,29 @@ export type ContentBlock =
       type: "stats";
       items: { value: string; label: string; source?: string }[];
     }
-  | { type: "takeaways"; items: string[] };
+  | { type: "takeaways"; items: string[] }
+  | {
+      type: "keyFacts";
+      covers: string;
+      audience: string;
+      readingTime: string;
+      technology: string;
+    }
+  | { type: "quickFacts"; items: string[] }
+  | {
+      type: "comparison";
+      title?: string;
+      headers: string[];
+      rows: string[][];
+      caption?: string;
+    }
+  | { type: "relatedDiseases"; items: string[] }
+  | {
+      type: "relatedArticleLinks";
+      items: { slug: string; title: string; category: string; readingTime: string }[];
+    }
+  | { type: "references"; items: { label: string; url?: string }[] };
+
 
 export type Article = {
   slug: string;
