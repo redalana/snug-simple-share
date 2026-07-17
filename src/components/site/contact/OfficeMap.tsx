@@ -16,10 +16,10 @@ function OfficeRow({
         <Icon className="h-4 w-4" />
       </span>
       <div className="min-w-0">
-        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+        <div className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.16em] text-muted-foreground">
           {label}
         </div>
-        <div className="mt-0.5 text-[14px] leading-relaxed text-foreground">
+        <div className="mt-0.5 text-[calc(14 * var(--desktop-px-unit))] leading-relaxed text-foreground">
           {children}
         </div>
       </div>
@@ -29,25 +29,25 @@ function OfficeRow({
 
 export function OfficeMap() {
   return (
-    <section className="bg-white py-[120px]">
+    <section className="bg-white py-[calc(120 * var(--desktop-px-unit))]">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-[44px] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
+        <div className="relative overflow-hidden rounded-[calc(44 * var(--desktop-px-unit))] border border-border/60 bg-white shadow-[0_30px_70px_-35px_rgba(15,23,42,0.35)]">
           <iframe
             title="AbuFarha Medical Supplies — Amman office"
             src={MAP_EMBED}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="h-[560px] w-full border-0"
+            className="h-[calc(560 * var(--desktop-px-unit))] w-full border-0"
           />
 
           {/* Floating card */}
           <div className="pointer-events-none absolute inset-0 flex items-start">
-            <div className="pointer-events-auto m-4 w-full max-w-[300px] rounded-[24px] border border-white/70 bg-white/95 p-5 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:max-w-[30%] sm:p-6">
+            <div className="pointer-events-auto m-4 w-full max-w-[calc(300 * var(--desktop-px-unit))] rounded-[calc(24 * var(--desktop-px-unit))] border border-white/70 bg-white/95 p-5 shadow-[0_40px_80px_-20px_rgba(15,23,42,0.45),0_10px_25px_-10px_rgba(15,23,42,0.2)] backdrop-blur-md sm:m-6 sm:max-w-[30%] sm:p-6">
               <div className="flex items-center gap-3">
                 <h3 className="font-display text-xl font-black text-foreground">
                   Visit Our Office
                 </h3>
-                <div className="h-[2px] w-8 rounded-full bg-primary" />
+                <div className="h-[calc(2 * var(--desktop-px-unit))] w-8 rounded-full bg-primary" />
               </div>
 
               <ul className="mt-5 space-y-4 text-sm">

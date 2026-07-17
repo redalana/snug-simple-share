@@ -35,7 +35,7 @@ export function Hero() {
           <span className="font-medium text-foreground">Contact Us</span>
         </nav>
 
-        <div className="relative min-h-[560px] overflow-hidden rounded-[36px] bg-secondary/30 sm:min-h-[620px] lg:h-[720px] lg:min-h-0">
+        <div className="relative min-h-[calc(560 * var(--desktop-px-unit))] overflow-hidden rounded-[calc(36 * var(--desktop-px-unit))] bg-secondary/30 sm:min-h-[calc(620 * var(--desktop-px-unit))] lg:h-[calc(720 * var(--desktop-px-unit))] lg:min-h-0">
           <div className="relative grid h-full grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
             <motion.div
               initial={reduce ? undefined : { opacity: 0, y: 24 }}
@@ -43,7 +43,7 @@ export function Hero() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="relative z-10 flex flex-col justify-center bg-white px-6 py-10 sm:px-10 sm:py-14 lg:px-10 lg:py-16 xl:px-12"
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3.5 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 Trusted Medical Equipment Partner
               </div>
@@ -52,7 +52,7 @@ export function Hero() {
                 <br /><span className="whitespace-nowrap">better healthcare</span>
                 <br /><span className="text-primary">together</span>
               </h1>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[calc(17 * var(--desktop-px-unit))]">
                 From consultation to after-sales support, our team is ready to
                 provide the right medical solutions for your healthcare facility.
               </p>
@@ -79,7 +79,7 @@ export function Hero() {
               </div>
             </motion.div>
 
-            <div className="relative min-h-[300px] overflow-hidden bg-secondary/50 sm:min-h-[360px] lg:min-h-0">
+            <div className="relative min-h-[calc(300 * var(--desktop-px-unit))] overflow-hidden bg-secondary/50 sm:min-h-[calc(360 * var(--desktop-px-unit))] lg:min-h-0">
               {HERO_SLIDES.map((s, i) => (
                 <img
                   key={s.src}

@@ -214,8 +214,8 @@ export function BeyondEquipment() {
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
+            "linear-gradient(to right, var(--color-border) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-border) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
+          backgroundSize: "calc(80 * var(--desktop-px-unit)) calc(80 * var(--desktop-px-unit))",
           maskImage: "radial-gradient(ellipse 85% 70% at 50% 25%, black 25%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(ellipse 85% 70% at 50% 25%, black 25%, transparent 100%)",
         }}
@@ -229,7 +229,7 @@ export function BeyondEquipment() {
             Why leading healthcare providers trust
             <br className="hidden sm:block" /> AbuFarha long after installation.
           </h2>
-          <p className="mt-5 max-w-2xl text-[17px] leading-[1.6] text-muted-foreground">
+          <p className="mt-5 max-w-2xl text-[calc(17 * var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
             Anyone can deliver a machine. We deliver a medical technology partnership —
             engineered, supported and accountable for the entire life of your equipment.
           </p>
@@ -333,10 +333,10 @@ export function BeyondEquipment() {
 
             {/* stage caption */}
             <div className="flex items-center justify-between gap-3 border-t border-border bg-white/70 px-6 py-3.5 backdrop-blur-sm">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              <span className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Interactive · Cath Lab Suite
               </span>
-              <span className="text-[11px] font-medium text-muted-foreground/80 tabular-nums">
+              <span className="text-[calc(11 * var(--desktop-px-unit))] font-medium text-muted-foreground/80 tabular-nums">
                 {String(activeIndex + 1).padStart(2, "0")} / {String(ADVANTAGES.length).padStart(2, "0")}
               </span>
             </div>
@@ -369,7 +369,7 @@ export function BeyondEquipment() {
                       <Icon className="h-4 w-4" />
                     </span>
                     <span
-                      className={`text-[13px] leading-tight transition-colors duration-300 ${
+                      className={`text-[calc(13 * var(--desktop-px-unit))] leading-tight transition-colors duration-300 ${
                         isActive ? "font-bold text-ink" : "font-medium text-muted-foreground group-hover:text-ink"
                       }`}
                     >
@@ -399,7 +399,7 @@ export function BeyondEquipment() {
                 >
                   <motion.span
                     variants={panelItem}
-                    className="block text-[11px] font-bold uppercase tracking-[0.24em] text-primary"
+                    className="block text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary"
                   >
                     {active.label}
                   </motion.span>
@@ -411,14 +411,14 @@ export function BeyondEquipment() {
                   </motion.h3>
                   <motion.p
                     variants={panelItem}
-                    className="mt-4 text-[16px] leading-[1.6] text-muted-foreground"
+                    className="mt-4 text-[calc(16 * var(--desktop-px-unit))] leading-[1.6] text-muted-foreground"
                   >
                     {active.desc}
                   </motion.p>
 
                   <motion.ul variants={panelItem} className="mt-6 flex flex-col gap-3.5">
                     {active.points.map((p) => (
-                      <li key={p} className="flex items-center gap-3 text-[15.5px] font-medium text-ink">
+                      <li key={p} className="flex items-center gap-3 text-[calc(15.5 * var(--desktop-px-unit))] font-medium text-ink">
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
@@ -432,25 +432,25 @@ export function BeyondEquipment() {
                     variants={panelItem}
                     className="mt-7 rounded-xl border border-primary/15 bg-primary/[0.035] px-5 py-4"
                   >
-                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                    <div className="flex items-center gap-2 text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-primary">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                       Hospital Outcome
                     </div>
-                    <p className="mt-2 text-[14.5px] font-medium leading-[1.6] text-ink">
+                    <p className="mt-2 text-[calc(14.5 * var(--desktop-px-unit))] font-medium leading-[1.6] text-ink">
                       {active.outcome}
                     </p>
                   </motion.div>
 
                   {/* Rotating contextual support block */}
                   <motion.div variants={panelItem} className="mt-5">
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+                    <div className="text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
                       {active.support.label}
                     </div>
                     <div className="mt-2.5 flex flex-wrap gap-2">
                       {active.support.items.map((it) => (
                         <span
                           key={it}
-                          className="rounded-full border border-border bg-secondary/50 px-3 py-1 text-[12px] font-semibold text-ink/80"
+                          className="rounded-full border border-border bg-secondary/50 px-3 py-1 text-[calc(12 * var(--desktop-px-unit))] font-semibold text-ink/80"
                         >
                           {it}
                         </span>
@@ -500,7 +500,7 @@ export function BeyondEquipment() {
             </div>
           </div>
 
-          <p className="mt-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/80">
+          <p className="mt-4 text-center text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-muted-foreground/80">
             Swipe to explore the partnership
           </p>
 
@@ -517,19 +517,19 @@ export function BeyondEquipment() {
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+                    <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-primary">
                       {String(i + 1).padStart(2, "0")} · {a.label}
                     </span>
                   </div>
                   <h3 className="mt-4 font-display text-xl font-extrabold leading-tight tracking-[-0.02em] text-ink">
                     {a.title}
                   </h3>
-                  <p className="mt-3 text-[14px] leading-[1.6] text-muted-foreground">
+                  <p className="mt-3 text-[calc(14 * var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
                     {a.desc}
                   </p>
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {a.points.map((p) => (
-                      <li key={p} className="flex items-center gap-2.5 text-[13.5px] font-medium text-ink">
+                      <li key={p} className="flex items-center gap-2.5 text-[calc(13.5 * var(--desktop-px-unit))] font-medium text-ink">
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
@@ -538,23 +538,23 @@ export function BeyondEquipment() {
                     ))}
                   </ul>
                   <div className="mt-4 rounded-xl border border-primary/15 bg-primary/[0.035] px-4 py-3">
-                    <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+                    <div className="flex items-center gap-2 text-[calc(9 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-primary">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                       Hospital Outcome
                     </div>
-                    <p className="mt-1.5 text-[13px] font-medium leading-[1.55] text-ink">
+                    <p className="mt-1.5 text-[calc(13 * var(--desktop-px-unit))] font-medium leading-[1.55] text-ink">
                       {a.outcome}
                     </p>
                   </div>
                   <div className="mt-4">
-                    <div className="text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+                    <div className="text-[calc(9 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
                       {a.support.label}
                     </div>
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {a.support.items.map((it) => (
                         <span
                           key={it}
-                          className="rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 text-[11px] font-semibold text-ink/80"
+                          className="rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold text-ink/80"
                         >
                           {it}
                         </span>

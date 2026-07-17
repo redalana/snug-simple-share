@@ -44,9 +44,9 @@ export function BlogArticlePage({ slug }: { slug: string }) {
 
   if (!article) {
     return (
-      <section className="bg-white pt-[140px] xl:pt-[180px]">
+      <section className="bg-white pt-[calc(140 * var(--desktop-px-unit))] xl:pt-[calc(180 * var(--desktop-px-unit))]">
         <div className="mx-auto max-w-3xl px-6 py-24 text-center lg:px-10">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-primary">
+          <p className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
             404 — Article not found
           </p>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-ink sm:text-4xl">
@@ -98,7 +98,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
 
 function Breadcrumb({ category, title }: { category: string; title: string }) {
   return (
-    <section className="bg-white pt-[100px] xl:pt-[150px]">
+    <section className="bg-white pt-[calc(100 * var(--desktop-px-unit))] xl:pt-[calc(150 * var(--desktop-px-unit))]">
       <div className="mx-auto max-w-[87.5rem] px-6 pt-6 lg:px-10">
         <nav
           aria-label="Breadcrumb"
@@ -127,13 +127,13 @@ function Hero({ article }: { article: Article }) {
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
       <div>
-        <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
+        <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
           {article.category}
         </span>
         <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.25rem]">
           {article.title}
         </h1>
-        <p className="mt-5 text-[15.5px] leading-relaxed text-muted-foreground">
+        <p className="mt-5 text-[calc(15.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
           {article.excerpt}
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground">
@@ -254,7 +254,7 @@ function Block({ block }: { block: ContentBlock }) {
             {block.text}
           </h2>
           {block.body && !block.image && (
-            <p className="mt-4 text-[15.5px] leading-[1.8] text-foreground/85">
+            <p className="mt-4 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
               {block.body}
             </p>
           )}
@@ -264,7 +264,7 @@ function Block({ block }: { block: ContentBlock }) {
                 block.imagePosition === "left" ? "" : "sm:[&>*:first-child]:order-2"
               }`}
             >
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[calc(260 * var(--desktop-px-unit))]">
                 <img
                   data-article-image
                   src={block.image}
@@ -275,7 +275,7 @@ function Block({ block }: { block: ContentBlock }) {
                   loading="lazy"
                 />
               </div>
-              <p className="text-[15.5px] leading-[1.8] text-foreground/85">
+              <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
                 {block.body}
               </p>
             </div>
@@ -292,7 +292,7 @@ function Block({ block }: { block: ContentBlock }) {
 
     case "p":
       return (
-        <p className="text-[15.5px] leading-[1.8] text-foreground/85">
+        <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
           {block.text}
         </p>
       );
@@ -304,14 +304,14 @@ function Block({ block }: { block: ContentBlock }) {
             {block.paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="text-[15.5px] leading-[1.8] text-foreground/85"
+                className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85"
               >
                 {p}
               </p>
             ))}
           </div>
           {block.image && (
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[260px]">
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-secondary sm:w-[calc(260 * var(--desktop-px-unit))]">
               <img
                 data-article-image
                 src={block.image}
@@ -332,7 +332,7 @@ function Block({ block }: { block: ContentBlock }) {
           {block.items.map((it, i) => (
             <li
               key={i}
-              className="flex gap-3 text-[15.5px] leading-[1.7] text-foreground/85"
+              className="flex gap-3 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               {it}
@@ -423,7 +423,7 @@ function BenefitsGrid({
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary">
               <Icon className="h-5 w-5" />
             </div>
-            <p className="mt-3 font-display text-[15px] font-extrabold text-ink">
+            <p className="mt-3 font-display text-[calc(15 * var(--desktop-px-unit))] font-extrabold text-ink">
               {it.title}
             </p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -493,7 +493,7 @@ function PriceTable({
       </div>
       {caption && (
         <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="grid h-4 w-4 place-items-center rounded-full border border-muted-foreground/40 text-[10px]">
+          <span className="grid h-4 w-4 place-items-center rounded-full border border-muted-foreground/40 text-[calc(10 * var(--desktop-px-unit))]">
             i
           </span>
           {caption}
@@ -518,7 +518,7 @@ function Requirements({
         {checklist.map((it) => (
           <li
             key={it}
-            className="flex items-start gap-3 text-[15px] text-foreground/85"
+            className="flex items-start gap-3 text-[calc(15 * var(--desktop-px-unit))] text-foreground/85"
           >
             <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             {it}
@@ -526,7 +526,7 @@ function Requirements({
         ))}
       </ul>
       <div className="rounded-2xl border border-border bg-secondary p-5">
-        <p className="font-display text-[15px] font-extrabold text-ink">
+        <p className="font-display text-[calc(15 * var(--desktop-px-unit))] font-extrabold text-ink">
           {specs.title}
         </p>
         <dl className="mt-4 space-y-3 text-sm">
@@ -556,14 +556,14 @@ function RoiSection({
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div>
-        <p className="text-[15.5px] leading-[1.8] text-foreground/85">
+        <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
           {paragraph}
         </p>
         <ul className="mt-5 space-y-2.5">
           {bullets.map((b) => (
             <li
               key={b}
-              className="flex gap-3 text-[15.5px] leading-[1.7] text-foreground/85"
+              className="flex gap-3 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               {b}
@@ -606,7 +606,7 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
               aria-expanded={isOpen}
               className="flex min-h-16 w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-secondary/40"
             >
-              <span className="font-display text-[15px] font-bold text-ink">
+              <span className="font-display text-[calc(15 * var(--desktop-px-unit))] font-bold text-ink">
                 {it.q}
               </span>
               {isOpen ? (
@@ -624,7 +624,7 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
                   transition={{ duration: 0.25 }}
                   className="overflow-hidden"
                 >
-                  <div className="px-5 pb-5 text-[15px] leading-relaxed text-foreground/80">{it.a}</div>
+                  <div className="px-5 pb-5 text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-foreground/80">{it.a}</div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -645,7 +645,7 @@ function Sidebar({
   related: Article[];
 }) {
   return (
-    <aside className="space-y-6 lg:sticky lg:top-[170px] lg:self-start">
+    <aside className="space-y-6 lg:sticky lg:top-[calc(170 * var(--desktop-px-unit))] lg:self-start">
       <OnThisPage items={article.tableOfContents} />
       <RelatedArticles items={related} />
       <SidebarNewsletter />
@@ -732,13 +732,13 @@ function RelatedArticles({ items }: { items: Article[] }) {
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-primary">
+              <p className="text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
                 {a.category}
               </p>
-              <p className="mt-0.5 line-clamp-2 font-display text-[13px] font-bold leading-snug text-ink transition-colors group-hover:text-primary">
+              <p className="mt-0.5 line-clamp-2 font-display text-[calc(13 * var(--desktop-px-unit))] font-bold leading-snug text-ink transition-colors group-hover:text-primary">
                 {a.title}
               </p>
-              <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground">
+              <div className="mt-1 flex items-center gap-3 text-[calc(11 * var(--desktop-px-unit))] text-muted-foreground">
                 <span className="inline-flex items-center gap-1">
                   <Clock className="h-3 w-3" /> {a.readingTime}
                 </span>
@@ -881,7 +881,7 @@ function NewsletterBand() {
                 value={form.email}
                 onChange={(e) => form.setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-12 w-full min-w-[240px] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[260px]"
+                className="h-12 w-full min-w-[calc(240 * var(--desktop-px-unit))] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[calc(260 * var(--desktop-px-unit))]"
               />
               <button
                 type="submit"

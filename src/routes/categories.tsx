@@ -61,7 +61,7 @@ function CategoriesPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[96px]">
+      <main id="main-content" className="pt-[calc(96 * var(--desktop-px-unit))]">
         {/* HERO */}
         <section className="border-b border-border/60 bg-secondary">
           <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">

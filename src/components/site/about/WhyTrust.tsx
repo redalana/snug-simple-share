@@ -24,15 +24,15 @@ export function WhyTrust() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
                   <ShieldCheck className="h-7 w-7" />
                 </div>
-                <div className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur">
+                <div className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-wider backdrop-blur">
                   <Star className="h-3 w-3" /> Our Foundation
                 </div>
                 <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">Regional Experience Since 1999</h3>
-                <p className="mt-4 text-[14.5px] leading-relaxed text-white/85">
+                <p className="mt-4 text-[calc(14.5 * var(--desktop-px-unit))] leading-relaxed text-white/85">
                   {WHY[0].desc}
                 </p>
               </div>
-              <div className="relative mt-8 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wider text-white/85">
+              <div className="relative mt-8 flex items-center gap-2 text-[calc(12 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-white/85">
                 <TrendingUp className="h-4 w-4" /> Proven since 1999
               </div>
             </div>
@@ -44,7 +44,7 @@ export function WhyTrust() {
                   <w.icon className="h-5 w-5" />
                 </div>
                 <div className="mt-5 font-display text-[1.05rem] font-extrabold text-ink">{w.title}</div>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">{w.desc}</p>
+                <p className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{w.desc}</p>
               </div>
             </Reveal>
           ))}

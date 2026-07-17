@@ -33,20 +33,20 @@ function Mark({ brand }: { brand: Brand }) {
   const c = brand.color;
   switch (brand.mark) {
     case "square":
-      return <span className="h-4 w-4 rounded-[3px]" style={{ backgroundColor: c }} />;
+      return <span className="h-4 w-4 rounded-[calc(3 * var(--desktop-px-unit))]" style={{ backgroundColor: c }} />;
     case "ring":
       return (
         <span
-          className="h-4 w-4 rounded-full border-[3px]"
+          className="h-4 w-4 rounded-full border-[calc(3 * var(--desktop-px-unit))]"
           style={{ borderColor: c }}
         />
       );
     case "bars":
       return (
-        <span className="flex items-end gap-[2px]">
-          <span className="h-2.5 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
-          <span className="h-4 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
-          <span className="h-3 w-[3px] rounded-sm" style={{ backgroundColor: c }} />
+        <span className="flex items-end gap-[calc(2 * var(--desktop-px-unit))]">
+          <span className="h-2.5 w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c }} />
+          <span className="h-4 w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c }} />
+          <span className="h-3 w-[calc(3 * var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c }} />
         </span>
       );
     default:
@@ -67,7 +67,7 @@ function BrandLogo({ brand }: { brand: Brand }) {
         </span>
         {brand.sub && (
           <span
-            className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.18em]"
+            className="mt-0.5 text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em]"
             style={{ color: brand.color, opacity: 0.75 }}
           >
             {brand.sub}

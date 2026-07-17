@@ -12,10 +12,10 @@ export function FeaturedProjects() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_3fr] lg:items-end lg:gap-12">
           <div>
-            <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.26em] text-primary">
+            <p className="inline-flex items-center gap-2 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
               Proven Excellence <ArrowRight className="h-3 w-3" />
             </p>
-            <h2 className="mt-4 font-display text-[34px] font-extrabold leading-[1.05] sm:text-[40px]">
+            <h2 className="mt-4 font-display text-[calc(34 * var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40 * var(--desktop-px-unit))]">
               Projects That<br />Make a Difference
             </h2>
             <a
@@ -43,16 +43,16 @@ export function FeaturedProjects() {
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-bold text-foreground shadow-sm">
+                  <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-bold text-foreground shadow-sm">
                     {p.country}
                   </span>
                 </div>
                 <div className="p-5">
-                  <div className="font-display text-[15px] font-bold leading-tight text-foreground">
+                  <div className="font-display text-[calc(15 * var(--desktop-px-unit))] font-bold leading-tight text-foreground">
                     {p.title}
                   </div>
-                  <div className="mt-1 text-[13px] text-muted-foreground">{p.scope}</div>
-                  <div className="mt-4 flex items-center gap-3 border-t border-black/5 pt-3 text-[11px] text-muted-foreground">
+                  <div className="mt-1 text-[calc(13 * var(--desktop-px-unit))] text-muted-foreground">{p.scope}</div>
+                  <div className="mt-4 flex items-center gap-3 border-t border-black/5 pt-3 text-[calc(11 * var(--desktop-px-unit))] text-muted-foreground">
                     <span className="inline-flex items-center gap-1.5">
                       <span className="grid h-4 w-4 place-items-center rounded-full bg-primary/10 text-primary">
                         <Heart className="h-2.5 w-2.5" />

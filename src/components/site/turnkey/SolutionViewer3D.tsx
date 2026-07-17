@@ -192,7 +192,7 @@ function HotspotMarker({
       </mesh>
       {active && (
         <Html distanceFactor={6} position={[0, 0.28, 0]} center>
-          <div className="whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_rgba(0,0,0,0.15)]">
+          <div className="whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[calc(10.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_rgba(0,0,0,0.15)]">
             <span className="mr-2 text-primary">0{h.n}</span>
             {h.label}
           </div>

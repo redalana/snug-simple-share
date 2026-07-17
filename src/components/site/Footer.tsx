@@ -82,7 +82,7 @@ export function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(1100px 620px at 18% -12%, rgba(255,255,255,0.05), transparent 62%), radial-gradient(900px 560px at 88% 8%, rgba(255,255,255,0.028), transparent 60%), linear-gradient(160deg, #181A1D 0%, #141619 42%, #111315 100%)",
+            "radial-gradient(calc(1100 * var(--desktop-px-unit)) calc(620 * var(--desktop-px-unit)) at 18% -12%, rgba(255,255,255,0.05), transparent 62%), radial-gradient(calc(900 * var(--desktop-px-unit)) calc(560 * var(--desktop-px-unit)) at 88% 8%, rgba(255,255,255,0.028), transparent 60%), linear-gradient(160deg, #181A1D 0%, #141619 42%, #111315 100%)",
         }}
       />
 
@@ -156,7 +156,7 @@ export function Footer() {
         <div className="grid gap-x-10 gap-y-10 py-14 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
           <div>
             <Logo light />
-            <p className="mt-4 max-w-sm text-[13.5px] leading-[1.7] text-white/50">
+            <p className="mt-4 max-w-sm text-[calc(13.5 * var(--desktop-px-unit))] leading-[1.7] text-white/50">
               Delivering advanced medical technologies, turnkey project delivery,
               biomedical engineering and long-term support for healthcare providers
               across Africa, the Middle East and emerging healthcare markets.
@@ -170,7 +170,7 @@ export function Footer() {
                   className="group transition-transform duration-300 hover:-translate-y-0.5"
                   style={{ ["--sc" as string]: color }}
                 >
-                  <Icon className="h-[19px] w-[19px] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
+                  <Icon className="h-[calc(19 * var(--desktop-px-unit))] w-[calc(19 * var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
                 </a>
               ))}
             </div>
@@ -178,10 +178,10 @@ export function Footer() {
 
           {COLS.map((col) => (
             <div key={col.title}>
-              <h4 className="font-display text-[12px] font-semibold uppercase tracking-[0.2em] text-white/85">
+              <h4 className="font-display text-[calc(12 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                 {col.title}
               </h4>
-              <ul className="mt-4 space-y-2.5 text-[13.5px]">
+              <ul className="mt-4 space-y-2.5 text-[calc(13.5 * var(--desktop-px-unit))]">
                 {col.links.map((l) => (
                   <li key={l}>
                     <a
@@ -204,12 +204,12 @@ export function Footer() {
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
                 <div className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-white/45" strokeWidth={1.5} />
+                  <Icon className="mt-0.5 h-[calc(18 * var(--desktop-px-unit))] w-[calc(18 * var(--desktop-px-unit))] shrink-0 text-white/45" strokeWidth={1.5} />
                   <div className="min-w-0">
-                    <div className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+                    <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}
                     </div>
-                    <div className="mt-1 truncate text-[13.5px] text-white/75">{value}</div>
+                    <div className="mt-1 truncate text-[calc(13.5 * var(--desktop-px-unit))] text-white/75">{value}</div>
                   </div>
                 </div>
               );
@@ -228,10 +228,10 @@ export function Footer() {
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
         <div className="flex flex-col items-center justify-between gap-3 py-5 sm:flex-row">
 
-          <div className="text-[12.5px] text-white/40">
+          <div className="text-[calc(12.5 * var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
-          <div className="flex items-center gap-7 text-[12.5px]">
+          <div className="flex items-center gap-7 text-[calc(12.5 * var(--desktop-px-unit))]">
             {["Privacy Policy", "Terms & Conditions", "Sitemap"].map((l) => (
               <a
                 key={l}

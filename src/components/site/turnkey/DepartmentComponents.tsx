@@ -28,13 +28,13 @@ export function DepartmentComponents() {
 
         {/* RIGHT */}
         <div className="flex flex-col justify-center px-6 py-16 lg:px-14 lg:py-20">
-          <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary">
+          <p className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
             Inside the Department
           </p>
-          <h2 className="mt-4 font-display text-[34px] font-extrabold leading-[1.05] sm:text-[40px]">
+          <h2 className="mt-4 font-display text-[calc(34 * var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40 * var(--desktop-px-unit))]">
             Engineered for<br />Precision. Built for<br />Performance.
           </h2>
-          <p className="mt-4 max-w-md text-[14px] leading-relaxed text-muted-foreground">
+          <p className="mt-4 max-w-md text-[calc(14 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
             Every component is carefully selected and integrated to deliver
             exceptional clinical outcomes.
           </p>
@@ -76,14 +76,14 @@ export function DepartmentComponents() {
                 <div className="aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
                   <img src={active.thumb} alt={active.title} className="h-full w-full object-cover" />
                 </div>
-                <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                <p className="mt-4 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
                   {active.label}
                 </p>
-                <div className="mt-1 font-display text-[16px] font-bold text-foreground">{active.title}</div>
-                <p className="mt-2 text-[12.5px] leading-snug text-muted-foreground">{active.copy}</p>
+                <div className="mt-1 font-display text-[calc(16 * var(--desktop-px-unit))] font-bold text-foreground">{active.title}</div>
+                <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-snug text-muted-foreground">{active.copy}</p>
                 <ul className="mt-3 space-y-1.5">
                   {active.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-[12.5px] text-foreground">
+                    <li key={f} className="flex items-center gap-2 text-[calc(12.5 * var(--desktop-px-unit))] text-foreground">
                       <Check className="h-3.5 w-3.5 text-primary" /> {f}
                     </li>
                   ))}

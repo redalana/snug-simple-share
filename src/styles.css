@@ -24,13 +24,13 @@
   --color-primary-glow: var(--primary-glow);
   --color-primary-dark: var(--primary-dark);
   --color-ink: var(--ink);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - calc(4 * var(--desktop-px-unit)));
+  --radius-md: calc(var(--radius) - calc(2 * var(--desktop-px-unit)));
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-xl: calc(var(--radius) + calc(4 * var(--desktop-px-unit)));
+  --radius-2xl: calc(var(--radius) + calc(8 * var(--desktop-px-unit)));
+  --radius-3xl: calc(var(--radius) + calc(12 * var(--desktop-px-unit)));
+  --radius-4xl: calc(var(--radius) + calc(16 * var(--desktop-px-unit)));
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -202,17 +202,17 @@
  * headers, headings, cards, sections, buttons, icons — in one place,
  * without `zoom` or `transform: scale()` and without touching mobile/tablet.
  *
- * 16px -> 12px  ≈ 25% smaller on desktop (≥1024px)
- * 16px -> 11.5px ≈ 28% smaller on large desktop (≥1536px)
+ * calc(16 * var(--desktop-px-unit)) -> calc(12 * var(--desktop-px-unit))  ≈ 25% smaller on desktop (≥calc(1024 * var(--desktop-px-unit)))
+ * calc(16 * var(--desktop-px-unit)) -> calc(11.5 * var(--desktop-px-unit)) ≈ 28% smaller on large desktop (≥calc(1536 * var(--desktop-px-unit)))
  */
 @media (min-width: 1024px) {
   html {
-    font-size: 12px;
+    font-size: calc(12 * var(--desktop-px-unit));
   }
 }
 @media (min-width: 1536px) {
   html {
-    font-size: 11.5px;
+    font-size: calc(11.5 * var(--desktop-px-unit));
   }
 }
 

@@ -55,13 +55,13 @@ export function Process() {
               <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
                 <step.icon className="h-5 w-5" strokeWidth={1.8} />
               </span>
-              <div className="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+              <div className="mt-4 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-primary">
                 Step {step.n}
               </div>
               <h3 className="mt-1 font-display text-[1.05rem] font-extrabold tracking-tight text-ink">
                 {step.title}
               </h3>
-              <p className="mt-2 text-[12.5px] leading-[1.55] text-muted-foreground">
+              <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
                 {step.desc}
               </p>
             </motion.div>

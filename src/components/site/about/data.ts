@@ -84,23 +84,23 @@ export const JOURNEY = [
 
 export const BENTO = [
   {
-    key: "eng", img: engImg, span: "lg:col-span-2 lg:row-span-2 min-h-[620px]",
+    key: "eng", img: engImg, span: "lg:col-span-2 lg:row-span-2 min-h-[calc(620 * var(--desktop-px-unit))]",
     title: "Engineering First",
     desc: "AbuFarha is an engineering company that supplies medical equipment — not a reseller. Every project is scoped, installed and supported by our own biomedical engineers, from first site visit to lifetime service.",
     featured: true,
   },
   {
-    key: "cert", img: warehouseImg, span: "min-h-[290px]",
+    key: "cert", img: warehouseImg, span: "min-h-[calc(290 * var(--desktop-px-unit))]",
     title: "Certified Biomedical Engineers",
     desc: "OEM-trained field engineers with hands-on experience across MRI, CT, cath lab, ultrasound, monitoring and life-support systems.",
   },
   {
-    key: "turnkey", img: beyond, span: "min-h-[290px]",
+    key: "turnkey", img: beyond, span: "min-h-[calc(290 * var(--desktop-px-unit))]",
     title: "Turnkey Healthcare Projects",
     desc: "One accountable partner for planning, procurement, installation, commissioning, training and handover of complete hospital departments.",
   },
   {
-    key: "partner", img: remoteImg, span: "lg:col-span-2 min-h-[290px]",
+    key: "partner", img: remoteImg, span: "lg:col-span-2 min-h-[calc(290 * var(--desktop-px-unit))]",
     title: "Long-Term Partnership",
     desc: "We stay engaged long after go-live — preventive maintenance, spare parts, clinical retraining and technology upgrades across the equipment lifecycle.",
   },
