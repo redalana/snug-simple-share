@@ -583,32 +583,6 @@ export function PortfolioBrowser() {
         </div>
       </section>
 
-      {/* CATEGORY NAV */}
-      <section className="sticky top-[calc(112*var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
-          <div className="relative w-full [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)] lg:[mask-image:none]">
-            <div className="flex w-full snap-x snap-mandatory items-center gap-2 overflow-x-auto pr-10 [scrollbar-width:none] [-ms-overflow-style:none] lg:pr-0 [&::-webkit-scrollbar]:hidden">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    setActiveCat(cat);
-                    resetPage();
-                  }}
-                  className={`shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                    activeCat === cat
-                      ? "bg-primary text-primary-foreground shadow-[0_10px_24px_-10px_var(--primary)] ring-1 ring-primary"
-                      : "border border-border bg-card text-foreground/75 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_10px_24px_-16px_var(--primary)]"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* POPULAR MANUFACTURERS */}
       <section className="border-b border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-[100rem] px-6 py-10 lg:px-10">
@@ -642,6 +616,52 @@ export function PortfolioBrowser() {
                 </button>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* SEARCH */}
+      <section className="border-b border-border/60 bg-white">
+        <div className="mx-auto max-w-[100rem] px-6 py-8 lg:px-10 lg:py-10">
+          <div className="group/search relative mx-auto max-w-4xl">
+            <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
+            <input
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                resetPage();
+              }}
+              type="search"
+              placeholder="Search by system name, manufacturer, model, technology, or keyword..."
+              aria-label="Search medical systems"
+              className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORY NAV */}
+      <section className="sticky top-[calc(112*var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
+        <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
+          <div className="relative w-full [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)] lg:[mask-image:none]">
+            <div className="flex w-full snap-x snap-mandatory items-center gap-2 overflow-x-auto pr-10 [scrollbar-width:none] [-ms-overflow-style:none] lg:pr-0 [&::-webkit-scrollbar]:hidden">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setActiveCat(cat);
+                    resetPage();
+                  }}
+                  className={`shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                    activeCat === cat
+                      ? "bg-primary text-primary-foreground shadow-[0_10px_24px_-10px_var(--primary)] ring-1 ring-primary"
+                      : "border border-border bg-card text-foreground/75 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_10px_24px_-16px_var(--primary)]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
