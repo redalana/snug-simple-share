@@ -44,13 +44,13 @@ export function GlobalPresence() {
               providers worldwide.
             </h2>
           </div>
-          <a
-            href="/contact"
+          <Link
+            to="/projects"
             className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
           >
-            View all countries
+            Explore All Projects
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
         </div>
 
         {/* Dark dashboard container */}
