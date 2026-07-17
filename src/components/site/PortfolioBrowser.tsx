@@ -203,8 +203,10 @@ function FilterAccordion({
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
                 placeholder={`Search ${title.toLowerCase()}…`}
+                aria-label={`Search ${title}`}
                 className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               />
+
             </div>
           )}
           <ul className="space-y-3.5 pb-5">
