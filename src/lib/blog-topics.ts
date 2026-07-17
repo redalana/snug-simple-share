@@ -2651,8 +2651,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Continuity of care across cardiology, oncology and imaging services",
     ],
     references: [
-      { label: "IEC 62353 — Recurrent test and testing after repair" },
-      { label: "ISO 13485 — Medical devices quality management" },
+      { label: "IEC 62353 — Recurrent test and testing after repair of medical electrical equipment", url: "https://webstore.iec.ch/publication/22705" },
+      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
+      { label: "AAMI — Medical equipment management resources", url: "https://array.aami.org/" },
     ],
   },
   Biomedical: {
