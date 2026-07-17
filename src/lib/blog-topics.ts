@@ -2392,9 +2392,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac arrhythmia",
     ],
     references: [
-      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet" },
-      { label: "ACC/AHA Guideline for Coronary Artery Revascularization" },
-      { label: "ESC Guidelines on Acute Coronary Syndromes" },
+      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet", url: "https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)" },
+      { label: "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization", url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038" },
+      { label: "ESC Guidelines for the Management of Acute Coronary Syndromes (2023)", url: "https://academic.oup.com/eurheartj/article/44/38/3720/7243210" },
+      { label: "SCAI — Society for Cardiovascular Angiography & Interventions", url: "https://scai.org/" },
     ],
   },
   MRI: {
