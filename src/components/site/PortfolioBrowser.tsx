@@ -44,6 +44,7 @@ const STATUS_STYLES: Record<Product["status"], string> = {
   "Brand New": "bg-primary/10 text-primary ring-1 ring-primary/20",
   "Certified Refurbished": "bg-secondary text-foreground/80 ring-1 ring-border",
   "Factory Certified": "bg-secondary text-foreground/80 ring-1 ring-border",
+  "Used": "bg-secondary text-foreground/80 ring-1 ring-border",
 };
 
 const CATEGORIES = ["All Categories", ...PRIMARY_CATEGORIES] as const;
