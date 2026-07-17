@@ -118,9 +118,9 @@ function HeroSlider() {
                 <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
                   {slide.category}
                 </span>
-                <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+                <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
                   {slide.title}
-                </h1>
+                </h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
                   {slide.excerpt}
                 </p>
