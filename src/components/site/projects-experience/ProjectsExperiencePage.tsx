@@ -624,30 +624,36 @@ function ExperienceGrid() {
                 src={c.img}
                 alt={c.title}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+              <div aria-hidden className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/25" />
               <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold text-white ring-1 ring-white/20 backdrop-blur">
                 <span>{c.flag}</span> {c.country}
               </span>
               <div className="relative z-10 p-5">
-                <h3 className="font-display text-lg font-extrabold leading-tight">
+                <h3 className="font-display text-lg font-extrabold leading-tight transition-transform duration-500 group-hover:-translate-y-0.5">
                   {c.title}
                 </h3>
                 <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/80">
                   {c.copy}
                 </p>
-                <Link
-                  to="/contact"
-                  className="mt-3 inline-flex items-center gap-1.5 text-[calc(12*var(--desktop-px-unit))] font-bold text-white/95"
-                >
-                  Read Case Study
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
+                <div className="mt-3 grid transition-[grid-template-rows,opacity] duration-500 ease-out grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 motion-reduce:grid-rows-[1fr] motion-reduce:opacity-100">
+                  <div className="overflow-hidden">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-1.5 text-[calc(12*var(--desktop-px-unit))] font-bold text-white"
+                    >
+                      View Case Study
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
