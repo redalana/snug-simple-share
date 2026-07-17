@@ -33,7 +33,7 @@ export const NAV: NavItem[] = [
   },
   { label: "About Us", href: "/about" },
 
-  { label: "Blog", href: "/blog" },
+  { label: "Knowledge Center", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];
 
