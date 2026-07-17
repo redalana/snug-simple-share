@@ -20,7 +20,7 @@ export function Hero() {
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[calc(480*var(--desktop-px-unit))] max-w-[100rem] items-center gap-16 px-6 pt-24 pb-20 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="relative mx-auto grid min-h-[calc(440*var(--desktop-px-unit))] max-w-[100rem] items-center gap-16 px-6 pt-24 pb-20 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
