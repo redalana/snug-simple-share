@@ -192,6 +192,36 @@
   animation: conn-flow 3.2s linear infinite;
 }
 
+/*
+ * Desktop-only global visual scale refinement.
+ *
+ * Applies a proportional zoom to the entire desktop UI so that headers,
+ * headings, cards, spacing, icons, buttons, and imagery all shrink
+ * together (~13–15%) — matching the visual density of modern enterprise
+ * medical websites without touching a single component, animation, color
+ * token, or typography rule. Mobile and tablet layouts (< 1280px) are
+ * intentionally unaffected.
+ */
+@media (min-width: 1280px) {
+  html {
+    zoom: 0.9;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    zoom: 0.88;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    zoom: 0.86;
+  }
+}
+
+
+
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
