@@ -37,7 +37,7 @@ export function Header() {
       <div
         className={`transition-all duration-300 ${
           scrolled
-            ? "bg-white/90 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+            ? "bg-white shadow-[0_8px_30px_-16px_rgba(0,0,0,0.16)] lg:bg-white/90 lg:backdrop-blur-xl"
             : "bg-white"
         }`}
       >

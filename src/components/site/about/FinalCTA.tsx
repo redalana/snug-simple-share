@@ -8,7 +8,7 @@ export function FinalCTA() {
     <section className="relative overflow-hidden bg-ink text-white">
       <img src={ctaImg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/50" />
-      <div className="relative mx-auto max-w-[100rem] px-6 py-24 lg:px-10 lg:py-20">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div>
             <Eyebrow tone="light" index="13">Let's Talk</Eyebrow>

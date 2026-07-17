@@ -5,7 +5,7 @@ import { turnkeyHero } from "./data";
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto grid min-h-[calc(440*var(--desktop-px-unit))] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="mx-auto grid max-w-[100rem] gap-10 px-6 pt-14 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
         {/* LEFT */}
         <div className="flex flex-col justify-center">
           <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.28em] text-primary">
@@ -15,7 +15,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mt-5 font-display text-[calc(44*var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
+            className="mt-5 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
           >
             Complete Clinical<br />
             Departments.<br />
@@ -26,16 +26,16 @@ export function Hero() {
             deliver fully integrated medical departments that perform today and
             for years to come.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white shadow-[0_20px_40px_-18px_rgba(225,29,46,0.7)] transition-transform hover:-translate-y-0.5"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_20px_40px_-18px_rgba(225,29,46,0.7)] transition-transform hover:-translate-y-0.5 sm:py-3.5"
             >
               Start Your Project <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#journey"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3.5 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground sm:py-3.5"
             >
               <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/10 text-primary">
                 <Play className="h-3 w-3 fill-current" />

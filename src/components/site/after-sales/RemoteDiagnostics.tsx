@@ -46,7 +46,7 @@ function FeatureCard({
 
 export function RemoteDiagnostics() {
   return (
-    <section className="relative overflow-hidden bg-background py-24 lg:py-20">
+    <section className="relative overflow-hidden bg-background py-16 lg:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-16 px-6 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-20 lg:px-10">
         {/* LEFT — Image with parallax + glass card */}
         <motion.div

@@ -45,7 +45,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
   if (!article) {
     return (
       <section className="bg-white pt-[calc(140*var(--desktop-px-unit))] xl:pt-[calc(180*var(--desktop-px-unit))]">
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center lg:px-10">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-10">
           <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
             404 — Article not found
           </p>

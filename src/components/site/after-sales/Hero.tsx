@@ -20,34 +20,34 @@ export function Hero() {
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[calc(440*var(--desktop-px-unit))] max-w-[100rem] items-center gap-16 px-6 pt-24 pb-20 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="relative mx-auto grid max-w-[100rem] items-center gap-16 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             After Sales Support
           </div>
-          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[calc(56*var(--desktop-px-unit))]">
+          <h1 className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-tight sm:text-[3.25rem] lg:text-[calc(56*var(--desktop-px-unit))]">
             Reliable Support.
             <br />
             <span className="text-primary">Maximum</span>
             <br />
             <span className="text-white/95">Performance.</span>
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
             We keep your medical equipment running at peak performance with
             expert care, genuine parts and fast response — every time.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <a
               href="#request"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-bold text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
+              className="group inline-flex min-h-[48px] items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5 sm:px-7 sm:py-4"
             >
               Request Service
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="tel:+96264026063"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10 sm:px-7 sm:py-4"
             >
               <Headphones className="h-4 w-4" />
               Emergency Support
