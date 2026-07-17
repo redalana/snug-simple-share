@@ -237,7 +237,7 @@ export const PRODUCTS: Product[] = [
       "https://www.abufarhamedical.com/storage/medical-platform/products/toshiba-aquilion-64-slices-ct-scanner-d9db5173.jpg"
     ],
     specs: [
-      "PET/CT Scanners",
+      "CT Scanners",
       "YOM 2009"
     ],
     status: "Used",
