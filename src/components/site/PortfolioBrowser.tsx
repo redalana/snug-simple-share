@@ -289,7 +289,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
             </span>
           ))}
         </div>
-        <div className="mt-3 space-y-1.5 border-t border-border/60 pt-3 text-xs font-medium text-foreground/70 sm:mt-4 sm:space-y-2 sm:pt-4">
+        <div className="mt-3 space-y-1 border-t border-border/60 pt-3 text-xs font-medium leading-snug text-foreground/70 sm:mt-4 sm:space-y-2 sm:pt-4">
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-primary" />
             {product.warranty} Included

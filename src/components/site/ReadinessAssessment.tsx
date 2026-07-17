@@ -416,7 +416,7 @@ export function ReadinessAssessment() {
   return (
     <section
       id="readiness"
-      className="relative overflow-hidden bg-white py-20 lg:py-20"
+      className="relative overflow-hidden bg-white py-16 lg:py-20"
     >
       {/* subtle engineering grid */}
       <div

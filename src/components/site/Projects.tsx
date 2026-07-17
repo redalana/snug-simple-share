@@ -6,7 +6,7 @@ import p1 from "@/assets/project-1.jpg";
 
 export function Projects() {
   return (
-    <section id="projects" className="bg-white py-20 lg:py-20">
+    <section id="projects" className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>

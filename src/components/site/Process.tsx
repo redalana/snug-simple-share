@@ -28,7 +28,7 @@ const STEPS: Step[] = [
 
 export function Process() {
   return (
-    <section id="process" className="bg-secondary/50 py-20 lg:py-20">
+    <section id="process" className="bg-secondary/50 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">

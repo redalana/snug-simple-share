@@ -333,7 +333,7 @@ const STEPS: { icon: LucideIcon; title: string; desc: string }[] = [
 
 function HowWeSupport() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="text-center">
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -677,7 +677,7 @@ function Coverage() {
   }
 
   return (
-    <section id="request" className="bg-[#F5F6F8] py-20">
+    <section id="request" className="bg-[#F5F6F8] py-16 lg:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-8 px-6 lg:grid-cols-2 lg:px-10">
         {/* LEFT — coverage */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">

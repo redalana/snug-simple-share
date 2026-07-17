@@ -87,7 +87,7 @@ const PILLARS: Pillar[] = [
 
 export function WhyAbuFarha() {
   return (
-    <section id="why" className="relative bg-secondary/40 py-20 lg:py-20">
+    <section id="why" className="relative bg-secondary/40 py-16 lg:py-20">
       <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

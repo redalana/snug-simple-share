@@ -5,7 +5,7 @@ export function FinalCTA() {
   return (
     <section
       id="cta"
-      className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark py-20 lg:py-20 text-primary-foreground"
+      className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark py-16 lg:py-20 text-primary-foreground"
     >
       {/* premium ambient glows */}
       <div className="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl" />

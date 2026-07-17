@@ -207,7 +207,7 @@ export function BeyondEquipment() {
   );
 
   return (
-    <section id="advantage" className="relative overflow-hidden bg-white py-20 lg:py-20">
+    <section id="advantage" className="relative overflow-hidden bg-white py-16 lg:py-20">
       {/* Whisper-quiet engineering grid — present, never noisy */}
       <div
         aria-hidden
