@@ -393,6 +393,9 @@ function Block({ block }: { block: ContentBlock }) {
     case "references":
       return <References items={block.items} />;
 
+    case "reviewedBy":
+      return <ReviewedBy name={block.name} specialty={block.specialty} date={block.date} />;
+
     case "quote":
       return (
         <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
@@ -666,8 +669,35 @@ function References({ items }: { items: { label: string; url?: string }[] }) {
   );
 }
 
+function ReviewedBy({ name, specialty, date }: { name: string; specialty: string; date: string }) {
+  return (
+    <aside
+      aria-label="Medically reviewed by"
+      className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)] sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div className="flex items-start gap-3">
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+          <ShieldCheck className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-muted-foreground">
+            Medically reviewed by
+          </p>
+          <p className="mt-0.5 font-display text-[calc(15*var(--desktop-px-unit))] font-extrabold text-ink">
+            {name}
+          </p>
+          <p className="text-[calc(13*var(--desktop-px-unit))] text-muted-foreground">
+            {specialty}
+          </p>
+        </div>
+      </div>
+      <div className="inline-flex items-center gap-1.5 self-start rounded-full bg-secondary px-3 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-ink sm:self-auto">
+        <Calendar className="h-3.5 w-3.5" /> Reviewed {date}
+      </div>
+    </aside>
+  );
+}
 
-/* -- Benefits grid -- */
 
 const BENEFIT_ICONS: Record<
   BenefitIcon,

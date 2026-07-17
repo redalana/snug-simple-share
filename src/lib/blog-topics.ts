@@ -2392,9 +2392,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac arrhythmia",
     ],
     references: [
-      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet" },
-      { label: "ACC/AHA Guideline for Coronary Artery Revascularization" },
-      { label: "ESC Guidelines on Acute Coronary Syndromes" },
+      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet", url: "https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)" },
+      { label: "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization", url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038" },
+      { label: "ESC Guidelines for the Management of Acute Coronary Syndromes (2023)", url: "https://academic.oup.com/eurheartj/article/44/38/3720/7243210" },
+      { label: "SCAI — Society for Cardiovascular Angiography & Interventions", url: "https://scai.org/" },
     ],
   },
   MRI: {
@@ -2428,9 +2429,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac tissue characterization",
     ],
     references: [
-      { label: "ACR Appropriateness Criteria" },
-      { label: "ESR Guidelines on MRI Safety" },
-      { label: "RSNA — Magnetic Resonance Imaging (MRI) safety information" },
+      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+      { label: "ESR — European Society of Radiology, MRI safety guidance", url: "https://www.myesr.org/" },
+      { label: "RSNA — MRI safety information", url: "https://www.rsna.org/patient-resources" },
+      { label: "ACR Manual on MR Safety (2024)", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
     ],
   },
   "MRI Scanners": {
@@ -2463,8 +2465,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac disease",
     ],
     references: [
-      { label: "ACR Practice Parameter for Performing MRI" },
-      { label: "IEC 60601-2-33 — MRI safety standard" },
+      { label: "ACR Practice Parameter for Performing and Interpreting MRI", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
+      { label: "IEC 60601-2-33 — MR equipment safety standard", url: "https://webstore.iec.ch/publication/68147" },
+      { label: "ACR Manual on MR Safety", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
     ],
   },
   "CT Scanners": {
@@ -2496,8 +2499,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Lung and abdominal cancers",
     ],
     references: [
-      { label: "ACR–SPR Practice Parameter for CT" },
-      { label: "ICRP — Radiological Protection in Medicine" },
+      { label: "ACR–SPR–STR Practice Parameter for CT", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
+      { label: "ICRP Publication 135 — Diagnostic Reference Levels in Medical Imaging", url: "https://www.icrp.org/publication.asp?id=ICRP%20Publication%20135" },
+      { label: "Image Gently — Pediatric CT dose stewardship", url: "https://www.imagegently.org/" },
+      { label: "RSNA — Computed Tomography (CT) patient information", url: "https://www.radiologyinfo.org/en/info/bodyct" },
     ],
   },
   "PET/CT": {
@@ -2528,8 +2533,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Myocardial viability assessment",
     ],
     references: [
-      { label: "EANM Procedure Guidelines for PET/CT" },
-      { label: "SNMMI Practice Guidelines" },
+      { label: "EANM Procedure Guidelines for Tumour Imaging (FDG PET/CT)", url: "https://www.eanm.org/publications/guidelines/" },
+      { label: "SNMMI — PET/CT Practice Guidelines & Appropriate Use Criteria", url: "https://www.snmmi.org/ClinicalPractice/content.aspx?ItemNumber=6414" },
+      { label: "NCCN Clinical Practice Guidelines in Oncology", url: "https://www.nccn.org/guidelines/category_1" },
     ],
   },
   Ultrasound: {
@@ -2560,8 +2566,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Obstetric assessment",
     ],
     references: [
-      { label: "AIUM Practice Parameters" },
-      { label: "WFUMB — Safety of ultrasound" },
+      { label: "AIUM Practice Parameters", url: "https://www.aium.org/officialStatements/PracticeParameters" },
+      { label: "WFUMB — Safety of diagnostic ultrasound", url: "https://wfumb.info/safety-of-ultrasound/" },
+      { label: "ACR–AIUM–SPR–SRU Practice Parameter for Ultrasound Examinations", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
     ],
   },
   "Operating Room": {
@@ -2581,8 +2588,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Trauma",
     ],
     references: [
-      { label: "AORN Guidelines for Perioperative Practice" },
-      { label: "WHO Surgical Safety Checklist" },
+      { label: "AORN Guidelines for Perioperative Practice", url: "https://www.aorn.org/guidelines" },
+      { label: "WHO Surgical Safety Checklist", url: "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources" },
+      { label: "CDC — Guideline for Prevention of Surgical Site Infection", url: "https://www.cdc.gov/infection-control/hcp/surgical-site-infection/" },
     ],
   },
   "Radiation Therapy": {
@@ -2603,8 +2611,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Brain metastases",
     ],
     references: [
-      { label: "IAEA Human Health Series — Radiotherapy QA" },
-      { label: "ASTRO Clinical Practice Guidelines" },
+      { label: "IAEA Human Health Series — Radiotherapy Quality Assurance", url: "https://www.iaea.org/publications/search/type/human-health-series" },
+      { label: "ASTRO — Clinical Practice Guidelines", url: "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines" },
+      { label: "ESTRO — European Society for Radiotherapy and Oncology", url: "https://www.estro.org/Science/Guidelines" },
     ],
   },
   "Turnkey Projects": {
@@ -2623,8 +2632,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Advanced diagnostic imaging",
     ],
     references: [
-      { label: "WHO — Health Facility Planning Guidelines" },
-      { label: "IEC 60601 — Medical electrical equipment" },
+      { label: "WHO — Health Facility Planning and Design Guidance", url: "https://www.who.int/publications/i/item/9789240032897" },
+      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
+      { label: "FGI — Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
     ],
   },
   "After Sales": {
@@ -2641,8 +2651,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Continuity of care across cardiology, oncology and imaging services",
     ],
     references: [
-      { label: "IEC 62353 — Recurrent test and testing after repair" },
-      { label: "ISO 13485 — Medical devices quality management" },
+      { label: "IEC 62353 — Recurrent test and testing after repair of medical electrical equipment", url: "https://webstore.iec.ch/publication/22705" },
+      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
+      { label: "AAMI — Medical equipment management resources", url: "https://array.aami.org/" },
     ],
   },
   Biomedical: {
@@ -2659,8 +2670,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "All clinical services depend on well-maintained medical technology.",
     ],
     references: [
-      { label: "IEC 60601 series — Medical electrical equipment" },
-      { label: "WHO — Medical devices management" },
+      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
+      { label: "WHO — Medical devices management publications", url: "https://www.who.int/health-topics/medical-devices" },
+      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
     ],
   },
   "Technical Support": {
@@ -2677,8 +2689,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Any interruption to imaging or interventional services affects patient care.",
     ],
     references: [
-      { label: "AAMI TIR56 — Medical device recall management" },
-      { label: "ISO 55000 — Asset management" },
+      { label: "AAMI TIR56 — Medical device recall management", url: "https://array.aami.org/doi/10.2345/9781570206481.ch1" },
+      { label: "ISO 55000 — Asset management overview", url: "https://www.iso.org/standard/55088.html" },
+      { label: "ECRI — Health Devices resources", url: "https://www.ecri.org/" },
     ],
   },
   "Imaging Solutions": {
@@ -2709,8 +2722,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Neurological disorders",
     ],
     references: [
-      { label: "ACR Appropriateness Criteria" },
-      { label: "ESR — European Society of Radiology guidelines" },
+      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+      { label: "ESR — European Society of Radiology", url: "https://www.myesr.org/" },
+      { label: "RSNA — RadiologyInfo patient resources", url: "https://www.radiologyinfo.org/" },
     ],
   },
   "Hospital Planning": {
@@ -2727,8 +2741,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "All patient populations benefit from thoughtful facility design.",
     ],
     references: [
-      { label: "WHO — Hospital Planning and Design" },
-      { label: "FGI Guidelines for Design and Construction of Hospitals" },
+      { label: "WHO — Hospital planning and design publications", url: "https://www.who.int/publications/i/item/9789240032897" },
+      { label: "FGI Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
+      { label: "IHFG — International Health Facility Guidelines", url: "https://healthfacilityguidelines.com/" },
     ],
   },
 };
@@ -2746,8 +2761,9 @@ const GENERIC_DEFAULTS: CategoryDefaults = {
     "Common conditions relevant to the specialty covered in this article.",
   ],
   references: [
-    { label: "World Health Organization — Medical devices" },
-    { label: "International clinical practice guidelines" },
+    { label: "WHO — Medical devices", url: "https://www.who.int/health-topics/medical-devices" },
+    { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+    { label: "NIH — MedlinePlus health information", url: "https://medlineplus.gov/" },
   ],
 };
 
