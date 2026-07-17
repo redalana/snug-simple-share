@@ -2741,8 +2741,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "All patient populations benefit from thoughtful facility design.",
     ],
     references: [
-      { label: "WHO — Hospital Planning and Design" },
-      { label: "FGI Guidelines for Design and Construction of Hospitals" },
+      { label: "WHO — Hospital planning and design publications", url: "https://www.who.int/publications/i/item/9789240032897" },
+      { label: "FGI Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
+      { label: "IHFG — International Health Facility Guidelines", url: "https://healthfacilityguidelines.com/" },
     ],
   },
 };
