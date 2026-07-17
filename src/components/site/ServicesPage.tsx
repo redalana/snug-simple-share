@@ -207,7 +207,7 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.35fr_0.65fr] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16">
         {/* LEFT — animated content */}
-        <div className="relative min-h-[calc(460*var(--desktop-px-unit))]">
+        <div className="relative lg:min-h-[calc(460*var(--desktop-px-unit))]">
           {HERO_SLIDES.map((s, i) => (
             <div
               key={s.eyebrow}
