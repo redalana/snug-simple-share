@@ -33,7 +33,7 @@ export function Header() {
 
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-[var(--lovable-toolbar-offset,0px)] z-50">
       <div
         className={`transition-all duration-300 ${
           scrolled

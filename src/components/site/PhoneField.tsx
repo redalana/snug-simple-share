@@ -255,11 +255,13 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
             type="tel"
             inputMode="tel"
             autoComplete="tel"
+            aria-label="Phone number"
             value={inputValue}
             onChange={handlePhoneValueChange}
             placeholder={formatExample(country.iso2, dialCode)}
             className="w-full min-w-0 bg-transparent px-3.5 text-sm text-ink outline-none placeholder:text-muted-foreground/70"
           />
+
         </div>
       </PopoverAnchor>
     </Popover>

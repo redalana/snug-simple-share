@@ -203,8 +203,10 @@ function FilterAccordion({
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
                 placeholder={`Search ${title.toLowerCase()}…`}
+                aria-label={`Search ${title}`}
                 className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               />
+
             </div>
           )}
           <ul className="space-y-3.5 pb-5">
@@ -567,8 +569,10 @@ export function PortfolioBrowser() {
                     }}
                     type="search"
                     placeholder="Search by system name, manufacturer, model, technology, or keyword..."
+                    aria-label="Search medical systems"
                     className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
                   />
+
                 </div>
               </div>
 
@@ -715,8 +719,10 @@ export function PortfolioBrowser() {
                       setSort(e.target.value);
                       resetPage();
                     }}
+                    aria-label="Sort systems"
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
+
                     {SORT_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
                     ))}

@@ -134,19 +134,31 @@ function RootComponent() {
 
   // Editor-only: when the app is loaded inside the Lovable Preview iframe,
   // the host injects a top toolbar that can visually clip our fixed header's
-  // second nav row. Tag <html> so a scoped CSS rule can offset the header.
-  // Standalone preview and production: window.self === window.top → no-op.
+  // second nav row. We expose the offset as a CSS variable
+  // (--lovable-toolbar-offset). Defaults to 0px in styles.css so standalone
+  // preview and production are pixel-identical; only the embedded editor
+  // assigns a non-zero value at runtime.
   useEffect(() => {
     if (typeof window === "undefined") return;
+    let embedded = false;
     try {
-      if (window.self !== window.top) {
-        document.documentElement.setAttribute("data-lovable-embed", "true");
-      }
+      embedded = window.self !== window.top;
     } catch {
       // Cross-origin access to window.top throws → we're embedded.
-      document.documentElement.setAttribute("data-lovable-embed", "true");
+      embedded = true;
     }
+    if (!embedded) return;
+    const root = document.documentElement;
+    root.setAttribute("data-lovable-embed", "true");
+    // Lovable editor toolbar height. Kept as a single tunable constant here
+    // rather than a hardcoded literal inside the header component.
+    root.style.setProperty("--lovable-toolbar-offset", "44px");
+    return () => {
+      root.removeAttribute("data-lovable-embed");
+      root.style.removeProperty("--lovable-toolbar-offset");
+    };
   }, []);
+
 
   return (
     <QueryClientProvider client={queryClient}>
