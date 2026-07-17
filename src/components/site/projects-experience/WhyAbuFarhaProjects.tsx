@@ -1,0 +1,152 @@
+import { motion } from "framer-motion";
+import {
+  Wrench,
+  Cog,
+  GraduationCap,
+  ShieldCheck,
+  Boxes,
+  LifeBuoy,
+  BadgeCheck,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Eyebrow } from "../Eyebrow";
+import { useCountUp } from "@/hooks/use-count-up";
+
+type Stat = { value: number; suffix: string; label: string };
+
+const STATS: Stat[] = [
+  { value: 25, suffix: "+", label: "Years Experience" },
+  { value: 250, suffix: "+", label: "Hospitals Served" },
+  { value: 10, suffix: "", label: "Countries Covered" },
+  { value: 1500, suffix: "+", label: "Equipment Installed" },
+];
+
+function StatItem({ stat }: { stat: Stat }) {
+  const { ref, value } = useCountUp(stat.value);
+  return (
+    <div className="text-center">
+      <div className="font-display text-[2.9rem] font-extrabold leading-none tracking-[-0.02em] text-ink sm:text-[3.6rem]">
+        <span ref={ref} className="tabular-nums">
+          {value.toLocaleString()}
+        </span>
+        <span className="text-primary">{stat.suffix}</span>
+      </div>
+      <div className="mt-3 text-[calc(13*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {stat.label}
+      </div>
+    </div>
+  );
+}
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+type Pillar = {
+  icon: LucideIcon;
+  title: string;
+  copy: string;
+};
+
+const PILLARS: Pillar[] = [
+  {
+    icon: Wrench,
+    title: "Biomedical Engineering",
+    copy: "Certified engineers plan site readiness, infrastructure and clinical workflows before a single system arrives.",
+  },
+  {
+    icon: Cog,
+    title: "Installation & Commissioning",
+    copy: "Every system is installed, calibrated and acceptance-tested so it performs to specification from day one.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Clinical Applications",
+    copy: "Hands-on training gives physicians and technologists the confidence to use advanced technology at its full potential.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Preventive Maintenance",
+    copy: "Scheduled service and performance testing prevent downtime and protect uptime for critical patient care.",
+  },
+  {
+    icon: Boxes,
+    title: "Original Spare Parts",
+    copy: "Reliable regional access to genuine, OEM-compatible components keeps essential systems operational.",
+  },
+  {
+    icon: LifeBuoy,
+    title: "Long-Term Technical Support",
+    copy: "Remote and on-site engineering continues for the full equipment lifecycle — not just the first year.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "One-Year Free Warranty",
+    copy: "Every installation includes a full year of complimentary warranty coverage, with continued maintenance plans available beyond the first year to keep your equipment running at full performance.",
+  },
+];
+
+export function WhyAbuFarhaProjects() {
+  return (
+    <section id="why" className="relative bg-secondary/40 py-16 lg:py-20">
+      <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-15% 0px" }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="max-w-3xl"
+        >
+          <Eyebrow index="03">Why AbuFarha</Eyebrow>
+          <h2 className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[3.1rem]">
+            Hospitals stay with AbuFarha
+            <span className="block text-primary">long after installation.</span>
+          </h2>
+          <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+            Anyone can deliver a machine. AbuFarha delivers an engineered,
+            supported and accountable partnership for the entire life of your
+            technology.
+          </p>
+        </motion.div>
+
+        <div className="mt-16 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
+          {PILLARS.map((pillar, i) => {
+            const Icon = pillar.icon;
+            return (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.06 * (i % 3) }}
+                className="group relative border-t border-border/70 pt-7"
+              >
+                <span className="absolute -top-px left-0 h-[calc(2*var(--desktop-px-unit))] w-12 bg-primary transition-all duration-300 group-hover:w-20" />
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-white text-primary shadow-[0_12px_30px_-20px_rgba(15,23,42,0.5)]">
+                  <Icon className="h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]" strokeWidth={1.75} />
+                </span>
+                <h3 className="mt-6 font-display text-[1.4rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 max-w-sm text-[calc(15.5*var(--desktop-px-unit))] leading-[1.65] text-muted-foreground">
+                  {pillar.copy}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Trust numbers — emphasized variant for Projects & Experience */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mt-20 grid grid-cols-2 gap-y-12 rounded-2xl border border-border/70 bg-white/70 py-14 shadow-[0_2px_18px_-8px_rgba(15,23,42,0.16)] sm:grid-cols-4 lg:mt-24"
+        >
+          {STATS.map((stat) => (
+            <StatItem key={stat.label} stat={stat} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
