@@ -2722,8 +2722,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Neurological disorders",
     ],
     references: [
-      { label: "ACR Appropriateness Criteria" },
-      { label: "ESR — European Society of Radiology guidelines" },
+      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+      { label: "ESR — European Society of Radiology", url: "https://www.myesr.org/" },
+      { label: "RSNA — RadiologyInfo patient resources", url: "https://www.radiologyinfo.org/" },
     ],
   },
   "Hospital Planning": {
