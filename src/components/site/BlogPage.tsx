@@ -83,7 +83,7 @@ function HeroSlider() {
   const slide = slides[active];
 
   return (
-    <section className="bg-white pt-[calc(100*var(--desktop-px-unit))] xl:pt-[calc(150*var(--desktop-px-unit))]">
+    <section className="bg-white pt-10 lg:pt-14">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <div
           className="relative h-[calc(460*var(--desktop-px-unit))] w-full overflow-hidden rounded-3xl bg-ink shadow-[0_30px_80px_-40px_rgba(15,23,42,0.45)] sm:h-[calc(520*var(--desktop-px-unit))] lg:h-[calc(580*var(--desktop-px-unit))]"
