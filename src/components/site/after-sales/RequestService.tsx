@@ -88,7 +88,7 @@ export function RequestService() {
   const errCls = "border-destructive focus:border-destructive focus:ring-destructive/15";
 
   return (
-    <section id="request" className="relative overflow-hidden bg-background py-24 lg:py-20">
+    <section id="request" className="relative overflow-hidden bg-background py-16 lg:py-20">
       <div className="pointer-events-none absolute -top-32 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <div className="relative mx-auto max-w-[80rem] px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">

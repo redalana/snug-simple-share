@@ -7,7 +7,7 @@ import { EXPERTISE, warehouseImg } from "./data";
 export function Expertise() {
   const [open, setOpen] = useState<number>(0);
   return (
-    <section className="bg-white py-24 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal>

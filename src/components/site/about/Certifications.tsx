@@ -4,7 +4,7 @@ import { CERTS } from "./data";
 
 export function Certifications() {
   return (
-    <section className="bg-secondary/50 py-24 lg:py-20">
+    <section className="bg-secondary/50 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">

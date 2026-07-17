@@ -5,7 +5,7 @@ import { TEAM_ROLES, TEAM_BADGES, teamImg } from "./data";
 
 export function Team() {
   return (
-    <section className="bg-secondary/50 py-24 lg:py-20">
+    <section className="bg-secondary/50 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <Reveal>

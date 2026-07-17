@@ -11,7 +11,7 @@ export function WhereWeWork() {
   const VISIBLE = PINS.filter(p => p.x >= VB_X && p.x <= VB_X + VB_W && p.y >= VB_Y && p.y <= VB_Y + VB_H);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-20">
+    <section className="relative overflow-hidden bg-ink py-16 text-white lg:py-20">
       <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>

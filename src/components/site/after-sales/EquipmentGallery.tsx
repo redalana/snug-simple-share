@@ -39,7 +39,7 @@ function EquipmentCard({ item, index }: { item: EquipmentItem; index: number }) 
 
 export function EquipmentGallery() {
   return (
-    <section className="relative bg-background py-24 lg:py-20">
+    <section className="relative bg-background py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">

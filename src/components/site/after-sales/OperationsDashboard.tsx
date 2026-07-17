@@ -4,7 +4,7 @@ import { AnimatedNumber, Sparkline } from "./primitives";
 
 export function OperationsDashboard() {
   return (
-    <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-20">
+    <section className="relative overflow-hidden bg-[#0a0d14] py-16 text-white lg:py-20">
       <div className="pointer-events-none absolute -top-40 left-1/3 h-[32rem] w-[32rem] rounded-full bg-primary/12 blur-[calc(140*var(--desktop-px-unit))]" />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">

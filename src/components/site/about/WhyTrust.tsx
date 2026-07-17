@@ -5,7 +5,7 @@ import { WHY } from "./data";
 
 export function WhyTrust() {
   return (
-    <section className="bg-white py-24 lg:py-20">
+    <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">
