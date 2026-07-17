@@ -102,17 +102,17 @@ const BRANDS: Brand[] = [
     productKey: "GE",
   },
   {
-    name: "Toshiba – Canon",
+    name: "Canon Medical",
     color: "#CC0000",
     mark: "bars",
     country: "Japan",
     countryFlag: "🇯🇵",
     description:
-      "Precision Japanese engineering across CT, MRI, X-ray and vascular imaging.",
+      "Precision Japanese engineering across CT, MRI, X-ray and vascular imaging. Formerly Toshiba Medical Systems.",
     categories: ["CT", "MRI", "X-Ray", "Vascular"],
     groups: ["Imaging", "Cardiovascular"],
     modalities: ["MRI", "CT", "Cath Lab", "Ultrasound"],
-    productKey: "Toshiba - Canon",
+    productKey: "Canon Medical",
   },
   {
     name: "Mindray",
