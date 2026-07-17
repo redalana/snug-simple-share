@@ -193,10 +193,29 @@
 }
 
 /*
- * Desktop visual density is achieved via real per-component sizing values
- * on `lg:`/`xl:` breakpoints (section padding, heading sizes, container
- * spacing, header height). No `zoom` or `transform: scale()` hacks.
+ * Desktop scale system.
+ *
+ * The root font-size IS the master design token: every Tailwind spacing,
+ * font-size, gap, padding, radius, and width utility is authored in `rem`
+ * and resolves against `html { font-size }`. Reducing the root size on
+ * desktop breakpoints proportionally rescales the entire token system —
+ * headers, headings, cards, sections, buttons, icons — in one place,
+ * without `zoom` or `transform: scale()` and without touching mobile/tablet.
+ *
+ * 16px -> 12px  ≈ 25% smaller on desktop (≥1024px)
+ * 16px -> 11.5px ≈ 28% smaller on large desktop (≥1536px)
  */
+@media (min-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1536px) {
+  html {
+    font-size: 11.5px;
+  }
+}
+
 
 
 
