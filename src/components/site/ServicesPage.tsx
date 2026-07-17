@@ -220,7 +220,7 @@ function Hero() {
               )}
             >
               <Eyebrow tone="light">{s.eyebrow}</Eyebrow>
-              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[52px]">
+              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[46px]">
                 {s.title}
               </h1>
               <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-white/70">
