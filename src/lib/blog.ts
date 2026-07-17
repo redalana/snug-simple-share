@@ -54,7 +54,18 @@ export type ContentBlock =
       bullets: string[];
       callout: { title: string; lines: string[] };
     }
-  | { type: "faq"; items: { q: string; a: string }[] };
+  | { type: "faq"; items: { q: string; a: string }[] }
+  | {
+      type: "callout";
+      variant: "tip" | "note" | "important" | "clinical";
+      title?: string;
+      text: string;
+    }
+  | {
+      type: "stats";
+      items: { value: string; label: string; source?: string }[];
+    }
+  | { type: "takeaways"; items: string[] };
 
 export type Article = {
   slug: string;
@@ -75,218 +86,17 @@ export type Article = {
   content: ContentBlock[];
 };
 
+import { makeMedicalContent } from "./blog-topics";
+
 function makeDefaultContent(a: {
+  slug: string;
   title: string;
   category: string;
   coverImage: string;
 }): { content: ContentBlock[]; toc: TocItem[] } {
-  const noun = a.category;
-  const toc: TocItem[] = [
-    { id: "introduction", title: "Introduction" },
-    { id: "what-is", title: `What is Refurbished ${noun}?` },
-    { id: "benefits", title: `Benefits of Choosing Refurbished ${noun}` },
-    { id: "cost", title: `${noun} Cost: New vs Refurbished` },
-    { id: "installation", title: "Installation Requirements" },
-    { id: "roi", title: "ROI: Is It Worth It?" },
-    { id: "faq", title: "Frequently Asked Questions" },
-    { id: "conclusion", title: "Conclusion" },
-  ];
-
-  const content: ContentBlock[] = [
-    {
-      type: "h2",
-      id: "introduction",
-      text: "Introduction",
-    },
-    {
-      type: "intro",
-      image: a.coverImage,
-      imageAlt: a.title,
-      paragraphs: [
-        `${a.title} is a decision that shapes clinical services and capital budgets for years. However, the high cost of new systems can be a challenge for many hospitals and imaging centers. Refurbished platforms provide a reliable, cost-effective alternative — delivering premium performance, advanced technology and long-term value.`,
-        `This guide walks you through everything you need to know before investing in a refurbished ${noun.toLowerCase()} system, including costs, popular brands, installation requirements and expected ROI.`,
-      ],
-    },
-
-    {
-      type: "h2",
-      id: "what-is",
-      text: `What is a Refurbished ${noun} System?`,
-      number: 1,
-      image: a.coverImage,
-      imagePosition: "left",
-      body: `A refurbished ${noun.toLowerCase()} system is a pre-owned platform that has been fully inspected, restored and tested by certified engineers to meet original manufacturer standards. It includes essential component replacement, software updates and quality assurance tests to ensure optimal performance and patient safety.`,
-    },
-
-    {
-      type: "h2",
-      id: "benefits",
-      text: `Benefits of Choosing Refurbished ${noun}`,
-      number: 2,
-    },
-    {
-      type: "benefits",
-      items: [
-        {
-          icon: "cost",
-          title: "Cost Savings",
-          description: "Save 30% – 60% compared to new systems.",
-        },
-        {
-          icon: "reliability",
-          title: "Proven Reliability",
-          description:
-            "Rigorous refurbishment & testing ensures reliable performance.",
-        },
-        {
-          icon: "delivery",
-          title: "Faster Delivery",
-          description: "Shorter lead time and quicker installation.",
-        },
-        {
-          icon: "performance",
-          title: "High Performance",
-          description: "Excellent image quality & clinical results.",
-        },
-      ],
-    },
-
-    {
-      type: "h2",
-      id: "cost",
-      text: `${noun} Cost: New vs Refurbished`,
-      number: 3,
-    },
-    {
-      type: "table",
-      headers: [
-        "System Type",
-        "New Price (USD)",
-        "Refurbished Price (USD)",
-        "Potential Savings",
-      ],
-      rows: [
-        [
-          `Entry-level ${noun}`,
-          "$1,000,000 – $1,800,000",
-          "$450,000 – $900,000",
-          "30% – 60%",
-        ],
-        [
-          `Mid-range ${noun}`,
-          "$1,800,000 – $3,200,000",
-          "$800,000 – $1,600,000",
-          "30% – 55%",
-        ],
-        [
-          `High-end ${noun}`,
-          "$600,000 – $1,200,000",
-          "$250,000 – $600,000",
-          "40% – 60%",
-        ],
-      ],
-      highlightLastColumn: true,
-      caption:
-        "Prices vary depending on brand, model, condition and configuration.",
-    },
-
-    {
-      type: "h2",
-      id: "installation",
-      text: "Installation Requirements",
-      number: 4,
-    },
-    {
-      type: "requirements",
-      checklist: [
-        "Site preparation and civil works",
-        "RF shielding and room compliance",
-        "Power supply and grounding",
-        "Cooling and ventilation system",
-        "Software & network integration",
-        "Regulatory compliance & safety tests",
-      ],
-      specs: {
-        title: `Typical Room Requirements (${noun})`,
-        rows: [
-          { label: "Room Size (Min.)", value: "5.5m (L) × 3.5m (W) × 2.4m (H)" },
-          { label: "Power Requirement", value: "60 – 80 kVA" },
-          { label: "Cooling", value: "2 – 4 tons" },
-          { label: "RF Shielding", value: "Required" },
-          { label: "Door Width", value: "Min. 1.2m" },
-        ],
-      },
-    },
-
-    {
-      type: "h2",
-      id: "roi",
-      text: "ROI: Is It Worth It?",
-      number: 5,
-    },
-    {
-      type: "roi",
-      paragraph: `Investing in a refurbished ${noun.toLowerCase()} system can provide a strong return by increasing patient throughput, expanding diagnostic services and reducing operational costs.`,
-      bullets: [
-        "Lower initial investment",
-        `High patient demand for ${noun.toLowerCase()}`,
-        "Minimal downtime with proper maintenance",
-        "Long service life with OEM parts & support",
-      ],
-      callout: {
-        title: "Typical ROI Timeline",
-        lines: [
-          "Payback Period: 1 – 3 years",
-          "Lifespan: 7 – 10 years with proper maintenance",
-        ],
-      },
-    },
-
-    {
-      type: "h2",
-      id: "faq",
-      text: "Frequently Asked Questions",
-      number: 6,
-    },
-    {
-      type: "faq",
-      items: [
-        {
-          q: `Are refurbished ${noun.toLowerCase()} systems reliable?`,
-          a: "Yes — every system we supply is fully re-certified by our engineers with a warranty, spare parts and applications training.",
-        },
-        {
-          q: "What warranty do you provide?",
-          a: "Standard warranty is 12 months on parts and labour, with extended options available up to 36 months.",
-        },
-        {
-          q: "How long does installation take?",
-          a: "Typical installation takes between 3 and 8 weeks depending on site readiness and modality.",
-        },
-        {
-          q: "Can I upgrade the system later?",
-          a: "Yes — most platforms accept coil, software and workflow upgrades throughout their service life.",
-        },
-        {
-          q: "What brands do you support?",
-          a: "We support Philips, Siemens Healthineers, GE HealthCare, Canon and other leading OEMs.",
-        },
-      ],
-    },
-
-    {
-      type: "h2",
-      id: "conclusion",
-      text: "Conclusion",
-      number: 7,
-    },
-    {
-      type: "p",
-      text: `Refurbished ${noun.toLowerCase()} is a proven way to bring advanced diagnostic capability to hospitals without the capital burden of new equipment. With the right partner for supply, installation, training and after-sales support, the total cost of ownership drops sharply while clinical performance stays uncompromised.`,
-    },
-  ];
-  return { content, toc };
+  return makeMedicalContent(a);
 }
+
 
 const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   content?: ContentBlock[];
@@ -516,6 +326,7 @@ export const ARTICLES: Article[] = RAW.map((a) => {
     return a as Article;
   }
   const { content, toc } = makeDefaultContent({
+    slug: a.slug,
     title: a.title,
     category: a.category,
     coverImage: a.coverImage,
