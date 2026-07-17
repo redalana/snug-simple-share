@@ -1517,10 +1517,20 @@ export function makeMedicalContent(
     relatedTech: ["Related imaging modalities", "Biomedical engineering", "Medical IT"],
   };
 
+  const cat = CATEGORY_DEFAULTS[a.category] ?? GENERIC_DEFAULTS;
+  const quickFacts = t.quickFacts ?? cat.quickFacts;
+  const comparison = t.comparison ?? cat.comparison;
+  const relatedDiseases = t.relatedDiseases ?? cat.relatedDiseases;
+  const references = t.references ?? cat.references;
+  const audience = t.audience ?? cat.audience;
+
   const toc: TocItem[] = HEADINGS.filter((h) => {
     if (h.id === "symptoms" && !t.symptoms) return false;
     if (h.id === "causes" && !t.causes) return false;
     if (h.id === "risk-factors" && !t.riskFactors) return false;
+    if (h.id === "comparison" && !comparison) return false;
+    if (h.id === "related-diseases" && (!relatedDiseases || !relatedDiseases.length)) return false;
+    if (h.id === "references" && (!references || !references.length)) return false;
     return true;
   });
 
@@ -1533,13 +1543,23 @@ export function makeMedicalContent(
     number: ++n,
   });
 
-  // 1. Introduction
+  // 0. Key Facts summary card
   content.push({
     type: "h2",
-    id: "introduction",
-    text: "Introduction",
+    id: "key-facts",
+    text: "Key Facts",
     number: ++n,
   });
+  content.push({
+    type: "keyFacts",
+    covers: `${subject} — clinical background, diagnosis, technology and outcomes.`,
+    audience,
+    readingTime: "Approx. 8–12 min",
+    technology: cat.technology,
+  });
+
+  // 1. Introduction
+  content.push(heading("introduction", "Introduction"));
   content.push({
     type: "intro",
     image: a.coverImage,
@@ -1564,6 +1584,12 @@ export function makeMedicalContent(
     content.push({ type: "stats", items: t.stats });
   }
   content.push({ type: "ul", items: t.whyMatters });
+
+  // 4b. Quick Facts
+  if (quickFacts && quickFacts.length) {
+    content.push(heading("quick-facts", "Quick Facts"));
+    content.push({ type: "quickFacts", items: quickFacts });
+  }
 
   // 5. Symptoms
   if (t.symptoms) {
@@ -1612,6 +1638,12 @@ export function makeMedicalContent(
     content.push({ type: "callout", variant: "tip", text: t.clinicalTip });
   }
 
+  // 9b. Comparison table
+  if (comparison) {
+    content.push(heading("comparison", "At-a-Glance Comparison"));
+    content.push({ type: "comparison", ...comparison });
+  }
+
   // 10. Clinical Benefits
   content.push(heading("clinical-benefits", "Clinical Benefits"));
   content.push({ type: "ul", items: t.clinicalBenefits });
@@ -1645,6 +1677,16 @@ export function makeMedicalContent(
   content.push(heading("takeaways", "Key Takeaways"));
   content.push({ type: "takeaways", items: t.takeaways });
 
+  // 14b. Related Conditions
+  if (relatedDiseases && relatedDiseases.length) {
+    content.push(heading("related-diseases", "Related Conditions"));
+    content.push({
+      type: "p",
+      text: `Readers exploring ${subject.toLowerCase()} often want to understand the medical conditions where it plays a central role:`,
+    });
+    content.push({ type: "relatedDiseases", items: relatedDiseases });
+  }
+
   // 15. Related Technologies
   content.push(heading("related-tech", "Related Technologies"));
   content.push({
@@ -1652,6 +1694,16 @@ export function makeMedicalContent(
     text: `The following technologies complement ${subject.toLowerCase()} and are frequently deployed together in a comprehensive clinical program:`,
   });
   content.push({ type: "ul", items: t.relatedTech });
+
+  // 15b. References & Guidelines
+  if (references && references.length) {
+    content.push(heading("references", "References & Guidelines"));
+    content.push({
+      type: "p",
+      text: `This article draws on established medical guidelines and international best practice. For further reading:`,
+    });
+    content.push({ type: "references", items: references });
+  }
 
   // 16. Conclusion
   content.push(heading("conclusion", "Conclusion"));
@@ -1668,3 +1720,4 @@ export function makeMedicalContent(
 
   return { content, toc };
 }
+
