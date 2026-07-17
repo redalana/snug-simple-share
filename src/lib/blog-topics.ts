@@ -2632,8 +2632,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Advanced diagnostic imaging",
     ],
     references: [
-      { label: "WHO — Health Facility Planning Guidelines" },
-      { label: "IEC 60601 — Medical electrical equipment" },
+      { label: "WHO — Health Facility Planning and Design Guidance", url: "https://www.who.int/publications/i/item/9789240032897" },
+      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
+      { label: "FGI — Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
     ],
   },
   "After Sales": {
