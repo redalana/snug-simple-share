@@ -569,8 +569,10 @@ export function PortfolioBrowser() {
                     }}
                     type="search"
                     placeholder="Search by system name, manufacturer, model, technology, or keyword..."
+                    aria-label="Search medical systems"
                     className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
                   />
+
                 </div>
               </div>
 
