@@ -15,8 +15,8 @@ export function FinalCTA() {
         className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
+            "linear-gradient(to right, white calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, white calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
+          backgroundSize: "calc(56 * var(--desktop-px-unit)) calc(56 * var(--desktop-px-unit))",
         }}
       />
       <svg
@@ -63,7 +63,7 @@ export function FinalCTA() {
           >
             <FileText className="h-4 w-4" /> Company Profile
           </a>
-          <p className="mt-1 flex w-full items-center justify-center gap-2 text-[13px] font-medium text-white/80 lg:justify-start">
+          <p className="mt-1 flex w-full items-center justify-center gap-2 text-[calc(13 * var(--desktop-px-unit))] font-medium text-white/80 lg:justify-start">
             <ShieldCheck className="h-4 w-4" />
             Backed by a 1-year free warranty on every installation.
           </p>

@@ -24,13 +24,13 @@
   --color-primary-glow: var(--primary-glow);
   --color-primary-dark: var(--primary-dark);
   --color-ink: var(--ink);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - calc(4 * var(--desktop-px-unit)));
+  --radius-md: calc(var(--radius) - calc(2 * var(--desktop-px-unit)));
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-xl: calc(var(--radius) + calc(4 * var(--desktop-px-unit)));
+  --radius-2xl: calc(var(--radius) + calc(8 * var(--desktop-px-unit)));
+  --radius-3xl: calc(var(--radius) + calc(12 * var(--desktop-px-unit)));
+  --radius-4xl: calc(var(--radius) + calc(16 * var(--desktop-px-unit)));
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -67,6 +67,7 @@
 }
 
 :root {
+  --desktop-px-unit: 1px;
   --radius: 0.75rem;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -195,24 +196,18 @@
 /*
  * Desktop scale system.
  *
- * The root font-size IS the master design token: every Tailwind spacing,
- * font-size, gap, padding, radius, and width utility is authored in `rem`
- * and resolves against `html { font-size }`. Reducing the root size on
- * desktop breakpoints proportionally rescales the entire token system —
- * headers, headings, cards, sections, buttons, icons — in one place,
- * without `zoom` or `transform: scale()` and without touching mobile/tablet.
- *
- * 16px -> 12px  ≈ 25% smaller on desktop (≥1024px)
- * 16px -> 11.5px ≈ 28% smaller on large desktop (≥1536px)
+ * Rem-based Tailwind tokens and formerly fixed pixel values use parallel
+ * desktop scale tokens. Both resolve to 75% at desktop widths while retaining
+ * their original values on mobile and tablet. This is real computed sizing,
+ * not zoom or transform scaling.
  */
 @media (min-width: 1024px) {
+  :root {
+    --desktop-px-unit: 0.75px;
+  }
+
   html {
     font-size: 12px;
-  }
-}
-@media (min-width: 1536px) {
-  html {
-    font-size: 11.5px;
   }
 }
 

@@ -7,7 +7,7 @@ export function Logo({ className = "", light = false }: { className?: string; li
         viewBox="0 0 34 34"
         fill="none"
         aria-hidden="true"
-        className="shrink-0"
+        className="h-[calc(34*var(--desktop-px-unit))] w-[calc(34*var(--desktop-px-unit))] shrink-0"
       >
         <path
           d="M1 18h6l2.5-9 4 15 3.5-20 3 11 2-3h8"
@@ -24,7 +24,7 @@ export function Logo({ className = "", light = false }: { className?: string; li
           Abu<span className="text-primary">Farha</span>
         </div>
         <div
-          className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}
+          className={`text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}
         >
           Medical Equipment
         </div>

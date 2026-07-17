@@ -16,17 +16,17 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/20 to-ink/50" />
         {/* soft red glow */}
-        <div className="pointer-events-none absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-primary/25 blur-[140px]" />
-        <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-primary/25 blur-[calc(140 * var(--desktop-px-unit))]" />
+        <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[calc(120 * var(--desktop-px-unit))]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] items-center gap-16 px-6 pt-24 pb-20 lg:min-h-[460px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="relative mx-auto grid min-h-[calc(480 * var(--desktop-px-unit))] max-w-[100rem] items-center gap-16 px-6 pt-24 pb-20 lg:min-h-[calc(460 * var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             After Sales Support
           </div>
-          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[56px]">
+          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[calc(56 * var(--desktop-px-unit))]">
             Reliable Support.
             <br />
             <span className="text-primary">Maximum</span>
@@ -70,14 +70,14 @@ export function Hero() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[10.5px] font-semibold uppercase tracking-[0.24em] text-white/50">
+                <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/50">
                   Service Dashboard
                 </div>
                 <div className="mt-1.5 text-base font-semibold text-white">
                   Live · Amman Ops Center
                 </div>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold text-emerald-300">
+              <div className="flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-[calc(11 * var(--desktop-px-unit))] font-bold text-emerald-300">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                 ALL SYSTEMS OK
               </div>
@@ -97,13 +97,13 @@ export function Hero() {
                   <div className="font-display text-xl font-extrabold text-white">
                     {k}
                   </div>
-                  <div className="mt-0.5 text-[11.5px] text-white/60">{v}</div>
+                  <div className="mt-0.5 text-[calc(11.5 * var(--desktop-px-unit))] text-white/60">{v}</div>
                 </div>
               ))}
             </div>
 
             <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-5">
-              <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              <div className="flex items-center justify-between text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
                 <span>Ticket #AF-24017</span>
                 <span className="text-primary">EN ROUTE</span>
               </div>
@@ -118,7 +118,7 @@ export function Hero() {
                   className="h-full rounded-full bg-gradient-to-r from-primary to-primary-glow"
                 />
               </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-white/55">
+              <div className="mt-2 flex items-center justify-between text-[calc(11 * var(--desktop-px-unit))] text-white/55">
                 <span>Engineer 12 min away</span>
                 <span>ETA 10:42</span>
               </div>

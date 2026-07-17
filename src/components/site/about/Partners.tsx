@@ -21,7 +21,7 @@ export function Partners() {
             <Reveal key={p.name} delay={i * 0.04}>
               <a href={p.href}
                 className="group flex h-32 items-center justify-center rounded-2xl border border-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_24px_50px_-24px_rgba(15,23,42,0.2)]">
-                <span className="font-display text-[18px] font-extrabold tracking-tight text-[oklch(0.55_0_0)] transition-all duration-300 group-hover:scale-105"
+                <span className="font-display text-[calc(18 * var(--desktop-px-unit))] font-extrabold tracking-tight text-[oklch(0.55_0_0)] transition-all duration-300 group-hover:scale-105"
                   style={{ color: undefined }}>
                   <span className="block text-current transition-colors duration-300 group-hover:text-[var(--brand)]" style={{ ["--brand" as string]: p.color }}>
                     {p.name}

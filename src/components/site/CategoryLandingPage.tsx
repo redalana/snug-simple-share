@@ -40,7 +40,7 @@ export function CategoryLandingPage({
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[110px]">
+      <main id="main-content" className="pt-[calc(110 * var(--desktop-px-unit))]">
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
           <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
@@ -139,7 +139,7 @@ export function CategoryLandingPage({
                       loading="lazy"
                     />
                     <span
-                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold ${STATUS_STYLES[p.status]}`}
+                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[p.status]}`}
                     >
                       {p.status}
                     </span>
@@ -156,7 +156,7 @@ export function CategoryLandingPage({
                       {p.specs.map((s) => (
                         <span
                           key={s}
-                          className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-foreground/75"
+                          className="rounded-full bg-muted px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-medium text-foreground/75"
                         >
                           {s}
                         </span>

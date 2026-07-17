@@ -61,7 +61,7 @@ export function Insights() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative flex min-h-[380px] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:shadow-[0_40px_80px_-32px_rgba(15,23,42,0.55)]"
+            className="group relative flex min-h-[calc(380 * var(--desktop-px-unit))] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:shadow-[0_40px_80px_-32px_rgba(15,23,42,0.55)]"
           >
             <img
               src={FEATURED.img}
@@ -71,7 +71,7 @@ export function Insights() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
             <div className="relative z-10 p-7">
-              <div className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider">
+              <div className="mb-3 flex items-center gap-3 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider">
                 <span className="rounded-full bg-primary px-3 py-1 text-primary-foreground">
                   {FEATURED.category}
                 </span>
@@ -113,7 +113,7 @@ export function Insights() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <div className="mb-1.5 flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-wider">
+                  <div className="mb-1.5 flex items-center gap-2.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider">
                     <span className="text-primary">{article.category}</span>
                     <span className="inline-flex items-center gap-1 text-muted-foreground">
                       <Calendar className="h-3 w-3" /> {article.date}

@@ -50,7 +50,7 @@ export function ProjectsGrid() {
           <h1 className="mt-4 font-display text-[2.2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
             Projects Delivered Across Africa &amp; the Middle East
           </h1>
-          <p className="mt-5 text-[16px] leading-[1.75] text-muted-foreground">
+          <p className="mt-5 text-[calc(16 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
             A selection of hospitals and medical centers where AbuFarha has
             supplied, installed, commissioned and supported advanced medical
             technology.
@@ -74,12 +74,12 @@ export function ProjectsGrid() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow">
+                <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-0.5 text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground shadow">
                   Case Study
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <p className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <p className="mb-1.5 flex items-center gap-1.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
                   <MapPin className="h-3.5 w-3.5 text-primary" /> {proj.loc}
                 </p>
                 <h3 className="font-display text-xl font-bold text-ink transition-colors group-hover:text-primary">
@@ -89,10 +89,10 @@ export function ProjectsGrid() {
                   {proj.desc}
                 </p>
                 <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold text-primary">
                     <Building2 className="h-3 w-3" /> {proj.type}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 text-[calc(11 * var(--desktop-px-unit))] font-medium text-muted-foreground">
                     <Layers className="h-3 w-3 text-primary" /> {proj.scope}
                   </span>
                 </div>

@@ -25,7 +25,7 @@ function EquipmentCard({ item, index }: { item: EquipmentItem; index: number }) 
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/5 to-transparent transition-colors duration-300 group-hover:from-ink/85 group-hover:via-ink/15" />
       </div>
 
-      <div className="grid min-h-[96px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-ink px-5 py-4 sm:px-6">
+      <div className="grid min-h-[calc(96 * var(--desktop-px-unit))] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-ink px-5 py-4 sm:px-6">
         <h3 className="min-w-0 font-display text-[1.35rem] font-extrabold leading-tight text-white sm:text-[1.5rem]">
           {item.name}
         </h3>
@@ -43,7 +43,7 @@ export function EquipmentGallery() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+            <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
               Equipment We Support
             </div>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
@@ -52,7 +52,7 @@ export function EquipmentGallery() {
               Every major brand.
             </h2>
           </div>
-          <p className="max-w-md text-[15px] leading-relaxed text-muted-foreground">
+          <p className="max-w-md text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
             Siemens, Philips, GE Healthcare, Canon, Hologic and more — our
             engineers are certified across the full portfolio of diagnostic and
             interventional systems we deliver.

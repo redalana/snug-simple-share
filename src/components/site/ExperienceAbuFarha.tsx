@@ -49,8 +49,8 @@ export function ExperienceAbuFarha() {
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-ink) 1px, transparent 1px), linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
+            "linear-gradient(to right, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
+          backgroundSize: "calc(72 * var(--desktop-px-unit)) calc(72 * var(--desktop-px-unit))",
           maskImage:
             "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
           WebkitMaskImage:
@@ -113,7 +113,7 @@ export function ExperienceAbuFarha() {
               Comprehensive
               <span className="mt-1 block text-primary">Stroke Programs.</span>
             </h2>
-            <p className="mt-7 max-w-2xl text-[21px] leading-[1.7] text-muted-foreground">
+            <p className="mt-7 max-w-2xl text-[calc(21 * var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
               Successful stroke care is never a single device. It is an ecosystem
               of imaging, clinical workflows, biomedical engineering and technical
               support working as one — and AbuFarha helps hospitals bring it
@@ -126,13 +126,13 @@ export function ExperienceAbuFarha() {
                 return (
                   <li key={pillar.id} className="flex gap-4">
                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
-                      <Icon className="h-[24px] w-[24px]" strokeWidth={1.75} />
+                      <Icon className="h-[calc(24 * var(--desktop-px-unit))] w-[calc(24 * var(--desktop-px-unit))]" strokeWidth={1.75} />
                     </span>
                     <div>
                       <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                         {pillar.title}
                       </h3>
-                      <p className="mt-1.5 max-w-lg text-[16.5px] leading-[1.6] text-muted-foreground">
+                      <p className="mt-1.5 max-w-lg text-[calc(16.5 * var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
                         {pillar.copy}
                       </p>
                     </div>
@@ -144,7 +144,7 @@ export function ExperienceAbuFarha() {
             <div className="mt-11">
               <Link
                 to="/programs/stroke-care"
-                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[15px] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[calc(15 * var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
               >
                 Explore Stroke Solutions
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

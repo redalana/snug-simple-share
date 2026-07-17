@@ -16,7 +16,7 @@ export function ClientOnly3D({
   useEffect(() => {
     if (typeof window === "undefined") return;
     const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const mobile = window.matchMedia?.("(max-width: 640px)").matches;
+    const mobile = window.matchMedia?.("(max-width: calc(640 * var(--desktop-px-unit)))").matches;
     if (reduced || mobile) return; // keep static fallback
     setReady(true);
   }, []);

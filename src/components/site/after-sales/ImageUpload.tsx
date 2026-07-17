@@ -96,7 +96,7 @@ export function ImageUpload({
         <div className="mt-3 text-sm font-semibold text-foreground">
           Click or drag &amp; drop images
         </div>
-        <div className="mt-1 text-[12px] text-muted-foreground">
+        <div className="mt-1 text-[calc(12 * var(--desktop-px-unit))] text-muted-foreground">
           JPG, PNG or WEBP · up to 5MB each · multiple allowed
         </div>
       </button>
@@ -113,7 +113,7 @@ export function ImageUpload({
       />
 
       {error && (
-        <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-[12.5px] font-medium text-destructive">
+        <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-[calc(12.5 * var(--desktop-px-unit))] font-medium text-destructive">
           {error}
         </div>
       )}

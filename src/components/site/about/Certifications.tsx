@@ -23,8 +23,8 @@ export function Certifications() {
                 </div>
                 <div>
                   <div className="font-display text-[1.05rem] font-extrabold text-ink">{c.title}</div>
-                  <div className="mt-0.5 text-[12px] font-semibold uppercase tracking-wider text-primary">{c.sub}</div>
-                  <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <div className="mt-0.5 text-[calc(12 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-primary">{c.sub}</div>
+                  <p className="mt-2 text-[calc(13 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
               </div>
             </Reveal>

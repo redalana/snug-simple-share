@@ -261,7 +261,7 @@ function NoteRow({
         }`}
         strokeWidth={2}
       />
-      <p className="text-[13.5px] leading-[1.6] text-ink/75">
+      <p className="text-[calc(13.5 * var(--desktop-px-unit))] leading-[1.6] text-ink/75">
         <span className="font-semibold text-ink">{label}</span> {text}
       </p>
     </motion.div>
@@ -292,16 +292,16 @@ function AssessmentItem({ item }: { item: Item }) {
         </span>
 
         <ItemIcon
-          className="h-[18px] w-[18px] shrink-0 text-muted-foreground transition-all duration-300 group-hover:-rotate-6 group-hover:text-ink"
+          className="h-[calc(18 * var(--desktop-px-unit))] w-[calc(18 * var(--desktop-px-unit))] shrink-0 text-muted-foreground transition-all duration-300 group-hover:-rotate-6 group-hover:text-ink"
           strokeWidth={1.8}
         />
 
-        <span className="flex-1 text-[15px] font-semibold leading-tight text-ink">
+        <span className="flex-1 text-[calc(15 * var(--desktop-px-unit))] font-semibold leading-tight text-ink">
           {item.label}
         </span>
 
         <span
-          className={`hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] ring-1 transition-all duration-300 group-hover:scale-[1.04] sm:inline-flex ${meta.badge}`}
+          className={`hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.08em] ring-1 transition-all duration-300 group-hover:scale-[1.04] sm:inline-flex ${meta.badge}`}
         >
           <StatusIcon className="h-3.5 w-3.5" strokeWidth={2.2} />
           {meta.label}
@@ -323,7 +323,7 @@ function AssessmentItem({ item }: { item: Item }) {
             transition={{ duration: 0.42, ease: EASE }}
             className="overflow-hidden"
           >
-            <div className="mb-4 ml-[28px] space-y-2.5 rounded-xl bg-secondary/60 px-4 py-4 ring-1 ring-border/60">
+            <div className="mb-4 ml-[calc(28 * var(--desktop-px-unit))] space-y-2.5 rounded-xl bg-secondary/60 px-4 py-4 ring-1 ring-border/60">
               <NoteRow icon={AlertCircle} label="Why it matters —" text={item.why} delay={0.05} />
               <NoteRow icon={FileSearch} label="What we evaluate —" text={item.evaluates} delay={0.11} />
               <NoteRow icon={AlertTriangle} label="Common risk —" text={item.risk} tone="risk" delay={0.17} />
@@ -375,10 +375,10 @@ function AssessmentGroup({
           <Icon className="h-5 w-5" strokeWidth={1.8} />
         </span>
         <span className="flex-1">
-          <span className="block font-display text-[16.5px] font-extrabold tracking-tight text-ink">
+          <span className="block font-display text-[calc(16.5 * var(--desktop-px-unit))] font-extrabold tracking-tight text-ink">
             {group.title}
           </span>
-          <span className="mt-0.5 block text-[12.5px] font-medium text-muted-foreground">
+          <span className="mt-0.5 block text-[calc(12.5 * var(--desktop-px-unit))] font-medium text-muted-foreground">
             {readyCount} of {group.items.length} confirmed ready
           </span>
         </span>
@@ -424,8 +424,8 @@ export function ReadinessAssessment() {
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-ink) 1px, transparent 1px), linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "linear-gradient(to right, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
+          backgroundSize: "calc(48 * var(--desktop-px-unit)) calc(48 * var(--desktop-px-unit))",
           maskImage:
             "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
           WebkitMaskImage:
@@ -445,7 +445,7 @@ export function ReadinessAssessment() {
           <h2 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
             Hospital Readiness Assessment
           </h2>
-          <p className="mt-5 max-w-xl text-[16px] leading-[1.75] text-muted-foreground">
+          <p className="mt-5 max-w-xl text-[calc(16 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
             Before investing in advanced medical technology, make sure your
             hospital is ready for a successful implementation.
           </p>
@@ -462,7 +462,7 @@ export function ReadinessAssessment() {
                 index={i}
               />
             ))}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-1 pt-1 text-[12px] font-medium text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-1 pt-1 text-[calc(12 * var(--desktop-px-unit))] font-medium text-muted-foreground">
               {(["ready", "review", "unknown"] as Status[]).map((s) => (
                 <span key={s} className="inline-flex items-center gap-2">
                   <span
@@ -482,13 +482,13 @@ export function ReadinessAssessment() {
             transition={{ duration: 0.65, ease: EASE, delay: 0.15 }}
             className="lg:sticky lg:top-24 lg:self-start"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
+            <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
               Hospital Readiness
             </span>
             <h3 className="mt-2.5 font-display text-[1.85rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-ink">
               Is Your Hospital Ready for Advanced Medical Technology?
             </h3>
-            <p className="mt-4 text-[15px] leading-[1.75] text-muted-foreground">
+            <p className="mt-4 text-[calc(15 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
               In practice, most installation delays come from the building, not
               the equipment — the room, the slab, the power supply and the
               workflow around it. We assess utilities, room readiness and
@@ -506,7 +506,7 @@ export function ReadinessAssessment() {
               }}
               className="mt-7 rounded-2xl border border-border bg-secondary/40 p-5"
             >
-              <span className="text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink">
+              <span className="text-[calc(11.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-ink">
                 Engineering Review Includes
               </span>
               <ul className="mt-4 space-y-3">
@@ -524,7 +524,7 @@ export function ReadinessAssessment() {
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-primary ring-1 ring-primary/10 transition-transform duration-300 group-hover:scale-105">
                         <Icon className="h-4 w-4" strokeWidth={1.8} />
                       </span>
-                      <span className="text-[14px] font-semibold text-ink">
+                      <span className="text-[calc(14 * var(--desktop-px-unit))] font-semibold text-ink">
                         {d.label}
                       </span>
                     </motion.li>
@@ -542,18 +542,18 @@ export function ReadinessAssessment() {
             >
               <a
                 href="/contact"
-                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[14px] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-[calc(14 * var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_16px_34px_-16px_var(--primary)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_20px_40px_-16px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
               >
                 Request a Free Hospital Readiness Assessment
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="/contact"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[14px] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[calc(14 * var(--desktop-px-unit))] font-bold text-ink transition-colors duration-300 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
               >
                 Talk to a Biomedical Engineer
               </a>
-              <p className="mt-1 flex items-start gap-2 text-[12px] leading-[1.55] text-muted-foreground">
+              <p className="mt-1 flex items-start gap-2 text-[calc(12 * var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
                 <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" strokeWidth={2} />
                 Every readiness assessment is performed by AbuFarha biomedical
                 engineers before any equipment recommendation.

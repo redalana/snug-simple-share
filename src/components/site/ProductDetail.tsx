@@ -244,7 +244,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
 
             {/* INFO */}
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+              <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
                 {product.category}
               </span>
               <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -334,7 +334,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                         <dt className="text-xs uppercase tracking-wide text-muted-foreground">
                           {f.label}
                         </dt>
-                        <dd className="text-[15px] font-semibold text-foreground">{f.value}</dd>
+                        <dd className="text-[calc(15 * var(--desktop-px-unit))] font-semibold text-foreground">{f.value}</dd>
                       </div>
                     </div>
                   ))}
@@ -350,7 +350,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           {/* WHY HOSPITALS CHOOSE */}
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
+            <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
               Why Hospitals Choose This System
             </span>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -390,7 +390,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 return (
                   <div key={s.label} className="group px-6 py-8 transition-colors hover:bg-secondary/30">
                     <Icon className="h-5 w-5 text-primary/70 transition-transform duration-300 group-hover:scale-110" />
-                    <dt className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <dt className="mt-4 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       {s.label}
                     </dt>
                     <dd className="mt-1.5 font-display text-2xl font-bold leading-tight text-foreground">
@@ -405,7 +405,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           {/* INCLUDED WITH EVERY PURCHASE */}
           <div className="mt-16 grid grid-cols-1 gap-8 rounded-3xl border border-border/60 bg-primary/[0.04] p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-center lg:p-12">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-primary">
+              <span className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
                 Complete Package
               </span>
               <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
@@ -499,7 +499,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             >
               <ChevronLeft className="h-5 w-5 shrink-0 text-primary" />
               <div className="min-w-0">
-                <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                <div className="text-[calc(11 * var(--desktop-px-unit))] uppercase tracking-wide text-muted-foreground">
                   Previous System
                 </div>
                 <div className="truncate font-display text-sm font-bold text-foreground group-hover:text-primary">
@@ -513,7 +513,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               className="group flex flex-1 items-center justify-end gap-4 rounded-2xl border border-border/70 bg-card p-5 text-right transition-all hover:-translate-y-0.5 hover:border-primary/40"
             >
               <div className="min-w-0">
-                <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                <div className="text-[calc(11 * var(--desktop-px-unit))] uppercase tracking-wide text-muted-foreground">
                   Next System
                 </div>
                 <div className="truncate font-display text-sm font-bold text-foreground group-hover:text-primary">
@@ -590,7 +590,7 @@ function CountrySelect({
             <>
               <FlagImage
                 iso2={selected.iso2}
-                className="h-4 w-6 rounded-[3px] object-cover shadow-sm"
+                className="h-4 w-6 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm"
               />
               <span className="flex-1 truncate">{selected.name}</span>
             </>
@@ -603,7 +603,7 @@ function CountrySelect({
       <PopoverContent
         align="start"
         sideOffset={8}
-        className="w-[--radix-popover-trigger-width] min-w-[280px] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+        className="w-[--radix-popover-trigger-width] min-w-[calc(280 * var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <div className="sticky top-0 z-10 border-b border-border/70 bg-white/95 p-2.5 backdrop-blur">
@@ -619,7 +619,7 @@ function CountrySelect({
             />
           </div>
         </div>
-        <div className="max-h-[260px] overflow-y-auto overscroll-contain p-1.5">
+        <div className="max-h-[calc(260 * var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
           {filtered.length === 0 ? (
             <p className="px-3 py-6 text-center text-sm text-muted-foreground">
               No countries found
@@ -641,7 +641,7 @@ function CountrySelect({
                 >
                   <FlagImage
                     iso2={c.iso2}
-                    className="h-4 w-6 shrink-0 rounded-[3px] object-cover shadow-sm"
+                    className="h-4 w-6 shrink-0 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm"
                   />
                   <span className="flex-1 truncate text-foreground">{c.name}</span>
                   {isSelected && <Check className="h-4 w-4 shrink-0 text-primary" />}
@@ -881,7 +881,7 @@ function RelatedCard({ product }: { product: Product }) {
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
         />
-        <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
+        <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.brand}
         </span>
       </div>

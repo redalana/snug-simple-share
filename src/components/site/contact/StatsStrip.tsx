@@ -3,9 +3,9 @@ import { STATS } from "./data";
 
 export function StatsStrip() {
   return (
-    <section className="py-[90px]">
+    <section className="py-[calc(90 * var(--desktop-px-unit))]">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="grid grid-cols-2 gap-4 rounded-[16px] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
+        <div className="grid grid-cols-2 gap-4 rounded-[calc(16 * var(--desktop-px-unit))] border border-border/70 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:grid-cols-4 sm:gap-6 sm:p-10">
           {STATS.map(({ icon: Icon, value, label }, i) => (
             <div
               key={label}
@@ -21,7 +21,7 @@ export function StatsStrip() {
                 <div className="font-display text-4xl font-black tabular-nums leading-none text-foreground sm:text-5xl lg:text-6xl">
                   {value}
                 </div>
-                <div className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="mt-2 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
                   {label}
                 </div>
               </div>

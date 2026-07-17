@@ -65,8 +65,8 @@ export function GlobalPresence() {
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.35]"
                 style={{
-                  backgroundImage: "radial-gradient(oklch(1 0 0 / 14%) 1px, transparent 1px)",
-                  backgroundSize: "22px 22px",
+                  backgroundImage: "radial-gradient(oklch(1 0 0 / 14%) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
+                  backgroundSize: "calc(22 * var(--desktop-px-unit)) calc(22 * var(--desktop-px-unit))",
                 }}
               />
               {/* red ambient lighting behind active regions */}
@@ -107,7 +107,7 @@ export function GlobalPresence() {
                       strokeWidth={0.9}
                       strokeLinejoin="round"
                       style={{
-                        filter: isActive ? "drop-shadow(0 0 6px var(--primary))" : undefined,
+                        filter: isActive ? "drop-shadow(0 0 calc(6 * var(--desktop-px-unit)) var(--primary))" : undefined,
                         transition: "fill 0.25s ease",
                       }}
                     />
@@ -145,7 +145,7 @@ export function GlobalPresence() {
 
                     {/* static spec label */}
                     {LABELLED.has(p.name) && (
-                      <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/70 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white/90 backdrop-blur-sm">
+                      <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/70 px-1.5 py-0.5 text-[calc(9 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-white/90 backdrop-blur-sm">
                         {p.name}
                       </span>
                     )}
@@ -159,15 +159,15 @@ export function GlobalPresence() {
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-display text-sm font-bold text-white">{p.name}</span>
                         {p.hq && (
-                          <span className="rounded-full bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary-foreground">
+                          <span className="rounded-full bg-primary px-2 py-0.5 text-[calc(9 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
                             HQ
                           </span>
                         )}
                       </div>
-                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      <div className="mt-1 text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-primary">
                         Verified deliveries
                       </div>
-                      <ul className="mt-2 space-y-1 text-[11px] leading-snug">
+                      <ul className="mt-2 space-y-1 text-[calc(11 * var(--desktop-px-unit))] leading-snug">
                         {p.items.map((item) => (
                           <li key={item} className="flex items-start gap-1.5 text-white/75">
                             <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary" />
@@ -177,9 +177,9 @@ export function GlobalPresence() {
                       </ul>
 
                       {flip ? (
-                        <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[6px] border-x-transparent border-b-ink/80" />
+                        <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[calc(6 * var(--desktop-px-unit))] border-b-[calc(6 * var(--desktop-px-unit))] border-x-transparent border-b-ink/80" />
                       ) : (
-                        <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink/80" />
+                        <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[calc(6 * var(--desktop-px-unit))] border-t-[calc(6 * var(--desktop-px-unit))] border-x-transparent border-t-ink/80" />
                       )}
                     </div>
                   </div>
@@ -187,7 +187,7 @@ export function GlobalPresence() {
               })}
 
               {/* countries-served pill */}
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[11px] font-medium text-white/75 shadow-sm backdrop-blur-md">
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[calc(11 * var(--desktop-px-unit))] font-medium text-white/75 shadow-sm backdrop-blur-md">
                 <Globe className="h-3.5 w-3.5" />
                 10 countries · verified project history
               </div>
@@ -216,7 +216,7 @@ export function GlobalPresence() {
                       className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"
                     >
                       <div className="font-display text-3xl font-extrabold text-white">{s.value}</div>
-                      <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/45">
+                      <div className="mt-1.5 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-white/45">
                         {s.label}
                       </div>
                     </div>

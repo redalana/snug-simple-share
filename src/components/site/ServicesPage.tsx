@@ -205,9 +205,9 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f12]/70 via-transparent to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[460px] lg:grid-cols-[1.35fr_0.65fr] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="relative mx-auto grid min-h-[calc(480 * var(--desktop-px-unit))] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[calc(460 * var(--desktop-px-unit))] lg:grid-cols-[1.35fr_0.65fr] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16">
         {/* LEFT — animated content */}
-        <div className="relative min-h-[460px]">
+        <div className="relative min-h-[calc(460 * var(--desktop-px-unit))]">
           {HERO_SLIDES.map((s, i) => (
             <div
               key={s.eyebrow}
@@ -220,10 +220,10 @@ function Hero() {
               )}
             >
               <Eyebrow tone="light">{s.eyebrow}</Eyebrow>
-              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[46px]">
+              <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[calc(46 * var(--desktop-px-unit))]">
                 {s.title}
               </h1>
-              <p className="mt-6 max-w-xl text-[15px] leading-[1.75] text-white/70">
+              <p className="mt-6 max-w-xl text-[calc(15 * var(--desktop-px-unit))] leading-[1.75] text-white/70">
                 {s.desc}
               </p>
 
@@ -244,7 +244,7 @@ function Hero() {
                     className="rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
                   >
                     <Icon className="h-6 w-6 text-primary" strokeWidth={1.6} />
-                    <div className="mt-3 text-[12.5px] font-semibold leading-snug text-white">
+                    <div className="mt-3 text-[calc(12.5 * var(--desktop-px-unit))] font-semibold leading-snug text-white">
                       {label}
                     </div>
                   </div>
@@ -256,7 +256,7 @@ function Hero() {
 
         {/* RIGHT — KPI PANEL (persistent across slides) */}
         <div className="lg:justify-self-end">
-          <div className="rounded-2xl border border-white/12 bg-[#111418]/85 p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md lg:min-w-[320px]">
+          <div className="rounded-2xl border border-white/12 bg-[#111418]/85 p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md lg:min-w-[calc(320 * var(--desktop-px-unit))]">
             <div className="flex flex-col divide-y divide-white/10">
               {HERO_KPIS.map(({ icon: Icon, value, label }) => (
                 <div key={label} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
@@ -267,7 +267,7 @@ function Hero() {
                     <div className="font-display text-2xl font-extrabold leading-none text-white">
                       {value}
                     </div>
-                    <div className="mt-1.5 text-[12px] uppercase tracking-[0.14em] text-white/60">
+                    <div className="mt-1.5 text-[calc(12 * var(--desktop-px-unit))] uppercase tracking-[0.14em] text-white/60">
                       {label}
                     </div>
                   </div>
@@ -339,28 +339,28 @@ function HowWeSupport() {
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             How We Support You
           </h2>
-          <div className="mx-auto mt-3 h-[3px] w-14 rounded-full bg-primary" />
+          <div className="mx-auto mt-3 h-[calc(3 * var(--desktop-px-unit))] w-14 rounded-full bg-primary" />
         </div>
 
         <div className="relative mt-16">
           {/* dotted connector */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-[6%] right-[6%] top-[42px] hidden h-px border-t-2 border-dotted border-primary/60 md:block"
+            className="pointer-events-none absolute left-[6%] right-[6%] top-[calc(42 * var(--desktop-px-unit))] hidden h-px border-t-2 border-dotted border-primary/60 md:block"
           />
           <ol className="relative grid grid-cols-2 gap-y-12 sm:grid-cols-3 md:grid-cols-6 md:gap-y-0">
             {STEPS.map(({ icon: Icon, title, desc }, i) => (
               <li key={title} className="relative flex flex-col items-center px-3 text-center">
-                <div className="relative grid h-[84px] w-[84px] place-items-center rounded-full border border-border bg-white shadow-sm">
+                <div className="relative grid h-[calc(84 * var(--desktop-px-unit))] w-[calc(84 * var(--desktop-px-unit))] place-items-center rounded-full border border-border bg-white shadow-sm">
                   <Icon className="h-8 w-8 text-foreground" strokeWidth={1.5} />
-                  <span className="absolute -bottom-2 grid h-6 w-6 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                  <span className="absolute -bottom-2 grid h-6 w-6 place-items-center rounded-full bg-primary text-[calc(10 * var(--desktop-px-unit))] font-bold text-primary-foreground">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <div className="mt-6 font-display text-[15px] font-bold text-foreground">
+                <div className="mt-6 font-display text-[calc(15 * var(--desktop-px-unit))] font-bold text-foreground">
                   {title}
                 </div>
-                <p className="mt-2 max-w-[180px] text-[12.5px] leading-snug text-muted-foreground">
+                <p className="mt-2 max-w-[calc(180 * var(--desktop-px-unit))] text-[calc(12.5 * var(--desktop-px-unit))] leading-snug text-muted-foreground">
                   {desc}
                 </p>
               </li>
@@ -479,16 +479,16 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
           <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/30 bg-primary/10">
             <Icon className="h-4.5 w-4.5 text-primary" strokeWidth={1.7} />
           </div>
-          <h3 className="font-display text-[17px] font-extrabold leading-tight text-foreground">
+          <h3 className="font-display text-[calc(17 * var(--desktop-px-unit))] font-extrabold leading-tight text-foreground">
             {item.title}
           </h3>
         </div>
-        <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">
+        <p className="mt-3 text-[calc(13 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
           {item.desc}
         </p>
         <ul className="mt-3 space-y-1.5">
           {item.bullets.map((b) => (
-            <li key={b} className="flex items-center gap-2 text-[12.5px] text-foreground/85">
+            <li key={b} className="flex items-center gap-2 text-[calc(12.5 * var(--desktop-px-unit))] text-foreground/85">
               <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
@@ -498,7 +498,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
         </ul>
         <a
           href="#request"
-          className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-primary hover:underline"
+          className="mt-4 inline-flex items-center gap-1.5 text-[calc(12.5 * var(--desktop-px-unit))] font-semibold text-primary hover:underline"
         >
           Learn More <ArrowRight className="h-3.5 w-3.5" />
         </a>
@@ -515,7 +515,7 @@ function CoreServices() {
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             Our Core Services
           </h2>
-          <div className="mx-auto mt-3 h-[3px] w-14 rounded-full bg-primary" />
+          <div className="mx-auto mt-3 h-[calc(3 * var(--desktop-px-unit))] w-14 rounded-full bg-primary" />
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {CORE.map((c) => (
@@ -548,7 +548,7 @@ function Equipment() {
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             Equipment We Support
           </h2>
-          <div className="mx-auto mt-3 h-[3px] w-14 rounded-full bg-primary" />
+          <div className="mx-auto mt-3 h-[calc(3 * var(--desktop-px-unit))] w-14 rounded-full bg-primary" />
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-6">
@@ -561,8 +561,8 @@ function Equipment() {
                 <img src={eq.img} alt={eq.name} className="h-full w-full object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="font-display text-[14px] font-bold text-foreground">{eq.name}</h3>
-                <ul className="mt-3 space-y-1 text-[12px] text-muted-foreground">
+                <h3 className="font-display text-[calc(14 * var(--desktop-px-unit))] font-bold text-foreground">{eq.name}</h3>
+                <ul className="mt-3 space-y-1 text-[calc(12 * var(--desktop-px-unit))] text-muted-foreground">
                   {eq.services.map((s) => (
                     <li key={s} className="flex items-center gap-1.5">
                       <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />
@@ -572,7 +572,7 @@ function Equipment() {
                 </ul>
                 <a
                   href="#request"
-                  className="mt-3 inline-flex items-center gap-1 text-[11.5px] font-semibold text-primary hover:underline"
+                  className="mt-3 inline-flex items-center gap-1 text-[calc(11.5 * var(--desktop-px-unit))] font-semibold text-primary hover:underline"
                 >
                   Learn Details <ArrowRight className="h-3 w-3" />
                 </a>
@@ -600,8 +600,8 @@ function WhyChoose() {
   return (
     <section className="bg-white py-8">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="grid items-center gap-8 rounded-2xl bg-[#0d0f12] px-8 py-10 text-white lg:grid-cols-[minmax(0,240px)_1fr]">
-          <h2 className="font-display text-[26px] font-extrabold leading-tight">
+        <div className="grid items-center gap-8 rounded-2xl bg-[#0d0f12] px-8 py-10 text-white lg:grid-cols-[minmax(0,calc(240 * var(--desktop-px-unit)))_1fr]">
+          <h2 className="font-display text-[calc(26 * var(--desktop-px-unit))] font-extrabold leading-tight">
             Why Hospitals
             <br />
             Choose AbuFarha
@@ -612,8 +612,8 @@ function WhyChoose() {
                 <div className="grid h-10 w-10 place-items-center rounded-full border border-primary/40 bg-primary/10">
                   <Icon className="h-5 w-5 text-primary" strokeWidth={1.7} />
                 </div>
-                <div className="mt-4 font-display text-[15px] font-bold text-white">{title}</div>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-white/65">{desc}</p>
+                <div className="mt-4 font-display text-[calc(15 * var(--desktop-px-unit))] font-bold text-white">{title}</div>
+                <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/65">{desc}</p>
               </div>
             ))}
           </div>
@@ -684,7 +684,7 @@ function Coverage() {
           <h2 className="font-display text-2xl font-extrabold text-foreground">
             Our Coverage
           </h2>
-          <p className="mt-2 max-w-sm text-[13.5px] text-muted-foreground">
+          <p className="mt-2 max-w-sm text-[calc(13.5 * var(--desktop-px-unit))] text-muted-foreground">
             Supporting healthcare across Africa &amp; the Middle East.
           </p>
 
@@ -692,15 +692,15 @@ function Coverage() {
             <div className="grid grid-cols-3 gap-6">
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">10+</div>
-                <div className="mt-1 text-[11.5px] uppercase tracking-wider text-muted-foreground">Countries</div>
+                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Countries</div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">60+</div>
-                <div className="mt-1 text-[11.5px] uppercase tracking-wider text-muted-foreground">Cities</div>
+                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Cities</div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">24/7</div>
-                <div className="mt-1 text-[11.5px] uppercase tracking-wider text-muted-foreground">Support</div>
+                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Support</div>
               </div>
             </div>
           </div>
@@ -709,7 +709,7 @@ function Coverage() {
             <AfricaMap />
           </div>
 
-          <div className="mt-4 flex items-center gap-6 text-[12px] text-muted-foreground">
+          <div className="mt-4 flex items-center gap-6 text-[calc(12 * var(--desktop-px-unit))] text-muted-foreground">
             <span className="inline-flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-primary" /> Our Presence
             </span>
@@ -722,7 +722,7 @@ function Coverage() {
         {/* RIGHT — form */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">
           <h2 className="font-display text-2xl font-extrabold text-foreground">Request a Service</h2>
-          <p className="mt-2 text-[13.5px] text-muted-foreground">
+          <p className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] text-muted-foreground">
             Tell us about your needs and our team will get back to you.
           </p>
 
@@ -732,7 +732,7 @@ function Coverage() {
               <div className="mt-3 font-display text-lg font-bold text-foreground">
                 Request received
               </div>
-              <p className="mt-1 text-[13px] text-muted-foreground">
+              <p className="mt-1 text-[calc(13 * var(--desktop-px-unit))] text-muted-foreground">
                 Our service desk will reach out shortly.
               </p>
             </div>
@@ -781,15 +781,15 @@ function Coverage() {
               </Field>
 
               <div className="sm:col-span-2">
-                <label className="text-[12px] font-semibold text-foreground/80">
+                <label className="text-[calc(12 * var(--desktop-px-unit))] font-semibold text-foreground/80">
                   Upload Images (Optional)
                 </label>
                 <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-[#FAFAFB] px-6 py-8 text-center transition hover:border-primary/60">
                   <Upload className="h-5 w-5 text-muted-foreground" />
-                  <div className="mt-2 text-[13px] text-foreground/80">
+                  <div className="mt-2 text-[calc(13 * var(--desktop-px-unit))] text-foreground/80">
                     {fileName ?? "Drag & drop files here"}
                   </div>
-                  <div className="text-[11.5px] text-muted-foreground">
+                  <div className="text-[calc(11.5 * var(--desktop-px-unit))] text-muted-foreground">
                     or click to browse (JPG, PNG, PDF up to 10MB)
                   </div>
                   <input
@@ -816,7 +816,7 @@ function Coverage() {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-border bg-white px-3 py-2.5 text-[13.5px] text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
+  "w-full rounded-lg border border-border bg-white px-3 py-2.5 text-[calc(13.5 * var(--desktop-px-unit))] text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 function PhoneFieldWrapper() {
   const [value, setValue] = useState("");
@@ -826,7 +826,7 @@ function PhoneFieldWrapper() {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[12px] font-semibold text-foreground/80">
+      <span className="text-[calc(12 * var(--desktop-px-unit))] font-semibold text-foreground/80">
         {label} {required && <span className="text-primary">*</span>}
       </span>
       {children}
@@ -852,29 +852,29 @@ function EmergencyCTA() {
             <br />
             <span className="text-primary">We're Available 24/7</span>
           </h2>
-          <p className="mt-3 max-w-md text-[13.5px] text-white/70">
+          <p className="mt-3 max-w-md text-[calc(13.5 * var(--desktop-px-unit))] text-white/70">
             Our engineers are ready to help you anytime, anywhere.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <a href="tel:+96264026063" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
               <Phone className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[12px] uppercase tracking-wider text-white/60">Call Us</div>
-                <div className="mt-1 text-[13.5px] font-semibold text-white">+20 123 456 7890</div>
+                <div className="text-[calc(12 * var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Call Us</div>
+                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">+20 123 456 7890</div>
               </div>
             </a>
             <a href="https://wa.me/962799741318" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
               <MessageCircle className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[12px] uppercase tracking-wider text-white/60">WhatsApp</div>
-                <div className="mt-1 text-[13.5px] font-semibold text-white">Chat with our team</div>
+                <div className="text-[calc(12 * var(--desktop-px-unit))] uppercase tracking-wider text-white/60">WhatsApp</div>
+                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">Chat with our team</div>
               </div>
             </a>
             <a href="mailto:support@abufarhamedical.com" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
               <Mail className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[12px] uppercase tracking-wider text-white/60">Email Us</div>
-                <div className="mt-1 text-[13.5px] font-semibold text-white">support@abufarhamedical.com</div>
+                <div className="text-[calc(12 * var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Email Us</div>
+                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">support@abufarhamedical.com</div>
               </div>
             </a>
           </div>
