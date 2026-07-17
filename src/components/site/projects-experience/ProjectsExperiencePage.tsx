@@ -30,12 +30,13 @@ import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { WhyAbuFarhaProjects } from "./WhyAbuFarhaProjects";
 import {
-  COUNTRY_PATHS as WORLD_COUNTRIES,
-  MAP_W,
-  MAP_H,
-  GEO,
-  HIGHLIGHT_NAMES,
-} from "../turnkey/worldMap";
+  WORLD_COUNTRY_PATHS,
+  WORLD_MAP_W as MAP_W,
+  WORLD_MAP_H as MAP_H,
+  WORLD_GEO as GEO,
+  WORLD_HIGHLIGHT_NAMES as HIGHLIGHT_NAMES,
+  SPHERE_D,
+} from "./worldMapFull";
 import { REGIONS } from "../turnkey/data";
 import heroImg from "@/assets/hero-cathlab.jpg";
 import p1 from "@/assets/project-1.jpg";
