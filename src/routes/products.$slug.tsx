@@ -67,7 +67,7 @@ function SimpleShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto flex max-w-[100rem] flex-col items-center gap-6 px-6 py-32 text-center lg:px-10">
+      <main id="main-content" className="mx-auto flex max-w-[100rem] flex-col items-center gap-6 px-6 py-32 text-center lg:px-10">
         {children}
       </main>
       <Footer />

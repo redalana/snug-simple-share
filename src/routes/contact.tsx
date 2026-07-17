@@ -34,7 +34,7 @@ function ContactRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main id="main-content">
         <ContactPage />
       </main>
       <Footer />

@@ -489,11 +489,11 @@ function BrandsPage() {
                     {featured.length} of {BRANDS.length}
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <button className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
-                      <ChevronLeft className="h-4 w-4" />
+                    <button type="button" aria-label="Previous brand" className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
+                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                     </button>
-                    <button className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
-                      <ChevronRight className="h-4 w-4" />
+                    <button type="button" aria-label="Next brand" className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
+                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
                     </button>
                   </div>
                 </div>

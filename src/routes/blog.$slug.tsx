@@ -81,7 +81,7 @@ function ArticleRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main id="main-content">
         <BlogArticlePage slug={slug} />
       </main>
       <Footer />
