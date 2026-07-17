@@ -557,24 +557,7 @@ export function PortfolioBrowser() {
                 hospitals, clinics and healthcare providers across Africa and the Middle East.
               </p>
 
-              {/* SEARCH — the primary action */}
-              <div className="mt-8">
-                <div className="group/search relative">
-                  <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
-                  <input
-                    value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      resetPage();
-                    }}
-                    type="search"
-                    placeholder="Search by system name, manufacturer, model, technology, or keyword..."
-                    aria-label="Search medical systems"
-                    className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
-                  />
 
-                </div>
-              </div>
 
               <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6">
                 <Stat icon={Boxes} value="11" label="Categories" />
