@@ -6,7 +6,7 @@ import { PARTNERS } from "./data";
 
 export function Partners() {
   return (
-    <section className="bg-white py-24 lg:py-28">
+    <section className="bg-white py-24 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">

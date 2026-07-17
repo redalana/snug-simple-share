@@ -24,7 +24,7 @@ export function Engineering() {
     { icon: Globe2, k: "10", v: "Countries Covered" },
   ];
   return (
-    <section className="relative overflow-hidden bg-[#f6f4f0] py-24 lg:py-28">
+    <section className="relative overflow-hidden bg-[#f6f4f0] py-24 lg:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-14 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20 lg:px-10">
         <div className="relative">
           <div className="overflow-hidden rounded-3xl shadow-[0_50px_100px_-40px_rgba(0,0,0,0.35)]">

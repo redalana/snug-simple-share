@@ -4,7 +4,7 @@ import { STEPS } from "./data";
 
 export function HowWeWork() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-28">
+    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-20">
       <div className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{ backgroundImage: "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)", backgroundSize: "56px 56px" }} />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">

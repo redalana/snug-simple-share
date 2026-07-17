@@ -34,7 +34,7 @@ export function PartsLogistics() {
             ))}
           </div>
         </div>
-        <div className="flex items-center bg-[#0a0d14] px-6 py-20 lg:px-14 lg:py-24">
+        <div className="flex items-center bg-[#0a0d14] px-6 py-20 lg:px-14 lg:py-20">
           <div className="w-full">
             <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
               OEM Parts & Logistics

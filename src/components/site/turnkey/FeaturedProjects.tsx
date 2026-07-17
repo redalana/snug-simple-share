@@ -8,7 +8,7 @@ export function FeaturedProjects() {
   const perView = 4;
   const max = Math.max(0, PROJECTS.length - perView);
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-20 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_3fr] lg:items-end lg:gap-12">
           <div>

@@ -120,7 +120,7 @@ export function GlobalPresence() {
     <section
       id="footprint"
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-20 lg:py-28"
+      className="relative overflow-hidden bg-white py-20 lg:py-20"
     >
       {/* soft radial gradients */}
       <div
