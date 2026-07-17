@@ -211,7 +211,7 @@ function SocialShare({ title }: { title: string }) {
             key={label}
             href={href}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label={`Share on ${label}`}
             className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-ink transition hover:bg-primary hover:text-primary-foreground"
           >
@@ -830,7 +830,7 @@ function ExpertCTA() {
               <a
                 href={`https://wa.me/962799741318?text=${encodeURIComponent("I've just read your article and I'd like to discuss this system.")}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"
               >
                 <WhatsAppIcon className="h-4 w-4" />

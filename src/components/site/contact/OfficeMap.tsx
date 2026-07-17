@@ -77,7 +77,7 @@ export function OfficeMap() {
                 <a
                   href={DIRECTIONS_LINK}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
                   Get Directions <Navigation className="h-4 w-4" />
@@ -85,7 +85,7 @@ export function OfficeMap() {
                 <a
                   href={MAP_LINK}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
                 >
                   Open in Google Maps <ExternalLink className="h-3.5 w-3.5" />
