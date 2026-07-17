@@ -42,14 +42,14 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[64px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.13]">
+        <div className="mx-auto flex h-[56px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.0]">
             <Logo />
           </Link>
 
           {/* Search — centered hero element of the header */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[460px] lg:w-[480px]">
+            <div className="w-[400px] lg:w-[420px]">
               <SearchField />
             </div>
           </div>
