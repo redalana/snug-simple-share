@@ -210,6 +210,7 @@ export function FormBlock() {
                 <div className="mt-1.5">
                   <Select value={inquiry} onValueChange={setInquiry}>
                     <SelectTrigger
+                      aria-label="Inquiry Type"
                       className={cn(
                         "h-12 rounded-xl border-border bg-secondary/30",
                         errors.inquiry && "border-destructive",
@@ -217,6 +218,7 @@ export function FormBlock() {
                     >
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
+
                     <SelectContent>
                       {INQUIRY_TYPES.map((t) => (
                         <SelectItem key={t} value={t}>
