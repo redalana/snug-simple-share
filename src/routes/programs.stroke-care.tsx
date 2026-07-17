@@ -35,7 +35,7 @@ function StrokeCarePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-[112px]">
+      <main id="main-content" className="pt-[112px]">
         <div className="mx-auto max-w-[94rem] px-6 lg:px-10">
           <Link
             to="/"

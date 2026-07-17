@@ -29,7 +29,7 @@ function BlogRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main><BlogPage /></main>
+      <main id="main-content"><BlogPage /></main>
       <Footer />
     </div>
   );
