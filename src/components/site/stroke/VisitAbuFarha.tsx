@@ -13,57 +13,39 @@ import {
 import { Link } from "@tanstack/react-router";
 import { Eyebrow } from "@/components/site/Eyebrow";
 
-type Card = {
+type Item = {
   Icon: LucideIcon;
-  title: string;
-  copy: string;
+  label: string;
+  highlight: string;
 };
 
-const CARDS: Card[] = [
-  {
-    Icon: Stethoscope,
-    title: "Meet Stroke Physicians",
-    copy: "Meet experienced stroke specialists and discuss real clinical workflows.",
-  },
-  {
-    Icon: Wrench,
-    title: "Meet Biomedical Engineering Team",
-    copy: "Learn how our engineers install, maintain, and support advanced medical technologies.",
-  },
-  {
-    Icon: Building2,
-    title: "Visit AbuFarha Headquarters",
-    copy: "Discover our company, facilities, and healthcare project capabilities.",
-  },
-  {
-    Icon: FlaskConical,
-    title: "Explore Engineering Laboratories",
-    copy: "See testing, quality assurance, and biomedical engineering operations.",
-  },
-  {
-    Icon: Package,
-    title: "Tour Medical Equipment Warehouse",
-    copy: "Explore equipment preparation, logistics, and delivery processes.",
-  },
-  {
-    Icon: Brain,
-    title: "Observe Comprehensive Stroke Workflows",
-    copy: "Understand how technology integrates with multidisciplinary stroke care.",
-  },
-  {
-    Icon: Hospital,
-    title: "Visit Partner Hospitals",
-    copy: "Experience real clinical environments using our technologies.",
-  },
-  {
-    Icon: Handshake,
-    title: "Exchange Knowledge with Our Leadership Team",
-    copy: "Discuss strategy, implementation, and long-term healthcare partnerships.",
-  },
+const ITEMS: Item[] = [
+  { Icon: Stethoscope, label: "Meet our Stroke Physicians", highlight: "Stroke Physicians" },
+  { Icon: Wrench, label: "Meet our Biomedical Engineering Team", highlight: "Biomedical Engineering Team" },
+  { Icon: Building2, label: "Tour AbuFarha Headquarters", highlight: "AbuFarha Headquarters" },
+  { Icon: FlaskConical, label: "Explore our Engineering Laboratories", highlight: "Engineering Laboratories" },
+  { Icon: Package, label: "Visit our Medical Equipment Warehouse", highlight: "Medical Equipment Warehouse" },
+  { Icon: Brain, label: "Observe Comprehensive Stroke Workflows", highlight: "Comprehensive Stroke Workflows" },
+  { Icon: Hospital, label: "Visit Hospitals Using Our Technologies", highlight: "Hospitals Using Our Technologies" },
+  { Icon: Handshake, label: "Exchange Knowledge with our Leadership Team", highlight: "Leadership Team" },
 ];
 
 // Subtle medical sky-blue accent — complements primary red without replacing it.
 const ACCENT = "#38BDF8";
+
+function renderLabel(label: string, highlight: string) {
+  const idx = label.indexOf(highlight);
+  if (idx === -1) return label;
+  return (
+    <>
+      {label.slice(0, idx)}
+      <span className="font-semibold" style={{ color: ACCENT }}>
+        {highlight}
+      </span>
+      {label.slice(idx + highlight.length)}
+    </>
+  );
+}
 
 export function VisitAbuFarha() {
   return (
@@ -73,47 +55,50 @@ export function VisitAbuFarha() {
         className="relative overflow-hidden bg-gradient-to-b from-white to-secondary/40 py-16 lg:py-24"
       >
         <div className="relative mx-auto max-w-[94rem] px-6 lg:px-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex justify-center">
-              <Eyebrow index="01" align="center">
-                Visit AbuFarha
-              </Eyebrow>
-            </div>
-            <h2 className="mt-8 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
-              Experience Comprehensive Stroke Programs
-              <span className="mt-2 block text-primary">Before You Invest.</span>
-            </h2>
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-[1.75] text-muted-foreground sm:text-[1.05rem]">
-              We invite healthcare leaders, physicians, and biomedical engineers to experience
-              firsthand how comprehensive stroke programs are planned, engineered, implemented,
-              and supported — before making one of their hospital&apos;s most important
-              technology investments.
-            </p>
-          </div>
+          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+            {/* LEFT — headline + description */}
+            <div className="lg:pr-6">
+              <Eyebrow index="01">Visit AbuFarha</Eyebrow>
+              <h2 className="mt-8 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
+                Experience Comprehensive Stroke Programs
+                <span className="mt-2 block text-primary">Before You Invest.</span>
+              </h2>
+              <p className="mt-7 max-w-xl text-base leading-[1.75] text-muted-foreground sm:text-[1.05rem]">
+                We invite healthcare leaders, physicians, and biomedical engineers to
+                experience firsthand how comprehensive stroke programs are planned,
+                engineered, implemented, and supported — before making one of their
+                hospital&apos;s most important technology investments.
+              </p>
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-            {CARDS.map(({ Icon, title, copy }) => (
-              <div
-                key={title}
-                className="group relative flex flex-col rounded-2xl border border-border/70 bg-white p-6 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_60px_-30px_rgba(15,23,42,0.35)]"
+              <p
+                className="mt-10 max-w-xl border-l-2 pl-6 font-display text-[1.35rem] font-semibold leading-[1.35] tracking-[-0.01em] text-ink sm:text-[1.5rem]"
+                style={{ borderColor: ACCENT }}
               >
-                <span
-                  className="flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300"
-                  style={{
-                    backgroundColor: `${ACCENT}1A`,
-                    color: ACCENT,
-                  }}
+                Helping hospitals build comprehensive stroke programs across{" "}
+                <span className="text-primary">Africa and the Middle East</span> since 1999.
+              </p>
+            </div>
+
+            {/* RIGHT — premium checklist */}
+            <ul className="flex flex-col divide-y divide-border/60">
+              {ITEMS.map(({ Icon, label, highlight }) => (
+                <li
+                  key={label}
+                  className="group flex items-center gap-5 py-5 transition-colors first:pt-0 last:pb-0"
                 >
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 font-display text-[1.15rem] font-bold leading-tight tracking-tight text-ink">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {copy}
-                </p>
-              </div>
-            ))}
+                  <span
+                    className="flex h-12 w-12 flex-none items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105"
+                    style={{ backgroundColor: `${ACCENT}1A`, color: ACCENT }}
+                    aria-hidden
+                  >
+                    <Icon className="h-6 w-6" strokeWidth={2.2} />
+                  </span>
+                  <span className="font-display text-[1.15rem] font-medium leading-snug tracking-tight text-ink sm:text-[1.25rem]">
+                    {renderLabel(label, highlight)}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
