@@ -7,6 +7,7 @@ import { FormBlock } from "./contact/FormBlock";
 import { OfficeMap } from "./contact/OfficeMap";
 import { StatsStrip } from "./contact/StatsStrip";
 import { FaqSection } from "./contact/FaqSection";
+import { VisitAbuFarha } from "./stroke/VisitAbuFarha";
 
 export function ContactPage() {
   const locationHash = useRouterState({ select: (state) => state.location.hash });
