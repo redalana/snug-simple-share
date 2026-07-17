@@ -253,9 +253,9 @@ export const PRODUCTS: Product[] = [
       "Oncology",
       "Radiology"
     ],
-    keywords: "pet/ct scanners canon medical used oncology radiology",
+    keywords: "ct scanners canon medical used oncology radiology",
     addedOrder: 21,
-    subtitle: "Used 2009 PET/CT Scanners",
+    subtitle: "Used 2009 CT Scanners",
     model: "Toshiba Aquilion 64 Slices",
     snapshot: [
       {
