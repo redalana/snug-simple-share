@@ -245,7 +245,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[calc(520*var(--desktop-px-unit))] w-[calc(520*var(--desktop-px-unit))] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content ─────────────────────────────────────────────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-9 lg:px-10 lg:py-14">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-7 lg:px-10 lg:py-11">
         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
