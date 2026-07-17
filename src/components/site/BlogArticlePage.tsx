@@ -393,6 +393,9 @@ function Block({ block }: { block: ContentBlock }) {
     case "references":
       return <References items={block.items} />;
 
+    case "reviewedBy":
+      return <ReviewedBy name={block.name} specialty={block.specialty} date={block.date} />;
+
     case "quote":
       return (
         <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
