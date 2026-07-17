@@ -64,7 +64,7 @@ const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 // Master taxonomies — the complete enterprise filter vocabulary. Every value
 // is always shown (with a live count) so brands/categories are never hidden
 // just because they currently hold few or no systems.
-const CONDITIONS = ["Brand New", "Certified Refurbished", "Factory Certified"] as const;
+const CONDITIONS = ["Brand New", "Certified Refurbished", "Factory Certified", "Used"] as const;
 const COUNTRIES = ["Germany", "Japan", "USA", "Netherlands", "Italy", "China"] as const;
 const SYSTEM_TYPES = ["Fixed", "Mobile", "Ceiling Mounted", "Floor Mounted", "Portable"] as const;
 const SERVICES = [
