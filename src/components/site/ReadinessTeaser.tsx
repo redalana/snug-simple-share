@@ -7,7 +7,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function ReadinessTeaser() {
   return (
-    <section id="readiness" className="relative overflow-hidden bg-white py-20 lg:py-24">
+    <section id="readiness" className="relative overflow-hidden bg-white py-20 lg:py-20">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.03]"

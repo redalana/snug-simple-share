@@ -26,7 +26,7 @@ export function Hero() {
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             After Sales Support
           </div>
-          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[64px]">
+          <h1 className="mt-7 font-display text-[3.25rem] font-extrabold leading-[0.98] tracking-tight sm:text-[4.25rem] lg:text-[56px]">
             Reliable Support.
             <br />
             <span className="text-primary">Maximum</span>

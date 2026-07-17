@@ -193,32 +193,10 @@
 }
 
 /*
- * Desktop-only global visual scale refinement.
- *
- * Applies a proportional zoom to the entire desktop UI so that headers,
- * headings, cards, spacing, icons, buttons, and imagery all shrink
- * together (~13–15%) — matching the visual density of modern enterprise
- * medical websites without touching a single component, animation, color
- * token, or typography rule. Mobile and tablet layouts (< 1280px) are
- * intentionally unaffected.
+ * Desktop visual density is achieved via real per-component sizing values
+ * on `lg:`/`xl:` breakpoints (section padding, heading sizes, container
+ * spacing, header height). No `zoom` or `transform: scale()` hacks.
  */
-@media (min-width: 1280px) {
-  html {
-    zoom: 0.9;
-  }
-}
-
-@media (min-width: 1536px) {
-  html {
-    zoom: 0.88;
-  }
-}
-
-@media (min-width: 1800px) {
-  html {
-    zoom: 0.86;
-  }
-}
 
 
 

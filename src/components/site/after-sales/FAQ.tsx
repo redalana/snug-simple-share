@@ -16,7 +16,7 @@ export function FAQ() {
   });
 
   return (
-    <section className="relative bg-[#f6f4f0] py-24 lg:py-32">
+    <section className="relative bg-[#f6f4f0] py-24 lg:py-20">
       <div className="mx-auto max-w-[80rem] px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="lg:sticky lg:top-32 lg:self-start">

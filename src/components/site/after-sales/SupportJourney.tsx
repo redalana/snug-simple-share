@@ -6,7 +6,7 @@ export function SupportJourney() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-120px" });
   return (
-    <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-32">
+    <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-20">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent" />
       <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">

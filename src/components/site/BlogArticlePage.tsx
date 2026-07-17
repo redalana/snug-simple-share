@@ -130,7 +130,7 @@ function Hero({ article }: { article: Article }) {
         <span className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
           {article.category}
         </span>
-        <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.5rem]">
+        <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.25rem]">
           {article.title}
         </h1>
         <p className="mt-5 text-[15.5px] leading-relaxed text-muted-foreground">

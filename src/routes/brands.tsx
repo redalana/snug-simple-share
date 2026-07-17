@@ -367,7 +367,7 @@ function BrandsPage() {
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
                 Our Global Partners
               </div>
-              <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3.4rem]">
+              <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-[3rem]">
                 Twelve world-leading
                 <br />
                 manufacturers.
@@ -661,7 +661,7 @@ function BrandsPage() {
               <div className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-primary">
                 Advisory
               </div>
-              <h3 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-[2.5rem]">
+              <h3 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-[2.25rem]">
                 Need help choosing the right manufacturer?
               </h3>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70">
