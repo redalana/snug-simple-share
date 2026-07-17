@@ -47,7 +47,7 @@ export function Hero() {
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 Trusted Medical Equipment Partner
               </div>
-              <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[2.5rem] xl:text-[2.75rem]">
+              <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[2.25rem] xl:text-[2.75rem]">
                 Let&apos;s build
                 <br /><span className="whitespace-nowrap">better healthcare</span>
                 <br /><span className="text-primary">together</span>

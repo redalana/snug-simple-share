@@ -268,7 +268,7 @@ export function Solutions() {
 
 
   return (
-    <section id="solutions" className="relative overflow-hidden bg-background py-20 lg:py-24">
+    <section id="solutions" className="relative overflow-hidden bg-background py-20 lg:py-20">
       {/* subtle technical grid */}
       <div
         aria-hidden

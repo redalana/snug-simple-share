@@ -211,7 +211,7 @@ export function StrokeCareProgram() {
   return (
     <section
       id="stroke-ecosystem"
-      className="relative overflow-hidden bg-white py-28 lg:py-40"
+      className="relative overflow-hidden bg-white py-28 lg:py-20"
     >
       {/* Very subtle engineering grid */}
       <div
@@ -242,7 +242,7 @@ export function StrokeCareProgram() {
               The Stroke Care Ecosystem
             </Eyebrow>
           </div>
-          <h2 className="mt-8 font-display text-[3.1rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[4rem] lg:text-[4.6rem]">
+          <h2 className="mt-8 font-display text-[3.1rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[4rem] lg:text-[3.5rem]">
             A Stroke Program Is an Ecosystem —
             <span className="mt-2 block text-primary">
               Not a Single Device.

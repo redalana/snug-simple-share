@@ -16,7 +16,7 @@ export function FinalCTA() {
         <div className="pointer-events-none absolute -right-40 top-1/3 h-[38rem] w-[38rem] rounded-full bg-primary/25 blur-[140px]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-primary/10 blur-[120px]" />
       </div>
-      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-12 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:px-10 lg:py-32">
+      <div className="relative mx-auto flex max-w-[100rem] flex-col items-start gap-12 px-6 py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:px-10 lg:py-20">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white backdrop-blur">
             <span className="relative flex h-2 w-2">
@@ -25,7 +25,7 @@ export function FinalCTA() {
             </span>
             24/7 Emergency Support
           </div>
-          <h2 className="mt-6 font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight sm:text-[3.75rem] lg:text-[4.75rem]">
+          <h2 className="mt-6 font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-tight sm:text-[3.75rem] lg:text-[4.25rem]">
             When downtime is not
             <br />
             <span className="text-primary">an option</span>
