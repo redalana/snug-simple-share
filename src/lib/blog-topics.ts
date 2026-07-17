@@ -2499,8 +2499,10 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Lung and abdominal cancers",
     ],
     references: [
-      { label: "ACR–SPR Practice Parameter for CT" },
-      { label: "ICRP — Radiological Protection in Medicine" },
+      { label: "ACR–SPR–STR Practice Parameter for CT", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
+      { label: "ICRP Publication 135 — Diagnostic Reference Levels in Medical Imaging", url: "https://www.icrp.org/publication.asp?id=ICRP%20Publication%20135" },
+      { label: "Image Gently — Pediatric CT dose stewardship", url: "https://www.imagegently.org/" },
+      { label: "RSNA — Computed Tomography (CT) patient information", url: "https://www.radiologyinfo.org/en/info/bodyct" },
     ],
   },
   "PET/CT": {
