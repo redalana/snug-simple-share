@@ -2465,8 +2465,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac disease",
     ],
     references: [
-      { label: "ACR Practice Parameter for Performing MRI" },
-      { label: "IEC 60601-2-33 — MRI safety standard" },
+      { label: "ACR Practice Parameter for Performing and Interpreting MRI", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
+      { label: "IEC 60601-2-33 — MR equipment safety standard", url: "https://webstore.iec.ch/publication/68147" },
+      { label: "ACR Manual on MR Safety", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
     ],
   },
   "CT Scanners": {
