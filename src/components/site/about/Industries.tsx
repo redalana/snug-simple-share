@@ -26,7 +26,7 @@ export function Industries() {
                   <Building className="h-6 w-6" />
                 </div>
                 <h3 className="mt-6 font-display text-[1.75rem] font-extrabold leading-tight">{INDUSTRIES[0].title}</h3>
-                <p className="mt-3 max-w-md text-[calc(14.5 * var(--desktop-px-unit))] leading-relaxed text-white/85">{INDUSTRIES[0].desc}</p>
+                <p className="mt-3 max-w-md text-[calc(14.5*var(--desktop-px-unit))] leading-relaxed text-white/85">{INDUSTRIES[0].desc}</p>
               </div>
             </div>
           </Reveal>

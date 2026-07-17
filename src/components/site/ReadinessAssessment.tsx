@@ -261,7 +261,7 @@ function NoteRow({
         }`}
         strokeWidth={2}
       />
-      <p className="text-[calc(13.5 * var(--desktop-px-unit))] leading-[1.6] text-ink/75">
+      <p className="text-[calc(13.5*var(--desktop-px-unit))] leading-[1.6] text-ink/75">
         <span className="font-semibold text-ink">{label}</span> {text}
       </p>
     </motion.div>
@@ -375,10 +375,10 @@ function AssessmentGroup({
           <Icon className="h-5 w-5" strokeWidth={1.8} />
         </span>
         <span className="flex-1">
-          <span className="block font-display text-[calc(16.5 * var(--desktop-px-unit))] font-extrabold tracking-tight text-ink">
+          <span className="block font-display text-[calc(16.5*var(--desktop-px-unit))] font-extrabold tracking-tight text-ink">
             {group.title}
           </span>
-          <span className="mt-0.5 block text-[calc(12.5 * var(--desktop-px-unit))] font-medium text-muted-foreground">
+          <span className="mt-0.5 block text-[calc(12.5*var(--desktop-px-unit))] font-medium text-muted-foreground">
             {readyCount} of {group.items.length} confirmed ready
           </span>
         </span>
@@ -506,7 +506,7 @@ export function ReadinessAssessment() {
               }}
               className="mt-7 rounded-2xl border border-border bg-secondary/40 p-5"
             >
-              <span className="text-[calc(11.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-ink">
+              <span className="text-[calc(11.5*var(--desktop-px-unit))] font-bold uppercase tracking-[0.2em] text-ink">
                 Engineering Review Includes
               </span>
               <ul className="mt-4 space-y-3">

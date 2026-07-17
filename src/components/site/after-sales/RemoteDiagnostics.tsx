@@ -37,7 +37,7 @@ function FeatureCard({
       <div className="mt-5 font-display text-[1.1rem] font-bold text-foreground">
         {title}
       </div>
-      <div className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+      <div className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
         {desc}
       </div>
     </motion.div>
@@ -160,7 +160,7 @@ export function RemoteDiagnostics() {
             <div className="flex items-center justify-between border-b border-border/70 bg-muted/40 px-6 py-4">
               <div className="flex items-center gap-2.5">
                 <Signal className="h-4 w-4 text-emerald-500" strokeWidth={2} />
-                <span className="text-[calc(11.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-foreground">
+                <span className="text-[calc(11.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-foreground">
                   Live Equipment Status
                 </span>
               </div>
@@ -177,7 +177,7 @@ export function RemoteDiagnostics() {
                     className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-6 py-4 transition-colors hover:bg-muted/30 sm:grid-cols-[1.2fr_1.4fr_1fr]"
                   >
                     <div>
-                      <div className="text-[calc(14.5 * var(--desktop-px-unit))] font-semibold text-foreground">
+                      <div className="text-[calc(14.5*var(--desktop-px-unit))] font-semibold text-foreground">
                         {name}
                       </div>
                       <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] text-muted-foreground">
@@ -187,7 +187,7 @@ export function RemoteDiagnostics() {
 
                     <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
                       <span
-                        className={`inline-flex items-center gap-2 rounded-full ${c.bg} px-2.5 py-1 text-[calc(11.5 * var(--desktop-px-unit))] font-semibold ${c.text}`}
+                        className={`inline-flex items-center gap-2 rounded-full ${c.bg} px-2.5 py-1 text-[calc(11.5*var(--desktop-px-unit))] font-semibold ${c.text}`}
                       >
                         <span className="relative flex h-2 w-2">
                           <span
@@ -210,7 +210,7 @@ export function RemoteDiagnostics() {
                               style={{ width: `${health}%` }}
                             />
                           </div>
-                          <span className="w-14 text-right text-[calc(12.5 * var(--desktop-px-unit))] font-semibold tabular-nums text-foreground">
+                          <span className="w-14 text-right text-[calc(12.5*var(--desktop-px-unit))] font-semibold tabular-nums text-foreground">
                             {health}%
                           </span>
                         </>
@@ -230,7 +230,7 @@ export function RemoteDiagnostics() {
           <div className="mt-8">
             <a
               href="#services"
-              className="group inline-flex items-center gap-2 border-b border-foreground/30 pb-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="group inline-flex items-center gap-2 border-b border-foreground/30 pb-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               Explore Our Support Services
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

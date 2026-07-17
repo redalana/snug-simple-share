@@ -28,7 +28,7 @@ export function WhyTrust() {
                   <Star className="h-3 w-3" /> Our Foundation
                 </div>
                 <h3 className="mt-5 font-display text-[1.9rem] font-extrabold leading-tight">Regional Experience Since 1999</h3>
-                <p className="mt-4 text-[calc(14.5 * var(--desktop-px-unit))] leading-relaxed text-white/85">
+                <p className="mt-4 text-[calc(14.5*var(--desktop-px-unit))] leading-relaxed text-white/85">
                   {WHY[0].desc}
                 </p>
               </div>
@@ -44,7 +44,7 @@ export function WhyTrust() {
                   <w.icon className="h-5 w-5" />
                 </div>
                 <div className="mt-5 font-display text-[1.05rem] font-extrabold text-ink">{w.title}</div>
-                <p className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{w.desc}</p>
+                <p className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{w.desc}</p>
               </div>
             </Reveal>
           ))}

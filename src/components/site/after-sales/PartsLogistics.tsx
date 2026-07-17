@@ -44,7 +44,7 @@ export function PartsLogistics() {
               <br />
               Ready when you need them.
             </h2>
-            <p className="mt-5 max-w-md text-[calc(15.5 * var(--desktop-px-unit))] leading-relaxed text-white/70">
+            <p className="mt-5 max-w-md text-[calc(15.5*var(--desktop-px-unit))] leading-relaxed text-white/70">
               A dedicated regional inventory across our Amman and Cairo hubs —
               select a module to see live availability.
             </p>
@@ -79,7 +79,7 @@ export function PartsLogistics() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-white/50">
+                  <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-white/50">
                     In Regional Stock
                   </div>
                   <div className="mt-1 font-display text-4xl font-extrabold text-white">

@@ -80,10 +80,10 @@ export function DepartmentComponents() {
                   {active.label}
                 </p>
                 <div className="mt-1 font-display text-[calc(16*var(--desktop-px-unit))] font-bold text-foreground">{active.title}</div>
-                <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-snug text-muted-foreground">{active.copy}</p>
+                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">{active.copy}</p>
                 <ul className="mt-3 space-y-1.5">
                   {active.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-[calc(12.5 * var(--desktop-px-unit))] text-foreground">
+                    <li key={f} className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground">
                       <Check className="h-3.5 w-3.5 text-primary" /> {f}
                     </li>
                   ))}

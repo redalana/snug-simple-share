@@ -42,7 +42,7 @@ export function FAQ() {
                       transition={{ duration: 0.25 }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 pr-12 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                      <p className="pb-5 pr-12 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                         {f.a}
                       </p>
                     </motion.div>

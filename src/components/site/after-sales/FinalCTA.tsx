@@ -54,7 +54,7 @@ export function FinalCTA() {
             className="group inline-flex items-center justify-between gap-4 rounded-2xl bg-primary px-6 py-5 text-left text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
           >
             <div>
-              <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/80">
+              <div className="text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/80">
                 Emergency Line
               </div>
               <div className="mt-0.5 font-display text-lg font-extrabold">
@@ -68,7 +68,7 @@ export function FinalCTA() {
             className="group inline-flex items-center justify-between gap-4 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-6 py-4 text-left text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
           >
             <div>
-              <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-emerald-300">
+              <div className="text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-emerald-300">
                 WhatsApp
               </div>
               <div className="mt-0.5 text-[calc(14*var(--desktop-px-unit))] font-semibold">

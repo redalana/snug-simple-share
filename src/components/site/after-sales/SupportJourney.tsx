@@ -53,7 +53,7 @@ export function SupportJourney() {
                   <div className="relative flex h-[calc(104*var(--desktop-px-unit))] w-[calc(104*var(--desktop-px-unit))] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-transform duration-300 group-hover:scale-105">
                     <s.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
                   </div>
-                  <div className="absolute -top-2 right-2 rounded-full bg-primary px-2.5 py-0.5 text-[calc(10.5 * var(--desktop-px-unit))] font-black tracking-widest text-white shadow-[0_8px_20px_-6px_rgba(220,38,38,0.7)]">
+                  <div className="absolute -top-2 right-2 rounded-full bg-primary px-2.5 py-0.5 text-[calc(10.5*var(--desktop-px-unit))] font-black tracking-widest text-white shadow-[0_8px_20px_-6px_rgba(220,38,38,0.7)]">
                     0{i + 1}
                   </div>
                 </div>
@@ -61,12 +61,12 @@ export function SupportJourney() {
                   <div className="font-display text-[calc(16*var(--desktop-px-unit))] font-bold text-white">
                     {s.t}
                   </div>
-                  <div className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/55">
+                  <div className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/55">
                     {s.d}
                   </div>
                   <div className="mt-2 grid grid-rows-[0fr] overflow-hidden opacity-0 transition-[grid-template-rows,opacity] duration-300 group-hover:grid-rows-[1fr] group-hover:opacity-100">
                     <div className="min-h-0">
-                      <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[calc(11.5 * var(--desktop-px-unit))] leading-relaxed text-white/70">
+                      <div className="mt-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[calc(11.5*var(--desktop-px-unit))] leading-relaxed text-white/70">
                         {s.detail}
                       </div>
                     </div>

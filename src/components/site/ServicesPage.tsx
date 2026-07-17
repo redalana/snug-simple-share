@@ -244,7 +244,7 @@ function Hero() {
                     className="rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
                   >
                     <Icon className="h-6 w-6 text-primary" strokeWidth={1.6} />
-                    <div className="mt-3 text-[calc(12.5 * var(--desktop-px-unit))] font-semibold leading-snug text-white">
+                    <div className="mt-3 text-[calc(12.5*var(--desktop-px-unit))] font-semibold leading-snug text-white">
                       {label}
                     </div>
                   </div>
@@ -360,7 +360,7 @@ function HowWeSupport() {
                 <div className="mt-6 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">
                   {title}
                 </div>
-                <p className="mt-2 max-w-[calc(180*var(--desktop-px-unit))] text-[calc(12.5 * var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                <p className="mt-2 max-w-[calc(180*var(--desktop-px-unit))] text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">
                   {desc}
                 </p>
               </li>
@@ -488,7 +488,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
         </p>
         <ul className="mt-3 space-y-1.5">
           {item.bullets.map((b) => (
-            <li key={b} className="flex items-center gap-2 text-[calc(12.5 * var(--desktop-px-unit))] text-foreground/85">
+            <li key={b} className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground/85">
               <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
@@ -498,7 +498,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
         </ul>
         <a
           href="#request"
-          className="mt-4 inline-flex items-center gap-1.5 text-[calc(12.5 * var(--desktop-px-unit))] font-semibold text-primary hover:underline"
+          className="mt-4 inline-flex items-center gap-1.5 text-[calc(12.5*var(--desktop-px-unit))] font-semibold text-primary hover:underline"
         >
           Learn More <ArrowRight className="h-3.5 w-3.5" />
         </a>
@@ -572,7 +572,7 @@ function Equipment() {
                 </ul>
                 <a
                   href="#request"
-                  className="mt-3 inline-flex items-center gap-1 text-[calc(11.5 * var(--desktop-px-unit))] font-semibold text-primary hover:underline"
+                  className="mt-3 inline-flex items-center gap-1 text-[calc(11.5*var(--desktop-px-unit))] font-semibold text-primary hover:underline"
                 >
                   Learn Details <ArrowRight className="h-3 w-3" />
                 </a>
@@ -613,7 +613,7 @@ function WhyChoose() {
                   <Icon className="h-5 w-5 text-primary" strokeWidth={1.7} />
                 </div>
                 <div className="mt-4 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-white">{title}</div>
-                <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/65">{desc}</p>
+                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/65">{desc}</p>
               </div>
             ))}
           </div>
@@ -684,7 +684,7 @@ function Coverage() {
           <h2 className="font-display text-2xl font-extrabold text-foreground">
             Our Coverage
           </h2>
-          <p className="mt-2 max-w-sm text-[calc(13.5 * var(--desktop-px-unit))] text-muted-foreground">
+          <p className="mt-2 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] text-muted-foreground">
             Supporting healthcare across Africa &amp; the Middle East.
           </p>
 
@@ -692,15 +692,15 @@ function Coverage() {
             <div className="grid grid-cols-3 gap-6">
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">10+</div>
-                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Countries</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Countries</div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">60+</div>
-                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Cities</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Cities</div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">24/7</div>
-                <div className="mt-1 text-[calc(11.5 * var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Support</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Support</div>
               </div>
             </div>
           </div>
@@ -722,7 +722,7 @@ function Coverage() {
         {/* RIGHT — form */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">
           <h2 className="font-display text-2xl font-extrabold text-foreground">Request a Service</h2>
-          <p className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] text-muted-foreground">
+          <p className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] text-muted-foreground">
             Tell us about your needs and our team will get back to you.
           </p>
 
@@ -789,7 +789,7 @@ function Coverage() {
                   <div className="mt-2 text-[calc(13*var(--desktop-px-unit))] text-foreground/80">
                     {fileName ?? "Drag & drop files here"}
                   </div>
-                  <div className="text-[calc(11.5 * var(--desktop-px-unit))] text-muted-foreground">
+                  <div className="text-[calc(11.5*var(--desktop-px-unit))] text-muted-foreground">
                     or click to browse (JPG, PNG, PDF up to 10MB)
                   </div>
                   <input
@@ -816,7 +816,7 @@ function Coverage() {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-border bg-white px-3 py-2.5 text-[calc(13.5 * var(--desktop-px-unit))] text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
+  "w-full rounded-lg border border-border bg-white px-3 py-2.5 text-[calc(13.5*var(--desktop-px-unit))] text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 function PhoneFieldWrapper() {
   const [value, setValue] = useState("");
@@ -852,7 +852,7 @@ function EmergencyCTA() {
             <br />
             <span className="text-primary">We're Available 24/7</span>
           </h2>
-          <p className="mt-3 max-w-md text-[calc(13.5 * var(--desktop-px-unit))] text-white/70">
+          <p className="mt-3 max-w-md text-[calc(13.5*var(--desktop-px-unit))] text-white/70">
             Our engineers are ready to help you anytime, anywhere.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -860,21 +860,21 @@ function EmergencyCTA() {
               <Phone className="h-5 w-5 text-primary" />
               <div>
                 <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Call Us</div>
-                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">+20 123 456 7890</div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">+20 123 456 7890</div>
               </div>
             </a>
             <a href="https://wa.me/962799741318" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
               <MessageCircle className="h-5 w-5 text-primary" />
               <div>
                 <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">WhatsApp</div>
-                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">Chat with our team</div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">Chat with our team</div>
               </div>
             </a>
             <a href="mailto:support@abufarhamedical.com" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
               <Mail className="h-5 w-5 text-primary" />
               <div>
                 <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Email Us</div>
-                <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] font-semibold text-white">support@abufarhamedical.com</div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">support@abufarhamedical.com</div>
               </div>
             </a>
           </div>

@@ -113,7 +113,7 @@ export function ImageUpload({
       />
 
       {error && (
-        <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-[calc(12.5 * var(--desktop-px-unit))] font-medium text-destructive">
+        <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-[calc(12.5*var(--desktop-px-unit))] font-medium text-destructive">
           {error}
         </div>
       )}

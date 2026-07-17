@@ -132,7 +132,7 @@ export function ExperienceAbuFarha() {
                       <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                         {pillar.title}
                       </h3>
-                      <p className="mt-1.5 max-w-lg text-[calc(16.5 * var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
+                      <p className="mt-1.5 max-w-lg text-[calc(16.5*var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
                         {pillar.copy}
                       </p>
                     </div>

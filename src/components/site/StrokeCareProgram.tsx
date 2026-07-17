@@ -177,7 +177,7 @@ function NodePanel({
         </span>
         <span
           className={`font-bold uppercase tracking-[0.24em] text-primary ${
-            isPrimary ? "text-[calc(12*var(--desktop-px-unit))]" : "text-[calc(10.5 * var(--desktop-px-unit))] opacity-80"
+            isPrimary ? "text-[calc(12*var(--desktop-px-unit))]" : "text-[calc(10.5*var(--desktop-px-unit))] opacity-80"
           }`}
         >
           {node.num} · {node.category}
@@ -194,7 +194,7 @@ function NodePanel({
         className={`mt-3 leading-[1.65] ${
           isPrimary
             ? "text-[calc(17*var(--desktop-px-unit))] text-muted-foreground"
-            : "text-[calc(14.5 * var(--desktop-px-unit))] text-muted-foreground/85"
+            : "text-[calc(14.5*var(--desktop-px-unit))] text-muted-foreground/85"
         } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
       >
         {node.copy}
@@ -476,7 +476,7 @@ export function StrokeCareProgram() {
                 ))}
               </ul>
 
-              <p className="mt-11 max-w-xl text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground/70">
+              <p className="mt-11 max-w-xl text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground/70">
                 Helping hospitals build comprehensive stroke programs across
                 Africa and the Middle East since 1999.
               </p>

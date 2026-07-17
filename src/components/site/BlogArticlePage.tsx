@@ -133,7 +133,7 @@ function Hero({ article }: { article: Article }) {
         <h1 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[2.25rem]">
           {article.title}
         </h1>
-        <p className="mt-5 text-[calc(15.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+        <p className="mt-5 text-[calc(15.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
           {article.excerpt}
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground">
@@ -254,7 +254,7 @@ function Block({ block }: { block: ContentBlock }) {
             {block.text}
           </h2>
           {block.body && !block.image && (
-            <p className="mt-4 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
+            <p className="mt-4 text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
               {block.body}
             </p>
           )}
@@ -275,7 +275,7 @@ function Block({ block }: { block: ContentBlock }) {
                   loading="lazy"
                 />
               </div>
-              <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
+              <p className="text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
                 {block.body}
               </p>
             </div>
@@ -292,7 +292,7 @@ function Block({ block }: { block: ContentBlock }) {
 
     case "p":
       return (
-        <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
+        <p className="text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
           {block.text}
         </p>
       );
@@ -304,7 +304,7 @@ function Block({ block }: { block: ContentBlock }) {
             {block.paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85"
+                className="text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85"
               >
                 {p}
               </p>
@@ -332,7 +332,7 @@ function Block({ block }: { block: ContentBlock }) {
           {block.items.map((it, i) => (
             <li
               key={i}
-              className="flex gap-3 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
+              className="flex gap-3 text-[calc(15.5*var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               {it}
@@ -556,14 +556,14 @@ function RoiSection({
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div>
-        <p className="text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
+        <p className="text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
           {paragraph}
         </p>
         <ul className="mt-5 space-y-2.5">
           {bullets.map((b) => (
             <li
               key={b}
-              className="flex gap-3 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
+              className="flex gap-3 text-[calc(15.5*var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               {b}

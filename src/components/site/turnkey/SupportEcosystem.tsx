@@ -27,7 +27,7 @@ export function SupportEcosystem() {
               <div className="mt-5 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-white">
                 {s.title}
               </div>
-              <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/60">
+              <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/60">
                 {s.copy}
               </p>
             </motion.div>

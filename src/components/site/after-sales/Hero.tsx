@@ -70,7 +70,7 @@ export function Hero() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/50">
+                <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/50">
                   Service Dashboard
                 </div>
                 <div className="mt-1.5 text-base font-semibold text-white">
@@ -97,7 +97,7 @@ export function Hero() {
                   <div className="font-display text-xl font-extrabold text-white">
                     {k}
                   </div>
-                  <div className="mt-0.5 text-[calc(11.5 * var(--desktop-px-unit))] text-white/60">{v}</div>
+                  <div className="mt-0.5 text-[calc(11.5*var(--desktop-px-unit))] text-white/60">{v}</div>
                 </div>
               ))}
             </div>
