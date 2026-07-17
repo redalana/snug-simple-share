@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StrokeCareProgram } from "@/components/site/StrokeCareProgram";
+import { VisitAbuFarha } from "@/components/site/stroke/VisitAbuFarha";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/programs/stroke-care")({
@@ -45,6 +46,7 @@ function StrokeCarePage() {
             Back to home
           </Link>
         </div>
+        <VisitAbuFarha />
         <StrokeCareProgram />
       </main>
       <Footer />
