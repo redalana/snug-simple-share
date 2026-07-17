@@ -54,7 +54,7 @@ export function WhereWeWork() {
                   onMouseEnter={() => setActive(p)} onMouseLeave={() => setActive(null)}>
                   <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 animate-ping rounded-full bg-primary/60" />
                   <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 rounded-full bg-primary/20 blur-md" />
-                  <button className={`relative block rounded-full bg-primary ring-2 ring-white/70 transition-all group-hover:scale-125 ${p.hq ? "h-4 w-4 ring-2 ring-white" : "h-3 w-3"} ${isA ? "scale-125" : ""}`} />
+                  <button type="button" aria-label={p.name} className={`relative block rounded-full bg-primary ring-2 ring-white/70 transition-all group-hover:scale-125 ${p.hq ? "h-4 w-4 ring-2 ring-white" : "h-3 w-3"} ${isA ? "scale-125" : ""}`} />
                   {p.hq && (
                     <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-primary/90 px-1.5 py-0.5 text-[calc(9*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">HQ</span>
                   )}
