@@ -361,6 +361,16 @@ function Block({ block }: { block: ContentBlock }) {
     case "faq":
       return <Faq items={block.items} />;
 
+    case "callout":
+      return <Callout {...block} />;
+
+    case "stats":
+      return <StatsBlock items={block.items} />;
+
+    case "takeaways":
+      return <Takeaways items={block.items} />;
+
+
     case "quote":
       return (
         <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6">
