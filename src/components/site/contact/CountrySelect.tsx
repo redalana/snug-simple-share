@@ -46,6 +46,7 @@ export function CountrySelect({
       <PopoverTrigger asChild>
         <button
           type="button"
+          aria-label={current ? `Country: ${current.name}. Change country` : "Select your country"}
           className={cn(
             "flex h-12 w-full items-center justify-between rounded-xl border border-border bg-secondary/30 px-3.5 text-left text-sm transition-all duration-200",
             "hover:border-primary/40 hover:bg-secondary/40",
@@ -53,6 +54,7 @@ export function CountrySelect({
             hasError && "border-destructive",
           )}
         >
+
           <span className="flex min-w-0 items-center gap-2.5">
             {current ? (
               <>
