@@ -2588,8 +2588,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Trauma",
     ],
     references: [
-      { label: "AORN Guidelines for Perioperative Practice" },
-      { label: "WHO Surgical Safety Checklist" },
+      { label: "AORN Guidelines for Perioperative Practice", url: "https://www.aorn.org/guidelines" },
+      { label: "WHO Surgical Safety Checklist", url: "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources" },
+      { label: "CDC — Guideline for Prevention of Surgical Site Infection", url: "https://www.cdc.gov/infection-control/hcp/surgical-site-infection/" },
     ],
   },
   "Radiation Therapy": {
