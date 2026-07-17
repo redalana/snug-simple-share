@@ -91,7 +91,7 @@ export function VisitAbuFarha() {
                   >
                     <Icon className="h-6 w-6" strokeWidth={2.2} />
                   </span>
-                  <span className="font-display text-[1.15rem] font-medium leading-snug tracking-tight text-ink sm:text-[1.25rem]">
+                  <span className="font-display text-[1.2rem] font-semibold leading-snug tracking-tight text-[#1F2937] sm:text-[1.3rem]">
                     {renderLabel(label, highlight)}
                   </span>
                 </li>
