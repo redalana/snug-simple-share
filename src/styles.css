@@ -237,7 +237,6 @@
    Standalone preview and production have no attribute → zero effect,
    pixel-identical rendering.
    ========================================================================== */
-html[data-lovable-embed="true"] > body > header,
-html[data-lovable-embed="true"] > body header.fixed {
+html[data-lovable-embed="true"] header.fixed.inset-x-0.top-0 {
   top: 44px;
 }
