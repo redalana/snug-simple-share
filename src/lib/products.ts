@@ -224,7 +224,7 @@ export const PRODUCTS: Product[] = [
     name: "Toshiba Aquilion 64 Slices CT Scanner",
     slug: "toshiba-aquilion-64-slices-ct-scanner",
     brand: "Canon Medical",
-    category: "PET/CT Scanners",
+    category: "CT Scanners",
     image: "https://www.abufarhamedical.com/storage/medical-platform/products/toshiba-aquilion-64-slices-ct-scanner-a4a38968.jpg",
     gallery: [
       "https://www.abufarhamedical.com/storage/medical-platform/products/toshiba-aquilion-64-slices-ct-scanner-a4a38968.jpg",
