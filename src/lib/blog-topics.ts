@@ -2566,8 +2566,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Obstetric assessment",
     ],
     references: [
-      { label: "AIUM Practice Parameters" },
-      { label: "WFUMB — Safety of ultrasound" },
+      { label: "AIUM Practice Parameters", url: "https://www.aium.org/officialStatements/PracticeParameters" },
+      { label: "WFUMB — Safety of diagnostic ultrasound", url: "https://wfumb.info/safety-of-ultrasound/" },
+      { label: "ACR–AIUM–SPR–SRU Practice Parameter for Ultrasound Examinations", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
     ],
   },
   "Operating Room": {
