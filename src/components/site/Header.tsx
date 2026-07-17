@@ -42,7 +42,7 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[84px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+        <div className="mx-auto flex h-[64px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
           <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.13]">
             <Logo />
           </Link>
