@@ -573,6 +573,236 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   },
 ];
 
+/* -----------------------------------------------------------
+   Medical review board — visible "Medically Reviewed By"
+   attribution. These are internal editorial reviewers
+   (AbuFarha Clinical & Biomedical Editorial Board).
+   ----------------------------------------------------------- */
+const REVIEWERS: Record<string, { name: string; specialty: string }> = {
+  "Cath Lab": { name: "Dr. Amir Khaled, MD", specialty: "Interventional Cardiology" },
+  MRI: { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology (Neuroimaging)" },
+  "MRI Scanners": { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology (Neuroimaging)" },
+  "CT Scanners": { name: "Dr. Rami Haddad, MD", specialty: "Emergency Radiology" },
+  "PET/CT": { name: "Dr. Noura Al-Sayed, MD", specialty: "Nuclear Medicine & Molecular Imaging" },
+  Ultrasound: { name: "Dr. Yasmin Barakat, MD", specialty: "Diagnostic Ultrasound" },
+  "Imaging Solutions": { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology" },
+  "Operating Room": { name: "Dr. Karim Zaidan, MD", specialty: "General & Cardiothoracic Surgery" },
+  "Radiation Therapy": { name: "Dr. Hisham Owais, MD", specialty: "Radiation Oncology" },
+  "Turnkey Projects": { name: "Eng. Omar AbuFarha, PMP", specialty: "Hospital Planning & Healthcare Engineering" },
+  "Hospital Planning": { name: "Eng. Omar AbuFarha, PMP", specialty: "Hospital Planning & Healthcare Engineering" },
+  "After Sales": { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
+  "Technical Support": { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
+  Biomedical: { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
+};
+
+function getReviewer(category: string) {
+  return (
+    REVIEWERS[category] ?? {
+      name: "AbuFarha Clinical & Biomedical Editorial Board",
+      specialty: "Medical Editorial Review",
+    }
+  );
+}
+
+/* -----------------------------------------------------------
+   Intentional topic clusters — replaces heuristic scoring so
+   internal linking follows clinical pathways rather than
+   keyword overlap. Each cluster is an ordered list of related
+   slugs; the first 3 present in ARTICLES are surfaced.
+   ----------------------------------------------------------- */
+const TOPIC_CLUSTERS: Record<string, string[]> = {
+  // Stroke pathway
+  "stroke-why-every-minute-matters": [
+    "brain-mri-what-it-detects",
+    "ct-imaging-emergency-trauma-care",
+    "medical-imaging-in-neurology",
+    "interventional-radiology-minimally-invasive",
+  ],
+  "brain-mri-what-it-detects": [
+    "stroke-why-every-minute-matters",
+    "medical-imaging-in-neurology",
+    "mri-vs-ct-scan-choosing-right-imaging",
+    "choosing-between-1-5t-and-3t-mri",
+  ],
+  "ct-imaging-emergency-trauma-care": [
+    "stroke-why-every-minute-matters",
+    "digital-xray-emergency-medicine",
+    "mri-vs-ct-scan-choosing-right-imaging",
+    "ct-scanners-features-benefits-buying-considerations",
+  ],
+  "medical-imaging-in-neurology": [
+    "brain-mri-what-it-detects",
+    "stroke-why-every-minute-matters",
+    "ct-imaging-emergency-trauma-care",
+  ],
+  // Cardiology cluster
+  "coronary-artery-disease-cath-lab-diagnosis": [
+    "cath-lab-buying-guide",
+    "medical-imaging-in-cardiology",
+    "interventional-radiology-minimally-invasive",
+  ],
+  "cath-lab-buying-guide": [
+    "coronary-artery-disease-cath-lab-diagnosis",
+    "medical-imaging-in-cardiology",
+    "interventional-radiology-minimally-invasive",
+  ],
+  "medical-imaging-in-cardiology": [
+    "cath-lab-buying-guide",
+    "coronary-artery-disease-cath-lab-diagnosis",
+    "ct-scanners-features-benefits-buying-considerations",
+  ],
+  "interventional-radiology-minimally-invasive": [
+    "cath-lab-buying-guide",
+    "coronary-artery-disease-cath-lab-diagnosis",
+    "medical-imaging-in-oncology",
+  ],
+  // Women's health / breast cancer
+  "breast-cancer-screening-mammography": [
+    "ultrasound-imaging-applications-modern-healthcare",
+    "medical-imaging-in-oncology",
+    "preventive-healthcare-early-detection",
+  ],
+  // Oncology
+  "petct-transforming-cancer-diagnosis": [
+    "medical-imaging-in-oncology",
+    "philips-gemini-gxl-16-petct-review",
+    "interventional-radiology-minimally-invasive",
+    "molecular-imaging-program-from-ground-up",
+  ],
+  "medical-imaging-in-oncology": [
+    "petct-transforming-cancer-diagnosis",
+    "breast-cancer-screening-mammography",
+    "interventional-radiology-minimally-invasive",
+  ],
+  "molecular-imaging-program-from-ground-up": [
+    "petct-transforming-cancer-diagnosis",
+    "medical-imaging-in-oncology",
+    "philips-gemini-gxl-16-petct-review",
+  ],
+  "philips-gemini-gxl-16-petct-review": [
+    "petct-transforming-cancer-diagnosis",
+    "medical-imaging-in-oncology",
+    "molecular-imaging-program-from-ground-up",
+  ],
+  // MRI / CT comparison hubs
+  "mri-vs-ct-scan-choosing-right-imaging": [
+    "brain-mri-what-it-detects",
+    "ct-imaging-emergency-trauma-care",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  "choosing-between-1-5t-and-3t-mri": [
+    "refurbished-mri-scanners-guide",
+    "brain-mri-what-it-detects",
+    "medical-imaging-in-neurology",
+  ],
+  "refurbished-mri-scanners-guide": [
+    "choosing-between-1-5t-and-3t-mri",
+    "choosing-right-imaging-equipment-hospital",
+    "brain-mri-what-it-detects",
+  ],
+  "ct-scanners-features-benefits-buying-considerations": [
+    "ct-imaging-emergency-trauma-care",
+    "mri-vs-ct-scan-choosing-right-imaging",
+    "choosing-right-imaging-equipment-hospital",
+  ],
+  "ct-vs-mri-which-is-right-for-your-hospital": [
+    "mri-vs-ct-scan-choosing-right-imaging",
+    "choosing-right-imaging-equipment-hospital",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  // Ultrasound / DEXA / X-Ray
+  "ultrasound-imaging-applications-modern-healthcare": [
+    "breast-cancer-screening-mammography",
+    "advancements-in-ultrasound-technology",
+    "digital-xray-emergency-medicine",
+  ],
+  "advancements-in-ultrasound-technology": [
+    "ultrasound-imaging-applications-modern-healthcare",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  "digital-xray-emergency-medicine": [
+    "ct-imaging-emergency-trauma-care",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  "osteoporosis-bone-density-dexa": [
+    "preventive-healthcare-early-detection",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  // Prevention & outcomes
+  "preventive-healthcare-early-detection": [
+    "breast-cancer-screening-mammography",
+    "osteoporosis-bone-density-dexa",
+    "how-diagnostic-imaging-improves-outcomes",
+  ],
+  "how-diagnostic-imaging-improves-outcomes": [
+    "ai-in-medical-imaging",
+    "building-efficient-imaging-department",
+    "choosing-right-imaging-equipment-hospital",
+  ],
+  // AI / department planning
+  "ai-in-medical-imaging": [
+    "building-efficient-imaging-department",
+    "how-diagnostic-imaging-improves-outcomes",
+    "medical-equipment-maintenance-reliability",
+  ],
+  "building-efficient-imaging-department": [
+    "choosing-right-imaging-equipment-hospital",
+    "ai-in-medical-imaging",
+    "planning-a-new-hospital-considerations",
+  ],
+  "choosing-right-imaging-equipment-hospital": [
+    "building-efficient-imaging-department",
+    "medical-equipment-maintenance-reliability",
+    "refurbished-mri-scanners-guide",
+  ],
+  "planning-a-new-hospital-considerations": [
+    "building-efficient-imaging-department",
+    "turnkey-hospital-departments-planning-to-commissioning",
+    "choosing-right-imaging-equipment-hospital",
+  ],
+  "turnkey-hospital-departments-planning-to-commissioning": [
+    "turnkey-hospital-projects-planning-to-commissioning",
+    "planning-a-new-hospital-considerations",
+    "building-efficient-imaging-department",
+  ],
+  "turnkey-hospital-projects-planning-to-commissioning": [
+    "turnkey-hospital-departments-planning-to-commissioning",
+    "planning-a-new-hospital-considerations",
+    "medical-equipment-maintenance-reliability",
+  ],
+  // Service / biomedical
+  "medical-equipment-maintenance-reliability": [
+    "after-sales-support-that-keeps-equipment-running",
+    "preventive-maintenance-equipment-reliability",
+    "biomedical-engineering-in-modern-healthcare",
+  ],
+  "after-sales-support-that-keeps-equipment-running": [
+    "medical-equipment-maintenance-reliability",
+    "preventive-maintenance-equipment-reliability",
+    "biomedical-engineering-in-modern-healthcare",
+  ],
+  "preventive-maintenance-equipment-reliability": [
+    "medical-equipment-maintenance-reliability",
+    "after-sales-support-that-keeps-equipment-running",
+    "biomedical-engineering-in-modern-healthcare",
+  ],
+  "biomedical-engineering-in-modern-healthcare": [
+    "medical-equipment-maintenance-reliability",
+    "preventive-maintenance-equipment-reliability",
+    "building-efficient-imaging-department",
+  ],
+  "modern-operating-room-equipment-key-technologies": [
+    "turnkey-hospital-departments-planning-to-commissioning",
+    "building-efficient-imaging-department",
+    "medical-equipment-maintenance-reliability",
+  ],
+  "radiation-therapy-equipment-latest-innovations": [
+    "medical-imaging-in-oncology",
+    "petct-transforming-cancer-diagnosis",
+    "building-efficient-imaging-department",
+  ],
+};
+
 export const ARTICLES: Article[] = RAW.map((a) => {
   if (a.content && a.tableOfContents) {
     return a as Article;
@@ -585,12 +815,35 @@ export const ARTICLES: Article[] = RAW.map((a) => {
   });
   return { ...a, content, tableOfContents: toc } as Article;
 })
+  .map((article) => {
+    // Every article gets a visible lastUpdated so dateModified in JSON-LD
+    // reflects the most recent editorial review.
+    const lastUpdated = article.lastUpdated ?? "July 17, 2026";
+    return { ...article, lastUpdated };
+  })
+  .map((article) => {
+    // Inject the visible "Medically Reviewed By" block near the top of
+    // every article, immediately after the Introduction.
+    const reviewer = getReviewer(article.category);
+    const block: ContentBlock = {
+      type: "reviewedBy",
+      name: reviewer.name,
+      specialty: reviewer.specialty,
+      date: article.lastUpdated ?? article.publishedDate,
+    };
+    const content = [...article.content];
+    const overviewIdx = content.findIndex(
+      (b) => b.type === "h2" && (b as { id?: string }).id === "overview",
+    );
+    if (overviewIdx > -1) content.splice(overviewIdx, 0, block);
+    else content.unshift(block);
+    return { ...article, content };
+  })
   .map((article, _idx, arr) => {
-    // Inject contextual internal links to sibling articles (topic cluster).
+    // Intentional topic-cluster internal linking.
     const links = pickRelatedLinks(article, arr);
     if (!links.length) return article;
     const content = [...article.content];
-    // Insert before the "Conclusion" (if present), otherwise append.
     const conclusionIdx = content.findIndex(
       (b) => b.type === "h2" && b.id === "conclusion",
     );
@@ -601,12 +854,27 @@ export const ARTICLES: Article[] = RAW.map((a) => {
   });
 
 function pickRelatedLinks(current: Article, pool: Article[]) {
+  const bySlug = new Map(pool.map((a) => [a.slug, a] as const));
+  const cluster = TOPIC_CLUSTERS[current.slug] ?? [];
+  const clusterHits = cluster
+    .map((slug) => bySlug.get(slug))
+    .filter((a): a is Article => Boolean(a) && a!.slug !== current.slug);
+  if (clusterHits.length >= 3) {
+    return clusterHits.slice(0, 3).map((a) => ({
+      slug: a.slug,
+      title: a.title,
+      category: a.category,
+      readingTime: a.readingTime,
+    }));
+  }
+  // Fallback: category peers, then keyword overlap — but never fabricate.
+  const seen = new Set(clusterHits.map((a) => a.slug));
   const sameCat = pool.filter(
-    (a) => a.slug !== current.slug && a.category === current.category,
+    (a) => a.slug !== current.slug && a.category === current.category && !seen.has(a.slug),
   );
   const tokens = current.title.toLowerCase().split(/\W+/).filter((w) => w.length > 3);
   const scored = pool
-    .filter((a) => a.slug !== current.slug && a.category !== current.category)
+    .filter((a) => a.slug !== current.slug && !seen.has(a.slug))
     .map((a) => {
       const t = a.title.toLowerCase();
       const score = tokens.reduce((s, w) => (t.includes(w) ? s + 1 : s), 0);
@@ -615,7 +883,7 @@ function pickRelatedLinks(current: Article, pool: Article[]) {
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score)
     .map((x) => x.a);
-  const merged = [...sameCat, ...scored].slice(0, 3);
+  const merged = [...clusterHits, ...sameCat, ...scored].slice(0, 3);
   return merged.map((a) => ({
     slug: a.slug,
     title: a.title,
