@@ -102,7 +102,7 @@ function ProductDetailPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-[112px]">
+      <main id="main-content" className="pt-[112px]">
         <ProductDetail product={product} slug={slug} />
       </main>
       <Footer />
