@@ -34,7 +34,7 @@ function ProductsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[96px]">
+      <main id="main-content" className="pt-[110px]">
         <PortfolioBrowser />
       </main>
       <Footer />

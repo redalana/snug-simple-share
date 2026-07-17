@@ -358,7 +358,7 @@ function BrandsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-[96px]">
+      <main className="pt-[110px]">
         {/* ============ HERO ============ */}
         <section className="relative overflow-hidden bg-white">
           <div className="mx-auto grid max-w-[100rem] items-center gap-10 px-6 py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12 lg:px-10 lg:py-16">
