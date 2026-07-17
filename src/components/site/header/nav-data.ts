@@ -80,7 +80,7 @@ export type BrandItem = {
 
 export const BRAND_ITEMS: BrandItem[] = [
   { name: "Philips", color: "#0B5ED7", mark: "ring", href: "/brands/philips" },
-  { name: "Toshiba – Canon", color: "#CC0000", mark: "bars", href: "/brands/toshiba-canon" },
+  { name: "Canon Medical", color: "#CC0000", mark: "bars", href: "/brands/canon-medical" },
   { name: "Siemens", sub: "Healthineers", color: "#EC6602", mark: "square", href: "/brands/siemens" },
   { name: "Mindray", color: "#005BAC", mark: "dot", href: "/brands/mindray" },
   { name: "Esaote", color: "#003DA5", mark: "dot", href: "/brands/esaote" },

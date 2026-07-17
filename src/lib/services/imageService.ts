@@ -53,7 +53,7 @@ function slugify(input: string): string {
 /**
  * Brand → manufacturer mapping. For now brand and manufacturer are the same
  * canonical value; the backend can later resolve aliases (e.g. "Toshiba" →
- * "Toshiba - Canon") from the database.
+ * "Canon Medical") from the database.
  */
 function mapManufacturer(brand: string): string {
   return brand.trim();

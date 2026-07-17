@@ -134,6 +134,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
     { icon: Layers3, label: "Category", value: product.category },
     { icon: BadgeCheck, label: "Condition", value: product.status },
     { icon: ShieldCheck, label: "Warranty", value: product.warranty },
+    ...(product.refurbishment
+      ? [{ icon: Wrench, label: "Refurbishment Status", value: product.refurbishment }]
+      : []),
     { icon: CheckCircle2, label: "Availability", value: "In Stock" },
     { icon: MapPin, label: "Country of Origin", value: product.country },
     { icon: CalendarDays, label: "Year", value: String(product.year) },
