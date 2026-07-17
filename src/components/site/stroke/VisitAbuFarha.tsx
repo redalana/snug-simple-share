@@ -39,9 +39,7 @@ function renderLabel(label: string, highlight: string) {
   return (
     <>
       {label.slice(0, idx)}
-      <span className="font-semibold" style={{ color: ACCENT }}>
-        {highlight}
-      </span>
+      <span className="font-semibold text-ink">{highlight}</span>
       {label.slice(idx + highlight.length)}
     </>
   );
@@ -59,11 +57,11 @@ export function VisitAbuFarha() {
             {/* LEFT — headline + description */}
             <div className="lg:pr-6">
               <Eyebrow index="01">Visit AbuFarha</Eyebrow>
-              <h2 className="mt-8 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
+              <h2 className="mt-10 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
                 Experience Comprehensive Stroke Programs
                 <span className="mt-2 block text-primary">Before You Invest.</span>
               </h2>
-              <p className="mt-7 max-w-xl text-base leading-[1.75] text-muted-foreground sm:text-[1.05rem]">
+              <p className="mt-10 max-w-xl text-base leading-[1.8] text-muted-foreground sm:text-[1.05rem]">
                 We invite healthcare leaders, physicians, and biomedical engineers to
                 experience firsthand how comprehensive stroke programs are planned,
                 engineered, implemented, and supported — before making one of their
@@ -71,7 +69,7 @@ export function VisitAbuFarha() {
               </p>
 
               <p
-                className="mt-10 max-w-xl border-l-2 pl-6 font-display text-[1.35rem] font-semibold leading-[1.35] tracking-[-0.01em] text-ink sm:text-[1.5rem]"
+                className="mt-14 max-w-xl border-l-[3px] pl-7 font-display text-[1.5rem] font-extrabold leading-[1.3] tracking-[-0.015em] text-ink sm:text-[1.7rem] lg:text-[1.85rem]"
                 style={{ borderColor: ACCENT }}
               >
                 Helping hospitals build comprehensive stroke programs across{" "}
@@ -84,7 +82,7 @@ export function VisitAbuFarha() {
               {ITEMS.map(({ Icon, label, highlight }) => (
                 <li
                   key={label}
-                  className="group flex items-center gap-5 py-5 transition-colors first:pt-0 last:pb-0"
+                  className="group flex items-center gap-5 py-7 transition-colors first:pt-0 last:pb-0"
                 >
                   <span
                     className="flex h-12 w-12 flex-none items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105"
