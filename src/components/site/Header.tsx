@@ -125,7 +125,7 @@ export function Header() {
                 <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-4 text-[16px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
+                    className={`flex items-center gap-1 px-5 py-2.5 text-[16px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
