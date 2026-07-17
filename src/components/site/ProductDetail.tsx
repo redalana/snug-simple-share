@@ -481,7 +481,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (
-                <RelatedCard key={p.name} product={p} />
+                <RelatedCard key={productSlug(p)} product={p} />
               ))}
             </div>
           </div>
