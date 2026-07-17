@@ -2761,8 +2761,9 @@ const GENERIC_DEFAULTS: CategoryDefaults = {
     "Common conditions relevant to the specialty covered in this article.",
   ],
   references: [
-    { label: "World Health Organization — Medical devices" },
-    { label: "International clinical practice guidelines" },
+    { label: "WHO — Medical devices", url: "https://www.who.int/health-topics/medical-devices" },
+    { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+    { label: "NIH — MedlinePlus health information", url: "https://medlineplus.gov/" },
   ],
 };
 
