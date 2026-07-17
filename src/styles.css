@@ -203,11 +203,11 @@
  */
 @media (min-width: 1024px) {
   :root {
-    --desktop-px-unit: 0.75px;
+    --desktop-px-unit: 0.70px;
   }
 
   html {
-    font-size: 12px;
+    font-size: 11.25px;
   }
 }
 
