@@ -127,7 +127,7 @@ export function CategoryLandingPage({
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {matches.map((p) => (
                 <Link
-                  key={p.name}
+                  key={productSlug(p)}
                   to="/products/$slug"
                   params={{ slug: productSlug(p) }}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[0_10px_30px_-20px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.2)]"

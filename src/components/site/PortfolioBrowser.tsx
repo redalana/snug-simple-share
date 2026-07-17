@@ -825,7 +825,7 @@ export function PortfolioBrowser() {
                   }
                 >
                   {pageItems.map((p) => (
-                    <ProductCard key={p.name} product={p} view={view} />
+                    <ProductCard key={productSlug(p)} product={p} view={view} />
                   ))}
                 </div>
 
