@@ -211,7 +211,7 @@ export function StrokeCareProgram() {
   return (
     <section
       id="stroke-ecosystem"
-      className="relative overflow-hidden bg-white py-28 lg:py-20"
+      className="relative overflow-hidden bg-white py-16 lg:py-20"
     >
       {/* Very subtle engineering grid */}
       <div

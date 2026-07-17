@@ -46,7 +46,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
 
 export function Statistics() {
   return (
-    <section id="statistics" className="bg-secondary/50 py-20 lg:py-20">
+    <section id="statistics" className="bg-secondary/50 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <div className="flex justify-center">

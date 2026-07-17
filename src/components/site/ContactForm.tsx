@@ -163,7 +163,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-white py-20 lg:py-20">
+    <section id="contact" className="relative overflow-hidden bg-white py-16 lg:py-20">
       {/* subtle healthcare identity — ECG line, <4% opacity, slow breathing */}
       <motion.svg
         aria-hidden

@@ -3,7 +3,7 @@ import { beyondCath } from "./data";
 
 export function FinalCTA() {
   return (
-    <section className="bg-white pb-20 pt-4 lg:pb-24">
+    <section className="bg-white pb-16 pt-4 lg:pb-24">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-2xl bg-[#111315] p-10 text-white lg:p-14">
           <div className="pointer-events-none absolute inset-0 opacity-25">
