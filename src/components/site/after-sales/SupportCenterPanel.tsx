@@ -13,14 +13,14 @@ export function SupportCenterPanel() {
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink via-[#0f131c] to-ink p-7 text-white shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)] lg:p-8">
       <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
       <div className="relative">
-        <div className="flex items-center gap-2 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/60">
+        <div className="flex items-center gap-2 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/60">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
           Support Center
         </div>
         <div className="mt-3 font-display text-2xl font-extrabold">
           We&apos;re here 24/7.
         </div>
-        <p className="mt-2 text-[calc(13 * var(--desktop-px-unit))] leading-relaxed text-white/60">
+        <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-white/60">
           Reach an engineer instantly through any channel below.
         </p>
 
@@ -54,15 +54,15 @@ export function SupportCenterPanel() {
             <div className="flex items-center gap-1.5 text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
               <Clock className="h-3 w-3" /> Support Hours
             </div>
-            <div className="mt-1.5 text-[calc(14 * var(--desktop-px-unit))] font-bold text-white">24 / 7</div>
-            <div className="text-[calc(11 * var(--desktop-px-unit))] text-white/50">Year-round coverage</div>
+            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">24 / 7</div>
+            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">Year-round coverage</div>
           </div>
           <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
             <div className="flex items-center gap-1.5 text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
               <Zap className="h-3 w-3" /> Avg Response
             </div>
-            <div className="mt-1.5 text-[calc(14 * var(--desktop-px-unit))] font-bold text-white">&lt; 4 hrs</div>
-            <div className="text-[calc(11 * var(--desktop-px-unit))] text-white/50">Regional SLA</div>
+            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">&lt; 4 hrs</div>
+            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">Regional SLA</div>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ export function SupportCenterPanel() {
           </div>
           <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {REASONS.map((r) => (
-              <li key={r} className="flex items-center gap-2 text-[calc(13 * var(--desktop-px-unit))] text-white/80">
+              <li key={r} className="flex items-center gap-2 text-[calc(13*var(--desktop-px-unit))] text-white/80">
                 <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
                   <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
                 </span>
@@ -97,13 +97,13 @@ export function SupportCenterPanel() {
             <div className="mt-3 font-display text-xl font-extrabold text-white">
               Need immediate help?
             </div>
-            <div className="mt-1 text-[calc(13 * var(--desktop-px-unit))] text-white/70">
+            <div className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-white/70">
               Call our engineer now — always on standby.
             </div>
             <div className="mt-5 space-y-2.5">
               <a
                 href="tel:+962799741318"
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-[calc(14 * var(--desktop-px-unit))] font-bold text-white shadow-[0_18px_40px_-16px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white shadow-[0_18px_40px_-16px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
               >
                 <Phone className="h-4 w-4" /> Call +962 79 974 1318
               </a>

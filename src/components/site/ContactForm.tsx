@@ -187,8 +187,8 @@ export function ContactForm() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
-          backgroundSize: "calc(44 * var(--desktop-px-unit)) calc(44 * var(--desktop-px-unit))",
+            "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+          backgroundSize: "calc(44*var(--desktop-px-unit)) calc(44*var(--desktop-px-unit))",
         }}
         initial={{ opacity: 0.025 }}
         animate={reduceMotion ? undefined : { opacity: [0.018, 0.03, 0.018] }}
@@ -201,7 +201,7 @@ export function ContactForm() {
           {/* extremely subtle healthcare wireframe behind left content (<4%) */}
           <svg
             aria-hidden
-            className="pointer-events-none absolute -left-6 -top-8 h-[calc(360 * var(--desktop-px-unit))] w-[calc(360 * var(--desktop-px-unit))] text-ink opacity-[0.03]"
+            className="pointer-events-none absolute -left-6 -top-8 h-[calc(360*var(--desktop-px-unit))] w-[calc(360*var(--desktop-px-unit))] text-ink opacity-[0.03]"
             viewBox="0 0 200 200"
             fill="none"
             stroke="currentColor"
@@ -222,7 +222,7 @@ export function ContactForm() {
               <br />
               <span className="text-primary">next project.</span>
             </h2>
-            <p className="mt-6 max-w-sm text-[calc(15 * var(--desktop-px-unit))] leading-[1.85] text-muted-foreground">
+            <p className="mt-6 max-w-sm text-[calc(15*var(--desktop-px-unit))] leading-[1.85] text-muted-foreground">
               Tell us about your specialty, clinical objectives or upcoming
               healthcare project, and our specialists will recommend the most
               suitable solution.
@@ -238,7 +238,7 @@ export function ContactForm() {
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary/15">
                     <t.icon className="h-4 w-4" strokeWidth={2} />
                   </span>
-                  <span className="text-[calc(13 * var(--desktop-px-unit))] font-medium leading-tight text-ink">{t.label}</span>
+                  <span className="text-[calc(13*var(--desktop-px-unit))] font-medium leading-tight text-ink">{t.label}</span>
                 </li>
               ))}
             </ul>
@@ -262,7 +262,7 @@ export function ContactForm() {
         >
           {/* I am a... */}
           <div className="space-y-2">
-            <Label htmlFor="customerType" className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">
+            <Label htmlFor="customerType" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
               I am a… <span className="text-primary">*</span>
             </Label>
             <Select
@@ -302,7 +302,7 @@ export function ContactForm() {
                       key={f.name}
                       className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
                     >
-                      <Label htmlFor={f.name} className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">{f.label}</Label>
+                      <Label htmlFor={f.name} className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">{f.label}</Label>
                       <Input
                         id={f.name}
                         className={inputCls}
@@ -319,7 +319,7 @@ export function ContactForm() {
 
           {/* I'm interested in */}
           <div className="mt-5 space-y-2">
-            <Label htmlFor="interest" className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">
+            <Label htmlFor="interest" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
               I&apos;m interested in <span className="text-primary">*</span>
             </Label>
             <Select
@@ -348,7 +348,7 @@ export function ContactForm() {
           {/* Shared fields */}
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">
+              <Label htmlFor="email" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
                 Email <span className="text-primary">*</span>
               </Label>
               <Input
@@ -364,7 +364,7 @@ export function ContactForm() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">
+              <Label htmlFor="whatsapp" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
                 WhatsApp <span className="text-primary">*</span>
               </Label>
               <PhoneField
@@ -380,7 +380,7 @@ export function ContactForm() {
           </div>
 
           <div className="mt-5 space-y-2">
-            <Label htmlFor="message" className="text-[calc(13 * var(--desktop-px-unit))] font-semibold text-ink">
+            <Label htmlFor="message" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
               Message <span className="text-primary">*</span>
             </Label>
             <Textarea

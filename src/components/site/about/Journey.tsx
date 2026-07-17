@@ -12,7 +12,7 @@ export function Journey() {
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               25 years of engineering healthcare progress.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
               From a single engineering office to a regional medical-technology partner trusted by leading hospitals across two continents.
             </p>
           </div>
@@ -20,9 +20,9 @@ export function Journey() {
 
         <div className="relative mt-20">
           {/* connecting line — stronger */}
-          <div className="pointer-events-none absolute left-10 right-10 top-[calc(104 * var(--desktop-px-unit))] hidden lg:block">
-            <div className="h-[calc(3 * var(--desktop-px-unit))] w-full rounded-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-            <div className="absolute inset-0 h-[calc(3 * var(--desktop-px-unit))] rounded-full bg-primary/30 blur-[calc(6 * var(--desktop-px-unit))]" />
+          <div className="pointer-events-none absolute left-10 right-10 top-[calc(104*var(--desktop-px-unit))] hidden lg:block">
+            <div className="h-[calc(3*var(--desktop-px-unit))] w-full rounded-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+            <div className="absolute inset-0 h-[calc(3*var(--desktop-px-unit))] rounded-full bg-primary/30 blur-[calc(6*var(--desktop-px-unit))]" />
           </div>
 
           <div className="grid gap-14 lg:grid-cols-6 lg:gap-6">
@@ -37,7 +37,7 @@ export function Journey() {
                   </div>
                   <div className="mt-8 font-display text-[1.75rem] font-extrabold tracking-tight text-primary">{j.year}</div>
                   <div className="mt-1 font-display text-lg font-bold text-ink">{j.title}</div>
-                  <p className="mt-3 max-w-[calc(240 * var(--desktop-px-unit))] text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                  <p className="mt-3 max-w-[calc(240*var(--desktop-px-unit))] text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                     {j.desc}
                   </p>
                 </div>

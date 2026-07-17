@@ -44,13 +44,13 @@ export function Engineering() {
             <div className="mt-1 font-display text-4xl font-extrabold text-foreground">
               98%
             </div>
-            <div className="text-[calc(12 * var(--desktop-px-unit))] text-muted-foreground">
+            <div className="text-[calc(12*var(--desktop-px-unit))] text-muted-foreground">
               Across MEA installations
             </div>
           </div>
         </div>
         <div>
-          <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
             Engineering Excellence
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-[3.25rem]">
@@ -58,7 +58,7 @@ export function Engineering() {
             <br />
             Your reliability.
           </h2>
-          <p className="mt-5 max-w-lg text-[calc(16 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-lg text-[calc(16*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
             A field team of 15+ dedicated biomedical engineers — trained
             directly by OEMs, backed by a regional operations center, and
             trusted by leading hospitals since 1999.
@@ -72,7 +72,7 @@ export function Engineering() {
                   <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <div className="text-[calc(15 * var(--desktop-px-unit))] font-bold text-foreground">{t}</div>
+                  <div className="text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">{t}</div>
                   <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                     {d}
                   </div>

@@ -9,10 +9,10 @@ export function FAQ() {
     <section className="bg-white py-20 lg:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-12 px-6 lg:grid-cols-[1fr_1.4fr_1fr] lg:items-start lg:gap-14 lg:px-10">
         <div>
-          <p className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
+          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
             Frequently Asked Questions
           </p>
-          <h2 className="mt-4 font-display text-[calc(34 * var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40 * var(--desktop-px-unit))]">
+          <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
             Everything You Need<br />To Know
           </h2>
         </div>
@@ -26,7 +26,7 @@ export function FAQ() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="flex w-full items-center justify-between gap-4 py-5 text-left"
                 >
-                  <span className="font-display text-[calc(15 * var(--desktop-px-unit))] font-semibold text-foreground">
+                  <span className="font-display text-[calc(15*var(--desktop-px-unit))] font-semibold text-foreground">
                     {f.q}
                   </span>
                   <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-foreground">

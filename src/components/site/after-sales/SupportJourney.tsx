@@ -8,10 +8,10 @@ export function SupportJourney() {
   return (
     <section className="relative overflow-hidden bg-[#0a0d14] py-24 text-white lg:py-20">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.04] to-transparent" />
-      <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-[calc(120 * var(--desktop-px-unit))]" />
+      <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="max-w-3xl">
-          <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
             Support Journey
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
@@ -23,7 +23,7 @@ export function SupportJourney() {
 
         <div ref={ref} className="relative mt-20">
           {/* animated horizontal rail */}
-          <div className="pointer-events-none absolute left-0 right-0 top-[calc(72 * var(--desktop-px-unit))] hidden h-[calc(2 * var(--desktop-px-unit))] overflow-hidden rounded-full bg-white/10 lg:block">
+          <div className="pointer-events-none absolute left-0 right-0 top-[calc(72*var(--desktop-px-unit))] hidden h-[calc(2*var(--desktop-px-unit))] overflow-hidden rounded-full bg-white/10 lg:block">
             <motion.div
               initial={{ width: "0%" }}
               animate={inView ? { width: "100%" } : {}}
@@ -42,7 +42,7 @@ export function SupportJourney() {
                 transition={{ duration: 0.55, delay: i * 0.09 }}
                 className="group relative"
               >
-                <div className="relative mx-auto flex h-[calc(144 * var(--desktop-px-unit))] w-[calc(144 * var(--desktop-px-unit))] items-center justify-center">
+                <div className="relative mx-auto flex h-[calc(144*var(--desktop-px-unit))] w-[calc(144*var(--desktop-px-unit))] items-center justify-center">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/25 via-primary/5 to-transparent blur-xl transition-opacity duration-300 group-hover:opacity-100 group-hover:blur-2xl" />
                   <div className="absolute inset-2 rounded-full border border-white/10 bg-[#0f131c] transition-colors group-hover:border-primary/40" />
                   <motion.div
@@ -50,7 +50,7 @@ export function SupportJourney() {
                     transition={{ duration: 3, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute inset-4 rounded-full border border-primary/25"
                   />
-                  <div className="relative flex h-[calc(104 * var(--desktop-px-unit))] w-[calc(104 * var(--desktop-px-unit))] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-transform duration-300 group-hover:scale-105">
+                  <div className="relative flex h-[calc(104*var(--desktop-px-unit))] w-[calc(104*var(--desktop-px-unit))] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-transform duration-300 group-hover:scale-105">
                     <s.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
                   </div>
                   <div className="absolute -top-2 right-2 rounded-full bg-primary px-2.5 py-0.5 text-[calc(10.5 * var(--desktop-px-unit))] font-black tracking-widest text-white shadow-[0_8px_20px_-6px_rgba(220,38,38,0.7)]">
@@ -58,7 +58,7 @@ export function SupportJourney() {
                   </div>
                 </div>
                 <div className="mt-7 text-center">
-                  <div className="font-display text-[calc(16 * var(--desktop-px-unit))] font-bold text-white">
+                  <div className="font-display text-[calc(16*var(--desktop-px-unit))] font-bold text-white">
                     {s.t}
                   </div>
                   <div className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/55">

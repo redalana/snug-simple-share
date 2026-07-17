@@ -35,14 +35,14 @@ export function Bento() {
                 <div className="pointer-events-none absolute -inset-1 rounded-3xl bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/25" />
                 <div className="relative flex h-full flex-col justify-end p-7 lg:p-8">
                   {b.featured && (
-                    <div className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/50 bg-primary/15 px-3 py-1 text-[calc(10 * var(--desktop-px-unit))] font-bold uppercase tracking-wider text-white backdrop-blur">
+                    <div className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/50 bg-primary/15 px-3 py-1 text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-white backdrop-blur">
                       <Sparkles className="h-3 w-3" /> Our Core
                     </div>
                   )}
                   <h3 className={`font-display font-extrabold leading-tight ${b.featured ? "text-2xl lg:text-[2rem]" : "text-xl lg:text-2xl"}`}>
                     {b.title}
                   </h3>
-                  <p className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15 * var(--desktop-px-unit))]" : "text-[calc(13.5 * var(--desktop-px-unit))]"}`}>
+                  <p className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15*var(--desktop-px-unit))]" : "text-[calc(13.5 * var(--desktop-px-unit))]"}`}>
                     {b.desc}
                   </p>
                 </div>

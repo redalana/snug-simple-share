@@ -36,7 +36,7 @@ function ReadinessPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[calc(96 * var(--desktop-px-unit))]">
+      <main id="main-content" className="pt-[calc(96*var(--desktop-px-unit))]">
         <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
           <Link
             to="/"

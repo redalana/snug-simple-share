@@ -82,7 +82,7 @@ export function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(calc(1100 * var(--desktop-px-unit)) calc(620 * var(--desktop-px-unit)) at 18% -12%, rgba(255,255,255,0.05), transparent 62%), radial-gradient(calc(900 * var(--desktop-px-unit)) calc(560 * var(--desktop-px-unit)) at 88% 8%, rgba(255,255,255,0.028), transparent 60%), linear-gradient(160deg, #181A1D 0%, #141619 42%, #111315 100%)",
+            "radial-gradient(calc(1100*var(--desktop-px-unit)) calc(620*var(--desktop-px-unit)) at 18% -12%, rgba(255,255,255,0.05), transparent 62%), radial-gradient(calc(900*var(--desktop-px-unit)) calc(560*var(--desktop-px-unit)) at 88% 8%, rgba(255,255,255,0.028), transparent 60%), linear-gradient(160deg, #181A1D 0%, #141619 42%, #111315 100%)",
         }}
       />
 
@@ -170,7 +170,7 @@ export function Footer() {
                   className="group transition-transform duration-300 hover:-translate-y-0.5"
                   style={{ ["--sc" as string]: color }}
                 >
-                  <Icon className="h-[calc(19 * var(--desktop-px-unit))] w-[calc(19 * var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
+                  <Icon className="h-[calc(19*var(--desktop-px-unit))] w-[calc(19*var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
                 </a>
               ))}
             </div>
@@ -178,7 +178,7 @@ export function Footer() {
 
           {COLS.map((col) => (
             <div key={col.title}>
-              <h4 className="font-display text-[calc(12 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
+              <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                 {col.title}
               </h4>
               <ul className="mt-4 space-y-2.5 text-[calc(13.5 * var(--desktop-px-unit))]">
@@ -204,7 +204,7 @@ export function Footer() {
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
                 <div className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-[calc(18 * var(--desktop-px-unit))] w-[calc(18 * var(--desktop-px-unit))] shrink-0 text-white/45" strokeWidth={1.5} />
+                  <Icon className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45" strokeWidth={1.5} />
                   <div className="min-w-0">
                     <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}

@@ -58,7 +58,7 @@ export function CountrySelect({
               <>
                 <FlagImage
                   iso2={current.iso2}
-                  className="h-4 w-6 shrink-0 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm"
+                  className="h-4 w-6 shrink-0 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
                 />
                 <span className="truncate font-medium text-ink">{current.name}</span>
               </>
@@ -93,7 +93,7 @@ export function CountrySelect({
             />
           </div>
         </div>
-        <div className="max-h-[calc(260 * var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
+        <div className="max-h-[calc(260*var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
           {filtered.length === 0 ? (
             <p className="px-3 py-6 text-center text-sm text-muted-foreground">
               No countries found
@@ -116,7 +116,7 @@ export function CountrySelect({
                 >
                   <FlagImage
                     iso2={c.iso2}
-                    className="h-4 w-6 shrink-0 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm"
+                    className="h-4 w-6 shrink-0 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
                   />
                   <span className="flex-1 truncate text-ink">{c.name}</span>
 

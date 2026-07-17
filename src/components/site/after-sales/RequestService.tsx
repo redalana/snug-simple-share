@@ -92,7 +92,7 @@ export function RequestService() {
       <div className="pointer-events-none absolute -top-32 left-1/2 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <div className="relative mx-auto max-w-[80rem] px-6 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
             Request Service
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl">
@@ -100,7 +100,7 @@ export function RequestService() {
             <br />
             We&apos;ll take care of the rest.
           </h2>
-          <p className="mt-5 text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
             Submit a request and our support team will respond within one
             business hour — 24/7 for critical cases.
           </p>
@@ -111,7 +111,7 @@ export function RequestService() {
 
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card/80 p-8 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.25)] backdrop-blur-xl lg:p-10">
             {submitted ? (
-              <div className="flex min-h-[calc(420 * var(--desktop-px-unit))] flex-col items-center justify-center text-center">
+              <div className="flex min-h-[calc(420*var(--desktop-px-unit))] flex-col items-center justify-center text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500">
                   <CheckCircle2 className="h-8 w-8" strokeWidth={2} />
                 </div>
@@ -155,7 +155,7 @@ export function RequestService() {
                     className={`${inputCls} ${errors.name ? errCls : ""}`}
                     aria-invalid={!!errors.name}
                   />
-                  {errors.name && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.name}</span>}
+                  {errors.name && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.name}</span>}
                 </label>
 
                 <label className="block">
@@ -169,7 +169,7 @@ export function RequestService() {
                       hasError={!!errors.phone}
                     />
                   </div>
-                  {errors.phone && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.phone}</span>}
+                  {errors.phone && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.phone}</span>}
                 </label>
 
                 <label className="block">
@@ -187,7 +187,7 @@ export function RequestService() {
                     className={`${inputCls} ${errors.email ? errCls : ""}`}
                     aria-invalid={!!errors.email}
                   />
-                  {errors.email && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.email}</span>}
+                  {errors.email && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.email}</span>}
                 </label>
 
                 <label className="block">
@@ -204,7 +204,7 @@ export function RequestService() {
                     className={`${inputCls} ${errors.facility ? errCls : ""}`}
                     aria-invalid={!!errors.facility}
                   />
-                  {errors.facility && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.facility}</span>}
+                  {errors.facility && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.facility}</span>}
                 </label>
 
                 <label className="block">
@@ -225,7 +225,7 @@ export function RequestService() {
                       <option key={e.name}>{e.name}</option>
                     ))}
                   </select>
-                  {errors.equipment && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.equipment}</span>}
+                  {errors.equipment && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.equipment}</span>}
                 </label>
 
                 <label className="block">
@@ -253,7 +253,7 @@ export function RequestService() {
                     className={`mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 ${errors.description ? errCls : ""}`}
                     aria-invalid={!!errors.description}
                   />
-                  {errors.description && <span className="mt-1.5 block text-[calc(12 * var(--desktop-px-unit))] font-medium text-destructive">{errors.description}</span>}
+                  {errors.description && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.description}</span>}
                 </label>
 
                 <div className="block sm:col-span-2">

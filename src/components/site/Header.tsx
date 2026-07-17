@@ -42,14 +42,14 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[calc(56 * var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+        <div className="mx-auto flex h-[calc(56*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
           <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.0]">
             <Logo />
           </Link>
 
           {/* Search — centered hero element of the header */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[calc(400 * var(--desktop-px-unit))] lg:w-[calc(420 * var(--desktop-px-unit))]">
+            <div className="w-[calc(400*var(--desktop-px-unit))] lg:w-[calc(420*var(--desktop-px-unit))]">
               <SearchField />
             </div>
           </div>
@@ -58,8 +58,8 @@ export function Header() {
           <div className="hidden shrink-0 items-center lg:flex">
             <LanguageSelector />
 
-            {/* Language → Social : calc(28 * var(--desktop-px-unit)) */}
-            <div className="ml-6 flex items-center gap-[calc(14 * var(--desktop-px-unit))]">
+            {/* Language → Social : calc(28*var(--desktop-px-unit)) */}
+            <div className="ml-6 flex items-center gap-[calc(14*var(--desktop-px-unit))]">
               {SOCIALS.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
@@ -79,11 +79,11 @@ export function Header() {
               </a>
             </div>
 
-            {/* Social → Button : calc(28 * var(--desktop-px-unit)) */}
+            {/* Social → Button : calc(28*var(--desktop-px-unit)) */}
             <Link
               to="/contact"
               hash="contact-form"
-              className="ml-6 inline-flex h-[calc(40 * var(--desktop-px-unit))] shrink-0 items-center rounded-full bg-primary px-6 text-[calc(13 * var(--desktop-px-unit))] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="ml-6 inline-flex h-[calc(40*var(--desktop-px-unit))] shrink-0 items-center rounded-full bg-primary px-6 text-[calc(13*var(--desktop-px-unit))] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
             </Link>
@@ -111,7 +111,7 @@ export function Header() {
 
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[calc(10 * var(--desktop-px-unit))] px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[calc(10*var(--desktop-px-unit))] px-6 lg:px-10">
             {NAV.map((item) => {
               const active = isActive(item.href);
               const isContact = item.label === "Contact Us";
@@ -125,7 +125,7 @@ export function Header() {
                 <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-4 py-2 text-[calc(15 * var(--desktop-px-unit))] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
+                    className={`flex items-center gap-1 px-4 py-2 text-[calc(15*var(--desktop-px-unit))] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
@@ -203,7 +203,7 @@ export function Header() {
                       <a
                         href="/brands"
                         onClick={() => setOpen(false)}
-                        className="flex items-center gap-2 text-[calc(16 * var(--desktop-px-unit))] font-medium text-foreground/80 hover:text-primary"
+                        className="flex items-center gap-2 text-[calc(16*var(--desktop-px-unit))] font-medium text-foreground/80 hover:text-primary"
                       >
                         <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
                         All Brands
@@ -218,11 +218,11 @@ export function Header() {
                           >
                             <BrandMark item={b} />
                             <span
-                              className="font-display text-[calc(13 * var(--desktop-px-unit))] font-extrabold leading-tight tracking-tight"
+                              className="font-display text-[calc(13*var(--desktop-px-unit))] font-extrabold leading-tight tracking-tight"
                               style={{ color: b.color }}
                             >
                               {b.name}
-                              {b.sub && <span className="ml-1 text-[calc(9 * var(--desktop-px-unit))] uppercase opacity-75">{b.sub}</span>}
+                              {b.sub && <span className="ml-1 text-[calc(9*var(--desktop-px-unit))] uppercase opacity-75">{b.sub}</span>}
                             </span>
                           </a>
                         ))}
@@ -245,7 +245,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-4 text-[calc(16 * var(--desktop-px-unit))] transition-colors last:border-0 ${
+                    className={`block border-b border-border/60 py-4 text-[calc(16*var(--desktop-px-unit))] transition-colors last:border-0 ${
                       item.label === "Contact Us"
                         ? "font-bold text-primary hover:text-primary-dark"
                         : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
@@ -258,7 +258,7 @@ export function Header() {
 
               {/* Mobile language selector */}
               <div className="mt-4 border-t border-border/60 pt-4">
-                <div className="mb-2 text-[calc(11 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="mb-2 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   Language
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -266,7 +266,7 @@ export function Header() {
                     <button
                       key={l.code}
                       type="button"
-                      className="inline-flex min-h-[calc(48 * var(--desktop-px-unit))] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
+                      className="inline-flex min-h-[calc(48*var(--desktop-px-unit))] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
                     >
                       <span aria-hidden className="text-base leading-none">{l.flag}</span>
                       {l.label}
@@ -299,7 +299,7 @@ export function Header() {
                   to="/contact"
                   hash="contact-form"
                   onClick={() => setOpen(false)}
-                  className="inline-flex min-h-[calc(48 * var(--desktop-px-unit))] items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground"
+                  className="inline-flex min-h-[calc(48*var(--desktop-px-unit))] items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground"
                 >
                   Request a Quote
                 </Link>

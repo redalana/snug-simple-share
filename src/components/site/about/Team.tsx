@@ -10,13 +10,13 @@ export function Team() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <Reveal>
             <div className="relative overflow-hidden rounded-3xl shadow-[0_40px_100px_-30px_rgba(0,0,0,0.45)]">
-              <img src={teamImg} alt="AbuFarha engineering team" className="h-full w-full min-h-[calc(600 * var(--desktop-px-unit))] object-cover" loading="lazy" />
+              <img src={teamImg} alt="AbuFarha engineering team" className="h-full w-full min-h-[calc(600*var(--desktop-px-unit))] object-cover" loading="lazy" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent p-8 text-white">
-                <div className="text-[calc(11 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">Our Engineering Team</div>
+                <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">Our Engineering Team</div>
                 <div className="mt-2 font-display text-[1.6rem] font-extrabold">Certified engineers, based regionally.</div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {TEAM_BADGES.map(b => (
-                    <span key={b} className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[calc(11 * var(--desktop-px-unit))] font-semibold text-white backdrop-blur">
+                    <span key={b} className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold text-white backdrop-blur">
                       <BadgeCheck className="h-3 w-3 text-primary" /> {b}
                     </span>
                   ))}
@@ -29,7 +29,7 @@ export function Team() {
             <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               People who install it, train on it and stand behind it.
             </h2>
-            <p className="mt-4 text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
               AbuFarha's people are the reason hospitals stay with us long after handover.
               Biomedical engineers, application specialists, clinical trainers and healthcare
               consultants work as one multi-disciplinary team — collaborating with doctors,

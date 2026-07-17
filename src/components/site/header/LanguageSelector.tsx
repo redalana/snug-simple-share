@@ -20,7 +20,7 @@ export function LanguageSelector() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 text-[calc(15 * var(--desktop-px-unit))] font-medium text-foreground/75 transition-colors hover:text-primary"
+        className="flex items-center gap-1.5 text-[calc(15*var(--desktop-px-unit))] font-medium text-foreground/75 transition-colors hover:text-primary"
       >
         <span aria-hidden className="text-base leading-none">{lang.flag}</span>
         {lang.label}
@@ -35,7 +35,7 @@ export function LanguageSelector() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full z-20 mt-2 w-44 rounded-[calc(14 * var(--desktop-px-unit))] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
+            className="absolute right-0 top-full z-20 mt-2 w-44 rounded-[calc(14*var(--desktop-px-unit))] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
           >
             {LANGUAGES.map((l) => (
               <button
@@ -44,7 +44,7 @@ export function LanguageSelector() {
                   setLang(l);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center gap-2.5 rounded-[calc(10 * var(--desktop-px-unit))] px-3 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
+                className={`flex w-full items-center gap-2.5 rounded-[calc(10*var(--desktop-px-unit))] px-3 py-2.5 text-left text-sm font-medium transition-colors duration-200 hover:bg-muted ${
                   l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >

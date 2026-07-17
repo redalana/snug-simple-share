@@ -15,7 +15,7 @@ export function FinalCTA() {
             <h2 className="mt-5 font-display text-[2.25rem] font-extrabold leading-[1.05] sm:text-[3rem]">
               Let's Build Better Healthcare <span className="text-primary">Together.</span>
             </h2>
-            <p className="mt-5 max-w-xl text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-white/70">
+            <p className="mt-5 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-white/70">
               We don't just sell equipment — we become your long-term healthcare
               engineering partner. From planning and installation to clinical
               training and lifetime technical support, AbuFarha stays with your
@@ -24,11 +24,11 @@ export function FinalCTA() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/contact"
-                className="inline-flex h-[calc(50 * var(--desktop-px-unit))] items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark">
+                className="inline-flex h-[calc(50*var(--desktop-px-unit))] items-center gap-2 rounded-full bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition hover:-translate-y-0.5 hover:bg-primary-dark">
                 <Phone className="h-4 w-4" /> Talk to an Engineer
               </Link>
               <Link to="/contact"
-                className="inline-flex h-[calc(50 * var(--desktop-px-unit))] items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">
+                className="inline-flex h-[calc(50*var(--desktop-px-unit))] items-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">
                 Request Consultation <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

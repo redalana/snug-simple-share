@@ -24,7 +24,7 @@ export function Logo({ className = "", light = false }: { className?: string; li
           Abu<span className="text-primary">Farha</span>
         </div>
         <div
-          className={`text-[calc(10 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}
+          className={`text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}
         >
           Medical Equipment
         </div>

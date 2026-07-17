@@ -60,11 +60,11 @@ function StatCard({
       <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
         <Icon className="h-5 w-5" strokeWidth={1.8} />
       </div>
-      <div className="mt-4 font-display text-[calc(32 * var(--desktop-px-unit))] font-extrabold leading-none text-foreground">
+      <div className="mt-4 font-display text-[calc(32*var(--desktop-px-unit))] font-extrabold leading-none text-foreground">
         {n}
         <span className="ml-0.5 text-primary">+</span>
       </div>
-      <div className="mt-2 text-[calc(12 * var(--desktop-px-unit))] font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="mt-2 text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-wide text-muted-foreground">
         {label}
       </div>
     </motion.div>
@@ -128,7 +128,7 @@ export function GlobalPresence() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(calc(1200 * var(--desktop-px-unit)) calc(600 * var(--desktop-px-unit)) at 85% 10%, rgba(225,29,46,0.06), transparent 60%), radial-gradient(calc(900 * var(--desktop-px-unit)) calc(500 * var(--desktop-px-unit)) at 10% 80%, rgba(15,23,42,0.05), transparent 60%)",
+            "radial-gradient(calc(1200*var(--desktop-px-unit)) calc(600*var(--desktop-px-unit)) at 85% 10%, rgba(225,29,46,0.06), transparent 60%), radial-gradient(calc(900*var(--desktop-px-unit)) calc(500*var(--desktop-px-unit)) at 10% 80%, rgba(15,23,42,0.05), transparent 60%)",
         }}
       />
       {/* medical blueprint grid */}
@@ -137,8 +137,8 @@ export function GlobalPresence() {
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(15,23,42,0.04) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, rgba(15,23,42,0.04) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
-          backgroundSize: "calc(56 * var(--desktop-px-unit)) calc(56 * var(--desktop-px-unit))",
+            "linear-gradient(to right, rgba(15,23,42,0.04) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, rgba(15,23,42,0.04) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+          backgroundSize: "calc(56*var(--desktop-px-unit)) calc(56*var(--desktop-px-unit))",
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
         }}
       />
@@ -148,7 +148,7 @@ export function GlobalPresence() {
         className="pointer-events-none absolute bottom-16 left-8 h-40 w-40 opacity-40"
         style={{
           backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) calc(1.2 * var(--desktop-px-unit)), transparent calc(1.2 * var(--desktop-px-unit)))",
-          backgroundSize: "calc(14 * var(--desktop-px-unit)) calc(14 * var(--desktop-px-unit))",
+          backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
         }}
       />
 
@@ -161,7 +161,7 @@ export function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-[calc(12 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.28em] text-primary"
+              className="text-[calc(12*var(--desktop-px-unit))] font-bold uppercase tracking-[0.28em] text-primary"
             >
               Global Footprint
             </motion.p>
@@ -170,7 +170,7 @@ export function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.05 }}
-              className="mt-4 font-display text-[calc(40 * var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-[-0.02em] text-foreground sm:text-[calc(52 * var(--desktop-px-unit))]"
+              className="mt-4 font-display text-[calc(40*var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-[-0.02em] text-foreground sm:text-[calc(52*var(--desktop-px-unit))]"
             >
               Delivering Excellence
               <br />
@@ -181,7 +181,7 @@ export function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="mt-5 max-w-md text-[calc(15 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground"
+              className="mt-5 max-w-md text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground"
             >
               We deliver <span className="font-semibold text-primary">turnkey</span> medical
               departments, advanced imaging systems and biomedical engineering solutions across
@@ -207,7 +207,7 @@ export function GlobalPresence() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-[calc(15 * var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_20px_45px_-16px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:-translate-y-0.5"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-[calc(15*var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_20px_45px_-16px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:-translate-y-0.5"
             >
               Explore Global Projects
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -280,7 +280,7 @@ export function GlobalPresence() {
                     strokeWidth={isHov ? 1.2 : 0.8}
                     strokeLinejoin="round"
                     style={{
-                      filter: isHov ? "drop-shadow(0 0 calc(4 * var(--desktop-px-unit)) rgba(225,29,46,0.55))" : undefined,
+                      filter: isHov ? "drop-shadow(0 0 calc(4*var(--desktop-px-unit)) rgba(225,29,46,0.55))" : undefined,
                       transition: "all 0.3s ease",
                     }}
                   />
@@ -376,7 +376,7 @@ export function GlobalPresence() {
                   className="absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
                   style={{ left: `${(p.x / MAP_W) * 100}%`, top: `${(p.y / MAP_H) * 100}%` }}
                 >
-                  <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[calc(11 * var(--desktop-px-unit))] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
+                  <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[calc(11*var(--desktop-px-unit))] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
                     {r.name}
                   </span>
                   {/* invisible hit-area */}
@@ -393,7 +393,7 @@ export function GlobalPresence() {
               <div className="relative">
                 <span className="absolute inset-0 -m-4 animate-ping rounded-full bg-primary/20" />
                 <span className="absolute inset-0 -m-2 rounded-full bg-white/70 blur-xl" />
-                <div className="relative flex h-[calc(92 * var(--desktop-px-unit))] w-[calc(92 * var(--desktop-px-unit))] flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_45px_-12px_rgba(15,23,42,0.35)] ring-1 ring-primary/25">
+                <div className="relative flex h-[calc(92*var(--desktop-px-unit))] w-[calc(92*var(--desktop-px-unit))] flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_45px_-12px_rgba(15,23,42,0.35)] ring-1 ring-primary/25">
                   {/* heart-pulse line */}
                   <svg viewBox="0 0 60 20" className="h-3 w-14 text-primary">
                     <path
@@ -405,7 +405,7 @@ export function GlobalPresence() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <div className="mt-0.5 font-display text-[calc(13 * var(--desktop-px-unit))] font-extrabold leading-none tracking-tight text-foreground">
+                  <div className="mt-0.5 font-display text-[calc(13*var(--desktop-px-unit))] font-extrabold leading-none tracking-tight text-foreground">
                     Abu<span className="text-primary">Farha</span>
                   </div>
                   <div className="mt-0.5 text-[calc(6.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-muted-foreground">
@@ -413,7 +413,7 @@ export function GlobalPresence() {
                   </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[calc(11 * var(--desktop-px-unit))] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
+              <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-white/90 px-2 py-0.5 text-[calc(11*var(--desktop-px-unit))] font-bold text-foreground shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
                 Jordan
               </div>
             </div>
@@ -422,18 +422,18 @@ export function GlobalPresence() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.name}
-                initial={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(calc(6 * var(--desktop-px-unit)))" }}
-                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(calc(0 * var(--desktop-px-unit)))" }}
-                exit={{ opacity: 0, y: -8, scale: 0.98, filter: "blur(calc(4 * var(--desktop-px-unit)))" }}
+                initial={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(calc(6*var(--desktop-px-unit)))" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(calc(0*var(--desktop-px-unit)))" }}
+                exit={{ opacity: 0, y: -8, scale: 0.98, filter: "blur(calc(4*var(--desktop-px-unit)))" }}
                 transition={{ duration: 0.32, ease: "easeOut" }}
-                className="absolute bottom-4 right-4 z-30 w-[calc(270 * var(--desktop-px-unit))] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_70px_-25px_rgba(15,23,42,0.4)] ring-1 ring-black/[0.06]"
+                className="absolute bottom-4 right-4 z-30 w-[calc(270*var(--desktop-px-unit))] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_70px_-25px_rgba(15,23,42,0.4)] ring-1 ring-black/[0.06]"
               >
                 <div className="flex items-center gap-3">
                   <span className="grid h-10 w-10 place-items-center rounded-lg bg-neutral-100 text-xl leading-none">
                     {active.flag}
                   </span>
                   <div className="min-w-0">
-                    <div className="font-display text-[calc(16 * var(--desktop-px-unit))] font-extrabold text-foreground">
+                    <div className="font-display text-[calc(16*var(--desktop-px-unit))] font-extrabold text-foreground">
                       {active.name}
                     </div>
                     {active.note && (
@@ -498,10 +498,10 @@ export function GlobalPresence() {
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
                   <f.icon className="h-5 w-5" strokeWidth={1.8} />
                 </div>
-                <div className="mt-3 font-display text-[calc(14 * var(--desktop-px-unit))] font-extrabold text-foreground">
+                <div className="mt-3 font-display text-[calc(14*var(--desktop-px-unit))] font-extrabold text-foreground">
                   {f.title}
                 </div>
-                <p className="mt-1.5 text-[calc(12 * var(--desktop-px-unit))] leading-snug text-muted-foreground">{f.copy}</p>
+                <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">{f.copy}</p>
               </motion.div>
             ))}
           </div>

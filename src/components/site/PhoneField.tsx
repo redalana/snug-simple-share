@@ -163,7 +163,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
               aria-label={`Selected country: ${country.name} (+${dialCode}). Change country`}
               className="flex shrink-0 items-center gap-2 border-r border-border/80 px-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-secondary/60 focus-visible:outline-none focus-visible:bg-secondary/70"
             >
-              <FlagImage iso2={country.iso2} className="h-4 w-6 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm" />
+              <FlagImage iso2={country.iso2} className="h-4 w-6 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm" />
               <span className="tabular-nums text-muted-foreground">+{dialCode}</span>
               <ChevronDown
                 className={cn(
@@ -176,7 +176,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
         <PopoverContent
           align="start"
           sideOffset={6}
-          className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280 * var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+          className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
 
@@ -204,7 +204,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
                   </div>
                 </div>
 
-                <div ref={listRef} className="max-h-[calc(280 * var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
+                <div ref={listRef} className="max-h-[calc(280*var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
                   {filtered.length === 0 ? (
                     <p className="px-3 py-6 text-center text-sm text-muted-foreground">
                       No countries found
@@ -231,7 +231,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
                           >
                             <FlagImage
                               iso2={c.iso2}
-                              className="h-4 w-6 shrink-0 rounded-[calc(3 * var(--desktop-px-unit))] object-cover shadow-sm"
+                              className="h-4 w-6 shrink-0 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
                             />
                             <span className="flex-1 truncate text-ink">{c.name}</span>
                             <span className="tabular-nums text-xs text-muted-foreground">

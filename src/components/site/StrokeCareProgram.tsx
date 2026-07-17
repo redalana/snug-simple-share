@@ -171,13 +171,13 @@ function NodePanel({
           } ${isPrimary ? "h-12 w-12 border-primary/25" : "h-9 w-9 border-border"}`}
         >
           <Icon
-            className={isPrimary ? "h-[calc(22 * var(--desktop-px-unit))] w-[calc(22 * var(--desktop-px-unit))]" : "h-[calc(17 * var(--desktop-px-unit))] w-[calc(17 * var(--desktop-px-unit))]"}
+            className={isPrimary ? "h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]" : "h-[calc(17*var(--desktop-px-unit))] w-[calc(17*var(--desktop-px-unit))]"}
             strokeWidth={1.75}
           />
         </span>
         <span
           className={`font-bold uppercase tracking-[0.24em] text-primary ${
-            isPrimary ? "text-[calc(12 * var(--desktop-px-unit))]" : "text-[calc(10.5 * var(--desktop-px-unit))] opacity-80"
+            isPrimary ? "text-[calc(12*var(--desktop-px-unit))]" : "text-[calc(10.5 * var(--desktop-px-unit))] opacity-80"
           }`}
         >
           {node.num} · {node.category}
@@ -193,7 +193,7 @@ function NodePanel({
       <p
         className={`mt-3 leading-[1.65] ${
           isPrimary
-            ? "text-[calc(17 * var(--desktop-px-unit))] text-muted-foreground"
+            ? "text-[calc(17*var(--desktop-px-unit))] text-muted-foreground"
             : "text-[calc(14.5 * var(--desktop-px-unit))] text-muted-foreground/85"
         } ${isLeft ? "lg:ml-auto" : ""} max-w-xs`}
       >
@@ -219,8 +219,8 @@ export function StrokeCareProgram() {
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1 * var(--desktop-px-unit)), transparent calc(1 * var(--desktop-px-unit)))",
-          backgroundSize: "calc(72 * var(--desktop-px-unit)) calc(72 * var(--desktop-px-unit))",
+            "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+          backgroundSize: "calc(72*var(--desktop-px-unit)) calc(72*var(--desktop-px-unit))",
           maskImage:
             "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
           WebkitMaskImage:
@@ -248,7 +248,7 @@ export function StrokeCareProgram() {
               Not a Single Device.
             </span>
           </h2>
-          <p className="mx-auto mt-9 max-w-2xl text-[calc(21 * var(--desktop-px-unit))] leading-[1.8] text-muted-foreground">
+          <p className="mx-auto mt-9 max-w-2xl text-[calc(21*var(--desktop-px-unit))] leading-[1.8] text-muted-foreground">
             When a cerebral artery is blocked, brain tissue is lost every minute
             until blood flow is restored. Restoring it in time depends on
             precision imaging, rapid clinical decisions, biomedical engineering,
@@ -436,7 +436,7 @@ export function StrokeCareProgram() {
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-[calc(13 * var(--desktop-px-unit))] font-bold text-ink shadow-[0_10px_30px_-14px_rgba(15,23,42,0.5)] backdrop-blur-sm">
+              <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-[calc(13*var(--desktop-px-unit))] font-bold text-ink shadow-[0_10px_30px_-14px_rgba(15,23,42,0.5)] backdrop-blur-sm">
                 <MapPin className="h-4 w-4 text-primary" strokeWidth={2} />
                 Amman, Jordan — AbuFarha Headquarters
               </div>
@@ -444,13 +444,13 @@ export function StrokeCareProgram() {
 
             {/* Right — invitation content */}
             <div className="px-8 py-14 sm:px-12 lg:py-16">
-              <span className="text-[calc(13 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.34em] text-primary">
+              <span className="text-[calc(13*var(--desktop-px-unit))] font-bold uppercase tracking-[0.34em] text-primary">
                 A Personal Invitation
               </span>
               <h3 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3rem]">
                 Visit Before You Invest.
               </h3>
-              <p className="mt-6 max-w-xl text-[calc(18 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
+              <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
                 We invite healthcare leaders, physicians and biomedical
                 engineers to experience firsthand how comprehensive stroke
                 programs are planned, engineered, implemented and supported
@@ -458,14 +458,14 @@ export function StrokeCareProgram() {
                 investments.
               </p>
 
-              <p className="mt-10 text-[calc(12 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.3em] text-ink/50">
+              <p className="mt-10 text-[calc(12*var(--desktop-px-unit))] font-bold uppercase tracking-[0.3em] text-ink/50">
                 During your visit you will
               </p>
               <ul className="mt-5 grid gap-x-8 gap-y-3.5 text-left sm:grid-cols-2">
                 {VISIT_POINTS.map((point) => (
                   <li
                     key={point}
-                    className="flex items-start gap-3 text-[calc(15 * var(--desktop-px-unit))] font-medium leading-snug text-ink"
+                    className="flex items-start gap-3 text-[calc(15*var(--desktop-px-unit))] font-medium leading-snug text-ink"
                   >
                     <span
                       aria-hidden
@@ -484,14 +484,14 @@ export function StrokeCareProgram() {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="/contact"
-                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[calc(15 * var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[calc(15*var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                 >
                   Schedule Your Clinical Visit
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
                 <a
                   href="/contact"
-                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-[calc(15 * var(--desktop-px-unit))] font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-[calc(15*var(--desktop-px-unit))] font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
                 >
                   Talk With Our Stroke Program Team
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

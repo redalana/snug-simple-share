@@ -31,7 +31,7 @@ function StatItem({ stat }: { stat: Stat }) {
         </span>
         <span className="text-primary">{stat.suffix}</span>
       </div>
-      <div className="mt-2 text-[calc(13 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
+      <div className="mt-2 text-[calc(13*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
         {stat.label}
       </div>
     </div>
@@ -101,7 +101,7 @@ export function WhyAbuFarha() {
             Hospitals stay with AbuFarha
             <span className="block text-primary">long after installation.</span>
           </h2>
-          <p className="mt-6 max-w-xl text-[calc(18 * var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+          <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
             Anyone can deliver a machine. AbuFarha delivers an engineered,
             supported and accountable partnership for the entire life of your
             technology.
@@ -120,9 +120,9 @@ export function WhyAbuFarha() {
                 transition={{ duration: 0.6, ease: EASE, delay: 0.06 * (i % 3) }}
                 className="group relative border-t border-border/70 pt-7"
               >
-                <span className="absolute -top-px left-0 h-[calc(2 * var(--desktop-px-unit))] w-12 bg-primary transition-all duration-300 group-hover:w-20" />
+                <span className="absolute -top-px left-0 h-[calc(2*var(--desktop-px-unit))] w-12 bg-primary transition-all duration-300 group-hover:w-20" />
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-white text-primary shadow-[0_12px_30px_-20px_rgba(15,23,42,0.5)]">
-                  <Icon className="h-[calc(22 * var(--desktop-px-unit))] w-[calc(22 * var(--desktop-px-unit))]" strokeWidth={1.75} />
+                  <Icon className="h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]" strokeWidth={1.75} />
                 </span>
                 <h3 className="mt-6 font-display text-[1.4rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                   {pillar.title}
