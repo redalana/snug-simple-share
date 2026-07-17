@@ -111,7 +111,7 @@ export function Header() {
 
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[10px] px-6 lg:px-10">
             {NAV.map((item) => {
               const active = isActive(item.href);
               const isContact = item.label === "Contact Us";
@@ -125,7 +125,7 @@ export function Header() {
                 <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-2.5 text-[16px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
+                    className={`flex items-center gap-1 px-4 py-2 text-[15px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
