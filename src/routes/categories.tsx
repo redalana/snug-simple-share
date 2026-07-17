@@ -14,6 +14,7 @@ import solDexa from "@/assets/sol-dexa.jpg";
 import solEswl from "@/assets/sol-eswl.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 const CATEGORIES = [
   { name: "Cath Lab", count: "42 systems", image: heroCathlab },
@@ -46,8 +47,12 @@ export const Route = createFileRoute("/categories")({
           "Browse every category of certified medical systems available through AbuFarha Medical.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/categories" },
+      { property: "og:image", content: OG_IMAGES.categories },
+      { name: "twitter:image", content: OG_IMAGES.categories },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL + "/categories" }],
   }),
   component: CategoriesPage,
 });

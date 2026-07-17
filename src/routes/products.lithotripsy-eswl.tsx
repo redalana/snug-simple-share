@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/lithotripsy-eswl")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/products/lithotripsy-eswl")({
           "ESWL platforms with urology-focused clinical training and long-term service coverage.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory["lithotripsy-eswl"] },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory["lithotripsy-eswl"] },
     ],
     links: [{ rel: "canonical", href: "/products/lithotripsy-eswl" }],
   }),

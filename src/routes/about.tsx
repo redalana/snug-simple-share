@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { AboutPage } from "@/components/site/AboutPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 const TITLE = "About AbuFarha | Medical Equipment Engineering Since 1999";
 const DESC =
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.about },
+      { name: "twitter:image", content: OG_IMAGES.about },
       { property: "og:url", content: "/about" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },

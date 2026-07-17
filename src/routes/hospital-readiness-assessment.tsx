@@ -4,6 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ReadinessAssessment } from "@/components/site/ReadinessAssessment";
 import { FinalCTA } from "@/components/site/FinalCTA";
+import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/hospital-readiness-assessment")({
   head: () => ({
@@ -21,8 +22,12 @@ export const Route = createFileRoute("/hospital-readiness-assessment")({
           "A structured facility, clinical and operational readiness checklist so hospitals avoid late modifications and install advanced medical technology on schedule.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/hospital-readiness-assessment" },
+      { property: "og:image", content: OG_IMAGES.hospitalReadiness },
+      { name: "twitter:image", content: OG_IMAGES.hospitalReadiness },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL + "/hospital-readiness-assessment" }],
   }),
   component: ReadinessPage,
 });

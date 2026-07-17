@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 const NAMED_CATEGORIES = [
   "Cath Lab Systems",
@@ -29,6 +30,9 @@ export const Route = createFileRoute("/products/others")({
           "Ultrasound, OR, women's healthcare and specialty systems with installation, training and lifecycle support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory.others },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory.others },
     ],
     links: [{ rel: "canonical", href: "/products/others" }],
   }),

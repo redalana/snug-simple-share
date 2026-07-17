@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/mri-scanners")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/products/mri-scanners")({
           "Whole-body MRI systems with helium logistics, RF/shield planning, clinical training and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory["mri-scanners"] },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory["mri-scanners"] },
     ],
     links: [{ rel: "canonical", href: "/products/mri-scanners" }],
   }),

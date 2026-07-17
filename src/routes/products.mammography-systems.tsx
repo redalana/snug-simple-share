@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/mammography-systems")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/products/mammography-systems")({
           "Tomosynthesis mammography with integrated biopsy, clinical training and QA support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory["mammography-systems"] },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory["mammography-systems"] },
     ],
     links: [{ rel: "canonical", href: "/products/mammography-systems" }],
   }),

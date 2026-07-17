@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CategoryLandingPage } from "@/components/site/CategoryLandingPage";
+import { OG_IMAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/cath-lab")({
   head: () => ({
@@ -17,6 +18,9 @@ export const Route = createFileRoute("/products/cath-lab")({
           "Interventional cardiology and neurovascular cath lab systems with installation, training and lifetime support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGES.productCategory["cath-lab"] },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGES.productCategory["cath-lab"] },
     ],
     links: [{ rel: "canonical", href: "/products/cath-lab" }],
   }),
