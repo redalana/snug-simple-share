@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
-import { WhyAbuFarha } from "../WhyAbuFarha";
+import { WhyAbuFarhaProjects } from "./WhyAbuFarhaProjects";
 import {
   COUNTRY_PATHS as WORLD_COUNTRIES,
   MAP_W,
@@ -761,7 +761,7 @@ export function ProjectsExperiencePage() {
       <ExperienceGrid />
       <CtaBanner />
       <Technologies />
-      <WhyAbuFarha />
+      <WhyAbuFarhaProjects />
     </>
   );
 }
