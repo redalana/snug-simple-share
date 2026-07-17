@@ -172,25 +172,15 @@ function RegionalPresence() {
   return (
     <section className="relative bg-secondary/40 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-md">
-            <Eyebrow index="01">Our Regional Presence</Eyebrow>
-            <p className="mt-4 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-              Delivering healthcare solutions across Africa &amp; The Middle
-              East through local expertise and long-term partnerships.
-            </p>
-          </div>
-          <Link
-            to="/projects"
-            hash="countries"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
-          >
-            View All Countries
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+        <div className="mb-10 max-w-md">
+          <Eyebrow index="01">Our Regional Presence</Eyebrow>
+          <p className="mt-4 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+            Delivering healthcare solutions across Africa &amp; The Middle
+            East through local expertise and long-term partnerships.
+          </p>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.55fr_1fr] lg:items-center">
           {/* MAP */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
@@ -207,18 +197,38 @@ function RegionalPresence() {
             >
               <defs>
                 <linearGradient id="rp-active" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="color-mix(in oklab, var(--primary) 25%, #1e3a5f)" />
-                  <stop offset="100%" stopColor="#0f2544" />
+                  <stop offset="0%" stopColor="color-mix(in oklab, var(--primary) 92%, white)" />
+                  <stop offset="100%" stopColor="var(--primary)" />
                 </linearGradient>
+                <filter id="rp-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.6" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
               {/* Soft ocean/sphere backdrop */}
-              <path d={SPHERE_D} fill="#f5f7fa" stroke="#e2e8f0" strokeWidth={0.5} />
+              <path d={SPHERE_D} fill="#f4f7fb" stroke="#c9d2dd" strokeWidth={0.6} />
               {WORLD_COUNTRY_PATHS.filter((c) => !HIGHLIGHT_NAMES.has(c.name)).map((c) => (
-                <path key={c.name} d={c.d} fill="#eef1f5" stroke="#dfe4ea" strokeWidth={0.3} />
+                <path key={c.name} d={c.d} fill="#dfe4ec" stroke="#b8c1cd" strokeWidth={0.45} strokeLinejoin="round" />
               ))}
-              {WORLD_COUNTRY_PATHS.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => (
-                <path key={c.name} d={c.d} fill="url(#rp-active)" stroke="#0f2544" strokeWidth={0.4} />
-              ))}
+              {WORLD_COUNTRY_PATHS.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => {
+                const isA = hovered === c.name || (c.name === "Somalia" && hovered === "Somaliland");
+                return (
+                  <path
+                    key={c.name}
+                    d={c.d}
+                    fill="url(#rp-active)"
+                    stroke="#ffffff"
+                    strokeWidth={0.9}
+                    strokeLinejoin="round"
+                    filter={isA ? "url(#rp-glow)" : undefined}
+                    style={{ transition: "filter .25s ease" }}
+                  />
+                );
+              })}
+
               {Object.entries(GEO).map(([name, p]) => {
                 const isA = hovered === name;
                 return (
