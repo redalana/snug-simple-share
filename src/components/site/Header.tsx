@@ -59,7 +59,7 @@ export function Header() {
             <LanguageSelector />
 
             {/* Language → Social : 28px */}
-            <div className="ml-7 flex items-center gap-[18px]">
+            <div className="ml-6 flex items-center gap-[14px]">
               {SOCIALS.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
@@ -83,7 +83,7 @@ export function Header() {
             <Link
               to="/contact"
               hash="contact-form"
-              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="ml-6 inline-flex h-[40px] shrink-0 items-center rounded-full bg-primary px-6 text-[13px] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
             </Link>
