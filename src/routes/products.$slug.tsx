@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProductDetail } from "@/components/site/ProductDetail";
 import { getProductBySlug } from "@/lib/products";
+import { SITE_URL, absUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
@@ -28,11 +29,12 @@ export const Route = createFileRoute("/products/$slug")({
         { property: "og:title", content: `${product.name} | AbuFarha Medical` },
         { property: "og:description", content: desc },
         { property: "og:type", content: "product" },
-        { property: "og:url", content: `/products/${params.slug}` },
-        { property: "og:image", content: product.image },
+        { property: "og:url", content: `${SITE_URL}/products/${params.slug}` },
+        { property: "og:image", content: absUrl(product.image) },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: absUrl(product.image) },
       ],
-      links: [{ rel: "canonical", href: `/products/${params.slug}` }],
+      links: [{ rel: "canonical", href: `${SITE_URL}/products/${params.slug}` }],
       scripts: [
         {
           type: "application/ld+json",
