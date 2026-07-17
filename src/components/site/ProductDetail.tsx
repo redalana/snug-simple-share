@@ -727,7 +727,7 @@ function QuoteSection({
   return (
     <section
       id="request-quote"
-      className="mx-auto max-w-[100rem] scroll-mt-28 px-6 py-20 lg:px-10"
+      className="mx-auto max-w-[100rem] scroll-mt-28 px-6 py-16 lg:px-10 lg:py-20"
     >
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[36fr_64fr] lg:items-start lg:gap-16">
         {/* LEFT COLUMN */}
