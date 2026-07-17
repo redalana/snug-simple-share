@@ -719,8 +719,10 @@ export function PortfolioBrowser() {
                       setSort(e.target.value);
                       resetPage();
                     }}
+                    aria-label="Sort systems"
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
+
                     {SORT_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
                     ))}
