@@ -274,22 +274,22 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           {product.brand}
         </span>
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h3 className="font-display text-lg font-bold tracking-tight text-foreground">
           {product.name}
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">{product.category}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">
           {product.specs.map((s) => (
             <span
               key={s}
-              className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground/70"
+              className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground/70 sm:px-3 sm:py-1"
             >
               {s}
             </span>
           ))}
         </div>
-        <div className="mt-4 space-y-2 border-t border-border/60 pt-4 text-xs font-medium text-foreground/70">
+        <div className="mt-3 space-y-1.5 border-t border-border/60 pt-3 text-xs font-medium text-foreground/70 sm:mt-4 sm:space-y-2 sm:pt-4">
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-primary" />
             {product.warranty} Included
@@ -310,7 +310,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
         <Link
           to="/products/$slug"
           params={{ slug: productSlug(product) }}
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+          className="mt-4 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground sm:mt-5 sm:py-3"
         >
           View Details
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
