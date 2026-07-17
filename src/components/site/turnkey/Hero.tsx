@@ -26,16 +26,16 @@ export function Hero() {
             deliver fully integrated medical departments that perform today and
             for years to come.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-white shadow-[0_20px_40px_-18px_rgba(225,29,46,0.7)] transition-transform hover:-translate-y-0.5"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_20px_40px_-18px_rgba(225,29,46,0.7)] transition-transform hover:-translate-y-0.5 sm:py-3.5"
             >
               Start Your Project <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#journey"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3.5 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground sm:py-3.5"
             >
               <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/10 text-primary">
                 <Play className="h-3 w-3 fill-current" />
