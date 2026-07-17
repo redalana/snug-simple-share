@@ -728,16 +728,19 @@ function Technologies() {
                   src={t.img}
                   alt={t.title}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                 />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </div>
-              <div className="p-3 text-center">
-                <div className="text-[calc(12.5*var(--desktop-px-unit))] font-bold text-ink transition-colors group-hover:text-primary">
+              <div className="flex items-center justify-center gap-1.5 p-3 text-center">
+                <span className="text-[calc(12.5*var(--desktop-px-unit))] font-bold text-ink transition-colors group-hover:text-primary">
                   {t.title}
-                </div>
+                </span>
+                <ArrowRight aria-hidden className="h-3 w-3 -translate-x-1 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
               </div>
             </Link>
           ))}
+
         </div>
       </div>
     </section>
