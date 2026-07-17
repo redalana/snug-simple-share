@@ -2533,8 +2533,9 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Myocardial viability assessment",
     ],
     references: [
-      { label: "EANM Procedure Guidelines for PET/CT" },
-      { label: "SNMMI Practice Guidelines" },
+      { label: "EANM Procedure Guidelines for Tumour Imaging (FDG PET/CT)", url: "https://www.eanm.org/publications/guidelines/" },
+      { label: "SNMMI — PET/CT Practice Guidelines & Appropriate Use Criteria", url: "https://www.snmmi.org/ClinicalPractice/content.aspx?ItemNumber=6414" },
+      { label: "NCCN Clinical Practice Guidelines in Oncology", url: "https://www.nccn.org/guidelines/category_1" },
     ],
   },
   Ultrasound: {
