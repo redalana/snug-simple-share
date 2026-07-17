@@ -33,7 +33,7 @@ export function HowWeWork() {
                     </span>
                   </div>
                   <div className="mt-6 font-display font-bold text-white">{s.title}</div>
-                  <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/60">
+                  <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/60">
                     {s.desc}
                   </p>
                 </li>

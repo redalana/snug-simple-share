@@ -41,7 +41,7 @@ export function FinalCTA() {
                   <t.icon className="h-5 w-5" />
                 </div>
                 <div className="mt-4 font-display text-base font-extrabold">{t.title}</div>
-                <p className="mt-1.5 text-[calc(12.5 * var(--desktop-px-unit))] leading-relaxed text-white/70">{t.desc}</p>
+                <p className="mt-1.5 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/70">{t.desc}</p>
               </div>
             ))}
           </div>

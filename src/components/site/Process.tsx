@@ -61,7 +61,7 @@ export function Process() {
               <h3 className="mt-1 font-display text-[1.05rem] font-extrabold tracking-tight text-ink">
                 {step.title}
               </h3>
-              <p className="mt-2 text-[calc(12.5 * var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
+              <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
                 {step.desc}
               </p>
             </motion.div>

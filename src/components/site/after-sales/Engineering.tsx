@@ -38,7 +38,7 @@ export function Engineering() {
             />
           </div>
           <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-xl sm:block">
-            <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               First-Time Fix Rate
             </div>
             <div className="mt-1 font-display text-4xl font-extrabold text-foreground">
@@ -73,7 +73,7 @@ export function Engineering() {
                 </div>
                 <div>
                   <div className="text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">{t}</div>
-                  <div className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                  <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                     {d}
                   </div>
                 </div>
@@ -87,7 +87,7 @@ export function Engineering() {
               <div key={v} className="rounded-xl border border-border bg-white px-3 py-3 text-center">
                 <Icon className="mx-auto h-4 w-4 text-primary" />
                 <div className="mt-2 font-display text-lg font-extrabold text-foreground">{k}</div>
-                <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{v}</div>
+                <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{v}</div>
               </div>
             ))}
           </div>

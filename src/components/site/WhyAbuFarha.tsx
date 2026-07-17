@@ -127,7 +127,7 @@ export function WhyAbuFarha() {
                 <h3 className="mt-6 font-display text-[1.4rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                   {pillar.title}
                 </h3>
-                <p className="mt-3 max-w-sm text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.65] text-muted-foreground">
+                <p className="mt-3 max-w-sm text-[calc(15.5*var(--desktop-px-unit))] leading-[1.65] text-muted-foreground">
                   {pillar.copy}
                 </p>
               </motion.div>

@@ -82,7 +82,7 @@ export function RequestService() {
     setSubmitted(false);
   };
 
-  const labelCls = "text-[calc(12.5 * var(--desktop-px-unit))] font-semibold text-foreground";
+  const labelCls = "text-[calc(12.5*var(--desktop-px-unit))] font-semibold text-foreground";
   const inputCls =
     "mt-2 h-12 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10";
   const errCls = "border-destructive focus:border-destructive focus:ring-destructive/15";
@@ -118,7 +118,7 @@ export function RequestService() {
                 <div className="mt-6 font-display text-2xl font-extrabold text-foreground">
                   Request received.
                 </div>
-                <p className="mt-3 max-w-md text-[calc(14.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                <p className="mt-3 max-w-md text-[calc(14.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                   A service coordinator has been notified and will contact you
                   within one business hour. For critical downtime, please also
                   call our 24/7 emergency line.

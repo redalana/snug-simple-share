@@ -37,7 +37,7 @@ export function Journey() {
                   </div>
                   <div className="mt-8 font-display text-[1.75rem] font-extrabold tracking-tight text-primary">{j.year}</div>
                   <div className="mt-1 font-display text-lg font-bold text-ink">{j.title}</div>
-                  <p className="mt-3 max-w-[calc(240*var(--desktop-px-unit))] text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                  <p className="mt-3 max-w-[calc(240*var(--desktop-px-unit))] text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
                     {j.desc}
                   </p>
                 </div>

@@ -153,10 +153,10 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Top footer — 5 columns */}
-        <div className="grid gap-x-10 gap-y-10 py-14 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr]">
+        <div className="grid gap-x-10 gap-y-8 py-10 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-y-10 lg:py-14">
           <div>
             <Logo light />
-            <p className="mt-4 max-w-sm text-[calc(13.5 * var(--desktop-px-unit))] leading-[1.7] text-white/50">
+            <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
               Delivering advanced medical technologies, turnkey project delivery,
               biomedical engineering and long-term support for healthcare providers
               across Africa, the Middle East and emerging healthcare markets.
@@ -181,7 +181,7 @@ export function Footer() {
               <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                 {col.title}
               </h4>
-              <ul className="mt-4 space-y-2.5 text-[calc(13.5 * var(--desktop-px-unit))]">
+              <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                 {col.links.map((l) => (
                   <li key={l}>
                     <a
@@ -199,17 +199,18 @@ export function Footer() {
 
         {/* Premium divider + contact bar */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="py-6">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="py-5 lg:py-6">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
+
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
                 <div className="flex items-start gap-3">
                   <Icon className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45" strokeWidth={1.5} />
                   <div className="min-w-0">
-                    <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
+                    <div className="text-[calc(10.5*var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}
                     </div>
-                    <div className="mt-1 truncate text-[calc(13.5 * var(--desktop-px-unit))] text-white/75">{value}</div>
+                    <div className="mt-1 truncate text-[calc(13.5*var(--desktop-px-unit))] text-white/75">{value}</div>
                   </div>
                 </div>
               );
@@ -226,12 +227,12 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="flex flex-col items-center justify-between gap-3 py-5 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row lg:py-5">
 
-          <div className="text-[calc(12.5 * var(--desktop-px-unit))] text-white/40">
+          <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
-          <div className="flex items-center gap-7 text-[calc(12.5 * var(--desktop-px-unit))]">
+          <div className="flex items-center gap-7 text-[calc(12.5*var(--desktop-px-unit))]">
             {["Privacy Policy", "Terms & Conditions", "Sitemap"].map((l) => (
               <a
                 key={l}

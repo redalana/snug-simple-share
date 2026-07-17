@@ -408,7 +408,7 @@ export function Solutions() {
                 <h3 className="mt-3.5 font-display text-[2.35rem] font-black leading-[0.98] tracking-[-0.03em] text-ink sm:text-[3rem]">
                   {active.title}
                 </h3>
-                <p className="mt-5 max-w-[34ch] text-[calc(16.5 * var(--desktop-px-unit))] leading-[1.7] text-muted-foreground/90">
+                <p className="mt-5 max-w-[34ch] text-[calc(16.5*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground/90">
                   {active.desc}
                 </p>
 
@@ -438,7 +438,7 @@ export function Solutions() {
                       <div className="text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
                         {m.label}
                       </div>
-                      <div className="mt-2 text-[calc(13.5 * var(--desktop-px-unit))] font-bold leading-snug text-ink">
+                      <div className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] font-bold leading-snug text-ink">
                         {m.value}
                       </div>
                     </div>

@@ -418,7 +418,7 @@ export function BeyondEquipment() {
 
                   <motion.ul variants={panelItem} className="mt-6 flex flex-col gap-3.5">
                     {active.points.map((p) => (
-                      <li key={p} className="flex items-center gap-3 text-[calc(15.5 * var(--desktop-px-unit))] font-medium text-ink">
+                      <li key={p} className="flex items-center gap-3 text-[calc(15.5*var(--desktop-px-unit))] font-medium text-ink">
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
@@ -436,7 +436,7 @@ export function BeyondEquipment() {
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                       Hospital Outcome
                     </div>
-                    <p className="mt-2 text-[calc(14.5 * var(--desktop-px-unit))] font-medium leading-[1.6] text-ink">
+                    <p className="mt-2 text-[calc(14.5*var(--desktop-px-unit))] font-medium leading-[1.6] text-ink">
                       {active.outcome}
                     </p>
                   </motion.div>
@@ -529,7 +529,7 @@ export function BeyondEquipment() {
                   </p>
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {a.points.map((p) => (
-                      <li key={p} className="flex items-center gap-2.5 text-[calc(13.5 * var(--desktop-px-unit))] font-medium text-ink">
+                      <li key={p} className="flex items-center gap-2.5 text-[calc(13.5*var(--desktop-px-unit))] font-medium text-ink">
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>

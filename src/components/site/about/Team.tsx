@@ -44,7 +44,7 @@ export function Team() {
                   </div>
                   <div>
                     <div className="font-display font-bold text-ink">{r.title}</div>
-                    <p className="mt-1 text-[calc(13.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{r.desc}</p>
+                    <p className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{r.desc}</p>
                   </div>
                 </div>
               ))}

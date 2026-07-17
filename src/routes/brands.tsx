@@ -422,7 +422,7 @@ function BrandsPage() {
                     <div className="font-display text-2xl font-extrabold tracking-tight text-foreground lg:text-3xl">
                       {m.value}
                     </div>
-                    <div className="mt-1 text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    <div className="mt-1 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       {m.label}
                     </div>
                   </div>
@@ -477,7 +477,7 @@ function BrandsPage() {
             <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
               <div className="mb-6 flex items-end justify-between gap-6">
                 <div>
-                  <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+                  <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                     Featured Manufacturers
                   </div>
                   <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-foreground md:text-[1.75rem]">
@@ -512,7 +512,7 @@ function BrandsPage() {
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+                <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                   All Manufacturers
                 </div>
                 <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-foreground md:text-[1.75rem]">
@@ -545,7 +545,7 @@ function BrandsPage() {
         <section className="bg-white pb-16">
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="mb-6">
-              <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+              <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                 Compare Manufacturers
               </div>
               <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-foreground md:text-[1.75rem]">
@@ -622,7 +622,7 @@ function BrandsPage() {
         <section className="bg-white pb-16 lg:pb-20">
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="mb-6">
-              <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+              <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                 Why Choose AbuFarha?
               </div>
               <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-foreground md:text-[1.75rem]">
@@ -658,7 +658,7 @@ function BrandsPage() {
           </div>
           <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
             <div className="max-w-3xl">
-              <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
+              <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-primary">
                 Advisory
               </div>
               <h3 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-[2.25rem]">
@@ -837,7 +837,7 @@ function BrandEcosystem() {
             {activeBrand.name}
           </span>
         </div>
-        <div className="mt-1 flex items-center gap-1.5 text-[calc(10.5 * var(--desktop-px-unit))] text-muted-foreground">
+        <div className="mt-1 flex items-center gap-1.5 text-[calc(10.5*var(--desktop-px-unit))] text-muted-foreground">
           <span>{activeBrand.countryFlag}</span>
           <span>{activeBrand.country}</span>
         </div>
@@ -872,7 +872,7 @@ function WorldDotMap() {
       className="pointer-events-none absolute inset-0 opacity-40"
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgba(15,23,42,0.18) calc(1*var(--desktop-px-unit)), transparent calc(1.4 * var(--desktop-px-unit)))",
+          "radial-gradient(circle, rgba(15,23,42,0.18) calc(1*var(--desktop-px-unit)), transparent calc(1.4*var(--desktop-px-unit)))",
         backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
         maskImage:
           "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",

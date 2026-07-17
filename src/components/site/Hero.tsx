@@ -176,7 +176,7 @@ export function Hero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[calc(144*var(--desktop-px-unit))] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[calc(152*var(--desktop-px-unit))] xl:pt-[calc(204*var(--desktop-px-unit))]"
+      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[calc(128*var(--desktop-px-unit))] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[calc(136*var(--desktop-px-unit))] xl:pt-[calc(180*var(--desktop-px-unit))]"
     >
       {/* ── Background scene (crossfade) ─────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
@@ -245,7 +245,7 @@ export function Hero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[calc(520*var(--desktop-px-unit))] w-[calc(520*var(--desktop-px-unit))] rounded-full bg-primary/5 blur-3xl lg:hidden" />
 
       {/* ── Content ─────────────────────────────────────────────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-9 lg:px-10 lg:py-14">
+      <div className="relative mx-auto max-w-[100rem] px-6 py-7 lg:px-10 lg:py-11">
         <motion.div
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}

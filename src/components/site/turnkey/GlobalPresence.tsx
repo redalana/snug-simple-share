@@ -147,7 +147,7 @@ export function GlobalPresence() {
         aria-hidden
         className="pointer-events-none absolute bottom-16 left-8 h-40 w-40 opacity-40"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) calc(1.2 * var(--desktop-px-unit)), transparent calc(1.2 * var(--desktop-px-unit)))",
+          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) calc(1.2*var(--desktop-px-unit)), transparent calc(1.2*var(--desktop-px-unit)))",
           backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
         }}
       />
@@ -408,7 +408,7 @@ export function GlobalPresence() {
                   <div className="mt-0.5 font-display text-[calc(13*var(--desktop-px-unit))] font-extrabold leading-none tracking-tight text-foreground">
                     Abu<span className="text-primary">Farha</span>
                   </div>
-                  <div className="mt-0.5 text-[calc(6.5 * var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  <div className="mt-0.5 text-[calc(6.5*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                     Medical Equipment
                   </div>
                 </div>
@@ -437,7 +437,7 @@ export function GlobalPresence() {
                       {active.name}
                     </div>
                     {active.note && (
-                      <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
+                      <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-muted-foreground">
                         {active.note}
                       </div>
                     )}
@@ -446,7 +446,7 @@ export function GlobalPresence() {
 
                 <ul className="mt-3 space-y-1.5 border-t border-black/5 pt-3">
                   {active.equipment.map((e) => (
-                    <li key={e.label} className="flex items-center justify-between text-[calc(12.5 * var(--desktop-px-unit))]">
+                    <li key={e.label} className="flex items-center justify-between text-[calc(12.5*var(--desktop-px-unit))]">
                       <span className="flex items-center gap-2 text-muted-foreground">
                         <Stethoscope className="h-3.5 w-3.5 text-primary/70" strokeWidth={1.8} />
                         {e.label}
@@ -467,7 +467,7 @@ export function GlobalPresence() {
 
                 <a
                   href="#projects"
-                  className="mt-3 inline-flex items-center gap-1 text-[calc(12.5 * var(--desktop-px-unit))] font-bold text-primary hover:text-primary/80"
+                  className="mt-3 inline-flex items-center gap-1 text-[calc(12.5*var(--desktop-px-unit))] font-bold text-primary hover:text-primary/80"
                 >
                   View Projects <ArrowRight className="h-3.5 w-3.5" />
                 </a>

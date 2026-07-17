@@ -19,7 +19,7 @@ export function OperationsDashboard() {
               support operations.
             </h2>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[calc(11.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/70">
+          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[calc(11.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/70">
             <Signal className="h-3.5 w-3.5 text-emerald-400" />
             Live · Updated every 30s
           </div>
@@ -35,7 +35,7 @@ export function OperationsDashboard() {
               <div className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-white">Global Service Console</div>
               <div className="hidden text-[calc(11*var(--desktop-px-unit))] text-white/40 sm:block">/ MEA · Central & South Asia</div>
             </div>
-            <div className="hidden gap-2 text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/40 sm:flex">
+            <div className="hidden gap-2 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/40 sm:flex">
               <span>Today</span>
               <span>·</span>
               <span>7d</span>
@@ -60,7 +60,7 @@ export function OperationsDashboard() {
                 transition={{ duration: 0.5, delay: i * 0.06 }}
                 className="rounded-2xl border border-white/8 bg-white/[0.02] p-5"
               >
-                <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-white/50">
+                <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-white/50">
                   {m.label}
                 </div>
                 <div className="mt-3 font-display text-4xl font-extrabold tracking-tight text-white">

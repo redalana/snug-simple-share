@@ -42,7 +42,7 @@ export function Bento() {
                   <h3 className={`font-display font-extrabold leading-tight ${b.featured ? "text-2xl lg:text-[2rem]" : "text-xl lg:text-2xl"}`}>
                     {b.title}
                   </h3>
-                  <p className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15*var(--desktop-px-unit))]" : "text-[calc(13.5 * var(--desktop-px-unit))]"}`}>
+                  <p className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15*var(--desktop-px-unit))]" : "text-[calc(13.5*var(--desktop-px-unit))]"}`}>
                     {b.desc}
                   </p>
                 </div>

@@ -30,7 +30,7 @@ export function FAQ() {
               <br />
               to know.
             </h2>
-            <p className="mt-6 max-w-md text-[calc(15.5 * var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+            <p className="mt-6 max-w-md text-[calc(15.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
               Answers to the most common questions from biomedical engineers,
               procurement teams and hospital directors.
             </p>
@@ -66,7 +66,7 @@ export function FAQ() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search questions — e.g. warranty, parts, training"
-                  className="w-full bg-transparent py-3 text-[calc(14.5 * var(--desktop-px-unit))] text-foreground outline-none placeholder:text-muted-foreground/70"
+                  className="w-full bg-transparent py-3 text-[calc(14.5*var(--desktop-px-unit))] text-foreground outline-none placeholder:text-muted-foreground/70"
                 />
               </div>
             </div>
@@ -111,10 +111,10 @@ export function FAQ() {
                         className="flex w-full items-center justify-between gap-6 px-7 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                       >
                         <div className="min-w-0">
-                          <div className="text-[calc(10.5 * var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-primary">
+                          <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-primary">
                             {fcat}
                           </div>
-                          <div className="mt-1.5 text-[calc(17.5 * var(--desktop-px-unit))] font-semibold leading-snug text-foreground sm:text-[calc(19*var(--desktop-px-unit))]">
+                          <div className="mt-1.5 text-[calc(17.5*var(--desktop-px-unit))] font-semibold leading-snug text-foreground sm:text-[calc(19*var(--desktop-px-unit))]">
                             {q}
                           </div>
                         </div>
@@ -134,7 +134,7 @@ export function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-7 pb-8 text-[calc(15.5 * var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
+                        <div className="px-7 pb-8 text-[calc(15.5*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
                           {a}
                         </div>
                       </motion.div>
