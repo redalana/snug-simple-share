@@ -87,7 +87,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10 lg:pt-10 xl:gap-12">
           <div className="min-w-0">
             <Hero article={article} />
-            <div className="mt-14 max-w-[78ch] space-y-14" data-article-content>
+            <div className="mt-14 max-w-[78ch] space-y-16 lg:space-y-20" data-article-content>
               {article.content.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
