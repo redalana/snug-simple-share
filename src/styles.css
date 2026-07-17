@@ -67,6 +67,7 @@
 }
 
 :root {
+  --desktop-px-unit: 1px;
   --radius: 0.75rem;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -195,24 +196,18 @@
 /*
  * Desktop scale system.
  *
- * The root font-size IS the master design token: every Tailwind spacing,
- * font-size, gap, padding, radius, and width utility is authored in `rem`
- * and resolves against `html { font-size }`. Reducing the root size on
- * desktop breakpoints proportionally rescales the entire token system —
- * headers, headings, cards, sections, buttons, icons — in one place,
- * without `zoom` or `transform: scale()` and without touching mobile/tablet.
- *
- * calc(16 * var(--desktop-px-unit)) -> calc(12 * var(--desktop-px-unit))  ≈ 25% smaller on desktop (≥calc(1024 * var(--desktop-px-unit)))
- * calc(16 * var(--desktop-px-unit)) -> calc(11.5 * var(--desktop-px-unit)) ≈ 28% smaller on large desktop (≥calc(1536 * var(--desktop-px-unit)))
+ * Rem-based Tailwind tokens and formerly fixed pixel values use parallel
+ * desktop scale tokens. Both resolve to 75% at desktop widths while retaining
+ * their original values on mobile and tablet. This is real computed sizing,
+ * not zoom or transform scaling.
  */
 @media (min-width: 1024px) {
-  html {
-    font-size: calc(12 * var(--desktop-px-unit));
+  :root {
+    --desktop-px-unit: 0.75px;
   }
-}
-@media (min-width: 1536px) {
+
   html {
-    font-size: calc(11.5 * var(--desktop-px-unit));
+    font-size: 12px;
   }
 }
 

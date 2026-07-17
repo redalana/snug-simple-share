@@ -7,7 +7,7 @@ export function Logo({ className = "", light = false }: { className?: string; li
         viewBox="0 0 34 34"
         fill="none"
         aria-hidden="true"
-        className="shrink-0"
+        className="h-[calc(34*var(--desktop-px-unit))] w-[calc(34*var(--desktop-px-unit))] shrink-0"
       >
         <path
           d="M1 18h6l2.5-9 4 15 3.5-20 3 11 2-3h8"
