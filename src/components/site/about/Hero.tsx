@@ -15,10 +15,10 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/25" />
       </div>
-      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[520px] lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pt-24 lg:pb-20">
+      <div className="relative mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[460px] lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
         <div className="max-w-xl">
           <Eyebrow tone="light" index="01">About Us</Eyebrow>
-          <h1 className="mt-6 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[3.25rem]">
+          <h1 className="mt-6 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[2.875rem]">
             Engineering Healthcare
             <br />
             Since 1999.

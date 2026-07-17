@@ -28,7 +28,7 @@ function MetricCard({ m, i }: { m: Metric; i: number }) {
 
 export function ByTheNumbers() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-28">
+    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-20">
       <div className="pointer-events-none absolute inset-0 opacity-[0.07]"
         style={{ backgroundImage: "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)", backgroundSize: "64px 64px" }} />
       <div className="pointer-events-none absolute -right-32 top-1/3 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />

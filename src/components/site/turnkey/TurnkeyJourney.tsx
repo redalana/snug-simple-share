@@ -4,7 +4,7 @@ import { PHASES } from "./data";
 
 export function TurnkeyJourney() {
   return (
-    <section id="journey" className="bg-white py-20 lg:py-24">
+    <section id="journey" className="bg-white py-20 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[1fr_3.2fr] lg:gap-14">
           <div>

@@ -36,7 +36,7 @@ function ProjectsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[110px]">
+      <main id="main-content" className="pt-[96px]">
         <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
           <Link
             to="/"

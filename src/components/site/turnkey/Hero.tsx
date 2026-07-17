@@ -5,7 +5,7 @@ import { turnkeyHero } from "./data";
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[520px] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-24 lg:pb-20">
+      <div className="mx-auto grid min-h-[480px] max-w-[100rem] gap-10 px-6 pt-24 pb-20 lg:min-h-[460px] lg:grid-cols-[1fr_1.25fr] lg:gap-14 lg:px-10 lg:pt-20 lg:pb-16">
         {/* LEFT */}
         <div className="flex flex-col justify-center">
           <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
@@ -15,7 +15,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mt-5 font-display text-[44px] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[54px] lg:text-[64px]"
+            className="mt-5 font-display text-[44px] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[54px] lg:text-[56px]"
           >
             Complete Clinical<br />
             Departments.<br />

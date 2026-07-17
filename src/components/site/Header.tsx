@@ -42,14 +42,14 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[64px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.13]">
+        <div className="mx-auto flex h-[56px] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
+          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.0]">
             <Logo />
           </Link>
 
           {/* Search — centered hero element of the header */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[460px] lg:w-[480px]">
+            <div className="w-[400px] lg:w-[420px]">
               <SearchField />
             </div>
           </div>
@@ -59,7 +59,7 @@ export function Header() {
             <LanguageSelector />
 
             {/* Language → Social : 28px */}
-            <div className="ml-7 flex items-center gap-[18px]">
+            <div className="ml-6 flex items-center gap-[14px]">
               {SOCIALS.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
@@ -83,7 +83,7 @@ export function Header() {
             <Link
               to="/contact"
               hash="contact-form"
-              className="ml-7 inline-flex h-[46px] shrink-0 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="ml-6 inline-flex h-[40px] shrink-0 items-center rounded-full bg-primary px-6 text-[13px] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
             >
               Request a Quote
             </Link>
@@ -111,7 +111,7 @@ export function Header() {
 
         {/* Level 2 — navigation */}
         <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[14px] px-6 lg:px-10">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[10px] px-6 lg:px-10">
             {NAV.map((item) => {
               const active = isActive(item.href);
               const isContact = item.label === "Contact Us";
@@ -125,7 +125,7 @@ export function Header() {
                 <div key={item.label} className="group relative flex items-center">
                   <a
                     href={item.href}
-                    className={`flex items-center gap-1 px-5 py-2.5 text-[16px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
+                    className={`flex items-center gap-1 px-4 py-2 text-[15px] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
@@ -134,7 +134,7 @@ export function Header() {
                       <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                     )}
                     <span
-                      className={`absolute inset-x-5 bottom-1.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
+                      className={`absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
                         active
                           ? "scale-x-100"
                           : "origin-left scale-x-0 group-hover:scale-x-100"
