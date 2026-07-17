@@ -134,7 +134,7 @@ export function Header() {
                       <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
                     )}
                     <span
-                      className={`absolute inset-x-5 bottom-1.5 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
+                      className={`absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
                         active
                           ? "scale-x-100"
                           : "origin-left scale-x-0 group-hover:scale-x-100"
