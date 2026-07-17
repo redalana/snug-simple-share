@@ -14,7 +14,7 @@ export const WORLD_MAP_H = 520;
 // with Africa and the Middle East falling naturally around the center.
 export const projection = geoNaturalEarth1().fitSize(
   [WORLD_MAP_W, WORLD_MAP_H],
-  { type: "Sphere" } as unknown as GeoJSON.GeoJsonObject,
+  { type: "Sphere" } as never,
 );
 
 const pathGen = geoPath(projection);
