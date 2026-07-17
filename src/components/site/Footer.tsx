@@ -199,8 +199,8 @@ export function Footer() {
 
         {/* Premium divider + contact bar */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="py-5 lg:py-6">
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
+        <div className="py-4 lg:py-6">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
 
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
