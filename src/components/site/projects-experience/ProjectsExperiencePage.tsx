@@ -121,8 +121,21 @@ function Hero() {
 /* ============================================================
  * 2. REGIONAL PRESENCE  — compact map + country list
  * ==========================================================*/
+const COUNTRY_SUMMARY: Record<string, string> = {
+  Jordan: "Cath Lab Projects",
+  Iraq: "Cath Lab • MRI • Ultrasound",
+  Syria: "Cath Lab • MRI • IVF",
+  Yemen: "Cath Lab • MRI • CT",
+  Libya: "Cath Lab • IVF • Digital X-Ray",
+  Somalia: "Cardiology Solutions",
+  Somaliland: "Cath Lab Projects",
+  Egypt: "Cardiology Consumables",
+  Uzbekistan: "Cath Lab Projects",
+  Bangladesh: "Bone Density Systems",
+};
+
 function RegionalPresence() {
-  const highlighted = REGIONS.filter((r) => r.name !== "Somaliland" || true);
+  const highlighted = REGIONS;
   const [hovered, setHovered] = useState<string | null>(null);
   const regionByName = new Map(REGIONS.map((r) => [r.name, r]));
   return (
@@ -189,33 +202,42 @@ function RegionalPresence() {
               })}
             </svg>
 
-            {/* Tooltip overlay */}
+            {/* Tooltip overlay — verified project reference data */}
             {Object.entries(GEO).map(([name, p]) => {
               const r = regionByName.get(name);
               if (!r) return null;
               const isA = hovered === name;
-              const count = r.equipment.reduce((s, e) => s + (parseInt(e.qty, 10) || 0), 0);
-              const specialties = r.equipment.slice(0, 2).map((e) => e.label).join(" · ");
               return (
                 <div
                   key={name}
-                  className={`pointer-events-none absolute z-10 w-52 -translate-x-1/2 rounded-xl border border-black/5 bg-white p-3 text-left shadow-[0_20px_40px_-16px_rgba(15,23,42,0.35)] transition-opacity duration-200 ${
+                  role="tooltip"
+                  className={`pointer-events-none absolute z-10 w-60 -translate-x-1/2 rounded-xl border border-black/5 bg-white p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(15,23,42,0.35)] transition-opacity duration-200 ${
                     isA ? "opacity-100" : "opacity-0"
                   }`}
                   style={{ left: `${(p.x / MAP_W) * 100}%`, top: `calc(${(p.y / MAP_H) * 100}% - calc(14*var(--desktop-px-unit)))`, transform: "translate(-50%, -100%)" }}
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-base leading-none">{r.flag}</span>
-                    <span className="font-display text-sm font-extrabold text-ink">{r.name}</span>
+                    <span className="font-display text-sm font-extrabold text-ink">
+                      {r.name}
+                    </span>
                   </div>
-                  <div className="mt-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
-                    {count}+ systems delivered
+                  <div className="mt-2 text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-muted-foreground">
+                    Projects
                   </div>
-                  {specialties && (
-                    <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">
-                      {specialties}
-                    </div>
-                  )}
+                  <ul className="mt-1 space-y-0.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-ink">
+                    {r.equipment.map((e) => {
+                      const n = parseInt(e.qty, 10);
+                      return (
+                        <li key={e.label} className="flex items-baseline justify-between gap-3">
+                          <span className="truncate">{e.label}</span>
+                          {Number.isFinite(n) && n > 0 ? (
+                            <span className="shrink-0 font-semibold text-primary">×{n}</span>
+                          ) : null}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               );
             })}
@@ -224,17 +246,24 @@ function RegionalPresence() {
           {/* COUNTRY LIST */}
           <ul
             id="countries"
-            className="grid grid-cols-2 gap-x-4 gap-y-3 sm:gap-y-4"
+            className="grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2 sm:gap-y-4"
           >
             {highlighted.map((r) => (
               <li
                 key={r.name}
                 onMouseEnter={() => setHovered(r.name)}
                 onMouseLeave={() => setHovered(null)}
-                className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] hover:ring-primary/25"
+                className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] hover:ring-primary/25"
               >
-                <span className="text-xl leading-none">{r.flag}</span>
-                <span className="text-sm font-semibold text-ink">{r.name}</span>
+                <span className="mt-0.5 text-xl leading-none">{r.flag}</span>
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-ink">{r.name}</div>
+                  {COUNTRY_SUMMARY[r.name] && (
+                    <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                      {COUNTRY_SUMMARY[r.name]}
+                    </div>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
@@ -243,6 +272,7 @@ function RegionalPresence() {
     </section>
   );
 }
+
 
 /* ============================================================
  * 3. TRUST STRIP
