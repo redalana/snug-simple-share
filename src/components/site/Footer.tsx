@@ -227,17 +227,17 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row lg:py-5">
+        <div className="flex flex-col items-center justify-between gap-3 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row sm:pb-4 lg:py-5">
 
           <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
-          <div className="flex items-center gap-7 text-[calc(12.5*var(--desktop-px-unit))]">
+          <div className="flex items-center gap-5 text-[calc(12.5*var(--desktop-px-unit))] sm:gap-7">
             {["Privacy Policy", "Terms & Conditions", "Sitemap"].map((l) => (
               <a
                 key={l}
                 href="#"
-                className="text-white/40 transition-colors duration-200 hover:text-white/80"
+                className="inline-flex min-h-[44px] items-center text-white/40 transition-colors duration-200 hover:text-white/80 sm:min-h-0"
               >
                 {l}
               </a>
