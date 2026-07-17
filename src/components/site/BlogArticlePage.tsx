@@ -5,6 +5,7 @@ import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   ChevronLeft,
   ChevronUp,
   BarChart3,
@@ -12,8 +13,10 @@ import {
   CheckCircle2,
   ChevronRight,
   Clock,
+  Cpu,
   DollarSign,
   Facebook,
+  FileText,
   Info,
   Lightbulb,
   Linkedin,
@@ -30,8 +33,10 @@ import {
   Truck,
   TrendingUp,
   User,
+  Users,
   X,
 } from "lucide-react";
+
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
 import {
@@ -82,7 +87,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10 lg:pt-10 xl:gap-12">
           <div className="min-w-0">
             <Hero article={article} />
-            <div className="mt-14 max-w-[78ch] space-y-14" data-article-content>
+            <div className="mt-14 max-w-[78ch] space-y-16 lg:space-y-20" data-article-content>
               {article.content.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
@@ -370,10 +375,27 @@ function Block({ block }: { block: ContentBlock }) {
     case "takeaways":
       return <Takeaways items={block.items} />;
 
+    case "keyFacts":
+      return <KeyFacts {...block} />;
+
+    case "quickFacts":
+      return <QuickFacts items={block.items} />;
+
+    case "comparison":
+      return <ComparisonTable {...block} />;
+
+    case "relatedDiseases":
+      return <RelatedDiseases items={block.items} />;
+
+    case "relatedArticleLinks":
+      return <RelatedArticleLinks items={block.items} />;
+
+    case "references":
+      return <References items={block.items} />;
 
     case "quote":
       return (
-        <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6">
+        <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
           <p className="font-display text-lg font-semibold italic leading-relaxed text-ink">
             "{block.text}"
           </p>
@@ -400,7 +422,7 @@ function Block({ block }: { block: ContentBlock }) {
             />
           </div>
           {block.caption && (
-            <figcaption className="mt-3 text-center text-xs text-muted-foreground">
+            <figcaption className="mt-3 border-l-2 border-primary/40 pl-3 text-[calc(12.5*var(--desktop-px-unit))] italic leading-relaxed text-muted-foreground">
               {block.caption}
             </figcaption>
           )}
@@ -408,6 +430,242 @@ function Block({ block }: { block: ContentBlock }) {
       );
   }
 }
+
+/* -- Premium educational blocks -- */
+
+function KeyFacts({
+  covers,
+  audience,
+  readingTime,
+  technology,
+}: {
+  covers: string;
+  audience: string;
+  readingTime: string;
+  technology: string;
+}) {
+  const items = [
+    { Icon: BookOpen, label: "What this covers", value: covers },
+    { Icon: Users, label: "Who should read", value: audience },
+    { Icon: Clock, label: "Reading time", value: readingTime },
+    { Icon: Cpu, label: "Main technology", value: technology },
+  ];
+  return (
+    <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+      <div className="grid gap-4 sm:grid-cols-2">
+        {items.map(({ Icon, label, value }) => (
+          <div key={label} className="flex gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15 text-primary">
+              <Icon className="h-4.5 w-4.5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+                {label}
+              </p>
+              <p className="mt-1 text-[calc(14.5*var(--desktop-px-unit))] leading-snug text-ink">
+                {value}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function QuickFacts({ items }: { items: string[] }) {
+  return (
+    <div className="rounded-2xl border border-emerald-500/20 bg-emerald-50/60 p-6">
+      <div className="flex items-center gap-3">
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm ring-1 ring-emerald-500/20 text-emerald-600">
+          <CheckCircle2 className="h-5 w-5" />
+        </div>
+        <p className="font-display text-lg font-extrabold text-ink">Quick Facts</p>
+      </div>
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {items.map((it) => (
+          <li
+            key={it}
+            className="flex gap-3 text-[calc(14.5*var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
+          >
+            <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-emerald-600" />
+            <span>{it}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ComparisonTable({
+  title,
+  headers,
+  rows,
+  caption,
+}: {
+  title?: string;
+  headers: string[];
+  rows: string[][];
+  caption?: string;
+}) {
+  return (
+    <div>
+      {title && (
+        <p className="mb-3 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+          {title}
+        </p>
+      )}
+      <div className="overflow-hidden rounded-2xl border border-border shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-[calc(14*var(--desktop-px-unit))]">
+            <thead>
+              <tr className="bg-secondary text-left">
+                {headers.map((h) => (
+                  <th
+                    key={h}
+                    className="px-5 py-3 text-xs font-bold uppercase tracking-wider text-ink"
+                  >
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, i) => (
+                <tr
+                  key={i}
+                  className="border-t border-border transition-colors odd:bg-white even:bg-secondary/30 hover:bg-primary/[0.03]"
+                >
+                  {row.map((cell, j) => (
+                    <td
+                      key={j}
+                      className={`px-5 py-3 align-top leading-relaxed ${
+                        j === 0
+                          ? "font-semibold text-ink"
+                          : "text-foreground/85"
+                      }`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {caption && (
+        <p className="mt-3 flex items-start gap-2 text-[calc(12*var(--desktop-px-unit))] italic text-muted-foreground">
+          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          {caption}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function RelatedDiseases({ items }: { items: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {items.map((it) => (
+        <span
+          key={it}
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-2 text-[calc(13*var(--desktop-px-unit))] font-medium text-ink"
+        >
+          <Stethoscope className="h-3.5 w-3.5 text-primary" />
+          {it}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function RelatedArticleLinks({
+  items,
+}: {
+  items: { slug: string; title: string; category: string; readingTime: string }[];
+}) {
+  if (!items.length) return null;
+  return (
+    <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+      <div className="flex items-center gap-3">
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary">
+          <BookOpen className="h-5 w-5" />
+        </div>
+        <p className="font-display text-lg font-extrabold text-ink">
+          Continue Reading
+        </p>
+      </div>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Related educational articles from the AbuFarha Knowledge Center.
+      </p>
+      <ul className="mt-4 divide-y divide-border">
+        {items.map((a) => (
+          <li key={a.slug}>
+            <Link
+              to="/blog/$slug"
+              params={{ slug: a.slug }}
+              className="group flex items-start justify-between gap-4 py-3 transition-colors hover:text-primary"
+            >
+              <div className="min-w-0">
+                <p className="text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+                  {a.category}
+                </p>
+                <p className="mt-1 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-ink transition-colors group-hover:text-primary">
+                  {a.title}
+                </p>
+                <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <Clock className="h-3 w-3" /> {a.readingTime}
+                </p>
+              </div>
+              <ArrowRight className="mt-2 h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function References({ items }: { items: { label: string; url?: string }[] }) {
+  return (
+    <div className="rounded-2xl border border-border bg-secondary/40 p-6">
+      <div className="flex items-center gap-3">
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm ring-1 ring-border text-ink">
+          <FileText className="h-5 w-5" />
+        </div>
+        <p className="font-display text-lg font-extrabold text-ink">
+          References & Guidelines
+        </p>
+      </div>
+      <ol className="mt-4 space-y-2.5 text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-foreground/85">
+        {items.map((r, i) => (
+          <li key={r.label} className="flex gap-3">
+            <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary/10 text-[calc(10.5*var(--desktop-px-unit))] font-bold text-primary">
+              {i + 1}
+            </span>
+            {r.url ? (
+              <a
+                href={r.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary hover:underline"
+              >
+                {r.label}
+              </a>
+            ) : (
+              <span>{r.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+      <p className="mt-4 text-[calc(12*var(--desktop-px-unit))] italic text-muted-foreground">
+        This article is for educational purposes and is not a substitute for professional medical advice, diagnosis or treatment.
+      </p>
+    </div>
+  );
+}
+
 
 /* -- Benefits grid -- */
 

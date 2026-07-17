@@ -65,7 +65,29 @@ export type ContentBlock =
       type: "stats";
       items: { value: string; label: string; source?: string }[];
     }
-  | { type: "takeaways"; items: string[] };
+  | { type: "takeaways"; items: string[] }
+  | {
+      type: "keyFacts";
+      covers: string;
+      audience: string;
+      readingTime: string;
+      technology: string;
+    }
+  | { type: "quickFacts"; items: string[] }
+  | {
+      type: "comparison";
+      title?: string;
+      headers: string[];
+      rows: string[][];
+      caption?: string;
+    }
+  | { type: "relatedDiseases"; items: string[] }
+  | {
+      type: "relatedArticleLinks";
+      items: { slug: string; title: string; category: string; readingTime: string }[];
+    }
+  | { type: "references"; items: { label: string; url?: string }[] };
+
 
 export type Article = {
   slug: string;
@@ -332,7 +354,46 @@ export const ARTICLES: Article[] = RAW.map((a) => {
     coverImage: a.coverImage,
   });
   return { ...a, content, tableOfContents: toc } as Article;
-});
+})
+  .map((article, _idx, arr) => {
+    // Inject contextual internal links to sibling articles (topic cluster).
+    const links = pickRelatedLinks(article, arr);
+    if (!links.length) return article;
+    const content = [...article.content];
+    // Insert before the "Conclusion" (if present), otherwise append.
+    const conclusionIdx = content.findIndex(
+      (b) => b.type === "h2" && b.id === "conclusion",
+    );
+    const block: ContentBlock = { type: "relatedArticleLinks", items: links };
+    if (conclusionIdx > -1) content.splice(conclusionIdx, 0, block);
+    else content.push(block);
+    return { ...article, content };
+  });
+
+function pickRelatedLinks(current: Article, pool: Article[]) {
+  const sameCat = pool.filter(
+    (a) => a.slug !== current.slug && a.category === current.category,
+  );
+  const tokens = current.title.toLowerCase().split(/\W+/).filter((w) => w.length > 3);
+  const scored = pool
+    .filter((a) => a.slug !== current.slug && a.category !== current.category)
+    .map((a) => {
+      const t = a.title.toLowerCase();
+      const score = tokens.reduce((s, w) => (t.includes(w) ? s + 1 : s), 0);
+      return { a, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((x) => x.a);
+  const merged = [...sameCat, ...scored].slice(0, 3);
+  return merged.map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    category: a.category,
+    readingTime: a.readingTime,
+  }));
+}
+
 
 export const FEATURED_ARTICLES = ARTICLES.filter((a) => a.featured);
 export const LATEST_ARTICLES = ARTICLES.slice(0, 9);

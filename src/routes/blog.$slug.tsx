@@ -25,10 +25,13 @@ export const Route = createFileRoute("/blog/$slug")({
         "@type": "Article",
         headline: article.title,
         description: article.metaDescription,
+        image: [absUrl(article.coverImage)],
         datePublished: article.publishedDate,
         dateModified: article.lastUpdated ?? article.publishedDate,
         author: { "@type": "Organization", name: "AbuFarha Biomedical Engineering Team" },
         publisher: { "@type": "Organization", name: "AbuFarha Medical" },
+        articleSection: article.category,
+        keywords: [article.category, ...article.title.split(/\s+/).slice(0, 6)].join(", "),
         mainEntityOfPage: articlePath,
       },
       {
@@ -52,6 +55,7 @@ export const Route = createFileRoute("/blog/$slug")({
           }]
         : []),
     ];
+
     return {
       meta: [
         { title },
