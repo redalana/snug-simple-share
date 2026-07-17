@@ -26,6 +26,7 @@ export function ContactPage() {
   return (
     <>
       <Hero />
+      <VisitAbuFarha />
       <ContactBar />
       <FormBlock />
       <OfficeMap />
