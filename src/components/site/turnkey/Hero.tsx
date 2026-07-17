@@ -15,7 +15,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mt-5 font-display text-[calc(44*var(--desktop-px-unit))] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
+            className="mt-5 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
           >
             Complete Clinical<br />
             Departments.<br />
