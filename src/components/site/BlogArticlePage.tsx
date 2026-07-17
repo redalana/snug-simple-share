@@ -650,6 +650,74 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
   );
 }
 
+/* -- Callout / Stats / Takeaways -- */
+
+const CALLOUT_STYLES: Record<
+  "tip" | "note" | "important" | "clinical",
+  { border: string; bg: string; text: string; icon: React.ComponentType<{ className?: string }>; label: string }
+> = {
+  tip: { border: "border-emerald-500/30", bg: "bg-emerald-50", text: "text-emerald-700", icon: Lightbulb, label: "Clinical Tip" },
+  note: { border: "border-sky-500/30", bg: "bg-sky-50", text: "text-sky-700", icon: Info, label: "Note" },
+  important: { border: "border-amber-500/40", bg: "bg-amber-50", text: "text-amber-700", icon: AlertTriangle, label: "Important" },
+  clinical: { border: "border-primary/25", bg: "bg-primary/[0.04]", text: "text-primary", icon: Stethoscope, label: "Clinical Insight" },
+};
+
+function Callout({ variant, title, text }: { variant: "tip" | "note" | "important" | "clinical"; title?: string; text: string }) {
+  const s = CALLOUT_STYLES[variant];
+  const Icon = s.icon;
+  return (
+    <aside className={`flex gap-4 rounded-2xl border-l-4 ${s.border} ${s.bg} p-5`}>
+      <div className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow-sm ${s.text}`}>
+        <Icon className="h-4.5 w-4.5" />
+      </div>
+      <div className="min-w-0">
+        <p className={`text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider ${s.text}`}>
+          {title ?? s.label}
+        </p>
+        <p className="mt-1 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-foreground/85">
+          {text}
+        </p>
+      </div>
+    </aside>
+  );
+}
+
+function StatsBlock({ items }: { items: { value: string; label: string; source?: string }[] }) {
+  return (
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {items.map((s) => (
+        <div key={s.label} className="rounded-2xl border border-border bg-white p-5 text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+          <p className="font-display text-2xl font-extrabold text-primary sm:text-[1.75rem]">{s.value}</p>
+          <p className="mt-1.5 text-sm font-semibold text-ink">{s.label}</p>
+          {s.source && <p className="mt-1 text-[calc(10.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">{s.source}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Takeaways({ items }: { items: string[] }) {
+  return (
+    <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-6">
+      <div className="flex items-center gap-3">
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
+          <Sparkles className="h-5 w-5 text-primary" />
+        </div>
+        <p className="font-display text-lg font-extrabold text-ink">Key Takeaways</p>
+      </div>
+      <ul className="mt-4 space-y-2.5">
+        {items.map((it) => (
+          <li key={it} className="flex gap-3 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-foreground/85">
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <span>{it}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
 /* ---------------- Sidebar ---------------- */
 
 function Sidebar({
