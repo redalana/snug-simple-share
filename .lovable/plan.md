@@ -1,50 +1,66 @@
-## Phase 4 — Enterprise Refactor Plan
+# Desktop Visual Scale Refinement (~10–12%)
 
-**Goal:** Split oversized page components into cohesive sub-modules and extract shared primitives — zero visual, behavioral, SEO, or a11y change.
+Applied only at `lg:` / `xl:` breakpoints. Mobile and tablet layouts are untouched. No color, no typography hierarchy, no redesign — only proportional size/spacing reductions.
 
-### Target files (before)
-| File | Lines |
-|---|---|
-| `AfterSalesPage.tsx` | 1787 |
-| `TurnkeyPage.tsx` | 1335 |
-| `AboutPage.tsx` | 996 |
-| `ContactPage.tsx` | 996 |
-| `Header.tsx` | 752 |
+## Scope of change (exact values)
 
-Total: 5,866 → target ~1,800 across parents + section files each < 400 lines.
+### 1. Header — `src/components/site/Header.tsx`
+| Element | Current | New | Δ |
+|---|---|---|---|
+| Top bar height | `h-[64px]` | `h-[56px]` | −8px |
+| Logo scale wrapper | `scale-[1.13]` | `scale-[1.0]` | −11% |
+| Search width (desktop) | `w-[460px] lg:w-[480px]` | `w-[400px] lg:w-[420px]` | −13% |
+| CTA button | `h-[46px] px-8 text-sm` | `h-[40px] px-6 text-[13px]` | −13% |
+| Social gap | `gap-[18px]` ml-7 | `gap-[14px]` ml-6 | tighter |
+| Nav item padding | `px-5 py-2.5 text-[16px]` | `px-4 py-2 text-[15px]` | −6% |
+| Nav gap | `gap-[14px]` | `gap-[10px]` | −4px |
 
-### Approach (per page)
-Each oversized page is currently one file rendering multiple JSX "sections" (hero, stats, timeline, CTA, etc.). Refactor pattern:
+### 2. Search field — `src/components/site/header/SearchField.tsx`
+| Element | Current | New |
+|---|---|---|
+| Input height | `h-12` | `h-10` |
+| Icon left offset | `left-4` | `left-3.5` |
+| Padding | `pl-11 pr-4 text-sm` | `pl-10 pr-4 text-[13px]` |
 
-1. Read the file, identify visually-distinct sections (usually one `<section>` each).
-2. Extract each section to `src/components/site/<page>/<SectionName>.tsx` as a pure presentational component. Move only JSX + section-local constants/data arrays.
-3. Keep animations, className strings, and DOM structure **byte-identical**.
-4. Parent page file becomes a thin composition: imports + `<Hero /> <Stats /> ...`.
-5. Shared data arrays that repeat (e.g. stats, service lists) move to `src/components/site/<page>/data.ts`.
+### 3. Route offsets (list pages) — 8 route files
+`pt-[110px]` → `pt-[96px]` in:
+`routes/about.tsx`, `after-sales.tsx`, `brands.tsx`, `categories.tsx`, `hospital-readiness-assessment.tsx`, `products.$slug.tsx`, `products.index.tsx`, `programs.stroke-care.tsx`, `projects.tsx`, `services.tsx`, `turnkey.tsx`.
 
-### Header
-- Extract `DesktopNav`, `MobileNav`, `MegaMenu` (products dropdown), and the search overlay into `src/components/site/header/` submodules.
-- Keep the `Header` shell (scroll state, sticky wrapper) in `Header.tsx`.
+### 4. Editorial heroes (About / Services / Turnkey / After Sales)
+Only the `lg:` values change.
 
-### Shared extractions (only if used ≥2x with identical markup)
-- Section heading pattern (eyebrow + h2 + subtitle) if repeated verbatim across ≥3 pages → `src/components/site/SectionHeading.tsx`.
-- Repeated stat-card, CTA-band, or timeline-item markup → shared primitives under `src/components/site/primitives/`.
+| Element | Current | New |
+|---|---|---|
+| Hero padding | `lg:pt-24 lg:pb-20` | `lg:pt-20 lg:pb-16` |
+| Hero min-height | `min-h-[520px]` | `lg:min-h-[460px]` |
+| After Sales H1 | `lg:text-[72px]` | `lg:text-[64px]` |
+| About H1 | `lg:text-[3.25rem]` (52px) | `lg:text-[2.875rem]` (46px) |
+| Turnkey H1 | `lg:text-[64px]` | `lg:text-[56px]` |
+| Services H1 (if lg override) | same tier | −8–10% |
 
-I will only extract shared primitives when the JSX is **structurally identical** across pages. If pages differ (even in class order), they stay local to avoid regressions.
+### 5. Section vertical spacing (desktop only)
+Global soft reduction using a targeted grep pass on `lg:py-24` / `lg:py-28` inside section wrappers:
+- `lg:py-28` → `lg:py-24`
+- `lg:py-24` → `lg:py-20`
 
-### Guardrails
-- No changes to `className`, animation props, `id`, `aria-*`, `head()`, route files, or public exports of parent components.
-- After each page, run `tsgo --noEmit` + visual smoke check via Playwright screenshot vs baseline.
-- Minimum Change Principle: props stay implicit (no over-typing); no logic reshaping.
+Applied only on **section wrappers** on About / Services / Turnkey / After Sales pages. Homepage, Contact, Brands untouched (per prior constraints).
 
-### Deliverables at end
-- Refactored file list w/ before/after line counts
-- New component tree
-- Duplicates eliminated
-- Regression report (typecheck + screenshot diffs on `/`, `/about`, `/turnkey`, `/after-sales`, `/contact`)
-- Confirmation of zero visual changes
+### 6. Card padding (desktop only)
+Where cards use `lg:p-8` → `lg:p-7`; `lg:p-6` stays. KPI cards **untouched** (explicitly preserved per prior approval).
 
-### Out of scope
-- Any file < 500 lines unless it contains obvious duplication of an extracted primitive.
-- `BlogArticlePage`, `ProductDetail`, `PortfolioBrowser`, `ServicesPage`, `brands.tsx` — flagged for a future phase; leaving untouched to keep this pass reviewable.
-- Design tokens (Phase 2 backlog).
+## Not changing
+- Homepage hero, layout, or spacing
+- Contact page
+- Brands page
+- Mobile (`base`) and tablet (`md:`) sizes
+- All colors, tokens, gradients, shadows
+- Typography families and hierarchy
+- Animations
+- KPI cards
+- CTA visual style (only size class)
+
+## Expected result
+Perceived density on 1440×900 improves by ~10–12%: header drops ~8px, editorial hero drops ~40–50px, section rhythm tightens, headings feel less shouty. No layout shifts on mobile/tablet.
+
+## Verification
+After implementation: Playwright screenshots at 1920, 1440, 1366 for About, Services, Turnkey, After Sales, Products; before/after side-by-side header crop at 1440.
