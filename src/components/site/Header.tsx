@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Menu, X, Star } from "lucide-react";
+import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
 
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
@@ -16,6 +16,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
+  const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isActive = (href: string) => {
@@ -194,21 +195,70 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden border-t border-border bg-white xl:hidden"
           >
-            <div className="mx-auto max-w-[100rem] px-6 py-4 lg:px-10">
-              {NAV.map((item) => {
+            <div className="mx-auto max-w-[100rem] px-6 py-2 lg:px-10">
+              {NAV.filter((item) => item.label !== "Brands").map((item) => {
                 const active = isActive(item.href);
-                if (item.label === "Brands") {
+                if (item.label === "All Products") {
                   return (
-                    <div key={item.label} className="border-b border-border/60 py-3 last:border-0">
-                      <a
-                        href="/brands"
-                        onClick={() => setOpen(false)}
-                        className="flex items-center gap-2 text-[calc(16*var(--desktop-px-unit))] font-medium text-foreground/80 hover:text-primary"
-                      >
-                        <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
-                        All Brands
-                      </a>
-                      <div className="mt-3 grid grid-cols-2 gap-2">
+                    <MobileProductsAccordion
+                      key={item.label}
+                      active={active}
+                      onNavigate={() => setOpen(false)}
+                    />
+                  );
+                }
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`block border-b border-border/60 py-2.5 text-[calc(16*var(--desktop-px-unit))] transition-colors last:border-0 ${
+                      item.label === "Contact Us"
+                        ? "font-bold text-primary hover:text-primary-dark"
+                        : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+
+              {/* All Brands — collapsible accordion, closed by default */}
+              <div className="border-b border-border/60 last:border-0">
+                <button
+                  type="button"
+                  onClick={() => setMobileBrandsOpen((v) => !v)}
+                  aria-expanded={mobileBrandsOpen}
+                  aria-controls="mobile-brands-panel"
+                  className="flex w-full items-center justify-between gap-2 py-2.5 text-left text-[calc(16*var(--desktop-px-unit))] font-medium text-foreground/80 transition-colors hover:text-primary"
+                >
+                  <span className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
+                    All Brands
+                  </span>
+                  <ChevronRight
+                    className={`h-4 w-4 opacity-60 transition-transform ${mobileBrandsOpen ? "rotate-90" : ""}`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {mobileBrandsOpen && (
+                    <motion.div
+                      id="mobile-brands-panel"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-2 gap-2 pb-3 pt-1">
+                        <a
+                          href="/brands"
+                          onClick={() => setOpen(false)}
+                          className="col-span-2 flex items-center gap-2 rounded-lg border border-border/60 px-3 py-2 text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground/80 transition-colors hover:border-primary/60 hover:text-primary"
+                        >
+                          <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
+                          View All Brands
+                        </a>
                         {BRAND_ITEMS.map((b) => (
                           <a
                             key={b.name}
@@ -227,34 +277,11 @@ export function Header() {
                           </a>
                         ))}
                       </div>
-                    </div>
-                  );
-                }
-                if (item.label === "All Products") {
-                  return (
-                    <MobileProductsAccordion
-                      key={item.label}
-                      active={active}
-                      onNavigate={() => setOpen(false)}
-                    />
-                  );
-                }
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={`block border-b border-border/60 py-4 text-[calc(16*var(--desktop-px-unit))] transition-colors last:border-0 ${
-                      item.label === "Contact Us"
-                        ? "font-bold text-primary hover:text-primary-dark"
-                        : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
 
               {/* Mobile language selector */}
               <div className="mt-4 border-t border-border/60 pt-4">
