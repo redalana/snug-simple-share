@@ -151,7 +151,7 @@ export function Footer() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[100rem] px-3 lg:px-10">
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         {/* Top footer — desktop layout, proportionally scaled on mobile */}
         <MobileScaledDesktopBlock referenceWidth={1024}>
           <div className="grid grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] gap-x-8 gap-y-10 py-10 lg:py-14">
