@@ -195,27 +195,23 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_1fr_320px] lg:gap-8">
             {/* GALLERY */}
             <div>
-              <div className="overflow-hidden rounded-2xl border border-border/70 bg-white shadow-[0_18px_44px_-24px_rgba(0,0,0,0.28)]">
+              <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_44px_-24px_rgba(0,0,0,0.28)]">
                 <button
                   type="button"
                   onClick={() => setLightboxOpen(true)}
                   aria-label="Open fullscreen gallery"
-                  className="group relative block aspect-[4/3] w-full overflow-hidden bg-white"
+                  className="group relative block aspect-[4/3] w-full overflow-hidden bg-secondary"
                 >
-                  <motion.div
+                  <motion.img
                     key={active}
-                    initial={{ opacity: 0.4 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0.4, scale: 1.01 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.35 }}
-                    className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                  >
-                    <img
-                      src={active}
-                      alt={`${product.brand} ${product.name}`}
-                      loading="eager"
-                      className="absolute inset-0 h-full w-full object-contain"
-                    />
-                  </motion.div>
+                    src={active}
+                    alt={`${product.brand} ${product.name}`}
+                    loading="eager"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                   <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
                     <Expand className="h-3.5 w-3.5" /> Fullscreen
                   </span>
@@ -225,14 +221,14 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 </button>
               </div>
               {gallery.length > 1 && (
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex gap-3">
                   {gallery.map((img, i) => (
                     <button
                       key={img + i}
                       onClick={() => setActive(img)}
                       aria-label={`View image ${i + 1}`}
                       aria-pressed={active === img}
-                      className={`h-[100px] w-[100px] shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all ${
+                      className={`h-20 w-24 shrink-0 overflow-hidden rounded-xl border-2 bg-secondary transition-all ${
                         active === img
                           ? "border-primary ring-2 ring-primary/25"
                           : "border-border/60 opacity-80 hover:opacity-100"
@@ -242,7 +238,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                         src={img}
                         alt=""
                         loading="lazy"
-                        className="h-full w-full object-contain"
+                        className="h-full w-full object-cover"
                       />
                     </button>
                   ))}
