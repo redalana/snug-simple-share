@@ -238,11 +238,11 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                           : "border-border/60 opacity-80 hover:opacity-100"
                       }`}
                     >
-                      <img
+                      <SmartFitImage
                         src={img}
                         alt=""
                         loading="lazy"
-                        className="h-full w-full object-contain p-1"
+                        fit={0.9}
                       />
                     </button>
                   ))}
