@@ -242,7 +242,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                         src={img}
                         alt=""
                         loading="lazy"
-                        fit={0.9}
+                        fit={1}
                       />
                     </button>
                   ))}
