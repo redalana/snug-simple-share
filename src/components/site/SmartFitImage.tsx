@@ -151,20 +151,22 @@ export function SmartFitImage({
         (size.w * fit) / displayedBW,
         (size.h * fit) / displayedBH,
       );
-      // Cap zoom to avoid pixelation on already-tight images
-      const s = Math.max(1, Math.min(extra, 4));
-      // Translate so bbox center aligns to container center
-      const imgCX = bbox.nW / 2;
-      const imgCY = bbox.nH / 2;
-      const bboxCX = bbox.x + bbox.w / 2;
-      const bboxCY = bbox.y + bbox.h / 2;
-      const tx = (imgCX - bboxCX) * scale0 * s;
-      const ty = (imgCY - bboxCY) * scale0 * s;
-      style = {
-        transform: `translate(${tx}px, ${ty}px) scale(${s})`,
-        transformOrigin: "center center",
-        willChange: "transform",
-      };
+      // Only scale UP small subjects — never shrink an image that already fills
+      // the container. Skip near-1 transforms so large images stay untouched.
+      if (extra > 1.15) {
+        const s = Math.min(extra, 2.2);
+        const imgCX = bbox.nW / 2;
+        const imgCY = bbox.nH / 2;
+        const bboxCX = bbox.x + bbox.w / 2;
+        const bboxCY = bbox.y + bbox.h / 2;
+        const tx = (imgCX - bboxCX) * scale0 * s;
+        const ty = (imgCY - bboxCY) * scale0 * s;
+        style = {
+          transform: `translate(${tx}px, ${ty}px) scale(${s})`,
+          transformOrigin: "center center",
+          willChange: "transform",
+        };
+      }
     }
   }
 
