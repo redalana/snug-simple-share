@@ -16,6 +16,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
+  const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const isActive = (href: string) => {
