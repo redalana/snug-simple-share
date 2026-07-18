@@ -45,6 +45,7 @@ import {
   productSlug,
 } from "@/lib/products";
 import { generateProductPdf } from "@/lib/product-pdf";
+import { SmartFitImage } from "@/components/site/SmartFitImage";
 import { geoService } from "@/lib/services/geoService";
 
 const WHATSAPP_NUMBER = "962799741318";
