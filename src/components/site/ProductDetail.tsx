@@ -209,11 +209,11 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                     transition={{ duration: 0.35 }}
                     className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.02]"
                   >
-                    <SmartFitImage
+                    <img
                       src={active}
                       alt={`${product.brand} ${product.name}`}
                       loading="eager"
-                      fit={1}
+                      className="absolute inset-0 h-full w-full object-contain"
                     />
                   </motion.div>
                   <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
