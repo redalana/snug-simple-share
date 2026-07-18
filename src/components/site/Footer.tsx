@@ -152,50 +152,53 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-        {/* Top footer — 5 columns */}
-        <div className="grid gap-x-8 gap-y-7 py-8 md:grid-cols-2 md:gap-x-10 md:gap-y-8 md:py-10 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-y-10 lg:py-14">
-          <div>
-            <Logo light />
-            <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
-              Delivering advanced medical technologies, turnkey project delivery,
-              biomedical engineering and long-term support for healthcare providers
-              across Africa, the Middle East and emerging healthcare markets.
-            </p>
-            <div className="mt-5 flex items-center gap-6">
-              {SOCIALS.map(({ label, Icon, color }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="group transition-transform duration-300 hover:-translate-y-0.5"
-                  style={{ ["--sc" as string]: color }}
-                >
-                  <Icon className="h-[calc(19*var(--desktop-px-unit))] w-[calc(19*var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {COLS.map((col) => (
-            <div key={col.title}>
-              <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
-                {col.title}
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a
-                      href="#"
-                      className="inline-block text-white/50 transition-all duration-200 hover:translate-x-1 hover:text-white"
-                    >
-                      {l}
-                    </a>
-                  </li>
+        {/* Top footer — 5 columns (horizontal scroll on mobile, grid on desktop) */}
+        <div className="-mx-6 overflow-x-auto py-8 lg:mx-0 lg:overflow-visible lg:py-14">
+          <div className="flex min-w-max gap-x-8 px-6 lg:grid lg:min-w-0 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-x-8 lg:gap-y-10 lg:px-0">
+            <div className="w-[280px] shrink-0 lg:w-auto">
+              <Logo light />
+              <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
+                Delivering advanced medical technologies, turnkey project delivery,
+                biomedical engineering and long-term support for healthcare providers
+                across Africa, the Middle East and emerging healthcare markets.
+              </p>
+              <div className="mt-5 flex items-center gap-6">
+                {SOCIALS.map(({ label, Icon, color }) => (
+                  <a
+                    key={label}
+                    href="#"
+                    aria-label={label}
+                    className="group transition-transform duration-300 hover:-translate-y-0.5"
+                    style={{ ["--sc" as string]: color }}
+                  >
+                    <Icon className="h-[calc(19*var(--desktop-px-unit))] w-[calc(19*var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
+                  </a>
                 ))}
-              </ul>
+              </div>
             </div>
-          ))}
+
+            {COLS.map((col) => (
+              <div key={col.title} className="w-[170px] shrink-0 lg:w-auto">
+                <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
+                  {col.title}
+                </h4>
+                <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
+                  {col.links.map((l) => (
+                    <li key={l}>
+                      <a
+                        href="#"
+                        className="inline-block text-white/50 transition-all duration-200 hover:translate-x-1 hover:text-white"
+                      >
+                        {l}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
+
 
         {/* Premium divider + contact bar */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
