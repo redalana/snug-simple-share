@@ -201,16 +201,20 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                   aria-label="Open fullscreen gallery"
                   className="group relative block w-full overflow-hidden bg-white h-[420px] sm:h-[500px] lg:h-[620px]"
                 >
-                  <motion.img
+                  <motion.div
                     key={active}
-                    initial={{ opacity: 0.4, scale: 1.01 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0.4 }}
+                    animate={{ opacity: 1 }}
                     transition={{ duration: 0.35 }}
-                    src={active}
-                    alt={`${product.brand} ${product.name}`}
-                    loading="eager"
-                    className="absolute inset-0 h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
+                    className="absolute inset-0 p-3 sm:p-4 transition-transform duration-500 group-hover:scale-[1.02]"
+                  >
+                    <SmartFitImage
+                      src={active}
+                      alt={`${product.brand} ${product.name}`}
+                      loading="eager"
+                      fit={0.92}
+                    />
+                  </motion.div>
                   <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
                     <Expand className="h-3.5 w-3.5" /> Fullscreen
                   </span>
