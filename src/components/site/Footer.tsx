@@ -253,3 +253,66 @@ export function Footer() {
     </footer>
   );
 }
+
+/**
+ * Renders desktop-styled content at a fixed reference width and proportionally
+ * scales it down on viewports narrower than `referenceWidth` so the desktop
+ * layout fits without horizontal overflow. At `lg` and above (>=1024px),
+ * scaling is disabled and the content renders at its natural size.
+ */
+function MobileScaledDesktopBlock({
+  children,
+  referenceWidth,
+}: {
+  children: React.ReactNode;
+  referenceWidth: number;
+}) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  const [innerHeight, setInnerHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const outer = outerRef.current;
+    const inner = innerRef.current;
+    if (!outer || !inner) return;
+
+    const update = () => {
+      const cw = outer.clientWidth;
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      const s = isDesktop ? 1 : Math.min(1, cw / referenceWidth);
+      setScale(s);
+      setInnerHeight(inner.getBoundingClientRect().height / (s || 1));
+    };
+
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(outer);
+    ro.observe(inner);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [referenceWidth]);
+
+  return (
+    <div
+      ref={outerRef}
+      className="w-full overflow-hidden"
+      style={{ height: innerHeight != null ? innerHeight * scale : undefined }}
+    >
+      <div
+        ref={innerRef}
+        style={{
+          width: `${referenceWidth}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
