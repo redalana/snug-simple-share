@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -151,18 +151,18 @@ export function Footer() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[100rem] px-3 lg:px-10">
-        {/* Top footer — 5 columns (compressed on mobile to avoid scroll) */}
-        <div className="py-8 lg:py-14">
-          <div className="grid grid-cols-[1.5fr_1fr_1fr_0.9fr_0.9fr] gap-x-2 gap-y-6 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-x-8 lg:gap-y-10">
+      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+        {/* Top footer — desktop layout, proportionally scaled on mobile */}
+        <MobileScaledDesktopBlock referenceWidth={1024}>
+          <div className="grid grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] gap-x-8 gap-y-10 py-10 lg:py-14">
             <div className="min-w-0">
               <Logo light />
-              <p className="mt-3 max-w-sm text-[9px] leading-[1.55] text-white/50 lg:mt-4 lg:text-[calc(13.5*var(--desktop-px-unit))] lg:leading-[1.7]">
+              <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
                 Delivering advanced medical technologies, turnkey project delivery,
                 biomedical engineering and long-term support for healthcare providers
                 across Africa, the Middle East and emerging healthcare markets.
               </p>
-              <div className="mt-3 flex items-center gap-3 lg:mt-5 lg:gap-6">
+              <div className="mt-5 flex items-center gap-6">
                 {SOCIALS.map(({ label, Icon, color }) => (
                   <a
                     key={label}
@@ -171,7 +171,7 @@ export function Footer() {
                     className="group transition-transform duration-300 hover:-translate-y-0.5"
                     style={{ ["--sc" as string]: color }}
                   >
-                    <Icon className="h-3 w-3 text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)] lg:h-[calc(19*var(--desktop-px-unit))] lg:w-[calc(19*var(--desktop-px-unit))]" />
+                    <Icon className="h-[calc(19*var(--desktop-px-unit))] w-[calc(19*var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
                   </a>
                 ))}
               </div>
@@ -179,10 +179,10 @@ export function Footer() {
 
             {COLS.map((col) => (
               <div key={col.title} className="min-w-0">
-                <h4 className="font-display text-[8px] font-semibold uppercase tracking-[0.12em] text-white/85 lg:text-[calc(12*var(--desktop-px-unit))] lg:tracking-[0.2em]">
+                <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                   {col.title}
                 </h4>
-                <ul className="mt-2 space-y-1.5 text-[9px] lg:mt-4 lg:space-y-2.5 lg:text-[calc(13.5*var(--desktop-px-unit))]">
+                <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
                     <li key={l}>
                       <a
@@ -197,7 +197,8 @@ export function Footer() {
               </div>
             ))}
           </div>
-        </div>
+        </MobileScaledDesktopBlock>
+
 
 
 
@@ -252,3 +253,66 @@ export function Footer() {
     </footer>
   );
 }
+
+/**
+ * Renders desktop-styled content at a fixed reference width and proportionally
+ * scales it down on viewports narrower than `referenceWidth` so the desktop
+ * layout fits without horizontal overflow. At `lg` and above (>=1024px),
+ * scaling is disabled and the content renders at its natural size.
+ */
+function MobileScaledDesktopBlock({
+  children,
+  referenceWidth,
+}: {
+  children: React.ReactNode;
+  referenceWidth: number;
+}) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  const [innerHeight, setInnerHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const outer = outerRef.current;
+    const inner = innerRef.current;
+    if (!outer || !inner) return;
+
+    const update = () => {
+      const cw = outer.clientWidth;
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      const s = isDesktop ? 1 : Math.min(1, cw / referenceWidth);
+      setScale(s);
+      setInnerHeight(inner.getBoundingClientRect().height / (s || 1));
+    };
+
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(outer);
+    ro.observe(inner);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [referenceWidth]);
+
+  return (
+    <div
+      ref={outerRef}
+      className="w-full overflow-hidden"
+      style={{ height: innerHeight != null ? innerHeight * scale : undefined }}
+    >
+      <div
+        ref={innerRef}
+        style={{
+          width: `${referenceWidth}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
