@@ -151,7 +151,7 @@ export function Footer() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
+      <div className="relative mx-auto max-w-[100rem] px-3 lg:px-10">
         {/* Top footer — 5 columns (compressed on mobile to avoid scroll) */}
         <div className="py-8 lg:py-14">
           <div className="grid grid-cols-[1.5fr_1fr_1fr_0.9fr_0.9fr] gap-x-2 gap-y-6 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-x-8 lg:gap-y-10">
