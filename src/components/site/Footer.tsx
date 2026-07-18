@@ -152,17 +152,17 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-[100rem] px-3 lg:px-10">
-        {/* Top footer — 5 columns (compressed on mobile to avoid scroll) */}
-        <div className="py-8 lg:py-14">
-          <div className="grid grid-cols-[1.5fr_1fr_1fr_0.9fr_0.9fr] gap-x-2 gap-y-6 lg:grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] lg:gap-x-8 lg:gap-y-10">
+        {/* Top footer — desktop layout, proportionally scaled on mobile */}
+        <MobileScaledDesktopBlock referenceWidth={1024}>
+          <div className="grid grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] gap-x-8 gap-y-10 py-10 lg:py-14">
             <div className="min-w-0">
               <Logo light />
-              <p className="mt-3 max-w-sm text-[9px] leading-[1.55] text-white/50 lg:mt-4 lg:text-[calc(13.5*var(--desktop-px-unit))] lg:leading-[1.7]">
+              <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
                 Delivering advanced medical technologies, turnkey project delivery,
                 biomedical engineering and long-term support for healthcare providers
                 across Africa, the Middle East and emerging healthcare markets.
               </p>
-              <div className="mt-3 flex items-center gap-3 lg:mt-5 lg:gap-6">
+              <div className="mt-5 flex items-center gap-6">
                 {SOCIALS.map(({ label, Icon, color }) => (
                   <a
                     key={label}
@@ -171,7 +171,7 @@ export function Footer() {
                     className="group transition-transform duration-300 hover:-translate-y-0.5"
                     style={{ ["--sc" as string]: color }}
                   >
-                    <Icon className="h-3 w-3 text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)] lg:h-[calc(19*var(--desktop-px-unit))] lg:w-[calc(19*var(--desktop-px-unit))]" />
+                    <Icon className="h-[calc(19*var(--desktop-px-unit))] w-[calc(19*var(--desktop-px-unit))] text-white/70 transition-colors duration-300 group-hover:text-[var(--sc)]" />
                   </a>
                 ))}
               </div>
@@ -179,10 +179,10 @@ export function Footer() {
 
             {COLS.map((col) => (
               <div key={col.title} className="min-w-0">
-                <h4 className="font-display text-[8px] font-semibold uppercase tracking-[0.12em] text-white/85 lg:text-[calc(12*var(--desktop-px-unit))] lg:tracking-[0.2em]">
+                <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                   {col.title}
                 </h4>
-                <ul className="mt-2 space-y-1.5 text-[9px] lg:mt-4 lg:space-y-2.5 lg:text-[calc(13.5*var(--desktop-px-unit))]">
+                <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
                     <li key={l}>
                       <a
@@ -197,7 +197,8 @@ export function Footer() {
               </div>
             ))}
           </div>
-        </div>
+        </MobileScaledDesktopBlock>
+
 
 
 
