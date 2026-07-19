@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { PRODUCTS, productSlug } from "@/lib/products";
 import { ARTICLES } from "@/lib/blog";
+import { SITE_URL } from "@/lib/seo";
 
-const BASE_URL = "https://snug-simple-share.lovable.app";
+const BASE_URL = SITE_URL;
 
 interface SitemapEntry {
   path: string;
