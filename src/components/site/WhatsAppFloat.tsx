@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { onQuoteModalState } from "@/lib/quote-modal";
 
 const WA_URL =
   "https://wa.me/962799741318?text=Hello%20AbuFarha%20Medical%20Supplies,%20I%20would%20like%20to%20inquire%20about%20your%20medical%20equipment.";
