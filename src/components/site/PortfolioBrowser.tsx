@@ -328,6 +328,33 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
   );
 }
 
+function CompareToggle({ slug, productName }: { slug: string; productName: string }) {
+  const slugs = useCompare();
+  const active = slugs.includes(slug);
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const added = toggleCompare(slug);
+        if (added) toast.success("Added to Compare", { description: productName });
+        else if (!active) toast.error("You can compare up to 4 products");
+        else toast("Removed from Compare");
+      }}
+      aria-pressed={active}
+      aria-label={active ? "Remove from comparison" : "Add to comparison"}
+      className={`absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border shadow-sm transition-all ${
+        active
+          ? "border-primary bg-primary text-primary-foreground"
+          : "border-white/70 bg-white/95 text-foreground/70 hover:border-primary hover:text-primary"
+      }`}
+    >
+      <GitCompare className="h-4 w-4" />
+    </button>
+  );
+}
+
 /** Builds a compact page list with ellipses: 1 … 4 5 6 … 10 */
 function buildPageList(current: number, total: number): (number | "…")[] {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
