@@ -152,10 +152,10 @@ export const EXPERTISE = [
 ];
 
 export const MAP_STATS = [
-  { icon: Building2, value: "30+", label: "Projects" },
+  { icon: Building2, value: "30+", label: "Healthcare Projects" },
   { icon: Globe2, value: "10+", label: "Countries" },
-  { icon: MapPinned, value: "60+", label: "Cities" },
-  { icon: MonitorCheck, value: "500+", label: "Installed Systems" },
+  { icon: CalendarClock, value: "Since 1999", label: "Engineering Healthcare" },
+  { icon: MonitorCheck, value: "24/7", label: "Technical Support" },
 ];
 
 export const INDUSTRIES = [
