@@ -22,7 +22,9 @@ import {
   GraduationCap,
   SearchX,
   X,
+  GitCompare,
 } from "lucide-react";
+import { toast } from "sonner";
 import { HeroShowcase } from "@/components/site/HeroShowcase";
 import {
   PRIMARY_CATEGORIES,
@@ -31,6 +33,7 @@ import {
   productSlug,
   type Product,
 } from "@/lib/products";
+import { toggleCompare, useCompare } from "@/lib/compare-store";
 
 
 /**
