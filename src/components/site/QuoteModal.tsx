@@ -228,6 +228,8 @@ export function QuoteModal() {
                 <label htmlFor="qm-org" className={fieldLabel}>Hospital / Company *</label>
                 <input
                   id="qm-org"
+                  name="organization"
+                  autoComplete="organization"
                   value={org}
                   onChange={(e) => setOrg(e.target.value)}
                   onBlur={() => markTouched("org")}
