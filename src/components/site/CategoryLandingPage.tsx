@@ -1,10 +1,26 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronRight, ShieldCheck, Wrench, GraduationCap } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronRight,
+  ShieldCheck,
+  Wrench,
+  GraduationCap,
+  CheckCircle2,
+  ClipboardList,
+  Stethoscope,
+  Plus,
+  Minus,
+} from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
-import { itemListJsonLd } from "@/config/companyFacts";
+import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
+import {
+  CATEGORY_CONTENT,
+  CATEGORY_LABELS,
+} from "@/lib/category-content";
 
 export type CategoryLandingProps = {
   /** Slug segment used in the URL, e.g. "cath-lab". */
@@ -40,6 +56,8 @@ export function CategoryLandingPage({
     ? PRODUCTS.filter((p) => !productCategories.includes(p.category))
     : PRODUCTS.filter((p) => productCategories.includes(p.category));
 
+  const content = CATEGORY_CONTENT[slug];
+
   const itemListSchema = itemListJsonLd(
     matches.map((p) => ({
       name: p.name,
@@ -47,6 +65,9 @@ export function CategoryLandingPage({
     })),
     title,
   );
+
+  const faqSchema =
+    content && content.faqs.length > 0 ? faqPageJsonLd(content.faqs) : null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,6 +77,13 @@ export function CategoryLandingPage({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <main id="main-content" className="pt-[calc(110*var(--desktop-px-unit))]">
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
@@ -115,6 +143,112 @@ export function CategoryLandingPage({
             </div>
           </div>
         </section>
+
+        {/* Enrichment: overview + clinical applications + buyer considerations */}
+        {content && (
+          <section className="border-b border-border/60 bg-background">
+            <div className="mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-16">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
+                <div className="lg:col-span-2">
+                  <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                    About {title}
+                  </h2>
+                  <p className="mt-5 text-base leading-relaxed text-foreground/85">
+                    {content.intro}
+                  </p>
+
+                  <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-foreground">
+                        <Stethoscope className="h-5 w-5 text-primary" />
+                        Clinical applications
+                      </h3>
+                      <ul className="mt-4 space-y-2.5 text-sm text-foreground/80">
+                        {content.applications.map((a) => (
+                          <li key={a} className="flex items-start gap-2">
+                            <CheckCircle2
+                              className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                              strokeWidth={2.25}
+                            />
+                            <span>{a}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-lg font-bold text-foreground">
+                        <ClipboardList className="h-5 w-5 text-primary" />
+                        Buyer considerations
+                      </h3>
+                      <ul className="mt-4 space-y-2.5 text-sm text-foreground/80">
+                        {content.buyerConsiderations.map((b) => (
+                          <li key={b} className="flex items-start gap-2">
+                            <CheckCircle2
+                              className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                              strokeWidth={2.25}
+                            />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Support services + related categories sidebar */}
+                <aside className="space-y-6">
+                  <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.15)]">
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      AbuFarha support for {title}
+                    </h3>
+                    <ul className="mt-4 space-y-2 text-sm">
+                      {content.supportServices.map((s) => (
+                        <li key={s.href + s.label}>
+                          <Link
+                            to={s.href}
+                            className="group flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-foreground/85 transition-colors hover:bg-muted/60 hover:text-primary"
+                          >
+                            <span>{s.label}</span>
+                            <ArrowRight
+                              className="h-4 w-4 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5"
+                              strokeWidth={2.25}
+                            />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {content.related.length > 0 && (
+                    <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.15)]">
+                      <h3 className="font-display text-base font-bold text-foreground">
+                        Related categories
+                      </h3>
+                      <ul className="mt-4 space-y-2 text-sm">
+                        {content.related
+                          .filter((r) => CATEGORY_LABELS[r])
+                          .map((r) => (
+                            <li key={r}>
+                              <a
+                                href={`/products/${r}`}
+                                className="group flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-foreground/85 transition-colors hover:bg-muted/60 hover:text-primary"
+                              >
+                                <span>{CATEGORY_LABELS[r]}</span>
+                                <ArrowRight
+                                  className="h-4 w-4 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5"
+                                  strokeWidth={2.25}
+                                />
+                              </a>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  )}
+                </aside>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Products grid */}
         <section className="mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-20">
@@ -213,9 +347,84 @@ export function CategoryLandingPage({
             </div>
           )}
         </section>
+
+        {/* Category FAQ */}
+        {content && content.faqs.length > 0 && (
+          <section className="border-t border-border/60 bg-muted/30">
+            <div className="mx-auto max-w-[80rem] px-6 py-14 lg:px-10 lg:py-20">
+              <div className="max-w-3xl">
+                <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  {title} — frequently asked questions
+                </h2>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Answers to the questions our engineers receive most often from
+                  hospital procurement and clinical teams.
+                </p>
+              </div>
+              <div className="mt-8">
+                <CategoryFaqList items={content.faqs} />
+              </div>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/contact"
+                  hash="contact-form"
+                  className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark"
+                >
+                  Talk to an Engineer
+                </Link>
+                <Link
+                  to="/faqs"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  All FAQs
+                  <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
+  );
+}
+
+function CategoryFaqList({
+  items,
+}: {
+  items: { question: string; answer: string }[];
+}) {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <ul className="divide-y divide-border/70 overflow-hidden rounded-2xl border border-border bg-white">
+      {items.map((it, i) => {
+        const isOpen = open === i;
+        return (
+          <li key={it.question}>
+            <button
+              type="button"
+              aria-expanded={isOpen}
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-muted/40 sm:px-6 sm:py-5"
+            >
+              <span className="font-display text-base font-semibold text-foreground sm:text-lg">
+                {it.question}
+              </span>
+              {isOpen ? (
+                <Minus className="h-5 w-5 shrink-0 text-primary" strokeWidth={2.25} />
+              ) : (
+                <Plus className="h-5 w-5 shrink-0 text-primary" strokeWidth={2.25} />
+              )}
+            </button>
+            {isOpen && (
+              <div className="px-5 pb-5 text-sm leading-relaxed text-foreground/80 sm:px-6 sm:pb-6">
+                {it.answer}
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -225,6 +434,7 @@ export const CATEGORY_SLUGS = [
   "drug-eluting-stents",
   "pet-ct-scanners",
   "mri-scanners",
+  "ct-scanners",
   "c-arm-systems",
   "x-ray-systems",
   "mammography-systems",
