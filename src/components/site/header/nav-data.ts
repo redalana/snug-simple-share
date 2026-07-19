@@ -61,10 +61,15 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
   { label: "Others", category: null, seoPath: "/products/others", Icon: LayoutGrid },
 ];
 
-export const SOCIALS = [
-  { label: "Facebook", href: "#", Icon: Facebook, hover: "hover:text-[#1877F2]" },
-  { label: "LinkedIn", href: "#", Icon: Linkedin, hover: "hover:text-[#0A66C2]" },
-];
+// Official social profiles. Add entries here once real URLs exist — the
+// header/mobile menu iterates this array, so leaving it empty simply hides
+// the group (no `href="#"` placeholders reach production).
+export const SOCIALS: {
+  label: string;
+  href: string;
+  Icon: typeof Facebook;
+  hover: string;
+}[] = [];
 
 export const LANGUAGES = [
   { code: "en", label: "English", flag: "🇬🇧" },
