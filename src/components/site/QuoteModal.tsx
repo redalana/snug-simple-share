@@ -9,7 +9,6 @@ import {
   FileText,
   Mail,
   MessageCircle,
-  PhoneCall,
   Search,
   ShieldCheck,
   X,
@@ -42,7 +41,18 @@ const INTERESTS = [
   "Other",
 ];
 
-type Contact = "whatsapp" | "phone" | "email";
+type Contact = "whatsapp" | "email";
+
+// Maps the "I'm Interested In" category to product category names in PRODUCTS.
+const INTEREST_TO_CATEGORY: Record<string, string[]> = {
+  "Cath Lab": ["Cath Lab Systems"],
+  MRI: ["MRI Scanners"],
+  CT: ["CT Scanners"],
+  "PET/CT": ["PET/CT Scanners"],
+  "X-Ray": ["X-Ray"],
+  "C-Arm": ["C-Arm"],
+  Mammography: ["Mammography"],
+};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -97,16 +107,27 @@ export function QuoteModal() {
     );
   }, [countryQuery]);
 
+  const productPool = useMemo(() => {
+    const cats = INTEREST_TO_CATEGORY[interest];
+    if (!interest) return PRODUCTS;
+    if (!cats) return [];
+    return PRODUCTS.filter((p) =>
+      cats.some((c) => p.category.toLowerCase().includes(c.toLowerCase())),
+    );
+  }, [interest]);
+
   const productMatches = useMemo(() => {
     const q = product.trim().toLowerCase();
-    if (!q) return PRODUCTS.slice(0, 8);
-    return PRODUCTS.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q),
-    ).slice(0, 8);
-  }, [product]);
+    if (!q) return productPool.slice(0, 8);
+    return productPool
+      .filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+  }, [product, productPool]);
 
   const activeCountry = COUNTRIES.find((c) => c.iso2 === country) ?? COUNTRIES[0];
 
@@ -339,6 +360,7 @@ export function QuoteModal() {
                           <button
                             type="button"
                             onClick={() => {
+                              if (i !== interest) setProduct("");
                               setInterest(i);
                               setInterestOpen(false);
                             }}
@@ -419,11 +441,10 @@ export function QuoteModal() {
 
               <div>
                 <span className={fieldLabel}>Preferred Contact</span>
-                <div className="grid grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-2 gap-2.5">
                   {(
                     [
                       { id: "whatsapp", label: "WhatsApp", icon: MessageCircle },
-                      { id: "phone", label: "Phone", icon: PhoneCall },
                       { id: "email", label: "Email", icon: Mail },
                     ] as { id: Contact; label: string; icon: typeof Mail }[]
                   ).map((opt) => {
