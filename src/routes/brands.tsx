@@ -223,7 +223,7 @@ const FILTERS: ("All" | BrandCategory)[] = [
 
 const METRICS = [
   { value: "12", label: "Global Brands", icon: Globe2 },
-  { value: "25+", label: "Years Experience", icon: ShieldCheck },
+  { value: "Since 1999", label: "Engineering Healthcare", icon: ShieldCheck },
   { value: "10+", label: "Countries Served", icon: Sparkles },
   { value: "100%", label: "Certified OEM Partners", icon: Award },
 ];
