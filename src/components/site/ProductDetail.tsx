@@ -441,7 +441,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" />
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
               <div
                 key={f.title}
