@@ -58,6 +58,23 @@ export const Route = createFileRoute("/services")({
       { name: "twitter:description", content: DESC },
     ],
     links: [{ rel: "canonical", href: SITE_URL + "/services" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          itemListJsonLd(
+            SERVICES.map((s) => ({ name: s.name, url: SITE_URL + "/services" })),
+            "AbuFarha Medical Services",
+          ),
+        ),
+      },
+      ...SERVICES.map((s) => ({
+        type: "application/ld+json",
+        children: JSON.stringify(
+          serviceJsonLd({ ...s, url: SITE_URL + "/services" }),
+        ),
+      })),
+    ],
   }),
   component: ServicesRoute,
 });
