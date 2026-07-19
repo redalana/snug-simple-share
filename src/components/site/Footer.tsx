@@ -197,13 +197,13 @@ export function Footer() {
                 </h4>
                 <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
-                    <li key={l}>
-                      <a
-                        href="#"
+                    <li key={l.label}>
+                      <Link
+                        to={l.to}
                         className="inline-block text-white/50 transition-all duration-200 hover:translate-x-1 hover:text-white"
                       >
-                        {l}
-                      </a>
+                        {l.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
