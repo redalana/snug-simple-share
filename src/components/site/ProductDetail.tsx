@@ -175,8 +175,11 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const inCompare = compareSlugs.includes(slug);
   const handleCompare = () => {
     const added = toggleCompare(slug);
-    if (!added && !inCompare) toast.error("You can compare up to 4 products");
+    if (added) toast.success("Added to Compare", { description: `${product.name} is ready to compare.` });
+    else if (inCompare) toast("Removed from Compare");
+    else toast.error("You can compare up to 4 products");
   };
+
   const share = useShare(product, pageUrl);
 
   const adjacent = getAdjacentProducts(slug);
