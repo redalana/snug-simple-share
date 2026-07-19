@@ -20,7 +20,15 @@ import solEswl from "@/assets/sol-eswl.jpg";
 import solDes from "@/assets/sol-des.jpg";
 import solOr from "@/assets/sol-or.jpg";
 
-export const SITE_URL = "https://snug-simple-share.lovable.app";
+/**
+ * Production site URL. Overridable at build time via VITE_SITE_URL so
+ * canonical / og:url / sitemap / JSON-LD all point at the real production
+ * domain once a custom domain is connected. Fallback is the current Lovable
+ * subdomain used during preview.
+ */
+export const SITE_URL: string =
+  (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
+  "https://snug-simple-share.lovable.app";
 
 /** Absolute URL helper — pass a relative path or a full URL. */
 export function absUrl(pathOrUrl: string): string {
