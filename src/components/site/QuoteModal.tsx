@@ -361,6 +361,7 @@ export function QuoteModal() {
                           <button
                             type="button"
                             onClick={() => {
+                              if (i !== interest) setProduct("");
                               setInterest(i);
                               setInterestOpen(false);
                             }}
