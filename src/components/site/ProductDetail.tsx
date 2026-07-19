@@ -268,7 +268,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
+      <section id="overview" className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl"
