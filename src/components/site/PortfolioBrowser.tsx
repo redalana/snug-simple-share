@@ -675,8 +675,8 @@ export function PortfolioBrowser() {
       {/* CATEGORY NAV */}
       <section className="sticky top-[calc(112*var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-[100rem] items-center gap-3 px-6 py-4 lg:px-10">
-          <div className="relative w-full [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)] lg:[mask-image:none]">
-            <div className="flex w-full snap-x snap-mandatory items-center gap-2 overflow-x-auto pr-10 [scrollbar-width:none] [-ms-overflow-style:none] lg:pr-0 [&::-webkit-scrollbar]:hidden">
+          <div className="relative w-full [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)] md:[mask-image:none]">
+            <div className="flex w-full snap-x snap-mandatory items-center gap-2 overflow-x-auto pr-10 [scrollbar-width:none] [-ms-overflow-style:none] md:flex-wrap md:justify-center md:gap-x-3 md:gap-y-3 md:overflow-visible md:pr-0 md:snap-none [&::-webkit-scrollbar]:hidden">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
@@ -684,7 +684,7 @@ export function PortfolioBrowser() {
                     setActiveCat(cat);
                     resetPage();
                   }}
-                  className={`shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                  className={`h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 text-sm font-medium leading-none transition-all duration-300 ${
                     activeCat === cat
                       ? "bg-primary text-primary-foreground shadow-[0_10px_24px_-10px_var(--primary)] ring-1 ring-primary"
                       : "border border-border bg-card text-foreground/75 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_10px_24px_-16px_var(--primary)]"
