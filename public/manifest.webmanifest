@@ -1,0 +1,12 @@
+{
+  "name": "AbuFarha Medical Equipment",
+  "short_name": "AbuFarha",
+  "description": "Advanced medical technology solutions — supply, installation, training and long-term biomedical engineering support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E53935",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}

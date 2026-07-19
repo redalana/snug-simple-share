@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
+import { Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Logo } from "./Logo";
@@ -55,10 +55,17 @@ const COLS: { title: string; links: FooterLink[] }[] = [
   },
 ];
 
-const SOCIALS = [
-  { label: "Facebook", Icon: Facebook, color: "#1877F2" },
-  { label: "LinkedIn", Icon: Linkedin, color: "#0A66C2" },
-  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366" },
+// Only WhatsApp has a verified official destination today; Facebook / LinkedIn
+// are hidden until official URLs exist (avoids href="#" placeholders shipping
+// to production). Add entries here with an explicit `href` when ready.
+type SocialItem = {
+  label: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  href: string;
+};
+const SOCIALS: SocialItem[] = [
+  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366", href: "https://wa.me/962799741318" },
 ];
 
 const CONTACTS = [
@@ -176,10 +183,12 @@ export function Footer() {
                 across Africa, the Middle East and emerging healthcare markets.
               </p>
               <div className="mt-5 flex items-center gap-6">
-                {SOCIALS.map(({ label, Icon, color }) => (
+                {SOCIALS.map(({ label, Icon, color, href }) => (
                   <a
                     key={label}
-                    href="#"
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={label}
                     className="group transition-transform duration-300 hover:-translate-y-0.5"
                     style={{ ["--sc" as string]: color }}
