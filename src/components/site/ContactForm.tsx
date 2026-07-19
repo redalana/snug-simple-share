@@ -415,13 +415,16 @@ export function ContactForm() {
             <Textarea
               id="message"
               rows={4}
+              autoComplete="off"
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? "message-error" : undefined}
               className="resize-none rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
               placeholder="Tell us about your project, requirements or timeline…"
               value={values.message ?? ""}
               onChange={(e) => setField("message", e.target.value)}
             />
             {errors.message && (
-              <p role="alert" className="text-xs font-medium text-destructive">{errors.message}</p>
+              <p id="message-error" role="alert" className="text-xs font-medium text-destructive">{errors.message}</p>
             )}
           </div>
 
