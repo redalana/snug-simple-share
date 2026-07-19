@@ -210,6 +210,8 @@ export function QuoteModal() {
                 <label htmlFor="qm-name" className={fieldLabel}>Full Name *</label>
                 <input
                   id="qm-name"
+                  name="name"
+                  autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onBlur={() => markTouched("name")}
@@ -226,6 +228,8 @@ export function QuoteModal() {
                 <label htmlFor="qm-org" className={fieldLabel}>Hospital / Company *</label>
                 <input
                   id="qm-org"
+                  name="organization"
+                  autoComplete="organization"
                   value={org}
                   onChange={(e) => setOrg(e.target.value)}
                   onBlur={() => markTouched("org")}
@@ -317,7 +321,10 @@ export function QuoteModal() {
                 <label htmlFor="qm-email" className={fieldLabel}>Email *</label>
                 <input
                   id="qm-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => markTouched("email")}

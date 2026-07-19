@@ -113,6 +113,18 @@ const inputCls =
 const selectCls =
   "h-12 rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 hover:bg-secondary/50 focus:border-primary focus:ring-4 focus:ring-primary/10 data-[state=open]:border-primary data-[state=open]:ring-4 data-[state=open]:ring-primary/10";
 
+function autoCompleteFor(name: string): string {
+  switch (name) {
+    case "fullName": return "name";
+    case "hospitalName":
+    case "companyName":
+    case "orgName":
+    case "facility":
+      return "organization";
+    case "country": return "country-name";
+    default: return "off";
+  }
+}
 
 export function ContactForm() {
   const reduceMotion = useReducedMotion();
@@ -305,6 +317,8 @@ export function ContactForm() {
                       <Label htmlFor={f.name} className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">{f.label}</Label>
                       <Input
                         id={f.name}
+                        name={f.name}
+                        autoComplete={autoCompleteFor(f.name)}
                         className={inputCls}
                         placeholder={f.placeholder}
                         value={values[f.name] ?? ""}
@@ -353,14 +367,19 @@ export function ContactForm() {
               </Label>
               <Input
                 id="email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
                 className={inputCls}
                 placeholder="you@organization.com"
                 value={values.email ?? ""}
                 onChange={(e) => setField("email", e.target.value)}
               />
               {errors.email && (
-                <p role="alert" className="text-xs font-medium text-destructive">{errors.email}</p>
+                <p id="email-error" role="alert" className="text-xs font-medium text-destructive">{errors.email}</p>
               )}
             </div>
             <div className="space-y-2">

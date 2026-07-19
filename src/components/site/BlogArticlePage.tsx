@@ -46,6 +46,7 @@ import {
   type BenefitIcon,
   type ContentBlock,
 } from "@/lib/blog";
+import { openQuoteModal } from "@/lib/quote-modal";
 
 /* ---------------- Page shell ---------------- */
 
@@ -1190,14 +1191,14 @@ function ExpertCTA() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Link
-                to="/contact"
-                hash="contact-form"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              <button
+                type="button"
+                onClick={() => openQuoteModal({ source: "blog-article" })}
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </button>
               <a
                 href={`https://wa.me/962799741318?text=${encodeURIComponent("I've just read your article and I'd like to discuss this system.")}`}
                 target="_blank"

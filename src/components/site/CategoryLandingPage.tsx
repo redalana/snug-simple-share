@@ -17,6 +17,7 @@ import { Footer } from "@/components/site/Footer";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
 import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
+import { openQuoteModal } from "@/lib/quote-modal";
 import {
   CATEGORY_CONTENT,
   CATEGORY_LABELS,
@@ -111,13 +112,13 @@ export function CategoryLandingPage({
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link
-                to="/contact"
-                hash="contact-form"
-                className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark"
+              <button
+                type="button"
+                onClick={() => openQuoteModal({ source: `category:${slug}` })}
+                className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 Request a Quote
-              </Link>
+              </button>
               <Link
                 to="/products"
                 className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
@@ -365,12 +366,20 @@ export function CategoryLandingPage({
                 <CategoryFaqList items={content.faqs} />
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal({ source: `category-faq:${slug}` })}
+                  className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                >
+                  Request a Quote
+                </button>
                 <Link
                   to="/contact"
                   hash="contact-form"
-                  className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
                 >
                   Talk to an Engineer
+                  <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
                 </Link>
                 <Link
                   to="/faqs"
