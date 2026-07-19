@@ -172,6 +172,7 @@ function RootComponent() {
       </a>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <WhatsAppFloat />
       <Toaster />
     </QueryClientProvider>
   );
