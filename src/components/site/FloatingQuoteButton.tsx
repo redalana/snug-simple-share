@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FileText } from "lucide-react";
-import { openQuoteModal } from "@/lib/quote-modal";
+import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
 
 /**
  * Sits 20px above the floating WhatsApp button (which uses --af-wa-base
