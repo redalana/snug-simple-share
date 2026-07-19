@@ -58,7 +58,13 @@ const COLS: { title: string; links: FooterLink[] }[] = [
 // Only WhatsApp has a verified official destination today; Facebook / LinkedIn
 // are hidden until official URLs exist (avoids href="#" placeholders shipping
 // to production). Add entries here with an explicit `href` when ready.
-const SOCIALS: { label: string; Icon: typeof Facebook; color: string; href: string }[] = [
+type SocialItem = {
+  label: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  href: string;
+};
+const SOCIALS: SocialItem[] = [
   { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366", href: "https://wa.me/962799741318" },
 ];
 
