@@ -48,6 +48,7 @@ import { generateProductPdf } from "@/lib/product-pdf";
 import { pushRecentlyViewed } from "@/lib/recently-viewed";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
 import { RecentlyViewed } from "@/components/site/RecentlyViewed";
+import { RelatedProducts } from "@/components/site/RelatedProducts";
 import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
