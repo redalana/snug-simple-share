@@ -1339,3 +1339,36 @@ function CategoryBreadcrumbLink({ category }: { category: string }) {
     </a>
   );
 }
+
+const ABS_SITE_URL = "https://snug-simple-share.lovable.app";
+
+function buildBreadcrumbSchema(product: Product, slug: string) {
+  const categorySlug = CATEGORY_NAME_TO_SLUG[product.category];
+  const items: Array<Record<string, unknown>> = [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${ABS_SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Products", item: `${ABS_SITE_URL}/products` },
+  ];
+  if (categorySlug) {
+    items.push({
+      "@type": "ListItem",
+      position: 3,
+      name: product.category,
+      item: `${ABS_SITE_URL}/products/${categorySlug}`,
+    });
+    items.push({
+      "@type": "ListItem",
+      position: 4,
+      name: product.name,
+      item: `${ABS_SITE_URL}/products/${slug}`,
+    });
+  } else {
+    items.push({ "@type": "ListItem", position: 3, name: product.category });
+    items.push({
+      "@type": "ListItem",
+      position: 4,
+      name: product.name,
+      item: `${ABS_SITE_URL}/products/${slug}`,
+    });
+  }
+  return { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: items };
+}
