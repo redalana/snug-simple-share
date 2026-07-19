@@ -38,12 +38,12 @@ export function FinalCTA() {
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[calc(13*var(--desktop-px-unit))] font-medium text-white/70">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Avg response &lt; 4 hours
+              Certified biomedical engineers
             </div>
             <div className="hidden h-4 w-px bg-white/15 sm:block" />
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              98% first-time fix rate
+              Genuine OEM spare parts
             </div>
           </div>
 
