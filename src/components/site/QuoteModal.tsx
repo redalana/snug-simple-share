@@ -50,6 +50,8 @@ export function QuoteModal() {
   const [open, setOpen] = useState(false);
   const [ctx, setCtx] = useState<QuoteContext>({});
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
 
   // form state
   const [name, setName] = useState("");
