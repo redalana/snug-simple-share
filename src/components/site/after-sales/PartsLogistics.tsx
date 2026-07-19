@@ -21,8 +21,8 @@ export function PartsLogistics() {
           <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-ink" />
           <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-8 p-10">
             {[
-              { k: "2,350+", v: "Parts in stock" },
-              { k: "48 hrs", v: "Regional dispatch" },
+              { k: "OEM", v: "Sourced parts" },
+              { k: "Regional", v: "Dispatch hubs" },
               { k: "100%", v: "OEM certified" },
             ].map((x) => (
               <div key={x.v}>
