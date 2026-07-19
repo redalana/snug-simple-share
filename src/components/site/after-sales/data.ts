@@ -51,7 +51,7 @@ export const JOURNEY = [
   { icon: Phone, t: "Problem Reported", d: "Call, email or portal — a case is opened within minutes.", detail: "Multi-channel intake with automatic triage and ticket routing." },
   { icon: Activity, t: "Remote Diagnosis", d: "Our engineers analyze logs and telemetry to isolate the cause.", detail: "OEM-approved secure tunnels; most issues resolved without a visit." },
   { icon: Users, t: "Engineer Assigned", d: "Nearest certified engineer is dispatched with the right parts.", detail: "Dispatched from the closest regional hub with pre-picked parts." },
-  { icon: Truck, t: "On-Site Arrival", d: "Within our regional response SLA of under 4 hours.", detail: "GPS-tracked ETA shared with your biomed team in real time." },
+  { icon: Truck, t: "On-Site Arrival", d: "Rapid dispatch from the nearest regional hub.", detail: "GPS-tracked ETA shared with your biomed team in real time." },
   { icon: Wrench, t: "Precision Repair", d: "Genuine OEM parts, factory procedures, zero shortcuts.", detail: "Every intervention logged for full audit and compliance trail." },
   { icon: Gauge, t: "Calibration & QA", d: "Full quality assurance to OEM performance specs.", detail: "Image quality, dose and mechanical checks all restored to spec." },
   { icon: CheckCircle2, t: "System Back Online", d: "Handover, sign-off and follow-up support.", detail: "Signed service report, warranty update and 7-day follow-up call." },
@@ -71,11 +71,11 @@ export const EQUIPMENT = [
 export type EquipmentItem = (typeof EQUIPMENT)[number];
 
 export const PART_MODULES = [
-  { id: "mri", label: "MRI Parts", count: "620+", note: "Coils, gradient amps, RF components" },
-  { id: "ct", label: "CT Parts", count: "540+", note: "X-ray tubes, detectors, DAS boards" },
-  { id: "cath", label: "Cath Lab Parts", count: "410+", note: "Flat panels, generators, table drives" },
-  { id: "petct", label: "PET / CT Parts", count: "280+", note: "PMT modules, crystals, cooling" },
-  { id: "cal", label: "Calibration Kits", count: "500+", note: "Phantoms, QA jigs, dosimetry" },
+  { id: "mri", label: "MRI Parts", count: "In stock", note: "Coils, gradient amps, RF components" },
+  { id: "ct", label: "CT Parts", count: "In stock", note: "X-ray tubes, detectors, DAS boards" },
+  { id: "cath", label: "Cath Lab Parts", count: "In stock", note: "Flat panels, generators, table drives" },
+  { id: "petct", label: "PET / CT Parts", count: "In stock", note: "PMT modules, crystals, cooling" },
+  { id: "cal", label: "Calibration Kits", count: "In stock", note: "Phantoms, QA jigs, dosimetry" },
 ];
 
 export const CONTACT_CHANNELS = [
@@ -98,7 +98,7 @@ export type FaqCat = (typeof FAQ_CATS)[number];
 
 export const FAQS: { q: string; a: string; cat: Exclude<FaqCat, "All"> }[] = [
   { q: "How can I request a service?", a: "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and a certified engineer is assigned within minutes.", cat: "Service" },
-  { q: "How fast can an engineer reach our site?", a: "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region — dispatched from the nearest field hub with the right parts on board.", cat: "Service" },
+  { q: "How fast can an engineer reach our site?", a: "We prioritize critical downtime with rapid dispatch across Jordan and the wider MEA region — from the nearest field hub with the right parts on board.", cat: "Service" },
   { q: "What is the warranty coverage?", a: "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available for multi-year coverage, uptime guarantees and preventive maintenance.", cat: "Warranty" },
   { q: "Do you provide training for our staff?", a: "Yes — clinical and biomedical training is included with every installation and available on demand. Sessions are led by OEM-certified application specialists on your own equipment.", cat: "Training" },
   { q: "Do you provide preventive maintenance?", a: "Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment, following original OEM procedures and checklists.", cat: "Service" },

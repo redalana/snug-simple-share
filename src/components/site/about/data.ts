@@ -218,7 +218,7 @@ export const METRICS: Metric[] = [
   { value: 10, suffix: "+", label: "Countries", sub: "Africa, Middle East & Central Asia", icon: Globe2 },
   { value: 30, suffix: "+", label: "Hospital Projects", sub: "Across Africa & the Middle East", icon: Building2 },
   { value: 5, suffix: "", label: "Biomedical Engineers", sub: "In-house engineering team", icon: Cpu },
-  { value: 12, suffix: "+", label: "OEM Partners", sub: "Certified manufacturer partnerships", icon: HardHat },
+  { value: 100, suffix: "%", label: "OEM Certified", sub: "All partnerships manufacturer-certified", icon: HardHat },
   { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site, region-wide", icon: Headphones },
 ];
 
