@@ -96,7 +96,7 @@ const INCLUDED = [
 ];
 
 const TRUST = [
-  { icon: Award, title: "25+ Years Experience", text: "Delivering medical technology across the MEA region since 1999." },
+  { icon: Award, title: "Engineering Since 1999", text: "Delivering medical technology across Africa and the Middle East since 1999." },
   { icon: BadgeCheck, title: "Certified Biomedical Engineers", text: "OEM-trained specialists covering every major imaging platform." },
   { icon: Wrench, title: "Installation & Commissioning", text: "Full site preparation, mechanical install and clinical hand-over." },
   { icon: GraduationCap, title: "Clinical Training", text: "Structured operator and application programs at your facility." },

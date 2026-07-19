@@ -18,6 +18,7 @@ import { QuoteModal } from "@/components/site/QuoteModal";
 import { CookieConsent } from "@/components/site/CookieConsent";
 import { CompareBar } from "@/components/site/CompareBar";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
+import { COMPANY, COPY, ORGANIZATION_JSONLD } from "@/config/companyFacts";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
@@ -69,17 +70,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "AbuFarha Medical Equipment | Advanced Medical Technology Solutions" },
       {
         name: "description",
-        content:
-          "AbuFarha supplies, installs, commissions, trains and supports world-class medical equipment across Africa and the Middle East. 25+ years, 250+ hospitals, 40+ countries.",
+        content: COPY.metaDescription,
       },
-      { name: "author", content: "AbuFarha Medical Equipment" },
+      { name: "author", content: COMPANY.legalName },
       { property: "og:title", content: "AbuFarha Medical Equipment | Advanced Medical Technology" },
       {
         property: "og:description",
-        content:
-          "Supply, installation, commissioning, training and lifetime support for world-class medical equipment across Africa and the Middle East.",
+        content: COPY.ogDescription,
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: COMPANY.shortName },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -93,6 +93,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(ORGANIZATION_JSONLD),
       },
     ],
   }),

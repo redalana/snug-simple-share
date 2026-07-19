@@ -132,7 +132,7 @@ const GROUPS: Group[] = [
 
 const STATS = [
   { value: "50+", label: "Medical Products", Icon: Boxes },
-  { value: "25+", label: "Years of Experience", Icon: CalendarDays },
+  { value: "Since 1999", label: "Engineering Healthcare", Icon: CalendarDays },
   { value: "30+", label: "Healthcare Projects", Icon: Briefcase },
   { value: "10+", label: "Countries Served", Icon: Globe2 },
 ];

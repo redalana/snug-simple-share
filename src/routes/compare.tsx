@@ -40,7 +40,7 @@ const ROWS: Row[] = [
   },
   { label: "Warranty", get: (p) => p.warranty || "Provided on quotation" },
   { label: "Availability", get: (p) => (p.sold ? "Sold" : "Available") },
-  { label: "Country Support", get: () => "Africa & Middle East (40+ countries)" },
+  { label: "Country Support", get: () => "Africa & Middle East (10+ countries)" },
   { label: "Installation", get: (p) => (p.installation ? "Included" : "Available on request") },
   { label: "Training", get: (p) => (p.training ? "Included" : "Available on request") },
   { label: "After Sales", get: () => "Lifetime technical support" },

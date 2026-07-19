@@ -152,10 +152,10 @@ export const EXPERTISE = [
 ];
 
 export const MAP_STATS = [
-  { icon: Building2, value: "30+", label: "Projects" },
+  { icon: Building2, value: "30+", label: "Healthcare Projects" },
   { icon: Globe2, value: "10+", label: "Countries" },
-  { icon: MapPinned, value: "60+", label: "Cities" },
-  { icon: MonitorCheck, value: "500+", label: "Installed Systems" },
+  { icon: CalendarClock, value: "Since 1999", label: "Engineering Healthcare" },
+  { icon: MonitorCheck, value: "24/7", label: "Technical Support" },
 ];
 
 export const INDUSTRIES = [
@@ -217,8 +217,8 @@ export const METRICS: Metric[] = [
   { value: 1999, suffix: "", label: "Established", sub: "Engineering healthcare since 1999", icon: CalendarClock },
   { value: 10, suffix: "+", label: "Countries", sub: "Africa, Middle East & Central Asia", icon: Globe2 },
   { value: 30, suffix: "+", label: "Hospital Projects", sub: "Across Africa & the Middle East", icon: Building2 },
-  { value: 40, suffix: "+", label: "Biomedical Engineers", sub: "In-house engineering team", icon: Cpu },
-  { value: 500, suffix: "+", label: "Turnkey Solutions Deployed", sub: "Systems installed & commissioned", icon: HardHat },
+  { value: 5, suffix: "", label: "Biomedical Engineers", sub: "In-house engineering team", icon: Cpu },
+  { value: 12, suffix: "+", label: "OEM Partners", sub: "Certified manufacturer partnerships", icon: HardHat },
   { value: 24, suffix: "/7", label: "Technical Support", sub: "Remote & on-site, region-wide", icon: Headphones },
 ];
 

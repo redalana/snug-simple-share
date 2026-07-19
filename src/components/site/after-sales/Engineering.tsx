@@ -20,8 +20,8 @@ export function Engineering() {
   const badges = [
     { icon: Award, k: "12+", v: "OEM Certificates" },
     { icon: Clock, k: "< 4h", v: "Response Time" },
-    { icon: Users, k: "15+", v: "OEM-Trained Engineers" },
-    { icon: Globe2, k: "10", v: "Countries Covered" },
+    { icon: Users, k: "5", v: "OEM-Trained Engineers" },
+    { icon: Globe2, k: "10+", v: "Countries Covered" },
   ];
   return (
     <section className="relative overflow-hidden bg-[#f6f4f0] py-16 lg:py-20">
@@ -59,7 +59,7 @@ export function Engineering() {
             Your reliability.
           </h2>
           <p className="mt-5 max-w-lg text-[calc(16*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            A field team of 15+ dedicated biomedical engineers — trained
+            An in-house team of dedicated biomedical engineers — trained
             directly by OEMs, backed by a regional operations center, and
             trusted by leading hospitals since 1999.
           </p>

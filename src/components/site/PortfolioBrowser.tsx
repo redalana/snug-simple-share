@@ -593,8 +593,8 @@ export function PortfolioBrowser() {
 
               <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6">
                 <Stat icon={Boxes} value="11" label="Categories" />
-                <Stat icon={Layers} value="1,500+" label="Systems Installed" />
-                <Stat icon={Globe2} value="40+" label="Countries Served" />
+                <Stat icon={Layers} value="30+" label="Healthcare Projects" />
+                <Stat icon={Globe2} value="10+" label="Countries Served" />
                 <div className="flex items-center gap-2.5">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <BadgeCheck className="h-5 w-5" />
