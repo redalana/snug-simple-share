@@ -165,6 +165,21 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const activeIndex = Math.max(0, gallery.indexOf(active));
   const [generating, setGenerating] = useState(false);
+  const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
+  const isLoaded = !!loadedMap[active];
+  const markLoaded = (src: string) =>
+    setLoadedMap((m) => (m[src] ? m : { ...m, [src]: true }));
+
+  // Hover-zoom (desktop) — transform-origin follows the cursor.
+  const [zoomHover, setZoomHover] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const handleZoomMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    setZoomPos({ x, y });
+  };
+
   // Read the live URL only after mount to avoid SSR/client hydration mismatch.
   const [pageUrl, setPageUrl] = useState("");
   useEffect(() => {
@@ -190,6 +205,40 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
   )}`;
+
+  // Derived hero badges — subtle, semantic.
+  const badges: { label: string; tone: "primary" | "emerald" | "slate" | "amber" }[] = [];
+  if (product.sold) badges.push({ label: "Sold", tone: "slate" });
+  else badges.push({ label: "In Stock", tone: "emerald" });
+  if (product.status === "Brand New") badges.push({ label: "New", tone: "primary" });
+  else if (product.status.toLowerCase().includes("refurbished"))
+    badges.push({ label: "Certified Refurbished", tone: "amber" });
+  else badges.push({ label: product.status, tone: "amber" });
+
+  const badgeToneClass = (t: "primary" | "emerald" | "slate" | "amber") =>
+    t === "primary"
+      ? "bg-primary text-primary-foreground"
+      : t === "emerald"
+      ? "bg-emerald-500/95 text-white"
+      : t === "amber"
+      ? "bg-amber-500/95 text-white"
+      : "bg-slate-700/90 text-white";
+
+  const shareNative = async () => {
+    const url = pageUrl || (typeof window !== "undefined" ? window.location.href : "");
+    type Nav = Navigator & { share?: (d: ShareData) => Promise<void> };
+    const nav = typeof navigator !== "undefined" ? (navigator as Nav) : null;
+    if (nav?.share) {
+      try {
+        await nav.share({ title: product.name, text: `${product.name} — ${product.category}`, url });
+        return;
+      } catch { /* user cancelled */ }
+    }
+    share.copyLink();
+    toast.success("Link copied to clipboard");
+  };
+
+
 
 
   const facts: { icon: typeof Factory; label: string; value: string }[] = [
