@@ -100,10 +100,18 @@ export function yearsSince(year: number): number {
   return new Date().getUTCFullYear() - year;
 }
 
-/** Structured data for Organization / MedicalOrganization schema. */
+/**
+ * Structured data — combined MedicalOrganization / MedicalBusiness /
+ * LocalBusiness schema. A single JSON-LD block covers every entity type
+ * Google and AI answer engines look for.
+ *
+ * `sameAs` is intentionally omitted — no verified social profile URLs are
+ * available in the Corporate Profile. Add here once user-approved.
+ */
 export const ORGANIZATION_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "MedicalOrganization",
+  "@type": ["MedicalOrganization", "MedicalBusiness", "LocalBusiness"],
+  "@id": `${COMPANY.website}/#organization`,
   name: COMPANY.legalName,
   alternateName: COMPANY.shortName,
   foundingDate: String(COMPANY.foundedYear),
@@ -117,9 +125,86 @@ export const ORGANIZATION_JSONLD = {
     addressLocality: COMPANY.headquarters.city,
     addressCountry: COMPANY.headquarters.country,
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: COMPANY.headquarters.coords.lat,
+    longitude: COMPANY.headquarters.coords.lng,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+  ],
   areaServed: [
     { "@type": "Place", name: "Africa" },
     { "@type": "Place", name: "Middle East" },
   ],
   description: COPY.longDescription,
 } as const;
+
+/** Person schema for the founder. Referenced from /about via JSON-LD. */
+export const FOUNDER_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: COMPANY.founder,
+  jobTitle: "Founder",
+  worksFor: { "@id": `${COMPANY.website}/#organization` },
+  nationality: { "@type": "Country", name: "Jordan" },
+} as const;
+
+/** Utility — Schema.org FAQPage block. */
+export function faqPageJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.question,
+      acceptedAnswer: { "@type": "Answer", text: it.answer },
+    })),
+  };
+}
+
+/** Utility — Schema.org ItemList block for category / product listings. */
+export function itemListJsonLd(
+  items: { name: string; url: string }[],
+  listName?: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    ...(listName ? { name: listName } : {}),
+    numberOfItems: items.length,
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: it.url,
+    })),
+  };
+}
+
+/** Utility — Schema.org Service block for one offered service. */
+export function serviceJsonLd(input: {
+  name: string;
+  description: string;
+  url?: string;
+  serviceType?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: input.name,
+    description: input.description,
+    ...(input.url ? { url: input.url } : {}),
+    ...(input.serviceType ? { serviceType: input.serviceType } : {}),
+    provider: { "@id": `${COMPANY.website}/#organization` },
+    areaServed: [
+      { "@type": "Place", name: "Africa" },
+      { "@type": "Place", name: "Middle East" },
+    ],
+  };
+}
