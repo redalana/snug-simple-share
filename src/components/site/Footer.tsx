@@ -55,10 +55,11 @@ const COLS: { title: string; links: FooterLink[] }[] = [
   },
 ];
 
-const SOCIALS = [
-  { label: "Facebook", Icon: Facebook, color: "#1877F2" },
-  { label: "LinkedIn", Icon: Linkedin, color: "#0A66C2" },
-  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366" },
+// Only WhatsApp has a verified official destination today; Facebook / LinkedIn
+// are hidden until official URLs exist (avoids href="#" placeholders shipping
+// to production). Add entries here with an explicit `href` when ready.
+const SOCIALS: { label: string; Icon: typeof Facebook; color: string; href: string }[] = [
+  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366", href: "https://wa.me/962799741318" },
 ];
 
 const CONTACTS = [
