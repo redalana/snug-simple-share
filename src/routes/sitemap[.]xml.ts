@@ -53,19 +53,24 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const entries: SitemapEntry[] = [
-          ...STATIC_ROUTES,
-          // Dynamic product detail pages — one entry per product.
+        const today = new Date().toISOString().slice(0, 10);
+        const toIso = (d: string) => {
+          const t = Date.parse(d);
+          return Number.isFinite(t) ? new Date(t).toISOString().slice(0, 10) : today;
+        };
+        const entries: (SitemapEntry & { lastmod?: string })[] = [
+          ...STATIC_ROUTES.map((e) => ({ ...e, lastmod: today })),
           ...PRODUCTS.map((p) => ({
             path: `/products/${productSlug(p)}`,
             changefreq: "monthly" as const,
             priority: "0.7",
+            lastmod: today,
           })),
-          // Dynamic blog article pages — one entry per article.
           ...ARTICLES.map((a) => ({
             path: `/blog/${a.slug}`,
             changefreq: "monthly" as const,
             priority: "0.6",
+            lastmod: toIso(a.lastUpdated ?? a.publishedDate),
           })),
         ];
 
@@ -73,6 +78,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
