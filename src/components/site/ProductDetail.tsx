@@ -495,28 +495,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* RELATED SYSTEMS */}
-      {related.length > 0 && (
-        <section className="border-b border-border/60 bg-secondary/30">
-          <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
-            <div className="mb-8 flex items-center justify-between">
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground">
-                Related Systems
-              </h2>
-              <Link
-                to="/products"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-              >
-                View All Systems <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
-                <RelatedCard key={productSlug(p)} product={p} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="border-b border-border/60 bg-secondary/30">
+        <RelatedProducts product={product} />
+      </div>
 
       {/* PREV / NEXT */}
       {adjacent && (
