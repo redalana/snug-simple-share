@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -7,38 +8,50 @@ import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import cathLabBg from "@/assets/footer-cathlab.jpg.asset.json";
 import vascularBg from "@/assets/footer-vascular.jpg.asset.json";
 
-const COLS = [
+type FooterLink = { label: string; to: string };
+
+const COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Products",
     links: [
-      "Cath Lab Systems",
-      "MRI Systems",
-      "CT Scanners",
-      "PET/CT",
-      "C-Arms",
-      "X-Ray Systems",
-      "Mammography",
-      "View All Products",
+      { label: "Cath Lab Systems", to: "/products/cath-lab" },
+      { label: "MRI Systems", to: "/products/mri-scanners" },
+      { label: "CT Scanners", to: "/products" },
+      { label: "PET/CT", to: "/products/pet-ct-scanners" },
+      { label: "C-Arms", to: "/products/c-arm-systems" },
+      { label: "X-Ray Systems", to: "/products/x-ray-systems" },
+      { label: "Mammography", to: "/products/mammography-systems" },
+      { label: "View All Products", to: "/products" },
     ],
   },
   {
     title: "Services",
     links: [
-      "Installation & Commissioning",
-      "Biomedical Engineering",
-      "Clinical Training",
-      "Preventive Maintenance",
-      "Spare Parts",
-      "Technical Support",
+      { label: "Installation & Commissioning", to: "/services" },
+      { label: "Biomedical Engineering", to: "/services" },
+      { label: "Clinical Training", to: "/services" },
+      { label: "Preventive Maintenance", to: "/after-sales" },
+      { label: "Spare Parts", to: "/after-sales" },
+      { label: "Technical Support", to: "/after-sales" },
     ],
   },
   {
     title: "Company",
-    links: ["About Us", "Turnkey Projects", "Brands", "Knowledge Center", "Contact"],
+    links: [
+      { label: "About Us", to: "/about" },
+      { label: "Turnkey", to: "/turnkey" },
+      { label: "Brands", to: "/brands" },
+      { label: "Knowledge Center", to: "/blog" },
+      { label: "Contact", to: "/contact" },
+    ],
   },
   {
     title: "Support",
-    links: ["Warranty", "After Sales", "Service Contracts", "FAQs"],
+    links: [
+      { label: "Warranty", to: "/after-sales" },
+      { label: "After Sales", to: "/after-sales" },
+      { label: "Service Contracts", to: "/after-sales" },
+    ],
   },
 ];
 
@@ -184,13 +197,13 @@ export function Footer() {
                 </h4>
                 <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
-                    <li key={l}>
-                      <a
-                        href="#"
+                    <li key={l.label}>
+                      <Link
+                        to={l.to}
                         className="inline-block text-white/50 transition-all duration-200 hover:translate-x-1 hover:text-white"
                       >
-                        {l}
-                      </a>
+                        {l.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -236,17 +249,6 @@ export function Footer() {
 
           <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
-          </div>
-          <div className="flex items-center gap-5 text-[calc(12.5*var(--desktop-px-unit))] sm:gap-7">
-            {["Privacy Policy", "Terms & Conditions", "Sitemap"].map((l) => (
-              <a
-                key={l}
-                href="#"
-                className="inline-flex min-h-[44px] items-center text-white/40 transition-colors duration-200 hover:text-white/80 sm:min-h-0"
-              >
-                {l}
-              </a>
-            ))}
           </div>
         </div>
       </div>
