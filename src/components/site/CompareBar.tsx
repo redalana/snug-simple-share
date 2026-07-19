@@ -26,7 +26,7 @@ export function CompareBar() {
     return () => io.disconnect();
   }, []);
 
-  if (!slugs.length) return null;
+  if (!slugs.length || quoteOpen) return null;
   const items = slugs
     .map((s) => PRODUCTS.find((p) => p.slug === s))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
