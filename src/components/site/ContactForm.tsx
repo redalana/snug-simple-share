@@ -319,11 +319,16 @@ export function ContactForm() {
                         id={f.name}
                         name={f.name}
                         autoComplete={autoCompleteFor(f.name)}
+                        aria-invalid={!!errors[f.name]}
+                        aria-describedby={errors[f.name] ? `${f.name}-error` : undefined}
                         className={inputCls}
                         placeholder={f.placeholder}
                         value={values[f.name] ?? ""}
                         onChange={(e) => setField(f.name, e.target.value)}
                       />
+                      {errors[f.name] && (
+                        <p id={`${f.name}-error`} role="alert" className="text-xs font-medium text-destructive">{errors[f.name]}</p>
+                      )}
                     </div>
                   ))}
                 </div>
