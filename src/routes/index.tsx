@@ -33,7 +33,16 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: HOME_DESC },
       { name: "twitter:image", content: OG_IMAGES.home },
     ],
-    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    links: [
+      { rel: "canonical", href: SITE_URL + "/" },
+      // LCP preload — hero image is the largest contentful paint element.
+      {
+        rel: "preload",
+        as: "image",
+        href: OG_IMAGES.home,
+        fetchpriority: "high",
+      },
+    ],
   }),
   component: Index,
 });
