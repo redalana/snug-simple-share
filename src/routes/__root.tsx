@@ -62,6 +62,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const GA_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) ?? "";
+const GSC_TOKEN = (import.meta.env.VITE_GSC_VERIFICATION as string | undefined) ?? "";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -81,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: COMPANY.shortName },
       { name: "twitter:card", content: "summary_large_image" },
+      // Google Search Console — verification meta (rendered only when set).
+      ...(GSC_TOKEN
+        ? [{ name: "google-site-verification", content: GSC_TOKEN }]
+        : []),
     ],
     links: [
       {
@@ -100,6 +107,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify(ORGANIZATION_JSONLD),
       },
+      // Google Analytics 4 — loaded only when VITE_GA_MEASUREMENT_ID is set.
+      ...(GA_ID
+        ? [
+            {
+              src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`,
+              async: true,
+            },
+            {
+              children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`,
+            },
+          ]
+        : []),
     ],
   }),
 
