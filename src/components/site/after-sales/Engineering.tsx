@@ -20,8 +20,8 @@ export function Engineering() {
   const badges = [
     { icon: Award, k: "12+", v: "OEM Certificates" },
     { icon: Clock, k: "< 4h", v: "Response Time" },
-    { icon: Users, k: "15+", v: "OEM-Trained Engineers" },
-    { icon: Globe2, k: "10", v: "Countries Covered" },
+    { icon: Users, k: "5", v: "OEM-Trained Engineers" },
+    { icon: Globe2, k: "10+", v: "Countries Covered" },
   ];
   return (
     <section className="relative overflow-hidden bg-[#f6f4f0] py-16 lg:py-20">
