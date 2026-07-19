@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TurnkeyRouteImport } from './routes/turnkey'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapRouteImport } from './routes/sitemap'
@@ -21,6 +22,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -49,6 +51,11 @@ import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[
 const TurnkeyRoute = TurnkeyRouteImport.update({
   id: '/turnkey',
   path: '/turnkey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -105,6 +112,11 @@ const FaqsRoute = FaqsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesRoute = CategoriesRouteImport.update({
@@ -241,6 +253,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -252,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -278,6 +292,7 @@ export interface FileRoutesByTo {
   '/after-sales': typeof AfterSalesRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -288,6 +303,7 @@ export interface FileRoutesByTo {
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -316,6 +332,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
@@ -327,6 +344,7 @@ export interface FileRoutesById {
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -356,6 +374,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/brands'
     | '/categories'
+    | '/compare'
     | '/contact'
     | '/faqs'
     | '/hospital-readiness-assessment'
@@ -367,6 +386,7 @@ export interface FileRouteTypes {
     | '/sitemap'
     | '/sitemap.xml'
     | '/terms'
+    | '/thank-you'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -393,6 +413,7 @@ export interface FileRouteTypes {
     | '/after-sales'
     | '/brands'
     | '/categories'
+    | '/compare'
     | '/contact'
     | '/faqs'
     | '/hospital-readiness-assessment'
@@ -403,6 +424,7 @@ export interface FileRouteTypes {
     | '/sitemap'
     | '/sitemap.xml'
     | '/terms'
+    | '/thank-you'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -430,6 +452,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/brands'
     | '/categories'
+    | '/compare'
     | '/contact'
     | '/faqs'
     | '/hospital-readiness-assessment'
@@ -441,6 +464,7 @@ export interface FileRouteTypes {
     | '/sitemap'
     | '/sitemap.xml'
     | '/terms'
+    | '/thank-you'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -469,6 +493,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
+  CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   FaqsRoute: typeof FaqsRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
@@ -480,6 +505,7 @@ export interface RootRouteChildren {
   SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  ThankYouRoute: typeof ThankYouRoute
   TurnkeyRoute: typeof TurnkeyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -494,6 +520,13 @@ declare module '@tanstack/react-router' {
       path: '/turnkey'
       fullPath: '/turnkey'
       preLoaderRoute: typeof TurnkeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -571,6 +604,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories': {
@@ -797,6 +837,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
+  CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   FaqsRoute: FaqsRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
@@ -808,6 +849,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  ThankYouRoute: ThankYouRoute,
   TurnkeyRoute: TurnkeyRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:

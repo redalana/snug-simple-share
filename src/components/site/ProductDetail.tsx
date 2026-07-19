@@ -45,6 +45,10 @@ import {
   productSlug,
 } from "@/lib/products";
 import { generateProductPdf } from "@/lib/product-pdf";
+import { pushRecentlyViewed } from "@/lib/recently-viewed";
+import { toggleCompare, useCompare } from "@/lib/compare-store";
+import { RecentlyViewed } from "@/components/site/RecentlyViewed";
+import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
 
@@ -115,7 +119,14 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const [pageUrl, setPageUrl] = useState("");
   useEffect(() => {
     setPageUrl(window.location.href);
+    pushRecentlyViewed(slug);
   }, [slug]);
+  const compareSlugs = useCompare();
+  const inCompare = compareSlugs.includes(slug);
+  const handleCompare = () => {
+    const added = toggleCompare(slug);
+    if (!added && !inCompare) toast.error("You can compare up to 4 products");
+  };
   const share = useShare(product, pageUrl);
 
   const related = getRelatedProducts(product, 3);
@@ -296,6 +307,20 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 <FileText className="h-4 w-4" />
                 {generating ? "Preparing PDF…" : "Download Product PDF"}
               </button>
+              <button
+                type="button"
+                onClick={handleCompare}
+                aria-pressed={inCompare}
+                className={`ml-2 mt-3 inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${
+                  inCompare
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
+                }`}
+              >
+                <GitCompare className="h-4 w-4" />
+                {inCompare ? "Added to Compare" : "Add to Compare"}
+              </button>
+
 
               {/* SHARE */}
               <div className="mt-7">
@@ -543,6 +568,22 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           onClose={() => setLightboxOpen(false)}
         />
       )}
+      <RecentlyViewed excludeSlug={slug} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+              { "@type": "ListItem", position: 2, name: "Products", item: "/products" },
+              { "@type": "ListItem", position: 3, name: product.category },
+              { "@type": "ListItem", position: 4, name: product.name },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }
