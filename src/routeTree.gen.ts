@@ -39,6 +39,7 @@ import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-s
 import { Route as ProductsMammographySystemsRouteImport } from './routes/products.mammography-systems'
 import { Route as ProductsLithotripsyEswlRouteImport } from './routes/products.lithotripsy-eswl'
 import { Route as ProductsDrugElutingStentsRouteImport } from './routes/products.drug-eluting-stents'
+import { Route as ProductsCtScannersRouteImport } from './routes/products.ct-scanners'
 import { Route as ProductsCathLabRouteImport } from './routes/products.cath-lab'
 import { Route as ProductsCArmSystemsRouteImport } from './routes/products.c-arm-systems'
 import { Route as ProductsBoneDensitometersRouteImport } from './routes/products.bone-densitometers'
@@ -201,6 +202,11 @@ const ProductsDrugElutingStentsRoute =
     path: '/drug-eluting-stents',
     getParentRoute: () => ProductsRoute,
   } as any)
+const ProductsCtScannersRoute = ProductsCtScannersRouteImport.update({
+  id: '/ct-scanners',
+  path: '/ct-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
 const ProductsCathLabRoute = ProductsCathLabRouteImport.update({
   id: '/cath-lab',
   path: '/cath-lab',
@@ -274,6 +280,7 @@ export interface FileRoutesByFullPath {
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
   '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/ct-scanners': typeof ProductsCtScannersRoute
   '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
   '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
   '/products/mammography-systems': typeof ProductsMammographySystemsRoute
@@ -312,6 +319,7 @@ export interface FileRoutesByTo {
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
   '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/ct-scanners': typeof ProductsCtScannersRoute
   '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
   '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
   '/products/mammography-systems': typeof ProductsMammographySystemsRoute
@@ -353,6 +361,7 @@ export interface FileRoutesById {
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
   '/products/cath-lab': typeof ProductsCathLabRoute
+  '/products/ct-scanners': typeof ProductsCtScannersRoute
   '/products/drug-eluting-stents': typeof ProductsDrugElutingStentsRoute
   '/products/lithotripsy-eswl': typeof ProductsLithotripsyEswlRoute
   '/products/mammography-systems': typeof ProductsMammographySystemsRoute
@@ -395,6 +404,7 @@ export interface FileRouteTypes {
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
     | '/products/cath-lab'
+    | '/products/ct-scanners'
     | '/products/drug-eluting-stents'
     | '/products/lithotripsy-eswl'
     | '/products/mammography-systems'
@@ -433,6 +443,7 @@ export interface FileRouteTypes {
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
     | '/products/cath-lab'
+    | '/products/ct-scanners'
     | '/products/drug-eluting-stents'
     | '/products/lithotripsy-eswl'
     | '/products/mammography-systems'
@@ -473,6 +484,7 @@ export interface FileRouteTypes {
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
     | '/products/cath-lab'
+    | '/products/ct-scanners'
     | '/products/drug-eluting-stents'
     | '/products/lithotripsy-eswl'
     | '/products/mammography-systems'
@@ -725,6 +737,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsDrugElutingStentsRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/products/ct-scanners': {
+      id: '/products/ct-scanners'
+      path: '/ct-scanners'
+      fullPath: '/products/ct-scanners'
+      preLoaderRoute: typeof ProductsCtScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
     '/products/cath-lab': {
       id: '/products/cath-lab'
       path: '/cath-lab'
@@ -801,6 +820,7 @@ interface ProductsRouteChildren {
   ProductsBoneDensitometersRoute: typeof ProductsBoneDensitometersRoute
   ProductsCArmSystemsRoute: typeof ProductsCArmSystemsRoute
   ProductsCathLabRoute: typeof ProductsCathLabRoute
+  ProductsCtScannersRoute: typeof ProductsCtScannersRoute
   ProductsDrugElutingStentsRoute: typeof ProductsDrugElutingStentsRoute
   ProductsLithotripsyEswlRoute: typeof ProductsLithotripsyEswlRoute
   ProductsMammographySystemsRoute: typeof ProductsMammographySystemsRoute
@@ -816,6 +836,7 @@ const ProductsRouteChildren: ProductsRouteChildren = {
   ProductsBoneDensitometersRoute: ProductsBoneDensitometersRoute,
   ProductsCArmSystemsRoute: ProductsCArmSystemsRoute,
   ProductsCathLabRoute: ProductsCathLabRoute,
+  ProductsCtScannersRoute: ProductsCtScannersRoute,
   ProductsDrugElutingStentsRoute: ProductsDrugElutingStentsRoute,
   ProductsLithotripsyEswlRoute: ProductsLithotripsyEswlRoute,
   ProductsMammographySystemsRoute: ProductsMammographySystemsRoute,
