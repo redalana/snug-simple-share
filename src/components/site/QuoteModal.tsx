@@ -480,19 +480,28 @@ export function QuoteModal() {
             </button>
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.button
-                key={submitting ? "sending" : "submit"}
+                key={success ? "success" : submitting ? "sending" : "submit"}
                 type="submit"
-                disabled={submitting || !isValid}
+                disabled={submitting || success || !isValid}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.18 }}
-                className="inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-dark px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                className={`inline-flex h-[52px] items-center justify-center gap-2 rounded-full px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
+                  success
+                    ? "bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-100"
+                    : "bg-gradient-to-r from-primary to-primary-dark disabled:opacity-50"
+                }`}
               >
-                {submitting ? (
+                {success ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4" />
+                    Request Sent
+                  </>
+                ) : submitting ? (
                   <>
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-                    Sending…
+                    Submitting Request…
                   </>
                 ) : (
                   <>
@@ -506,7 +515,42 @@ export function QuoteModal() {
 
           {ctx.productName && <input type="hidden" name="context_product" value={ctx.productName} />}
           {ctx.source && <input type="hidden" name="context_source" value={ctx.source} />}
+          </fieldset>
+
+          {/* SUCCESS OVERLAY */}
+          <AnimatePresence>
+            {success && (
+              <motion.div
+                key="success-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-background/85 backdrop-blur-sm"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="flex max-w-md flex-col items-center px-6 text-center">
+                  <motion.div
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                    className="grid h-16 w-16 place-items-center rounded-full bg-emerald-500 text-white shadow-[0_20px_45px_-12px_rgba(16,185,129,0.55)]"
+                  >
+                    <Check className="h-8 w-8" strokeWidth={3} />
+                  </motion.div>
+                  <h3 className="mt-5 font-display text-xl font-extrabold text-foreground">
+                    Request submitted successfully
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Our specialists will contact you within 24 hours.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </form>
+
       </DialogContent>
     </Dialog>
   );
