@@ -42,7 +42,18 @@ const INTERESTS = [
   "Other",
 ];
 
-type Contact = "whatsapp" | "phone" | "email";
+type Contact = "whatsapp" | "email";
+
+// Maps the "I'm Interested In" category to product category names in PRODUCTS.
+const INTEREST_TO_CATEGORY: Record<string, string[]> = {
+  "Cath Lab": ["Cath Lab Systems"],
+  MRI: ["MRI Scanners"],
+  CT: ["CT Scanners"],
+  "PET/CT": ["PET/CT Scanners"],
+  "X-Ray": ["X-Ray"],
+  "C-Arm": ["C-Arm"],
+  Mammography: ["Mammography"],
+};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
