@@ -48,8 +48,8 @@ import trainingImg from "@/assets/aftersales-hero.jpg";
 /* ================================================================== */
 
 const HERO_KPIS = [
-  { icon: BadgeCheck, value: "25+", label: "Years of Experience" },
-  { icon: Users, value: "500+", label: "Systems Supported" },
+  { icon: BadgeCheck, value: "Since 1999", label: "Engineering Healthcare" },
+  { icon: Users, value: "30+", label: "Healthcare Projects" },
   { icon: MapPin, value: "10+", label: "Countries Served" },
   { icon: LifeBuoy, value: "24/7", label: "Technical Support" },
 ];
