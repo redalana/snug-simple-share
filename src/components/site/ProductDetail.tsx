@@ -573,6 +573,47 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </section>
 
+      {/* STICKY IN-PAGE NAV — active section tracked via IntersectionObserver */}
+      <nav
+        aria-label="Product sections"
+        className="sticky top-16 z-30 hidden border-b border-border/60 bg-white/85 backdrop-blur lg:block"
+      >
+        <div className="mx-auto flex max-w-[100rem] items-center gap-1 overflow-x-auto px-6 lg:px-10">
+          {[
+            { id: "overview", label: "Overview" },
+            { id: "features", label: "Features" },
+            { id: "downloads", label: "Downloads" },
+            { id: "faq", label: "FAQ" },
+            { id: "request-quote", label: "Request Quote" },
+          ].map((s) => {
+            const isActive = activeSection === s.id;
+            return (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                aria-current={isActive ? "true" : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className={`relative shrink-0 px-4 py-3.5 text-sm font-semibold transition-colors ${
+                  isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {s.label}
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-primary transition-opacity ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+
+
       {/* VALUE BLOCK — Why Choose · Snapshot · Included, unified */}
       <section id="features" className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
