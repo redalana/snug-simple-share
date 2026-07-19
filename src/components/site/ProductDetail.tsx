@@ -40,7 +40,6 @@ import {
 } from "lucide-react";
 import {
   type Product,
-  getRelatedProducts,
   getAdjacentProducts,
   productSlug,
 } from "@/lib/products";
@@ -48,6 +47,7 @@ import { generateProductPdf } from "@/lib/product-pdf";
 import { pushRecentlyViewed } from "@/lib/recently-viewed";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
 import { RecentlyViewed } from "@/components/site/RecentlyViewed";
+import { RelatedProducts } from "@/components/site/RelatedProducts";
 import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
@@ -129,7 +129,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   };
   const share = useShare(product, pageUrl);
 
-  const related = getRelatedProducts(product, 3);
   const adjacent = getAdjacentProducts(slug);
 
   const scrollToQuote = () => {
@@ -495,28 +494,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* RELATED SYSTEMS */}
-      {related.length > 0 && (
-        <section className="border-b border-border/60 bg-secondary/30">
-          <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10">
-            <div className="mb-8 flex items-center justify-between">
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground">
-                Related Systems
-              </h2>
-              <Link
-                to="/products"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-              >
-                View All Systems <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
-                <RelatedCard key={productSlug(p)} product={p} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="border-b border-border/60 bg-secondary/30">
+        <RelatedProducts product={product} />
+      </div>
 
       {/* PREV / NEXT */}
       {adjacent && (
@@ -913,37 +893,6 @@ function ShareButton({
   );
 }
 
-function RelatedCard({ product }: { product: Product }) {
-  return (
-    <Link
-      to="/products/$slug"
-      params={{ slug: productSlug(product) }}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_28px_56px_-24px_rgba(0,0,0,0.32)]"
-    >
-      <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
-        />
-        <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
-          {product.brand}
-        </span>
-      </div>
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-lg font-bold tracking-tight text-foreground">
-          {product.name}
-        </h3>
-        <p className="mt-1 text-sm text-muted-foreground">{product.subtitle}</p>
-        <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-          View Details
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </span>
-      </div>
-    </Link>
-  );
-}
 
 function Lightbox({
   images,
