@@ -56,7 +56,7 @@ export const WHY = [
   {
     icon: Globe2,
     title: "Africa & Middle East Coverage",
-    desc: "Serving 25+ countries across Africa & the Middle East.",
+    desc: "Serving hospitals across 10+ countries in Africa and the Middle East.",
   },
   {
     icon: Building2,
@@ -71,10 +71,10 @@ export const WHY = [
 ];
 
 export const STATS = [
-  { icon: Globe, value: "25+", label: "Countries Served" },
-  { icon: Building2, value: "1,500+", label: "Systems Installed" },
-  { icon: HeartPulse, value: "500+", label: "Healthcare Facilities" },
-  { icon: Award, value: "15+", label: "Years of Experience" },
+  { icon: Globe, value: "10+", label: "Countries Served" },
+  { icon: Building2, value: "30+", label: "Healthcare Projects" },
+  { icon: HeartPulse, value: "24/7", label: "Technical Support" },
+  { icon: Award, value: "Since 1999", label: "Engineering Healthcare" },
 ];
 
 export const FAQS = [
