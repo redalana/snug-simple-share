@@ -279,6 +279,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
         <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.brand}
         </span>
+        <CompareToggle slug={productSlug(product)} productName={product.name} />
       </div>
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h3 className="font-display text-lg font-bold tracking-tight text-foreground">
