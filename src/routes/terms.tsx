@@ -204,12 +204,15 @@ const CONTACTS: ContactCard[] = [
   {
     Icon: MapPin,
     title: "Address",
-    lines: ["AbuFarha Medical Supplies", "Queen Rania St.,", "Amman, Jordan"],
+    lines: ["AbuFarha Medical Supplies", "Queen Rania St.", "Amman, Jordan"],
   },
   {
     Icon: Phone,
     title: "Phone",
-    lines: ["+962 6 4026063", "+962 79 9741318"],
+    lines: [
+      <span key="p1" className="whitespace-nowrap">+962 6 4026063</span>,
+      <span key="p2" className="whitespace-nowrap">+962 79 9741318</span>,
+    ],
   },
   {
     Icon: Mail,
@@ -218,7 +221,7 @@ const CONTACTS: ContactCard[] = [
       <a
         key="e"
         href="mailto:info@abufarhamedical.com"
-        className="hover:text-primary"
+        className="whitespace-nowrap hover:text-primary"
       >
         info@abufarhamedical.com
       </a>,
@@ -227,7 +230,9 @@ const CONTACTS: ContactCard[] = [
   {
     Icon: Globe2,
     title: "Website",
-    lines: ["www.abufarhamedical.com"],
+    lines: [
+      <span key="w" className="whitespace-nowrap">www.abufarhamedical.com</span>,
+    ],
   },
 ];
 
@@ -308,30 +313,30 @@ function TermsRoute() {
                 If you have any questions about these Terms & Conditions, please reach out to us.
               </p>
 
-              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mx-auto mt-10 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {CONTACTS.map(({ Icon, title, lines }) => (
                   <div
                     key={title}
-                    className="flex items-start gap-4 rounded-xl border border-border bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                    className="flex min-h-[180px] flex-col items-start justify-start gap-4 rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                   >
-                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/20 bg-primary/5 text-primary">
-                      <Icon className="h-5 w-5" strokeWidth={1.6} />
-                    </div>
-                    <div className="min-w-0">
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/20 bg-primary/5 text-primary">
+                        <Icon className="h-5 w-5" strokeWidth={1.6} />
+                      </div>
                       <div className="font-display text-[15px] font-black text-foreground">
                         {title}
                       </div>
-                      <div className="mt-1 space-y-0.5 text-[13.5px] leading-relaxed text-muted-foreground">
-                        {lines.map((l, i) => (
-                          <div key={i}>{l}</div>
-                        ))}
-                      </div>
+                    </div>
+                    <div className="min-w-0 space-y-1 text-[14px] leading-relaxed text-muted-foreground">
+                      {lines.map((l, i) => (
+                        <div key={i}>{l}</div>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-10 flex justify-center">
+              <div className="mt-8 flex justify-center">
                 <Link
                   to="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
