@@ -307,6 +307,20 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 <FileText className="h-4 w-4" />
                 {generating ? "Preparing PDF…" : "Download Product PDF"}
               </button>
+              <button
+                type="button"
+                onClick={handleCompare}
+                aria-pressed={inCompare}
+                className={`ml-2 mt-3 inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${
+                  inCompare
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
+                }`}
+              >
+                <GitCompare className="h-4 w-4" />
+                {inCompare ? "Added to Compare" : "Add to Compare"}
+              </button>
+
 
               {/* SHARE */}
               <div className="mt-7">
