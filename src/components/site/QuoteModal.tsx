@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Check,
+  CheckCircle2,
   ChevronDown,
   Clock,
   FileText,
@@ -13,6 +14,7 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
+
 import { defaultCountries, parseCountry, FlagImage } from "react-international-phone";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
