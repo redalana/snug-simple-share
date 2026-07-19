@@ -83,7 +83,8 @@ export function WhatsAppFloat() {
         }
       `}</style>
       <div
-        className="af-wa-wrap fixed right-4 z-[90] flex flex-row-reverse items-center gap-3 transition-[bottom] duration-300 ease-out sm:right-6"
+        className={`af-wa-wrap fixed right-4 z-[90] flex flex-row-reverse items-center gap-3 transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
+        aria-hidden={modalOpen}
         style={{
           bottom: `calc(var(--af-wa-base, 90px) + ${footerLift}px)`,
         }}
