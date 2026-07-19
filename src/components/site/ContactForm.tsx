@@ -403,7 +403,7 @@ export function ContactForm() {
                 hasError={!!errors.whatsapp}
               />
               {errors.whatsapp && (
-                <p role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
+                <p id="whatsapp-error" role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
               )}
             </div>
           </div>
