@@ -321,7 +321,10 @@ export function QuoteModal() {
                 <label htmlFor="qm-email" className={fieldLabel}>Email *</label>
                 <input
                   id="qm-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => markTouched("email")}
