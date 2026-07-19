@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { onQuoteModalState } from "@/lib/quote-modal";
 
 const WA_URL =
   "https://wa.me/962799741318?text=Hello%20AbuFarha%20Medical%20Supplies,%20I%20would%20like%20to%20inquire%20about%20your%20medical%20equipment.";
@@ -10,6 +11,10 @@ export function WhatsAppFloat() {
   const [showTooltip, setShowTooltip] = useState(false);
   const footerObserver = useRef<IntersectionObserver | null>(null);
   const [footerLift, setFooterLift] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => onQuoteModalState(setModalOpen), []);
+
 
   // Tooltip: desktop only, appears after a delay, auto-hides after 5s, remembers dismissal.
   useEffect(() => {
@@ -78,7 +83,8 @@ export function WhatsAppFloat() {
         }
       `}</style>
       <div
-        className="af-wa-wrap fixed right-4 z-[90] flex flex-row-reverse items-center gap-3 transition-[bottom] duration-300 ease-out sm:right-6"
+        className={`af-wa-wrap fixed right-4 z-[90] flex flex-row-reverse items-center gap-3 transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
+        aria-hidden={modalOpen}
         style={{
           bottom: `calc(var(--af-wa-base, 90px) + ${footerLift}px)`,
         }}

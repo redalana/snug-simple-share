@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FileText } from "lucide-react";
-import { openQuoteModal } from "@/lib/quote-modal";
+import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
 
 /**
  * Sits 20px above the floating WhatsApp button (which uses --af-wa-base
@@ -9,7 +9,10 @@ import { openQuoteModal } from "@/lib/quote-modal";
  */
 export function FloatingQuoteButton() {
   const [footerLift, setFooterLift] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => onQuoteModalState(setModalOpen), []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -43,7 +46,8 @@ export function FloatingQuoteButton() {
         @media (min-width: 1024px) { .af-quote-wrap { --af-quote-base: 200px; } }
       `}</style>
       <div
-        className="af-quote-wrap fixed right-4 z-[90] transition-[bottom] duration-300 ease-out sm:right-6"
+        className={`af-quote-wrap fixed right-4 z-[90] transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
+        aria-hidden={modalOpen}
         style={{ bottom: `calc(var(--af-quote-base) + ${footerLift}px)` }}
       >
         <button
