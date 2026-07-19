@@ -9,7 +9,10 @@ import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
  */
 export function FloatingQuoteButton() {
   const [footerLift, setFooterLift] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => onQuoteModalState(setModalOpen), []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
