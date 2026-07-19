@@ -94,10 +94,10 @@ export function CookieConsent() {
 
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
               {([
-                { k: "necessary", label: "Necessary", desc: "Required for the site to function." , locked: true },
-                { k: "analytics", label: "Analytics", desc: "Help us measure and improve." },
-                { k: "marketing", label: "Marketing", desc: "Personalized content and campaigns." },
-                { k: "functional", label: "Functional", desc: "Enhanced features and preferences." },
+                { k: "necessary", label: "Necessary", desc: "Required for the site to function.", locked: true },
+                { k: "analytics", label: "Analytics", desc: "Help us measure and improve.", locked: false },
+                { k: "marketing", label: "Marketing", desc: "Personalized content and campaigns.", locked: false },
+                { k: "functional", label: "Functional", desc: "Enhanced features and preferences.", locked: false },
               ] as const).map((row) => {
                 const checked = row.locked ? true : (prefs as Record<string, boolean>)[row.k];
                 return (
