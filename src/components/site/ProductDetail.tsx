@@ -553,7 +553,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* VALUE BLOCK — Why Choose · Snapshot · Included, unified */}
-      <section className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
+      <section id="features" className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           {/* WHY HOSPITALS CHOOSE */}
           <div className="mx-auto max-w-2xl text-center">
