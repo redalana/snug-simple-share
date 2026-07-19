@@ -18,6 +18,7 @@ import { QuoteModal } from "@/components/site/QuoteModal";
 import { CookieConsent } from "@/components/site/CookieConsent";
 import { CompareBar } from "@/components/site/CompareBar";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
+import { COMPANY, COPY, ORGANIZATION_JSONLD } from "@/config/companyFacts";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
