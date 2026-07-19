@@ -367,14 +367,19 @@ export function ContactForm() {
               </Label>
               <Input
                 id="email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
                 className={inputCls}
                 placeholder="you@organization.com"
                 value={values.email ?? ""}
                 onChange={(e) => setField("email", e.target.value)}
               />
               {errors.email && (
-                <p role="alert" className="text-xs font-medium text-destructive">{errors.email}</p>
+                <p id="email-error" role="alert" className="text-xs font-medium text-destructive">{errors.email}</p>
               )}
             </div>
             <div className="space-y-2">
