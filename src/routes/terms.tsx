@@ -313,11 +313,11 @@ function TermsRoute() {
                 If you have any questions about these Terms & Conditions, please reach out to us.
               </p>
 
-              <div className="mx-auto mt-10 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-10 grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {CONTACTS.map(({ Icon, title, lines }) => (
                   <div
                     key={title}
-                    className="flex min-h-[180px] flex-col items-start justify-start gap-4 rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                    className="flex min-h-[180px] w-full flex-col items-start justify-start gap-5 rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <div className="flex items-center gap-3">
                       <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/20 bg-primary/5 text-primary">
@@ -327,9 +327,9 @@ function TermsRoute() {
                         {title}
                       </div>
                     </div>
-                    <div className="min-w-0 space-y-1 text-[14px] leading-relaxed text-muted-foreground">
+                    <div className="min-w-0 space-y-1.5 text-[14px] leading-[1.7] text-muted-foreground">
                       {lines.map((l, i) => (
-                        <div key={i}>{l}</div>
+                        <div key={i} className="whitespace-nowrap">{l}</div>
                       ))}
                     </div>
                   </div>
