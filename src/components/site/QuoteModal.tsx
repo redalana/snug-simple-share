@@ -177,8 +177,11 @@ export function QuoteModal() {
 
         <form
           onSubmit={onSubmit}
-          className="max-h-[calc(94vh-14rem)] overflow-y-auto px-7 py-8 sm:px-9 sm:py-9"
+          aria-busy={submitting || success}
+          className="relative max-h-[calc(94vh-14rem)] overflow-y-auto px-7 py-8 sm:px-9 sm:py-9"
         >
+          <fieldset disabled={submitting || success} className="contents">
+
           <div className="grid grid-cols-1 gap-x-7 gap-y-6 md:grid-cols-2">
             {/* LEFT COLUMN */}
             <div className="space-y-6">
