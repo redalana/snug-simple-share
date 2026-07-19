@@ -18,8 +18,8 @@ export function Engineering() {
   ];
 
   const badges = [
-    { icon: Award, k: "12+", v: "OEM Certificates" },
-    { icon: Clock, k: "< 4h", v: "Response Time" },
+    { icon: Award, k: "100%", v: "OEM Certified" },
+    { icon: Clock, k: "24/7", v: "Technical Support" },
     { icon: Users, k: "5", v: "OEM-Trained Engineers" },
     { icon: Globe2, k: "10+", v: "Countries Covered" },
   ];
