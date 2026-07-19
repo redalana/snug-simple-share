@@ -59,7 +59,7 @@ export function Engineering() {
             Your reliability.
           </h2>
           <p className="mt-5 max-w-lg text-[calc(16*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            A field team of 15+ dedicated biomedical engineers — trained
+            An in-house team of dedicated biomedical engineers — trained
             directly by OEMs, backed by a regional operations center, and
             trusted by leading hospitals since 1999.
           </p>
