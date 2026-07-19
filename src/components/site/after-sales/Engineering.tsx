@@ -39,10 +39,10 @@ export function Engineering() {
           </div>
           <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-xl sm:block">
             <div className="text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              First-Time Fix Rate
+              Certified OEM Partners
             </div>
             <div className="mt-1 font-display text-4xl font-extrabold text-foreground">
-              98%
+              100%
             </div>
             <div className="text-[calc(12*var(--desktop-px-unit))] text-muted-foreground">
               Across MEA installations
