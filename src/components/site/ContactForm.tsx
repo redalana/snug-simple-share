@@ -348,7 +348,12 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, interest: "" }));
               }}
             >
-              <SelectTrigger id="interest" className={selectCls}>
+              <SelectTrigger
+                id="interest"
+                aria-invalid={!!errors.interest}
+                aria-describedby={errors.interest ? "interest-error" : undefined}
+                className={selectCls}
+              >
                 <SelectValue placeholder="Select a solution" />
               </SelectTrigger>
               <SelectContent>
@@ -360,7 +365,7 @@ export function ContactForm() {
               </SelectContent>
             </Select>
             {errors.interest && (
-              <p role="alert" className="text-xs font-medium text-destructive">{errors.interest}</p>
+              <p id="interest-error" role="alert" className="text-xs font-medium text-destructive">{errors.interest}</p>
             )}
           </div>
 
