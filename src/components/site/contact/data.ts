@@ -84,7 +84,7 @@ export const FAQS = [
   },
   {
     q: "Which countries do you deliver to?",
-    a: "We deliver across the Middle East and Africa, with active projects in 25+ countries and logistics partners for the rest of the region.",
+    a: "We deliver across Africa and the Middle East, with active projects in 10+ countries and logistics partners for the wider region.",
   },
   {
     q: "Do you supply refurbished medical equipment?",
