@@ -48,7 +48,9 @@ export function clearCompare() {
 }
 
 export function useCompare() {
-  const [slugs, setSlugs] = useState<string[]>(() => read());
+  // Start empty on both server and first client render to avoid hydration
+  // mismatch; hydrate from localStorage in useEffect.
+  const [slugs, setSlugs] = useState<string[]>([]);
   useEffect(() => {
     setSlugs(read());
     const l: Listener = (s) => setSlugs(s);

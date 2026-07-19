@@ -70,7 +70,11 @@ function ComparePage() {
           </div>
         </div>
 
-        {ready && items.length === 0 ? (
+        {!ready ? (
+          <div className="rounded-3xl border border-dashed border-border bg-card p-12 text-center text-sm text-muted-foreground" aria-busy="true">
+            Loading comparison…
+          </div>
+        ) : items.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-border bg-card p-12 text-center">
             <h2 className="font-display text-xl font-bold text-foreground">No products to compare yet</h2>
             <p className="mt-2 text-sm text-muted-foreground">Add products to your comparison from any product page.</p>
