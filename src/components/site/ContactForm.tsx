@@ -305,6 +305,8 @@ export function ContactForm() {
                       <Label htmlFor={f.name} className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">{f.label}</Label>
                       <Input
                         id={f.name}
+                        name={f.name}
+                        autoComplete={autoCompleteFor(f.name)}
                         className={inputCls}
                         placeholder={f.placeholder}
                         value={values[f.name] ?? ""}
