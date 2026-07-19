@@ -180,17 +180,17 @@ export function QuoteModal() {
   return (
     <Dialog open={open} onOpenChange={resetOnClose}>
       <DialogContent
-        className="max-h-[94vh] w-[calc(100vw-2rem)] max-w-[900px] overflow-hidden rounded-[20px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)]"
+        className="max-h-[94vh] w-[calc(100vw-1rem)] max-w-[900px] overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]"
       >
         {/* HEADER */}
-        <div className="relative border-b border-border/60 px-7 pb-8 pt-9 sm:px-9 sm:pt-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+        <div className="relative border-b border-border/60 px-5 pb-6 pt-7 sm:px-9 sm:pb-8 sm:pt-10">
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
             <FileText className="h-3 w-3" /> Quotation Request
           </div>
-          <DialogTitle className="mt-5 font-display text-[26px] font-extrabold leading-tight tracking-tight text-foreground sm:text-[30px]">
+          <DialogTitle className="mt-4 font-display text-[22px] font-extrabold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-[30px]">
             Request a Quote
           </DialogTitle>
-          <DialogDescription className="mt-3 max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground">
+          <DialogDescription className="mt-2 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:mt-3 sm:text-[13.5px]">
             Tell us about your healthcare project and our specialists will prepare
             the best quotation for your requirements.
           </DialogDescription>
@@ -199,7 +199,7 @@ export function QuoteModal() {
         <form
           onSubmit={onSubmit}
           aria-busy={submitting || success}
-          className="relative max-h-[calc(94vh-14rem)] overflow-y-auto px-7 py-8 sm:px-9 sm:py-9"
+          className="relative max-h-[calc(94vh-12rem)] overflow-y-auto px-5 py-6 sm:max-h-[calc(94vh-14rem)] sm:px-9 sm:py-9"
         >
           <fieldset disabled={submitting || success} className="contents">
 

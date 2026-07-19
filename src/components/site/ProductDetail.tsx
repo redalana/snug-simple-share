@@ -187,6 +187,27 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
     setPageUrl(window.location.href);
     pushRecentlyViewed(slug);
   }, [slug]);
+
+  // Sticky in-page nav — track the currently visible section for a11y + orientation.
+  const [activeSection, setActiveSection] = useState<string>("overview");
+  useEffect(() => {
+    const ids = ["overview", "features", "downloads", "faq", "request-quote"];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [slug]);
   const compareSlugs = useCompare();
   const inCompare = compareSlugs.includes(slug);
   const handleCompare = () => {
@@ -268,7 +289,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
+      <section id="overview" className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl"
@@ -552,8 +573,49 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </section>
 
+      {/* STICKY IN-PAGE NAV — active section tracked via IntersectionObserver */}
+      <nav
+        aria-label="Product sections"
+        className="sticky top-16 z-30 hidden border-b border-border/60 bg-white/85 backdrop-blur lg:block"
+      >
+        <div className="mx-auto flex max-w-[100rem] items-center gap-1 overflow-x-auto px-6 lg:px-10">
+          {[
+            { id: "overview", label: "Overview" },
+            { id: "features", label: "Features" },
+            { id: "downloads", label: "Downloads" },
+            { id: "faq", label: "FAQ" },
+            { id: "request-quote", label: "Request Quote" },
+          ].map((s) => {
+            const isActive = activeSection === s.id;
+            return (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                aria-current={isActive ? "true" : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className={`relative shrink-0 px-4 py-3.5 text-sm font-semibold transition-colors ${
+                  isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {s.label}
+                <span
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-primary transition-opacity ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+
+
       {/* VALUE BLOCK — Why Choose · Snapshot · Included, unified */}
-      <section className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
+      <section id="features" className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           {/* WHY HOSPITALS CHOOSE */}
           <div className="mx-auto max-w-2xl text-center">
@@ -642,7 +704,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* DOWNLOADS */}
-      <section className="border-b border-border/60">
+      <section id="downloads" className="border-b border-border/60">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start">
             <div>
@@ -724,7 +786,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* PRODUCT FAQ */}
-      <section className="border-b border-border/60">
+      <section id="faq" className="border-b border-border/60">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start lg:gap-16">
             <div>

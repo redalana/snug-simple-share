@@ -319,11 +319,16 @@ export function ContactForm() {
                         id={f.name}
                         name={f.name}
                         autoComplete={autoCompleteFor(f.name)}
+                        aria-invalid={!!errors[f.name]}
+                        aria-describedby={errors[f.name] ? `${f.name}-error` : undefined}
                         className={inputCls}
                         placeholder={f.placeholder}
                         value={values[f.name] ?? ""}
                         onChange={(e) => setField(f.name, e.target.value)}
                       />
+                      {errors[f.name] && (
+                        <p id={`${f.name}-error`} role="alert" className="text-xs font-medium text-destructive">{errors[f.name]}</p>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -343,7 +348,12 @@ export function ContactForm() {
                 setErrors((e) => ({ ...e, interest: "" }));
               }}
             >
-              <SelectTrigger id="interest" className={selectCls}>
+              <SelectTrigger
+                id="interest"
+                aria-invalid={!!errors.interest}
+                aria-describedby={errors.interest ? "interest-error" : undefined}
+                className={selectCls}
+              >
                 <SelectValue placeholder="Select a solution" />
               </SelectTrigger>
               <SelectContent>
@@ -355,7 +365,7 @@ export function ContactForm() {
               </SelectContent>
             </Select>
             {errors.interest && (
-              <p role="alert" className="text-xs font-medium text-destructive">{errors.interest}</p>
+              <p id="interest-error" role="alert" className="text-xs font-medium text-destructive">{errors.interest}</p>
             )}
           </div>
 
@@ -393,7 +403,7 @@ export function ContactForm() {
                 hasError={!!errors.whatsapp}
               />
               {errors.whatsapp && (
-                <p role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
+                <p id="whatsapp-error" role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
               )}
             </div>
           </div>
@@ -405,13 +415,16 @@ export function ContactForm() {
             <Textarea
               id="message"
               rows={4}
+              autoComplete="off"
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? "message-error" : undefined}
               className="resize-none rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
               placeholder="Tell us about your project, requirements or timeline…"
               value={values.message ?? ""}
               onChange={(e) => setField("message", e.target.value)}
             />
             {errors.message && (
-              <p role="alert" className="text-xs font-medium text-destructive">{errors.message}</p>
+              <p id="message-error" role="alert" className="text-xs font-medium text-destructive">{errors.message}</p>
             )}
           </div>
 

@@ -442,9 +442,9 @@ export function ReadinessAssessment() {
           className="max-w-2xl"
         >
           <Eyebrow index="06">Hospital Readiness</Eyebrow>
-          <h2 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
+          <h1 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
             Hospital Readiness Assessment
-          </h2>
+          </h1>
           <p className="mt-5 max-w-xl text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
             Before investing in advanced medical technology, make sure your
             hospital is ready for a successful implementation.
