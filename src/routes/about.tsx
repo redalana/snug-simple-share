@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { AboutPage } from "@/components/site/AboutPage";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { FOUNDER_JSONLD } from "@/config/companyFacts";
 
 const TITLE = "About AbuFarha | Medical Equipment Engineering Since 1999";
 const DESC =
@@ -24,6 +25,9 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:description", content: DESC },
     ],
     links: [{ rel: "canonical", href: SITE_URL + "/about" }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(FOUNDER_JSONLD) },
+    ],
   }),
   component: AboutRoute,
 });
