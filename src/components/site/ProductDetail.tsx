@@ -40,7 +40,6 @@ import {
 } from "lucide-react";
 import {
   type Product,
-  getRelatedProducts,
   getAdjacentProducts,
   productSlug,
 } from "@/lib/products";
