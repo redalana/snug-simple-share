@@ -40,9 +40,22 @@ export function CategoryLandingPage({
     ? PRODUCTS.filter((p) => !productCategories.includes(p.category))
     : PRODUCTS.filter((p) => productCategories.includes(p.category));
 
+  const itemListSchema = itemListJsonLd(
+    matches.map((p) => ({
+      name: p.name,
+      url: `${SITE_URL}/products/${productSlug(p)}`,
+    })),
+    title,
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <main id="main-content" className="pt-[calc(110*var(--desktop-px-unit))]">
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
