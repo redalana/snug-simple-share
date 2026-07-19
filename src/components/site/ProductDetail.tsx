@@ -724,7 +724,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       </section>
 
       {/* PRODUCT FAQ */}
-      <section className="border-b border-border/60">
+      <section id="faq" className="border-b border-border/60">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start lg:gap-16">
             <div>
