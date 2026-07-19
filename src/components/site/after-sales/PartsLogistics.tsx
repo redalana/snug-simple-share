@@ -93,7 +93,7 @@ export function PartsLogistics() {
               </div>
               <div className="mt-5 flex items-center gap-4 border-t border-white/10 pt-4 text-[calc(12*var(--desktop-px-unit))] text-white/60">
                 <div className="flex items-center gap-1.5">
-                  <Truck className="h-3.5 w-3.5 text-primary" /> 48h dispatch
+                  <Truck className="h-3.5 w-3.5 text-primary" /> Regional dispatch
                 </div>
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="h-3.5 w-3.5 text-primary" /> OEM sealed
