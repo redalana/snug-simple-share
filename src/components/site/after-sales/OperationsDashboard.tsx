@@ -77,7 +77,7 @@ export function OperationsDashboard() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/8 bg-black/30 px-5 py-4 text-[calc(12*var(--desktop-px-unit))] text-white/60">
             <div className="flex items-center gap-2">
               <MapPin className="h-3.5 w-3.5 text-primary" />
-              <span className="font-semibold text-white">10 countries</span> · 26 cities · 500+ installations under active care
+              <span className="font-semibold text-white">10+ countries</span> · 30+ healthcare projects under active care
             </div>
             <div className="flex items-center gap-2 text-white/50">
               <Clock className="h-3.5 w-3.5" />
