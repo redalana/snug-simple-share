@@ -52,6 +52,7 @@ export const OG_IMAGES = {
   productsIndex: absUrl(solMri),
   productCategory: {
     "mri-scanners": absUrl(solMri),
+    "ct-scanners": absUrl(solPetct),
     "pet-ct-scanners": absUrl(solPetct),
     "cath-lab": absUrl(heroCathlab),
     "c-arm-systems": absUrl(solCarm),

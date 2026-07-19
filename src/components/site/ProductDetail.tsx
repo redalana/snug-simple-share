@@ -43,6 +43,7 @@ import {
   getAdjacentProducts,
   productSlug,
 } from "@/lib/products";
+import { CATEGORY_NAME_TO_SLUG } from "@/lib/category-content";
 import { generateProductPdf } from "@/lib/product-pdf";
 import { pushRecentlyViewed } from "@/lib/recently-viewed";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
@@ -289,7 +290,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                   </Link>
                 </li>
                 <ChevronRight className="h-4 w-4 text-muted-foreground/60" />
-                <li className="hidden sm:block text-muted-foreground">{product.category}</li>
+                <li className="hidden sm:block">
+                  <CategoryBreadcrumbLink category={product.category} />
+                </li>
                 <ChevronRight className="hidden h-4 w-4 text-muted-foreground/60 sm:block" />
                 <li className="font-semibold text-foreground" aria-current="page">
                   {product.name}
@@ -849,16 +852,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-              { "@type": "ListItem", position: 2, name: "Products", item: "/products" },
-              { "@type": "ListItem", position: 3, name: product.category },
-              { "@type": "ListItem", position: 4, name: product.name },
-            ],
-          }),
+          __html: JSON.stringify(buildBreadcrumbSchema(product, slug)),
         }}
       />
     </>
@@ -1327,4 +1321,54 @@ function Lightbox({
       )}
     </div>
   );
+}
+
+/**
+ * Breadcrumb category link — routes to the category landing page when the
+ * product's category maps to a known slug; otherwise renders plain text.
+ */
+function CategoryBreadcrumbLink({ category }: { category: string }) {
+  const slug = CATEGORY_NAME_TO_SLUG[category];
+  if (!slug) return <span className="text-muted-foreground">{category}</span>;
+  return (
+    <a
+      href={`/products/${slug}`}
+      className="text-muted-foreground transition-colors hover:text-primary"
+    >
+      {category}
+    </a>
+  );
+}
+
+const ABS_SITE_URL = "https://snug-simple-share.lovable.app";
+
+function buildBreadcrumbSchema(product: Product, slug: string) {
+  const categorySlug = CATEGORY_NAME_TO_SLUG[product.category];
+  const items: Array<Record<string, unknown>> = [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${ABS_SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Products", item: `${ABS_SITE_URL}/products` },
+  ];
+  if (categorySlug) {
+    items.push({
+      "@type": "ListItem",
+      position: 3,
+      name: product.category,
+      item: `${ABS_SITE_URL}/products/${categorySlug}`,
+    });
+    items.push({
+      "@type": "ListItem",
+      position: 4,
+      name: product.name,
+      item: `${ABS_SITE_URL}/products/${slug}`,
+    });
+  } else {
+    items.push({ "@type": "ListItem", position: 3, name: product.category });
+    items.push({
+      "@type": "ListItem",
+      position: 4,
+      name: product.name,
+      item: `${ABS_SITE_URL}/products/${slug}`,
+    });
+  }
+  return { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: items };
 }
