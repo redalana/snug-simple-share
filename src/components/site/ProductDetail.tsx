@@ -187,6 +187,27 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
     setPageUrl(window.location.href);
     pushRecentlyViewed(slug);
   }, [slug]);
+
+  // Sticky in-page nav — track the currently visible section for a11y + orientation.
+  const [activeSection, setActiveSection] = useState<string>("overview");
+  useEffect(() => {
+    const ids = ["overview", "features", "downloads", "faq", "request-quote"];
+    const els = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [slug]);
   const compareSlugs = useCompare();
   const inCompare = compareSlugs.includes(slug);
   const handleCompare = () => {
