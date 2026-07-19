@@ -11,6 +11,10 @@ export function WhatsAppFloat() {
   const [showTooltip, setShowTooltip] = useState(false);
   const footerObserver = useRef<IntersectionObserver | null>(null);
   const [footerLift, setFooterLift] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => onQuoteModalState(setModalOpen), []);
+
 
   // Tooltip: desktop only, appears after a delay, auto-hides after 5s, remembers dismissal.
   useEffect(() => {
