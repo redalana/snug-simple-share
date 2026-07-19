@@ -4,11 +4,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronUp, GitCompare, Trash2, X } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
 import { clearCompare, removeCompare, useCompare } from "@/lib/compare-store";
+import { onQuoteModalState } from "@/lib/quote-modal";
 
 export function CompareBar() {
   const slugs = useCompare();
   const [expanded, setExpanded] = useState(false);
   const [nearFooter, setNearFooter] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+
+  useEffect(() => onQuoteModalState(setQuoteOpen), []);
+
 
   useEffect(() => {
     const footer = document.querySelector("footer");
