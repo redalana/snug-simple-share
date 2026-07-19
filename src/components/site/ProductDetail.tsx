@@ -75,6 +75,16 @@ const FEATURES = [
     title: "Future Ready Platform",
     text: "Upgradeable architecture that scales with evolving clinical needs.",
   },
+  {
+    icon: GraduationCap,
+    title: "Clinical Training Included",
+    text: "Hands-on operator training so your team performs from day one.",
+  },
+  {
+    icon: Headset,
+    title: "Lifetime After-Sales Support",
+    text: "Certified biomedical engineers on call across every project region.",
+  },
 ];
 
 const INCLUDED = [
@@ -84,6 +94,46 @@ const INCLUDED = [
   { icon: PackageCheck, label: "Spare Parts" },
   { icon: Headset, label: "After Sales Support" },
 ];
+
+const TRUST = [
+  { icon: Award, title: "25+ Years Experience", text: "Delivering medical technology across the MEA region since 1999." },
+  { icon: BadgeCheck, title: "Certified Biomedical Engineers", text: "OEM-trained specialists covering every major imaging platform." },
+  { icon: Wrench, title: "Installation & Commissioning", text: "Full site preparation, mechanical install and clinical hand-over." },
+  { icon: GraduationCap, title: "Clinical Training", text: "Structured operator and application programs at your facility." },
+  { icon: ShieldCheck, title: "Preventive Maintenance", text: "Scheduled service plans that protect uptime and patient throughput." },
+  { icon: Headset, title: "After Sales Support", text: "Priority remote support and rapid on-site response worldwide." },
+];
+
+const DOWNLOADS = [
+  { label: "Product Brochure", type: "PDF", size: "1.8 MB" },
+  { label: "Technical Datasheet", type: "PDF", size: "0.9 MB" },
+  { label: "Installation Guide", type: "PDF", size: "1.2 MB" },
+  { label: "Warranty Information", type: "PDF", size: "0.4 MB" },
+];
+
+const FAQS = [
+  {
+    q: "Can this system be installed in existing hospitals?",
+    a: "Yes. Our engineers perform a site survey, confirm power, cooling and shielding requirements, and manage the full installation and commissioning inside operating facilities.",
+  },
+  {
+    q: "Is clinical training included with the system?",
+    a: "Every AbuFarha delivery includes structured operator and application training so your radiographers and technologists can use the equipment confidently from day one.",
+  },
+  {
+    q: "Is international shipping and installation available?",
+    a: "Yes. We regularly deliver, install and commission systems across the Middle East, Africa and beyond, including customs, logistics and on-site engineering.",
+  },
+  {
+    q: "How long is the warranty?",
+    a: "Every system ships with a standard 12-month parts warranty, with optional extended coverage and preventive maintenance packages available.",
+  },
+  {
+    q: "Do you provide after-sales support and spare parts?",
+    a: "Our biomedical team offers long-term service contracts, remote diagnostics, priority spare parts supply and rapid on-site response.",
+  },
+];
+
 
 const SNAPSHOT_ICONS = [Gauge, ScanLine, Workflow, Layers3, BadgeCheck, ShieldCheck];
 
