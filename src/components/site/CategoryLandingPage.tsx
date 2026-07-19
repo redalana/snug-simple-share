@@ -17,6 +17,7 @@ import { Footer } from "@/components/site/Footer";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
 import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
+import { openQuoteModal } from "@/lib/quote-modal";
 import {
   CATEGORY_CONTENT,
   CATEGORY_LABELS,
