@@ -289,7 +289,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                   </Link>
                 </li>
                 <ChevronRight className="h-4 w-4 text-muted-foreground/60" />
-                <li className="hidden sm:block text-muted-foreground">{product.category}</li>
+                <li className="hidden sm:block">
+                  <CategoryBreadcrumbLink category={product.category} />
+                </li>
                 <ChevronRight className="hidden h-4 w-4 text-muted-foreground/60 sm:block" />
                 <li className="font-semibold text-foreground" aria-current="page">
                   {product.name}
