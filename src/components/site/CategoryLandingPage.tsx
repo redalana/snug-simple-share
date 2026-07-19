@@ -3,6 +3,8 @@ import { ArrowRight, ChevronRight, ShieldCheck, Wrench, GraduationCap } from "lu
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
+import { itemListJsonLd } from "@/config/companyFacts";
+import { SITE_URL } from "@/lib/seo";
 
 export type CategoryLandingProps = {
   /** Slug segment used in the URL, e.g. "cath-lab". */
