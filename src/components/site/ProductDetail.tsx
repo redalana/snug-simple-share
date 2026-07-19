@@ -45,6 +45,10 @@ import {
   productSlug,
 } from "@/lib/products";
 import { generateProductPdf } from "@/lib/product-pdf";
+import { pushRecentlyViewed } from "@/lib/recently-viewed";
+import { toggleCompare, useCompare } from "@/lib/compare-store";
+import { RecentlyViewed } from "@/components/site/RecentlyViewed";
+import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
 
@@ -115,7 +119,14 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const [pageUrl, setPageUrl] = useState("");
   useEffect(() => {
     setPageUrl(window.location.href);
+    pushRecentlyViewed(slug);
   }, [slug]);
+  const compareSlugs = useCompare();
+  const inCompare = compareSlugs.includes(slug);
+  const handleCompare = () => {
+    const added = toggleCompare(slug);
+    if (!added && !inCompare) toast.error("You can compare up to 4 products");
+  };
   const share = useShare(product, pageUrl);
 
   const related = getRelatedProducts(product, 3);
