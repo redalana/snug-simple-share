@@ -1331,3 +1331,20 @@ function Lightbox({
     </div>
   );
 }
+
+/**
+ * Breadcrumb category link — routes to the category landing page when the
+ * product's category maps to a known slug; otherwise renders plain text.
+ */
+function CategoryBreadcrumbLink({ category }: { category: string }) {
+  const slug = CATEGORY_NAME_TO_SLUG[category];
+  if (!slug) return <span className="text-muted-foreground">{category}</span>;
+  return (
+    <a
+      href={`/products/${slug}`}
+      className="text-muted-foreground transition-colors hover:text-primary"
+    >
+      {category}
+    </a>
+  );
+}
