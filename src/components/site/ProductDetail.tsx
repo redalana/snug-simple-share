@@ -43,6 +43,7 @@ import {
   getAdjacentProducts,
   productSlug,
 } from "@/lib/products";
+import { CATEGORY_NAME_TO_SLUG } from "@/lib/category-content";
 import { generateProductPdf } from "@/lib/product-pdf";
 import { pushRecentlyViewed } from "@/lib/recently-viewed";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
