@@ -243,13 +243,31 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
+        {/* Copyright + Legal */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
         <div className="flex flex-col items-center justify-between gap-3 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row sm:pb-4 lg:py-5">
-
           <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
+          <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[calc(12.5*var(--desktop-px-unit))]">
+            {[
+              { label: "Privacy Policy", to: "/privacy-policy" },
+              { label: "Terms & Conditions", to: "/terms" },
+              { label: "FAQs", to: "/faqs" },
+              { label: "Sitemap", to: "/sitemap" },
+            ].map((l, i, arr) => (
+              <span key={l.to} className="flex items-center gap-2">
+                <Link
+                  to={l.to}
+                  activeProps={{ className: "text-primary font-semibold" }}
+                  className="text-white/50 transition-colors hover:text-white"
+                >
+                  {l.label}
+                </Link>
+                {i < arr.length - 1 ? <span className="text-white/20">|</span> : null}
+              </span>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
