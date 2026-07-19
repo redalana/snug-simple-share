@@ -1,7 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import {
   Facebook,
-  Linkedin,
   HeartPulse,
   Activity,
   ScanLine,
