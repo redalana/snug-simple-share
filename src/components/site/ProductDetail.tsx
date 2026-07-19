@@ -9,7 +9,7 @@ import {
 } from "react-international-phone";
 import { PhoneField } from "@/components/site/PhoneField";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, Search, X, ZoomIn, ZoomOut, Expand } from "lucide-react";
+import { Check, Search, X, ZoomIn, ZoomOut, Expand, Download, Plus } from "lucide-react";
 import {
   ChevronRight,
   ChevronLeft,
@@ -75,6 +75,16 @@ const FEATURES = [
     title: "Future Ready Platform",
     text: "Upgradeable architecture that scales with evolving clinical needs.",
   },
+  {
+    icon: GraduationCap,
+    title: "Clinical Training Included",
+    text: "Hands-on operator training so your team performs from day one.",
+  },
+  {
+    icon: Headset,
+    title: "Lifetime After-Sales Support",
+    text: "Certified biomedical engineers on call across every project region.",
+  },
 ];
 
 const INCLUDED = [
@@ -84,6 +94,46 @@ const INCLUDED = [
   { icon: PackageCheck, label: "Spare Parts" },
   { icon: Headset, label: "After Sales Support" },
 ];
+
+const TRUST = [
+  { icon: Award, title: "25+ Years Experience", text: "Delivering medical technology across the MEA region since 1999." },
+  { icon: BadgeCheck, title: "Certified Biomedical Engineers", text: "OEM-trained specialists covering every major imaging platform." },
+  { icon: Wrench, title: "Installation & Commissioning", text: "Full site preparation, mechanical install and clinical hand-over." },
+  { icon: GraduationCap, title: "Clinical Training", text: "Structured operator and application programs at your facility." },
+  { icon: ShieldCheck, title: "Preventive Maintenance", text: "Scheduled service plans that protect uptime and patient throughput." },
+  { icon: Headset, title: "After Sales Support", text: "Priority remote support and rapid on-site response worldwide." },
+];
+
+const DOWNLOADS = [
+  { label: "Product Brochure", type: "PDF", size: "1.8 MB" },
+  { label: "Technical Datasheet", type: "PDF", size: "0.9 MB" },
+  { label: "Installation Guide", type: "PDF", size: "1.2 MB" },
+  { label: "Warranty Information", type: "PDF", size: "0.4 MB" },
+];
+
+const FAQS = [
+  {
+    q: "Can this system be installed in existing hospitals?",
+    a: "Yes. Our engineers perform a site survey, confirm power, cooling and shielding requirements, and manage the full installation and commissioning inside operating facilities.",
+  },
+  {
+    q: "Is clinical training included with the system?",
+    a: "Every AbuFarha delivery includes structured operator and application training so your radiographers and technologists can use the equipment confidently from day one.",
+  },
+  {
+    q: "Is international shipping and installation available?",
+    a: "Yes. We regularly deliver, install and commission systems across the Middle East, Africa and beyond, including customs, logistics and on-site engineering.",
+  },
+  {
+    q: "How long is the warranty?",
+    a: "Every system ships with a standard 12-month parts warranty, with optional extended coverage and preventive maintenance packages available.",
+  },
+  {
+    q: "Do you provide after-sales support and spare parts?",
+    a: "Our biomedical team offers long-term service contracts, remote diagnostics, priority spare parts supply and rapid on-site response.",
+  },
+];
+
 
 const SNAPSHOT_ICONS = [Gauge, ScanLine, Workflow, Layers3, BadgeCheck, ShieldCheck];
 
@@ -125,8 +175,11 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const inCompare = compareSlugs.includes(slug);
   const handleCompare = () => {
     const added = toggleCompare(slug);
-    if (!added && !inCompare) toast.error("You can compare up to 4 products");
+    if (added) toast.success("Added to Compare", { description: `${product.name} is ready to compare.` });
+    else if (inCompare) toast("Removed from Compare");
+    else toast.error("You can compare up to 4 products");
   };
+
   const share = useShare(product, pageUrl);
 
   const adjacent = getAdjacentProducts(slug);
@@ -388,7 +441,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" />
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
               <div
                 key={f.title}
@@ -463,35 +516,157 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </section>
 
-      {/* DOWNLOAD PROFILE */}
+      {/* DOWNLOADS */}
       <section className="border-b border-border/60">
-        <div className="mx-auto max-w-[100rem] px-6 py-14 lg:px-10">
-          <div className="flex flex-col items-center gap-6 rounded-3xl border border-border/70 bg-card p-8 shadow-[0_18px_44px_-30px_rgba(0,0,0,0.25)] sm:flex-row sm:justify-between lg:p-10">
-            <div className="flex items-center gap-5">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                <FileText className="h-7 w-7" />
+        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start">
+            <div>
+              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
+                Product Downloads
               </span>
-              <div>
-                <h2 className="font-display text-lg font-bold text-foreground">
-                  Complete Product Profile
-                </h2>
-                <p className="mt-1 max-w-md text-sm text-muted-foreground">
-                  Download a professional PDF with full product information, technical
-                  highlights and our contact details — generated instantly.
-                </p>
-              </div>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+                Documentation &amp; datasheets
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                Download the full product profile instantly or request the OEM
+                datasheets, installation and warranty documents from our team.
+              </p>
+              <button
+                onClick={handlePdf}
+                disabled={generating}
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
+              >
+                <FileText className="h-4 w-4" />
+                {generating ? "Preparing PDF…" : "Download Full Product Profile"}
+              </button>
             </div>
-            <button
-              onClick={handlePdf}
-              disabled={generating}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
-            >
-              <FileText className="h-4 w-4" />
-              {generating ? "Preparing PDF…" : "Download Full Product Profile"}
-            </button>
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {DOWNLOADS.map((d) => (
+                <li key={d.label}>
+                  <button
+                    type="button"
+                    onClick={handlePdf}
+                    disabled={generating}
+                    className="group flex w-full items-center gap-4 rounded-2xl border border-border/70 bg-card p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_18px_44px_-30px_rgba(0,0,0,0.28)] disabled:opacity-60"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <FileText className="h-5 w-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-bold text-foreground">{d.label}</span>
+                      <span className="mt-0.5 block text-[calc(11*var(--desktop-px-unit))] uppercase tracking-wide text-muted-foreground">
+                        {d.type} · {d.size}
+                      </span>
+                    </span>
+                    <Download className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
+
+      {/* WHY BUY FROM ABUFARHA */}
+      <section className="border-b border-border/60 bg-gradient-to-b from-secondary/30 to-white">
+        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
+              Why Buy From AbuFarha
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              A partner behind every installation
+            </h2>
+            <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" />
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {TRUST.map((t) => (
+              <div
+                key={t.title}
+                className="group flex gap-4 rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_24px_52px_-30px_rgba(0,0,0,0.28)]"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <t.icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-display text-base font-bold text-foreground">{t.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRODUCT FAQ */}
+      <section className="border-b border-border/60">
+        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start lg:gap-16">
+            <div>
+              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
+                Product FAQ
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+                Answers to common questions
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                Everything you need to know about installation, training, warranty
+                and after-sales support for this system.
+              </p>
+            </div>
+            <div className="divide-y divide-border/60 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-[0_18px_44px_-32px_rgba(0,0,0,0.28)]">
+              {FAQS.map((f) => (
+                <details key={f.q} className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left text-sm font-bold text-foreground transition-colors hover:bg-secondary/40 lg:px-7 lg:py-6 lg:text-base">
+                    <span>{f.q}</span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border text-primary transition-all group-open:rotate-45 group-open:bg-primary group-open:text-primary-foreground">
+                      <Plus className="h-4 w-4" />
+                    </span>
+                  </summary>
+                  <div className="px-6 pb-6 pr-16 text-sm leading-relaxed text-muted-foreground lg:px-7 lg:pb-7">
+                    {f.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HELP CTA */}
+      <section className="border-b border-border/60 bg-primary/[0.04]">
+        <div className="mx-auto max-w-[100rem] px-6 py-14 lg:px-10 lg:py-16">
+          <div className="flex flex-col items-start gap-6 rounded-3xl border border-primary/15 bg-card p-8 shadow-[0_24px_56px_-34px_rgba(0,0,0,0.3)] lg:flex-row lg:items-center lg:justify-between lg:p-12">
+            <div className="max-w-2xl">
+              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
+                Talk to a Specialist
+              </span>
+              <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+                Need help choosing the right system?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Our clinical and biomedical specialists will help you match the right
+                configuration to your facility, project scope and budget.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={scrollToQuote}
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              >
+                <FileText className="h-4 w-4" /> Request a Quote
+              </button>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3.5 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
+              >
+                <PhoneCall className="h-4 w-4" /> Contact Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* RELATED SYSTEMS */}
       <div className="border-b border-border/60 bg-secondary/30">
