@@ -46,6 +46,7 @@ import {
   type BenefitIcon,
   type ContentBlock,
 } from "@/lib/blog";
+import { openQuoteModal } from "@/lib/quote-modal";
 
 /* ---------------- Page shell ---------------- */
 
