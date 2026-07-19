@@ -204,12 +204,15 @@ const CONTACTS: ContactCard[] = [
   {
     Icon: MapPin,
     title: "Address",
-    lines: ["AbuFarha Medical Supplies", "Queen Rania St.,", "Amman, Jordan"],
+    lines: ["AbuFarha Medical Supplies", "Queen Rania St.", "Amman, Jordan"],
   },
   {
     Icon: Phone,
     title: "Phone",
-    lines: ["+962 6 4026063", "+962 79 9741318"],
+    lines: [
+      <span key="p1" className="whitespace-nowrap">+962 6 4026063</span>,
+      <span key="p2" className="whitespace-nowrap">+962 79 9741318</span>,
+    ],
   },
   {
     Icon: Mail,
@@ -218,7 +221,7 @@ const CONTACTS: ContactCard[] = [
       <a
         key="e"
         href="mailto:info@abufarhamedical.com"
-        className="hover:text-primary"
+        className="whitespace-nowrap hover:text-primary"
       >
         info@abufarhamedical.com
       </a>,
@@ -227,7 +230,9 @@ const CONTACTS: ContactCard[] = [
   {
     Icon: Globe2,
     title: "Website",
-    lines: ["www.abufarhamedical.com"],
+    lines: [
+      <span key="w" className="whitespace-nowrap">www.abufarhamedical.com</span>,
+    ],
   },
 ];
 
