@@ -71,11 +71,11 @@ export const EQUIPMENT = [
 export type EquipmentItem = (typeof EQUIPMENT)[number];
 
 export const PART_MODULES = [
-  { id: "mri", label: "MRI Parts", count: "620+", note: "Coils, gradient amps, RF components" },
-  { id: "ct", label: "CT Parts", count: "540+", note: "X-ray tubes, detectors, DAS boards" },
-  { id: "cath", label: "Cath Lab Parts", count: "410+", note: "Flat panels, generators, table drives" },
-  { id: "petct", label: "PET / CT Parts", count: "280+", note: "PMT modules, crystals, cooling" },
-  { id: "cal", label: "Calibration Kits", count: "500+", note: "Phantoms, QA jigs, dosimetry" },
+  { id: "mri", label: "MRI Parts", count: "In stock", note: "Coils, gradient amps, RF components" },
+  { id: "ct", label: "CT Parts", count: "In stock", note: "X-ray tubes, detectors, DAS boards" },
+  { id: "cath", label: "Cath Lab Parts", count: "In stock", note: "Flat panels, generators, table drives" },
+  { id: "petct", label: "PET / CT Parts", count: "In stock", note: "PMT modules, crystals, cooling" },
+  { id: "cal", label: "Calibration Kits", count: "In stock", note: "Phantoms, QA jigs, dosimetry" },
 ];
 
 export const CONTACT_CHANNELS = [
