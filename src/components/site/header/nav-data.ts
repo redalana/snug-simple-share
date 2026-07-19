@@ -12,6 +12,7 @@ import {
   Bone,
   Waves,
   LayoutGrid,
+  Layers3,
 } from "lucide-react";
 
 export type NavItem = {
