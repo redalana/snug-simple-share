@@ -108,16 +108,27 @@ export function QuoteModal() {
     );
   }, [countryQuery]);
 
+  const productPool = useMemo(() => {
+    const cats = INTEREST_TO_CATEGORY[interest];
+    if (!interest) return PRODUCTS;
+    if (!cats) return [];
+    return PRODUCTS.filter((p) =>
+      cats.some((c) => p.category.toLowerCase().includes(c.toLowerCase())),
+    );
+  }, [interest]);
+
   const productMatches = useMemo(() => {
     const q = product.trim().toLowerCase();
-    if (!q) return PRODUCTS.slice(0, 8);
-    return PRODUCTS.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q),
-    ).slice(0, 8);
-  }, [product]);
+    if (!q) return productPool.slice(0, 8);
+    return productPool
+      .filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+  }, [product, productPool]);
 
   const activeCountry = COUNTRIES.find((c) => c.iso2 === country) ?? COUNTRIES[0];
 
