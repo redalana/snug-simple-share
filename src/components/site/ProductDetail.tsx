@@ -130,7 +130,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   };
   const share = useShare(product, pageUrl);
 
-  const related = getRelatedProducts(product, 3);
   const adjacent = getAdjacentProducts(slug);
 
   const scrollToQuote = () => {
