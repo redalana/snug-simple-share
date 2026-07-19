@@ -442,11 +442,10 @@ export function QuoteModal() {
 
               <div>
                 <span className={fieldLabel}>Preferred Contact</span>
-                <div className="grid grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-2 gap-2.5">
                   {(
                     [
                       { id: "whatsapp", label: "WhatsApp", icon: MessageCircle },
-                      { id: "phone", label: "Phone", icon: PhoneCall },
                       { id: "email", label: "Email", icon: Mail },
                     ] as { id: Contact; label: string; icon: typeof Mail }[]
                   ).map((opt) => {
