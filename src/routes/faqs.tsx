@@ -27,6 +27,51 @@ const TITLE = "Frequently Asked Questions | AbuFarha Medical Supplies";
 const DESC =
   "Find answers to the most common questions about our products, services, warranty and technical support.";
 
+// Plain-text FAQ pairs for FAQPage JSON-LD (schema.org requires plain text,
+// not JSX). Kept in sync with the visible FAQS list below.
+const FAQ_SCHEMA_ITEMS: { question: string; answer: string }[] = [
+  {
+    question: "What types of medical imaging equipment does AbuFarha Medical Supplies provide?",
+    answer:
+      "We provide a wide range of advanced medical imaging equipment including Cath Lab Systems, MRI, CT, PET/CT, X-Ray, Mammography, C-Arm Systems, Bone Densitometers (DEXA), and more from leading global manufacturers.",
+  },
+  {
+    question: "Do you provide installation and commissioning?",
+    answer:
+      "Yes. Our biomedical engineering team delivers full installation, commissioning and site acceptance testing for every system we supply — coordinated end-to-end with the manufacturer and the hospital.",
+  },
+  {
+    question: "Do you offer training for our medical and technical staff?",
+    answer:
+      "Yes. We provide structured clinical and technical training programs for radiographers, biomedical engineers and clinicians to ensure your team operates the equipment safely and confidently from day one.",
+  },
+  {
+    question: "What warranty do your products come with?",
+    answer:
+      "Every system we deliver includes a standard manufacturer-backed warranty covering parts and technical support. Extended service agreements and maintenance contracts are available on request.",
+  },
+  {
+    question: "Do you provide after-sales support and maintenance?",
+    answer:
+      "Yes — preventive maintenance, corrective maintenance, spare parts, remote diagnostics, technical support and clinical training. See our After Sales page for the full scope.",
+  },
+  {
+    question: "Can you help with hospital planning and turnkey projects?",
+    answer:
+      "Yes. We deliver turnkey imaging and cardiology departments — planning, equipment supply, installation, commissioning, training and long-term support.",
+  },
+  {
+    question: "Do you sell new or refurbished equipment?",
+    answer:
+      "Both. We supply new equipment as well as professionally inspected and refurbished systems that undergo thorough testing and quality assurance before delivery.",
+  },
+  {
+    question: "How can I request a quote?",
+    answer:
+      "Use the Request a Quote button in the header, or visit our Contact page. Share your project requirements and our team will respond within one to two business days.",
+  },
+];
+
 export const Route = createFileRoute("/faqs")({
   head: () => ({
     meta: [
@@ -36,10 +81,17 @@ export const Route = createFileRoute("/faqs")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.afterSales },
+      { name: "twitter:image", content: OG_IMAGES.afterSales },
       { property: "og:url", content: SITE_URL + "/faqs" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: SITE_URL + "/faqs" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(faqPageJsonLd(FAQ_SCHEMA_ITEMS)),
+      },
+    ],
   }),
   component: FaqsRoute,
 });
