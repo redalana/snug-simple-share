@@ -124,10 +124,12 @@ export function QuoteModal() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isValid || submitting) return;
+    if (!isValid || submitting || success) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 650));
     setSubmitting(false);
+    setSuccess(true);
+    await new Promise((r) => setTimeout(r, 1100));
     setOpen(false);
     navigate({ to: "/thank-you", search: { source: "quote" } as never });
   };
@@ -139,8 +141,11 @@ export function QuoteModal() {
       setPhone("");
       setContact("email");
       setTouched({});
+      setSuccess(false);
+      setSubmitting(false);
     }
   };
+
 
   const fieldLabel =
     "mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75";
