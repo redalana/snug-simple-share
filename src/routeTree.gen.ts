@@ -10,12 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TurnkeyRouteImport } from './routes/turnkey'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
+import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as BrandsRouteImport } from './routes/brands'
@@ -47,9 +51,19 @@ const TurnkeyRoute = TurnkeyRouteImport.update({
   path: '/turnkey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -67,6 +81,11 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
@@ -78,6 +97,11 @@ const HospitalReadinessAssessmentRoute =
     path: '/hospital-readiness-assessment',
     getParentRoute: () => rootRouteImport,
   } as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -218,12 +242,16 @@ export interface FileRoutesByFullPath {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/mcp': typeof McpRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -251,11 +279,15 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/mcp': typeof McpRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -285,12 +317,16 @@ export interface FileRoutesById {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/hospital-readiness-assessment': typeof HospitalReadinessAssessmentRoute
   '/mcp': typeof McpRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/turnkey': typeof TurnkeyRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -321,12 +357,16 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/contact'
+    | '/faqs'
     | '/hospital-readiness-assessment'
     | '/mcp'
+    | '/privacy-policy'
     | '/products'
     | '/projects'
     | '/services'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/terms'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -354,11 +394,15 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/contact'
+    | '/faqs'
     | '/hospital-readiness-assessment'
     | '/mcp'
+    | '/privacy-policy'
     | '/projects'
     | '/services'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/terms'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -387,12 +431,16 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/contact'
+    | '/faqs'
     | '/hospital-readiness-assessment'
     | '/mcp'
+    | '/privacy-policy'
     | '/products'
     | '/projects'
     | '/services'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/terms'
     | '/turnkey'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -422,12 +470,16 @@ export interface RootRouteChildren {
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
   ContactRoute: typeof ContactRoute
+  FaqsRoute: typeof FaqsRoute
   HospitalReadinessAssessmentRoute: typeof HospitalReadinessAssessmentRoute
   McpRoute: typeof McpRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
+  SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   TurnkeyRoute: typeof TurnkeyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -444,11 +496,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TurnkeyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -472,6 +538,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mcp': {
       id: '/mcp'
       path: '/mcp'
@@ -484,6 +557,13 @@ declare module '@tanstack/react-router' {
       path: '/hospital-readiness-assessment'
       fullPath: '/hospital-readiness-assessment'
       preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -718,12 +798,16 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
   ContactRoute: ContactRoute,
+  FaqsRoute: FaqsRoute,
   HospitalReadinessAssessmentRoute: HospitalReadinessAssessmentRoute,
   McpRoute: McpRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
+  SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   TurnkeyRoute: TurnkeyRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
