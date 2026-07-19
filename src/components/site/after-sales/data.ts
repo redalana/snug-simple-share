@@ -98,7 +98,7 @@ export type FaqCat = (typeof FAQ_CATS)[number];
 
 export const FAQS: { q: string; a: string; cat: Exclude<FaqCat, "All"> }[] = [
   { q: "How can I request a service?", a: "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and a certified engineer is assigned within minutes.", cat: "Service" },
-  { q: "How fast can an engineer reach our site?", a: "Our regional response SLA is under 4 hours for critical downtime across Jordan, Egypt and the wider MEA region — dispatched from the nearest field hub with the right parts on board.", cat: "Service" },
+  { q: "How fast can an engineer reach our site?", a: "We prioritize critical downtime with rapid dispatch across Jordan and the wider MEA region — from the nearest field hub with the right parts on board.", cat: "Service" },
   { q: "What is the warranty coverage?", a: "Every installation includes a 1-year free warranty covering parts and labor, with extended service contracts available for multi-year coverage, uptime guarantees and preventive maintenance.", cat: "Warranty" },
   { q: "Do you provide training for our staff?", a: "Yes — clinical and biomedical training is included with every installation and available on demand. Sessions are led by OEM-certified application specialists on your own equipment.", cat: "Training" },
   { q: "Do you provide preventive maintenance?", a: "Scheduled PM visits are included in our service contracts and can be booked ad-hoc for any supported equipment, following original OEM procedures and checklists.", cat: "Service" },
