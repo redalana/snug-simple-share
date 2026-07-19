@@ -13,10 +13,10 @@ import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Footer } from "@/components/site/Footer";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { COPY } from "@/config/companyFacts";
 
 const HOME_TITLE = "AbuFarha Medical Equipment | Advanced Medical Technology Solutions";
-const HOME_DESC =
-  "AbuFarha supplies, installs, commissions, trains and supports world-class medical equipment across Africa and the Middle East. 25+ years, 250+ hospitals, 40+ countries.";
+const HOME_DESC = COPY.metaDescription;
 
 export const Route = createFileRoute("/")({
   head: () => ({
