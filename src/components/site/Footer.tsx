@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Facebook, Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
+import { Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Logo } from "./Logo";
