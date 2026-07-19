@@ -183,10 +183,12 @@ export function Footer() {
                 across Africa, the Middle East and emerging healthcare markets.
               </p>
               <div className="mt-5 flex items-center gap-6">
-                {SOCIALS.map(({ label, Icon, color }) => (
+                {SOCIALS.map(({ label, Icon, color, href }) => (
                   <a
                     key={label}
-                    href="#"
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={label}
                     className="group transition-transform duration-300 hover:-translate-y-0.5"
                     style={{ ["--sc" as string]: color }}
