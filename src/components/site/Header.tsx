@@ -260,7 +260,7 @@ export function Header() {
                           <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
                           View All Brands
                         </a>
-                        {BRAND_ITEMS.map((b) => (
+                        {BRANDS_LIST.map((b) => (
                           <a
                             key={b.name}
                             href={b.href}
