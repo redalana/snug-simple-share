@@ -5,7 +5,8 @@ import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
 
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import { NAV, SOCIALS, LANGUAGES, BRAND_ITEMS } from "./header/nav-data";
+import { NAV, SOCIALS, LANGUAGES } from "./header/nav-data";
+import { BRANDS_LIST } from "@/lib/brands-data";
 import { LanguageSelector } from "./header/LanguageSelector";
 import { BrandMark, BrandsMegaDropdown } from "./header/BrandsMegaDropdown";
 import { ProductsMegaDropdown } from "./header/ProductsMegaDropdown";
