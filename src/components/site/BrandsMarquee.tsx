@@ -15,60 +15,39 @@ import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
  */
 
 /**
- * Per-brand optical scale factor.
+ * Trusted Brands strip.
  *
- * Every logo lives in an identical container, but source artwork has wildly
- * different aspect ratios and interior padding. These multipliers bring each
- * brand to roughly the same perceived size on screen — tuned by eye, not math.
- * 1.0 = base slot height; <1 shrinks bulky marks; >1 grows thin/short marks.
+ * Every brand is rendered as a unified typographic wordmark — same font,
+ * weight, tracking, and size — colored in the brand's primary color. Mixing
+ * SVG marks (GE monogram, Abbott "a") with wordmarks makes some brands
+ * visually dominate no matter how you scale them, so we standardize the
+ * visual language. This is the same approach premium enterprise medical
+ * sites use for supplier/partner rails.
+ *
+ * Per-brand micro-adjustments below correct for word length and letterform
+ * density so nothing reads noticeably larger or smaller.
  */
 const OPTICAL_SCALE: Record<string, number> = {
-  Abbott: 0.72,
-  "Canon Medical": 0.82,
-  Siemens: 1.18,
-  GE: 1.25,
-  Hitachi: 1.22,
-  Shimadzu: 0.92,
-  Philips: 1.05,
-  Medtronic: 1.05,
-  "Boston Scientific": 0.95,
-  "Richard Wolf": 0.95,
-  Mindray: 1.05,
-  Esaote: 1.05,
+  Philips: 1.0,
+  Siemens: 1.0,
+  GE: 1.02,
+  "Canon Medical": 0.92,
+  Mindray: 1.02,
+  Esaote: 1.02,
+  "Richard Wolf": 0.96,
+  Hitachi: 1.02,
+  Shimadzu: 1.0,
+  Abbott: 1.02,
+  Medtronic: 0.98,
+  "Boston Scientific": 0.88,
 };
 
 function LogoItem({ brand }: { brand: BrandEntry }) {
   const scale = OPTICAL_SCALE[brand.name] ?? 1;
-  const wrapper =
-    "flex h-20 w-52 shrink-0 items-center justify-center px-4 sm:h-[90px] sm:w-[220px]";
-  const inner =
-    "opacity-90 grayscale-[20%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
-
-  if (brand.logo.kind === "svg") {
-    // Base logo box: ~44px tall on desktop, then scaled per brand.
-    const basePx = 44;
-    return (
-      <div className={wrapper}>
-        <div
-          className="flex items-center justify-center"
-          style={{ height: `${basePx * scale}px`, maxWidth: "100%" }}
-        >
-          <img
-            src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
-            alt={brand.name}
-            loading="lazy"
-            decoding="async"
-            className={`${inner} block h-full w-auto max-w-full object-contain`}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={wrapper}>
+    <div className="flex h-20 w-52 shrink-0 items-center justify-center px-6 sm:h-[90px] sm:w-[220px]">
       <span
-        className={`${inner} inline-flex max-w-full items-center justify-center whitespace-nowrap text-center leading-none`}
+        className="inline-flex max-w-full items-center justify-center whitespace-nowrap text-center leading-none opacity-95 grayscale-[15%] transition-all duration-500 hover:opacity-100 hover:grayscale-0"
         style={{ color: brand.color, fontSize: `${1.35 * scale}rem` }}
       >
         <span className="font-display font-extrabold tracking-tight">
