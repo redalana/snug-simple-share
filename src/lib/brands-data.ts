@@ -25,16 +25,16 @@ export type BrandEntry = {
 };
 
 export const BRANDS_LIST: BrandEntry[] = [
-  { name: "Philips",           color: "#0B5ED7", mark: "ring",   href: "/brands#philips",            logo: { kind: "svg",  slug: "philips" } },
+  { name: "Philips",           color: "#0B5ED7", mark: "ring",   href: "/brands#philips",            logo: { kind: "text" } },
   { name: "Siemens", sub: "Healthineers", color: "#EC6602", mark: "square", href: "/brands#siemens",  logo: { kind: "svg",  slug: "siemens" } },
   { name: "GE",      sub: "HealthCare",   color: "#005EB8", mark: "ring",   href: "/brands#ge-healthcare", logo: { kind: "svg",  slug: "generalelectric" } },
-  { name: "Canon Medical",     color: "#CC0000", mark: "bars",   href: "/brands#canon-medical",      logo: { kind: "svg",  slug: "canon" } },
+  { name: "Canon Medical",     color: "#CC0000", mark: "bars",   href: "/brands#canon-medical",      logo: { kind: "text" } },
   { name: "Mindray",           color: "#005BAC", mark: "dot",    href: "/brands#mindray",            logo: { kind: "text" } },
   { name: "Esaote",            color: "#003DA5", mark: "dot",    href: "/brands#esaote",             logo: { kind: "text" } },
   { name: "Richard Wolf",      color: "#C8102E", mark: "square", href: "/brands#richard-wolf",       logo: { kind: "text" } },
   { name: "Hitachi",           color: "#E60027", mark: "square", href: "/brands#hitachi",            logo: { kind: "svg",  slug: "hitachi" } },
-  { name: "Shimadzu",          color: "#C8161D", mark: "square", href: "/brands#shimadzu",           logo: { kind: "svg",  slug: "shimadzu" } },
+  { name: "Shimadzu",          color: "#C8161D", mark: "square", href: "/brands#shimadzu",           logo: { kind: "text" } },
   { name: "Abbott",            color: "#008FC7", mark: "dot",    href: "/brands#abbott",             logo: { kind: "svg",  slug: "abbott" } },
-  { name: "Medtronic",         color: "#170F5F", mark: "bars",   href: "/brands#medtronic",          logo: { kind: "svg",  slug: "medtronic" } },
+  { name: "Medtronic",         color: "#170F5F", mark: "bars",   href: "/brands#medtronic",          logo: { kind: "text" } },
   { name: "Boston Scientific", color: "#0072CE", mark: "ring",   href: "/brands#boston-scientific",  logo: { kind: "text" } },
 ];
