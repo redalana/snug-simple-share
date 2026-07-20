@@ -15,30 +15,37 @@ import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
  */
 
 function LogoItem({ brand }: { brand: BrandEntry }) {
-  const common =
-    "shrink-0 opacity-90 grayscale-[20%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
+  const wrapper =
+    "flex h-16 w-44 shrink-0 items-center justify-center sm:h-20 sm:w-52";
+  const inner =
+    "opacity-90 grayscale-[20%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
 
   if (brand.logo.kind === "svg") {
     return (
-      <img
-        src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
-        alt={brand.name}
-        loading="lazy"
-        decoding="async"
-        className={`${common} h-9 w-auto object-contain sm:h-12`}
-      />
+      <div className={wrapper}>
+        <img
+          src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
+          alt={brand.name}
+          loading="lazy"
+          decoding="async"
+          className={`${inner} block h-full w-full object-contain`}
+          style={{ maxHeight: "2.25rem", maxWidth: "100%" }}
+        />
+      </div>
     );
   }
 
   return (
-    <span
-      className={`${common} inline-flex h-9 items-center whitespace-nowrap sm:h-12`}
-      style={{ color: brand.color }}
-    >
-      <span className="font-display text-[1.3rem] font-extrabold tracking-tight sm:text-[1.6rem]">
-        {brand.name}
+    <div className={wrapper}>
+      <span
+        className={`${inner} inline-flex max-h-full max-w-full items-center justify-center whitespace-nowrap text-center leading-none`}
+        style={{ color: brand.color }}
+      >
+        <span className="font-display text-[1.15rem] font-extrabold tracking-tight sm:text-[1.35rem]">
+          {brand.name}
+        </span>
       </span>
-    </span>
+    </div>
   );
 }
 
@@ -66,7 +73,7 @@ export function BrandsMarquee() {
             "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
         }}
       >
-        <div className="animate-marquee flex w-max items-center gap-16 whitespace-nowrap group-hover:[animation-play-state:paused] sm:gap-24">
+        <div className="animate-marquee flex w-max items-center gap-0 whitespace-nowrap group-hover:[animation-play-state:paused]">
           {loop.map((b, i) => (
             <LogoItem key={`${b.name}-${i}`} brand={b} />
           ))}
