@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { BRAND_ITEMS, type BrandItem } from "./nav-data";
+import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
 
-export function BrandMark({ item }: { item: BrandItem }) {
+// Kept exported so the mobile accordion in Header.tsx (which still imports it)
+// keeps rendering identity marks unchanged.
+export function BrandMark({ item }: { item: BrandEntry }) {
   const c = item.color;
   switch (item.mark) {
     case "square":
@@ -20,6 +22,22 @@ export function BrandMark({ item }: { item: BrandItem }) {
     default:
       return <span className="h-3 w-3 rounded-full" style={{ backgroundColor: c }} />;
   }
+}
+
+function RowMark({ item }: { item: BrandEntry }) {
+  if (item.logo.kind === "svg") {
+    return (
+      <img
+        src={`https://cdn.simpleicons.org/${item.logo.slug}/${item.color.replace("#", "")}`}
+        alt=""
+        aria-hidden
+        loading="lazy"
+        decoding="async"
+        className="h-4 w-4 object-contain"
+      />
+    );
+  }
+  return <BrandMark item={item} />;
 }
 
 export function BrandsMegaDropdown() {
@@ -56,11 +74,11 @@ export function BrandsMegaDropdown() {
       role="menu"
       aria-label="Brands"
       onMouseEnter={() => setClosed(false)}
-      className={`pointer-events-none absolute left-1/2 top-full z-10 w-[calc(360*var(--desktop-px-unit))] -translate-x-1/2 pt-1 transition-all duration-200 ${closedClass}`}
+      className={`pointer-events-none absolute left-1/2 top-full z-10 w-[calc(260*var(--desktop-px-unit))] -translate-x-1/2 pt-1 transition-all duration-200 ${closedClass}`}
     >
-      <div className="translate-y-1 rounded-2xl bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/5 transition-transform duration-200 group-hover:translate-y-0 group-focus-within:translate-y-0">
-        <ul className="grid grid-cols-2 gap-0.5">
-          {BRAND_ITEMS.map((b) => (
+      <div className="translate-y-1 rounded-2xl bg-white p-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] ring-1 ring-black/5 transition-transform duration-200 group-hover:translate-y-0 group-focus-within:translate-y-0">
+        <ul className="flex flex-col">
+          {BRANDS_LIST.map((b) => (
             <li key={b.name}>
               <a
                 href={b.href}
@@ -69,14 +87,14 @@ export function BrandsMegaDropdown() {
                   setClosed(true);
                   (e.currentTarget as HTMLElement).blur();
                 }}
-                className="group/brand flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 outline-none transition-colors duration-150 hover:bg-accent focus-visible:bg-accent"
+                className="group/brand flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 outline-none transition-colors duration-150 hover:bg-accent focus-visible:bg-accent"
               >
                 <span className="flex h-4 w-4 shrink-0 items-center justify-center">
-                  <BrandMark item={b} />
+                  <RowMark item={b} />
                 </span>
                 <span className="flex min-w-0 items-baseline gap-1 leading-none">
                   <span
-                    className="truncate font-display text-[calc(13*var(--desktop-px-unit))] font-semibold tracking-tight text-foreground transition-colors group-hover/brand:text-[color:var(--brand)]"
+                    className="truncate font-display text-[calc(13.5*var(--desktop-px-unit))] font-semibold tracking-tight text-foreground transition-colors group-hover/brand:text-[color:var(--brand)]"
                     style={{ ["--brand" as string]: b.color }}
                   >
                     {b.name}

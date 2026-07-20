@@ -1,104 +1,79 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
+import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
 
 /**
  * Premium enterprise logo strip — Trusted Brands.
  *
- * Design notes:
- * - Real SVG wordmarks (via simpleicons CDN) whenever an official mark exists;
- *   otherwise a carefully-tuned text wordmark rendered at the same optical height.
- * - Every logo is normalised to the same visual height (h-7 sm:h-8) so the strip
- *   reads as one balanced line, not a collage.
- * - Neutral monochrome by default; brand color emerges on hover — quiet, premium,
- *   unmistakably enterprise.
+ * - Real SVG wordmarks via cdn.simpleicons.org whenever an official mark exists.
+ * - Text fallback wordmarks rendered at the same optical height so the strip
+ *   reads as one balanced line.
+ * - Brand identity visible by default; a light grayscale veil clears on hover.
  * - Seamless infinite marquee (duplicated track), pauses on hover.
  * - Soft edge fade via mask-image; no cards, no shadows, white background.
  */
 
-type Brand =
-  | { name: string; kind: "svg"; slug: string; color: string; heightClass?: string }
-  | { name: string; sub?: string; kind: "text"; color: string; className?: string };
-
-const BRANDS: Brand[] = [
-  { name: "Philips", kind: "svg", slug: "philips", color: "0B5ED7" },
-  { name: "Siemens Healthineers", kind: "svg", slug: "siemens", color: "EC6602" },
-  { name: "GE HealthCare", kind: "svg", slug: "generalelectric", color: "005EB8" },
-  { name: "Canon Medical", kind: "svg", slug: "canon", color: "CC0000" },
-  { name: "Hitachi", kind: "svg", slug: "hitachi", color: "E60027" },
-  { name: "Toshiba", kind: "svg", slug: "toshiba", color: "FF0000" },
-  { name: "Shimadzu", kind: "svg", slug: "shimadzu", color: "C8161D" },
-  { name: "Abbott", kind: "svg", slug: "abbott", color: "008FC7" },
-  { name: "Medtronic", kind: "svg", slug: "medtronic", color: "170F5F" },
-  { name: "Mindray", kind: "text", color: "#005BAC" },
-  { name: "Boston Scientific", kind: "text", color: "#0072CE" },
-  { name: "Esaote", kind: "text", color: "#003DA5" },
-  { name: "Richard Wolf", kind: "text", color: "#C8102E" },
-];
-
-function LogoItem({ brand }: { brand: Brand }) {
-  // Reference site keeps brand identity visible by default — a light grayscale
-  // veil that fully clears on hover reads more premium than fully desaturated.
+function LogoItem({ brand }: { brand: BrandEntry }) {
   const common =
-    "shrink-0 opacity-80 grayscale-[35%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
+    "shrink-0 opacity-90 grayscale-[20%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
 
-  if (brand.kind === "svg") {
+  if (brand.logo.kind === "svg") {
     return (
       <img
-        src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color}`}
+        src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
         alt={brand.name}
         loading="lazy"
         decoding="async"
-        className={`${common} h-7 w-auto object-contain sm:h-9`}
+        className={`${common} h-9 w-auto object-contain sm:h-12`}
       />
     );
   }
 
   return (
     <span
-      className={`${common} inline-flex h-7 items-center whitespace-nowrap sm:h-9`}
+      className={`${common} inline-flex h-9 items-center whitespace-nowrap sm:h-12`}
       style={{ color: brand.color }}
     >
-      <span className="font-display text-[1.05rem] font-extrabold tracking-tight sm:text-[1.25rem]">
+      <span className="font-display text-[1.3rem] font-extrabold tracking-tight sm:text-[1.6rem]">
         {brand.name}
       </span>
     </span>
   );
 }
 
-
 export function BrandsMarquee() {
-  const loop = [...BRANDS, ...BRANDS];
+  const loop = [...BRANDS_LIST, ...BRANDS_LIST];
   return (
-    <section id="brands" className="border-y border-border bg-white py-16 lg:py-20">
+    <section id="brands" className="border-y border-border bg-white py-10 lg:py-12">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="text-center">
           <div className="flex justify-center">
             <Eyebrow align="center">Trusted by World-Leading Medical Manufacturers</Eyebrow>
           </div>
-          <h2 className="mx-auto mt-4 max-w-2xl font-display text-[1.9rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.4rem]">
+          <h2 className="mx-auto mt-3 max-w-2xl font-display text-[1.7rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.1rem]">
             Trusted Brands
           </h2>
         </div>
       </div>
 
       <div
-        className="group relative mt-10 overflow-hidden sm:mt-12"
+        className="group relative mt-6 overflow-hidden sm:mt-8"
         style={{
           WebkitMaskImage:
-            "linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%)",
+            "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
           maskImage:
-            "linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%)",
+            "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
         }}
       >
-        <div className="animate-marquee flex w-max items-center gap-14 whitespace-nowrap group-hover:[animation-play-state:paused] sm:gap-20">
+        <div className="animate-marquee flex w-max items-center gap-16 whitespace-nowrap group-hover:[animation-play-state:paused] sm:gap-24">
           {loop.map((b, i) => (
             <LogoItem key={`${b.name}-${i}`} brand={b} />
           ))}
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-[100rem] px-6 text-center lg:px-10">
+      <div className="mx-auto mt-8 max-w-[100rem] px-6 text-center lg:px-10">
         <Link
           to="/brands"
           className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 text-sm font-semibold text-primary transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
