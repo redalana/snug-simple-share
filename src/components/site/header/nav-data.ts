@@ -76,25 +76,4 @@ export const LANGUAGES = [
   { code: "fr", label: "Français", flag: "🇫🇷" },
 ] as const;
 
-export type BrandItem = {
-  name: string;
-  sub?: string;
-  color: string;
-  mark: "dot" | "square" | "ring" | "bars";
-  href: string;
-};
-
-export const BRAND_ITEMS: BrandItem[] = [
-  { name: "Philips", color: "#0B5ED7", mark: "ring", href: "/brands/philips" },
-  { name: "Canon Medical", color: "#CC0000", mark: "bars", href: "/brands/canon-medical" },
-  { name: "Siemens", sub: "Healthineers", color: "#EC6602", mark: "square", href: "/brands/siemens" },
-  { name: "Mindray", color: "#005BAC", mark: "dot", href: "/brands/mindray" },
-  { name: "Esaote", color: "#003DA5", mark: "dot", href: "/brands/esaote" },
-  { name: "Richard Wolf", color: "#C8102E", mark: "square", href: "/brands/richard-wolf" },
-  { name: "Hitachi", color: "#E60027", mark: "square", href: "/brands/hitachi" },
-  { name: "GE", sub: "HealthCare", color: "#005EB8", mark: "ring", href: "/brands/ge-healthcare" },
-  { name: "Shimadzu", color: "#C8161D", mark: "square", href: "/brands/shimadzu" },
-  { name: "Abbott", color: "#008FC7", mark: "dot", href: "/brands/abbott" },
-  { name: "Medtronic", color: "#170F5F", mark: "bars", href: "/brands/medtronic" },
-  { name: "Boston Scientific", color: "#0072CE", mark: "ring", href: "/brands/boston-scientific" },
-];
+// Brand roster lives in a single source of truth: src/lib/brands-data.ts
