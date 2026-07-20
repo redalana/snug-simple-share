@@ -14,23 +14,53 @@ import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
  * - Soft edge fade via mask-image; no cards, no shadows, white background.
  */
 
+/**
+ * Per-brand optical scale factor.
+ *
+ * Every logo lives in an identical container, but source artwork has wildly
+ * different aspect ratios and interior padding. These multipliers bring each
+ * brand to roughly the same perceived size on screen — tuned by eye, not math.
+ * 1.0 = base slot height; <1 shrinks bulky marks; >1 grows thin/short marks.
+ */
+const OPTICAL_SCALE: Record<string, number> = {
+  Abbott: 0.72,
+  "Canon Medical": 0.82,
+  Siemens: 1.18,
+  GE: 1.25,
+  Hitachi: 1.22,
+  Shimadzu: 0.92,
+  Philips: 1.05,
+  Medtronic: 1.05,
+  "Boston Scientific": 0.95,
+  "Richard Wolf": 0.95,
+  Mindray: 1.05,
+  Esaote: 1.05,
+};
+
 function LogoItem({ brand }: { brand: BrandEntry }) {
+  const scale = OPTICAL_SCALE[brand.name] ?? 1;
   const wrapper =
-    "flex h-16 w-44 shrink-0 items-center justify-center sm:h-20 sm:w-52";
+    "flex h-20 w-52 shrink-0 items-center justify-center px-4 sm:h-[90px] sm:w-[220px]";
   const inner =
     "opacity-90 grayscale-[20%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
 
   if (brand.logo.kind === "svg") {
+    // Base logo box: ~44px tall on desktop, then scaled per brand.
+    const basePx = 44;
     return (
       <div className={wrapper}>
-        <img
-          src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
-          alt={brand.name}
-          loading="lazy"
-          decoding="async"
-          className={`${inner} block h-full w-full object-contain`}
-          style={{ maxHeight: "2.25rem", maxWidth: "100%" }}
-        />
+        <div
+          className="flex items-center justify-center"
+          style={{ height: `${basePx * scale}px`, maxWidth: "100%" }}
+        >
+          <img
+            src={`https://cdn.simpleicons.org/${brand.logo.slug}/${brand.color.replace("#", "")}`}
+            alt={brand.name}
+            loading="lazy"
+            decoding="async"
+            className={`${inner} block h-full w-auto max-w-full object-contain`}
+          />
+        </div>
       </div>
     );
   }
@@ -38,10 +68,10 @@ function LogoItem({ brand }: { brand: BrandEntry }) {
   return (
     <div className={wrapper}>
       <span
-        className={`${inner} inline-flex max-h-full max-w-full items-center justify-center whitespace-nowrap text-center leading-none`}
-        style={{ color: brand.color }}
+        className={`${inner} inline-flex max-w-full items-center justify-center whitespace-nowrap text-center leading-none`}
+        style={{ color: brand.color, fontSize: `${1.35 * scale}rem` }}
       >
-        <span className="font-display text-[1.15rem] font-extrabold tracking-tight sm:text-[1.35rem]">
+        <span className="font-display font-extrabold tracking-tight">
           {brand.name}
         </span>
       </span>
