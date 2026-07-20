@@ -23,37 +23,28 @@ export function BrandMark({ item }: { item: BrandItem }) {
 
 export function BrandsMegaDropdown() {
   return (
-    <div className="pointer-events-none absolute left-1/2 top-full z-10 w-[min(92vw,calc(660*var(--desktop-px-unit)))] -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-      <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
-        <a
-          href="/brands"
-          className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-accent hover:text-primary"
-        >
-          <Star className="h-4 w-4 text-primary" strokeWidth={2.25} fill="currentColor" />
-          All Brands
-        </a>
-        <div className="my-2 h-px bg-border/70" />
-        <div className="grid grid-cols-3 gap-2">
+    <div className="pointer-events-none absolute left-1/2 top-full z-10 w-[min(92vw,calc(720*var(--desktop-px-unit)))] -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+      <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
+        <div className="grid grid-cols-2 gap-1">
           {BRAND_ITEMS.map((b) => (
             <a
               key={b.name}
               href={b.href}
-              className="group/brand flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-transparent px-3 py-3 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-white hover:shadow-[0_10px_24px_-14px_rgba(0,0,0,0.25)]"
+              className="group/brand flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 transition-colors duration-200 hover:bg-accent"
             >
-              <span className="flex h-6 items-center justify-center">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center opacity-90 transition-opacity group-hover/brand:opacity-100">
                 <BrandMark item={b} />
               </span>
-              <span className="flex flex-col items-center leading-none">
+              <span className="flex min-w-0 items-baseline gap-1.5 leading-none">
                 <span
-                  className="font-display text-[calc(13*var(--desktop-px-unit))] font-extrabold tracking-tight"
-                  style={{ color: b.color }}
+                  className="truncate font-display text-[calc(14*var(--desktop-px-unit))] font-extrabold tracking-tight text-foreground transition-colors group-hover/brand:text-[color:var(--brand)]"
+                  style={{ ["--brand" as string]: b.color }}
                 >
                   {b.name}
                 </span>
                 {b.sub && (
                   <span
-                    className="mt-1 text-[calc(9*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em]"
-                    style={{ color: b.color, opacity: 0.75 }}
+                    className="shrink-0 text-[calc(9*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
                   >
                     {b.sub}
                   </span>
@@ -62,7 +53,19 @@ export function BrandsMegaDropdown() {
             </a>
           ))}
         </div>
+        <div className="my-2 h-px bg-border/70" />
+        <a
+          href="/brands"
+          className="flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          <span className="inline-flex items-center gap-2">
+            <Star className="h-4 w-4" strokeWidth={2.25} fill="currentColor" />
+            View All Brands
+          </span>
+          <span aria-hidden>→</span>
+        </a>
       </div>
     </div>
   );
 }
+

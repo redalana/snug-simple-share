@@ -37,51 +37,35 @@ const BRANDS: Brand[] = [
 ];
 
 function LogoItem({ brand }: { brand: Brand }) {
+  // Reference site keeps brand identity visible by default — a light grayscale
+  // veil that fully clears on hover reads more premium than fully desaturated.
   const common =
-    "shrink-0 grayscale opacity-60 transition-all duration-500 hover:opacity-100 hover:grayscale-0";
+    "shrink-0 opacity-80 grayscale-[35%] transition-all duration-500 hover:opacity-100 hover:grayscale-0";
 
   if (brand.kind === "svg") {
-    // Neutral slate mark; hover reveals the brand color via a second layered image.
     return (
-      <span
-        aria-label={brand.name}
-        className={`${common} relative inline-flex h-7 items-center sm:h-8`}
-      >
-        {/* base (neutral) */}
-        <img
-          src={`https://cdn.simpleicons.org/${brand.slug}/64748b`}
-          alt=""
-          aria-hidden
-          loading="lazy"
-          decoding="async"
-          className="h-full w-auto object-contain transition-opacity duration-500 group-[.brand-item]:opacity-100"
-        />
-        {/* colored overlay on hover */}
-        <img
-          src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color}`}
-          alt={brand.name}
-          loading="lazy"
-          decoding="async"
-          className="pointer-events-none absolute inset-0 h-full w-auto object-contain opacity-0 transition-opacity duration-500 hover:opacity-100"
-        />
-      </span>
+      <img
+        src={`https://cdn.simpleicons.org/${brand.slug}/${brand.color}`}
+        alt={brand.name}
+        loading="lazy"
+        decoding="async"
+        className={`${common} h-7 w-auto object-contain sm:h-9`}
+      />
     );
   }
 
   return (
     <span
-      className={`${common} inline-flex h-7 items-center whitespace-nowrap sm:h-8`}
+      className={`${common} inline-flex h-7 items-center whitespace-nowrap sm:h-9`}
       style={{ color: brand.color }}
     >
-      <span
-        className="font-display text-[1.05rem] font-extrabold tracking-tight sm:text-[1.2rem]"
-        // Neutral by default, brand color on hover — controlled by parent group.
-      >
+      <span className="font-display text-[1.05rem] font-extrabold tracking-tight sm:text-[1.25rem]">
         {brand.name}
       </span>
     </span>
   );
 }
+
 
 export function BrandsMarquee() {
   const loop = [...BRANDS, ...BRANDS];
