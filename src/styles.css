@@ -173,8 +173,17 @@
 }
 
 .animate-marquee {
-  animation: marquee 55s linear infinite;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+  will-change: transform;
 }
+
+@media (min-width: 640px) {
+  .animate-marquee { --marquee-duration: 36s; }
+}
+@media (min-width: 1024px) {
+  .animate-marquee { --marquee-duration: 32s; }
+}
+
 
 
 .marquee-mask:hover .animate-marquee {
