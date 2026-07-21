@@ -1,68 +1,76 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
-import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
+
+import abbott from "@/assets/brands/abbott.png.asset.json";
+import boston from "@/assets/brands/boston-scientific.png.asset.json";
+import canon from "@/assets/brands/toshiba-canon.png.asset.json";
+import esaote from "@/assets/brands/esaote.png.asset.json";
+import ge from "@/assets/brands/ge.png.asset.json";
+import hitachi from "@/assets/brands/hitachi.png.asset.json";
+import medtronic from "@/assets/brands/medtronic.png.asset.json";
+import mindray from "@/assets/brands/mindray.png.asset.json";
+import philips from "@/assets/brands/philips.png.asset.json";
+import richardWolf from "@/assets/brands/richard-wolf.png.asset.json";
+import shimadzu from "@/assets/brands/shimadzu.png.asset.json";
+import siemens from "@/assets/brands/siemens.png.asset.json";
 
 /**
- * Premium enterprise logo strip — Trusted Brands.
+ * Trusted Brands — enterprise logo marquee.
  *
- * - Real SVG wordmarks via cdn.simpleicons.org whenever an official mark exists.
- * - Text fallback wordmarks rendered at the same optical height so the strip
- *   reads as one balanced line.
- * - Brand identity visible by default; a light grayscale veil clears on hover.
- * - Seamless infinite marquee (duplicated track), pauses on hover.
- * - Soft edge fade via mask-image; no cards, no shadows, white background.
+ * Official PNG wordmarks are trimmed of transparent padding at build time so
+ * every logo lands in an identical 56px container. Per-brand optical scale
+ * multipliers correct for wordmark density so no single logo dominates.
  */
 
-/**
- * Trusted Brands strip.
- *
- * Every brand is rendered as a unified typographic wordmark — same font,
- * weight, tracking, and size — colored in the brand's primary color. Mixing
- * SVG marks (GE monogram, Abbott "a") with wordmarks makes some brands
- * visually dominate no matter how you scale them, so we standardize the
- * visual language. This is the same approach premium enterprise medical
- * sites use for supplier/partner rails.
- *
- * Per-brand micro-adjustments below correct for word length and letterform
- * density so nothing reads noticeably larger or smaller.
- */
-const OPTICAL_SCALE: Record<string, number> = {
-  Philips: 1.0,
-  Siemens: 1.0,
-  GE: 1.02,
-  "Canon Medical": 0.92,
-  Mindray: 1.02,
-  Esaote: 1.02,
-  "Richard Wolf": 0.96,
-  Hitachi: 1.02,
-  Shimadzu: 1.0,
-  Abbott: 1.02,
-  Medtronic: 0.98,
-  "Boston Scientific": 0.88,
+type Brand = {
+  name: string;
+  alt: string;
+  url: string;
+  /** Optical scale multiplier applied to the max rendered height. */
+  scale: number;
 };
 
-function LogoItem({ brand }: { brand: BrandEntry }) {
-  const scale = OPTICAL_SCALE[brand.name] ?? 1;
+const BRANDS: Brand[] = [
+  { name: "Philips",             alt: "Philips",                 url: philips.url,     scale: 0.78 },
+  { name: "Siemens Healthineers",alt: "Siemens Healthineers",    url: siemens.url,     scale: 0.82 },
+  { name: "GE HealthCare",       alt: "GE HealthCare",           url: ge.url,          scale: 0.95 },
+  { name: "Canon Medical",       alt: "Canon Medical (Toshiba)", url: canon.url,       scale: 1.00 },
+  { name: "Mindray",             alt: "Mindray",                 url: mindray.url,     scale: 0.92 },
+  { name: "Esaote",              alt: "Esaote",                  url: esaote.url,      scale: 1.05 },
+  { name: "Richard Wolf",        alt: "Richard Wolf",            url: richardWolf.url, scale: 1.00 },
+  { name: "Hitachi",             alt: "Hitachi",                 url: hitachi.url,     scale: 0.86 },
+  { name: "Shimadzu",            alt: "Shimadzu",                url: shimadzu.url,    scale: 0.82 },
+  { name: "Abbott",              alt: "Abbott",                  url: abbott.url,      scale: 0.90 },
+  { name: "Medtronic",           alt: "Medtronic",               url: medtronic.url,   scale: 0.90 },
+  { name: "Boston Scientific",   alt: "Boston Scientific",       url: boston.url,      scale: 1.00 },
+];
+
+function LogoItem({ brand }: { brand: Brand }) {
+  const maxH = Math.round(48 * brand.scale);
   return (
-    <div className="flex h-20 w-52 shrink-0 items-center justify-center px-6 sm:h-[90px] sm:w-[220px]">
-      <span
-        className="inline-flex max-w-full items-center justify-center whitespace-nowrap text-center leading-none opacity-95 grayscale-[15%] transition-all duration-500 hover:opacity-100 hover:grayscale-0"
-        style={{ color: brand.color, fontSize: `${1.35 * scale}rem` }}
-      >
-        <span className="font-display font-extrabold tracking-tight">
-          {brand.name}
-        </span>
-      </span>
+    <div
+      className="flex h-14 shrink-0 items-center justify-center"
+      // Per-viewport gap is applied via parent's gap-x utilities; item itself has no side padding.
+    >
+      <img
+        src={brand.url}
+        alt={brand.alt}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+        className="w-auto select-none object-contain"
+        style={{ maxHeight: `${maxH}px`, height: `${maxH}px` }}
+      />
     </div>
   );
 }
 
 export function BrandsMarquee() {
-  const loop = [...BRANDS_LIST, ...BRANDS_LIST];
+  const loop = [...BRANDS, ...BRANDS];
   return (
-    <section id="brands" className="border-y border-border bg-white py-10 lg:py-12">
-      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
+    <section id="brands" className="border-y border-border bg-white py-20">
+      <div className="mx-auto max-w-[90rem] px-6 lg:px-10">
         <div className="text-center">
           <div className="flex justify-center">
             <Eyebrow align="center">Trusted by World-Leading Medical Manufacturers</Eyebrow>
@@ -74,22 +82,22 @@ export function BrandsMarquee() {
       </div>
 
       <div
-        className="group relative mt-6 overflow-hidden sm:mt-8"
-        style={{
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
-        }}
+        className="marquee-mask group relative mt-10 overflow-hidden"
+        aria-label="Trusted medical technology brands"
       >
-        <div className="animate-marquee flex w-max items-center gap-0 whitespace-nowrap group-hover:[animation-play-state:paused]">
+        <ul
+          className="animate-marquee flex w-max items-center gap-x-10 whitespace-nowrap sm:gap-x-14 lg:gap-x-[72px] group-hover:[animation-play-state:paused]"
+          style={{ transform: "translateZ(0)" }}
+        >
           {loop.map((b, i) => (
-            <LogoItem key={`${b.name}-${i}`} brand={b} />
+            <li key={`${b.name}-${i}`} aria-hidden={i >= BRANDS.length ? true : undefined}>
+              <LogoItem brand={b} />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
-      <div className="mx-auto mt-8 max-w-[100rem] px-6 text-center lg:px-10">
+      <div className="mx-auto mt-10 max-w-[90rem] px-6 text-center lg:px-10">
         <Link
           to="/brands"
           className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 text-sm font-semibold text-primary transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
