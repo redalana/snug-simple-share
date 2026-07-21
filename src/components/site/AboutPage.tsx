@@ -6,7 +6,7 @@ import { Expertise } from "./about/Expertise";
 import { WhereWeWork } from "./about/WhereWeWork";
 import { Industries } from "./about/Industries";
 import { Partners } from "./about/Partners";
-import { Team } from "./about/Team";
+import { Leadership } from "./about/Leadership";
 import { WhyTrust } from "./about/WhyTrust";
 import { Certifications } from "./about/Certifications";
 import { ByTheNumbers } from "./about/ByTheNumbers";
@@ -23,7 +23,7 @@ export function AboutPage() {
       <WhereWeWork />
       <Industries />
       <Partners />
-      <Team />
+      <Leadership />
       <WhyTrust />
       <Certifications />
       <ByTheNumbers />
