@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Linkedin, Mail, Award, Wrench, Handshake, Globe2, User, Pause, Play, Activity } from "lucide-react";
+import { Award, Wrench, Handshake, Globe2, User, Pause, Play } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
@@ -16,8 +16,6 @@ type Leader = {
   projects: string;
   focus: string[];
   photo?: string;
-  linkedin?: string;
-  email?: string;
 };
 
 const LEADERS: Leader[] = [
@@ -31,8 +29,6 @@ const LEADERS: Leader[] = [
     projects: "30+",
     focus: ["Healthcare Leadership", "Medical Technology", "Regional Growth"],
     photo: leaderPortrait1.url,
-    linkedin: "#",
-    email: "info@abufarhamedical.com",
   },
   {
     id: "khalid-s",
@@ -43,8 +39,6 @@ const LEADERS: Leader[] = [
     countries: "8+",
     projects: "40+",
     focus: ["Commercial Strategy", "OEM Partnerships", "Hospital Programs"],
-    linkedin: "#",
-    email: "info@abufarhamedical.com",
   },
   {
     id: "anwar",
@@ -55,8 +49,6 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "35+",
     focus: ["Clinical Advisory", "Medical Protocols", "Workflow Integration"],
-    linkedin: "#",
-    email: "info@abufarhamedical.com",
   },
   {
     id: "issam",
@@ -67,8 +59,6 @@ const LEADERS: Leader[] = [
     countries: "9+",
     projects: "50+",
     focus: ["Biomedical Engineering", "Commissioning", "Lifecycle Service"],
-    linkedin: "#",
-    email: "info@abufarhamedical.com",
   },
   {
     id: "yazan",
@@ -79,7 +69,6 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "20+",
     focus: ["Turnkey Delivery", "Project Planning", "Site Readiness"],
-    email: "info@abufarhamedical.com",
   },
   {
     id: "naser",
@@ -90,7 +79,6 @@ const LEADERS: Leader[] = [
     countries: "7+",
     projects: "60+",
     focus: ["Field Service", "SLA Management", "Preventive Maintenance"],
-    email: "info@abufarhamedical.com",
   },
   {
     id: "mohammad",
@@ -101,7 +89,6 @@ const LEADERS: Leader[] = [
     countries: "10+",
     projects: "45+",
     focus: ["Regional Logistics", "Spare Parts", "Supply Chain"],
-    email: "info@abufarhamedical.com",
   },
   {
     id: "khalid-n",
@@ -112,7 +99,6 @@ const LEADERS: Leader[] = [
     countries: "Global",
     projects: "40+",
     focus: ["OEM Procurement", "Warranty & Compliance", "Traceability"],
-    email: "info@abufarhamedical.com",
   },
   {
     id: "omar",
@@ -123,7 +109,6 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "30+",
     focus: ["Operations", "Delivery Coordination", "Cross-Functional"],
-    email: "info@abufarhamedical.com",
   },
   {
     id: "ibrahim",
@@ -134,7 +119,6 @@ const LEADERS: Leader[] = [
     countries: "Regional",
     projects: "All Programs",
     focus: ["Financial Planning", "Project Accounting", "Governance"],
-    email: "info@abufarhamedical.com",
   },
 ];
 
@@ -148,94 +132,21 @@ const HIGHLIGHTS = [
 const AUTO_MS = 7000;
 const RESUME_MS = 12000;
 
-/* ---------------- Live console micro-widgets ---------------- */
-
-function LiveClock() {
-  const [now, setNow] = useState<string>(() => {
-    const d = new Date();
-    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
-  });
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      const d = new Date();
-      setNow(d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }));
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, []);
-  return <span className="tabular-nums">{now}</span>;
-}
-
-function EcgLine() {
-  // Static SVG path traveling via CSS animation. Extremely subtle.
-  return (
-    <div className="relative h-6 w-full overflow-hidden rounded-md bg-white/[0.03] ring-1 ring-white/10">
-      <svg
-        viewBox="0 0 400 24"
-        preserveAspectRatio="none"
-        className="absolute inset-y-0 left-0 h-full w-[200%] animate-[ecg-scroll_6s_linear_infinite] motion-reduce:animate-none"
-        aria-hidden="true"
-      >
-        <path
-          d="M0 12 L30 12 L38 12 L44 6 L50 18 L56 12 L90 12 L100 12 L108 4 L116 20 L124 12 L160 12 L170 12 L178 8 L186 16 L194 12 L240 12 L260 12 L268 6 L274 18 L280 12 L320 12 L330 12 L338 4 L346 20 L354 12 L400 12 L430 12 L438 6 L444 18 L450 12 L490 12 L500 12 L508 4 L516 20 L524 12 L560 12 L570 12 L578 8 L586 16 L594 12 L640 12 L660 12 L668 6 L674 18 L680 12 L720 12 L730 12 L738 4 L746 20 L754 12 L800 12"
-          fill="none"
-          stroke="rgb(229 57 53 / 0.9)"
-          strokeWidth="1.25"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </div>
-  );
-}
-
-function LiveVitals() {
-  const [hr, setHr] = useState(72);
-  const [spo2, setSpo2] = useState(98);
-  const [bp, setBp] = useState("118/76");
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setHr(h => 68 + Math.floor(Math.random() * 10));
-      setSpo2(97 + Math.floor(Math.random() * 3));
-      const sys = 116 + Math.floor(Math.random() * 6);
-      const dia = 74 + Math.floor(Math.random() * 5);
-      setBp(`${sys}/${dia}`);
-    }, 3200);
-    return () => window.clearInterval(id);
-  }, []);
-  return (
-    <div className="grid grid-cols-3 gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/55">
-      <div className="rounded-md bg-white/[0.03] px-2 py-1 ring-1 ring-white/10">
-        <span className="text-white/40">HR</span>{" "}
-        <span className="tabular-nums text-white/80">{hr}</span>
-      </div>
-      <div className="rounded-md bg-white/[0.03] px-2 py-1 ring-1 ring-white/10">
-        <span className="text-white/40">SpO₂</span>{" "}
-        <span className="tabular-nums text-white/80">{spo2}%</span>
-      </div>
-      <div className="rounded-md bg-white/[0.03] px-2 py-1 ring-1 ring-white/10">
-        <span className="text-white/40">BP</span>{" "}
-        <span className="tabular-nums text-white/80">{bp}</span>
-      </div>
-    </div>
-  );
-}
-
-/* ---------------- Portraits ---------------- */
+/* ---------------- Nav rail portrait ---------------- */
 
 function Portrait({ leader, size }: { leader: Leader; size: number }) {
-  const radius = size;
   if (leader.photo) {
     return (
       <div
         className="relative overflow-hidden rounded-full bg-secondary ring-1 ring-border shadow-[0_10px_30px_-14px_rgba(15,23,42,0.35)]"
-        style={{ width: radius, height: radius }}
+        style={{ width: size, height: size }}
       >
         <img
           src={leader.photo}
           alt={leader.name}
           loading="lazy"
           decoding="async"
-          className="h-full w-full scale-[1.15] object-cover object-[50%_28%]"
+          className="h-full w-full scale-[1.15] object-cover object-[50%_26%]"
         />
       </div>
     );
@@ -243,10 +154,10 @@ function Portrait({ leader, size }: { leader: Leader; size: number }) {
   return (
     <div
       className="relative grid place-items-center overflow-hidden rounded-full bg-gradient-to-b from-secondary to-secondary/40 ring-1 ring-border"
-      style={{ width: radius, height: radius }}
+      style={{ width: size, height: size }}
       aria-hidden="true"
     >
-      <User className="text-ink/30" style={{ width: radius * 0.55, height: radius * 0.55 }} strokeWidth={1.25} />
+      <User className="text-ink/30" style={{ width: size * 0.55, height: size * 0.55 }} strokeWidth={1.25} />
     </div>
   );
 }
@@ -285,40 +196,43 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
   );
 }
 
-/* ---------------- Executive portrait card (4:5) ---------------- */
+/* ---------------- Hero portrait (crossfade) ---------------- */
 
-function ExecutivePortrait({ leader, className = "" }: { leader: Leader; className?: string }) {
+function HeroPortrait({ leader }: { leader: Leader }) {
   return (
-    <div
-      className={`relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/[0.06] to-white/[0.01] ring-1 ring-white/15 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.7)] ${className}`}
-      style={{ aspectRatio: "4 / 5" }}
-    >
-      {leader.photo ? (
-        <img
-          src={leader.photo}
-          alt={leader.name}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover object-[50%_22%]"
-        />
-      ) : (
-        <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/10 to-white/[0.02]">
-          <User className="h-24 w-24 text-white/25" strokeWidth={1.1} />
-        </div>
-      )}
-      {/* subtle scanline */}
+    <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-white/[0.04] to-black/20">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={leader.id}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="absolute inset-0"
+        >
+          {leader.photo ? (
+            <img
+              src={leader.photo}
+              alt={leader.name}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover object-[50%_20%]"
+            />
+          ) : (
+            <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/10 to-white/[0.02]">
+              <User className="h-28 w-28 text-white/25" strokeWidth={1.1} />
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+      {/* soft edge blend into the console body */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay motion-reduce:hidden"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(to bottom, rgba(255,255,255,0.6) 0 1px, transparent 1px 3px)",
-        }}
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-24 bg-gradient-to-r from-transparent to-[#1a1e25] sm:block"
       />
-      {/* soft glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-px rounded-2xl ring-1 ring-inset ring-white/5"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-black/30 sm:hidden"
       />
     </div>
   );
@@ -327,7 +241,6 @@ function ExecutivePortrait({ leader, className = "" }: { leader: Leader; classNa
 /* ---------------- Animated statistic ---------------- */
 
 function StatValue({ raw }: { raw: string }) {
-  // Only animate the leading integer portion; keep the suffix ("+", "Global", …) intact
   const match = raw.match(/^(\d+)(.*)$/);
   const [display, setDisplay] = useState(raw);
 
@@ -359,139 +272,149 @@ function StatValue({ raw }: { raw: string }) {
   return <>{display}</>;
 }
 
+/* ---------------- Progress indicator ---------------- */
+
+function ProgressBar({ activeIndex, total, paused }: { activeIndex: number; total: number; paused: boolean }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      {Array.from({ length: total }).map((_, i) => {
+        const isActive = i === activeIndex;
+        const isDone = i < activeIndex;
+        return (
+          <div
+            key={i}
+            className="relative h-[2px] flex-1 overflow-hidden rounded-full bg-white/10"
+            aria-hidden="true"
+          >
+            {isDone && <div className="absolute inset-y-0 left-0 w-full bg-white/40" />}
+            {isActive && (
+              <div
+                key={`fill-${activeIndex}-${paused ? "p" : "r"}`}
+                className={`absolute inset-y-0 left-0 w-0 bg-primary ${
+                  paused ? "" : "animate-[leader-progress_7000ms_linear_forwards] motion-reduce:w-full motion-reduce:animate-none"
+                }`}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /* ---------------- Executive Console ---------------- */
 
-function ExecutiveConsole({ leader, paused, onToggle }: { leader: Leader; paused: boolean; onToggle: () => void }) {
+function ExecutiveConsole({
+  leader,
+  paused,
+  onToggle,
+  activeIndex,
+  total,
+}: {
+  leader: Leader;
+  paused: boolean;
+  onToggle: () => void;
+  activeIndex: number;
+  total: number;
+}) {
   return (
-    <div className="relative overflow-hidden rounded-[calc(18*var(--desktop-px-unit))] border border-white/10 bg-[#14181e]/95 text-white shadow-[0_30px_90px_-30px_rgba(0,0,0,0.75)] backdrop-blur-md">
-      {/* very subtle monitor glow */}
+    <div className="relative overflow-hidden rounded-[calc(20*var(--desktop-px-unit))] border border-white/10 bg-[#1a1e25]/95 text-white shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)] backdrop-blur-md">
+      {/* very subtle inner glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -inset-24 opacity-40 motion-reduce:opacity-20"
         style={{
           background:
-            "radial-gradient(60% 40% at 50% 0%, rgba(229,57,53,0.10), transparent 60%), radial-gradient(50% 50% at 100% 100%, rgba(56,189,248,0.06), transparent 60%)",
-        }}
-      />
-      {/* scanline overlay */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay motion-reduce:hidden"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(to bottom, rgba(255,255,255,0.5) 0 1px, transparent 1px 3px)",
+            "radial-gradient(60% 40% at 0% 0%, rgba(255,255,255,0.06), transparent 60%), radial-gradient(60% 60% at 100% 100%, rgba(229,57,53,0.08), transparent 65%)",
         }}
       />
 
-      {/* Console header */}
-      <div className="relative flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/60">
-        <div className="flex items-center gap-2">
-          <span className="relative inline-flex h-2 w-2">
-            <span className={`absolute inline-flex h-full w-full rounded-full bg-primary/60 ${paused ? "" : "animate-ping motion-reduce:animate-none"}`} />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_rgba(229,57,53,0.9)]" />
-          </span>
-          <span>Executive Profile</span>
-          <span className="mx-2 hidden h-3 w-px bg-white/15 sm:inline-block" />
-          <span className="hidden items-center gap-1 text-white/45 sm:inline-flex">
-            <Activity className="h-3 w-3" />
-            <LiveClock />
-          </span>
+      <div className="grid gap-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        {/* LEFT — Hero portrait (~45–50% of console) */}
+        <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[380px]">
+          <HeroPortrait leader={leader} />
         </div>
-        <button
-          type="button"
-          onClick={onToggle}
-          className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-white/70 transition hover:bg-white/10 hover:text-white"
-          aria-label={paused ? "Resume rotation" : "Pause rotation"}
-        >
-          {paused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
-          <span className="tracking-[0.18em]">{paused ? "Paused" : "Live"}</span>
-        </button>
-      </div>
 
-      <div className="relative p-5 sm:p-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={leader.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="grid gap-6 sm:grid-cols-[minmax(0,200px)_1fr] sm:gap-7"
-          >
-            <div className="mx-auto w-full max-w-[220px] sm:mx-0 sm:max-w-none">
-              <ExecutivePortrait leader={leader} />
+        {/* RIGHT — Executive information */}
+        <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
+          {/* Top row: pause control + progress */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={onToggle}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70 transition hover:bg-white/10 hover:text-white"
+              aria-label={paused ? "Resume rotation" : "Pause rotation"}
+            >
+              {paused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
+              <span>{paused ? "Paused" : "Auto"}</span>
+            </button>
+            <div className="flex-1">
+              <ProgressBar activeIndex={activeIndex} total={total} paused={paused} />
             </div>
+            <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 tabular-nums">
+              {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </div>
+          </div>
 
-            <div className="min-w-0">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-primary/90">
-                {leader.role}
-              </div>
-              <div className="mt-1.5 font-display text-[1.45rem] font-extrabold leading-[1.1] text-white sm:text-[1.65rem]">
-                {leader.name}
-              </div>
-              <p className="mt-3 max-w-md text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-white/75">
-                {leader.bio}
-              </p>
+          {/* Content — crossfades on change */}
+          <div className="mt-6 flex-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={leader.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.55, ease: EASE }}
+              >
+                <div className="text-[10px] font-semibold uppercase tracking-[0.26em] text-primary/90">
+                  {leader.role}
+                </div>
+                <div className="mt-2 font-display text-[1.55rem] font-extrabold leading-[1.05] tracking-[-0.01em] text-white sm:text-[1.85rem]">
+                  {leader.name}
+                </div>
+                <p className="mt-4 max-w-md text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-white/75">
+                  {leader.bio}
+                </p>
 
-              {/* Stats */}
-              <div className="mt-5 grid grid-cols-3 gap-2">
-                {[
-                  { v: leader.years, l: "Years" },
-                  { v: leader.countries, l: "Countries" },
-                  { v: leader.projects, l: "Projects" },
-                ].map(s => (
-                  <div key={s.l} className="rounded-xl bg-white/[0.04] px-3 py-2.5 ring-1 ring-white/10">
-                    <div className="font-display text-[1.2rem] font-extrabold leading-none text-white">
-                      <StatValue raw={s.v} />
+                {/* Statistics */}
+                <div className="mt-6 grid grid-cols-3 gap-2.5">
+                  {[
+                    { v: leader.years, l: "Years" },
+                    { v: leader.countries, l: "Countries" },
+                    { v: leader.projects, l: "Projects" },
+                  ].map(s => (
+                    <div key={s.l} className="rounded-xl bg-white/[0.04] px-3 py-3 ring-1 ring-white/10">
+                      <div className="font-display text-[1.35rem] font-extrabold leading-none text-white">
+                        <StatValue raw={s.v} />
+                      </div>
+                      <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                        {s.l}
+                      </div>
                     </div>
-                    <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">{s.l}</div>
+                  ))}
+                </div>
+
+                {/* Areas of expertise */}
+                <div className="mt-6">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
+                    Areas of Expertise
                   </div>
-                ))}
-              </div>
-
-              {/* Focus tags */}
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {leader.focus.map(f => (
-                  <span key={f} className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[10.5px] font-medium tracking-wide text-white/80 ring-1 ring-white/10">
-                    {f}
-                  </span>
-                ))}
-              </div>
-
-              {/* Buttons */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {leader.linkedin && (
-                  <a
-                    href={leader.linkedin}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-3.5 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-white/90 transition hover:border-white/50 hover:bg-white/5 hover:text-white"
-                    aria-label={`${leader.name} on LinkedIn`}
-                  >
-                    <Linkedin className="h-3.5 w-3.5" /> LinkedIn
-                  </a>
-                )}
-                {leader.email && (
-                  <a
-                    href={`mailto:${leader.email}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-3.5 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-white/90 transition hover:border-primary hover:bg-primary hover:text-white"
-                    aria-label={`Email ${leader.name}`}
-                  >
-                    <Mail className="h-3.5 w-3.5" /> Email
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Live vitals strip */}
-        <div className="mt-6 border-t border-white/10 pt-4">
-          <EcgLine />
-          <div className="mt-2.5">
-            <LiveVitals />
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {leader.focus.map(f => (
+                      <span
+                        key={f}
+                        className="rounded-full bg-white/[0.05] px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/85 ring-1 ring-white/10"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
-      <div className="h-3 bg-gradient-to-b from-[#14181e] to-[#0a0d12]" />
     </div>
   );
 }
@@ -534,7 +457,7 @@ export function Leadership() {
 
   return (
     <section className="bg-white py-16 lg:py-20">
-      <style>{`@keyframes ecg-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+      <style>{`@keyframes leader-progress { from { width: 0%; } to { width: 100%; } }`}</style>
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <Eyebrow index="09">Meet the People Behind AbuFarha Medical</Eyebrow>
@@ -550,7 +473,7 @@ export function Leadership() {
         </Reveal>
 
         {/* Desktop */}
-        <div className="mt-12 hidden lg:grid lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-10">
+        <div className="mt-12 hidden lg:grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] lg:gap-10">
           <Reveal className="lg:sticky lg:top-28 lg:self-start">
             <div className="rounded-3xl bg-secondary/40 p-3 ring-1 ring-border">
               <div className="max-h-[calc(680*var(--desktop-px-unit))] space-y-1 overflow-y-auto pr-1">
@@ -571,11 +494,16 @@ export function Leadership() {
                 height={1104}
                 className="h-full max-h-[calc(820*var(--desktop-px-unit))] w-full object-cover"
               />
-              {/* Depth wash to lift the floating console */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
-              {/* Floating console (smaller, right-anchored — reveals more equipment) */}
-              <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[54%] lg:w-[50%] xl:w-[46%]">
-                <ExecutiveConsole leader={active} paused={paused} onToggle={togglePause} />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/5" />
+              {/* Floating console — smaller footprint so the cath lab remains visible */}
+              <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
+                <ExecutiveConsole
+                  leader={active}
+                  paused={paused}
+                  onToggle={togglePause}
+                  activeIndex={activeIndex}
+                  total={LEADERS.length}
+                />
               </div>
             </div>
           </Reveal>
@@ -583,7 +511,13 @@ export function Leadership() {
 
         {/* Tablet */}
         <div className="mt-10 hidden md:block lg:hidden">
-          <ExecutiveConsole leader={active} paused={paused} onToggle={togglePause} />
+          <ExecutiveConsole
+            leader={active}
+            paused={paused}
+            onToggle={togglePause}
+            activeIndex={activeIndex}
+            total={LEADERS.length}
+          />
           <div className="mt-6 grid grid-cols-2 gap-2">
             {LEADERS.map((l, i) => (
               <LeaderRow key={l.id} leader={l} active={i === activeIndex} onSelect={() => handleSelect(i)} />
@@ -591,10 +525,15 @@ export function Leadership() {
           </div>
         </div>
 
-        {/* Mobile — dedicated flow */}
+        {/* Mobile */}
         <div className="mt-8 md:hidden">
-          <ExecutiveConsole leader={active} paused={paused} onToggle={togglePause} />
-
+          <ExecutiveConsole
+            leader={active}
+            paused={paused}
+            onToggle={togglePause}
+            activeIndex={activeIndex}
+            total={LEADERS.length}
+          />
           <div className="mt-6 -mx-6 overflow-x-auto pb-2">
             <div className="flex gap-3 px-6 snap-x snap-mandatory">
               {LEADERS.map((l, i) => {
