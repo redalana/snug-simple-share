@@ -71,9 +71,9 @@ export const SOCIALS: {
 }[] = [];
 
 export const LANGUAGES = [
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "ar", label: "العربية", flag: "🇸🇦" },
-  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" },
 ] as const;
+
 
 // Brand roster lives in a single source of truth: src/lib/brands-data.ts

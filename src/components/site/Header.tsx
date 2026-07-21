@@ -5,13 +5,22 @@ import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
 
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import { NAV, SOCIALS, LANGUAGES } from "./header/nav-data";
+import { LinkedInIcon } from "./icons/LinkedInIcon";
+import { FacebookIcon } from "./icons/FacebookIcon";
+import { NAV, LANGUAGES } from "./header/nav-data";
 import { BRANDS_LIST } from "@/lib/brands-data";
 import { LanguageSelector } from "./header/LanguageSelector";
 import { BrandMark, BrandsMegaDropdown } from "./header/BrandsMegaDropdown";
 import { ProductsMegaDropdown } from "./header/ProductsMegaDropdown";
 import { MobileProductsAccordion } from "./header/MobileProductsAccordion";
 import { SearchField } from "./header/SearchField";
+
+const HEADER_SOCIALS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: LinkedInIcon, hoverColor: "#0A66C2" },
+  { label: "Facebook", href: "https://www.facebook.com/", Icon: FacebookIcon, hoverColor: "#1877F2" },
+  { label: "WhatsApp", href: "#", Icon: WhatsAppIcon, hoverColor: "#25D366" },
+] as const;
+
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,40 +65,29 @@ export function Header() {
             </div>
           </div>
 
-          {/* Right cluster — language, socials, CTA */}
-          <div className="hidden shrink-0 items-center lg:flex">
+          {/* Right cluster — language, socials */}
+          <div className="hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
             <LanguageSelector />
 
-            {/* Language → Social : calc(28*var(--desktop-px-unit)) */}
-            <div className="ml-6 flex items-center gap-[calc(14*var(--desktop-px-unit))]">
-              {SOCIALS.map(({ label, href, Icon, hover }) => (
+            <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
+              {HEADER_SOCIALS.map(({ label, href, Icon, hoverColor }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className={`text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="text-foreground/60 transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ ["--hover-color" as string]: hoverColor }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "")}
                 >
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  <Icon className="h-[calc(21*var(--desktop-px-unit))] w-[calc(21*var(--desktop-px-unit))]" />
                 </a>
               ))}
-              <a
-                href="#"
-                aria-label="WhatsApp"
-                className="text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
-              >
-                <WhatsAppIcon className="h-5 w-5" />
-              </a>
             </div>
-
-            {/* Social → Button : calc(28*var(--desktop-px-unit)) */}
-            <Link
-              to="/contact"
-              hash="contact-form"
-              className="ml-6 inline-flex h-[calc(40*var(--desktop-px-unit))] shrink-0 items-center rounded-full bg-primary px-6 text-[calc(13*var(--desktop-px-unit))] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
-            >
-              Request a Quote
-            </Link>
           </div>
+
 
 
           {/* Mobile controls */}
@@ -296,8 +294,8 @@ export function Header() {
                       type="button"
                       className="inline-flex min-h-[calc(48*var(--desktop-px-unit))] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
                     >
-                      <span aria-hidden className="text-base leading-none">{l.flag}</span>
                       {l.label}
+
                     </button>
                   ))}
                 </div>
@@ -305,23 +303,18 @@ export function Header() {
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  {SOCIALS.map(({ label, href, Icon }) => (
+                  {HEADER_SOCIALS.map(({ label, href, Icon }) => (
                     <a
                       key={label}
                       href={href}
                       aria-label={label}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                     >
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      <Icon className="h-5 w-5" />
                     </a>
                   ))}
-                  <a
-                    href="#"
-                    aria-label="WhatsApp"
-                    className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <WhatsAppIcon className="h-5 w-5" />
-                  </a>
                 </div>
                 <Link
                   to="/contact"

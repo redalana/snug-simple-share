@@ -22,7 +22,6 @@ export function LanguageSelector() {
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-1.5 text-[calc(15*var(--desktop-px-unit))] font-medium text-foreground/75 transition-colors hover:text-primary"
       >
-        <span aria-hidden className="text-base leading-none">{lang.flag}</span>
         {lang.label}
         <ChevronDown
           className={`h-3.5 w-3.5 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
@@ -35,7 +34,7 @@ export function LanguageSelector() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full z-20 mt-2 w-44 rounded-[calc(14*var(--desktop-px-unit))] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
+            className="absolute right-0 top-full z-20 mt-2 w-40 rounded-[calc(14*var(--desktop-px-unit))] border border-border/70 bg-white p-2 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.28)]"
           >
             {LANGUAGES.map((l) => (
               <button
@@ -48,7 +47,6 @@ export function LanguageSelector() {
                   l.code === lang.code ? "text-foreground" : "text-foreground/70"
                 }`}
               >
-                <span aria-hidden className="text-base leading-none">{l.flag}</span>
                 <span className="flex-1">{l.label}</span>
                 <Check
                   className={`h-4 w-4 text-primary ${l.code === lang.code ? "opacity-100" : "opacity-0"}`}
