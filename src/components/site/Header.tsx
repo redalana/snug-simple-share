@@ -65,40 +65,29 @@ export function Header() {
             </div>
           </div>
 
-          {/* Right cluster — language, socials, CTA */}
-          <div className="hidden shrink-0 items-center lg:flex">
+          {/* Right cluster — language, socials */}
+          <div className="hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
             <LanguageSelector />
 
-            {/* Language → Social : calc(28*var(--desktop-px-unit)) */}
-            <div className="ml-6 flex items-center gap-[calc(14*var(--desktop-px-unit))]">
-              {SOCIALS.map(({ label, href, Icon, hover }) => (
+            <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
+              {HEADER_SOCIALS.map(({ label, href, Icon, hoverColor }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className={`text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:drop-shadow-sm ${hover}`}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="text-foreground/60 transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ ["--hover-color" as string]: hoverColor }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "")}
                 >
-                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  <Icon className="h-[calc(21*var(--desktop-px-unit))] w-[calc(21*var(--desktop-px-unit))]" />
                 </a>
               ))}
-              <a
-                href="#"
-                aria-label="WhatsApp"
-                className="text-[#555555] transition-all duration-200 hover:scale-[1.08] hover:text-[#25D366] hover:drop-shadow-sm"
-              >
-                <WhatsAppIcon className="h-5 w-5" />
-              </a>
             </div>
-
-            {/* Social → Button : calc(28*var(--desktop-px-unit)) */}
-            <Link
-              to="/contact"
-              hash="contact-form"
-              className="ml-6 inline-flex h-[calc(40*var(--desktop-px-unit))] shrink-0 items-center rounded-full bg-primary px-6 text-[calc(13*var(--desktop-px-unit))] font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
-            >
-              Request a Quote
-            </Link>
           </div>
+
 
 
           {/* Mobile controls */}
