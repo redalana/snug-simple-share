@@ -27,32 +27,38 @@ type Brand = {
   name: string;
   alt: string;
   url: string;
-  /** Optical scale multiplier applied to the max rendered height. */
-  scale: number;
+  /**
+   * Rendered logo height in px on desktop. Calibrated per-logo by measuring
+   * the trimmed PNG's ink area (non-transparent pixel count) so every
+   * wordmark carries equal visual weight regardless of native pixel size.
+   */
+  h: number;
 };
 
+// Heights chosen so each logo occupies ~equal ink area when rendered.
+// Reduced: Toshiba/Canon, Hitachi, Shimadzu (thin/wide wordmarks).
+// Boosted: Esaote, Richard Wolf, Boston Scientific (compact wordmarks).
 const BRANDS: Brand[] = [
-  { name: "Philips",             alt: "Philips",                 url: philips.url,     scale: 0.78 },
-  { name: "Siemens Healthineers",alt: "Siemens Healthineers",    url: siemens.url,     scale: 0.82 },
-  { name: "GE HealthCare",       alt: "GE HealthCare",           url: ge.url,          scale: 0.95 },
-  { name: "Canon Medical",       alt: "Canon Medical (Toshiba)", url: canon.url,       scale: 1.00 },
-  { name: "Mindray",             alt: "Mindray",                 url: mindray.url,     scale: 0.92 },
-  { name: "Esaote",              alt: "Esaote",                  url: esaote.url,      scale: 1.05 },
-  { name: "Richard Wolf",        alt: "Richard Wolf",            url: richardWolf.url, scale: 1.00 },
-  { name: "Hitachi",             alt: "Hitachi",                 url: hitachi.url,     scale: 0.86 },
-  { name: "Shimadzu",            alt: "Shimadzu",                url: shimadzu.url,    scale: 0.82 },
-  { name: "Abbott",              alt: "Abbott",                  url: abbott.url,      scale: 0.90 },
-  { name: "Medtronic",           alt: "Medtronic",               url: medtronic.url,   scale: 0.90 },
-  { name: "Boston Scientific",   alt: "Boston Scientific",       url: boston.url,      scale: 1.00 },
+  { name: "Philips",              alt: "Philips",                 url: philips.url,     h: 22 },
+  { name: "Siemens Healthineers", alt: "Siemens Healthineers",    url: siemens.url,     h: 20 },
+  { name: "GE HealthCare",        alt: "GE HealthCare",           url: ge.url,          h: 40 },
+  { name: "Canon Medical",        alt: "Canon Medical (Toshiba)", url: canon.url,       h: 22 },
+  { name: "Mindray",              alt: "Mindray",                 url: mindray.url,     h: 34 },
+  { name: "Esaote",               alt: "Esaote",                  url: esaote.url,      h: 42 },
+  { name: "Richard Wolf",         alt: "Richard Wolf",            url: richardWolf.url, h: 36 },
+  { name: "Hitachi",              alt: "Hitachi",                 url: hitachi.url,     h: 24 },
+  { name: "Shimadzu",             alt: "Shimadzu",                url: shimadzu.url,    h: 26 },
+  { name: "Abbott",               alt: "Abbott",                  url: abbott.url,      h: 34 },
+  { name: "Medtronic",            alt: "Medtronic",               url: medtronic.url,   h: 40 },
+  { name: "Boston Scientific",    alt: "Boston Scientific",       url: boston.url,      h: 44 },
 ];
 
 function LogoItem({ brand }: { brand: Brand }) {
-  const maxH = Math.round(48 * brand.scale);
+  // Container is a fixed 56px slot; logo renders at its calibrated optical
+  // height and is vertically centered. Width auto → native aspect ratio,
+  // no clipping, no distortion.
   return (
-    <div
-      className="flex h-14 shrink-0 items-center justify-center"
-      // Per-viewport gap is applied via parent's gap-x utilities; item itself has no side padding.
-    >
+    <div className="flex h-14 shrink-0 items-center justify-center">
       <img
         src={brand.url}
         alt={brand.alt}
@@ -60,7 +66,9 @@ function LogoItem({ brand }: { brand: Brand }) {
         decoding="async"
         draggable={false}
         className="w-auto select-none object-contain"
-        style={{ maxHeight: `${maxH}px`, height: `${maxH}px` }}
+        style={{
+          height: `clamp(${Math.round(brand.h * 0.75)}px, ${brand.h / 16}rem, ${brand.h}px)`,
+        }}
       />
     </div>
   );
