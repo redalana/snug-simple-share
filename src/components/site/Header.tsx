@@ -5,13 +5,22 @@ import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
 
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import { NAV, SOCIALS, LANGUAGES } from "./header/nav-data";
+import { LinkedInIcon } from "./icons/LinkedInIcon";
+import { FacebookIcon } from "./icons/FacebookIcon";
+import { NAV, LANGUAGES } from "./header/nav-data";
 import { BRANDS_LIST } from "@/lib/brands-data";
 import { LanguageSelector } from "./header/LanguageSelector";
 import { BrandMark, BrandsMegaDropdown } from "./header/BrandsMegaDropdown";
 import { ProductsMegaDropdown } from "./header/ProductsMegaDropdown";
 import { MobileProductsAccordion } from "./header/MobileProductsAccordion";
 import { SearchField } from "./header/SearchField";
+
+const HEADER_SOCIALS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: LinkedInIcon, hoverColor: "#0A66C2" },
+  { label: "Facebook", href: "https://www.facebook.com/", Icon: FacebookIcon, hoverColor: "#1877F2" },
+  { label: "WhatsApp", href: "#", Icon: WhatsAppIcon, hoverColor: "#25D366" },
+] as const;
+
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
