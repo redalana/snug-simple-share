@@ -294,8 +294,8 @@ export function Header() {
                       type="button"
                       className="inline-flex min-h-[calc(48*var(--desktop-px-unit))] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
                     >
-                      <span aria-hidden className="text-base leading-none">{l.flag}</span>
                       {l.label}
+
                     </button>
                   ))}
                 </div>
@@ -303,23 +303,18 @@ export function Header() {
 
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  {SOCIALS.map(({ label, href, Icon }) => (
+                  {HEADER_SOCIALS.map(({ label, href, Icon }) => (
                     <a
                       key={label}
                       href={href}
                       aria-label={label}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                     >
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      <Icon className="h-5 w-5" />
                     </a>
                   ))}
-                  <a
-                    href="#"
-                    aria-label="WhatsApp"
-                    className="flex h-12 w-12 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    <WhatsAppIcon className="h-5 w-5" />
-                  </a>
                 </div>
                 <Link
                   to="/contact"
