@@ -42,6 +42,7 @@ const LEADERS: Leader[] = [
     projects: "30+",
     focus: ["Healthcare Leadership", "Medical Technology", "Regional Growth"],
     photo: leaderPortrait1.url,
+    thumb: leaderPortrait1Thumb.url,
     env: cathlabImg,
   },
 
