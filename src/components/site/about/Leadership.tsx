@@ -52,6 +52,7 @@ const LEADERS: Leader[] = [
     countries: "8+",
     projects: "40+",
     focus: ["Commercial Strategy", "OEM Partnerships", "Hospital Programs"],
+    env: envMeeting,
   },
   {
     id: "anwar",
@@ -62,6 +63,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "35+",
     focus: ["Clinical Advisory", "Medical Protocols", "Workflow Integration"],
+    env: envImaging,
   },
   {
     id: "issam",
@@ -72,6 +74,7 @@ const LEADERS: Leader[] = [
     countries: "9+",
     projects: "50+",
     focus: ["Biomedical Engineering", "Commissioning", "Lifecycle Service"],
+    env: envMri,
   },
   {
     id: "yazan",
@@ -82,6 +85,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "20+",
     focus: ["Turnkey Delivery", "Project Planning", "Site Readiness"],
+    env: envInstall,
   },
   {
     id: "naser",
@@ -92,6 +96,7 @@ const LEADERS: Leader[] = [
     countries: "7+",
     projects: "60+",
     focus: ["Field Service", "SLA Management", "Preventive Maintenance"],
+    env: envService,
   },
   {
     id: "mohammad",
@@ -102,6 +107,7 @@ const LEADERS: Leader[] = [
     countries: "10+",
     projects: "45+",
     focus: ["Regional Logistics", "Spare Parts", "Supply Chain"],
+    env: envWarehouse,
   },
   {
     id: "khalid-n",
@@ -112,6 +118,7 @@ const LEADERS: Leader[] = [
     countries: "Global",
     projects: "40+",
     focus: ["OEM Procurement", "Warranty & Compliance", "Traceability"],
+    env: envWarehouse,
   },
   {
     id: "omar",
@@ -122,6 +129,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "30+",
     focus: ["Operations", "Delivery Coordination", "Cross-Functional"],
+    env: envOps,
   },
   {
     id: "ibrahim",
@@ -132,7 +140,9 @@ const LEADERS: Leader[] = [
     countries: "Regional",
     projects: "All Programs",
     focus: ["Financial Planning", "Project Accounting", "Governance"],
+    env: envOffice,
   },
+
 ];
 
 const HIGHLIGHTS = [
