@@ -421,11 +421,12 @@ function ExecutiveConsole({
         }}
       />
 
-      <div className="grid gap-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        {/* LEFT — Hero portrait (~45–50% of console) */}
-        <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[380px]">
+      <div className="grid gap-0 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+        {/* LEFT — Hero portrait (~55% of console on desktop) */}
+        <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[520px] lg:min-h-[560px]">
           <HeroPortrait leader={leader} />
         </div>
+
 
         {/* RIGHT — Executive information */}
         <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
