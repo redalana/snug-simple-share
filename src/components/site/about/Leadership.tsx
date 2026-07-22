@@ -161,22 +161,22 @@ function Portrait({ leader, size }: { leader: Leader; size: number }) {
   if (leader.photo) {
     return (
       <div
-        className="relative overflow-hidden rounded-full bg-secondary ring-1 ring-border shadow-[0_10px_30px_-14px_rgba(15,23,42,0.35)]"
+        className="relative overflow-hidden rounded-full bg-secondary ring-2 ring-white shadow-[0_6px_16px_-4px_rgba(15,23,42,0.28)]"
         style={{ width: size, height: size }}
       >
         <img
           src={leader.photo}
           alt={leader.name}
-          loading="lazy"
           decoding="async"
-          className="h-full w-full scale-[1.15] object-cover object-[50%_26%]"
+          className="h-full w-full object-cover object-[center_top]"
+          style={{ imageRendering: "auto" }}
         />
       </div>
     );
   }
   return (
     <div
-      className="relative grid place-items-center overflow-hidden rounded-full bg-gradient-to-b from-secondary to-secondary/40 ring-1 ring-border"
+      className="relative grid place-items-center overflow-hidden rounded-full bg-gradient-to-b from-secondary to-secondary/40 ring-2 ring-white shadow-[0_6px_16px_-4px_rgba(15,23,42,0.22)]"
       style={{ width: size, height: size }}
       aria-hidden="true"
     >
@@ -184,6 +184,7 @@ function Portrait({ leader, size }: { leader: Leader; size: number }) {
     </div>
   );
 }
+
 
 function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boolean; onSelect: () => void }) {
   return (
@@ -205,7 +206,7 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
         />
       )}
       <div className="transition-transform duration-300 group-hover:scale-[1.04]">
-        <Portrait leader={leader} size={44} />
+        <Portrait leader={leader} size={50} />
       </div>
       <div className="min-w-0">
         <div className={`truncate font-display text-[calc(14*var(--desktop-px-unit))] font-bold ${active ? "text-ink" : "text-ink/90"}`}>
