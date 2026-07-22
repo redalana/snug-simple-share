@@ -219,7 +219,76 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
   );
 }
 
-/* ---------------- Hero portrait (crossfade) ---------------- */
+/* ---------------- Cinematic Backdrop ---------------- */
+
+function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string; alt: string }) {
+  const [layers, setLayers] = useState<{ src: string; id: number }[]>([{ src: env, id: 0 }]);
+  const nextId = useRef(1);
+
+  useEffect(() => {
+    setLayers(prev => {
+      if (prev[prev.length - 1].src === env) return prev;
+      return [...prev, { src: env, id: nextId.current++ }];
+    });
+  }, [env]);
+
+  useEffect(() => {
+    if (layers.length <= 1) return;
+    const t = window.setTimeout(() => {
+      setLayers(prev => prev.slice(-1));
+    }, 950);
+    return () => window.clearTimeout(t);
+  }, [layers]);
+
+  return (
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ aspectRatio: "1600 / 1104", maxHeight: "calc(820*var(--desktop-px-unit))" }}
+    >
+      {layers.map((l, i) => {
+        const isTop = i === layers.length - 1;
+        const kbClass = l.id % 2 === 0 ? "leader-kb-a" : "leader-kb-b";
+        return (
+          <div
+            key={l.id}
+            aria-hidden={i < layers.length - 1 ? true : undefined}
+            className={`absolute inset-0 ${isTop && layers.length > 1 ? "leader-fade-in" : ""}`}
+            style={{ willChange: "opacity" }}
+          >
+            <div
+              className={`absolute inset-0 ${kbClass} motion-reduce:!animate-none motion-reduce:!transform-none`}
+              style={{ willChange: "transform" }}
+            >
+              <img
+                src={l.src}
+                alt={isTop ? alt : ""}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        );
+      })}
+      {/* Ambient light — subtle breathing, continues during pause */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 leader-ambient motion-reduce:!animate-none"
+        style={{
+          background:
+            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.14), transparent 60%), radial-gradient(55% 45% at 85% 85%, rgba(120,180,255,0.10), transparent 65%)",
+          mixBlendMode: "screen",
+        }}
+      />
+      {/* Cinematic vignette + tone */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
+      {/* Preload next */}
+      <link rel="preload" as="image" href={nextEnv} />
+    </div>
+  );
+}
+
+
 
 function HeroPortrait({ leader }: { leader: Leader }) {
   return (
