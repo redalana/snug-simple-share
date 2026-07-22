@@ -52,30 +52,32 @@ export function CookieConsent() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[95] p-3 sm:p-4">
-      <div className="mx-auto max-w-5xl rounded-2xl border border-border bg-white/95 p-4 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.35)] backdrop-blur sm:p-6">
+      <div className="mx-auto max-w-3xl rounded-2xl border border-border/70 bg-white/92 p-3.5 shadow-[0_10px_30px_-16px_rgba(15,23,42,0.25)] backdrop-blur-md sm:p-4">
         {!showCustom ? (
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-              <Cookie className="h-5 w-5" />
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <div className="flex items-start gap-3 sm:flex-1">
+              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                <Cookie className="h-4 w-4" />
+              </div>
+              <div className="min-w-0 flex-1 text-sm text-foreground/90">
+                <div className="font-display text-sm font-semibold text-foreground">We value your privacy</div>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  We use cookies to improve your experience.{" "}
+                  <Link to="/privacy-policy" className="font-semibold text-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
+              </div>
             </div>
-            <div className="flex-1 text-sm text-foreground/90">
-              <div className="font-display text-base font-bold text-foreground">We value your privacy</div>
-              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-                We use cookies to improve your experience, analyze traffic, and personalize content. Read our{" "}
-                <Link to="/privacy-policy" className="font-semibold text-primary hover:underline">
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <button onClick={() => setShowCustom(true)} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold text-foreground hover:border-primary">
+            <div className="flex flex-wrap items-center gap-1.5 sm:shrink-0">
+              <button onClick={() => setShowCustom(true)} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-foreground hover:border-primary">
                 <Settings2 className="h-3.5 w-3.5" /> Customize
               </button>
-              <button onClick={rejectNonEssential} className="rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold text-foreground hover:border-primary">
-                Reject Non-Essential
+              <button onClick={rejectNonEssential} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-foreground hover:border-primary">
+                Reject
               </button>
-              <button onClick={acceptAll} className="rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary-dark">
+              <button onClick={acceptAll} className="rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary-dark">
                 Accept All
               </button>
             </div>

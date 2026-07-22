@@ -54,7 +54,7 @@ export function FloatingQuoteButton() {
           type="button"
           onClick={() => openQuoteModal({ source: "floating" })}
           aria-label="Request a quote"
-          className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[0_12px_30px_-10px_var(--primary)] transition-all duration-[220ms] ease-out hover:scale-[1.04] hover:shadow-[0_16px_36px_-10px_var(--primary)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 sm:px-5 sm:py-3.5"
+          className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_20px_-8px_rgba(15,23,42,0.35)] transition-all duration-[220ms] ease-out hover:scale-[1.04] hover:shadow-[0_12px_28px_-10px_rgba(15,23,42,0.4)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 sm:px-5 sm:py-3.5"
         >
           <FileText className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
           <span className="hidden sm:inline">Request a Quote</span>
