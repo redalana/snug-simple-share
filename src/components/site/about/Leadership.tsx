@@ -270,18 +270,16 @@ function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string
           </div>
         );
       })}
-      {/* Ambient light — subtle breathing, continues during pause */}
+      {/* Ambient breathing — very subtle, no color tint, no blend mode */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 leader-ambient motion-reduce:!animate-none"
         style={{
           background:
-            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.14), transparent 60%), radial-gradient(55% 45% at 85% 85%, rgba(120,180,255,0.10), transparent 65%)",
-          mixBlendMode: "screen",
+            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.06), transparent 65%)",
         }}
       />
-      {/* Cinematic vignette + tone */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
+
       {/* Preload next */}
       <link rel="preload" as="image" href={nextEnv} />
     </div>
@@ -311,10 +309,17 @@ function HeroPortrait({ leader }: { leader: Leader }) {
               className="h-full w-full object-cover object-[50%_20%]"
             />
           ) : (
-            <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/10 to-white/[0.02]">
-              <User className="h-28 w-28 text-white/25" strokeWidth={1.1} />
+            // TODO: replace with real portrait for {leader.name}
+            <div className="grid h-full w-full place-items-center bg-gradient-to-b from-[#1f242c] to-[#0f1318] p-10">
+              <div
+                className="grid aspect-square w-[62%] max-w-[220px] place-items-center rounded-full bg-gradient-to-b from-[#242a33] to-[#141820] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.04)] ring-1 ring-primary/30"
+                aria-label={`${leader.name} — portrait pending`}
+              >
+                <User className="h-1/2 w-1/2 text-white/40" strokeWidth={1.1} />
+              </div>
             </div>
           )}
+
         </motion.div>
       </AnimatePresence>
       {/* soft edge blend into the console body */}
@@ -618,6 +623,17 @@ export function Leadership() {
                 nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
                 alt={`Environment reflecting ${active.role}`}
               />
+
+              {/* Localized readability gradient — only behind the console area, fades to fully transparent */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 hidden sm:block"
+                style={{
+                  background:
+                    "radial-gradient(70% 65% at 82% 88%, rgba(10,14,20,0.72) 0%, rgba(10,14,20,0.45) 35%, rgba(10,14,20,0) 70%)",
+                }}
+              />
+
 
               {/* Floating console — smaller footprint so the cath lab remains visible */}
               <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
