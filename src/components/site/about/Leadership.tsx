@@ -270,18 +270,16 @@ function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string
           </div>
         );
       })}
-      {/* Ambient light — subtle breathing, continues during pause */}
+      {/* Ambient breathing — very subtle, no color tint, no blend mode */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 leader-ambient motion-reduce:!animate-none"
         style={{
           background:
-            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.14), transparent 60%), radial-gradient(55% 45% at 85% 85%, rgba(120,180,255,0.10), transparent 65%)",
-          mixBlendMode: "screen",
+            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.06), transparent 65%)",
         }}
       />
-      {/* Cinematic vignette + tone */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
+
       {/* Preload next */}
       <link rel="preload" as="image" href={nextEnv} />
     </div>
