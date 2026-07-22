@@ -501,9 +501,10 @@ function ExecutiveConsole({
                       <div className="font-display text-[1.35rem] font-extrabold leading-none text-white tabular-nums">
                         <StatValue raw={s.v} />
                       </div>
-                      <div className="mt-2 truncate text-[10px] font-semibold uppercase tracking-[0.14em] text-white/55">
+                      <div className="mt-2 whitespace-nowrap text-[9.5px] font-semibold uppercase tracking-[0.1em] text-white/55">
                         {s.l}
                       </div>
+
                     </div>
                   ))}
                 </div>
