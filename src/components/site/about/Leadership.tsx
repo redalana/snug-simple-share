@@ -549,7 +549,37 @@ export function Leadership() {
 
   return (
     <section className="bg-white py-16 lg:py-20">
-      <style>{`@keyframes leader-progress { from { width: 0%; } to { width: 100%; } }`}</style>
+      <style>{`
+        @keyframes leader-progress { from { width: 0%; } to { width: 100%; } }
+        @keyframes leader-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .leader-fade-in { animation: leader-fade-in 900ms ease-in-out forwards; }
+        @keyframes leader-kb-a {
+          0%   { transform: scale(1.00) translate3d(0, 0, 0); }
+          50%  { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
+          100% { transform: scale(1.00) translate3d(0, 0, 0); }
+        }
+        @keyframes leader-kb-b {
+          0%   { transform: scale(1.06) translate3d(1.0%, 0.6%, 0); }
+          50%  { transform: scale(1.00) translate3d(0, 0, 0); }
+          100% { transform: scale(1.06) translate3d(-1.0%, -0.6%, 0); }
+        }
+        .leader-kb-a { animation: leader-kb-a 22s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+        .leader-kb-b { animation: leader-kb-b 24s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+        @keyframes leader-ambient {
+          0%, 100% { opacity: 0.55; }
+          50%      { opacity: 0.85; }
+        }
+        .leader-ambient { animation: leader-ambient 7s ease-in-out infinite; opacity: 0.55; }
+        @keyframes leader-portrait-breath {
+          0%   { transform: scale(1.00) translate3d(0, 0, 0); }
+          100% { transform: scale(1.04) translate3d(0, -1.5%, 0); }
+        }
+        .leader-portrait-breath { animation: leader-portrait-breath 7s ease-out infinite alternate; }
+        @media (prefers-reduced-motion: reduce) {
+          .leader-kb-a, .leader-kb-b, .leader-ambient, .leader-portrait-breath { animation: none !important; transform: none !important; }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <Eyebrow index="09">Meet the People Behind AbuFarha Medical</Eyebrow>
