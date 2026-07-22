@@ -470,22 +470,26 @@ function ExecutiveConsole({
                 </p>
 
                 {/* Statistics */}
-                <div className="mt-6 grid grid-cols-3 gap-2.5">
+                <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
                     { v: leader.years, l: "Years" },
                     { v: leader.countries, l: "Countries" },
                     { v: leader.projects, l: "Projects" },
                   ].map(s => (
-                    <div key={s.l} className="rounded-xl bg-white/[0.04] px-3 py-3 ring-1 ring-white/10">
-                      <div className="font-display text-[1.35rem] font-extrabold leading-none text-white">
+                    <div
+                      key={s.l}
+                      className="min-w-0 rounded-xl bg-white/[0.04] px-2.5 py-3 text-center ring-1 ring-white/10"
+                    >
+                      <div className="font-display text-[1.35rem] font-extrabold leading-none text-white tabular-nums">
                         <StatValue raw={s.v} />
                       </div>
-                      <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                      <div className="mt-2 truncate text-[10px] font-semibold uppercase tracking-[0.14em] text-white/55">
                         {s.l}
                       </div>
                     </div>
                   ))}
                 </div>
+
 
                 {/* Areas of expertise */}
                 <div className="mt-6">
