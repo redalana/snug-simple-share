@@ -617,6 +617,17 @@ export function Leadership() {
                 alt={`Environment reflecting ${active.role}`}
               />
 
+              {/* Localized readability gradient — only behind the console area, fades to fully transparent */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 hidden sm:block"
+                style={{
+                  background:
+                    "radial-gradient(70% 65% at 82% 88%, rgba(10,14,20,0.72) 0%, rgba(10,14,20,0.45) 35%, rgba(10,14,20,0) 70%)",
+                }}
+              />
+
+
               {/* Floating console — smaller footprint so the cath lab remains visible */}
               <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
                 <ExecutiveConsole
