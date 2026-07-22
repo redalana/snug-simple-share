@@ -4,7 +4,17 @@ import { Award, Wrench, Handshake, Globe2, User, Pause, Play } from "lucide-reac
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
+import envMri from "@/assets/env-mri-suite.jpg";
+import envWarehouse from "@/assets/env-warehouse.jpg";
+import envMeeting from "@/assets/env-meeting-room.jpg";
+import envService from "@/assets/env-service-workshop.jpg";
+import envInstall from "@/assets/env-installation-site.jpg";
+import envOffice from "@/assets/env-executive-office.jpg";
+import envOps from "@/assets/env-operations-center.jpg";
+import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
+
+
 
 type Leader = {
   id: string;
@@ -16,6 +26,7 @@ type Leader = {
   projects: string;
   focus: string[];
   photo?: string;
+  env: string;
 };
 
 const LEADERS: Leader[] = [
@@ -29,7 +40,9 @@ const LEADERS: Leader[] = [
     projects: "30+",
     focus: ["Healthcare Leadership", "Medical Technology", "Regional Growth"],
     photo: leaderPortrait1.url,
+    env: cathlabImg,
   },
+
   {
     id: "khalid-s",
     name: "Khalid Shouqer",
@@ -39,6 +52,7 @@ const LEADERS: Leader[] = [
     countries: "8+",
     projects: "40+",
     focus: ["Commercial Strategy", "OEM Partnerships", "Hospital Programs"],
+    env: envMeeting,
   },
   {
     id: "anwar",
@@ -49,6 +63,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "35+",
     focus: ["Clinical Advisory", "Medical Protocols", "Workflow Integration"],
+    env: envImaging,
   },
   {
     id: "issam",
@@ -59,6 +74,7 @@ const LEADERS: Leader[] = [
     countries: "9+",
     projects: "50+",
     focus: ["Biomedical Engineering", "Commissioning", "Lifecycle Service"],
+    env: envMri,
   },
   {
     id: "yazan",
@@ -69,6 +85,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "20+",
     focus: ["Turnkey Delivery", "Project Planning", "Site Readiness"],
+    env: envInstall,
   },
   {
     id: "naser",
@@ -79,6 +96,7 @@ const LEADERS: Leader[] = [
     countries: "7+",
     projects: "60+",
     focus: ["Field Service", "SLA Management", "Preventive Maintenance"],
+    env: envService,
   },
   {
     id: "mohammad",
@@ -89,6 +107,7 @@ const LEADERS: Leader[] = [
     countries: "10+",
     projects: "45+",
     focus: ["Regional Logistics", "Spare Parts", "Supply Chain"],
+    env: envWarehouse,
   },
   {
     id: "khalid-n",
@@ -99,6 +118,7 @@ const LEADERS: Leader[] = [
     countries: "Global",
     projects: "40+",
     focus: ["OEM Procurement", "Warranty & Compliance", "Traceability"],
+    env: envWarehouse,
   },
   {
     id: "omar",
@@ -109,6 +129,7 @@ const LEADERS: Leader[] = [
     countries: "6+",
     projects: "30+",
     focus: ["Operations", "Delivery Coordination", "Cross-Functional"],
+    env: envOps,
   },
   {
     id: "ibrahim",
@@ -119,7 +140,9 @@ const LEADERS: Leader[] = [
     countries: "Regional",
     projects: "All Programs",
     focus: ["Financial Planning", "Project Accounting", "Governance"],
+    env: envOffice,
   },
+
 ];
 
 const HIGHLIGHTS = [
@@ -196,7 +219,76 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
   );
 }
 
-/* ---------------- Hero portrait (crossfade) ---------------- */
+/* ---------------- Cinematic Backdrop ---------------- */
+
+function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string; alt: string }) {
+  const [layers, setLayers] = useState<{ src: string; id: number }[]>([{ src: env, id: 0 }]);
+  const nextId = useRef(1);
+
+  useEffect(() => {
+    setLayers(prev => {
+      if (prev[prev.length - 1].src === env) return prev;
+      return [...prev, { src: env, id: nextId.current++ }];
+    });
+  }, [env]);
+
+  useEffect(() => {
+    if (layers.length <= 1) return;
+    const t = window.setTimeout(() => {
+      setLayers(prev => prev.slice(-1));
+    }, 950);
+    return () => window.clearTimeout(t);
+  }, [layers]);
+
+  return (
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ aspectRatio: "1600 / 1104", maxHeight: "calc(820*var(--desktop-px-unit))" }}
+    >
+      {layers.map((l, i) => {
+        const isTop = i === layers.length - 1;
+        const kbClass = l.id % 2 === 0 ? "leader-kb-a" : "leader-kb-b";
+        return (
+          <div
+            key={l.id}
+            aria-hidden={i < layers.length - 1 ? true : undefined}
+            className={`absolute inset-0 ${isTop && layers.length > 1 ? "leader-fade-in" : ""}`}
+            style={{ willChange: "opacity" }}
+          >
+            <div
+              className={`absolute inset-0 ${kbClass} motion-reduce:!animate-none motion-reduce:!transform-none`}
+              style={{ willChange: "transform" }}
+            >
+              <img
+                src={l.src}
+                alt={isTop ? alt : ""}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        );
+      })}
+      {/* Ambient light — subtle breathing, continues during pause */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 leader-ambient motion-reduce:!animate-none"
+        style={{
+          background:
+            "radial-gradient(60% 45% at 20% 15%, rgba(255,255,255,0.14), transparent 60%), radial-gradient(55% 45% at 85% 85%, rgba(120,180,255,0.10), transparent 65%)",
+          mixBlendMode: "screen",
+        }}
+      />
+      {/* Cinematic vignette + tone */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
+      {/* Preload next */}
+      <link rel="preload" as="image" href={nextEnv} />
+    </div>
+  );
+}
+
+
 
 function HeroPortrait({ leader }: { leader: Leader }) {
   return (
@@ -457,7 +549,37 @@ export function Leadership() {
 
   return (
     <section className="bg-white py-16 lg:py-20">
-      <style>{`@keyframes leader-progress { from { width: 0%; } to { width: 100%; } }`}</style>
+      <style>{`
+        @keyframes leader-progress { from { width: 0%; } to { width: 100%; } }
+        @keyframes leader-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .leader-fade-in { animation: leader-fade-in 900ms ease-in-out forwards; }
+        @keyframes leader-kb-a {
+          0%   { transform: scale(1.00) translate3d(0, 0, 0); }
+          50%  { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
+          100% { transform: scale(1.00) translate3d(0, 0, 0); }
+        }
+        @keyframes leader-kb-b {
+          0%   { transform: scale(1.06) translate3d(1.0%, 0.6%, 0); }
+          50%  { transform: scale(1.00) translate3d(0, 0, 0); }
+          100% { transform: scale(1.06) translate3d(-1.0%, -0.6%, 0); }
+        }
+        .leader-kb-a { animation: leader-kb-a 22s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+        .leader-kb-b { animation: leader-kb-b 24s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+        @keyframes leader-ambient {
+          0%, 100% { opacity: 0.55; }
+          50%      { opacity: 0.85; }
+        }
+        .leader-ambient { animation: leader-ambient 7s ease-in-out infinite; opacity: 0.55; }
+        @keyframes leader-portrait-breath {
+          0%   { transform: scale(1.00) translate3d(0, 0, 0); }
+          100% { transform: scale(1.04) translate3d(0, -1.5%, 0); }
+        }
+        .leader-portrait-breath { animation: leader-portrait-breath 7s ease-out infinite alternate; }
+        @media (prefers-reduced-motion: reduce) {
+          .leader-kb-a, .leader-kb-b, .leader-ambient, .leader-portrait-breath { animation: none !important; transform: none !important; }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <Eyebrow index="09">Meet the People Behind AbuFarha Medical</Eyebrow>
@@ -486,15 +608,12 @@ export function Leadership() {
 
           <Reveal delay={0.05}>
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
-              <img
-                src={cathlabImg}
-                alt="Modern interventional cath lab environment"
-                loading="lazy"
-                width={1600}
-                height={1104}
-                className="h-full max-h-[calc(820*var(--desktop-px-unit))] w-full object-cover"
+              <CinematicBackdrop
+                env={active.env}
+                nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
+                alt={`Environment reflecting ${active.role}`}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/5" />
+
               {/* Floating console — smaller footprint so the cath lab remains visible */}
               <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
                 <ExecutiveConsole
