@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Award, Wrench, Handshake, Globe2, User, Pause, Play } from "lucide-react";
+import { Award, Wrench, Handshake, Globe2, User } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
@@ -416,15 +416,24 @@ function ExecutiveConsole({
   total: number;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[calc(20*var(--desktop-px-unit))] border border-white/10 bg-[#1a1e25]/85 text-white shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl">
+    <div
+      className="relative overflow-hidden rounded-[calc(20*var(--desktop-px-unit))] text-white shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)]"
+      style={{
+        background: "rgba(15,18,24,0.72)",
+        backdropFilter: "blur(14px)",
+        border: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
       {/* Soft edge feather — softens the seam where the console meets the room photo */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1a1e25]/60 to-transparent"
+        className="pointer-events-none absolute inset-y-0 left-0 w-8"
+        style={{ background: "linear-gradient(to right, rgba(15,18,24,0.6), transparent)" }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-[#1a1e25]/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-6"
+        style={{ background: "linear-gradient(to bottom, rgba(15,18,24,0.5), transparent)" }}
       />
 
       {/* very subtle inner glow */}
@@ -446,26 +455,32 @@ function ExecutiveConsole({
 
         {/* RIGHT — Executive information */}
         <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
-          {/* Top row: pause control + progress */}
-          <div className="flex items-center gap-3">
+          {/* Header row: status (left) ↔ counter (right) */}
+          <div className="flex items-center justify-between gap-3">
             <button
               type="button"
               onClick={onToggle}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 transition hover:bg-white/10 hover:text-white"
               aria-label={paused ? "Resume rotation" : "Pause rotation"}
             >
-              {paused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
+              <span
+                aria-hidden="true"
+                className={`inline-block h-1.5 w-1.5 rounded-full ${paused ? "bg-white/40" : "bg-primary animate-pulse"}`}
+              />
               <span>{paused ? "Paused" : "Auto"}</span>
             </button>
-            <div className="min-w-0 flex-1">
-              <ProgressBar activeIndex={activeIndex} total={total} paused={paused} />
-            </div>
-            <div className="shrink-0 whitespace-nowrap text-[10px] font-semibold text-white/45 tabular-nums tracking-normal">
+            <div className="shrink-0 whitespace-nowrap font-mono text-[10px] font-semibold tabular-nums text-white/55">
               <span>{String(activeIndex + 1).padStart(2, "0")}</span>
               <span className="mx-1 text-white/25">/</span>
               <span>{String(total).padStart(2, "0")}</span>
             </div>
           </div>
+
+          {/* Progress row */}
+          <div className="mt-3">
+            <ProgressBar activeIndex={activeIndex} total={total} paused={paused} />
+          </div>
+
 
 
           {/* Content — crossfades on change */}
@@ -489,7 +504,10 @@ function ExecutiveConsole({
                 </p>
 
                 {/* Statistics */}
-                <div className="mt-6 grid grid-cols-3 gap-3">
+                <div
+                  className="mt-6 grid gap-2"
+                  style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
+                >
                   {[
                     { v: leader.years, l: "Years" },
                     { v: leader.countries, l: "Countries" },
@@ -497,18 +515,21 @@ function ExecutiveConsole({
                   ].map(s => (
                     <div
                       key={s.l}
-                      className="min-w-0 rounded-xl bg-white/[0.04] px-2.5 py-3 text-center ring-1 ring-white/10"
+                      className="min-w-0 rounded-xl bg-white/[0.04] px-2 py-3 text-center ring-1 ring-white/10"
                     >
-                      <div className="font-display text-[1.35rem] font-extrabold leading-none text-white tabular-nums">
+                      <div className="font-display text-[18px] font-bold leading-none text-white tabular-nums">
                         <StatValue raw={s.v} />
                       </div>
-                      <div className="mt-2 whitespace-nowrap text-[9.5px] font-semibold uppercase tracking-[0.1em] text-white/55">
+                      <div
+                        className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60"
+                        style={{ letterSpacing: "0.06em", wordBreak: "normal", overflowWrap: "break-word" }}
+                      >
                         {s.l}
                       </div>
-
                     </div>
                   ))}
                 </div>
+
 
 
                 {/* Areas of expertise */}
