@@ -13,6 +13,7 @@ import envOffice from "@/assets/env-executive-office.jpg";
 import envOps from "@/assets/env-operations-center.jpg";
 import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
+import leaderPortrait1Thumb from "@/assets/leader-portrait-1-thumb.jpg.asset.json";
 
 
 
