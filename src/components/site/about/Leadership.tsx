@@ -13,6 +13,7 @@ import envOffice from "@/assets/env-executive-office.jpg";
 import envOps from "@/assets/env-operations-center.jpg";
 import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
+import leaderPortrait1Thumb from "@/assets/leader-portrait-1-thumb.jpg.asset.json";
 
 
 
@@ -26,6 +27,7 @@ type Leader = {
   projects: string;
   focus: string[];
   photo?: string;
+  thumb?: string;
   env: string;
 };
 
@@ -40,6 +42,7 @@ const LEADERS: Leader[] = [
     projects: "30+",
     focus: ["Healthcare Leadership", "Medical Technology", "Regional Growth"],
     photo: leaderPortrait1.url,
+    thumb: leaderPortrait1Thumb.url,
     env: cathlabImg,
   },
 
@@ -158,18 +161,20 @@ const RESUME_MS = 12000;
 /* ---------------- Nav rail portrait ---------------- */
 
 function Portrait({ leader, size }: { leader: Leader; size: number }) {
-  if (leader.photo) {
+  const src = leader.thumb || leader.photo;
+  if (src) {
     return (
       <div
-        className="relative overflow-hidden rounded-full bg-secondary ring-2 ring-white shadow-[0_6px_16px_-4px_rgba(15,23,42,0.28)]"
+        className="roster-avatar relative overflow-hidden rounded-full bg-secondary ring-2 ring-white shadow-[0_6px_16px_-4px_rgba(15,23,42,0.28)]"
         style={{ width: size, height: size }}
       >
         <img
-          src={leader.photo}
+          src={src}
           alt={leader.name}
+          width={size}
+          height={size}
           decoding="async"
           className="h-full w-full object-cover object-[center_top]"
-          style={{ imageRendering: "auto" }}
         />
       </div>
     );
