@@ -450,19 +450,22 @@ function ExecutiveConsole({
             <button
               type="button"
               onClick={onToggle}
-              className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70 transition hover:bg-white/10 hover:text-white"
               aria-label={paused ? "Resume rotation" : "Pause rotation"}
             >
               {paused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
               <span>{paused ? "Paused" : "Auto"}</span>
             </button>
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <ProgressBar activeIndex={activeIndex} total={total} paused={paused} />
             </div>
-            <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 tabular-nums">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            <div className="shrink-0 whitespace-nowrap text-[10px] font-semibold text-white/45 tabular-nums tracking-normal">
+              <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+              <span className="mx-1 text-white/25">/</span>
+              <span>{String(total).padStart(2, "0")}</span>
             </div>
           </div>
+
 
           {/* Content — crossfades on change */}
           <div className="mt-6 flex-1">
