@@ -509,15 +509,12 @@ export function Leadership() {
 
           <Reveal delay={0.05}>
             <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
-              <img
-                src={cathlabImg}
-                alt="Modern interventional cath lab environment"
-                loading="lazy"
-                width={1600}
-                height={1104}
-                className="h-full max-h-[calc(820*var(--desktop-px-unit))] w-full object-cover"
+              <CinematicBackdrop
+                env={active.env}
+                nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
+                alt={`Environment reflecting ${active.role}`}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/5" />
+
               {/* Floating console — smaller footprint so the cath lab remains visible */}
               <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
                 <ExecutiveConsole
