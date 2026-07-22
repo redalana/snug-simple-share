@@ -415,7 +415,17 @@ function ExecutiveConsole({
   total: number;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[calc(20*var(--desktop-px-unit))] border border-white/10 bg-[#1a1e25]/95 text-white shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)] backdrop-blur-md">
+    <div className="relative overflow-hidden rounded-[calc(20*var(--desktop-px-unit))] border border-white/10 bg-[#1a1e25]/85 text-white shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl">
+      {/* Soft edge feather — softens the seam where the console meets the room photo */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1a1e25]/60 to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-[#1a1e25]/50 to-transparent"
+      />
+
       {/* very subtle inner glow */}
       <div
         aria-hidden="true"
