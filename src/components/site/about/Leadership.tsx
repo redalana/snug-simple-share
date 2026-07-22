@@ -504,7 +504,10 @@ function ExecutiveConsole({
                 </p>
 
                 {/* Statistics */}
-                <div className="mt-6 grid grid-cols-3 gap-3">
+                <div
+                  className="mt-6 grid gap-2"
+                  style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
+                >
                   {[
                     { v: leader.years, l: "Years" },
                     { v: leader.countries, l: "Countries" },
@@ -512,18 +515,21 @@ function ExecutiveConsole({
                   ].map(s => (
                     <div
                       key={s.l}
-                      className="min-w-0 rounded-xl bg-white/[0.04] px-2.5 py-3 text-center ring-1 ring-white/10"
+                      className="min-w-0 rounded-xl bg-white/[0.04] px-2 py-3 text-center ring-1 ring-white/10"
                     >
-                      <div className="font-display text-[1.35rem] font-extrabold leading-none text-white tabular-nums">
+                      <div className="font-display text-[18px] font-bold leading-none text-white tabular-nums">
                         <StatValue raw={s.v} />
                       </div>
-                      <div className="mt-2 whitespace-nowrap text-[9.5px] font-semibold uppercase tracking-[0.1em] text-white/55">
+                      <div
+                        className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60"
+                        style={{ letterSpacing: "0.06em", wordBreak: "normal", overflowWrap: "break-word" }}
+                      >
                         {s.l}
                       </div>
-
                     </div>
                   ))}
                 </div>
+
 
 
                 {/* Areas of expertise */}
