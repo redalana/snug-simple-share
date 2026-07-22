@@ -15,17 +15,6 @@ import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
 
 
-type Leader = {
-  id: string;
-  name: string;
-  role: string;
-  bio: string;
-  years: string;
-  countries: string;
-  projects: string;
-  focus: string[];
-  photo?: string;
-};
 
 type Leader = {
   id: string;
