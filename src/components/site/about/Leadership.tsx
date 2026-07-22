@@ -27,6 +27,7 @@ type Leader = {
   projects: string;
   focus: string[];
   photo?: string;
+  thumb?: string;
   env: string;
 };
 
