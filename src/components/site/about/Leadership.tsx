@@ -206,7 +206,7 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
         />
       )}
       <div className="transition-transform duration-300 group-hover:scale-[1.04]">
-        <Portrait leader={leader} size={44} />
+        <Portrait leader={leader} size={50} />
       </div>
       <div className="min-w-0">
         <div className={`truncate font-display text-[calc(14*var(--desktop-px-unit))] font-bold ${active ? "text-ink" : "text-ink/90"}`}>
