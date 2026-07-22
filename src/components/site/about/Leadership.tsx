@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Award, Wrench, Handshake, Globe2, User, Pause, Play } from "lucide-react";
+import { Award, Wrench, Handshake, Globe2, User } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
