@@ -27,6 +27,19 @@ type Leader = {
   photo?: string;
 };
 
+type Leader = {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  years: string;
+  countries: string;
+  projects: string;
+  focus: string[];
+  photo?: string;
+  env: string;
+};
+
 const LEADERS: Leader[] = [
   {
     id: "walid",
@@ -38,7 +51,9 @@ const LEADERS: Leader[] = [
     projects: "30+",
     focus: ["Healthcare Leadership", "Medical Technology", "Regional Growth"],
     photo: leaderPortrait1.url,
+    env: cathlabImg,
   },
+
   {
     id: "khalid-s",
     name: "Khalid Shouqer",
