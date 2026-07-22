@@ -4,7 +4,16 @@ import { Award, Wrench, Handshake, Globe2, User, Pause, Play } from "lucide-reac
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
+import envMri from "@/assets/env-mri-suite.jpg";
+import envWarehouse from "@/assets/env-warehouse.jpg";
+import envMeeting from "@/assets/env-meeting-room.jpg";
+import envService from "@/assets/env-service-workshop.jpg";
+import envInstall from "@/assets/env-installation-site.jpg";
+import envOffice from "@/assets/env-executive-office.jpg";
+import envOps from "@/assets/env-operations-center.jpg";
+import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
+
 
 type Leader = {
   id: string;
