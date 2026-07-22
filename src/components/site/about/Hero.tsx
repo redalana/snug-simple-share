@@ -9,21 +9,21 @@ export function Hero() {
         <img
           src={heroImg}
           alt="AbuFarha engineer inspecting an imaging system"
-          className="h-full w-full object-cover opacity-70"
+          className="h-full w-full object-cover opacity-80"
           width={1600}
           height={1100}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/10" />
       </div>
       <div className="relative mx-auto grid max-w-[100rem] items-center gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(420*var(--desktop-px-unit))] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 lg:px-10 lg:pt-16 lg:pb-14">
-        <div className="min-w-0 max-w-full lg:max-w-[620px]">
+        <div className="min-w-0 max-w-full lg:max-w-[600px]">
           <Eyebrow tone="light" index="01">About Us</Eyebrow>
           <h1
             className="mt-6 font-display font-extrabold tracking-[-0.02em] text-balance [overflow-wrap:break-word]"
             style={{
-              fontSize: "clamp(40px, 5vw, 72px)",
-              lineHeight: 0.98,
-              maxWidth: "min(100%, 620px)",
+              fontSize: "clamp(34px, 4.2vw, 60px)",
+              lineHeight: 1.02,
+              maxWidth: "min(100%, 600px)",
             }}
           >
             <span className="inline-block">Engineering Healthcare</span>
@@ -35,10 +35,10 @@ export function Hero() {
             </span>
           </h1>
           <p
-            className="mt-6 text-white/75 [overflow-wrap:break-word]"
+            className="mt-6 text-white/80 [overflow-wrap:break-word]"
             style={{
               maxWidth: "min(100%, 540px)",
-              fontSize: "clamp(16px, 1.15vw, 18px)",
+              fontSize: "clamp(15px, 1.05vw, 17px)",
               lineHeight: 1.7,
             }}
           >
