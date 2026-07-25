@@ -91,6 +91,7 @@ export function CookieConsent() {
 
   return (
     <div
+      ref={barRef}
       role="region"
       aria-label="Cookie consent"
       className="fixed inset-x-0 bottom-0 z-[95] p-3 sm:p-4"
