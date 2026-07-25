@@ -199,7 +199,7 @@ export function GlobalPresence() {
             {/* Right: live footprint content */}
             <div className="flex flex-col justify-between px-2 py-3 lg:px-4 lg:py-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">
                   Verified Footprint
                 </span>
                 <h3 className="mt-3 font-display text-2xl font-extrabold tracking-[-0.01em] text-white sm:text-[1.75rem]">
