@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Cookie, Settings2, X } from "lucide-react";
 
@@ -33,10 +33,44 @@ export function CookieConsent() {
     functional: false,
   });
 
+  const barRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const existing = readPrefs();
     if (!existing) setVisible(true);
   }, []);
+
+  // While the banner is on screen it is a fixed bottom bar, so it would cover
+  // page content and the floating widgets. Publish its height as
+  // --af-cookie-bar and reserve the same amount of scroll room at the end of
+  // the page; both are removed the moment the banner is dismissed.
+  useEffect(() => {
+    const root = document.documentElement;
+    const clear = () => {
+      root.style.removeProperty("--af-cookie-bar");
+      document.body.style.removeProperty("padding-bottom");
+    };
+    if (!visible) {
+      clear();
+      return;
+    }
+    const el = barRef.current;
+    if (!el) return;
+    const apply = () => {
+      const h = `${Math.ceil(el.getBoundingClientRect().height)}px`;
+      root.style.setProperty("--af-cookie-bar", h);
+      document.body.style.paddingBottom = h;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+      clear();
+    };
+  }, [visible, showCustom]);
 
   const acceptAll = () => {
     const p: Prefs = { necessary: true, analytics: true, marketing: true, functional: true };
