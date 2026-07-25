@@ -327,7 +327,7 @@ function CTABand() {
   return (
     <section className="bg-white pt-14 lg:pt-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(90deg,#fff5f5_0%,#fff_60%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-primary/10 sm:p-8">
+        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(90deg,#fff5f5_0%,#fff_60%)] p-6 shadow-(--shadow-editorial-sm) ring-1 ring-primary/10 sm:p-8">
           <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
               <MessageCircle className="h-7 w-7 text-primary" />
@@ -344,7 +344,7 @@ function CTABand() {
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -437,7 +437,7 @@ function Newsletter() {
   return (
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-black/[0.04] sm:p-8">
+        <div className="relative overflow-hidden rounded-3xl bg-secondary p-6 shadow-(--shadow-editorial-sm) ring-1 ring-black/[0.04] sm:p-8">
           <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
               <Mail className="h-7 w-7 text-primary" />
@@ -466,7 +466,7 @@ function Newsletter() {
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 Subscribe
               </button>

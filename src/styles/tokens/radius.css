@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Radius Tokens
+   --------------------------------------------------------------------------
+   `--radius` is the base; the derived scale (radius-sm … radius-4xl) is
+   registered with Tailwind in src/styles.css `@theme inline` so the tokens and
+   the `rounded-*` utilities share one definition.
+   ========================================================================== */
+
+:root {
+  --radius: 0.75rem;
+  --radius-none: 0px;
+  --radius-full: 9999px;
+}

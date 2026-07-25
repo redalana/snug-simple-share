@@ -1,0 +1,10 @@
+/* ==========================================================================
+   Border Tokens — widths only. Border colours live in colors.css.
+   ========================================================================== */
+
+:root {
+  --border-thin: 1px;
+  --border-normal: 2px;
+  --border-thick: 4px;
+  --border-color-default: var(--border);
+}

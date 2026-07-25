@@ -31,7 +31,7 @@ export function Expertise() {
                 Nine disciplines, one integrated team — from first clinical consultation to lifetime technical support.
               </p>
             </Reveal>
-            <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)]">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-white shadow-(--shadow-panel)">
               {EXPERTISE.map((e, i) => {
                 const isOpen = open === i;
                 return (

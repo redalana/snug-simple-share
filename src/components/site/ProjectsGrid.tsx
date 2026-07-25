@@ -65,7 +65,7 @@ export function ProjectsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-(--shadow-editorial-md) transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
             >
               <div className="relative h-52 w-full overflow-hidden">
                 <img

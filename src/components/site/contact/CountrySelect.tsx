@@ -80,7 +80,7 @@ export function CountrySelect({
       <PopoverContent
         align="start"
         sideOffset={8}
-        className="w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+        className="w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-2xl border-border/80 p-0 shadow-(--shadow-elevated)"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <div className="sticky top-0 z-10 border-b border-border/70 bg-white p-2.5">

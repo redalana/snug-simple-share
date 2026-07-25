@@ -176,7 +176,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
         <PopoverContent
           align="start"
           sideOffset={6}
-          className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+          className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-(--shadow-elevated)"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
 

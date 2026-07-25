@@ -233,7 +233,7 @@ function EmptyState() {
       </p>
       <Link
         to="/products"
-        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] hover:bg-primary-dark"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-sm) hover:bg-primary-dark"
       >
         Browse Products <ArrowRight className="h-4 w-4" />
       </Link>

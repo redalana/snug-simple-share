@@ -141,7 +141,7 @@ export function WhyAbuFarha() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mt-16 grid grid-cols-2 gap-y-10 rounded-2xl border border-border/70 bg-white/60 py-10 shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)] sm:grid-cols-4 lg:mt-20"
+          className="mt-16 grid grid-cols-2 gap-y-10 rounded-2xl border border-border/70 bg-white/60 py-10 shadow-(--shadow-panel) sm:grid-cols-4 lg:mt-20"
         >
           {STATS.map((stat) => (
             <StatItem key={stat.label} stat={stat} />

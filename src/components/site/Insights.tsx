@@ -61,7 +61,7 @@ export function Insights() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative flex min-h-[calc(380*var(--desktop-px-unit))] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:shadow-[0_40px_80px_-32px_rgba(15,23,42,0.55)]"
+            className="group relative flex min-h-[calc(380*var(--desktop-px-unit))] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-(--shadow-editorial-lg) ring-1 ring-black/5 transition-all duration-300 hover:shadow-[0_40px_80px_-32px_rgba(15,23,42,0.55)]"
           >
             <img
               src={FEATURED.img}
@@ -102,7 +102,7 @@ export function Insights() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-border bg-white p-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
+                className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-border bg-white p-3 shadow-(--shadow-editorial-md) ring-1 ring-black/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_28px_50px_-28px_rgba(15,23,42,0.4)]"
               >
                 <div className="h-24 w-32 shrink-0 overflow-hidden rounded-xl">
                   <img

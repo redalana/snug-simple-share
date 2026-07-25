@@ -511,7 +511,7 @@ export function BeyondEquipment() {
                 <div
                   key={a.id}
                   onClick={() => setActiveIndex(i)}
-                  className="w-[85%] shrink-0 snap-center rounded-2xl border border-border bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)]"
+                  className="w-[85%] shrink-0 snap-center rounded-2xl border border-border bg-white p-6 shadow-(--shadow-editorial-md)"
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">

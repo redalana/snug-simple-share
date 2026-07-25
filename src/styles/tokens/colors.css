@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Color Tokens — single source of truth for every colour in the project.
+   --------------------------------------------------------------------------
+   Values were moved verbatim out of src/styles.css; nothing changed visually.
+   Tailwind utilities are wired in src/styles.css via `@theme inline`.
+   ========================================================================== */
+
+:root {
+  /* --- Core surfaces --------------------------------------------------- */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.02 264);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 264);
+
+  /* --- Brand ------------------------------------------------------------ */
+  --primary: oklch(0.55 0.22 27.5);
+  --primary-foreground: oklch(0.99 0.003 247.858);
+  --primary-glow: oklch(0.63 0.23 27.5);
+  --primary-dark: oklch(0.42 0.18 28);
+  --ink: oklch(0.16 0.02 264);
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --secondary: oklch(0.97 0.005 264);
+  --secondary-foreground: oklch(0.2 0.02 264);
+  --muted: oklch(0.968 0.006 264);
+  --muted-foreground: oklch(0.5 0.02 264);
+  --accent: oklch(0.965 0.006 264);
+  --accent-foreground: oklch(0.2 0.02 264);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.92 0.008 264);
+  --input: oklch(0.92 0.008 264);
+  --ring: oklch(0.55 0.22 27.5);
+
+  /* --- Charts ----------------------------------------------------------- */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* --- Sidebar ---------------------------------------------------------- */
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* --- Semantic aliases (enterprise naming) -----------------------------
+     Aliases only: they resolve to the values above, never to new colours.
+     Tailwind utility names are registered in src/styles.css `@theme inline`. */
+  --primary-hover: var(--primary-glow);
+  --primary-active: var(--primary-dark);
+  --surface: var(--card);
+  --surface-alt: var(--secondary);
+  --text: var(--foreground);
+  --text-muted: var(--muted-foreground);
+
+  /* --- Status ----------------------------------------------------------- */
+  --success: oklch(0.62 0.16 150);
+  --success-foreground: oklch(0.99 0.003 247.858);
+  --warning: oklch(0.78 0.15 80);
+  --warning-foreground: oklch(0.18 0.02 264);
+  --danger: var(--destructive);
+  --danger-foreground: var(--destructive-foreground);
+  --info: oklch(0.62 0.14 240);
+  --info-foreground: oklch(0.99 0.003 247.858);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
