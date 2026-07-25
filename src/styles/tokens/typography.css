@@ -67,6 +67,14 @@
   --tracking-heading: -0.02em;
   /* Eyebrow / overline emphasis */
   --tracking-overline: 0.18em;
+  /* Small uppercase labels (stat tiles, meta labels) */
+  --tracking-label: 0.06em;
+
+  /* --- Page-hero typography (About hero) -------------------------------- */
+  --fs-hero-title: clamp(34px, 4.2vw, 60px);
+  --lh-hero-title: 1.02;
+  --fs-hero-lead: clamp(15px, 1.05vw, 17px);
+  --lh-hero-lead: 1.7;
 
 }
 

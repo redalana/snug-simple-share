@@ -19,10 +19,10 @@ export function Hero() {
         <div className="min-w-0 max-w-full lg:max-w-[600px]">
           <Eyebrow tone="light" index="01">About Us</Eyebrow>
           <h1
-            className="mt-6 font-display font-extrabold tracking-[-0.02em] text-balance [overflow-wrap:break-word]"
+            className="mt-6 font-display font-extrabold tracking-[var(--tracking-heading)] text-balance [overflow-wrap:break-word]"
             style={{
-              fontSize: "clamp(34px, 4.2vw, 60px)",
-              lineHeight: 1.02,
+              fontSize: "var(--fs-hero-title)",
+              lineHeight: "var(--lh-hero-title)",
               maxWidth: "min(100%, 600px)",
             }}
           >
@@ -38,8 +38,8 @@ export function Hero() {
             className="mt-6 text-white/80 [overflow-wrap:break-word]"
             style={{
               maxWidth: "min(100%, 540px)",
-              fontSize: "clamp(15px, 1.05vw, 17px)",
-              lineHeight: 1.7,
+              fontSize: "var(--fs-hero-lead)",
+              lineHeight: "var(--lh-hero-lead)",
             }}
           >
             AbuFarha Medical Supplies has been supplying, installing,
