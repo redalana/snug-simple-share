@@ -212,6 +212,9 @@ function Hero() {
             <div
               key={s.eyebrow}
               aria-hidden={i !== index}
+              // `inert` keeps links inside the hidden slides out of the tab
+              // order — aria-hidden alone left them focusable.
+              {...(i !== index ? { inert: "" as unknown as boolean } : {})}
               className={cn(
                 "transition-opacity duration-700 ease-out",
                 i === index

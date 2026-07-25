@@ -658,7 +658,7 @@ export function PortfolioBrowser() {
                   }`}
                 >
                   <span>{brand.name}</span>
-                  <span className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground/70">
+                  <span className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground">
                     {brand.count} {brand.count === 1 ? "system" : "systems"}
                   </span>
                 </button>
