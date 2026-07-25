@@ -61,7 +61,7 @@ export function FloatingQuoteButton() {
           <span className="hidden sm:inline">Request a Quote</span>
           <span className="sm:hidden">Quote</span>
         </button>
-      </div>
+      </aside>
     </>
   );
 }
