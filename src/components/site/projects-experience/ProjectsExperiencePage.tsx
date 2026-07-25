@@ -298,7 +298,7 @@ function RegionalPresence() {
                   key={r.name}
                   onMouseEnter={() => setHovered(r.name)}
                   onMouseLeave={() => setHovered(null)}
-                  className={`flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.12)] ring-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] ${
+                  className={`flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-(--shadow-editorial-md) ring-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] ${
                     isA
                       ? "-translate-y-0.5 shadow-[0_14px_30px_-14px_rgba(15,23,42,0.28)] ring-primary/40"
                       : "ring-black/5 hover:ring-primary/25"
@@ -523,7 +523,7 @@ function Specialties() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="mt-10 grid gap-8 rounded-3xl border border-border bg-white p-6 shadow-[0_2px_14px_-8px_rgba(15,23,42,0.14)] lg:grid-cols-[1fr_1.1fr] lg:p-8"
+          className="mt-10 grid gap-8 rounded-3xl border border-border bg-white p-6 shadow-(--shadow-panel) lg:grid-cols-[1fr_1.1fr] lg:p-8"
         >
           <div className="relative overflow-hidden rounded-2xl bg-neutral-100 aspect-[4/3]">
             <img
@@ -699,7 +699,7 @@ function ExperienceGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative flex min-h-[calc(360*var(--desktop-px-unit))] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.15)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-24px_rgba(15,23,42,0.5)]"
+              className="group relative flex min-h-[calc(360*var(--desktop-px-unit))] flex-col justify-end overflow-hidden rounded-2xl bg-ink text-white shadow-(--shadow-editorial-lg) ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-24px_rgba(15,23,42,0.5)]"
             >
               <img
                 src={c.img}

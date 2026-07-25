@@ -484,7 +484,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               <div className="mt-7 flex flex-wrap gap-3">
                 <button
                   onClick={scrollToQuote}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-(--shadow-brand-sm) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
                   <FileText className="h-4 w-4" /> Request a Quote
                 </button>
@@ -721,7 +721,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               <button
                 onClick={handlePdf}
                 disabled={generating}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-(--shadow-brand-sm) transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
               >
                 <FileText className="h-4 w-4" />
                 {generating ? "Preparing PDF…" : "Download Full Product Profile"}
@@ -839,7 +839,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={scrollToQuote}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-sm) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 <FileText className="h-4 w-4" /> Request a Quote
               </button>
@@ -982,7 +982,7 @@ function CountrySelect({
       <PopoverContent
         align="start"
         sideOffset={8}
-        className="w-[--radix-popover-trigger-width] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.35)]"
+        className="w-[--radix-popover-trigger-width] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-(--shadow-elevated)"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <div className="sticky top-0 z-10 border-b border-border/70 bg-white/95 p-2.5 backdrop-blur">

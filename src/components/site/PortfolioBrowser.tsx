@@ -942,7 +942,7 @@ export function PortfolioBrowser() {
             <div className="flex flex-wrap justify-center gap-3">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_14px_30px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-(--shadow-brand-sm) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
               >
                 <PhoneCall className="h-4 w-4" /> Request Consultation
               </a>

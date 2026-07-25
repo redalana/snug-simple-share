@@ -399,7 +399,7 @@ function Block({ block }: { block: ContentBlock }) {
 
     case "quote":
       return (
-        <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+        <blockquote className="rounded-2xl border-l-4 border-primary bg-secondary p-6 shadow-(--shadow-editorial-xs)">
           <p className="font-display text-lg font-semibold italic leading-relaxed text-ink">
             "{block.text}"
           </p>
@@ -455,7 +455,7 @@ function KeyFacts({
     { Icon: Cpu, label: "Main technology", value: technology },
   ];
   return (
-    <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+    <div className="rounded-2xl border border-primary/15 bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-6 shadow-(--shadow-editorial-xs)">
       <div className="grid gap-4 sm:grid-cols-2">
         {items.map(({ Icon, label, value }) => (
           <div key={label} className="flex gap-3">
@@ -519,7 +519,7 @@ function ComparisonTable({
           {title}
         </p>
       )}
-      <div className="overflow-hidden rounded-2xl border border-border shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+      <div className="overflow-hidden rounded-2xl border border-border shadow-(--shadow-editorial-xs)">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-[calc(14*var(--desktop-px-unit))]">
             <thead>
@@ -591,7 +591,7 @@ function RelatedArticleLinks({
 }) {
   if (!items.length) return null;
   return (
-    <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+    <div className="rounded-2xl border border-border bg-white p-6 shadow-(--shadow-editorial-xs)">
       <div className="flex items-center gap-3">
         <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary">
           <BookOpen className="h-5 w-5" />
@@ -674,7 +674,7 @@ function ReviewedBy({ name, specialty, date }: { name: string; specialty: string
   return (
     <aside
       aria-label="Medically reviewed by"
-      className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)] sm:flex-row sm:items-center sm:justify-between"
+      className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-5 shadow-(--shadow-editorial-xs) sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="flex items-start gap-3">
         <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
@@ -722,7 +722,7 @@ function BenefitsGrid({
         return (
           <div
             key={it.title}
-            className="rounded-2xl border border-border bg-white p-5 text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_16px_40px_-24px_rgba(15,23,42,0.25)]"
+            className="rounded-2xl border border-border bg-white p-5 text-center shadow-(--shadow-editorial-sm) transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_16px_40px_-24px_rgba(15,23,42,0.25)]"
           >
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary">
               <Icon className="h-5 w-5" />
@@ -975,7 +975,7 @@ function StatsBlock({ items }: { items: { value: string; label: string; source?:
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className="rounded-2xl border border-border bg-white p-5 text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+        <div key={s.label} className="rounded-2xl border border-border bg-white p-5 text-center shadow-(--shadow-editorial-xs)">
           <p className="font-display text-2xl font-extrabold text-primary sm:text-[1.75rem]">{s.value}</p>
           <p className="mt-1.5 text-sm font-semibold text-ink">{s.label}</p>
           {s.source && <p className="mt-1 text-[calc(10.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">{s.source}</p>}
@@ -1044,7 +1044,7 @@ function OnThisPage({ items }: { items: { id: string; title: string }[] }) {
   }, [items]);
 
   return (
-    <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+    <div className="rounded-2xl border border-border bg-white p-5 shadow-(--shadow-editorial-xs)">
       <p className="font-display text-base font-extrabold text-ink">
         On this page
       </p>
@@ -1083,7 +1083,7 @@ function OnThisPage({ items }: { items: { id: string; title: string }[] }) {
 function RelatedArticles({ items }: { items: Article[] }) {
   if (!items.length) return null;
   return (
-    <div className="rounded-2xl border border-border bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.06)]">
+    <div className="rounded-2xl border border-border bg-white p-5 shadow-(--shadow-editorial-xs)">
       <p className="font-display text-base font-extrabold text-ink">
         Related Articles
       </p>
@@ -1176,7 +1176,7 @@ function ExpertCTA() {
   return (
     <section className="bg-white pb-8">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(90deg,#fff5f5_0%,#fff_60%)] p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-primary/10 sm:p-8">
+        <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(90deg,#fff5f5_0%,#fff_60%)] p-6 shadow-(--shadow-editorial-sm) ring-1 ring-primary/10 sm:p-8">
           <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
               <MessageCircle className="h-7 w-7 text-primary" />
@@ -1194,7 +1194,7 @@ function ExpertCTA() {
               <button
                 type="button"
                 onClick={() => openQuoteModal({ source: "blog-article" })}
-                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 Request a Quote
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -1229,7 +1229,7 @@ function NewsletterBand() {
   return (
     <section className="bg-white pb-16 lg:pb-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <div className="relative overflow-hidden rounded-3xl bg-secondary p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] ring-1 ring-black/[0.04] sm:p-8">
+        <div className="relative overflow-hidden rounded-3xl bg-secondary p-6 shadow-(--shadow-editorial-sm) ring-1 ring-black/[0.04] sm:p-8">
           <div className="grid items-center gap-6 lg:grid-cols-[auto_1fr_auto_auto]">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
               <Mail className="h-7 w-7 text-primary" />
@@ -1258,7 +1258,7 @@ function NewsletterBand() {
               <button
                 type="submit"
                 disabled={form.loading}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_18px_36px_-16px_rgba(220,38,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
               >
                 {form.loading && <Loader2 className="h-4 w-4 animate-spin" />}
                 {form.loading ? "Subscribing…" : "Subscribe"}
