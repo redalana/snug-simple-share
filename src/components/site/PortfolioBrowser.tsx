@@ -724,7 +724,7 @@ export function PortfolioBrowser() {
       <section className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-16">
         <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
-          <aside className="mb-8 lg:mb-0">
+          <div className="mb-8 lg:mb-0">
             <div className="lg:sticky lg:top-[calc(188*var(--desktop-px-unit))]">
               <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
                 <div className="mb-1 flex items-center justify-between">

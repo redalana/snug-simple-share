@@ -73,7 +73,6 @@ export function BrandsMegaDropdown() {
   return (
     <div
       ref={ref}
-      role="menu"
       aria-label="Brands"
       onMouseEnter={() => setClosed(false)}
       className={`pointer-events-none absolute left-1/2 top-full z-10 w-[calc(260*var(--desktop-px-unit))] -translate-x-1/2 pt-1 transition-all duration-200 ${closedClass}`}
@@ -84,7 +83,6 @@ export function BrandsMegaDropdown() {
             <li key={b.name}>
               <a
                 href={b.href}
-                role="menuitem"
                 onClick={(e) => {
                   setClosed(true);
                   (e.currentTarget as HTMLElement).blur();
