@@ -213,9 +213,9 @@ export function Footer() {
 
             {COLS.map((col) => (
               <div key={col.title} className="min-w-0">
-                <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
+                <h3 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                   {col.title}
-                </h4>
+                </h3>
                 <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
                     <li key={l.label}>

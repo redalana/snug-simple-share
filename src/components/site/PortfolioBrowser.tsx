@@ -755,7 +755,7 @@ export function PortfolioBrowser() {
                 ))}
               </div>
             </div>
-          </aside>
+          </div>
 
           {/* CONTENT */}
           <div>
