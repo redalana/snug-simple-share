@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Z-index Tokens — the stacking contract for the whole application.
+   Values reflect the layers already in use; nothing was re-ordered.
+   ========================================================================== */
+
+:root {
+  --z-base: 0;
+  --z-dropdown: 30;
+  --z-sticky: 40;
+  --z-fixed: 50;
+  --z-modal: 100;
+  --z-toast: 110;
+  --z-tooltip: 120;
+}

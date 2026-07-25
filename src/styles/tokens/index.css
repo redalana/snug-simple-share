@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Design Tokens — entry point.
+   --------------------------------------------------------------------------
+   The single source of truth for every design decision in the project.
+   Import order is foundational -> derived. Tailwind wiring lives in
+   src/styles.css (`@theme inline`), which consumes these tokens only.
+   ========================================================================== */
+
+@import "./typography.css";
+@import "./colors.css";
+@import "./spacing.css";
+@import "./radius.css";
+@import "./borders.css";
+@import "./shadows.css";
+@import "./opacity.css";
+@import "./z-index.css";
+@import "./animation.css";
+@import "./motion.css";
+@import "./breakpoints.css";
