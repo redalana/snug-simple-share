@@ -220,7 +220,7 @@ export function GlobalPresence() {
                       <div className="font-display text-3xl font-extrabold text-white">
                         {s.value}
                       </div>
-                      <div className="mt-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-white/45">
+                      <div className="mt-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-white/55">
                         {s.label}
                       </div>
                     </div>
