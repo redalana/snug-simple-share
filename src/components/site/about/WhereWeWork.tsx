@@ -130,7 +130,7 @@ export function WhereWeWork() {
 
           <div className="flex flex-col gap-4">
             <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-7 backdrop-blur-sm">
-              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
+              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary-on-dark">
                 Our Presence
               </span>
               <h3 className="mt-3 font-display text-[1.6rem] font-extrabold">Regional footprint</h3>

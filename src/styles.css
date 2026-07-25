@@ -28,6 +28,7 @@
   --font-display: var(--font-display);
   --color-primary-glow: var(--primary-glow);
   --color-primary-dark: var(--primary-dark);
+  --color-primary-on-dark: var(--primary-on-dark);
   --color-ink: var(--ink);
   --color-primary-hover: var(--primary-hover);
   --color-primary-active: var(--primary-active);

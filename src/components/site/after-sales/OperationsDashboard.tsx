@@ -10,7 +10,7 @@ export function OperationsDashboard() {
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+            <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary-on-dark">
               Service Operations
             </div>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
@@ -44,7 +44,7 @@ export function OperationsDashboard() {
               <span>·</span>
               <span>7d</span>
               <span>·</span>
-              <span className="text-primary">30d</span>
+              <span className="text-primary-on-dark">30d</span>
             </div>
           </div>
 
