@@ -56,7 +56,11 @@ export function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[95] p-3 sm:p-4">
+    <div
+      role="region"
+      aria-label="Cookie consent"
+      className="fixed inset-x-0 bottom-0 z-[95] p-3 sm:p-4"
+    >
       <div className="mx-auto max-w-3xl rounded-2xl border border-border/70 bg-white/92 p-3.5 shadow-[0_10px_30px_-16px_rgba(15,23,42,0.25)] backdrop-blur-md sm:p-4">
         {!showCustom ? (
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
