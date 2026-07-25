@@ -52,12 +52,21 @@
   --lh-normal: 1.5;
   --lh-relaxed: 1.7;
 
-  /* --- Letter spacing --------------------------------------------------- */
-  --tracking-tighter: -0.03em;
-  --tracking-tight: -0.02em;
+  /* --- Letter spacing ---------------------------------------------------
+     NOTE: --tracking-* names are shared with Tailwind's own tracking scale,
+     so they keep Tailwind's values (changing them here changes every
+     `tracking-*` utility site-wide). The heading default has its own token. */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.08em;
-  --tracking-wider: 0.18em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* Applied to h1–h6 by default */
+  --tracking-heading: -0.02em;
+  /* Eyebrow / overline emphasis */
+  --tracking-overline: 0.18em;
+
 }
 
 /* --------------------------------------------------------------------------
