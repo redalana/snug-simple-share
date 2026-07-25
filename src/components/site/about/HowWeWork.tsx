@@ -37,19 +37,19 @@ export function HowWeWork() {
               <li key={s.n} className="min-w-0">
                 <Reveal delay={i * 0.05}>
                   <div className="group flex flex-col items-center text-center">
-                  <div className="relative flex h-[calc(108*var(--desktop-px-unit))] w-[calc(108*var(--desktop-px-unit))] items-center justify-center rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary group-hover:bg-primary/10 group-hover:shadow-[0_20px_50px_-10px_var(--primary)]">
-                    <s.icon
-                      className="h-8 w-8 text-white/80 transition-colors group-hover:text-primary"
-                      strokeWidth={1.5}
-                    />
-                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2.5 py-0.5 font-display text-[calc(10*var(--desktop-px-unit))] font-extrabold text-primary-foreground shadow-[0_6px_14px_-4px_var(--primary)]">
-                      {s.n}
-                    </span>
-                  </div>
-                  <div className="mt-6 font-display font-bold text-white">{s.title}</div>
-                  <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/60">
-                    {s.desc}
-                  </p>
+                    <div className="relative flex h-[calc(108*var(--desktop-px-unit))] w-[calc(108*var(--desktop-px-unit))] items-center justify-center rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary group-hover:bg-primary/10 group-hover:shadow-[0_20px_50px_-10px_var(--primary)]">
+                      <s.icon
+                        className="h-8 w-8 text-white/80 transition-colors group-hover:text-primary"
+                        strokeWidth={1.5}
+                      />
+                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2.5 py-0.5 font-display text-[calc(10*var(--desktop-px-unit))] font-extrabold text-primary-foreground shadow-[0_6px_14px_-4px_var(--primary)]">
+                        {s.n}
+                      </span>
+                    </div>
+                    <div className="mt-6 font-display font-bold text-white">{s.title}</div>
+                    <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/60">
+                      {s.desc}
+                    </p>
                   </div>
                 </Reveal>
               </li>
