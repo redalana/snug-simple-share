@@ -1,6 +1,9 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+/* Typography Design System — the single place typography is configured. */
+@import "./styles/tokens/typography.css";
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -69,9 +72,12 @@
 :root {
   --desktop-px-unit: 1px;
   --radius: 0.75rem;
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Font families resolve from styles/tokens/typography.css — never hardcode. */
+  --font-display: var(--font-heading);
+  --font-body: var(--font-main);
   --background: oklch(1 0 0);
+
+
   --foreground: oklch(0.18 0.02 264);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.02 264);
@@ -152,20 +158,29 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-body);
+    font-family: var(--font-main);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: var(--tracking-heading);
   }
 }
 
 @utility font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
 }
+
+@utility font-main {
+  font-family: var(--font-main);
+}
+
+@utility font-token-mono {
+  font-family: var(--font-mono);
+}
+
 
 @keyframes marquee {
   from { transform: translateX(-50%); }

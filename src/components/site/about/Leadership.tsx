@@ -527,7 +527,7 @@ function ExecutiveConsole({
                       </div>
                       <div
                         className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60"
-                        style={{ letterSpacing: "0.06em", wordBreak: "normal", overflowWrap: "break-word" }}
+                        style={{ letterSpacing: "var(--tracking-label)", wordBreak: "normal", overflowWrap: "break-word" }}
                       >
                         {s.l}
                       </div>
