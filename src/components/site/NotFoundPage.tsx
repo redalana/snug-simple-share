@@ -32,11 +32,14 @@ export function NotFoundPage() {
             Page not found
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-            The page you're looking for doesn't exist, has been moved, or is temporarily unavailable.
-            Try searching our catalog or head back home.
+            The page you're looking for doesn't exist, has been moved, or is temporarily
+            unavailable. Try searching our catalog or head back home.
           </p>
 
-          <form onSubmit={onSearch} className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card p-1.5 shadow-sm focus-within:border-primary">
+          <form
+            onSubmit={onSearch}
+            className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card p-1.5 shadow-sm focus-within:border-primary"
+          >
             <div className="grid h-10 w-10 place-items-center text-muted-foreground">
               <Search className="h-4 w-4" />
             </div>
@@ -47,19 +50,31 @@ export function NotFoundPage() {
               aria-label="Search medical equipment"
               className="h-10 flex-1 bg-transparent text-sm outline-none"
             />
-            <button type="submit" className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-dark">
+            <button
+              type="submit"
+              className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-dark"
+            >
               Search
             </button>
           </form>
 
           <div className="mt-8 flex flex-wrap justify-center gap-2">
-            <Link to="/" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-dark">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-dark"
+            >
               <Home className="h-4 w-4" /> Go Home
             </Link>
-            <Link to="/products" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary">
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary"
+            >
               <ShoppingBag className="h-4 w-4" /> Browse Products
             </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary"
+            >
               <Mail className="h-4 w-4" /> Contact Us <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

@@ -16,7 +16,9 @@ export function FeaturedProjects() {
               Proven Excellence <ArrowRight className="h-3 w-3" />
             </p>
             <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
-              Projects That<br />Make a Difference
+              Projects That
+              <br />
+              Make a Difference
             </h2>
             <a
               href="/projects"
@@ -51,7 +53,9 @@ export function FeaturedProjects() {
                   <div className="font-display text-[calc(15*var(--desktop-px-unit))] font-bold leading-tight text-foreground">
                     {p.title}
                   </div>
-                  <div className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-muted-foreground">{p.scope}</div>
+                  <div className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-muted-foreground">
+                    {p.scope}
+                  </div>
                   <div className="mt-4 flex items-center gap-3 border-t border-black/5 pt-3 text-[calc(11*var(--desktop-px-unit))] text-muted-foreground">
                     <span className="inline-flex items-center gap-1.5">
                       <span className="grid h-4 w-4 place-items-center rounded-full bg-primary/10 text-primary">

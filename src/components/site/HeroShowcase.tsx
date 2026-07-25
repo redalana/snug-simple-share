@@ -23,13 +23,21 @@ type Slide = {
  * Real medical equipment photography matching the bright homepage language.
  */
 const SLIDES: Slide[] = [
-  { image: heroCathlab, name: "Philips Allura Xper FD20", category: "Interventional Cardiology System" },
+  {
+    image: heroCathlab,
+    name: "Philips Allura Xper FD20",
+    category: "Interventional Cardiology System",
+  },
   { image: solMri, name: "Siemens Magnetom MRI", category: "Advanced MRI Imaging" },
   { image: solCt, name: "Canon Aquilion CT", category: "128-Slice CT Scanner" },
   { image: solPetct, name: "GE Discovery PET/CT", category: "Molecular Imaging System" },
   { image: solCarm, name: "Ziehm Vision RFD C-Arm", category: "Mobile Surgical Imaging" },
   { image: solMammo, name: "Hologic Selenia Mammography", category: "Digital Breast Imaging" },
-  { image: solUltrasound, name: "Philips EPIQ Ultrasound", category: "Premium Diagnostic Ultrasound" },
+  {
+    image: solUltrasound,
+    name: "Philips EPIQ Ultrasound",
+    category: "Premium Diagnostic Ultrasound",
+  },
   { image: solOr, name: "Integrated Operating Room", category: "Surgical Suite Equipment" },
 ];
 
@@ -90,9 +98,7 @@ export function HeroShowcase() {
             <div className="mt-3 font-display text-base font-extrabold leading-tight text-foreground">
               {slide.name}
             </div>
-            <div className="mt-1 text-xs font-medium text-muted-foreground">
-              {slide.category}
-            </div>
+            <div className="mt-1 text-xs font-medium text-muted-foreground">{slide.category}</div>
             <Link
               to="/products"
               className="group mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-primary transition-colors hover:text-primary-dark"

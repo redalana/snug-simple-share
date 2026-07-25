@@ -10,7 +10,9 @@ export function SupportEcosystem() {
             Beyond Installation
           </p>
           <h2 className="mt-4 font-display text-[calc(30*var(--desktop-px-unit))] font-extrabold leading-[1.1] sm:text-[calc(36*var(--desktop-px-unit))]">
-            Your Long-Term<br />Support Ecosystem
+            Your Long-Term
+            <br />
+            Support Ecosystem
           </h2>
         </div>
 

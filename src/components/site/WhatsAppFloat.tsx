@@ -15,7 +15,6 @@ export function WhatsAppFloat() {
 
   useEffect(() => onQuoteModalState(setModalOpen), []);
 
-
   // Tooltip: desktop only, appears after a delay, auto-hides after 5s, remembers dismissal.
   useEffect(() => {
     if (typeof window === "undefined") return;

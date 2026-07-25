@@ -44,15 +44,17 @@ export const Route = createFileRoute("/blog/$slug")({
         ],
       },
       ...(faq?.type === "faq"
-        ? [{
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faq.items.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          }]
+        ? [
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faq.items.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            },
+          ]
         : []),
     ];
 

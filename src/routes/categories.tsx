@@ -77,8 +77,8 @@ function CategoriesPage() {
               Medical Technology Categories
             </h1>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Explore our complete range of certified medical technology categories,
-              curated for hospitals, clinics and healthcare providers.
+              Explore our complete range of certified medical technology categories, curated for
+              hospitals, clinics and healthcare providers.
             </p>
           </div>
         </section>

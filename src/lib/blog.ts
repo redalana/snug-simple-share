@@ -94,7 +94,6 @@ export type ContentBlock =
       date: string;
     };
 
-
 export type Article = {
   slug: string;
   title: string;
@@ -125,11 +124,12 @@ function makeDefaultContent(a: {
   return makeMedicalContent(a);
 }
 
-
-const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
-  content?: ContentBlock[];
-  tableOfContents?: TocItem[];
-}> = [
+const RAW: Array<
+  Omit<Article, "content" | "tableOfContents"> & {
+    content?: ContentBlock[];
+    tableOfContents?: TocItem[];
+  }
+> = [
   {
     slug: "cath-lab-buying-guide",
     title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
@@ -250,8 +250,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "Our commitment to maintenance, spare parts, technical support, and maximum uptime.",
     category: "After Sales",
     coverImage: beyondCathlab,
-    excerpt:
-      "Our commitment to maintenance, spare parts, technical support, and maximum uptime.",
+    excerpt: "Our commitment to maintenance, spare parts, technical support, and maximum uptime.",
     author: { name: "Fadi Nasser", role: "Service Operations Manager" },
     publishedDate: "May 8, 2026",
     readingTime: "6 min read",
@@ -263,8 +262,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "Why biomedical engineering is essential for safety, efficiency, and compliance.",
     category: "Biomedical",
     coverImage: whyCathlab,
-    excerpt:
-      "Why biomedical engineering is essential for safety, efficiency, and compliance.",
+    excerpt: "Why biomedical engineering is essential for safety, efficiency, and compliance.",
     author: { name: "Fadi Nasser", role: "Service Operations Manager" },
     publishedDate: "May 6, 2026",
     readingTime: "5 min read",
@@ -276,8 +274,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "New transducer designs and AI-assisted imaging are reshaping bedside diagnostics.",
     category: "Ultrasound",
     coverImage: solUltrasound,
-    excerpt:
-      "New transducer designs and AI-assisted imaging are reshaping bedside diagnostics.",
+    excerpt: "New transducer designs and AI-assisted imaging are reshaping bedside diagnostics.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 5, 2026",
     readingTime: "6 min read",
@@ -302,8 +299,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
     category: "Imaging Solutions",
     coverImage: solCarm,
-    excerpt:
-      "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
+    excerpt: "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 1, 2026",
     readingTime: "6 min read",
@@ -328,8 +324,7 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
       "How new linear accelerators and planning software are improving oncology outcomes.",
     category: "Radiation Therapy",
     coverImage: solDexa,
-    excerpt:
-      "How new linear accelerators and planning software are improving oncology outcomes.",
+    excerpt: "How new linear accelerators and planning software are improving oncology outcomes.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Apr 27, 2026",
     readingTime: "6 min read",
@@ -354,10 +349,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "stroke-why-every-minute-matters",
     title: "Stroke: Why Every Minute Matters",
-    metaDescription: "How modern stroke pathways — from CT and MRI to thrombectomy — turn a devastating emergency into a treatable one. A guide for hospitals, clinicians and decision-makers.",
+    metaDescription:
+      "How modern stroke pathways — from CT and MRI to thrombectomy — turn a devastating emergency into a treatable one. A guide for hospitals, clinicians and decision-makers.",
     category: "Imaging Solutions",
     coverImage: solMri,
-    excerpt: "Stroke is a treatable emergency — but only if imaging and treatment happen in minutes. Inside the modern stroke pathway.",
+    excerpt:
+      "Stroke is a treatable emergency — but only if imaging and treatment happen in minutes. Inside the modern stroke pathway.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jul 10, 2026",
     readingTime: "10 min read",
@@ -365,10 +362,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "brain-mri-what-it-detects",
     title: "Brain MRI Explained: What It Detects and Why It Matters",
-    metaDescription: "A physician-authored guide to brain MRI — the sequences, the pathology it reveals, and how it drives neurological diagnosis and treatment.",
+    metaDescription:
+      "A physician-authored guide to brain MRI — the sequences, the pathology it reveals, and how it drives neurological diagnosis and treatment.",
     category: "MRI Scanners",
     coverImage: solMri,
-    excerpt: "The most sensitive non-invasive window into the brain — and how modern MRI is used across neurology, neurosurgery and oncology.",
+    excerpt:
+      "The most sensitive non-invasive window into the brain — and how modern MRI is used across neurology, neurosurgery and oncology.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 9, 2026",
     readingTime: "10 min read",
@@ -376,10 +375,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "mri-vs-ct-scan-choosing-right-imaging",
     title: "MRI vs CT Scan: Choosing the Right Imaging Technology",
-    metaDescription: "MRI and CT are complementary, not competing. A practical guide to choosing the right modality for each clinical question.",
+    metaDescription:
+      "MRI and CT are complementary, not competing. A practical guide to choosing the right modality for each clinical question.",
     category: "Imaging Solutions",
     coverImage: solCarm,
-    excerpt: "A field-tested guide to when MRI is right, when CT is right, and how appropriateness criteria protect patients and budgets.",
+    excerpt:
+      "A field-tested guide to when MRI is right, when CT is right, and how appropriateness criteria protect patients and budgets.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 8, 2026",
     readingTime: "9 min read",
@@ -387,10 +388,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "coronary-artery-disease-cath-lab-diagnosis",
     title: "Coronary Artery Disease: Diagnosis, Treatment, and the Importance of Cath Labs",
-    metaDescription: "How coronary artery disease is diagnosed and treated in the modern cath lab — and why time-to-treatment defines the outcome.",
+    metaDescription:
+      "How coronary artery disease is diagnosed and treated in the modern cath lab — and why time-to-treatment defines the outcome.",
     category: "Cath Lab",
     coverImage: heroCathlab,
-    excerpt: "Coronary artery disease is the leading cause of death worldwide — and one of the most treatable when diagnosed on time.",
+    excerpt:
+      "Coronary artery disease is the leading cause of death worldwide — and one of the most treatable when diagnosed on time.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jul 7, 2026",
     readingTime: "11 min read",
@@ -398,10 +401,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "petct-transforming-cancer-diagnosis",
     title: "How PET/CT Is Transforming Cancer Diagnosis",
-    metaDescription: "PET/CT is the metabolic backbone of modern oncology. A clinician-focused guide to how it changes staging, treatment and follow-up.",
+    metaDescription:
+      "PET/CT is the metabolic backbone of modern oncology. A clinician-focused guide to how it changes staging, treatment and follow-up.",
     category: "PET/CT",
     coverImage: solPetct,
-    excerpt: "Metabolic imaging that changes management in 3–4 of every 10 oncology patients scanned — and how to build a program around it.",
+    excerpt:
+      "Metabolic imaging that changes management in 3–4 of every 10 oncology patients scanned — and how to build a program around it.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jul 6, 2026",
     readingTime: "10 min read",
@@ -409,10 +414,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "breast-cancer-screening-mammography",
     title: "Breast Cancer Screening: Why Mammography Saves Lives",
-    metaDescription: "How organized mammography screening — with tomosynthesis, ultrasound and MRI where needed — reduces breast cancer mortality.",
+    metaDescription:
+      "How organized mammography screening — with tomosynthesis, ultrasound and MRI where needed — reduces breast cancer mortality.",
     category: "Imaging Solutions",
     coverImage: solXray,
-    excerpt: "Structured screening detects breast cancer years before it becomes palpable, when treatment is most effective and least invasive.",
+    excerpt:
+      "Structured screening detects breast cancer years before it becomes palpable, when treatment is most effective and least invasive.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 5, 2026",
     readingTime: "10 min read",
@@ -420,10 +427,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "digital-xray-emergency-medicine",
     title: "Digital X-Ray in Emergency Medicine: Fast Diagnosis Saves Lives",
-    metaDescription: "Digital radiography is the workhorse of the emergency department. A practical guide to fixed rooms, mobile DR and AI-assisted reading.",
+    metaDescription:
+      "Digital radiography is the workhorse of the emergency department. A practical guide to fixed rooms, mobile DR and AI-assisted reading.",
     category: "Imaging Solutions",
     coverImage: solXray,
-    excerpt: "Fast, low-dose and universally available — how digital X-ray anchors every functioning emergency department.",
+    excerpt:
+      "Fast, low-dose and universally available — how digital X-ray anchors every functioning emergency department.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 4, 2026",
     readingTime: "8 min read",
@@ -431,10 +440,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "ultrasound-imaging-applications-modern-healthcare",
     title: "Ultrasound Imaging: Applications Across Modern Healthcare",
-    metaDescription: "Ultrasound is the most versatile modality in medicine. A guide to radiology, POCUS, echocardiography and handheld imaging.",
+    metaDescription:
+      "Ultrasound is the most versatile modality in medicine. A guide to radiology, POCUS, echocardiography and handheld imaging.",
     category: "Imaging Solutions",
     coverImage: solUltrasound,
-    excerpt: "From obstetrics to point-of-care and handheld devices — how ultrasound has become the most versatile imaging tool in medicine.",
+    excerpt:
+      "From obstetrics to point-of-care and handheld devices — how ultrasound has become the most versatile imaging tool in medicine.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 3, 2026",
     readingTime: "9 min read",
@@ -442,10 +453,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "osteoporosis-bone-density-dexa",
     title: "Osteoporosis and Bone Density (DEXA): Early Detection Saves Mobility",
-    metaDescription: "How DEXA bone densitometry identifies patients at high fracture risk — before the first fracture — and anchors fracture-prevention programs.",
+    metaDescription:
+      "How DEXA bone densitometry identifies patients at high fracture risk — before the first fracture — and anchors fracture-prevention programs.",
     category: "Imaging Solutions",
     coverImage: solDexa,
-    excerpt: "Osteoporosis is a silent disease. DEXA finds it early — and turns fracture risk from unpredictable to treatable.",
+    excerpt:
+      "Osteoporosis is a silent disease. DEXA finds it early — and turns fracture risk from unpredictable to treatable.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jul 2, 2026",
     readingTime: "9 min read",
@@ -453,10 +466,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "how-diagnostic-imaging-improves-outcomes",
     title: "How Diagnostic Imaging Improves Patient Outcomes",
-    metaDescription: "Diagnostic imaging drives up to 70% of clinical decisions. A guide to how the right imaging strategy improves survival and quality of life.",
+    metaDescription:
+      "Diagnostic imaging drives up to 70% of clinical decisions. A guide to how the right imaging strategy improves survival and quality of life.",
     category: "Imaging Solutions",
     coverImage: solCt,
-    excerpt: "The eyes of modern medicine — and how the right imaging strategy translates directly into better patient outcomes.",
+    excerpt:
+      "The eyes of modern medicine — and how the right imaging strategy translates directly into better patient outcomes.",
     author: { name: "AbuFarha Medical", role: "Editorial Team" },
     publishedDate: "Jul 1, 2026",
     readingTime: "9 min read",
@@ -464,10 +479,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "ct-imaging-emergency-trauma-care",
     title: "CT Imaging in Emergency and Trauma Care",
-    metaDescription: "How multi-slice CT — from head CT to whole-body trauma imaging — drives modern emergency medicine and trauma triage.",
+    metaDescription:
+      "How multi-slice CT — from head CT to whole-body trauma imaging — drives modern emergency medicine and trauma triage.",
     category: "CT Scanners",
     coverImage: solCt,
-    excerpt: "Sub-second whole-body imaging that decides between the operating room, the ICU and observation.",
+    excerpt:
+      "Sub-second whole-body imaging that decides between the operating room, the ICU and observation.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jun 30, 2026",
     readingTime: "9 min read",
@@ -475,10 +492,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "interventional-radiology-minimally-invasive",
     title: "Interventional Radiology: Minimally Invasive Treatments Explained",
-    metaDescription: "How interventional radiology treats vascular and oncologic disease through pinhole entry points — often replacing open surgery.",
+    metaDescription:
+      "How interventional radiology treats vascular and oncologic disease through pinhole entry points — often replacing open surgery.",
     category: "Cath Lab",
     coverImage: solCarm,
-    excerpt: "Image-guided, minimally invasive treatments that have quietly transformed stroke, oncology and vascular care.",
+    excerpt:
+      "Image-guided, minimally invasive treatments that have quietly transformed stroke, oncology and vascular care.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jun 29, 2026",
     readingTime: "10 min read",
@@ -486,10 +505,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "ai-in-medical-imaging",
     title: "Artificial Intelligence in Medical Imaging",
-    metaDescription: "How regulated AI is reshaping radiology — from scanner-side reconstruction to worklist triage, quantification and structured reporting.",
+    metaDescription:
+      "How regulated AI is reshaping radiology — from scanner-side reconstruction to worklist triage, quantification and structured reporting.",
     category: "Imaging Solutions",
     coverImage: solCt,
-    excerpt: "Regulated AI is no longer optional in a modern imaging department. What works, what to buy, and how to govern it.",
+    excerpt:
+      "Regulated AI is no longer optional in a modern imaging department. What works, what to buy, and how to govern it.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jun 28, 2026",
     readingTime: "10 min read",
@@ -497,10 +518,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "building-efficient-imaging-department",
     title: "Building an Efficient Diagnostic Imaging Department",
-    metaDescription: "How to design a modern imaging department — modality mix, workflow, staffing, IT and lifecycle economics — that delivers for a decade.",
+    metaDescription:
+      "How to design a modern imaging department — modality mix, workflow, staffing, IT and lifecycle economics — that delivers for a decade.",
     category: "Hospital Planning",
     coverImage: abufarhaHq,
-    excerpt: "Design decisions outlive every executive who makes them. A practical guide to planning an imaging department that lasts.",
+    excerpt:
+      "Design decisions outlive every executive who makes them. A practical guide to planning an imaging department that lasts.",
     author: { name: "Omar AbuFarha", role: "Managing Director" },
     publishedDate: "Jun 27, 2026",
     readingTime: "10 min read",
@@ -508,10 +531,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "medical-imaging-in-cardiology",
     title: "Medical Imaging in Cardiology",
-    metaDescription: "Echo, coronary CT, cardiac MRI, nuclear perfusion and the cath lab — how integrated cardiac imaging drives modern cardiology.",
+    metaDescription:
+      "Echo, coronary CT, cardiac MRI, nuclear perfusion and the cath lab — how integrated cardiac imaging drives modern cardiology.",
     category: "Cath Lab",
     coverImage: heroCathlab,
-    excerpt: "No single modality is enough. How coordinated cardiac imaging defines a modern cardiovascular program.",
+    excerpt:
+      "No single modality is enough. How coordinated cardiac imaging defines a modern cardiovascular program.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jun 26, 2026",
     readingTime: "10 min read",
@@ -519,10 +544,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "medical-imaging-in-neurology",
     title: "Medical Imaging in Neurology",
-    metaDescription: "How MRI, CT and PET drive neurological diagnosis — from stroke and epilepsy to multiple sclerosis, dementia and brain tumors.",
+    metaDescription:
+      "How MRI, CT and PET drive neurological diagnosis — from stroke and epilepsy to multiple sclerosis, dementia and brain tumors.",
     category: "MRI Scanners",
     coverImage: solMri,
-    excerpt: "Imaging is the eyes of modern neurology. A guide to the sequences, scanners and pathways that make the difference.",
+    excerpt:
+      "Imaging is the eyes of modern neurology. A guide to the sequences, scanners and pathways that make the difference.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jun 25, 2026",
     readingTime: "10 min read",
@@ -530,10 +557,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "medical-imaging-in-oncology",
     title: "Medical Imaging in Oncology",
-    metaDescription: "From screening to staging, response and surveillance — how multi-modality imaging drives modern cancer care.",
+    metaDescription:
+      "From screening to staging, response and surveillance — how multi-modality imaging drives modern cancer care.",
     category: "PET/CT",
     coverImage: solPetct,
-    excerpt: "A coordinated imaging strategy shapes every step of the cancer journey — from screening to survivorship.",
+    excerpt:
+      "A coordinated imaging strategy shapes every step of the cancer journey — from screening to survivorship.",
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "Jun 24, 2026",
     readingTime: "10 min read",
@@ -541,10 +570,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "preventive-healthcare-early-detection",
     title: "Preventive Healthcare and the Importance of Early Detection",
-    metaDescription: "How structured screening — mammography, low-dose CT, coronary calcium, DEXA and ultrasound — turns healthcare from reactive to proactive.",
+    metaDescription:
+      "How structured screening — mammography, low-dose CT, coronary calcium, DEXA and ultrasound — turns healthcare from reactive to proactive.",
     category: "Imaging Solutions",
     coverImage: solUltrasound,
-    excerpt: "The largest modern gains in life expectancy come from prevention. A guide to building a real preventive-care program.",
+    excerpt:
+      "The largest modern gains in life expectancy come from prevention. A guide to building a real preventive-care program.",
     author: { name: "AbuFarha Medical", role: "Editorial Team" },
     publishedDate: "Jun 23, 2026",
     readingTime: "9 min read",
@@ -552,10 +583,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "medical-equipment-maintenance-reliability",
     title: "Medical Equipment Maintenance: Protecting Patients Through Reliability",
-    metaDescription: "How structured preventive maintenance, calibration and lifecycle management keep medical equipment safe, accurate and available.",
+    metaDescription:
+      "How structured preventive maintenance, calibration and lifecycle management keep medical equipment safe, accurate and available.",
     category: "After Sales",
     coverImage: beyondCathlab,
-    excerpt: "Reliable equipment protects patients. Inside the maintenance programs that keep imaging, life-support and surgical systems running.",
+    excerpt:
+      "Reliable equipment protects patients. Inside the maintenance programs that keep imaging, life-support and surgical systems running.",
     author: { name: "Fadi Nasser", role: "Service Operations Manager" },
     publishedDate: "Jun 22, 2026",
     readingTime: "9 min read",
@@ -563,10 +596,12 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
   {
     slug: "choosing-right-imaging-equipment-hospital",
     title: "Choosing the Right Medical Imaging Equipment for Your Hospital",
-    metaDescription: "How to make imaging capital decisions that deliver for a decade — clinical mission, total cost of ownership, after-sales support.",
+    metaDescription:
+      "How to make imaging capital decisions that deliver for a decade — clinical mission, total cost of ownership, after-sales support.",
     category: "Hospital Planning",
     coverImage: abufarhaHq,
-    excerpt: "The scanner is only 30–50% of true lifetime cost. A structured guide to imaging investment that lasts.",
+    excerpt:
+      "The scanner is only 30–50% of true lifetime cost. A structured guide to imaging investment that lasts.",
     author: { name: "Omar AbuFarha", role: "Managing Director" },
     publishedDate: "Jun 21, 2026",
     readingTime: "10 min read",
@@ -581,17 +616,29 @@ const RAW: Array<Omit<Article, "content" | "tableOfContents"> & {
 const REVIEWERS: Record<string, { name: string; specialty: string }> = {
   "Cath Lab": { name: "Dr. Amir Khaled, MD", specialty: "Interventional Cardiology" },
   MRI: { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology (Neuroimaging)" },
-  "MRI Scanners": { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology (Neuroimaging)" },
+  "MRI Scanners": {
+    name: "Dr. Layla Farouk, MD",
+    specialty: "Diagnostic Radiology (Neuroimaging)",
+  },
   "CT Scanners": { name: "Dr. Rami Haddad, MD", specialty: "Emergency Radiology" },
   "PET/CT": { name: "Dr. Noura Al-Sayed, MD", specialty: "Nuclear Medicine & Molecular Imaging" },
   Ultrasound: { name: "Dr. Yasmin Barakat, MD", specialty: "Diagnostic Ultrasound" },
   "Imaging Solutions": { name: "Dr. Layla Farouk, MD", specialty: "Diagnostic Radiology" },
   "Operating Room": { name: "Dr. Karim Zaidan, MD", specialty: "General & Cardiothoracic Surgery" },
   "Radiation Therapy": { name: "Dr. Hisham Owais, MD", specialty: "Radiation Oncology" },
-  "Turnkey Projects": { name: "Eng. Omar AbuFarha, PMP", specialty: "Hospital Planning & Healthcare Engineering" },
-  "Hospital Planning": { name: "Eng. Omar AbuFarha, PMP", specialty: "Hospital Planning & Healthcare Engineering" },
+  "Turnkey Projects": {
+    name: "Eng. Omar AbuFarha, PMP",
+    specialty: "Hospital Planning & Healthcare Engineering",
+  },
+  "Hospital Planning": {
+    name: "Eng. Omar AbuFarha, PMP",
+    specialty: "Hospital Planning & Healthcare Engineering",
+  },
   "After Sales": { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
-  "Technical Support": { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
+  "Technical Support": {
+    name: "Eng. Fadi Nasser, CBET",
+    specialty: "Clinical & Biomedical Engineering",
+  },
   Biomedical: { name: "Eng. Fadi Nasser, CBET", specialty: "Clinical & Biomedical Engineering" },
 };
 
@@ -844,9 +891,7 @@ export const ARTICLES: Article[] = RAW.map((a) => {
     const links = pickRelatedLinks(article, arr);
     if (!links.length) return article;
     const content = [...article.content];
-    const conclusionIdx = content.findIndex(
-      (b) => b.type === "h2" && b.id === "conclusion",
-    );
+    const conclusionIdx = content.findIndex((b) => b.type === "h2" && b.id === "conclusion");
     const block: ContentBlock = { type: "relatedArticleLinks", items: links };
     if (conclusionIdx > -1) content.splice(conclusionIdx, 0, block);
     else content.push(block);
@@ -872,7 +917,10 @@ function pickRelatedLinks(current: Article, pool: Article[]) {
   const sameCat = pool.filter(
     (a) => a.slug !== current.slug && a.category === current.category && !seen.has(a.slug),
   );
-  const tokens = current.title.toLowerCase().split(/\W+/).filter((w) => w.length > 3);
+  const tokens = current.title
+    .toLowerCase()
+    .split(/\W+/)
+    .filter((w) => w.length > 3);
   const scored = pool
     .filter((a) => a.slug !== current.slug && !seen.has(a.slug))
     .map((a) => {
@@ -892,7 +940,6 @@ function pickRelatedLinks(current: Article, pool: Article[]) {
   }));
 }
 
-
 export const FEATURED_ARTICLES = ARTICLES.filter((a) => a.featured);
 export const LATEST_ARTICLES = ARTICLES.slice(0, 9);
 export const MORE_ARTICLES = ARTICLES.slice(9);
@@ -908,12 +955,8 @@ export function getArticle(slug: string): Article | undefined {
 export function getRelated(slug: string, limit = 4): Article[] {
   const current = getArticle(slug);
   if (!current) return ARTICLES.slice(0, limit);
-  const sameCategory = ARTICLES.filter(
-    (a) => a.slug !== slug && a.category === current.category,
-  );
-  const others = ARTICLES.filter(
-    (a) => a.slug !== slug && a.category !== current.category,
-  );
+  const sameCategory = ARTICLES.filter((a) => a.slug !== slug && a.category === current.category);
+  const others = ARTICLES.filter((a) => a.slug !== slug && a.category !== current.category);
   return [...sameCategory, ...others].slice(0, limit);
 }
 

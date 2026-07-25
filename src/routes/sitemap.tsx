@@ -146,9 +146,7 @@ function SitemapRoute() {
     return GROUPS.map((g) => ({
       ...g,
       links: g.links.filter(
-        (l) =>
-          l.label.toLowerCase().includes(query) ||
-          g.title.toLowerCase().includes(query),
+        (l) => l.label.toLowerCase().includes(query) || g.title.toLowerCase().includes(query),
       ),
     })).filter((g) => g.links.length > 0);
   }, [q]);
@@ -182,9 +180,8 @@ function SitemapRoute() {
                     Sitemap
                   </h1>
                   <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[calc(17*var(--desktop-px-unit))]">
-                    Navigate the entire AbuFarha Medical Supplies website —
-                    products, services, company information and support — from
-                    one clear index.
+                    Navigate the entire AbuFarha Medical Supplies website — products, services,
+                    company information and support — from one clear index.
                   </p>
                 </div>
 
@@ -299,9 +296,7 @@ function SitemapRoute() {
                     <div className="font-display text-3xl font-black leading-none tracking-tight text-foreground">
                       {value}
                     </div>
-                    <div className="mt-1.5 text-sm text-muted-foreground">
-                      {label}
-                    </div>
+                    <div className="mt-1.5 text-sm text-muted-foreground">{label}</div>
                   </div>
                 </div>
               ))}
@@ -328,8 +323,8 @@ function SitemapRoute() {
                       Still need help?
                     </h2>
                     <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-                      Our team is ready to assist you with any questions about
-                      our products, services, or healthcare solutions.
+                      Our team is ready to assist you with any questions about our products,
+                      services, or healthcare solutions.
                     </p>
                   </div>
                 </div>

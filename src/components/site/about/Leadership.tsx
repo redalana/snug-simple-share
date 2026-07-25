@@ -15,8 +15,6 @@ import envImaging from "@/assets/env-imaging-dept.jpg";
 import leaderPortrait1 from "@/assets/leader-portrait-1.jpg.asset.json";
 import leaderPortrait1Thumb from "@/assets/leader-portrait-1-thumb.jpg.asset.json";
 
-
-
 type Leader = {
   id: string;
   name: string;
@@ -145,14 +143,29 @@ const LEADERS: Leader[] = [
     focus: ["Financial Planning", "Project Accounting", "Governance"],
     env: envOffice,
   },
-
 ];
 
 const HIGHLIGHTS = [
-  { icon: Award, title: "Experienced Leadership", desc: "Decades of combined experience in healthcare engineering and medical technology." },
-  { icon: Wrench, title: "Engineering Excellence", desc: "Advanced clinical systems installed, commissioned and supported to OEM standards." },
-  { icon: Handshake, title: "Customer Partnership", desc: "Long-term relationships with hospitals — built on trust, service and clinical results." },
-  { icon: Globe2, title: "Global Healthcare Impact", desc: "Supporting hospitals across Africa, the Middle East and Central Asia." },
+  {
+    icon: Award,
+    title: "Experienced Leadership",
+    desc: "Decades of combined experience in healthcare engineering and medical technology.",
+  },
+  {
+    icon: Wrench,
+    title: "Engineering Excellence",
+    desc: "Advanced clinical systems installed, commissioned and supported to OEM standards.",
+  },
+  {
+    icon: Handshake,
+    title: "Customer Partnership",
+    desc: "Long-term relationships with hospitals — built on trust, service and clinical results.",
+  },
+  {
+    icon: Globe2,
+    title: "Global Healthcare Impact",
+    desc: "Supporting hospitals across Africa, the Middle East and Central Asia.",
+  },
 ];
 
 const AUTO_MS = 7000;
@@ -185,13 +198,24 @@ function Portrait({ leader, size }: { leader: Leader; size: number }) {
       style={{ width: size, height: size }}
       aria-hidden="true"
     >
-      <User className="text-ink/30" style={{ width: size * 0.55, height: size * 0.55 }} strokeWidth={1.25} />
+      <User
+        className="text-ink/30"
+        style={{ width: size * 0.55, height: size * 0.55 }}
+        strokeWidth={1.25}
+      />
     </div>
   );
 }
 
-
-function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boolean; onSelect: () => void }) {
+function LeaderRow({
+  leader,
+  active,
+  onSelect,
+}: {
+  leader: Leader;
+  active: boolean;
+  onSelect: () => void;
+}) {
   return (
     <button
       type="button"
@@ -214,10 +238,14 @@ function LeaderRow({ leader, active, onSelect }: { leader: Leader; active: boole
         <Portrait leader={leader} size={50} />
       </div>
       <div className="min-w-0">
-        <div className={`truncate font-display text-[calc(14*var(--desktop-px-unit))] font-bold ${active ? "text-ink" : "text-ink/90"}`}>
+        <div
+          className={`truncate font-display text-[calc(14*var(--desktop-px-unit))] font-bold ${active ? "text-ink" : "text-ink/90"}`}
+        >
           {leader.name}
         </div>
-        <div className={`truncate text-[calc(12*var(--desktop-px-unit))] ${active ? "text-primary font-semibold" : "text-muted-foreground"}`}>
+        <div
+          className={`truncate text-[calc(12*var(--desktop-px-unit))] ${active ? "text-primary font-semibold" : "text-muted-foreground"}`}
+        >
           {leader.role}
         </div>
       </div>
@@ -232,7 +260,7 @@ function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string
   const nextId = useRef(1);
 
   useEffect(() => {
-    setLayers(prev => {
+    setLayers((prev) => {
       if (prev[prev.length - 1].src === env) return prev;
       return [...prev, { src: env, id: nextId.current++ }];
     });
@@ -241,7 +269,7 @@ function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string
   useEffect(() => {
     if (layers.length <= 1) return;
     const t = window.setTimeout(() => {
-      setLayers(prev => prev.slice(-1));
+      setLayers((prev) => prev.slice(-1));
     }, 950);
     return () => window.clearTimeout(t);
   }, [layers]);
@@ -292,8 +320,6 @@ function CinematicBackdrop({ env, nextEnv, alt }: { env: string; nextEnv: string
   );
 }
 
-
-
 function HeroPortrait({ leader }: { leader: Leader }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-white/[0.04] to-black/20">
@@ -325,7 +351,6 @@ function HeroPortrait({ leader }: { leader: Leader }) {
               </div>
             </div>
           )}
-
         </motion.div>
       </AnimatePresence>
       {/* soft edge blend into the console body */}
@@ -354,7 +379,10 @@ function StatValue({ raw }: { raw: string }) {
     }
     const target = parseInt(match[1], 10);
     const suffix = match[2];
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       setDisplay(raw);
       return;
     }
@@ -377,7 +405,15 @@ function StatValue({ raw }: { raw: string }) {
 
 /* ---------------- Progress indicator ---------------- */
 
-function ProgressBar({ activeIndex, total, paused }: { activeIndex: number; total: number; paused: boolean }) {
+function ProgressBar({
+  activeIndex,
+  total,
+  paused,
+}: {
+  activeIndex: number;
+  total: number;
+  paused: boolean;
+}) {
   return (
     <div className="flex items-center gap-1.5">
       {Array.from({ length: total }).map((_, i) => {
@@ -394,7 +430,9 @@ function ProgressBar({ activeIndex, total, paused }: { activeIndex: number; tota
               <div
                 key={`fill-${activeIndex}-${paused ? "p" : "r"}`}
                 className={`absolute inset-y-0 left-0 w-0 bg-primary ${
-                  paused ? "" : "animate-[leader-progress_7000ms_linear_forwards] motion-reduce:w-full motion-reduce:animate-none"
+                  paused
+                    ? ""
+                    : "animate-[leader-progress_7000ms_linear_forwards] motion-reduce:w-full motion-reduce:animate-none"
                 }`}
               />
             )}
@@ -457,7 +495,6 @@ function ExecutiveConsole({
           <HeroPortrait leader={leader} />
         </div>
 
-
         {/* RIGHT — Executive information */}
         <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
           {/* Header row: status (left) ↔ counter (right) */}
@@ -485,8 +522,6 @@ function ExecutiveConsole({
           <div className="mt-3">
             <ProgressBar activeIndex={activeIndex} total={total} paused={paused} />
           </div>
-
-
 
           {/* Content — crossfades on change */}
           <div className="mt-6 flex-1">
@@ -517,7 +552,7 @@ function ExecutiveConsole({
                     { v: leader.years, l: "Years" },
                     { v: leader.countries, l: "Countries" },
                     { v: leader.projects, l: "Projects" },
-                  ].map(s => (
+                  ].map((s) => (
                     <div
                       key={s.l}
                       className="min-w-0 rounded-xl bg-white/[0.04] px-2 py-3 text-center ring-1 ring-white/10"
@@ -527,7 +562,11 @@ function ExecutiveConsole({
                       </div>
                       <div
                         className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60"
-                        style={{ letterSpacing: "var(--tracking-label)", wordBreak: "normal", overflowWrap: "break-word" }}
+                        style={{
+                          letterSpacing: "var(--tracking-label)",
+                          wordBreak: "normal",
+                          overflowWrap: "break-word",
+                        }}
                       >
                         {s.l}
                       </div>
@@ -535,15 +574,13 @@ function ExecutiveConsole({
                   ))}
                 </div>
 
-
-
                 {/* Areas of expertise */}
                 <div className="mt-6">
                   <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
                     Areas of Expertise
                   </div>
                   <div className="mt-2.5 flex flex-wrap gap-1.5">
-                    {leader.focus.map(f => (
+                    {leader.focus.map((f) => (
                       <span
                         key={f}
                         className="rounded-full bg-white/[0.05] px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/85 ring-1 ring-white/10"
@@ -572,9 +609,13 @@ export function Leadership() {
 
   useEffect(() => {
     if (paused) return;
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
     const id = window.setInterval(() => {
-      setActiveIndex(i => (i + 1) % LEADERS.length);
+      setActiveIndex((i) => (i + 1) % LEADERS.length);
     }, AUTO_MS);
     return () => window.clearInterval(id);
   }, [paused]);
@@ -587,16 +628,19 @@ export function Leadership() {
   };
 
   const togglePause = () => {
-    setPaused(p => !p);
+    setPaused((p) => !p);
     if (resumeTimer.current) {
       window.clearTimeout(resumeTimer.current);
       resumeTimer.current = null;
     }
   };
 
-  useEffect(() => () => {
-    if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (resumeTimer.current) window.clearTimeout(resumeTimer.current);
+    },
+    [],
+  );
 
   return (
     <section className="bg-white py-16 lg:py-20">
@@ -636,11 +680,13 @@ export function Leadership() {
           <Eyebrow index="09">Meet the People Behind AbuFarha Medical</Eyebrow>
           <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
             <h2 className="font-display text-[2rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
-              Leadership that drives<br className="hidden sm:block" /> healthcare innovation.
+              Leadership that drives
+              <br className="hidden sm:block" /> healthcare innovation.
             </h2>
             <p className="max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-              Behind every successful healthcare project is an experienced team dedicated to engineering
-              excellence, medical technology and long-term customer partnerships across Africa and the Middle East.
+              Behind every successful healthcare project is an experienced team dedicated to
+              engineering excellence, medical technology and long-term customer partnerships across
+              Africa and the Middle East.
             </p>
           </div>
         </Reveal>
@@ -651,7 +697,12 @@ export function Leadership() {
             <div className="rounded-3xl bg-secondary/40 p-3 ring-1 ring-border">
               <div className="max-h-[calc(680*var(--desktop-px-unit))] space-y-1 overflow-y-auto pr-1">
                 {LEADERS.map((l, i) => (
-                  <LeaderRow key={l.id} leader={l} active={i === activeIndex} onSelect={() => handleSelect(i)} />
+                  <LeaderRow
+                    key={l.id}
+                    leader={l}
+                    active={i === activeIndex}
+                    onSelect={() => handleSelect(i)}
+                  />
                 ))}
               </div>
             </div>
@@ -674,7 +725,6 @@ export function Leadership() {
                     "radial-gradient(70% 65% at 82% 88%, rgba(10,14,20,0.72) 0%, rgba(10,14,20,0.45) 35%, rgba(10,14,20,0) 70%)",
                 }}
               />
-
 
               {/* Floating console — smaller footprint so the cath lab remains visible */}
               <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
@@ -701,7 +751,12 @@ export function Leadership() {
           />
           <div className="mt-6 grid grid-cols-2 gap-2">
             {LEADERS.map((l, i) => (
-              <LeaderRow key={l.id} leader={l} active={i === activeIndex} onSelect={() => handleSelect(i)} />
+              <LeaderRow
+                key={l.id}
+                leader={l}
+                active={i === activeIndex}
+                onSelect={() => handleSelect(i)}
+              />
             ))}
           </div>
         </div>
@@ -726,13 +781,17 @@ export function Leadership() {
                     onClick={() => handleSelect(i)}
                     aria-pressed={isActive}
                     className={`flex w-[152px] shrink-0 snap-start flex-col items-center gap-2 rounded-2xl p-3 text-center transition ${
-                      isActive ? "bg-white shadow-[0_10px_30px_-16px_rgba(15,23,42,0.3)] ring-1 ring-border" : "bg-secondary/50"
+                      isActive
+                        ? "bg-white shadow-[0_10px_30px_-16px_rgba(15,23,42,0.3)] ring-1 ring-border"
+                        : "bg-secondary/50"
                     }`}
                     style={{ minHeight: 44 }}
                   >
                     <Portrait leader={l} size={68} />
                     <div className="text-[13px] font-bold leading-tight text-ink">{l.name}</div>
-                    <div className={`text-[11px] font-semibold ${isActive ? "text-primary" : "text-muted-foreground"}`}>
+                    <div
+                      className={`text-[11px] font-semibold ${isActive ? "text-primary" : "text-muted-foreground"}`}
+                    >
                       {l.role}
                     </div>
                   </button>

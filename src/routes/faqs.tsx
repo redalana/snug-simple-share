@@ -96,13 +96,7 @@ export const Route = createFileRoute("/faqs")({
   component: FaqsRoute,
 });
 
-type Category =
-  | "All"
-  | "Products"
-  | "Services"
-  | "Warranty"
-  | "Support"
-  | "General";
+type Category = "All" | "Products" | "Services" | "Warranty" | "Support" | "General";
 
 type QA = { q: string; a: React.ReactNode; category: Exclude<Category, "All"> };
 
@@ -132,8 +126,8 @@ const FAQS: QA[] = [
     q: "Do you provide after-sales support and maintenance?",
     a: (
       <>
-        Yes — preventive maintenance, corrective maintenance, spare parts,
-        remote diagnostics, technical support and clinical training. See our{" "}
+        Yes — preventive maintenance, corrective maintenance, spare parts, remote diagnostics,
+        technical support and clinical training. See our{" "}
         <Link to="/after-sales" className="text-primary hover:underline">
           After Sales
         </Link>{" "}
@@ -146,9 +140,8 @@ const FAQS: QA[] = [
     q: "Can you help with hospital planning and turnkey projects?",
     a: (
       <>
-        Yes. We deliver turnkey imaging and cardiology departments — planning,
-        equipment supply, installation, commissioning, training and long-term
-        support. Learn more on our{" "}
+        Yes. We deliver turnkey imaging and cardiology departments — planning, equipment supply,
+        installation, commissioning, training and long-term support. Learn more on our{" "}
         <Link to="/turnkey" className="text-primary hover:underline">
           Turnkey
         </Link>{" "}
@@ -170,8 +163,8 @@ const FAQS: QA[] = [
         <Link to="/contact" className="text-primary hover:underline">
           Contact
         </Link>{" "}
-        page. Share your project requirements and our team will respond within
-        one to two business days.
+        page. Share your project requirements and our team will respond within one to two business
+        days.
       </>
     ),
   },
@@ -280,9 +273,7 @@ function FaqsRoute() {
                       >
                         {String(idx + 1).padStart(2, "0")}
                       </span>
-                      <span className="flex-1 font-semibold text-foreground">
-                        {qa.q}
-                      </span>
+                      <span className="flex-1 font-semibold text-foreground">{qa.q}</span>
                       <ChevronDown
                         className={cn(
                           "h-5 w-5 shrink-0 text-primary transition-transform duration-200",
@@ -301,8 +292,7 @@ function FaqsRoute() {
               })}
               {filtered.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-                  No questions match your search. Try a different keyword or
-                  category.
+                  No questions match your search. Try a different keyword or category.
                 </div>
               ) : null}
             </div>
@@ -318,8 +308,7 @@ function FaqsRoute() {
                       Still need help?
                     </h2>
                     <p className="mt-1 max-w-xl text-sm text-muted-foreground sm:text-[15px]">
-                      Our team is ready to assist you with any questions or
-                      custom requirements.
+                      Our team is ready to assist you with any questions or custom requirements.
                     </p>
                   </div>
                 </div>

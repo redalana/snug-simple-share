@@ -47,7 +47,12 @@ export function SupportJourney() {
                   <div className="absolute inset-2 rounded-full border border-white/10 bg-[#0f131c] transition-colors group-hover:border-primary/40" />
                   <motion.div
                     animate={{ scale: [1, 1.06, 1] }}
-                    transition={{ duration: 3, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 3,
+                      delay: i * 0.4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                     className="absolute inset-4 rounded-full border border-primary/25"
                   />
                   <div className="relative flex h-[calc(104*var(--desktop-px-unit))] w-[calc(104*var(--desktop-px-unit))] items-center justify-center rounded-full bg-gradient-to-br from-[#141924] to-[#0b0f16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-transform duration-300 group-hover:scale-105">
@@ -75,7 +80,6 @@ export function SupportJourney() {
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

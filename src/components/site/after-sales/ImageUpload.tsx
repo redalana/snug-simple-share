@@ -48,7 +48,9 @@ export function ImageUpload({
       const interval = window.setInterval(() => {
         setItems((prev) =>
           prev.map((p) =>
-            p.id === it.id ? { ...p, progress: Math.min(100, p.progress + 12 + Math.random() * 10) } : p,
+            p.id === it.id
+              ? { ...p, progress: Math.min(100, p.progress + 12 + Math.random() * 10) }
+              : p,
           ),
         );
       }, 140);
@@ -87,7 +89,9 @@ export function ImageUpload({
           if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files);
         }}
         className={`flex w-full flex-col items-center justify-center rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors ${
-          dragOver ? "border-primary bg-primary/5" : "border-border bg-background/60 hover:border-primary/60"
+          dragOver
+            ? "border-primary bg-primary/5"
+            : "border-border bg-background/60 hover:border-primary/60"
         }`}
       >
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">

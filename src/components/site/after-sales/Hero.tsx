@@ -34,8 +34,8 @@ export function Hero() {
             <span className="text-white/95">Performance.</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-            We keep your medical equipment running at peak performance with
-            expert care, genuine parts and fast response — every time.
+            We keep your medical equipment running at peak performance with expert care, genuine
+            parts and fast response — every time.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <a
@@ -90,14 +90,11 @@ export function Hero() {
                 { k: "100%", v: "Genuine OEM Parts" },
                 { k: "< 4 Hrs", v: "Avg Response" },
               ].map(({ k, v }) => (
-                <div
-                  key={v}
-                  className="rounded-xl border border-white/10 bg-white/[0.04] p-4"
-                >
-                  <div className="font-display text-xl font-extrabold text-white">
-                    {k}
+                <div key={v} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                  <div className="font-display text-xl font-extrabold text-white">{k}</div>
+                  <div className="mt-0.5 text-[calc(11.5*var(--desktop-px-unit))] text-white/60">
+                    {v}
                   </div>
-                  <div className="mt-0.5 text-[calc(11.5*var(--desktop-px-unit))] text-white/60">{v}</div>
                 </div>
               ))}
             </div>

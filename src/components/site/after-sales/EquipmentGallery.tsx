@@ -53,9 +53,8 @@ export function EquipmentGallery() {
             </h2>
           </div>
           <p className="max-w-md text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            Siemens, Philips, GE Healthcare, Canon, Hologic and more — our
-            engineers are certified across the full portfolio of diagnostic and
-            interventional systems we deliver.
+            Siemens, Philips, GE Healthcare, Canon, Hologic and more — our engineers are certified
+            across the full portfolio of diagnostic and interventional systems we deliver.
           </p>
         </div>
 
@@ -64,8 +63,6 @@ export function EquipmentGallery() {
             <EquipmentCard key={item.name} item={item} index={index} />
           ))}
         </div>
-
-
       </div>
     </section>
   );

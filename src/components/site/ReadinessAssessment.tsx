@@ -1,10 +1,5 @@
 import { useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
 import {
   Building2,
   Stethoscope,
@@ -213,16 +208,14 @@ const STATUS_META: Record<
     icon: AlertCircle,
     text: "text-primary",
     dot: "bg-primary",
-    badge:
-      "text-primary ring-primary/20 bg-primary/[0.06] group-hover:bg-primary/[0.12]",
+    badge: "text-primary ring-primary/20 bg-primary/[0.06] group-hover:bg-primary/[0.12]",
   },
   unknown: {
     label: "Unknown",
     icon: HelpCircle,
     text: "text-muted-foreground",
     dot: "bg-muted-foreground/50",
-    badge:
-      "text-muted-foreground ring-border bg-secondary/60 group-hover:bg-secondary",
+    badge: "text-muted-foreground ring-border bg-secondary/60 group-hover:bg-secondary",
   },
 };
 
@@ -325,8 +318,19 @@ function AssessmentItem({ item }: { item: Item }) {
           >
             <div className="mb-4 ml-[calc(28*var(--desktop-px-unit))] space-y-2.5 rounded-xl bg-secondary/60 px-4 py-4 ring-1 ring-border/60">
               <NoteRow icon={AlertCircle} label="Why it matters —" text={item.why} delay={0.05} />
-              <NoteRow icon={FileSearch} label="What we evaluate —" text={item.evaluates} delay={0.11} />
-              <NoteRow icon={AlertTriangle} label="Common risk —" text={item.risk} tone="risk" delay={0.17} />
+              <NoteRow
+                icon={FileSearch}
+                label="What we evaluate —"
+                text={item.evaluates}
+                delay={0.11}
+              />
+              <NoteRow
+                icon={AlertTriangle}
+                label="Common risk —"
+                text={item.risk}
+                tone="risk"
+                delay={0.17}
+              />
             </div>
           </motion.div>
         )}
@@ -358,11 +362,7 @@ function AssessmentGroup({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-12% 0px" }}
       transition={{ duration: 0.55, ease: EASE, delay: index * 0.1 }}
-      animate={
-        reduce
-          ? undefined
-          : { opacity: active ? 1 : 0.62, scale: active ? 1 : 0.992 }
-      }
+      animate={reduce ? undefined : { opacity: active ? 1 : 0.62, scale: active ? 1 : 0.992 }}
       className="overflow-hidden rounded-2xl border border-border bg-white shadow-(--shadow-panel) transition-shadow duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.3)]"
     >
       <button
@@ -414,10 +414,7 @@ export function ReadinessAssessment() {
   const reduce = useReducedMotion();
 
   return (
-    <section
-      id="readiness"
-      className="relative overflow-hidden bg-white py-16 lg:py-20"
-    >
+    <section id="readiness" className="relative overflow-hidden bg-white py-16 lg:py-20">
       {/* subtle engineering grid */}
       <div
         aria-hidden
@@ -426,10 +423,8 @@ export function ReadinessAssessment() {
           backgroundImage:
             "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(48*var(--desktop-px-unit)) calc(48*var(--desktop-px-unit))",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
+          maskImage: "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
         }}
       />
 
@@ -446,8 +441,8 @@ export function ReadinessAssessment() {
             Hospital Readiness Assessment
           </h1>
           <p className="mt-5 max-w-xl text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-            Before investing in advanced medical technology, make sure your
-            hospital is ready for a successful implementation.
+            Before investing in advanced medical technology, make sure your hospital is ready for a
+            successful implementation.
           </p>
         </motion.div>
 
@@ -455,19 +450,12 @@ export function ReadinessAssessment() {
           {/* LEFT — interactive assessment */}
           <div className="space-y-4">
             {GROUPS.map((group, i) => (
-              <AssessmentGroup
-                key={group.id}
-                group={group}
-                defaultOpen={i === 0}
-                index={i}
-              />
+              <AssessmentGroup key={group.id} group={group} defaultOpen={i === 0} index={i} />
             ))}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-1 pt-1 text-[calc(12*var(--desktop-px-unit))] font-medium text-muted-foreground">
               {(["ready", "review", "unknown"] as Status[]).map((s) => (
                 <span key={s} className="inline-flex items-center gap-2">
-                  <span
-                    className={`h-2 w-2 rounded-full ${STATUS_META[s].dot}`}
-                  />
+                  <span className={`h-2 w-2 rounded-full ${STATUS_META[s].dot}`} />
                   {STATUS_META[s].label}
                 </span>
               ))}
@@ -489,11 +477,10 @@ export function ReadinessAssessment() {
               Is Your Hospital Ready for Advanced Medical Technology?
             </h3>
             <p className="mt-4 text-[calc(15*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-              In practice, most installation delays come from the building, not
-              the equipment — the room, the slab, the power supply and the
-              workflow around it. We assess utilities, room readiness and
-              clinical flow before any system is specified, so hospitals avoid
-              late modifications and go live on schedule.
+              In practice, most installation delays come from the building, not the equipment — the
+              room, the slab, the power supply and the workflow around it. We assess utilities, room
+              readiness and clinical flow before any system is specified, so hospitals avoid late
+              modifications and go live on schedule.
             </p>
 
             <motion.div
@@ -554,9 +541,12 @@ export function ReadinessAssessment() {
                 Talk to a Biomedical Engineer
               </a>
               <p className="mt-1 flex items-start gap-2 text-[calc(12*var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
-                <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" strokeWidth={2} />
-                Every readiness assessment is performed by AbuFarha biomedical
-                engineers before any equipment recommendation.
+                <ShieldCheck
+                  className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70"
+                  strokeWidth={2}
+                />
+                Every readiness assessment is performed by AbuFarha biomedical engineers before any
+                equipment recommendation.
               </p>
             </motion.div>
           </motion.div>

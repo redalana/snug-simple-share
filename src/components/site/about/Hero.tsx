@@ -17,7 +17,9 @@ export function Hero() {
       </div>
       <div className="relative mx-auto grid max-w-[100rem] items-center gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(420*var(--desktop-px-unit))] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 lg:px-10 lg:pt-16 lg:pb-14">
         <div className="min-w-0 max-w-full lg:max-w-[600px]">
-          <Eyebrow tone="light" index="01">About Us</Eyebrow>
+          <Eyebrow tone="light" index="01">
+            About Us
+          </Eyebrow>
           <h1
             className="mt-6 font-display font-extrabold tracking-[var(--tracking-heading)] text-balance [overflow-wrap:break-word]"
             style={{
@@ -42,10 +44,9 @@ export function Hero() {
               lineHeight: "var(--lh-hero-lead)",
             }}
           >
-            AbuFarha Medical Supplies has been supplying, installing,
-            commissioning and supporting medical equipment for hospitals across
-            Africa and the Middle East since 1999 — combining biomedical
-            engineering expertise with long-term healthcare partnership.
+            AbuFarha Medical Supplies has been supplying, installing, commissioning and supporting
+            medical equipment for hospitals across Africa and the Middle East since 1999 — combining
+            biomedical engineering expertise with long-term healthcare partnership.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">

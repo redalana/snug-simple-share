@@ -31,8 +31,8 @@ export function FAQ() {
               to know.
             </h2>
             <p className="mt-6 max-w-md text-[calc(15.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-              Answers to the most common questions from biomedical engineers,
-              procurement teams and hospital directors.
+              Answers to the most common questions from biomedical engineers, procurement teams and
+              hospital directors.
             </p>
 
             {/* still need help */}
@@ -44,8 +44,8 @@ export function FAQ() {
                 Talk to an engineer directly.
               </div>
               <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-                Our support engineers are on call around the clock for any
-                technical or clinical question.
+                Our support engineers are on call around the clock for any technical or clinical
+                question.
               </p>
               <a
                 href="tel:+96264026063"
@@ -60,7 +60,19 @@ export function FAQ() {
             {/* Search + categories */}
             <div className="mb-6 rounded-2xl border border-border bg-white p-3 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.15)]">
               <div className="flex items-center gap-3 px-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-muted-foreground"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4 shrink-0 text-muted-foreground"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
                 <input
                   type="search"
                   value={query}
@@ -120,9 +132,7 @@ export function FAQ() {
                         </div>
                         <span
                           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                            isOpen
-                              ? "rotate-180 bg-primary text-white"
-                              : "bg-muted text-foreground"
+                            isOpen ? "rotate-180 bg-primary text-white" : "bg-muted text-foreground"
                           }`}
                         >
                           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}

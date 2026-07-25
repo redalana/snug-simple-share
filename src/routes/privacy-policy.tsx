@@ -1,5 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck, ClipboardList, Settings, Cookie, Users, Lock, CalendarClock, UserCog, ExternalLink, RefreshCw, Mail } from "lucide-react";
+import {
+  ShieldCheck,
+  ClipboardList,
+  Settings,
+  Cookie,
+  Users,
+  Lock,
+  CalendarClock,
+  UserCog,
+  ExternalLink,
+  RefreshCw,
+  Mail,
+} from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -41,12 +53,12 @@ const SECTIONS: Section[] = [
     body: (
       <>
         <p>
-          AbuFarha Medical Supplies is committed to protecting the privacy of our website
-          visitors, customers and business partners.
+          AbuFarha Medical Supplies is committed to protecting the privacy of our website visitors,
+          customers and business partners.
         </p>
         <p>
-          This Privacy Policy explains what information we collect, how it is used and the
-          choices available regarding your personal information.
+          This Privacy Policy explains what information we collect, how it is used and the choices
+          available regarding your personal information.
         </p>
         <p>By using our website, you agree to the practices described in this Privacy Policy.</p>
       </>
@@ -58,18 +70,42 @@ const SECTIONS: Section[] = [
     body: (
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <p className="mb-2">We may collect information that you voluntarily provide, including:</p>
+          <p className="mb-2">
+            We may collect information that you voluntarily provide, including:
+          </p>
           <ul className="space-y-1.5">
-            {["Full Name","Company Name","Email Address","Phone Number","Country","Message or Inquiry Details"].map((i) => (
-              <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+            {[
+              "Full Name",
+              "Company Name",
+              "Email Address",
+              "Phone Number",
+              "Country",
+              "Message or Inquiry Details",
+            ].map((i) => (
+              <li key={i} className="flex gap-2">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                {i}
+              </li>
             ))}
           </ul>
         </div>
         <div>
-          <p className="mb-2">We may also collect limited technical information automatically, such as:</p>
+          <p className="mb-2">
+            We may also collect limited technical information automatically, such as:
+          </p>
           <ul className="space-y-1.5">
-            {["IP Address","Browser Type","Device Information","Operating System","Pages Visited","Date and Time of Visit"].map((i) => (
-              <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+            {[
+              "IP Address",
+              "Browser Type",
+              "Device Information",
+              "Operating System",
+              "Pages Visited",
+              "Date and Time of Visit",
+            ].map((i) => (
+              <li key={i} className="flex gap-2">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                {i}
+              </li>
             ))}
           </ul>
         </div>
@@ -83,8 +119,18 @@ const SECTIONS: Section[] = [
       <>
         <p className="mb-2">Your information may be used to:</p>
         <ul className="space-y-1.5">
-          {["Respond to inquiries","Prepare quotations","Communicate regarding products or services","Improve our website and customer experience","Maintain website security","Comply with legal obligations"].map((i) => (
-            <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+          {[
+            "Respond to inquiries",
+            "Prepare quotations",
+            "Communicate regarding products or services",
+            "Improve our website and customer experience",
+            "Maintain website security",
+            "Comply with legal obligations",
+          ].map((i) => (
+            <li key={i} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              {i}
+            </li>
           ))}
         </ul>
       </>
@@ -95,7 +141,10 @@ const SECTIONS: Section[] = [
     title: "Cookies",
     body: (
       <>
-        <p>Our website may use cookies and similar technologies to improve browsing performance and enhance the user experience.</p>
+        <p>
+          Our website may use cookies and similar technologies to improve browsing performance and
+          enhance the user experience.
+        </p>
         <p>Cookies help us understand website usage and improve functionality.</p>
         <p>You may disable cookies through your browser settings at any time.</p>
       </>
@@ -106,10 +155,20 @@ const SECTIONS: Section[] = [
     title: "Information Sharing",
     body: (
       <>
-        <p>AbuFarha Medical Supplies does not sell personal information. Information may only be shared when necessary:</p>
+        <p>
+          AbuFarha Medical Supplies does not sell personal information. Information may only be
+          shared when necessary:
+        </p>
         <ul className="mt-2 space-y-1.5">
-          {["With trusted service providers supporting website operations.","When required by applicable laws or legal authorities.","To protect our legal rights and website security."].map((i) => (
-            <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+          {[
+            "With trusted service providers supporting website operations.",
+            "When required by applicable laws or legal authorities.",
+            "To protect our legal rights and website security.",
+          ].map((i) => (
+            <li key={i} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              {i}
+            </li>
           ))}
         </ul>
       </>
@@ -120,7 +179,10 @@ const SECTIONS: Section[] = [
     title: "Data Security",
     body: (
       <>
-        <p>We implement reasonable technical and organizational measures to protect personal information against unauthorized access, loss, misuse or disclosure.</p>
+        <p>
+          We implement reasonable technical and organizational measures to protect personal
+          information against unauthorized access, loss, misuse or disclosure.
+        </p>
         <p>However, no internet transmission can be guaranteed to be completely secure.</p>
       </>
     ),
@@ -132,8 +194,16 @@ const SECTIONS: Section[] = [
       <>
         <p className="mb-2">Personal information is retained only for as long as necessary to:</p>
         <ul className="space-y-1.5">
-          {["Respond to inquiries.","Provide requested services.","Meet legal or regulatory obligations.","Maintain business records where appropriate."].map((i) => (
-            <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+          {[
+            "Respond to inquiries.",
+            "Provide requested services.",
+            "Meet legal or regulatory obligations.",
+            "Maintain business records where appropriate.",
+          ].map((i) => (
+            <li key={i} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              {i}
+            </li>
           ))}
         </ul>
       </>
@@ -146,8 +216,17 @@ const SECTIONS: Section[] = [
       <>
         <p className="mb-2">Depending on applicable laws, you may have the right to:</p>
         <ul className="space-y-1.5">
-          {["Request access to your personal data.","Request correction of inaccurate information.","Request deletion of personal data where legally permitted.","Object to certain processing activities.","Withdraw consent where applicable."].map((i) => (
-            <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{i}</li>
+          {[
+            "Request access to your personal data.",
+            "Request correction of inaccurate information.",
+            "Request deletion of personal data where legally permitted.",
+            "Object to certain processing activities.",
+            "Withdraw consent where applicable.",
+          ].map((i) => (
+            <li key={i} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              {i}
+            </li>
           ))}
         </ul>
         <p className="mt-3">Requests may be submitted using the contact information below.</p>
@@ -161,7 +240,9 @@ const SECTIONS: Section[] = [
       <>
         <p>Our website may contain links to external websites.</p>
         <p>We are not responsible for the privacy practices or content of third-party websites.</p>
-        <p>Users are encouraged to review the privacy policies of any external websites they visit.</p>
+        <p>
+          Users are encouraged to review the privacy policies of any external websites they visit.
+        </p>
       </>
     ),
   },
@@ -181,10 +262,15 @@ const SECTIONS: Section[] = [
     title: "Contact Us",
     body: (
       <>
-        <p>For questions regarding this Privacy Policy, please contact us at{" "}
-          <a href="mailto:info@abufarhamedical.com" className="font-semibold text-primary hover:underline">
+        <p>
+          For questions regarding this Privacy Policy, please contact us at{" "}
+          <a
+            href="mailto:info@abufarhamedical.com"
+            className="font-semibold text-primary hover:underline"
+          >
             info@abufarhamedical.com
-          </a>{" "}or +962 6 4026063.
+          </a>{" "}
+          or +962 6 4026063.
         </p>
       </>
     ),
@@ -208,17 +294,18 @@ function PrivacyRoute() {
           <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
             <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
               {SECTIONS.map(({ Icon, title, body }, i) => (
-                <article
-                  key={title}
-                  className="flex gap-5 border-b border-border/70 pb-8"
-                >
+                <article key={title} className="flex gap-5 border-b border-border/70 pb-8">
                   <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-primary/20 bg-primary/5 text-primary">
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline gap-2">
-                      <span className="font-display text-lg font-black text-primary">{String(i + 1)}.</span>
-                      <h2 className="font-display text-xl font-black tracking-tight text-foreground">{title}</h2>
+                      <span className="font-display text-lg font-black text-primary">
+                        {String(i + 1)}.
+                      </span>
+                      <h2 className="font-display text-xl font-black tracking-tight text-foreground">
+                        {title}
+                      </h2>
                     </div>
                     <div className="mt-3 space-y-2 text-[15px] leading-relaxed text-muted-foreground">
                       {body}

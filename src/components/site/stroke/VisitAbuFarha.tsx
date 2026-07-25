@@ -21,13 +21,37 @@ type Item = {
 
 const ITEMS: Item[] = [
   { Icon: Stethoscope, label: "Meet our Stroke Physicians", highlight: "Stroke Physicians" },
-  { Icon: Wrench, label: "Meet our Biomedical Engineering Team", highlight: "Biomedical Engineering Team" },
+  {
+    Icon: Wrench,
+    label: "Meet our Biomedical Engineering Team",
+    highlight: "Biomedical Engineering Team",
+  },
   { Icon: Building2, label: "Tour AbuFarha Headquarters", highlight: "AbuFarha Headquarters" },
-  { Icon: FlaskConical, label: "Explore our Engineering Laboratories", highlight: "Engineering Laboratories" },
-  { Icon: Package, label: "Visit our Medical Equipment Warehouse", highlight: "Medical Equipment Warehouse" },
-  { Icon: Brain, label: "Observe Comprehensive Stroke Workflows", highlight: "Comprehensive Stroke Workflows" },
-  { Icon: Hospital, label: "Visit Hospitals Using Our Technologies", highlight: "Hospitals Using Our Technologies" },
-  { Icon: Handshake, label: "Exchange Knowledge with our Leadership Team", highlight: "Leadership Team" },
+  {
+    Icon: FlaskConical,
+    label: "Explore our Engineering Laboratories",
+    highlight: "Engineering Laboratories",
+  },
+  {
+    Icon: Package,
+    label: "Visit our Medical Equipment Warehouse",
+    highlight: "Medical Equipment Warehouse",
+  },
+  {
+    Icon: Brain,
+    label: "Observe Comprehensive Stroke Workflows",
+    highlight: "Comprehensive Stroke Workflows",
+  },
+  {
+    Icon: Hospital,
+    label: "Visit Hospitals Using Our Technologies",
+    highlight: "Hospitals Using Our Technologies",
+  },
+  {
+    Icon: Handshake,
+    label: "Exchange Knowledge with our Leadership Team",
+    highlight: "Leadership Team",
+  },
 ];
 
 // Subtle medical sky-blue accent — complements primary red without replacing it.
@@ -62,10 +86,10 @@ export function VisitAbuFarha() {
                 <span className="mt-2 block text-primary">Before You Invest.</span>
               </h2>
               <p className="mt-10 max-w-xl text-base leading-[1.8] text-muted-foreground sm:text-[1.05rem]">
-                We invite healthcare leaders, physicians, and biomedical engineers to
-                experience firsthand how comprehensive stroke programs are planned,
-                engineered, implemented, and supported — before making one of their
-                hospital&apos;s most important technology investments.
+                We invite healthcare leaders, physicians, and biomedical engineers to experience
+                firsthand how comprehensive stroke programs are planned, engineered, implemented,
+                and supported — before making one of their hospital&apos;s most important technology
+                investments.
               </p>
 
               <p
@@ -119,8 +143,8 @@ export function VisitAbuFarha() {
             since 1999.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-[1.75] text-white/70">
-            From planning and procurement to installation, training, and long-term support,
-            AbuFarha partners with hospitals to deliver sustainable stroke care solutions.
+            From planning and procurement to installation, training, and long-term support, AbuFarha
+            partners with hospitals to deliver sustainable stroke care solutions.
           </p>
           <div className="mt-9 flex justify-center">
             <Link

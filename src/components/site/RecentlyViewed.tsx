@@ -7,7 +7,11 @@ export function RecentlyViewed({ excludeSlug }: { excludeSlug?: string }) {
   const [slugs, setSlugs] = useState<string[]>([]);
 
   useEffect(() => {
-    setSlugs(getRecentlyViewed().filter((s) => s !== excludeSlug).slice(0, 4));
+    setSlugs(
+      getRecentlyViewed()
+        .filter((s) => s !== excludeSlug)
+        .slice(0, 4),
+    );
   }, [excludeSlug]);
 
   const items = slugs

@@ -39,10 +39,7 @@ export function ExperienceAbuFarha() {
   const reduce = useReducedMotion();
 
   return (
-    <section
-      id="experience"
-      className="relative overflow-hidden bg-white py-16 lg:py-20"
-    >
+    <section id="experience" className="relative overflow-hidden bg-white py-16 lg:py-20">
       {/* Very subtle engineering grid */}
       <div
         aria-hidden
@@ -51,10 +48,8 @@ export function ExperienceAbuFarha() {
           backgroundImage:
             "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(72*var(--desktop-px-unit)) calc(72*var(--desktop-px-unit))",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
+          maskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
         }}
       />
 
@@ -88,13 +83,9 @@ export function ExperienceAbuFarha() {
                 WebkitMaskImage:
                   "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
               }}
-              animate={
-                reduce ? undefined : { scale: [1, 1.012, 1], opacity: [1, 0.985, 1] }
-              }
+              animate={reduce ? undefined : { scale: [1, 1.012, 1], opacity: [1, 0.985, 1] }}
               transition={
-                reduce
-                  ? undefined
-                  : { duration: 6.5, repeat: Infinity, ease: "easeInOut" }
+                reduce ? undefined : { duration: 6.5, repeat: Infinity, ease: "easeInOut" }
               }
               draggable={false}
             />
@@ -114,10 +105,9 @@ export function ExperienceAbuFarha() {
               <span className="mt-1 block text-primary">Stroke Programs.</span>
             </h2>
             <p className="mt-7 max-w-2xl text-[calc(21*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-              Successful stroke care is never a single device. It is an ecosystem
-              of imaging, clinical workflows, biomedical engineering and technical
-              support working as one — and AbuFarha helps hospitals bring it
-              together.
+              Successful stroke care is never a single device. It is an ecosystem of imaging,
+              clinical workflows, biomedical engineering and technical support working as one — and
+              AbuFarha helps hospitals bring it together.
             </p>
 
             <ul className="mt-10 space-y-6">
@@ -126,7 +116,10 @@ export function ExperienceAbuFarha() {
                 return (
                   <li key={pillar.id} className="flex gap-4">
                     <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/25 bg-white text-primary shadow-[0_10px_28px_-18px_rgba(15,23,42,0.5)]">
-                      <Icon className="h-[calc(24*var(--desktop-px-unit))] w-[calc(24*var(--desktop-px-unit))]" strokeWidth={1.75} />
+                      <Icon
+                        className="h-[calc(24*var(--desktop-px-unit))] w-[calc(24*var(--desktop-px-unit))]"
+                        strokeWidth={1.75}
+                      />
                     </span>
                     <div>
                       <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">

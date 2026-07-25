@@ -53,7 +53,11 @@ const INTERESTS = [
 
 const DYNAMIC_FIELDS: Record<string, DynField[]> = {
   Hospital: [
-    { name: "hospitalName", label: "Hospital Name", placeholder: "e.g. King Faisal Specialist Hospital" },
+    {
+      name: "hospitalName",
+      label: "Hospital Name",
+      placeholder: "e.g. King Faisal Specialist Hospital",
+    },
     { name: "department", label: "Department", placeholder: "e.g. Cardiology" },
     { name: "country", label: "Country", placeholder: "e.g. Saudi Arabia" },
   ],
@@ -65,12 +69,20 @@ const DYNAMIC_FIELDS: Record<string, DynField[]> = {
   Distributor: [
     { name: "companyName", label: "Company Name", placeholder: "Your company" },
     { name: "country", label: "Country", placeholder: "Country of operation" },
-    { name: "categories", label: "Interested Product Categories", placeholder: "e.g. Imaging, Cath Lab" },
+    {
+      name: "categories",
+      label: "Interested Product Categories",
+      placeholder: "e.g. Imaging, Cath Lab",
+    },
   ],
   Dealer: [
     { name: "companyName", label: "Company Name", placeholder: "Your company" },
     { name: "country", label: "Country", placeholder: "Country of operation" },
-    { name: "categories", label: "Interested Product Categories", placeholder: "e.g. Imaging, C-Arm" },
+    {
+      name: "categories",
+      label: "Interested Product Categories",
+      placeholder: "e.g. Imaging, C-Arm",
+    },
   ],
   "Government Organization": [
     { name: "orgName", label: "Organization Name", placeholder: "Ministry / Authority name" },
@@ -94,7 +106,6 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please add a short message").max(1000),
 });
 
-
 const TRUST = [
   { icon: ShieldCheck, label: "OEM Certified Equipment" },
   { icon: Wrench, label: "Factory-Trained Engineers" },
@@ -115,14 +126,17 @@ const selectCls =
 
 function autoCompleteFor(name: string): string {
   switch (name) {
-    case "fullName": return "name";
+    case "fullName":
+      return "name";
     case "hospitalName":
     case "companyName":
     case "orgName":
     case "facility":
       return "organization";
-    case "country": return "country-name";
-    default: return "off";
+    case "country":
+      return "country-name";
+    default:
+      return "off";
   }
 }
 
@@ -134,7 +148,7 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
-  const dynFields = customerType ? DYNAMIC_FIELDS[customerType] ?? [] : [];
+  const dynFields = customerType ? (DYNAMIC_FIELDS[customerType] ?? []) : [];
 
   const fieldMotion = {
     initial: { opacity: 0, y: reduceMotion ? 0 : 12, height: 0 },
@@ -143,8 +157,7 @@ export function ContactForm() {
     transition: { duration: reduceMotion ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] as const },
   };
 
-  const setField = (name: string, v: string) =>
-    setValues((s) => ({ ...s, [name]: v }));
+  const setField = (name: string, v: string) => setValues((s) => ({ ...s, [name]: v }));
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -235,22 +248,20 @@ export function ContactForm() {
               <span className="text-primary">next project.</span>
             </h2>
             <p className="mt-6 max-w-sm text-[calc(15*var(--desktop-px-unit))] leading-[1.85] text-muted-foreground">
-              Tell us about your specialty, clinical objectives or upcoming
-              healthcare project, and our specialists will recommend the most
-              suitable solution.
+              Tell us about your specialty, clinical objectives or upcoming healthcare project, and
+              our specialists will recommend the most suitable solution.
             </p>
 
             {/* trust indicators */}
             <ul className="mt-10 grid max-w-md gap-y-3.5 border-t border-border pt-8 sm:grid-cols-2">
               {TRUST.map((t) => (
-                <li
-                  key={t.label}
-                  className="group flex items-center gap-3"
-                >
+                <li key={t.label} className="group flex items-center gap-3">
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary/15">
                     <t.icon className="h-4 w-4" strokeWidth={2} />
                   </span>
-                  <span className="text-[calc(13*var(--desktop-px-unit))] font-medium leading-tight text-ink">{t.label}</span>
+                  <span className="text-[calc(13*var(--desktop-px-unit))] font-medium leading-tight text-ink">
+                    {t.label}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -258,202 +269,245 @@ export function ContactForm() {
         </div>
 
         <div className="relative lg:pl-2">
-        {/* soft ambient radial glow behind the card for premium elevation */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(60%_50%_at_50%_20%,var(--primary)_0%,transparent_70%)] opacity-[0.06] blur-2xl"
-        />
-        <motion.form
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-          onSubmit={onSubmit}
-          noValidate
-          className="relative rounded-3xl border border-white/70 bg-white/85 p-6 shadow-[0_50px_120px_-50px_rgba(15,23,42,0.4),0_16px_40px_-24px_rgba(15,23,42,0.18),0_2px_6px_-2px_rgba(15,23,42,0.05)] ring-1 ring-black/5 backdrop-blur-xl sm:p-9"
-        >
-          {/* I am a... */}
-          <div className="space-y-2">
-            <Label htmlFor="customerType" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
-              I am a… <span className="text-primary">*</span>
-            </Label>
-            <Select
-              value={customerType}
-              onValueChange={(v) => {
-                setCustomerType(v);
-                setErrors((e) => ({ ...e, customerType: "" }));
-              }}
-            >
-              <SelectTrigger id="customerType" className={selectCls}>
-                <SelectValue placeholder="Select your profile" />
-              </SelectTrigger>
-              <SelectContent>
-                {CUSTOMER_TYPES.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {errors.customerType && (
-              <p role="alert" className="text-xs font-medium text-destructive">{errors.customerType}</p>
-            )}
-          </div>
-
-          {/* Dynamic profile fields */}
-          <AnimatePresence initial={false} mode="wait">
-            {customerType && (
-              <motion.div
-                key={customerType}
-                {...fieldMotion}
-                className="overflow-hidden"
-              >
-                <div className="grid gap-5 pt-5 sm:grid-cols-2">
-                  {dynFields.map((f) => (
-                    <div
-                      key={f.name}
-                      className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
-                    >
-                      <Label htmlFor={f.name} className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">{f.label}</Label>
-                      <Input
-                        id={f.name}
-                        name={f.name}
-                        autoComplete={autoCompleteFor(f.name)}
-                        aria-invalid={!!errors[f.name]}
-                        aria-describedby={errors[f.name] ? `${f.name}-error` : undefined}
-                        className={inputCls}
-                        placeholder={f.placeholder}
-                        value={values[f.name] ?? ""}
-                        onChange={(e) => setField(f.name, e.target.value)}
-                      />
-                      {errors[f.name] && (
-                        <p id={`${f.name}-error`} role="alert" className="text-xs font-medium text-destructive">{errors[f.name]}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* I'm interested in */}
-          <div className="mt-5 space-y-2">
-            <Label htmlFor="interest" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
-              I&apos;m interested in <span className="text-primary">*</span>
-            </Label>
-            <Select
-              value={interest}
-              onValueChange={(v) => {
-                setInterest(v);
-                setErrors((e) => ({ ...e, interest: "" }));
-              }}
-            >
-              <SelectTrigger
-                id="interest"
-                aria-invalid={!!errors.interest}
-                aria-describedby={errors.interest ? "interest-error" : undefined}
-                className={selectCls}
-              >
-                <SelectValue placeholder="Select a solution" />
-              </SelectTrigger>
-              <SelectContent>
-                {INTERESTS.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {errors.interest && (
-              <p id="interest-error" role="alert" className="text-xs font-medium text-destructive">{errors.interest}</p>
-            )}
-          </div>
-
-          {/* Shared fields */}
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
-                Email <span className="text-primary">*</span>
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                inputMode="email"
-                aria-invalid={!!errors.email}
-                aria-describedby={errors.email ? "email-error" : undefined}
-                className={inputCls}
-                placeholder="you@organization.com"
-                value={values.email ?? ""}
-                onChange={(e) => setField("email", e.target.value)}
-              />
-              {errors.email && (
-                <p id="email-error" role="alert" className="text-xs font-medium text-destructive">{errors.email}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
-                WhatsApp <span className="text-primary">*</span>
-              </Label>
-              <PhoneField
-                id="whatsapp"
-                value={values.whatsapp ?? ""}
-                onChange={(v) => setField("whatsapp", v)}
-                hasError={!!errors.whatsapp}
-              />
-              {errors.whatsapp && (
-                <p id="whatsapp-error" role="alert" className="text-xs font-medium text-destructive">{errors.whatsapp}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-5 space-y-2">
-            <Label htmlFor="message" className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink">
-              Message <span className="text-primary">*</span>
-            </Label>
-            <Textarea
-              id="message"
-              rows={4}
-              autoComplete="off"
-              aria-invalid={!!errors.message}
-              aria-describedby={errors.message ? "message-error" : undefined}
-              className="resize-none rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
-              placeholder="Tell us about your project, requirements or timeline…"
-              value={values.message ?? ""}
-              onChange={(e) => setField("message", e.target.value)}
-            />
-            {errors.message && (
-              <p id="message-error" role="alert" className="text-xs font-medium text-destructive">{errors.message}</p>
-            )}
-          </div>
-
-          <motion.button
-            type="submit"
-            disabled={submitting}
-            whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
-            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 24 }}
-            className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors duration-200 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 disabled:opacity-60"
+          {/* soft ambient radial glow behind the card for premium elevation */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(60%_50%_at_50%_20%,var(--primary)_0%,transparent_70%)] opacity-[0.06] blur-2xl"
+          />
+          <motion.form
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+            onSubmit={onSubmit}
+            noValidate
+            className="relative rounded-3xl border border-white/70 bg-white/85 p-6 shadow-[0_50px_120px_-50px_rgba(15,23,42,0.4),0_16px_40px_-24px_rgba(15,23,42,0.18),0_2px_6px_-2px_rgba(15,23,42,0.05)] ring-1 ring-black/5 backdrop-blur-xl sm:p-9"
           >
-            {submitting ? "Sending…" : "Request Project Consultation"}
-            {submitting ? (
-              <Send className="h-4 w-4 animate-pulse" />
-            ) : (
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            )}
-          </motion.button>
+            {/* I am a... */}
+            <div className="space-y-2">
+              <Label
+                htmlFor="customerType"
+                className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+              >
+                I am a… <span className="text-primary">*</span>
+              </Label>
+              <Select
+                value={customerType}
+                onValueChange={(v) => {
+                  setCustomerType(v);
+                  setErrors((e) => ({ ...e, customerType: "" }));
+                }}
+              >
+                <SelectTrigger id="customerType" className={selectCls}>
+                  <SelectValue placeholder="Select your profile" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CUSTOMER_TYPES.map((t) => (
+                    <SelectItem key={t} value={t}>
+                      {t}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.customerType && (
+                <p role="alert" className="text-xs font-medium text-destructive">
+                  {errors.customerType}
+                </p>
+              )}
+            </div>
 
-          {/* response assurance */}
-          <ul className="mt-6 grid gap-2.5 border-t border-border pt-5">
-            {REASSURANCE.map((r) => (
-              <li key={r.label} className="flex items-center gap-2.5 text-xs text-muted-foreground">
-                <r.icon className="h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2} />
-                {r.label}
-              </li>
-            ))}
-          </ul>
-        </motion.form>
+            {/* Dynamic profile fields */}
+            <AnimatePresence initial={false} mode="wait">
+              {customerType && (
+                <motion.div key={customerType} {...fieldMotion} className="overflow-hidden">
+                  <div className="grid gap-5 pt-5 sm:grid-cols-2">
+                    {dynFields.map((f) => (
+                      <div
+                        key={f.name}
+                        className={`space-y-2 ${dynFields.length % 2 !== 0 && f === dynFields[dynFields.length - 1] ? "sm:col-span-2" : ""}`}
+                      >
+                        <Label
+                          htmlFor={f.name}
+                          className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+                        >
+                          {f.label}
+                        </Label>
+                        <Input
+                          id={f.name}
+                          name={f.name}
+                          autoComplete={autoCompleteFor(f.name)}
+                          aria-invalid={!!errors[f.name]}
+                          aria-describedby={errors[f.name] ? `${f.name}-error` : undefined}
+                          className={inputCls}
+                          placeholder={f.placeholder}
+                          value={values[f.name] ?? ""}
+                          onChange={(e) => setField(f.name, e.target.value)}
+                        />
+                        {errors[f.name] && (
+                          <p
+                            id={`${f.name}-error`}
+                            role="alert"
+                            className="text-xs font-medium text-destructive"
+                          >
+                            {errors[f.name]}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* I'm interested in */}
+            <div className="mt-5 space-y-2">
+              <Label
+                htmlFor="interest"
+                className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+              >
+                I&apos;m interested in <span className="text-primary">*</span>
+              </Label>
+              <Select
+                value={interest}
+                onValueChange={(v) => {
+                  setInterest(v);
+                  setErrors((e) => ({ ...e, interest: "" }));
+                }}
+              >
+                <SelectTrigger
+                  id="interest"
+                  aria-invalid={!!errors.interest}
+                  aria-describedby={errors.interest ? "interest-error" : undefined}
+                  className={selectCls}
+                >
+                  <SelectValue placeholder="Select a solution" />
+                </SelectTrigger>
+                <SelectContent>
+                  {INTERESTS.map((t) => (
+                    <SelectItem key={t} value={t}>
+                      {t}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.interest && (
+                <p
+                  id="interest-error"
+                  role="alert"
+                  className="text-xs font-medium text-destructive"
+                >
+                  {errors.interest}
+                </p>
+              )}
+            </div>
+
+            {/* Shared fields */}
+            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="email"
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+                >
+                  Email <span className="text-primary">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  className={inputCls}
+                  placeholder="you@organization.com"
+                  value={values.email ?? ""}
+                  onChange={(e) => setField("email", e.target.value)}
+                />
+                {errors.email && (
+                  <p id="email-error" role="alert" className="text-xs font-medium text-destructive">
+                    {errors.email}
+                  </p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label
+                  htmlFor="whatsapp"
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+                >
+                  WhatsApp <span className="text-primary">*</span>
+                </Label>
+                <PhoneField
+                  id="whatsapp"
+                  value={values.whatsapp ?? ""}
+                  onChange={(v) => setField("whatsapp", v)}
+                  hasError={!!errors.whatsapp}
+                />
+                {errors.whatsapp && (
+                  <p
+                    id="whatsapp-error"
+                    role="alert"
+                    className="text-xs font-medium text-destructive"
+                  >
+                    {errors.whatsapp}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-2">
+              <Label
+                htmlFor="message"
+                className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+              >
+                Message <span className="text-primary">*</span>
+              </Label>
+              <Textarea
+                id="message"
+                rows={4}
+                autoComplete="off"
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                className="resize-none rounded-xl border-border bg-secondary/30 transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/10"
+                placeholder="Tell us about your project, requirements or timeline…"
+                value={values.message ?? ""}
+                onChange={(e) => setField("message", e.target.value)}
+              />
+              {errors.message && (
+                <p id="message-error" role="alert" className="text-xs font-medium text-destructive">
+                  {errors.message}
+                </p>
+              )}
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={submitting}
+              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 24 }}
+              className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-[0_20px_44px_-16px_var(--primary)] transition-colors duration-200 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 disabled:opacity-60"
+            >
+              {submitting ? "Sending…" : "Request Project Consultation"}
+              {submitting ? (
+                <Send className="h-4 w-4 animate-pulse" />
+              ) : (
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              )}
+            </motion.button>
+
+            {/* response assurance */}
+            <ul className="mt-6 grid gap-2.5 border-t border-border pt-5">
+              {REASSURANCE.map((r) => (
+                <li
+                  key={r.label}
+                  className="flex items-center gap-2.5 text-xs text-muted-foreground"
+                >
+                  <r.icon className="h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2} />
+                  {r.label}
+                </li>
+              ))}
+            </ul>
+          </motion.form>
         </div>
       </div>
     </section>

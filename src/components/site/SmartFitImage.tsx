@@ -28,16 +28,19 @@ function computeBBox(src: string): Promise<BBox | null> {
         ctx.drawImage(img, 0, 0, cw, ch);
         const data = ctx.getImageData(0, 0, cw, ch).data;
 
-        let minX = cw, minY = ch, maxX = -1, maxY = -1;
+        let minX = cw,
+          minY = ch,
+          maxX = -1,
+          maxY = -1;
         // Threshold: near-white or transparent = background
         for (let y = 0; y < ch; y++) {
           for (let x = 0; x < cw; x++) {
             const i = (y * cw + x) * 4;
             const a = data[i + 3];
-            const r = data[i], g = data[i + 1], b = data[i + 2];
-            const isBg =
-              a < 12 ||
-              (r > 243 && g > 243 && b > 243);
+            const r = data[i],
+              g = data[i + 1],
+              b = data[i + 2];
+            const isBg = a < 12 || (r > 243 && g > 243 && b > 243);
             if (!isBg) {
               if (x < minX) minX = x;
               if (x > maxX) maxX = x;
@@ -147,10 +150,7 @@ export function SmartFitImage({
     const displayedBW = bbox.w * scale0;
     const displayedBH = bbox.h * scale0;
     if (displayedBW > 0 && displayedBH > 0) {
-      const extra = Math.min(
-        (size.w * fit) / displayedBW,
-        (size.h * fit) / displayedBH,
-      );
+      const extra = Math.min((size.w * fit) / displayedBW, (size.h * fit) / displayedBH);
       // Only scale UP small subjects — never shrink an image that already fills
       // the container. Skip near-1 transforms so large images stay untouched.
       if (extra > 1.15) {

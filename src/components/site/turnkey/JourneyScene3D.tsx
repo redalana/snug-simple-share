@@ -77,10 +77,12 @@ function GlowPath({ points }: { points: THREE.Vector3[] }) {
   }, [points]);
   return (
     <primitive
-      object={new THREE.Line(
-        geo,
-        new THREE.LineBasicMaterial({ color: 0xe11d2e, transparent: true, opacity: 0.7 }),
-      )}
+      object={
+        new THREE.Line(
+          geo,
+          new THREE.LineBasicMaterial({ color: 0xe11d2e, transparent: true, opacity: 0.7 }),
+        )
+      }
     />
   );
 }
@@ -94,7 +96,13 @@ function Ground() {
   );
 }
 
-function CameraRig({ activeIndex, positions }: { activeIndex: number; positions: THREE.Vector3[] }) {
+function CameraRig({
+  activeIndex,
+  positions,
+}: {
+  activeIndex: number;
+  positions: THREE.Vector3[];
+}) {
   const { camera } = useThree();
   useFrame((state) => {
     const target = positions[activeIndex];
@@ -147,7 +155,15 @@ export function JourneyScene3D({ activeIndex }: { activeIndex: number }) {
             active={i === activeIndex}
           />
         ))}
-        <Sparkles count={60} size={2} scale={[16, 4, 8]} position={[0, 2, 0]} speed={0.3} opacity={0.4} color="#ffffff" />
+        <Sparkles
+          count={60}
+          size={2}
+          scale={[16, 4, 8]}
+          position={[0, 2, 0]}
+          speed={0.3}
+          opacity={0.4}
+          color="#ffffff"
+        />
         <CameraRig activeIndex={activeIndex} positions={positions} />
         <Environment preset="warehouse" />
       </Suspense>

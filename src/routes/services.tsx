@@ -20,8 +20,7 @@ const SERVICES = [
   },
   {
     name: "Calibration & Performance Verification",
-    description:
-      "OEM-aligned calibration and QA testing for imaging and diagnostic equipment.",
+    description: "OEM-aligned calibration and QA testing for imaging and diagnostic equipment.",
     serviceType: "Calibration",
   },
   {
@@ -70,9 +69,7 @@ export const Route = createFileRoute("/services")({
       },
       ...SERVICES.map((s) => ({
         type: "application/ld+json",
-        children: JSON.stringify(
-          serviceJsonLd({ ...s, url: SITE_URL + "/services" }),
-        ),
+        children: JSON.stringify(serviceJsonLd({ ...s, url: SITE_URL + "/services" })),
       })),
     ],
   }),

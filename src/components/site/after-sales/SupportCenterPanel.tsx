@@ -1,11 +1,4 @@
-import {
-  ArrowUpRight,
-  Clock,
-  Zap,
-  CheckCircle2,
-  Phone,
-  MessageSquare,
-} from "lucide-react";
+import { ArrowUpRight, Clock, Zap, CheckCircle2, Phone, MessageSquare } from "lucide-react";
 import { CONTACT_CHANNELS, REASONS } from "./data";
 
 export function SupportCenterPanel() {
@@ -17,9 +10,7 @@ export function SupportCenterPanel() {
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
           Support Center
         </div>
-        <div className="mt-3 font-display text-2xl font-extrabold">
-          We&apos;re here 24/7.
-        </div>
+        <div className="mt-3 font-display text-2xl font-extrabold">We&apos;re here 24/7.</div>
         <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-white/60">
           Reach an engineer instantly through any channel below.
         </p>
@@ -32,7 +23,9 @@ export function SupportCenterPanel() {
               href={href}
               className="group flex items-center gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-3.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.06]"
             >
-              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] ${accent}`}>
+              <div
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] ${accent}`}
+              >
                 <Icon className="h-4.5 w-4.5" />
               </div>
               <div className="min-w-0 flex-1">
@@ -54,14 +47,20 @@ export function SupportCenterPanel() {
             <div className="flex items-center gap-1.5 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
               <Clock className="h-3 w-3" /> Support Hours
             </div>
-            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">24 / 7</div>
-            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">Year-round coverage</div>
+            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">
+              24 / 7
+            </div>
+            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">
+              Year-round coverage
+            </div>
           </div>
           <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
             <div className="flex items-center gap-1.5 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
               <Zap className="h-3 w-3" /> Avg Response
             </div>
-            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">&lt; 4 hrs</div>
+            <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">
+              &lt; 4 hrs
+            </div>
             <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">Regional SLA</div>
           </div>
         </div>
@@ -73,7 +72,10 @@ export function SupportCenterPanel() {
           </div>
           <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {REASONS.map((r) => (
-              <li key={r} className="flex items-center gap-2 text-[calc(13*var(--desktop-px-unit))] text-white/80">
+              <li
+                key={r}
+                className="flex items-center gap-2 text-[calc(13*var(--desktop-px-unit))] text-white/80"
+              >
                 <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
                   <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
                 </span>

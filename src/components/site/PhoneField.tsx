@@ -15,7 +15,6 @@ import { Popover, PopoverContent, PopoverTrigger, PopoverAnchor } from "@/compon
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-
 type ParsedCountry = ReturnType<typeof parseCountry>;
 
 const COUNTRIES: ParsedCountry[] = defaultCountries
@@ -55,14 +54,13 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
   const listRef = useRef<HTMLDivElement>(null);
   const detected = useRef(false);
 
-  const { inputValue, country, setCountry, handlePhoneValueChange, inputRef } =
-    usePhoneInput({
-      defaultCountry: "eg",
-      value,
-      countries: defaultCountries,
-      disableDialCodeAndPrefix: true,
-      onChange: (data) => onChange(data.phone),
-    });
+  const { inputValue, country, setCountry, handlePhoneValueChange, inputRef } = usePhoneInput({
+    defaultCountry: "eg",
+    value,
+    countries: defaultCountries,
+    disableDialCodeAndPrefix: true,
+    onChange: (data) => onChange(data.phone),
+  });
 
   // Auto-detect visitor country on first mount (only if no value yet)
   useEffect(() => {
@@ -163,7 +161,10 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
               aria-label={`Selected country: ${country.name} (+${dialCode}). Change country`}
               className="flex shrink-0 items-center gap-2 border-r border-border/80 px-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-secondary/60 focus-visible:outline-none focus-visible:bg-secondary/70"
             >
-              <FlagImage iso2={country.iso2} className="h-4 w-6 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm" />
+              <FlagImage
+                iso2={country.iso2}
+                className="h-4 w-6 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
+              />
               <span className="tabular-nums text-muted-foreground">+{dialCode}</span>
               <ChevronDown
                 className={cn(
@@ -173,81 +174,83 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
               />
             </button>
           </PopoverTrigger>
-        <PopoverContent
-          align="start"
-          sideOffset={6}
-          className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-(--shadow-elevated)"
-          onOpenAutoFocus={(e) => e.preventDefault()}
-        >
-
-          <AnimatePresence>
-            {open && (
-              <motion.div
-                initial={reduceMotion ? undefined : { opacity: 0, y: -6, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: -6, scale: 0.98 }}
-                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* sticky search */}
-                <div className="sticky top-0 z-10 border-b border-border/70 bg-white/95 p-2.5 backdrop-blur">
-                  <div className="relative">
-                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      ref={searchRef}
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      onKeyDown={onSearchKeyDown}
-                      placeholder="Search country, code or +dial"
-                      aria-label="Search countries"
-                      className="h-10 rounded-lg border-border bg-secondary/40 pl-9 text-sm focus-visible:border-primary focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-primary/15"
-                    />
-                  </div>
-                </div>
-
-                <div ref={listRef} className="max-h-[calc(280*var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5">
-                  {filtered.length === 0 ? (
-                    <p className="px-3 py-6 text-center text-sm text-muted-foreground">
-                      No countries found
-                    </p>
-                  ) : (
-                    <div>
-                      {filtered.map((c, index) => {
-                        const isSelected = c.iso2 === country.iso2;
-                        const isActive = index === activeIndex;
-                        return (
-                          <button
-                            key={c.iso2}
-                            type="button"
-                            role="option"
-                            data-idx={index}
-                            aria-selected={isSelected}
-                            onClick={() => selectCountry(c.iso2)}
-                            onMouseEnter={() => setActiveIndex(index)}
-                            className={cn(
-                              "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors duration-100",
-                              isActive ? "bg-primary/8" : "bg-transparent",
-                              isSelected && "font-semibold",
-                            )}
-                          >
-                            <FlagImage
-                              iso2={c.iso2}
-                              className="h-4 w-6 shrink-0 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
-                            />
-                            <span className="flex-1 truncate text-ink">{c.name}</span>
-                            <span className="tabular-nums text-xs text-muted-foreground">
-                              +{c.dialCode}
-                            </span>
-                            {isSelected && <Check className="h-4 w-4 shrink-0 text-primary" />}
-                          </button>
-                        );
-                      })}
+          <PopoverContent
+            align="start"
+            sideOffset={6}
+            className="w-[var(--radix-popover-trigger-width)] min-w-[calc(280*var(--desktop-px-unit))] overflow-hidden rounded-2xl border-border/80 p-0 shadow-(--shadow-elevated)"
+            onOpenAutoFocus={(e) => e.preventDefault()}
+          >
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  initial={reduceMotion ? undefined : { opacity: 0, y: -6, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={reduceMotion ? undefined : { opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {/* sticky search */}
+                  <div className="sticky top-0 z-10 border-b border-border/70 bg-white/95 p-2.5 backdrop-blur">
+                    <div className="relative">
+                      <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        ref={searchRef}
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={onSearchKeyDown}
+                        placeholder="Search country, code or +dial"
+                        aria-label="Search countries"
+                        className="h-10 rounded-lg border-border bg-secondary/40 pl-9 text-sm focus-visible:border-primary focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-primary/15"
+                      />
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </PopoverContent>
+                  </div>
+
+                  <div
+                    ref={listRef}
+                    className="max-h-[calc(280*var(--desktop-px-unit))] overflow-y-auto overscroll-contain p-1.5"
+                  >
+                    {filtered.length === 0 ? (
+                      <p className="px-3 py-6 text-center text-sm text-muted-foreground">
+                        No countries found
+                      </p>
+                    ) : (
+                      <div>
+                        {filtered.map((c, index) => {
+                          const isSelected = c.iso2 === country.iso2;
+                          const isActive = index === activeIndex;
+                          return (
+                            <button
+                              key={c.iso2}
+                              type="button"
+                              role="option"
+                              data-idx={index}
+                              aria-selected={isSelected}
+                              onClick={() => selectCountry(c.iso2)}
+                              onMouseEnter={() => setActiveIndex(index)}
+                              className={cn(
+                                "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left text-sm transition-colors duration-100",
+                                isActive ? "bg-primary/8" : "bg-transparent",
+                                isSelected && "font-semibold",
+                              )}
+                            >
+                              <FlagImage
+                                iso2={c.iso2}
+                                className="h-4 w-6 shrink-0 rounded-[calc(3*var(--desktop-px-unit))] object-cover shadow-sm"
+                              />
+                              <span className="flex-1 truncate text-ink">{c.name}</span>
+                              <span className="tabular-nums text-xs text-muted-foreground">
+                                +{c.dialCode}
+                              </span>
+                              {isSelected && <Check className="h-4 w-4 shrink-0 text-primary" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </PopoverContent>
 
           <input
             id={id}
@@ -261,13 +264,11 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
             placeholder={formatExample(country.iso2, dialCode)}
             className="w-full min-w-0 bg-transparent px-3.5 text-sm text-ink outline-none placeholder:text-muted-foreground/70"
           />
-
         </div>
       </PopoverAnchor>
     </Popover>
   );
 }
-
 
 function formatExample(iso2: string, dialCode: string): string {
   try {
@@ -276,9 +277,7 @@ function formatExample(iso2: string, dialCode: string): string {
     t.input(`+${dialCode}1001234567`);
     const out = t.getNumber()?.formatInternational();
     if (!out) return "00 000 0000";
-    return out
-      .replace(new RegExp(`^\\+${dialCode}\\s*`), "")
-      .replace(/\d/g, "0");
+    return out.replace(new RegExp(`^\\+${dialCode}\\s*`), "").replace(/\d/g, "0");
   } catch {
     return "00 000 0000";
   }

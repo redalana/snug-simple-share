@@ -24,11 +24,7 @@ export interface GeneratedImageMeta {
 
 export interface ImageService {
   slugify(input: string): string;
-  generateFilename(input: {
-    productName: string;
-    index: number;
-    extension?: string;
-  }): string;
+  generateFilename(input: { productName: string; index: number; extension?: string }): string;
   mapManufacturer(brand: string): string;
   generateAltText(brand: string): string;
   generateTitle(brand: string): string;

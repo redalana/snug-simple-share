@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Wrench,
-  Cog,
-  GraduationCap,
-  ShieldCheck,
-  Boxes,
-  LifeBuoy,
-  BadgeCheck,
-} from "lucide-react";
+import { Wrench, Cog, GraduationCap, ShieldCheck, Boxes, LifeBuoy, BadgeCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { useCountUp } from "@/hooks/use-count-up";
@@ -82,7 +74,6 @@ const PILLARS: Pillar[] = [
     title: "One-Year Free Warranty",
     copy: "Every installation includes a full year of complimentary warranty coverage, with continued maintenance plans available beyond the first year to keep your equipment running at full performance.",
   },
-
 ];
 
 export function WhyAbuFarha() {
@@ -102,9 +93,8 @@ export function WhyAbuFarha() {
             <span className="block text-primary">long after installation.</span>
           </h2>
           <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-            Anyone can deliver a machine. AbuFarha delivers an engineered,
-            supported and accountable partnership for the entire life of your
-            technology.
+            Anyone can deliver a machine. AbuFarha delivers an engineered, supported and accountable
+            partnership for the entire life of your technology.
           </p>
         </motion.div>
 
@@ -122,7 +112,10 @@ export function WhyAbuFarha() {
               >
                 <span className="absolute -top-px left-0 h-[calc(2*var(--desktop-px-unit))] w-12 bg-primary transition-all duration-300 group-hover:w-20" />
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-white text-primary shadow-[0_12px_30px_-20px_rgba(15,23,42,0.5)]">
-                  <Icon className="h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]" strokeWidth={1.75} />
+                  <Icon
+                    className="h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]"
+                    strokeWidth={1.75}
+                  />
                 </span>
                 <h3 className="mt-6 font-display text-[1.4rem] font-extrabold leading-tight tracking-[-0.01em] text-ink">
                   {pillar.title}
@@ -148,7 +141,6 @@ export function WhyAbuFarha() {
           ))}
         </motion.div>
       </div>
-
     </section>
   );
 }

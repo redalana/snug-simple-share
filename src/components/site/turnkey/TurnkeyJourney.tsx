@@ -12,11 +12,13 @@ export function TurnkeyJourney() {
               The Turnkey Journey <ArrowRight className="h-3 w-3" />
             </p>
             <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
-              From Vision<br />To Performance
+              From Vision
+              <br />
+              To Performance
             </h2>
             <p className="mt-4 max-w-sm text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-              Our proven process ensures every department is delivered on time,
-              on budget, and to the highest clinical standards.
+              Our proven process ensures every department is delivered on time, on budget, and to
+              the highest clinical standards.
             </p>
             <a
               href="#"
@@ -43,8 +45,12 @@ export function TurnkeyJourney() {
                   </span>
                 </div>
                 <div className="mt-5 text-center">
-                  <div className="font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">{p.title}</div>
-                  <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">{p.copy}</p>
+                  <div className="font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-foreground">
+                    {p.title}
+                  </div>
+                  <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                    {p.copy}
+                  </p>
                 </div>
               </motion.div>
             ))}

@@ -14,12 +14,7 @@ import {
 } from "lucide-react";
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
-import {
-  FEATURED_ARTICLES,
-  LATEST_ARTICLES,
-  MORE_ARTICLES,
-  type Article,
-} from "@/lib/blog";
+import { FEATURED_ARTICLES, LATEST_ARTICLES, MORE_ARTICLES, type Article } from "@/lib/blog";
 
 const SORTS = ["Latest", "Oldest", "Most Popular"] as const;
 
@@ -52,8 +47,8 @@ function PageIntro() {
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
           Evidence-based clinical articles, healthcare technology insights, buying guides,
-          educational resources, and expert knowledge designed for hospitals, physicians,
-          biomedical engineers, and healthcare professionals across Africa and the Middle East.
+          educational resources, and expert knowledge designed for hospitals, physicians, biomedical
+          engineers, and healthcare professionals across Africa and the Middle East.
         </p>
       </div>
     </section>
@@ -69,10 +64,7 @@ function HeroSlider() {
   const count = slides.length;
 
   const next = useCallback(() => setActive((i) => (i + 1) % count), [count]);
-  const prev = useCallback(
-    () => setActive((i) => (i - 1 + count) % count),
-    [count],
-  );
+  const prev = useCallback(() => setActive((i) => (i - 1 + count) % count), [count]);
 
   useEffect(() => {
     if (paused) return;
@@ -234,9 +226,7 @@ function SearchBar() {
                       setOpen(false);
                     }}
                     className={`block w-full rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
-                      s === sort
-                        ? "bg-primary/10 text-primary"
-                        : "text-ink hover:bg-secondary"
+                      s === sort ? "bg-primary/10 text-primary" : "text-ink hover:bg-secondary"
                     }`}
                   >
                     {s}
@@ -298,9 +288,7 @@ function ArticleCard({ a }: { a: Article }) {
           <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
             {a.title}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {a.excerpt}
-          </p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.excerpt}</p>
           <div className="mt-auto flex items-center justify-between gap-3 pt-5">
             <div className="flex items-center gap-4 border-t border-border pt-4 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
@@ -337,8 +325,8 @@ function CTABand() {
                 Need help choosing the right medical equipment?
               </h3>
               <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
-                Our experts are here to help you find the best solution for your
-                facility and budget.
+                Our experts are here to help you find the best solution for your facility and
+                budget.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -381,10 +369,7 @@ function Pagination() {
   return (
     <section className="bg-white pt-12 lg:pt-16">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
-        <nav
-          aria-label="Pagination"
-          className="flex flex-wrap items-center justify-center gap-2"
-        >
+        <nav aria-label="Pagination" className="flex flex-wrap items-center justify-center gap-2">
           <button
             type="button"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
@@ -409,10 +394,7 @@ function Pagination() {
                 {p}
               </button>
             ) : (
-              <span
-                key={`ellipsis-${i}`}
-                className="px-2 text-sm text-muted-foreground"
-              >
+              <span key={`ellipsis-${i}`} className="px-2 text-sm text-muted-foreground">
                 {p}
               </span>
             ),

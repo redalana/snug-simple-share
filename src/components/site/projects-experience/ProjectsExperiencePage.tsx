@@ -77,9 +77,9 @@ function Hero() {
             <span className="text-primary">Across Africa &amp; The Middle East</span>
           </motion.h1>
           <p className="mt-6 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-            Delivering medical imaging, cardiology, women&rsquo;s healthcare,
-            turnkey projects, installation, training and long-term support for
-            healthcare providers across multiple markets.
+            Delivering medical imaging, cardiology, women&rsquo;s healthcare, turnkey projects,
+            installation, training and long-term support for healthcare providers across multiple
+            markets.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
@@ -175,8 +175,8 @@ function RegionalPresence() {
         <div className="mb-10 max-w-md">
           <Eyebrow index="01">Our Regional Presence</Eyebrow>
           <p className="mt-4 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-            Delivering healthcare solutions across Africa &amp; The Middle
-            East through local expertise and long-term partnerships.
+            Delivering healthcare solutions across Africa &amp; The Middle East through local
+            expertise and long-term partnerships.
           </p>
         </div>
 
@@ -211,10 +211,18 @@ function RegionalPresence() {
               {/* Soft ocean/sphere backdrop */}
               <path d={SPHERE_D} fill="#f4f7fb" stroke="#c9d2dd" strokeWidth={0.6} />
               {WORLD_COUNTRY_PATHS.filter((c) => !HIGHLIGHT_NAMES.has(c.name)).map((c) => (
-                <path key={c.name} d={c.d} fill="#dfe4ec" stroke="#b8c1cd" strokeWidth={0.45} strokeLinejoin="round" />
+                <path
+                  key={c.name}
+                  d={c.d}
+                  fill="#dfe4ec"
+                  stroke="#b8c1cd"
+                  strokeWidth={0.45}
+                  strokeLinejoin="round"
+                />
               ))}
               {WORLD_COUNTRY_PATHS.filter((c) => HIGHLIGHT_NAMES.has(c.name)).map((c) => {
-                const isA = hovered === c.name || (c.name === "Somalia" && hovered === "Somaliland");
+                const isA =
+                  hovered === c.name || (c.name === "Somalia" && hovered === "Somaliland");
                 return (
                   <path
                     key={c.name}
@@ -238,8 +246,21 @@ function RegionalPresence() {
                     onMouseLeave={() => setHovered(null)}
                     style={{ cursor: "pointer" }}
                   >
-                    <circle cx={p.x} cy={p.y} r={isA ? 12 : 8} fill="var(--primary)" opacity={isA ? 0.28 : 0.2} style={{ transition: "all .25s ease" }} />
-                    <circle cx={p.x} cy={p.y} r={isA ? 5 : 3.5} fill="var(--primary)" style={{ transition: "all .25s ease" }} />
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isA ? 12 : 8}
+                      fill="var(--primary)"
+                      opacity={isA ? 0.28 : 0.2}
+                      style={{ transition: "all .25s ease" }}
+                    />
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isA ? 5 : 3.5}
+                      fill="var(--primary)"
+                      style={{ transition: "all .25s ease" }}
+                    />
                   </g>
                 );
               })}
@@ -257,13 +278,15 @@ function RegionalPresence() {
                   className={`pointer-events-none absolute z-10 w-60 -translate-x-1/2 rounded-xl border border-black/5 bg-white p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(15,23,42,0.35)] transition-opacity duration-200 ${
                     isA ? "opacity-100" : "opacity-0"
                   }`}
-                  style={{ left: `${(p.x / MAP_W) * 100}%`, top: `calc(${(p.y / MAP_H) * 100}% - calc(14*var(--desktop-px-unit)))`, transform: "translate(-50%, -100%)" }}
+                  style={{
+                    left: `${(p.x / MAP_W) * 100}%`,
+                    top: `calc(${(p.y / MAP_H) * 100}% - calc(14*var(--desktop-px-unit)))`,
+                    transform: "translate(-50%, -100%)",
+                  }}
                 >
                   <div className="flex items-center gap-2">
                     <CountryFlag name={r.name} className="h-3.5 w-5" />
-                    <span className="font-display text-sm font-extrabold text-ink">
-                      {r.name}
-                    </span>
+                    <span className="font-display text-sm font-extrabold text-ink">{r.name}</span>
                   </div>
                   <div className="mt-2 text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-muted-foreground">
                     Projects
@@ -287,10 +310,7 @@ function RegionalPresence() {
           </motion.div>
 
           {/* COUNTRY LIST */}
-          <ul
-            id="countries"
-            className="grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2 sm:gap-y-4"
-          >
+          <ul id="countries" className="grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2 sm:gap-y-4">
             {highlighted.map((r) => {
               const isA = hovered === r.name;
               return (
@@ -322,8 +342,6 @@ function RegionalPresence() {
     </section>
   );
 }
-
-
 
 /* ============================================================
  * 3. TRUST STRIP
@@ -363,9 +381,7 @@ function TrustStrip() {
                   <Icon className="h-5 w-5" strokeWidth={1.8} />
                 </span>
                 <div>
-                  <div className="font-display text-base font-bold text-ink">
-                    {t.title}
-                  </div>
+                  <div className="font-display text-base font-bold text-ink">{t.title}</div>
                   <p className="mt-1 text-[calc(13*var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
                     {t.copy}
                   </p>
@@ -526,11 +542,7 @@ function Specialties() {
           className="mt-10 grid gap-8 rounded-3xl border border-border bg-white p-6 shadow-(--shadow-panel) lg:grid-cols-[1fr_1.1fr] lg:p-8"
         >
           <div className="relative overflow-hidden rounded-2xl bg-neutral-100 aspect-[4/3]">
-            <img
-              src={active.image}
-              alt={active.title}
-              className="h-full w-full object-cover"
-            />
+            <img src={active.image} alt={active.title} className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">
@@ -550,9 +562,7 @@ function Specialties() {
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
                       <Icon className="h-4 w-4" strokeWidth={1.8} />
                     </span>
-                    <span className="text-sm font-semibold text-ink">
-                      {f.label}
-                    </span>
+                    <span className="text-sm font-semibold text-ink">{f.label}</span>
                   </div>
                 );
               })}
@@ -568,13 +578,43 @@ function Specialties() {
  * 5. HOW WE DELIVER PROJECTS — timeline
  * ==========================================================*/
 const STEPS: { n: string; title: string; copy: string; icon: LucideIcon }[] = [
-  { n: "1", title: "Consultation", copy: "Understanding your needs and project goals.", icon: MessageSquare },
-  { n: "2", title: "Equipment Selection", copy: "Recommending the right technology for impact.", icon: Package },
+  {
+    n: "1",
+    title: "Consultation",
+    copy: "Understanding your needs and project goals.",
+    icon: MessageSquare,
+  },
+  {
+    n: "2",
+    title: "Equipment Selection",
+    copy: "Recommending the right technology for impact.",
+    icon: Package,
+  },
   { n: "3", title: "Logistics", copy: "Safe and timely delivery to your location.", icon: Truck },
-  { n: "4", title: "Installation", copy: "Professional installation by certified engineers.", icon: HardHat },
-  { n: "5", title: "Commissioning", copy: "Testing and ensuring optimal system performance.", icon: ClipboardCheck },
-  { n: "6", title: "Training", copy: "Hands-on training for your medical and technical teams.", icon: GraduationCap },
-  { n: "7", title: "After-Sales Support", copy: "Ongoing support and spare parts availability.", icon: LifeBuoy },
+  {
+    n: "4",
+    title: "Installation",
+    copy: "Professional installation by certified engineers.",
+    icon: HardHat,
+  },
+  {
+    n: "5",
+    title: "Commissioning",
+    copy: "Testing and ensuring optimal system performance.",
+    icon: ClipboardCheck,
+  },
+  {
+    n: "6",
+    title: "Training",
+    copy: "Hands-on training for your medical and technical teams.",
+    icon: GraduationCap,
+  },
+  {
+    n: "7",
+    title: "After-Sales Support",
+    copy: "Ongoing support and spare parts availability.",
+    icon: LifeBuoy,
+  },
 ];
 
 function HowWeDeliver() {
@@ -607,9 +647,7 @@ function HowWeDeliver() {
                       {s.n}
                     </span>
                   </div>
-                  <h3 className="mt-5 font-display text-sm font-extrabold text-ink">
-                    {s.title}
-                  </h3>
+                  <h3 className="mt-5 font-display text-sm font-extrabold text-ink">{s.title}</h3>
                   <p className="mt-2 max-w-[16rem] text-[calc(12*var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
                     {s.copy}
                   </p>
@@ -708,7 +746,10 @@ function ExperienceGrid() {
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
-              <div aria-hidden className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/25" />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/25"
+              />
               <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold text-white ring-1 ring-white/20 backdrop-blur">
                 <span>{c.flag}</span> {c.country}
               </span>
@@ -734,7 +775,6 @@ function ExperienceGrid() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -811,17 +851,22 @@ function Technologies() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                 />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-ink/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                />
               </div>
               <div className="flex items-center justify-center gap-1.5 p-3 text-center">
                 <span className="text-[calc(12.5*var(--desktop-px-unit))] font-bold text-ink transition-colors group-hover:text-primary">
                   {t.title}
                 </span>
-                <ArrowRight aria-hidden className="h-3 w-3 -translate-x-1 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+                <ArrowRight
+                  aria-hidden
+                  className="h-3 w-3 -translate-x-1 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                />
               </div>
             </Link>
           ))}
-
         </div>
       </div>
     </section>

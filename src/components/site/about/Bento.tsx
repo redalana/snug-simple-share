@@ -9,7 +9,11 @@ export function Bento() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">
-            <div className="flex justify-center"><Eyebrow align="center" index="03">What Makes AbuFarha Different</Eyebrow></div>
+            <div className="flex justify-center">
+              <Eyebrow align="center" index="03">
+                What Makes AbuFarha Different
+              </Eyebrow>
+            </div>
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               An engineering company inside a medical distributor.
             </h2>
@@ -39,10 +43,14 @@ export function Bento() {
                       <Sparkles className="h-3 w-3" /> Our Core
                     </div>
                   )}
-                  <h3 className={`font-display font-extrabold leading-tight ${b.featured ? "text-2xl lg:text-[2rem]" : "text-xl lg:text-2xl"}`}>
+                  <h3
+                    className={`font-display font-extrabold leading-tight ${b.featured ? "text-2xl lg:text-[2rem]" : "text-xl lg:text-2xl"}`}
+                  >
                     {b.title}
                   </h3>
-                  <p className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15*var(--desktop-px-unit))]" : "text-[calc(13.5*var(--desktop-px-unit))]"}`}>
+                  <p
+                    className={`mt-3 max-w-lg leading-relaxed text-white/85 ${b.featured ? "text-[calc(15*var(--desktop-px-unit))]" : "text-[calc(13.5*var(--desktop-px-unit))]"}`}
+                  >
                     {b.desc}
                   </p>
                 </div>

@@ -13,7 +13,9 @@ export function FAQ() {
             Frequently Asked Questions
           </p>
           <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
-            Everything You Need<br />To Know
+            Everything You Need
+            <br />
+            To Know
           </h2>
         </div>
 
@@ -54,7 +56,11 @@ export function FAQ() {
         </div>
 
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-black/5">
-          <img src={abufarhaHq} alt="AbuFarha support engineer" className="h-full w-full object-cover" />
+          <img
+            src={abufarhaHq}
+            alt="AbuFarha support engineer"
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
     </section>

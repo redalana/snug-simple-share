@@ -24,7 +24,7 @@ type Node = {
   category: string;
   title: string;
   copy: string;
-  
+
   side: "left" | "right";
   level: "primary" | "secondary";
   /** connector path from the panel edge to a meaningful anatomical region */
@@ -171,13 +171,19 @@ function NodePanel({
           } ${isPrimary ? "h-12 w-12 border-primary/25" : "h-9 w-9 border-border"}`}
         >
           <Icon
-            className={isPrimary ? "h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]" : "h-[calc(17*var(--desktop-px-unit))] w-[calc(17*var(--desktop-px-unit))]"}
+            className={
+              isPrimary
+                ? "h-[calc(22*var(--desktop-px-unit))] w-[calc(22*var(--desktop-px-unit))]"
+                : "h-[calc(17*var(--desktop-px-unit))] w-[calc(17*var(--desktop-px-unit))]"
+            }
             strokeWidth={1.75}
           />
         </span>
         <span
           className={`font-bold uppercase tracking-[0.24em] text-primary ${
-            isPrimary ? "text-[calc(12*var(--desktop-px-unit))]" : "text-[calc(10.5*var(--desktop-px-unit))] opacity-80"
+            isPrimary
+              ? "text-[calc(12*var(--desktop-px-unit))]"
+              : "text-[calc(10.5*var(--desktop-px-unit))] opacity-80"
           }`}
         >
           {node.num} · {node.category}
@@ -199,7 +205,6 @@ function NodePanel({
       >
         {node.copy}
       </p>
-
     </motion.div>
   );
 }
@@ -209,10 +214,7 @@ export function StrokeCareProgram() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
-    <section
-      id="stroke-ecosystem"
-      className="relative overflow-hidden bg-white py-16 lg:py-20"
-    >
+    <section id="stroke-ecosystem" className="relative overflow-hidden bg-white py-16 lg:py-20">
       {/* Very subtle engineering grid */}
       <div
         aria-hidden
@@ -221,10 +223,8 @@ export function StrokeCareProgram() {
           backgroundImage:
             "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(72*var(--desktop-px-unit)) calc(72*var(--desktop-px-unit))",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
+          maskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent)",
         }}
       />
 
@@ -244,19 +244,15 @@ export function StrokeCareProgram() {
           </div>
           <h1 className="mt-8 font-display text-[3.1rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[4rem] lg:text-[4rem]">
             A Stroke Program Is an Ecosystem —
-            <span className="mt-2 block text-primary">
-              Not a Single Device.
-            </span>
+            <span className="mt-2 block text-primary">Not a Single Device.</span>
           </h1>
           <p className="mx-auto mt-9 max-w-2xl text-[calc(21*var(--desktop-px-unit))] leading-[1.8] text-muted-foreground">
-            When a cerebral artery is blocked, brain tissue is lost every minute
-            until blood flow is restored. Restoring it in time depends on
-            precision imaging, rapid clinical decisions, biomedical engineering,
-            efficient workflows and reliable technical support acting as one
-            system. Each element below explains how it protects the patient's
-            brain — and how AbuFarha helps hospitals bring them together.
+            When a cerebral artery is blocked, brain tissue is lost every minute until blood flow is
+            restored. Restoring it in time depends on precision imaging, rapid clinical decisions,
+            biomedical engineering, efficient workflows and reliable technical support acting as one
+            system. Each element below explains how it protects the patient's brain — and how
+            AbuFarha helps hospitals bring them together.
           </p>
-
         </motion.div>
 
         {/* Hero visual + connected ecosystem */}
@@ -370,15 +366,9 @@ export function StrokeCareProgram() {
                   WebkitMaskImage:
                     "radial-gradient(ellipse 78% 82% at 52% 46%, black 58%, transparent 92%)",
                 }}
-                animate={
-                  reduce
-                    ? undefined
-                    : { scale: [1, 1.012, 1], opacity: [1, 0.985, 1] }
-                }
+                animate={reduce ? undefined : { scale: [1, 1.012, 1], opacity: [1, 0.985, 1] }}
                 transition={
-                  reduce
-                    ? undefined
-                    : { duration: 6.5, repeat: Infinity, ease: "easeInOut" }
+                  reduce ? undefined : { duration: 6.5, repeat: Infinity, ease: "easeInOut" }
                 }
                 draggable={false}
               />
@@ -451,10 +441,9 @@ export function StrokeCareProgram() {
                 Visit Before You Invest.
               </h3>
               <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-                We invite healthcare leaders, physicians and biomedical
-                engineers to experience firsthand how comprehensive stroke
-                programs are planned, engineered, implemented and supported
-                before making one of their hospital's most important technology
+                We invite healthcare leaders, physicians and biomedical engineers to experience
+                firsthand how comprehensive stroke programs are planned, engineered, implemented and
+                supported before making one of their hospital's most important technology
                 investments.
               </p>
 
@@ -477,8 +466,8 @@ export function StrokeCareProgram() {
               </ul>
 
               <p className="mt-11 max-w-xl text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground/70">
-                Helping hospitals build comprehensive stroke programs across
-                Africa and the Middle East since 1999.
+                Helping hospitals build comprehensive stroke programs across Africa and the Middle
+                East since 1999.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -497,7 +486,6 @@ export function StrokeCareProgram() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </div>
-
             </div>
           </div>
         </motion.div>

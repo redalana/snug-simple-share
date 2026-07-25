@@ -25,7 +25,12 @@ export function FinalCTA() {
         preserveAspectRatio="none"
         viewBox="0 0 1200 120"
       >
-        <path d="M0 60h440l24-42 32 84 22-56 20 14h642" fill="none" stroke="currentColor" strokeWidth="2" />
+        <path
+          d="M0 60h440l24-42 32 84 22-56 20 14h642"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
       </svg>
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -39,8 +44,8 @@ export function FinalCTA() {
             Let&apos;s Build Better Healthcare Together
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85">
-            Talk to our experts about equipping your next department or complete
-            medical technology project.
+            Talk to our experts about equipping your next department or complete medical technology
+            project.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
@@ -68,9 +73,7 @@ export function FinalCTA() {
             Backed by a 1-year free warranty on every installation.
           </p>
         </div>
-
       </motion.div>
     </section>
   );
 }
-

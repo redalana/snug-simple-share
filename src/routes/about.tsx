@@ -25,9 +25,7 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:description", content: DESC },
     ],
     links: [{ rel: "canonical", href: SITE_URL + "/about" }],
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(FOUNDER_JSONLD) },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(FOUNDER_JSONLD) }],
   }),
   component: AboutRoute,
 });

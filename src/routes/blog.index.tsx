@@ -14,7 +14,11 @@ export const Route = createFileRoute("/blog/")({
           "Evidence-based clinical articles, healthcare technology insights, buying guides, educational resources, and expert knowledge for hospitals, physicians and biomedical engineers across Africa and the Middle East.",
       },
       { property: "og:title", content: "Healthcare Knowledge Center — AbuFarha Medical" },
-      { property: "og:description", content: "Evidence-based clinical articles, healthcare technology insights and expert knowledge for healthcare professionals across Africa and the Middle East." },
+      {
+        property: "og:description",
+        content:
+          "Evidence-based clinical articles, healthcare technology insights and expert knowledge for healthcare professionals across Africa and the Middle East.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGES.blog },
       { name: "twitter:image", content: OG_IMAGES.blog },
@@ -30,7 +34,9 @@ function BlogRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content"><BlogPage /></main>
+      <main id="main-content">
+        <BlogPage />
+      </main>
       <Footer />
     </div>
   );

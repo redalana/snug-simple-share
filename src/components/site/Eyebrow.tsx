@@ -17,15 +17,15 @@ export function Eyebrow({
   /** Chapter number (e.g. "01") that turns disconnected sections into a story arc. */
   index?: string;
 }) {
-  const text =
-    tone === "light" ? "text-white/70" : "text-primary";
-  const line =
-    tone === "light" ? "bg-white/40" : "bg-primary/50";
+  const text = tone === "light" ? "text-white/70" : "text-primary";
+  const line = tone === "light" ? "bg-white/40" : "bg-primary/50";
   const dot = tone === "light" ? "bg-white" : "bg-primary";
   const num = tone === "light" ? "text-white/40" : "text-primary/45";
   const label = `text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] ${text}`;
   const chapter = index ? (
-    <span className={`font-display text-[calc(11*var(--desktop-px-unit))] font-extrabold tabular-nums ${num}`}>
+    <span
+      className={`font-display text-[calc(11*var(--desktop-px-unit))] font-extrabold tabular-nums ${num}`}
+    >
       {index}
     </span>
   ) : null;

@@ -34,9 +34,7 @@ const COUNTRY_LANGUAGE: Record<string, SupportedLanguage> = {
 
 function normalize(lang: string): SupportedLanguage | null {
   const base = lang.split("-")[0].toLowerCase();
-  return (SUPPORTED_LANGUAGES as string[]).includes(base)
-    ? (base as SupportedLanguage)
-    : null;
+  return (SUPPORTED_LANGUAGES as string[]).includes(base) ? (base as SupportedLanguage) : null;
 }
 
 export const languageService: LanguageService = {

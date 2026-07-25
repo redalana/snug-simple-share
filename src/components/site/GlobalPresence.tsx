@@ -21,10 +21,7 @@ const VISIBLE_PINS = PINS.filter(
 );
 
 // Country names that show a static map label — all 10 verified countries.
-const LABELLED = new Set(
-  PINS.map((p) => p.name),
-);
-
+const LABELLED = new Set(PINS.map((p) => p.name));
 
 export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
@@ -66,7 +63,8 @@ export function GlobalPresence() {
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.35]"
                 style={{
-                  backgroundImage: "radial-gradient(oklch(1 0 0 / 14%) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
+                  backgroundImage:
+                    "radial-gradient(oklch(1 0 0 / 14%) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
                   backgroundSize: "calc(22*var(--desktop-px-unit)) calc(22*var(--desktop-px-unit))",
                 }}
               />
@@ -108,7 +106,9 @@ export function GlobalPresence() {
                       strokeWidth={0.9}
                       strokeLinejoin="round"
                       style={{
-                        filter: isActive ? "drop-shadow(0 0 calc(6*var(--desktop-px-unit)) var(--primary))" : undefined,
+                        filter: isActive
+                          ? "drop-shadow(0 0 calc(6*var(--desktop-px-unit)) var(--primary))"
+                          : undefined,
                         transition: "fill 0.25s ease",
                       }}
                     />
@@ -140,7 +140,9 @@ export function GlobalPresence() {
                       type="button"
                       aria-label={p.name}
                       className={`relative block cursor-pointer rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
-                        p.hq ? "h-3.5 w-3.5 ring-2 ring-white/70" : "h-2.5 w-2.5 ring-1 ring-white/50"
+                        p.hq
+                          ? "h-3.5 w-3.5 ring-2 ring-white/70"
+                          : "h-2.5 w-2.5 ring-1 ring-white/50"
                       }`}
                     />
 
@@ -204,11 +206,10 @@ export function GlobalPresence() {
                   Middle East, Africa &amp; Asia
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
-                  A real, documented delivery record — heart centers, imaging,
-                  IVF and LASIK systems installed and supported across 10 countries.
-                  Hover any pin for the actual equipment delivered.
+                  A real, documented delivery record — heart centers, imaging, IVF and LASIK systems
+                  installed and supported across 10 countries. Hover any pin for the actual
+                  equipment delivered.
                 </p>
-
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   {STATS.map((s) => (
@@ -216,7 +217,9 @@ export function GlobalPresence() {
                       key={s.label}
                       className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"
                     >
-                      <div className="font-display text-3xl font-extrabold text-white">{s.value}</div>
+                      <div className="font-display text-3xl font-extrabold text-white">
+                        {s.value}
+                      </div>
                       <div className="mt-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-white/45">
                         {s.label}
                       </div>

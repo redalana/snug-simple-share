@@ -40,7 +40,8 @@ export function ProductsMegaDropdown() {
           {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
             const isActive =
               pathname === "/products" &&
-              ((category && activeCategory === category) || (!category && !activeCategory && false));
+              ((category && activeCategory === category) ||
+                (!category && !activeCategory && false));
             return (
               <li key={label}>
                 <Link

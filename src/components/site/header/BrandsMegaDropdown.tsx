@@ -10,7 +10,9 @@ export function BrandMark({ item }: { item: BrandEntry }) {
     case "square":
       return <span className="h-3.5 w-3.5 rounded-[3px]" style={{ backgroundColor: c }} />;
     case "ring":
-      return <span className="h-3.5 w-3.5 rounded-full border-[2.5px]" style={{ borderColor: c }} />;
+      return (
+        <span className="h-3.5 w-3.5 rounded-full border-[2.5px]" style={{ borderColor: c }} />
+      );
     case "bars":
       return (
         <span className="flex items-end gap-[2px]">

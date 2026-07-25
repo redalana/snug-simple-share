@@ -8,14 +8,7 @@ const BASE_URL = SITE_URL;
 
 interface SitemapEntry {
   path: string;
-  changefreq?:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never";
+  changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
 }
 

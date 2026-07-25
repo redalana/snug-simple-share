@@ -47,13 +47,7 @@ function buildFromPath(pathname: string, custom?: Crumb[]): Crumb[] {
   return crumbs;
 }
 
-export function Breadcrumbs({
-  items,
-  className = "",
-}: {
-  items?: Crumb[];
-  className?: string;
-}) {
+export function Breadcrumbs({ items, className = "" }: { items?: Crumb[]; className?: string }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (HIDDEN_ON.has(pathname)) return null;
 
@@ -91,7 +85,10 @@ export function Breadcrumbs({
           <li key={i} className="flex items-center gap-1.5">
             <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/60" aria-hidden />
             {c.to ? (
-              <Link to={c.to} className="text-muted-foreground transition-colors hover:text-primary">
+              <Link
+                to={c.to}
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
                 {c.label}
               </Link>
             ) : (
@@ -102,11 +99,7 @@ export function Breadcrumbs({
           </li>
         ))}
       </ol>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
     </nav>
   );
 }

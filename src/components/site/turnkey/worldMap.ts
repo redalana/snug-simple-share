@@ -35,13 +35,12 @@ export const projection = geoMercator().fitExtent(
 
 const pathGen = geoPath(projection);
 
-
 // Extract country features from the topojson.
 const rawCountries = (
-  feature(worldTopo as never, (worldTopo as never as { objects: { countries: never } }).objects.countries) as unknown as GeoJSON.FeatureCollection<
-    GeoJSON.Geometry,
-    { name: string }
-  >
+  feature(
+    worldTopo as never,
+    (worldTopo as never as { objects: { countries: never } }).objects.countries,
+  ) as unknown as GeoJSON.FeatureCollection<GeoJSON.Geometry, { name: string }>
 ).features;
 
 // Render every country the projection can draw — the SVG viewBox naturally
