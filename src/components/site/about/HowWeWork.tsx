@@ -34,8 +34,9 @@ export function HowWeWork() {
           </div>
           <ol className="grid gap-10 lg:grid-cols-7 lg:gap-3">
             {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.05}>
-                <li className="group flex flex-col items-center text-center">
+              <li key={s.n} className="min-w-0">
+                <Reveal delay={i * 0.05}>
+                  <div className="group flex flex-col items-center text-center">
                   <div className="relative flex h-[calc(108*var(--desktop-px-unit))] w-[calc(108*var(--desktop-px-unit))] items-center justify-center rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary group-hover:bg-primary/10 group-hover:shadow-[0_20px_50px_-10px_var(--primary)]">
                     <s.icon
                       className="h-8 w-8 text-white/80 transition-colors group-hover:text-primary"
