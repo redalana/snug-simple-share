@@ -18,7 +18,8 @@ const OVERVIEW = {
 export default defineTool({
   name: "get_company_overview",
   title: "Get company overview",
-  description: "Get an overview of AbuFarha Medical Supplies: what the company does, regions served, and the five-phase turnkey delivery model.",
+  description:
+    "Get an overview of AbuFarha Medical Supplies: what the company does, regions served, and the five-phase turnkey delivery model.",
   inputSchema: {},
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => ({

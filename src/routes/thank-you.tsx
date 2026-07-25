@@ -13,7 +13,10 @@ export const Route = createFileRoute("/thank-you")({
   head: () => ({
     meta: [
       { title: "Thank You | AbuFarha Medical Supplies" },
-      { name: "description", content: "Your request has been received. Our team will contact you within 24 hours." },
+      {
+        name: "description",
+        content: "Your request has been received. Our team will contact you within 24 hours.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -71,18 +74,29 @@ function ThankYouPage() {
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                 <Mail className="h-4 w-4" /> Next Step
               </div>
-              <div className="mt-1 text-sm font-semibold text-foreground">Check your inbox for confirmation</div>
+              <div className="mt-1 text-sm font-semibold text-foreground">
+                Check your inbox for confirmation
+              </div>
             </div>
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-2">
-            <Link to="/" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-dark">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-dark"
+            >
               Back Home
             </Link>
-            <Link to="/products" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:border-primary">
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:border-primary"
+            >
               Browse Products <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link to="/blog" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:border-primary">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:border-primary"
+            >
               Continue Browsing
             </Link>
           </div>

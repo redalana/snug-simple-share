@@ -17,14 +17,15 @@ export function Hero() {
             transition={{ duration: 0.7 }}
             className="mt-5 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-[calc(54*var(--desktop-px-unit))] lg:text-[calc(56*var(--desktop-px-unit))]"
           >
-            Complete Clinical<br />
-            Departments.<br />
+            Complete Clinical
+            <br />
+            Departments.
+            <br />
             <span className="text-primary">Ready for Life.</span>
           </motion.h1>
           <p className="mt-6 max-w-lg text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
-            From planning and engineering to installation and training, we
-            deliver fully integrated medical departments that perform today and
-            for years to come.
+            From planning and engineering to installation and training, we deliver fully integrated
+            medical departments that perform today and for years to come.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a
@@ -79,7 +80,11 @@ export function Hero() {
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-neutral-100 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.35)] ring-1 ring-black/5"
           >
-            <img src={turnkeyHero} alt="Clinical department" className="h-full w-full object-cover" />
+            <img
+              src={turnkeyHero}
+              alt="Clinical department"
+              className="h-full w-full object-cover"
+            />
           </motion.div>
 
           {/* Floating info card */}
@@ -100,7 +105,10 @@ export function Hero() {
                 <p className="mt-1 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
                   One partner for every step. One standard of excellence.
                 </p>
-                <a href="#journey" className="mt-2 inline-flex items-center gap-1 text-[calc(12*var(--desktop-px-unit))] font-bold text-primary">
+                <a
+                  href="#journey"
+                  className="mt-2 inline-flex items-center gap-1 text-[calc(12*var(--desktop-px-unit))] font-bold text-primary"
+                >
                   Explore Our Process <ArrowRight className="h-3 w-3" />
                 </a>
               </div>

@@ -72,7 +72,17 @@ function StatCard({
 }
 
 export function GlobalPresence() {
-  const spokeNames = ["Syria", "Iraq", "Egypt", "Libya", "Yemen", "Somaliland", "Somalia", "Uzbekistan", "Bangladesh"];
+  const spokeNames = [
+    "Syria",
+    "Iraq",
+    "Egypt",
+    "Libya",
+    "Yemen",
+    "Somaliland",
+    "Somalia",
+    "Uzbekistan",
+    "Bangladesh",
+  ];
   const spokes = spokeNames.map((n) => REGIONS.find((r) => r.name === n)!).filter(Boolean);
   const [active, setActive] = useState<Region>(REGIONS.find((r) => r.name === "Iraq")!);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -82,10 +92,9 @@ export function GlobalPresence() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => e.isIntersecting && setInView(true),
-      { threshold: 0.2 },
-    );
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setInView(true), {
+      threshold: 0.2,
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -147,7 +156,8 @@ export function GlobalPresence() {
         aria-hidden
         className="pointer-events-none absolute bottom-16 left-8 h-40 w-40 opacity-40"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) calc(1.2*var(--desktop-px-unit)), transparent calc(1.2*var(--desktop-px-unit)))",
+          backgroundImage:
+            "radial-gradient(circle, rgba(15,23,42,0.18) calc(1.2*var(--desktop-px-unit)), transparent calc(1.2*var(--desktop-px-unit)))",
           backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
         }}
       />
@@ -280,7 +290,9 @@ export function GlobalPresence() {
                     strokeWidth={isHov ? 1.2 : 0.8}
                     strokeLinejoin="round"
                     style={{
-                      filter: isHov ? "drop-shadow(0 0 calc(4*var(--desktop-px-unit)) rgba(225,29,46,0.55))" : undefined,
+                      filter: isHov
+                        ? "drop-shadow(0 0 calc(4*var(--desktop-px-unit)) rgba(225,29,46,0.55))"
+                        : undefined,
                       transition: "all 0.3s ease",
                     }}
                   />
@@ -346,10 +358,27 @@ export function GlobalPresence() {
                       fill="var(--primary)"
                       opacity={0.25}
                     >
-                      <animate attributeName="r" values={`${isHov ? 8 : 6};${isHov ? 14 : 11};${isHov ? 8 : 6}`} dur="2.4s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.4;0;0.4" dur="2.4s" repeatCount="indefinite" />
+                      <animate
+                        attributeName="r"
+                        values={`${isHov ? 8 : 6};${isHov ? 14 : 11};${isHov ? 8 : 6}`}
+                        dur="2.4s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="opacity"
+                        values="0.4;0;0.4"
+                        dur="2.4s"
+                        repeatCount="indefinite"
+                      />
                     </circle>
-                    <circle cx={p.x} cy={p.y} r={isHov ? 4.5 : 3.5} fill="var(--primary)" stroke="white" strokeWidth={1.2} />
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isHov ? 4.5 : 3.5}
+                      fill="var(--primary)"
+                      stroke="white"
+                      strokeWidth={1.2}
+                    />
                   </g>
                 );
               })}
@@ -422,9 +451,24 @@ export function GlobalPresence() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.name}
-                initial={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(calc(6*var(--desktop-px-unit)))" }}
-                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(calc(0*var(--desktop-px-unit)))" }}
-                exit={{ opacity: 0, y: -8, scale: 0.98, filter: "blur(calc(4*var(--desktop-px-unit)))" }}
+                initial={{
+                  opacity: 0,
+                  y: 14,
+                  scale: 0.96,
+                  filter: "blur(calc(6*var(--desktop-px-unit)))",
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(calc(0*var(--desktop-px-unit)))",
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -8,
+                  scale: 0.98,
+                  filter: "blur(calc(4*var(--desktop-px-unit)))",
+                }}
                 transition={{ duration: 0.32, ease: "easeOut" }}
                 className="absolute bottom-4 right-4 z-30 w-[calc(270*var(--desktop-px-unit))] overflow-hidden rounded-2xl bg-white p-4 shadow-[0_30px_70px_-25px_rgba(15,23,42,0.4)] ring-1 ring-black/[0.06]"
               >
@@ -446,7 +490,10 @@ export function GlobalPresence() {
 
                 <ul className="mt-3 space-y-1.5 border-t border-black/5 pt-3">
                   {active.equipment.map((e) => (
-                    <li key={e.label} className="flex items-center justify-between text-[calc(12.5*var(--desktop-px-unit))]">
+                    <li
+                      key={e.label}
+                      className="flex items-center justify-between text-[calc(12.5*var(--desktop-px-unit))]"
+                    >
                       <span className="flex items-center gap-2 text-muted-foreground">
                         <Stethoscope className="h-3.5 w-3.5 text-primary/70" strokeWidth={1.8} />
                         {e.label}
@@ -501,7 +548,9 @@ export function GlobalPresence() {
                 <div className="mt-3 font-display text-[calc(14*var(--desktop-px-unit))] font-extrabold text-foreground">
                   {f.title}
                 </div>
-                <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">{f.copy}</p>
+                <p className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                  {f.copy}
+                </p>
               </motion.div>
             ))}
           </div>

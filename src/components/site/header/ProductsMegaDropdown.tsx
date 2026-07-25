@@ -25,7 +25,6 @@ export function ProductsMegaDropdown() {
 
   return (
     <div
-      role="menu"
       aria-label="Product categories"
       onMouseLeave={() => setClosed(false)}
       className={`pointer-events-none absolute left-1/2 top-full z-10 w-[calc(336*var(--desktop-px-unit))] -translate-x-1/2 pt-1 transition-all duration-200 ${closedClass}`}
@@ -40,13 +39,13 @@ export function ProductsMegaDropdown() {
           {PRODUCT_CATEGORIES.map(({ label, category, Icon }) => {
             const isActive =
               pathname === "/products" &&
-              ((category && activeCategory === category) || (!category && !activeCategory && false));
+              ((category && activeCategory === category) ||
+                (!category && !activeCategory && false));
             return (
               <li key={label}>
                 <Link
                   to="/products"
                   search={category ? { category } : {}}
-                  role="menuitem"
                   aria-current={isActive ? "page" : undefined}
                   onClick={(e) => {
                     setClosed(true);

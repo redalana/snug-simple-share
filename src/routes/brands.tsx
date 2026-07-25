@@ -68,7 +68,15 @@ const BRANDS: Brand[] = [
       "Global leader in diagnostic imaging, image-guided therapy and connected care across leading hospitals.",
     categories: ["Cath Lab", "MRI", "CT", "Ultrasound", "PET/CT"],
     groups: ["Imaging", "Cardiovascular", "Patient Monitoring"],
-    modalities: ["MRI", "CT", "PET/CT", "Cath Lab", "Ultrasound", "Patient Monitoring", "Laboratory"],
+    modalities: [
+      "MRI",
+      "CT",
+      "PET/CT",
+      "Cath Lab",
+      "Ultrasound",
+      "Patient Monitoring",
+      "Laboratory",
+    ],
     featured: true,
     productKey: "Philips",
   },
@@ -83,7 +91,16 @@ const BRANDS: Brand[] = [
       "Pioneers of medical imaging and laboratory diagnostics across clinical and research platforms.",
     categories: ["CT", "MRI", "Angiography", "Mammography", "Lab"],
     groups: ["Imaging", "Cardiovascular", "Laboratory"],
-    modalities: ["MRI", "CT", "PET/CT", "Cath Lab", "Ultrasound", "Surgical", "Patient Monitoring", "Laboratory"],
+    modalities: [
+      "MRI",
+      "CT",
+      "PET/CT",
+      "Cath Lab",
+      "Ultrasound",
+      "Surgical",
+      "Patient Monitoring",
+      "Laboratory",
+    ],
     featured: true,
     productKey: "Siemens",
   },
@@ -97,7 +114,15 @@ const BRANDS: Brand[] = [
       "Innovative medical technologies and smart digital solutions improving patient care worldwide.",
     categories: ["Cath Lab", "CT", "MRI", "PET/CT", "Monitoring"],
     groups: ["Imaging", "Cardiovascular", "Patient Monitoring"],
-    modalities: ["MRI", "CT", "PET/CT", "Cath Lab", "Ultrasound", "Patient Monitoring", "Laboratory"],
+    modalities: [
+      "MRI",
+      "CT",
+      "PET/CT",
+      "Cath Lab",
+      "Ultrasound",
+      "Patient Monitoring",
+      "Laboratory",
+    ],
     featured: true,
     productKey: "GE",
   },
@@ -120,8 +145,7 @@ const BRANDS: Brand[] = [
     mark: "dot",
     country: "China",
     countryFlag: "🇨🇳",
-    description:
-      "Global provider of patient monitoring, ultrasound and in-vitro diagnostics.",
+    description: "Global provider of patient monitoring, ultrasound and in-vitro diagnostics.",
     categories: ["Ultrasound", "Monitoring", "Anesthesia"],
     groups: ["Patient Monitoring", "Imaging", "Laboratory"],
     modalities: ["PET/CT", "Ultrasound", "Patient Monitoring", "Laboratory"],
@@ -132,8 +156,7 @@ const BRANDS: Brand[] = [
     mark: "dot",
     country: "Italy",
     countryFlag: "🇮🇹",
-    description:
-      "Specialist in dedicated MRI and premium ultrasound imaging systems.",
+    description: "Specialist in dedicated MRI and premium ultrasound imaging systems.",
     categories: ["Dedicated MRI", "Ultrasound"],
     groups: ["Imaging", "Cardiovascular"],
     modalities: ["MRI", "Ultrasound"],
@@ -156,8 +179,7 @@ const BRANDS: Brand[] = [
     mark: "square",
     country: "Japan",
     countryFlag: "🇯🇵",
-    description:
-      "Open MRI, ultrasound and radiotherapy platforms known for patient comfort.",
+    description: "Open MRI, ultrasound and radiotherapy platforms known for patient comfort.",
     categories: ["Open MRI", "Ultrasound"],
     groups: ["Imaging"],
     modalities: ["MRI", "Ultrasound"],
@@ -168,8 +190,7 @@ const BRANDS: Brand[] = [
     mark: "square",
     country: "Japan",
     countryFlag: "🇯🇵",
-    description:
-      "Cardiovascular X-ray, fluoroscopy and mobile C-arm systems.",
+    description: "Cardiovascular X-ray, fluoroscopy and mobile C-arm systems.",
     categories: ["Angiography", "Fluoroscopy", "Lab"],
     groups: ["Imaging", "Cardiovascular", "Laboratory"],
     modalities: ["Cath Lab", "Laboratory"],
@@ -180,8 +201,7 @@ const BRANDS: Brand[] = [
     mark: "dot",
     country: "USA",
     countryFlag: "🇺🇸",
-    description:
-      "Structural heart, electrophysiology and vascular devices for cardiac care.",
+    description: "Structural heart, electrophysiology and vascular devices for cardiac care.",
     categories: ["Cardiology", "EP", "Vascular"],
     groups: ["Cardiovascular", "Laboratory"],
     modalities: ["Cath Lab", "Laboratory"],
@@ -192,8 +212,7 @@ const BRANDS: Brand[] = [
     mark: "bars",
     country: "Ireland / USA",
     countryFlag: "🇮🇪",
-    description:
-      "Cardiovascular, neurovascular, surgical and diabetes care technology.",
+    description: "Cardiovascular, neurovascular, surgical and diabetes care technology.",
     categories: ["Cardiology", "Neurovascular", "Surgical"],
     groups: ["Cardiovascular", "Surgical", "Patient Monitoring"],
     modalities: ["Cath Lab", "Surgical", "Patient Monitoring"],
@@ -284,11 +303,15 @@ function firstProductImage(brand: Brand): string | undefined {
 
 function BrandMark({ brand, size = "md" }: { brand: Brand; size?: "sm" | "md" | "lg" }) {
   const c = brand.color;
-  const cls =
-    size === "lg" ? "h-6 w-6" : size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5";
+  const cls = size === "lg" ? "h-6 w-6" : size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5";
   switch (brand.mark) {
     case "square":
-      return <span className={`${cls} rounded-[calc(3*var(--desktop-px-unit))]`} style={{ backgroundColor: c }} />;
+      return (
+        <span
+          className={`${cls} rounded-[calc(3*var(--desktop-px-unit))]`}
+          style={{ backgroundColor: c }}
+        />
+      );
     case "ring":
       return (
         <span
@@ -299,9 +322,18 @@ function BrandMark({ brand, size = "md" }: { brand: Brand; size?: "sm" | "md" | 
     case "bars":
       return (
         <span className="flex items-end gap-[calc(2*var(--desktop-px-unit))]">
-          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(10*var(--desktop-px-unit))" }} />
-          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(16*var(--desktop-px-unit))" }} />
-          <span className="w-[calc(3*var(--desktop-px-unit))] rounded-sm" style={{ backgroundColor: c, height: "calc(13*var(--desktop-px-unit))" }} />
+          <span
+            className="w-[calc(3*var(--desktop-px-unit))] rounded-sm"
+            style={{ backgroundColor: c, height: "calc(10*var(--desktop-px-unit))" }}
+          />
+          <span
+            className="w-[calc(3*var(--desktop-px-unit))] rounded-sm"
+            style={{ backgroundColor: c, height: "calc(16*var(--desktop-px-unit))" }}
+          />
+          <span
+            className="w-[calc(3*var(--desktop-px-unit))] rounded-sm"
+            style={{ backgroundColor: c, height: "calc(13*var(--desktop-px-unit))" }}
+          />
         </span>
       );
     default:
@@ -375,9 +407,9 @@ function BrandsPage() {
                 <span className="text-primary">One trusted partner.</span>
               </h1>
               <p className="mt-6 max-w-md text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-                AbuFarha Medical is the authorized channel for the world's leading
-                medical technology brands. We supply, install, commission and support
-                advanced medical systems across Africa and the Middle East.
+                AbuFarha Medical is the authorized channel for the world's leading medical
+                technology brands. We supply, install, commission and support advanced medical
+                systems across Africa and the Middle East.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -489,10 +521,18 @@ function BrandsPage() {
                     {featured.length} of {BRANDS.length}
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <button type="button" aria-label="Previous brand" className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
+                    <button
+                      type="button"
+                      aria-label="Previous brand"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                    >
                       <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                     </button>
-                    <button type="button" aria-label="Next brand" className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary">
+                    <button
+                      type="button"
+                      aria-label="Next brand"
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                    >
                       <ChevronRight className="h-4 w-4" aria-hidden="true" />
                     </button>
                   </div>
@@ -571,38 +611,36 @@ function BrandsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {BRANDS.filter((b) => b.featured || b.name === "Mindray").map(
-                    (b) => (
-                      <tr
-                        key={b.name}
-                        className="border-b border-border last:border-b-0 hover:bg-accent/20"
-                      >
-                        <td className="px-5 py-4">
-                          <div className="flex items-center gap-3">
-                            <BrandMark brand={b} size="md" />
-                            <span
-                              className="font-display text-sm font-extrabold tracking-tight"
-                              style={{ color: b.color }}
-                            >
-                              {b.name}
-                              {b.sub ? ` ${b.sub}` : ""}
+                  {BRANDS.filter((b) => b.featured || b.name === "Mindray").map((b) => (
+                    <tr
+                      key={b.name}
+                      className="border-b border-border last:border-b-0 hover:bg-accent/20"
+                    >
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <BrandMark brand={b} size="md" />
+                          <span
+                            className="font-display text-sm font-extrabold tracking-tight"
+                            style={{ color: b.color }}
+                          >
+                            {b.name}
+                            {b.sub ? ` ${b.sub}` : ""}
+                          </span>
+                        </div>
+                      </td>
+                      {MODALITY_COLS.map((m) => (
+                        <td key={m} className="px-4 py-4 text-center">
+                          {b.modalities.includes(m) ? (
+                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                              <Check className="h-3 w-3" strokeWidth={3} />
                             </span>
-                          </div>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
                         </td>
-                        {MODALITY_COLS.map((m) => (
-                          <td key={m} className="px-4 py-4 text-center">
-                            {b.modalities.includes(m) ? (
-                              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                                <Check className="h-3 w-3" strokeWidth={3} />
-                              </span>
-                            ) : (
-                              <span className="text-muted-foreground">—</span>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    ),
-                  )}
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -641,9 +679,7 @@ function BrandsPage() {
                   <div className="mt-4 font-display text-sm font-extrabold tracking-tight text-foreground">
                     {f.title}
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                    {f.desc}
-                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{f.desc}</p>
                 </div>
               ))}
             </div>
@@ -671,10 +707,30 @@ function BrandsPage() {
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: GitCompare, title: "Compare Brands", desc: "Side-by-side specs across manufacturers.", to: "/products" },
-                { icon: HeadphonesIcon, title: "Talk to an Engineer", desc: "Independent biomedical guidance.", to: "/contact" },
-                { icon: FileText, title: "Request a Quote", desc: "Pricing, availability and lead times.", to: "/contact" },
-                { icon: CalendarClock, title: "Book Consultation", desc: "Schedule a 30-minute call.", to: "/hospital-readiness-assessment" },
+                {
+                  icon: GitCompare,
+                  title: "Compare Brands",
+                  desc: "Side-by-side specs across manufacturers.",
+                  to: "/products",
+                },
+                {
+                  icon: HeadphonesIcon,
+                  title: "Talk to an Engineer",
+                  desc: "Independent biomedical guidance.",
+                  to: "/contact",
+                },
+                {
+                  icon: FileText,
+                  title: "Request a Quote",
+                  desc: "Pricing, availability and lead times.",
+                  to: "/contact",
+                },
+                {
+                  icon: CalendarClock,
+                  title: "Book Consultation",
+                  desc: "Schedule a 30-minute call.",
+                  to: "/hospital-readiness-assessment",
+                },
               ].map((a) => (
                 <Link
                   key={a.title}
@@ -687,9 +743,7 @@ function BrandsPage() {
                   <div className="mt-5 font-display text-lg font-extrabold tracking-tight">
                     {a.title}
                   </div>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-white/65">
-                    {a.desc}
-                  </p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-white/65">{a.desc}</p>
                   <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
                     Continue
                     <ArrowRight className="h-4 w-4" strokeWidth={2.25} />
@@ -717,17 +771,17 @@ function BrandEcosystem() {
     y: number;
     size?: "sm" | "md" | "lg";
   }[] = [
-    { key: "Philips",           x: 27,  y: 15, size: "lg" },
-    { key: "Siemens",           x: 52,  y: 6,  size: "md" },
-    { key: "GE HealthCare",     x: 78,  y: 15, size: "md" },
-    { key: "Richard Wolf",      x: 12,  y: 32, size: "md" },
-    { key: "Mindray",           x: 88,  y: 34, size: "md" },
-    { key: "Hitachi",           x: 6,   y: 52, size: "md" },
-    { key: "Esaote",            x: 92,  y: 55, size: "md" },
-    { key: "Shimadzu",          x: 15,  y: 72, size: "md" },
-    { key: "Medtronic",         x: 82,  y: 70, size: "md" },
-    { key: "Abbott",            x: 36,  y: 84, size: "md" },
-    { key: "Boston Scientific", x: 65,  y: 86, size: "md" },
+    { key: "Philips", x: 27, y: 15, size: "lg" },
+    { key: "Siemens", x: 52, y: 6, size: "md" },
+    { key: "GE HealthCare", x: 78, y: 15, size: "md" },
+    { key: "Richard Wolf", x: 12, y: 32, size: "md" },
+    { key: "Mindray", x: 88, y: 34, size: "md" },
+    { key: "Hitachi", x: 6, y: 52, size: "md" },
+    { key: "Esaote", x: 92, y: 55, size: "md" },
+    { key: "Shimadzu", x: 15, y: 72, size: "md" },
+    { key: "Medtronic", x: 82, y: 70, size: "md" },
+    { key: "Abbott", x: 36, y: 84, size: "md" },
+    { key: "Boston Scientific", x: 65, y: 86, size: "md" },
   ];
   const CENTER = { x: 50, y: 48 };
 
@@ -874,10 +928,8 @@ function WorldDotMap() {
         backgroundImage:
           "radial-gradient(circle, rgba(15,23,42,0.18) calc(1*var(--desktop-px-unit)), transparent calc(1.4*var(--desktop-px-unit)))",
         backgroundSize: "calc(14*var(--desktop-px-unit)) calc(14*var(--desktop-px-unit))",
-        maskImage:
-          "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",
-        WebkitMaskImage:
-          "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",
+        maskImage: "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",
+        WebkitMaskImage: "radial-gradient(ellipse at center, black 0%, black 55%, transparent 78%)",
       }}
       aria-hidden
     />
@@ -930,9 +982,7 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
           </div>
         </div>
 
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-          {brand.description}
-        </p>
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{brand.description}</p>
 
         <div className="mt-5 flex flex-wrap gap-1.5">
           {brand.categories.slice(0, 5).map((c) => (

@@ -67,9 +67,9 @@ const SECTIONS: Section[] = [
     title: "Website Purpose",
     body: (
       <p>
-        This website is designed to provide information about our products, services, solutions,
-        and company. The information is for general purposes only and may be updated or changed
-        without prior notice.
+        This website is designed to provide information about our products, services, solutions, and
+        company. The information is for general purposes only and may be updated or changed without
+        prior notice.
       </p>
     ),
   },
@@ -79,8 +79,8 @@ const SECTIONS: Section[] = [
     body: (
       <>
         <p>
-          All content on this website, including text, graphics, logos, images, and software, is
-          the property of AbuFarha Medical Supplies or its content suppliers and is protected by
+          All content on this website, including text, graphics, logos, images, and software, is the
+          property of AbuFarha Medical Supplies or its content suppliers and is protected by
           copyright and intellectual property laws.
         </p>
         <p>
@@ -99,9 +99,7 @@ const SECTIONS: Section[] = [
           Product specifications, availability, and configurations may vary depending on the
           manufacturer and market.
         </p>
-        <p>
-          Images are for illustrative purposes only and may not represent the exact product.
-        </p>
+        <p>Images are for illustrative purposes only and may not represent the exact product.</p>
         <p>Please contact our sales team for the most accurate and up-to-date information.</p>
       </>
     ),
@@ -126,9 +124,7 @@ const SECTIONS: Section[] = [
     body: (
       <>
         <p>You agree to use this website only for lawful purposes.</p>
-        <p>
-          You must not attempt to interfere with the website's security or functionality.
-        </p>
+        <p>You must not attempt to interfere with the website's security or functionality.</p>
         <p>
           You agree not to submit false, misleading, or fraudulent information through any form or
           communication.
@@ -146,7 +142,9 @@ const SECTIONS: Section[] = [
           AbuFarha Medical Supplies is not responsible for the content, privacy practices, or
           accuracy of any external websites.
         </p>
-        <p>We encourage you to review the terms and policies of any third-party websites you visit.</p>
+        <p>
+          We encourage you to review the terms and policies of any third-party websites you visit.
+        </p>
       </>
     ),
   },
@@ -155,12 +153,8 @@ const SECTIONS: Section[] = [
     title: "Disclaimer",
     body: (
       <>
-        <p>
-          All information on this website is provided "as is" without warranty of any kind.
-        </p>
-        <p>
-          We do not guarantee that the website will be error-free, secure, or uninterrupted.
-        </p>
+        <p>All information on this website is provided "as is" without warranty of any kind.</p>
+        <p>We do not guarantee that the website will be error-free, secure, or uninterrupted.</p>
         <p>
           We are not liable for any loss or damage resulting from the use of this website or
           reliance on its content.
@@ -187,8 +181,8 @@ const SECTIONS: Section[] = [
     title: "Contact Information",
     body: (
       <p>
-        If you have any questions or concerns regarding these Terms & Conditions, please contact
-        us using the information provided below.
+        If you have any questions or concerns regarding these Terms & Conditions, please contact us
+        using the information provided below.
       </p>
     ),
   },
@@ -210,8 +204,12 @@ const CONTACTS: ContactCard[] = [
     Icon: Phone,
     title: "Phone",
     lines: [
-      <span key="p1" className="whitespace-nowrap">+962 6 4026063</span>,
-      <span key="p2" className="whitespace-nowrap">+962 79 9741318</span>,
+      <span key="p1" className="whitespace-nowrap">
+        +962 6 4026063
+      </span>,
+      <span key="p2" className="whitespace-nowrap">
+        +962 79 9741318
+      </span>,
     ],
   },
   {
@@ -231,7 +229,9 @@ const CONTACTS: ContactCard[] = [
     Icon: Globe2,
     title: "Website",
     lines: [
-      <span key="w" className="whitespace-nowrap">www.abufarhamedical.com</span>,
+      <span key="w" className="whitespace-nowrap">
+        www.abufarhamedical.com
+      </span>,
     ],
   },
 ];
@@ -264,8 +264,8 @@ function TermsRoute() {
                   </h2>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
                     By accessing or using this website, you agree to comply with these Terms &
-                    Conditions. If you do not agree with any part of these terms, please
-                    discontinue using this website.
+                    Conditions. If you do not agree with any part of these terms, please discontinue
+                    using this website.
                   </p>
                 </div>
               </div>
@@ -329,7 +329,9 @@ function TermsRoute() {
                     </div>
                     <div className="min-w-0 space-y-1.5 text-[14px] leading-[1.7] text-muted-foreground">
                       {lines.map((l, i) => (
-                        <div key={i} className="whitespace-nowrap">{l}</div>
+                        <div key={i} className="whitespace-nowrap">
+                          {l}
+                        </div>
                       ))}
                     </div>
                   </div>

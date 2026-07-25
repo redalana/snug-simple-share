@@ -44,9 +44,17 @@ const ADVANTAGES: Advantage[] = [
     label: "Engineering-Led Delivery",
     title: "Biomedical Engineering",
     desc: "Every successful installation starts with engineering — not equipment delivery.",
-    points: ["Site readiness assessment", "Clinical workflow planning", "Infrastructure & utility validation"],
-    outcome: "Reduces implementation delays and ensures every system is ready for clinical operation from day one.",
-    support: { label: "Typical Deliverables", items: ["Site Assessment", "Clinical Documentation", "Acceptance Testing"] },
+    points: [
+      "Site readiness assessment",
+      "Clinical workflow planning",
+      "Infrastructure & utility validation",
+    ],
+    outcome:
+      "Reduces implementation delays and ensures every system is ready for clinical operation from day one.",
+    support: {
+      label: "Typical Deliverables",
+      items: ["Site Assessment", "Clinical Documentation", "Acceptance Testing"],
+    },
     cta: "Explore Engineering Support",
     icon: Wrench,
     x: 24,
@@ -59,7 +67,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "We supply technologies backed by globally recognised medical manufacturers.",
     points: ["Original medical equipment", "Manufacturer standards", "Certified product portfolio"],
     outcome: "Ensures long-term reliability, compatibility and manufacturer-backed performance.",
-    support: { label: "Backed By", items: ["OEM Certification", "Genuine Firmware", "Regulatory Compliance"] },
+    support: {
+      label: "Backed By",
+      items: ["OEM Certification", "Genuine Firmware", "Regulatory Compliance"],
+    },
     cta: "Learn About OEM Partnerships",
     icon: Handshake,
     x: 55,
@@ -72,7 +83,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "Every system is installed, calibrated and verified before clinical use.",
     points: ["Installation", "Calibration", "Acceptance testing"],
     outcome: "Reduces commissioning time and ensures equipment performs to specification.",
-    support: { label: "Typical Deliverables", items: ["Installation", "Calibration", "Acceptance Testing"] },
+    support: {
+      label: "Typical Deliverables",
+      items: ["Installation", "Calibration", "Acceptance Testing"],
+    },
     cta: "Explore Commissioning",
     icon: Cog,
     x: 53,
@@ -98,7 +112,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "Prevent issues before they interrupt patient care.",
     points: ["Scheduled service visits", "Performance testing", "Preventive inspections"],
     outcome: "Minimises unexpected downtime and extends equipment lifespan.",
-    support: { label: "Operational Benefits", items: ["Reduced Downtime", "Higher Availability", "Extended Lifespan"] },
+    support: {
+      label: "Operational Benefits",
+      items: ["Reduced Downtime", "Higher Availability", "Extended Lifespan"],
+    },
     cta: "Discover Our Maintenance Program",
     icon: ShieldCheck,
     x: 78,
@@ -111,7 +128,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "Reliable access to genuine replacement parts keeps critical systems operational.",
     points: ["Genuine components", "Fast regional availability", "OEM compatibility"],
     outcome: "Reduces repair time and protects long-term equipment performance.",
-    support: { label: "Operational Benefits", items: ["Faster Repairs", "Regional Stock", "Traceable Parts"] },
+    support: {
+      label: "Operational Benefits",
+      items: ["Faster Repairs", "Regional Stock", "Traceable Parts"],
+    },
     cta: "Explore Parts & Logistics",
     icon: Boxes,
     x: 39,
@@ -124,7 +144,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "Flexible warranty coverage designed around healthcare operations.",
     points: ["Extended coverage", "Service protection", "Priority support"],
     outcome: "Provides predictable service costs and greater operational confidence.",
-    support: { label: "Coverage Includes", items: ["Extended Cover", "Priority Response", "Predictable Costs"] },
+    support: {
+      label: "Coverage Includes",
+      items: ["Extended Cover", "Priority Response", "Predictable Costs"],
+    },
     cta: "Explore Warranty Programs",
     icon: BadgeCheck,
     x: 84,
@@ -137,7 +160,10 @@ const ADVANTAGES: Advantage[] = [
     desc: "Our relationship continues long after installation.",
     points: ["Remote assistance", "On-site engineering", "Long-term support"],
     outcome: "Hospitals receive continuous technical guidance throughout the equipment lifecycle.",
-    support: { label: "Support Channels", items: ["Remote Assistance", "On-site Engineering", "Lifecycle Guidance"] },
+    support: {
+      label: "Support Channels",
+      items: ["Remote Assistance", "On-site Engineering", "Lifecycle Guidance"],
+    },
     cta: "Explore Lifecycle Support",
     icon: LifeBuoy,
     x: 74,
@@ -179,9 +205,12 @@ export function BeyondEquipment() {
     img.src = cathlab;
   }, []);
 
-  useEffect(() => () => {
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    },
+    [],
+  );
 
   const pause = useCallback(() => {
     if (resumeTimer.current) {
@@ -196,15 +225,12 @@ export function BeyondEquipment() {
     resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS);
   }, []);
 
-  const select = useCallback(
-    (i: number) => {
-      if (resumeTimer.current) clearTimeout(resumeTimer.current);
-      setActiveIndex(i);
-      setPaused(true);
-      resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS);
-    },
-    [],
-  );
+  const select = useCallback((i: number) => {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    setActiveIndex(i);
+    setPaused(true);
+    resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS);
+  }, []);
 
   return (
     <section id="advantage" className="relative overflow-hidden bg-white py-16 lg:py-20">
@@ -217,7 +243,8 @@ export function BeyondEquipment() {
             "linear-gradient(to right, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(80*var(--desktop-px-unit)) calc(80*var(--desktop-px-unit))",
           maskImage: "radial-gradient(ellipse 85% 70% at 50% 25%, black 25%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse 85% 70% at 50% 25%, black 25%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 85% 70% at 50% 25%, black 25%, transparent 100%)",
         }}
       />
 
@@ -230,8 +257,8 @@ export function BeyondEquipment() {
             <br className="hidden sm:block" /> AbuFarha long after installation.
           </h2>
           <p className="mt-5 max-w-2xl text-[calc(17*var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
-            Anyone can deliver a machine. We deliver a medical technology partnership —
-            engineered, supported and accountable for the entire life of your equipment.
+            Anyone can deliver a machine. We deliver a medical technology partnership — engineered,
+            supported and accountable for the entire life of your equipment.
           </p>
         </div>
 
@@ -337,7 +364,8 @@ export function BeyondEquipment() {
                 Interactive · Cath Lab Suite
               </span>
               <span className="text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground/80 tabular-nums">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(ADVANTAGES.length).padStart(2, "0")}
+                {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                {String(ADVANTAGES.length).padStart(2, "0")}
               </span>
             </div>
           </div>
@@ -370,7 +398,9 @@ export function BeyondEquipment() {
                     </span>
                     <span
                       className={`text-[calc(13*var(--desktop-px-unit))] leading-tight transition-colors duration-300 ${
-                        isActive ? "font-bold text-ink" : "font-medium text-muted-foreground group-hover:text-ink"
+                        isActive
+                          ? "font-bold text-ink"
+                          : "font-medium text-muted-foreground group-hover:text-ink"
                       }`}
                     >
                       {a.title}
@@ -418,7 +448,10 @@ export function BeyondEquipment() {
 
                   <motion.ul variants={panelItem} className="mt-6 flex flex-col gap-3.5">
                     {active.points.map((p) => (
-                      <li key={p} className="flex items-center gap-3 text-[calc(15.5*var(--desktop-px-unit))] font-medium text-ink">
+                      <li
+                        key={p}
+                        className="flex items-center gap-3 text-[calc(15.5*var(--desktop-px-unit))] font-medium text-ink"
+                      >
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
@@ -529,7 +562,10 @@ export function BeyondEquipment() {
                   </p>
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {a.points.map((p) => (
-                      <li key={p} className="flex items-center gap-2.5 text-[calc(13.5*var(--desktop-px-unit))] font-medium text-ink">
+                      <li
+                        key={p}
+                        className="flex items-center gap-2.5 text-[calc(13.5*var(--desktop-px-unit))] font-medium text-ink"
+                      >
                         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>

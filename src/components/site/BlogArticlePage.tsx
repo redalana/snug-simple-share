@@ -213,9 +213,7 @@ function SocialShare({ title }: { title: string }) {
 
   return (
     <div className="mt-6 flex flex-wrap items-center gap-3">
-      <span className="text-sm font-medium text-muted-foreground">
-        Share this article:
-      </span>
+      <span className="text-sm font-medium text-muted-foreground">Share this article:</span>
       <div className="flex items-center gap-2">
         {items.map(({ label, Icon, href }) => (
           <a
@@ -245,9 +243,7 @@ function SocialShare({ title }: { title: string }) {
         >
           <Link2 className="h-4 w-4" />
         </button>
-        {copied && (
-          <span className="text-xs font-semibold text-primary">Copied</span>
-        )}
+        {copied && <span className="text-xs font-semibold text-primary">Copied</span>}
       </div>
     </div>
   );
@@ -295,11 +291,7 @@ function Block({ block }: { block: ContentBlock }) {
       );
 
     case "h3":
-      return (
-        <h3 className="font-display text-xl font-bold text-ink">
-          {block.text}
-        </h3>
-      );
+      return <h3 className="font-display text-xl font-bold text-ink">{block.text}</h3>;
 
     case "p":
       return (
@@ -544,9 +536,7 @@ function ComparisonTable({
                     <td
                       key={j}
                       className={`px-5 py-3 align-top leading-relaxed ${
-                        j === 0
-                          ? "font-semibold text-ink"
-                          : "text-foreground/85"
+                        j === 0 ? "font-semibold text-ink" : "text-foreground/85"
                       }`}
                     >
                       {cell}
@@ -596,9 +586,7 @@ function RelatedArticleLinks({
         <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-primary">
           <BookOpen className="h-5 w-5" />
         </div>
-        <p className="font-display text-lg font-extrabold text-ink">
-          Continue Reading
-        </p>
+        <p className="font-display text-lg font-extrabold text-ink">Continue Reading</p>
       </div>
       <p className="mt-2 text-sm text-muted-foreground">
         Related educational articles from the AbuFarha Knowledge Center.
@@ -638,9 +626,7 @@ function References({ items }: { items: { label: string; url?: string }[] }) {
         <div className="grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm ring-1 ring-border text-ink">
           <FileText className="h-5 w-5" />
         </div>
-        <p className="font-display text-lg font-extrabold text-ink">
-          References & Guidelines
-        </p>
+        <p className="font-display text-lg font-extrabold text-ink">References & Guidelines</p>
       </div>
       <ol className="mt-4 space-y-2.5 text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-foreground/85">
         {items.map((r, i) => (
@@ -664,7 +650,8 @@ function References({ items }: { items: { label: string; url?: string }[] }) {
         ))}
       </ol>
       <p className="mt-4 text-[calc(12*var(--desktop-px-unit))] italic text-muted-foreground">
-        This article is for educational purposes and is not a substitute for professional medical advice, diagnosis or treatment.
+        This article is for educational purposes and is not a substitute for professional medical
+        advice, diagnosis or treatment.
       </p>
     </div>
   );
@@ -699,11 +686,7 @@ function ReviewedBy({ name, specialty, date }: { name: string; specialty: string
   );
 }
 
-
-const BENEFIT_ICONS: Record<
-  BenefitIcon,
-  React.ComponentType<{ className?: string }>
-> = {
+const BENEFIT_ICONS: Record<BenefitIcon, React.ComponentType<{ className?: string }>> = {
   cost: DollarSign,
   reliability: ShieldCheck,
   delivery: Truck,
@@ -730,9 +713,7 @@ function BenefitsGrid({
             <p className="mt-3 font-display text-[calc(15*var(--desktop-px-unit))] font-extrabold text-ink">
               {it.title}
             </p>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-              {it.description}
-            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.description}</p>
           </div>
         );
       })}
@@ -772,17 +753,17 @@ function PriceTable({
             </thead>
             <tbody>
               {rows.map((row, i) => (
-                <tr key={i} className="border-t border-border transition-colors hover:bg-secondary/60">
+                <tr
+                  key={i}
+                  className="border-t border-border transition-colors hover:bg-secondary/60"
+                >
                   {row.map((cell, j) => {
-                    const isHighlight =
-                      highlightLastColumn && j === row.length - 1;
+                    const isHighlight = highlightLastColumn && j === row.length - 1;
                     return (
                       <td
                         key={j}
                         className={`px-5 py-3 align-top ${
-                          isHighlight
-                            ? "font-bold text-emerald-600"
-                            : "text-foreground/85"
+                          isHighlight ? "font-bold text-emerald-600" : "text-foreground/85"
                         }`}
                       >
                         {cell}
@@ -880,9 +861,7 @@ function RoiSection({
           <div className="grid h-11 w-11 place-items-center rounded-full bg-white shadow-sm ring-1 ring-primary/15">
             <TrendingUp className="h-5 w-5 text-primary" />
           </div>
-          <p className="font-display text-base font-extrabold text-primary">
-            {callout.title}
-          </p>
+          <p className="font-display text-base font-extrabold text-primary">{callout.title}</p>
         </div>
         <ul className="mt-3 space-y-1.5 text-sm text-foreground/85">
           {callout.lines.map((l) => (
@@ -928,7 +907,9 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
                   transition={{ duration: 0.25 }}
                   className="overflow-hidden"
                 >
-                  <div className="px-5 pb-5 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-foreground/80">{it.a}</div>
+                  <div className="px-5 pb-5 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-foreground/80">
+                    {it.a}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -943,24 +924,66 @@ function Faq({ items }: { items: { q: string; a: string }[] }) {
 
 const CALLOUT_STYLES: Record<
   "tip" | "note" | "important" | "clinical",
-  { border: string; bg: string; text: string; icon: React.ComponentType<{ className?: string }>; label: string }
+  {
+    border: string;
+    bg: string;
+    text: string;
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+  }
 > = {
-  tip: { border: "border-emerald-500/30", bg: "bg-emerald-50", text: "text-emerald-700", icon: Lightbulb, label: "Clinical Tip" },
-  note: { border: "border-sky-500/30", bg: "bg-sky-50", text: "text-sky-700", icon: Info, label: "Note" },
-  important: { border: "border-amber-500/40", bg: "bg-amber-50", text: "text-amber-700", icon: AlertTriangle, label: "Important" },
-  clinical: { border: "border-primary/25", bg: "bg-primary/[0.04]", text: "text-primary", icon: Stethoscope, label: "Clinical Insight" },
+  tip: {
+    border: "border-emerald-500/30",
+    bg: "bg-emerald-50",
+    text: "text-emerald-700",
+    icon: Lightbulb,
+    label: "Clinical Tip",
+  },
+  note: {
+    border: "border-sky-500/30",
+    bg: "bg-sky-50",
+    text: "text-sky-700",
+    icon: Info,
+    label: "Note",
+  },
+  important: {
+    border: "border-amber-500/40",
+    bg: "bg-amber-50",
+    text: "text-amber-700",
+    icon: AlertTriangle,
+    label: "Important",
+  },
+  clinical: {
+    border: "border-primary/25",
+    bg: "bg-primary/[0.04]",
+    text: "text-primary",
+    icon: Stethoscope,
+    label: "Clinical Insight",
+  },
 };
 
-function Callout({ variant, title, text }: { variant: "tip" | "note" | "important" | "clinical"; title?: string; text: string }) {
+function Callout({
+  variant,
+  title,
+  text,
+}: {
+  variant: "tip" | "note" | "important" | "clinical";
+  title?: string;
+  text: string;
+}) {
   const s = CALLOUT_STYLES[variant];
   const Icon = s.icon;
   return (
     <aside className={`flex gap-4 rounded-2xl border-l-4 ${s.border} ${s.bg} p-5`}>
-      <div className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow-sm ${s.text}`}>
+      <div
+        className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white shadow-sm ${s.text}`}
+      >
         <Icon className="h-4.5 w-4.5" />
       </div>
       <div className="min-w-0">
-        <p className={`text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider ${s.text}`}>
+        <p
+          className={`text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider ${s.text}`}
+        >
           {title ?? s.label}
         </p>
         <p className="mt-1 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-foreground/85">
@@ -975,10 +998,19 @@ function StatsBlock({ items }: { items: { value: string; label: string; source?:
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className="rounded-2xl border border-border bg-white p-5 text-center shadow-(--shadow-editorial-xs)">
-          <p className="font-display text-2xl font-extrabold text-primary sm:text-[1.75rem]">{s.value}</p>
+        <div
+          key={s.label}
+          className="rounded-2xl border border-border bg-white p-5 text-center shadow-(--shadow-editorial-xs)"
+        >
+          <p className="font-display text-2xl font-extrabold text-primary sm:text-[1.75rem]">
+            {s.value}
+          </p>
           <p className="mt-1.5 text-sm font-semibold text-ink">{s.label}</p>
-          {s.source && <p className="mt-1 text-[calc(10.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">{s.source}</p>}
+          {s.source && (
+            <p className="mt-1 text-[calc(10.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
+              {s.source}
+            </p>
+          )}
         </div>
       ))}
     </div>
@@ -996,7 +1028,10 @@ function Takeaways({ items }: { items: string[] }) {
       </div>
       <ul className="mt-4 space-y-2.5">
         {items.map((it) => (
-          <li key={it} className="flex gap-3 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-foreground/85">
+          <li
+            key={it}
+            className="flex gap-3 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-foreground/85"
+          >
             <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             <span>{it}</span>
           </li>
@@ -1006,16 +1041,9 @@ function Takeaways({ items }: { items: string[] }) {
   );
 }
 
-
 /* ---------------- Sidebar ---------------- */
 
-function Sidebar({
-  article,
-  related,
-}: {
-  article: Article;
-  related: Article[];
-}) {
+function Sidebar({ article, related }: { article: Article; related: Article[] }) {
   return (
     <aside className="space-y-6 lg:sticky lg:top-[calc(170*var(--desktop-px-unit))] lg:self-start">
       <OnThisPage items={article.tableOfContents} />
@@ -1045,9 +1073,7 @@ function OnThisPage({ items }: { items: { id: string; title: string }[] }) {
 
   return (
     <div className="rounded-2xl border border-border bg-white p-5 shadow-(--shadow-editorial-xs)">
-      <p className="font-display text-base font-extrabold text-ink">
-        On this page
-      </p>
+      <p className="font-display text-base font-extrabold text-ink">On this page</p>
       <nav className="mt-3 space-y-0.5">
         {items.map((it) => {
           const isActive = active === it.id;
@@ -1084,9 +1110,7 @@ function RelatedArticles({ items }: { items: Article[] }) {
   if (!items.length) return null;
   return (
     <div className="rounded-2xl border border-border bg-white p-5 shadow-(--shadow-editorial-xs)">
-      <p className="font-display text-base font-extrabold text-ink">
-        Related Articles
-      </p>
+      <p className="font-display text-base font-extrabold text-ink">Related Articles</p>
       <div className="mt-4 space-y-4">
         {items.map((a) => (
           <Link
@@ -1136,10 +1160,7 @@ function SidebarNewsletter() {
       <p className="mt-2 text-sm text-muted-foreground">
         Subscribe to our newsletter and never miss an important update.
       </p>
-      <form
-        onSubmit={form.submit}
-        className="mt-4 space-y-2.5"
-      >
+      <form onSubmit={form.submit} className="mt-4 space-y-2.5">
         <input
           type="email"
           required
@@ -1157,7 +1178,14 @@ function SidebarNewsletter() {
           {form.loading ? "Subscribing…" : "Subscribe"}
         </button>
       </form>
-      {form.message && <p role="status" className={`mt-3 text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}>{form.message}</p>}
+      {form.message && (
+        <p
+          role="status"
+          className={`mt-3 text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}
+        >
+          {form.message}
+        </p>
+      )}
       <div className="mt-4 aspect-[16/8] w-full overflow-hidden rounded-xl bg-secondary">
         <img
           src={whyCathlab}
@@ -1186,8 +1214,8 @@ function ExpertCTA() {
                 Need expert advice?
               </h3>
               <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
-                Our specialists can help you choose the right medical equipment
-                for your facility and budget.
+                Our specialists can help you choose the right medical equipment for your facility
+                and budget.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -1239,8 +1267,8 @@ function NewsletterBand() {
                 Subscribe to our newsletter
               </h3>
               <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
-                Get the latest buying guides, clinical insights and technology
-                updates delivered to your inbox.
+                Get the latest buying guides, clinical insights and technology updates delivered to
+                your inbox.
               </p>
             </div>
             <form
@@ -1264,7 +1292,14 @@ function NewsletterBand() {
                 {form.loading ? "Subscribing…" : "Subscribe"}
               </button>
             </form>
-            {form.message && <p role="status" className={`text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}>{form.message}</p>}
+            {form.message && (
+              <p
+                role="status"
+                className={`text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}
+              >
+                {form.message}
+              </p>
+            )}
             <div className="hidden h-32 w-56 shrink-0 overflow-hidden rounded-2xl lg:block">
               <img
                 src={solDes}
@@ -1323,7 +1358,10 @@ function ReadingProgress() {
   }, []);
   return (
     <div className="fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true">
-      <div className="h-full bg-primary transition-[width] duration-100" style={{ width: `${progress}%` }} />
+      <div
+        className="h-full bg-primary transition-[width] duration-100"
+        style={{ width: `${progress}%` }}
+      />
     </div>
   );
 }
@@ -1352,7 +1390,9 @@ function AuthorReview() {
   return (
     <section className="border-t border-border pt-8" aria-label="Article reviewer">
       <p className="text-xs font-bold uppercase tracking-wider text-primary">Reviewed by</p>
-      <p className="mt-2 font-display text-lg font-extrabold text-ink">AbuFarha Biomedical Engineering Team</p>
+      <p className="mt-2 font-display text-lg font-extrabold text-ink">
+        AbuFarha Biomedical Engineering Team
+      </p>
       <p className="mt-1 text-sm text-muted-foreground">Certified Medical Equipment Specialists</p>
     </section>
   );
@@ -1380,8 +1420,10 @@ function ArticleLightbox() {
     if (index === null) return;
     const keydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIndex(null);
-      if (event.key === "ArrowRight") setIndex((value) => value === null ? null : (value + 1) % images.length);
-      if (event.key === "ArrowLeft") setIndex((value) => value === null ? null : (value - 1 + images.length) % images.length);
+      if (event.key === "ArrowRight")
+        setIndex((value) => (value === null ? null : (value + 1) % images.length));
+      if (event.key === "ArrowLeft")
+        setIndex((value) => (value === null ? null : (value - 1 + images.length) % images.length));
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", keydown);
@@ -1393,7 +1435,9 @@ function ArticleLightbox() {
 
   const move = (direction: number) => {
     setZoomed(false);
-    setIndex((value) => value === null ? null : (value + direction + images.length) % images.length);
+    setIndex((value) =>
+      value === null ? null : (value + direction + images.length) % images.length,
+    );
   };
 
   return (
@@ -1416,21 +1460,54 @@ function ArticleLightbox() {
             setTouchStart(null);
           }}
         >
-          <button type="button" aria-label="Close image viewer" onClick={() => setIndex(null)} className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20">
+          <button
+            type="button"
+            aria-label="Close image viewer"
+            onClick={() => setIndex(null)}
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          >
             <X className="h-5 w-5" />
           </button>
-          {images.length > 1 && <button type="button" aria-label="Previous image" onClick={(event) => { event.stopPropagation(); move(-1); }} className="absolute left-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-6"><ChevronLeft className="h-6 w-6" /></button>}
+          {images.length > 1 && (
+            <button
+              type="button"
+              aria-label="Previous image"
+              onClick={(event) => {
+                event.stopPropagation();
+                move(-1);
+              }}
+              className="absolute left-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-6"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+          )}
           <img
             src={images[index].src}
             alt={images[index].alt}
-            onClick={(event) => { event.stopPropagation(); setZoomed((value) => !value); }}
+            onClick={(event) => {
+              event.stopPropagation();
+              setZoomed((value) => !value);
+            }}
             className={`max-h-[88vh] max-w-[88vw] object-contain transition-transform duration-300 ${zoomed ? "cursor-zoom-out scale-150" : "cursor-zoom-in scale-100"}`}
           />
-          {images.length > 1 && <button type="button" aria-label="Next image" onClick={(event) => { event.stopPropagation(); move(1); }} className="absolute right-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-6"><ArrowRight className="h-6 w-6" /></button>}
-          <span className="absolute bottom-5 text-xs font-semibold text-white/70">{index + 1} / {images.length}</span>
+          {images.length > 1 && (
+            <button
+              type="button"
+              aria-label="Next image"
+              onClick={(event) => {
+                event.stopPropagation();
+                move(1);
+              }}
+              className="absolute right-3 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-6"
+            >
+              <ArrowRight className="h-6 w-6" />
+            </button>
+          )}
+          <span className="absolute bottom-5 text-xs font-semibold text-white/70">
+            {index + 1} / {images.length}
+          </span>
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
-

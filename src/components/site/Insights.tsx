@@ -47,7 +47,10 @@ export function Insights() {
               Perspectives on Medical Technology &amp; Care
             </h2>
           </div>
-          <a href="/contact" className="group inline-flex items-center gap-2 text-sm font-bold text-primary">
+          <a
+            href="/contact"
+            className="group inline-flex items-center gap-2 text-sm font-bold text-primary"
+          >
             View All Articles
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>

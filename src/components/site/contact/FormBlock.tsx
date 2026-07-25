@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-import {
-  Mail,
-  Send,
-  ShieldCheck,
-  Clock,
-  User,
-  Building,
-  Check,
-} from "lucide-react";
+import { Mail, Send, ShieldCheck, Clock, User, Building, Check } from "lucide-react";
 import "react-international-phone/style.css";
 
 import { Input } from "@/components/ui/input";
@@ -50,8 +42,7 @@ export function FormBlock() {
     };
   }, []);
 
-  const setField = (name: string, v: string) =>
-    setValues((s) => ({ ...s, [name]: v }));
+  const setField = (name: string, v: string) => setValues((s) => ({ ...s, [name]: v }));
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,9 +79,11 @@ export function FormBlock() {
     "h-[calc(52*var(--desktop-px-unit))] rounded-xl border-border bg-secondary/30 text-[calc(15*var(--desktop-px-unit))] transition-all duration-200 hover:border-primary/40 focus-visible:border-primary focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-primary/15 focus-visible:shadow-[0_10px_28px_-14px_var(--primary)]";
 
   return (
-    <section id="contact-form" className="scroll-mt-36 bg-secondary/30 py-[calc(80*var(--desktop-px-unit))] lg:py-[calc(80*var(--desktop-px-unit))]">
+    <section
+      id="contact-form"
+      className="scroll-mt-36 bg-secondary/30 py-[calc(80*var(--desktop-px-unit))] lg:py-[calc(80*var(--desktop-px-unit))]"
+    >
       <div className="mx-auto w-full max-w-[87.5rem] px-6">
-
         <div className="grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(calc(340*var(--desktop-px-unit)),1fr)]">
           {/* Form */}
           <div className="m-0 w-full justify-self-stretch rounded-[calc(20*var(--desktop-px-unit))] border border-border/60 bg-white p-7 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)] sm:p-9 lg:p-12">
@@ -121,9 +114,16 @@ export function FormBlock() {
               )}
             </AnimatePresence>
 
-            <form onSubmit={onSubmit} noValidate className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2">
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              className="mt-7 grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-2"
+            >
               <div>
-                <Label className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground" htmlFor="fullName">
+                <Label
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground"
+                  htmlFor="fullName"
+                >
                   Full Name <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -140,7 +140,10 @@ export function FormBlock() {
               </div>
 
               <div>
-                <Label className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground" htmlFor="company">
+                <Label
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground"
+                  htmlFor="company"
+                >
                   Hospital / Company <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -171,7 +174,10 @@ export function FormBlock() {
               </div>
 
               <div>
-                <Label className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground" htmlFor="phone">
+                <Label
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground"
+                  htmlFor="phone"
+                >
                   Phone Number <span className="text-primary">*</span>
                 </Label>
                 <div className="mt-1.5">
@@ -186,7 +192,10 @@ export function FormBlock() {
               </div>
 
               <div>
-                <Label className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground" htmlFor="email">
+                <Label
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground"
+                  htmlFor="email"
+                >
                   Email Address <span className="text-primary">*</span>
                 </Label>
                 <div className="relative mt-1.5">
@@ -232,7 +241,10 @@ export function FormBlock() {
               </div>
 
               <div className="sm:col-span-2">
-                <Label className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground" htmlFor="message">
+                <Label
+                  className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground"
+                  htmlFor="message"
+                >
                   Message <span className="text-primary">*</span>
                 </Label>
                 <Textarea
@@ -251,7 +263,8 @@ export function FormBlock() {
 
               <div className="sm:col-span-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your information is securely transmitted.
+                  <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your information is securely
+                  transmitted.
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5 text-primary" /> We usually respond within 24 hours.
@@ -277,7 +290,6 @@ export function FormBlock() {
                   )}
                 </button>
               </div>
-
             </form>
           </div>
 
@@ -298,7 +310,9 @@ export function FormBlock() {
                     <Icon className="h-7 w-7" strokeWidth={1.75} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[calc(16*var(--desktop-px-unit))] font-bold text-foreground">{title}</div>
+                    <div className="text-[calc(16*var(--desktop-px-unit))] font-bold text-foreground">
+                      {title}
+                    </div>
                     <p className="mt-1 line-clamp-2 text-[calc(14*var(--desktop-px-unit))] leading-[1.55] text-muted-foreground">
                       {desc}
                     </p>
@@ -306,7 +320,6 @@ export function FormBlock() {
                 </li>
               ))}
             </ul>
-
           </div>
         </div>
       </div>

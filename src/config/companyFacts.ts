@@ -169,10 +169,7 @@ export function faqPageJsonLd(items: { question: string; answer: string }[]) {
 }
 
 /** Utility — Schema.org ItemList block for category / product listings. */
-export function itemListJsonLd(
-  items: { name: string; url: string }[],
-  listName?: string,
-) {
+export function itemListJsonLd(items: { name: string; url: string }[], listName?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",

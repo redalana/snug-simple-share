@@ -67,7 +67,10 @@ function SimpleShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="mx-auto flex max-w-[100rem] flex-col items-center gap-6 px-6 py-32 text-center lg:px-10">
+      <main
+        id="main-content"
+        className="mx-auto flex max-w-[100rem] flex-col items-center gap-6 px-6 py-32 text-center lg:px-10"
+      >
         {children}
       </main>
       <Footer />
@@ -83,8 +86,8 @@ function NotFoundView() {
         System not found
       </h1>
       <p className="max-w-md text-muted-foreground">
-        The medical system you&apos;re looking for isn&apos;t available. Explore our full
-        catalog of certified medical technologies.
+        The medical system you&apos;re looking for isn&apos;t available. Explore our full catalog of
+        certified medical technologies.
       </p>
       <button
         onClick={() => router.navigate({ to: "/products" })}
@@ -109,4 +112,3 @@ function ProductDetailPage() {
     </div>
   );
 }
-

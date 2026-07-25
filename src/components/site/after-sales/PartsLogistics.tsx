@@ -45,8 +45,8 @@ export function PartsLogistics() {
               Ready when you need them.
             </h2>
             <p className="mt-5 max-w-md text-[calc(15.5*var(--desktop-px-unit))] leading-relaxed text-white/70">
-              A dedicated regional inventory across our Amman and Cairo hubs —
-              select a module to see live availability.
+              A dedicated regional inventory across our Amman and Cairo hubs — select a module to
+              see live availability.
             </p>
 
             {/* interactive module tabs */}
@@ -85,7 +85,9 @@ export function PartsLogistics() {
                   <div className="mt-1 font-display text-4xl font-extrabold text-white">
                     {activeModule.count}
                   </div>
-                  <div className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-white/60">{activeModule.note}</div>
+                  <div className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-white/60">
+                    {activeModule.note}
+                  </div>
                 </div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary">
                   <Package className="h-5 w-5" />

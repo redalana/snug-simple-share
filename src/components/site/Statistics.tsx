@@ -37,9 +37,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
         </span>
         <span className="text-primary">{stat.suffix}</span>
       </div>
-      <div className="mt-2.5 text-sm font-semibold text-muted-foreground">
-        {stat.label}
-      </div>
+      <div className="mt-2.5 text-sm font-semibold text-muted-foreground">{stat.label}</div>
     </motion.div>
   );
 }

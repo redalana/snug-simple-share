@@ -32,11 +32,15 @@ export function DepartmentComponents() {
             Inside the Department
           </p>
           <h2 className="mt-4 font-display text-[calc(34*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(40*var(--desktop-px-unit))]">
-            Engineered for<br />Precision. Built for<br />Performance.
+            Engineered for
+            <br />
+            Precision. Built for
+            <br />
+            Performance.
           </h2>
           <p className="mt-4 max-w-md text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            Every component is carefully selected and integrated to deliver
-            exceptional clinical outcomes.
+            Every component is carefully selected and integrated to deliver exceptional clinical
+            outcomes.
           </p>
 
           <div className="mt-8 grid gap-8 md:grid-cols-[1fr_1.1fr]">
@@ -53,7 +57,11 @@ export function DepartmentComponents() {
                       }`}
                     >
                       <span className="flex items-center gap-2">
-                        {on ? <Check className="h-4 w-4 text-primary" /> : <Plus className="h-4 w-4 text-muted-foreground" />}
+                        {on ? (
+                          <Check className="h-4 w-4 text-primary" />
+                        ) : (
+                          <Plus className="h-4 w-4 text-muted-foreground" />
+                        )}
                         {c.label}
                       </span>
                       {on && <ArrowRight className="h-4 w-4 text-primary" />}
@@ -74,16 +82,27 @@ export function DepartmentComponents() {
                 className="rounded-2xl bg-white p-5 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
               >
                 <div className="aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
-                  <img src={active.thumb} alt={active.title} className="h-full w-full object-cover" />
+                  <img
+                    src={active.thumb}
+                    alt={active.title}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <p className="mt-4 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
                   {active.label}
                 </p>
-                <div className="mt-1 font-display text-[calc(16*var(--desktop-px-unit))] font-bold text-foreground">{active.title}</div>
-                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">{active.copy}</p>
+                <div className="mt-1 font-display text-[calc(16*var(--desktop-px-unit))] font-bold text-foreground">
+                  {active.title}
+                </div>
+                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground">
+                  {active.copy}
+                </p>
                 <ul className="mt-3 space-y-1.5">
                   {active.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground">
+                    <li
+                      key={f}
+                      className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground"
+                    >
                       <Check className="h-3.5 w-3.5 text-primary" /> {f}
                     </li>
                   ))}

@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
         rel: "preload",
         as: "image",
         href: OG_IMAGES.home,
-        fetchpriority: "high",
+        fetchPriority: "high",
       },
     ],
   }),

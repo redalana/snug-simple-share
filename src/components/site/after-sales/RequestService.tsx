@@ -1,12 +1,7 @@
 import { useRef, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import {
-  ArrowRight,
-  Phone,
-  CheckCircle2,
-  Loader2,
-} from "lucide-react";
+import { ArrowRight, Phone, CheckCircle2, Loader2 } from "lucide-react";
 import { PhoneField } from "@/components/site/PhoneField";
 import { SupportCenterPanel } from "./SupportCenterPanel";
 import { ImageUpload, type UploadItem } from "./ImageUpload";
@@ -52,7 +47,15 @@ export function RequestService() {
     const result = requestSchema.safeParse(values);
     if (!result.success) {
       const errs: Errors = {};
-      const order: FieldKey[] = ["name", "phone", "email", "facility", "equipment", "serial", "description"];
+      const order: FieldKey[] = [
+        "name",
+        "phone",
+        "email",
+        "facility",
+        "equipment",
+        "serial",
+        "description",
+      ];
       for (const issue of result.error.issues) {
         const key = issue.path[0] as FieldKey;
         if (!errs[key]) errs[key] = issue.message;
@@ -75,7 +78,15 @@ export function RequestService() {
   };
 
   const reset = () => {
-    setValues({ name: "", phone: "", email: "", facility: "", equipment: "", serial: "", description: "" });
+    setValues({
+      name: "",
+      phone: "",
+      email: "",
+      facility: "",
+      equipment: "",
+      serial: "",
+      description: "",
+    });
     setErrors({});
     images.forEach((i) => URL.revokeObjectURL(i.preview));
     setImages([]);
@@ -101,8 +112,8 @@ export function RequestService() {
             We&apos;ll take care of the rest.
           </h2>
           <p className="mt-5 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            Submit a request and our support team will respond within one
-            business hour — 24/7 for critical cases.
+            Submit a request and our support team will respond within one business hour — 24/7 for
+            critical cases.
           </p>
         </div>
 
@@ -119,9 +130,8 @@ export function RequestService() {
                   Request received.
                 </div>
                 <p className="mt-3 max-w-md text-[calc(14.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-                  A service coordinator has been notified and will contact you
-                  within one business hour. For critical downtime, please also
-                  call our 24/7 emergency line.
+                  A service coordinator has been notified and will contact you within one business
+                  hour. For critical downtime, please also call our 24/7 emergency line.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <a
@@ -155,7 +165,11 @@ export function RequestService() {
                     className={`${inputCls} ${errors.name ? errCls : ""}`}
                     aria-invalid={!!errors.name}
                   />
-                  {errors.name && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.name}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block">
@@ -169,7 +183,11 @@ export function RequestService() {
                       hasError={!!errors.phone}
                     />
                   </div>
-                  {errors.phone && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.phone}</span>}
+                  {errors.phone && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.phone}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block">
@@ -187,7 +205,11 @@ export function RequestService() {
                     className={`${inputCls} ${errors.email ? errCls : ""}`}
                     aria-invalid={!!errors.email}
                   />
-                  {errors.email && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.email}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block">
@@ -204,7 +226,11 @@ export function RequestService() {
                     className={`${inputCls} ${errors.facility ? errCls : ""}`}
                     aria-invalid={!!errors.facility}
                   />
-                  {errors.facility && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.facility}</span>}
+                  {errors.facility && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.facility}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block">
@@ -220,12 +246,18 @@ export function RequestService() {
                     className={`${inputCls} px-3 ${errors.equipment ? errCls : ""}`}
                     aria-invalid={!!errors.equipment}
                   >
-                    <option value="" disabled>Select equipment</option>
+                    <option value="" disabled>
+                      Select equipment
+                    </option>
                     {EQUIPMENT.map((e) => (
                       <option key={e.name}>{e.name}</option>
                     ))}
                   </select>
-                  {errors.equipment && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.equipment}</span>}
+                  {errors.equipment && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.equipment}
+                    </span>
+                  )}
                 </label>
 
                 <label className="block">
@@ -253,7 +285,11 @@ export function RequestService() {
                     className={`mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 ${errors.description ? errCls : ""}`}
                     aria-invalid={!!errors.description}
                   />
-                  {errors.description && <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">{errors.description}</span>}
+                  {errors.description && (
+                    <span className="mt-1.5 block text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      {errors.description}
+                    </span>
+                  )}
                 </label>
 
                 <div className="block sm:col-span-2">

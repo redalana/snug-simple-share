@@ -51,9 +51,8 @@ export function ProjectsGrid() {
             Projects Delivered Across Africa &amp; the Middle East
           </h1>
           <p className="mt-5 text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-            A selection of hospitals and medical centers where AbuFarha has
-            supplied, installed, commissioned and supported advanced medical
-            technology.
+            A selection of hospitals and medical centers where AbuFarha has supplied, installed,
+            commissioned and supported advanced medical technology.
           </p>
         </div>
 

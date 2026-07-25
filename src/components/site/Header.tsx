@@ -16,11 +16,20 @@ import { MobileProductsAccordion } from "./header/MobileProductsAccordion";
 import { SearchField } from "./header/SearchField";
 
 const HEADER_SOCIALS = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: LinkedInIcon, hoverColor: "#0A66C2" },
-  { label: "Facebook", href: "https://www.facebook.com/", Icon: FacebookIcon, hoverColor: "#1877F2" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
+    Icon: LinkedInIcon,
+    hoverColor: "#0A66C2",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/",
+    Icon: FacebookIcon,
+    hoverColor: "#1877F2",
+  },
   { label: "WhatsApp", href: "#", Icon: WhatsAppIcon, hoverColor: "#25D366" },
 ] as const;
-
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +50,6 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
 
   return (
     <header className="fixed inset-x-0 top-[var(--lovable-toolbar-offset,0px)] z-50">
@@ -88,8 +96,6 @@ export function Header() {
             </div>
           </div>
 
-
-
           {/* Mobile controls */}
           <div className="ml-auto flex items-center gap-1.5 md:ml-0 xl:hidden">
             <button
@@ -135,13 +141,10 @@ export function Header() {
                     )}
                     <span
                       className={`absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
-                        active
-                          ? "scale-x-100"
-                          : "origin-left scale-x-0 group-hover:scale-x-100"
+                        active ? "scale-x-100" : "origin-left scale-x-0 group-hover:scale-x-100"
                       }`}
                     />
                   </a>
-
 
                   {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
                   {item.label === "All Products" && <ProductsMegaDropdown />}
@@ -164,7 +167,6 @@ export function Header() {
                 </div>
               );
             })}
-
           </div>
         </nav>
       </div>
@@ -255,7 +257,11 @@ export function Header() {
                           onClick={() => setOpen(false)}
                           className="col-span-2 flex items-center gap-2 rounded-lg border border-border/60 px-3 py-2 text-[calc(13*var(--desktop-px-unit))] font-semibold text-foreground/80 transition-colors hover:border-primary/60 hover:text-primary"
                         >
-                          <Star className="h-4 w-4 text-primary" fill="currentColor" strokeWidth={2.25} />
+                          <Star
+                            className="h-4 w-4 text-primary"
+                            fill="currentColor"
+                            strokeWidth={2.25}
+                          />
                           View All Brands
                         </a>
                         {BRANDS_LIST.map((b) => (
@@ -271,7 +277,11 @@ export function Header() {
                               style={{ color: b.color }}
                             >
                               {b.name}
-                              {b.sub && <span className="ml-1 text-[calc(9*var(--desktop-px-unit))] uppercase opacity-75">{b.sub}</span>}
+                              {b.sub && (
+                                <span className="ml-1 text-[calc(9*var(--desktop-px-unit))] uppercase opacity-75">
+                                  {b.sub}
+                                </span>
+                              )}
                             </span>
                           </a>
                         ))}
@@ -280,7 +290,6 @@ export function Header() {
                   )}
                 </AnimatePresence>
               </div>
-
 
               {/* Mobile language selector */}
               <div className="mt-4 border-t border-border/60 pt-4">
@@ -295,7 +304,6 @@ export function Header() {
                       className="inline-flex min-h-[calc(48*var(--desktop-px-unit))] items-center gap-2 rounded-full border border-border px-4 text-sm font-medium text-foreground/80 transition-colors hover:border-primary hover:text-primary"
                     >
                       {l.label}
-
                     </button>
                   ))}
                 </div>

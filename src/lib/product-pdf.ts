@@ -53,7 +53,6 @@ async function imageToDataUrl(
   }
 }
 
-
 /**
  * Generates a professional, printable PDF product profile from product data —
  * company logo/name, product image, product info, technical highlights and
@@ -183,7 +182,11 @@ export async function generateProductPdf(product: Product): Promise<void> {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.setTextColor(210, 210, 210);
-  doc.text(`Landline: ${CONTACT.landline}    Mobile / WhatsApp: ${CONTACT.mobile}`, margin, footerY + 46);
+  doc.text(
+    `Landline: ${CONTACT.landline}    Mobile / WhatsApp: ${CONTACT.mobile}`,
+    margin,
+    footerY + 46,
+  );
   doc.text(`Email: ${CONTACT.email}    Website: ${CONTACT.website}`, margin, footerY + 62);
   doc.text(`Location: ${CONTACT.location}`, margin, footerY + 78);
 

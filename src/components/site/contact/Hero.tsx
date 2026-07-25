@@ -13,10 +13,7 @@ export function Hero() {
 
   useEffect(() => {
     if (HERO_SLIDES.length < 2 || reduce) return;
-    const id = window.setInterval(
-      () => setSlide((i) => (i + 1) % HERO_SLIDES.length),
-      5500,
-    );
+    const id = window.setInterval(() => setSlide((i) => (i + 1) % HERO_SLIDES.length), 5500);
     return () => window.clearInterval(id);
   }, [reduce]);
 
@@ -49,12 +46,14 @@ export function Hero() {
               </div>
               <h1 className="mt-6 font-display text-4xl font-black leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[2.25rem] xl:text-[2.75rem]">
                 Let&apos;s build
-                <br /><span className="whitespace-nowrap">better healthcare</span>
-                <br /><span className="text-primary">together</span>
+                <br />
+                <span className="whitespace-nowrap">better healthcare</span>
+                <br />
+                <span className="text-primary">together</span>
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-[calc(17*var(--desktop-px-unit))]">
-                From consultation to after-sales support, our team is ready to
-                provide the right medical solutions for your healthcare facility.
+                From consultation to after-sales support, our team is ready to provide the right
+                medical solutions for your healthcare facility.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -93,7 +92,10 @@ export function Hero() {
                   )}
                 />
               ))}
-              <div aria-hidden className="absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-white/45 to-transparent lg:block" />
+              <div
+                aria-hidden
+                className="absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-white/45 to-transparent lg:block"
+              />
               {HERO_SLIDES.length > 1 && (
                 <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
                   {HERO_SLIDES.map((_, i) => (

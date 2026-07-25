@@ -14,14 +14,12 @@ export function CompareBar() {
 
   useEffect(() => onQuoteModalState(setQuoteOpen), []);
 
-
   useEffect(() => {
     const footer = document.querySelector("footer");
     if (!footer) return;
-    const io = new IntersectionObserver(
-      (entries) => setNearFooter(entries[0].isIntersecting),
-      { rootMargin: "0px 0px -40px 0px" },
-    );
+    const io = new IntersectionObserver((entries) => setNearFooter(entries[0].isIntersecting), {
+      rootMargin: "0px 0px -40px 0px",
+    });
     io.observe(footer);
     return () => io.disconnect();
   }, []);
@@ -34,7 +32,9 @@ export function CompareBar() {
   return (
     <div
       className={`fixed right-4 z-[80] transition-[bottom] duration-300 sm:right-6 ${
-        nearFooter ? "bottom-[calc(env(safe-area-inset-bottom,0px)+180px)]" : "bottom-[calc(env(safe-area-inset-bottom,0px)+96px)]"
+        nearFooter
+          ? "bottom-[calc(env(safe-area-inset-bottom,0px)+180px)]"
+          : "bottom-[calc(env(safe-area-inset-bottom,0px)+96px)]"
       }`}
       role="region"
       aria-label="Product comparison"

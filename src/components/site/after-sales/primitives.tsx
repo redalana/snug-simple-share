@@ -1,7 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
-export function AnimatedNumber({ value, suffix = "", decimals = 0 }: { value: number; suffix?: string; decimals?: number }) {
+export function AnimatedNumber({
+  value,
+  suffix = "",
+  decimals = 0,
+}: {
+  value: number;
+  suffix?: string;
+  decimals?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [n, setN] = useState(0);
@@ -38,7 +46,14 @@ export function Sparkline({ data, color = "rgb(220,38,38)" }: { data: number[]; 
     .join(" ");
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="h-8 w-full">
-      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline
+        points={pts}
+        fill="none"
+        stroke={color}
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

@@ -12,10 +12,9 @@ export const WORLD_MAP_H = 520;
 
 // Fit the full sphere into the viewBox — the whole world is visible,
 // with Africa and the Middle East falling naturally around the center.
-export const projection = geoNaturalEarth1().fitSize(
-  [WORLD_MAP_W, WORLD_MAP_H],
-  { type: "Sphere" } as never,
-);
+export const projection = geoNaturalEarth1().fitSize([WORLD_MAP_W, WORLD_MAP_H], {
+  type: "Sphere",
+} as never);
 
 const pathGen = geoPath(projection);
 
@@ -58,10 +57,9 @@ export const WORLD_HIGHLIGHT_NAMES = new Set([
   "Bangladesh",
 ]);
 
-export const WORLD_GEO: Record<string, { x: number; y: number }> =
-  Object.fromEntries(
-    Object.entries(LATLON).map(([k, [lon, lat]]) => {
-      const p = projection([lon, lat])!;
-      return [k, { x: p[0], y: p[1] }];
-    }),
-  );
+export const WORLD_GEO: Record<string, { x: number; y: number }> = Object.fromEntries(
+  Object.entries(LATLON).map(([k, [lon, lat]]) => {
+    const p = projection([lon, lat])!;
+    return [k, { x: p[0], y: p[1] }];
+  }),
+);

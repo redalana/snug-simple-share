@@ -35,8 +35,10 @@ const ROWS: Row[] = [
   {
     label: "Specifications",
     get: (p) =>
-      p.snapshot?.slice(0, 3).map((s) => `${s.label}: ${s.value}`).join(" • ") ||
-      p.specs.join(" • "),
+      p.snapshot
+        ?.slice(0, 3)
+        .map((s) => `${s.label}: ${s.value}`)
+        .join(" • ") || p.specs.join(" • "),
   },
   { label: "Warranty", get: (p) => p.warranty || "Provided on quotation" },
   { label: "Availability", get: (p) => (p.sold ? "Sold" : "Available") },
@@ -286,7 +288,9 @@ function MobileProductAccordion({
               <dt className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                 {row.label}
               </dt>
-              <dd className="max-w-[60%] text-right text-sm text-foreground/90">{row.get(product)}</dd>
+              <dd className="max-w-[60%] text-right text-sm text-foreground/90">
+                {row.get(product)}
+              </dd>
             </div>
           ))}
         </dl>

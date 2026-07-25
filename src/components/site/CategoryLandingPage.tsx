@@ -18,10 +18,7 @@ import { PRODUCTS, productSlug, type Product } from "@/lib/products";
 import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
 import { openQuoteModal } from "@/lib/quote-modal";
-import {
-  CATEGORY_CONTENT,
-  CATEGORY_LABELS,
-} from "@/lib/category-content";
+import { CATEGORY_CONTENT, CATEGORY_LABELS } from "@/lib/category-content";
 
 export type CategoryLandingProps = {
   /** Slug segment used in the URL, e.g. "cath-lab". */
@@ -43,7 +40,7 @@ const STATUS_STYLES: Record<Product["status"], string> = {
   "Brand New": "bg-primary/10 text-primary ring-1 ring-primary/20",
   "Certified Refurbished": "bg-secondary text-foreground/80 ring-1 ring-border",
   "Factory Certified": "bg-secondary text-foreground/80 ring-1 ring-border",
-  "Used": "bg-secondary text-foreground/80 ring-1 ring-border",
+  Used: "bg-secondary text-foreground/80 ring-1 ring-border",
 };
 
 export function CategoryLandingPage({
@@ -67,21 +64,18 @@ export function CategoryLandingPage({
     title,
   );
 
-  const faqSchema =
-    content && content.faqs.length > 0 ? faqPageJsonLd(content.faqs) : null;
+  const faqSchema = content && content.faqs.length > 0 ? faqPageJsonLd(content.faqs) : null;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
       {faqSchema && (
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
@@ -107,9 +101,7 @@ export function CategoryLandingPage({
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
               {title}
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-              {description}
-            </p>
+            <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{description}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
@@ -331,12 +323,10 @@ export function CategoryLandingPage({
             <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-10 text-center">
               <p className="text-foreground/80">
                 We supply, install and support{" "}
-                <span className="font-semibold text-foreground">{title}</span> from
-                every major OEM.
+                <span className="font-semibold text-foreground">{title}</span> from every major OEM.
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
-                Talk to our engineers about current availability, specifications and
-                lead times.
+                Talk to our engineers about current availability, specifications and lead times.
               </p>
               <Link
                 to="/contact"
@@ -358,8 +348,8 @@ export function CategoryLandingPage({
                   {title} — frequently asked questions
                 </h2>
                 <p className="mt-3 text-sm text-muted-foreground">
-                  Answers to the questions our engineers receive most often from
-                  hospital procurement and clinical teams.
+                  Answers to the questions our engineers receive most often from hospital
+                  procurement and clinical teams.
                 </p>
               </div>
               <div className="mt-8">
@@ -398,11 +388,7 @@ export function CategoryLandingPage({
   );
 }
 
-function CategoryFaqList({
-  items,
-}: {
-  items: { question: string; answer: string }[];
-}) {
+function CategoryFaqList({ items }: { items: { question: string; answer: string }[] }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <ul className="divide-y divide-border/70 overflow-hidden rounded-2xl border border-border bg-white">

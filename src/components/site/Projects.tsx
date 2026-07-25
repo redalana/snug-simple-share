@@ -50,9 +50,9 @@ export function Projects() {
               King Fahad Cardiac Center
             </h3>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-white/75">
-              Philips Allura Xper FD10 Cath Lab — full supply, installation &amp;
-              commissioning delivered on schedule with complete biomedical
-              engineering handover and clinical applications training.
+              Philips Allura Xper FD10 Cath Lab — full supply, installation &amp; commissioning
+              delivered on schedule with complete biomedical engineering handover and clinical
+              applications training.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">

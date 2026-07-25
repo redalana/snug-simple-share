@@ -35,19 +35,17 @@ import {
 } from "@/lib/products";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
 
-
 /**
  * Catalog data lives in `@/lib/products` — the single source of truth shared
  * with the dynamic Product Details page. Everything below (categories,
  * manufacturers, filter counts, pagination) is derived from it.
  */
 
-
 const STATUS_STYLES: Record<Product["status"], string> = {
   "Brand New": "bg-primary/10 text-primary ring-1 ring-primary/20",
   "Certified Refurbished": "bg-secondary text-foreground/80 ring-1 ring-border",
   "Factory Certified": "bg-secondary text-foreground/80 ring-1 ring-border",
-  "Used": "bg-secondary text-foreground/80 ring-1 ring-border",
+  Used: "bg-secondary text-foreground/80 ring-1 ring-border",
 };
 
 const CATEGORIES = ["All Categories", ...PRIMARY_CATEGORIES] as const;
@@ -123,7 +121,13 @@ const FACET_CONFIG: {
   searchable?: boolean;
 }[] = [
   { key: "category", title: "Category", master: PRIMARY_CATEGORIES, defaultOpen: true },
-  { key: "manufacturer", title: "Manufacturer", master: ALL_MANUFACTURERS, defaultOpen: true, searchable: true },
+  {
+    key: "manufacturer",
+    title: "Manufacturer",
+    master: ALL_MANUFACTURERS,
+    defaultOpen: true,
+    searchable: true,
+  },
   { key: "condition", title: "Condition", master: CONDITIONS },
   { key: "country", title: "Country of Origin", master: COUNTRIES },
   { key: "year", title: "Year", master: YEARS.map(String) },
@@ -131,7 +135,6 @@ const FACET_CONFIG: {
   { key: "service", title: "Availability of Services", master: SERVICES },
   { key: "specialty", title: "Clinical Specialty", master: SPECIALTIES },
 ];
-
 
 type Selected = Record<FacetKey, string[]>;
 const EMPTY_SELECTED: Selected = {
@@ -170,9 +173,7 @@ function FilterAccordion({
 
   const showSearch = !!searchable && options.length > VISIBLE;
   const q = term.trim().toLowerCase();
-  const searched = q
-    ? options.filter((o) => o.value.toLowerCase().includes(q))
-    : options;
+  const searched = q ? options.filter((o) => o.value.toLowerCase().includes(q)) : options;
   const hasMore = !q && searched.length > VISIBLE;
   const visibleOptions = showAll || !hasMore ? searched : searched.slice(0, VISIBLE);
 
@@ -210,7 +211,6 @@ function FilterAccordion({
                 aria-label={`Search ${title}`}
                 className="h-10 w-full rounded-lg border border-border bg-background pl-9 pr-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               />
-
             </div>
           )}
           <ul className="space-y-3.5 pb-5">
@@ -227,7 +227,9 @@ function FilterAccordion({
                     className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
                   />
                   <span className="flex-1">{opt.value}</span>
-                  <span className="text-xs font-medium text-muted-foreground/70">({opt.count})</span>
+                  <span className="text-xs font-medium text-muted-foreground/70">
+                    ({opt.count})
+                  </span>
                 </label>
               </li>
             ))}
@@ -245,7 +247,6 @@ function FilterAccordion({
     </div>
   );
 }
-
 
 function ProductCard({ product, view }: { product: Product; view: "grid" | "list" }) {
   return (
@@ -322,7 +323,6 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           View Details
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
-
       </div>
     </motion.article>
   );
@@ -409,7 +409,6 @@ export function PortfolioBrowser() {
       setActiveCat("All Categories");
     }
   }, [searchStr]);
-
 
   const toggleSection = (key: string) => {
     setOpenFilters((prev) => {
@@ -504,7 +503,8 @@ export function PortfolioBrowser() {
       list = [...list].sort((a, b) => a.brand.localeCompare(b.brand));
     else if (sort === "Manufacturer Z–A")
       list = [...list].sort((a, b) => b.brand.localeCompare(a.brand));
-    else if (sort === "Category") list = [...list].sort((a, b) => a.category.localeCompare(b.category));
+    else if (sort === "Category")
+      list = [...list].sort((a, b) => a.category.localeCompare(b.category));
     else if (sort === "System Name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -521,13 +521,29 @@ export function PortfolioBrowser() {
   // Active chips (facets + category pill + search).
   const activeChips: { label: string; onRemove: () => void }[] = [
     ...(activeCat !== "All Categories"
-      ? [{ label: activeCat, onRemove: () => { setActiveCat("All Categories"); resetPage(); } }]
+      ? [
+          {
+            label: activeCat,
+            onRemove: () => {
+              setActiveCat("All Categories");
+              resetPage();
+            },
+          },
+        ]
       : []),
     ...FACET_CONFIG.flatMap(({ key }) =>
       selected[key].map((v) => ({ label: v, onRemove: () => toggleFilter(key, v) })),
     ),
     ...(query.trim()
-      ? [{ label: `“${query.trim()}”`, onRemove: () => { setQuery(""); resetPage(); } }]
+      ? [
+          {
+            label: `“${query.trim()}”`,
+            onRemove: () => {
+              setQuery("");
+              resetPage();
+            },
+          },
+        ]
       : []),
   ];
 
@@ -589,8 +605,6 @@ export function PortfolioBrowser() {
                 hospitals, clinics and healthcare providers across Africa and the Middle East.
               </p>
 
-
-
               <div className="mt-9 grid grid-cols-2 gap-x-8 gap-y-6">
                 <Stat icon={Boxes} value="11" label="Categories" />
                 <Stat icon={Layers} value="30+" label="Healthcare Projects" />
@@ -600,7 +614,9 @@ export function PortfolioBrowser() {
                     <BadgeCheck className="h-5 w-5" />
                   </span>
                   <div>
-                    <div className="text-lg font-extrabold leading-none text-foreground">Certified</div>
+                    <div className="text-lg font-extrabold leading-none text-foreground">
+                      Certified
+                    </div>
                     <div className="mt-1 text-xs text-muted-foreground">Quality &amp; Safety</div>
                   </div>
                 </div>
@@ -708,7 +724,7 @@ export function PortfolioBrowser() {
       <section className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-16">
         <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
-          <aside className="mb-8 lg:mb-0">
+          <div className="mb-8 lg:mb-0">
             <div className="lg:sticky lg:top-[calc(188*var(--desktop-px-unit))]">
               <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
                 <div className="mb-1 flex items-center justify-between">
@@ -739,7 +755,7 @@ export function PortfolioBrowser() {
                 ))}
               </div>
             </div>
-          </aside>
+          </div>
 
           {/* CONTENT */}
           <div>
@@ -763,7 +779,6 @@ export function PortfolioBrowser() {
                     aria-label="Sort systems"
                     className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
                   >
-
                     {SORT_OPTIONS.map((o) => (
                       <option key={o}>{o}</option>
                     ))}
@@ -790,7 +805,9 @@ export function PortfolioBrowser() {
                     aria-label="Grid view"
                     onClick={() => setView("grid")}
                     className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
-                      view === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                      view === "grid"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <LayoutGrid className="h-4 w-4" />
@@ -799,7 +816,9 @@ export function PortfolioBrowser() {
                     aria-label="List view"
                     onClick={() => setView("list")}
                     className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
-                      view === "list" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                      view === "list"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <List className="h-4 w-4" />
@@ -935,8 +954,8 @@ export function PortfolioBrowser() {
                 Need help choosing the right medical system?
               </h2>
               <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-                Our specialists can help you identify the most suitable technology for
-                your hospital, clinic or diagnostic center.
+                Our specialists can help you identify the most suitable technology for your
+                hospital, clinic or diagnostic center.
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
@@ -960,15 +979,7 @@ export function PortfolioBrowser() {
   );
 }
 
-function Stat({
-  icon: Icon,
-  value,
-  label,
-}: {
-  icon: typeof Boxes;
-  value: string;
-  label: string;
-}) {
+function Stat({ icon: Icon, value, label }: { icon: typeof Boxes; value: string; label: string }) {
   return (
     <div className="flex items-center gap-2.5">
       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">

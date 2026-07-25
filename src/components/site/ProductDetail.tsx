@@ -2,11 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useRouter } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import {
-  defaultCountries,
-  parseCountry,
-  FlagImage,
-} from "react-international-phone";
+import { defaultCountries, parseCountry, FlagImage } from "react-international-phone";
 import { PhoneField } from "@/components/site/PhoneField";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Check, Search, X, ZoomIn, ZoomOut, Expand, Download, Plus } from "lucide-react";
@@ -38,11 +34,7 @@ import {
   Boxes,
   Mail,
 } from "lucide-react";
-import {
-  type Product,
-  getAdjacentProducts,
-  productSlug,
-} from "@/lib/products";
+import { type Product, getAdjacentProducts, productSlug } from "@/lib/products";
 import { CATEGORY_NAME_TO_SLUG } from "@/lib/category-content";
 import { generateProductPdf } from "@/lib/product-pdf";
 import { pushRecentlyViewed } from "@/lib/recently-viewed";
@@ -97,12 +89,36 @@ const INCLUDED = [
 ];
 
 const TRUST = [
-  { icon: Award, title: "Engineering Since 1999", text: "Delivering medical technology across Africa and the Middle East since 1999." },
-  { icon: BadgeCheck, title: "Certified Biomedical Engineers", text: "OEM-trained specialists covering every major imaging platform." },
-  { icon: Wrench, title: "Installation & Commissioning", text: "Full site preparation, mechanical install and clinical hand-over." },
-  { icon: GraduationCap, title: "Clinical Training", text: "Structured operator and application programs at your facility." },
-  { icon: ShieldCheck, title: "Preventive Maintenance", text: "Scheduled service plans that protect uptime and patient throughput." },
-  { icon: Headset, title: "After Sales Support", text: "Priority remote support and rapid on-site response worldwide." },
+  {
+    icon: Award,
+    title: "Engineering Since 1999",
+    text: "Delivering medical technology across Africa and the Middle East since 1999.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Certified Biomedical Engineers",
+    text: "OEM-trained specialists covering every major imaging platform.",
+  },
+  {
+    icon: Wrench,
+    title: "Installation & Commissioning",
+    text: "Full site preparation, mechanical install and clinical hand-over.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Clinical Training",
+    text: "Structured operator and application programs at your facility.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Preventive Maintenance",
+    text: "Scheduled service plans that protect uptime and patient throughput.",
+  },
+  {
+    icon: Headset,
+    title: "After Sales Support",
+    text: "Priority remote support and rapid on-site response worldwide.",
+  },
 ];
 
 const DOWNLOADS = [
@@ -134,7 +150,6 @@ const FAQS = [
     a: "Our biomedical team offers long-term service contracts, remote diagnostics, priority spare parts supply and rapid on-site response.",
   },
 ];
-
 
 const SNAPSHOT_ICONS = [Gauge, ScanLine, Workflow, Layers3, BadgeCheck, ShieldCheck];
 
@@ -168,8 +183,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const [generating, setGenerating] = useState(false);
   const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
   const isLoaded = !!loadedMap[active];
-  const markLoaded = (src: string) =>
-    setLoadedMap((m) => (m[src] ? m : { ...m, [src]: true }));
+  const markLoaded = (src: string) => setLoadedMap((m) => (m[src] ? m : { ...m, [src]: true }));
 
   // Hover-zoom (desktop) — transform-origin follows the cursor.
   const [zoomHover, setZoomHover] = useState(false);
@@ -212,7 +226,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const inCompare = compareSlugs.includes(slug);
   const handleCompare = () => {
     const added = toggleCompare(slug);
-    if (added) toast.success("Added to Compare", { description: `${product.name} is ready to compare.` });
+    if (added)
+      toast.success("Added to Compare", { description: `${product.name} is ready to compare.` });
     else if (inCompare) toast("Removed from Compare");
     else toast.error("You can compare up to 4 products");
   };
@@ -222,7 +237,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   const adjacent = getAdjacentProducts(slug);
 
   const scrollToQuote = () => {
-    document.getElementById("request-quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document
+      .getElementById("request-quote")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const whatsappQuote = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hello AbuFarha,\n\nI am interested in:\n${product.name}\n\nCategory:\n${product.category}\n\nProduct Link:\n${pageUrl}\n\nPlease send quotation and availability.`,
@@ -241,10 +258,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
     t === "primary"
       ? "bg-primary text-primary-foreground"
       : t === "emerald"
-      ? "bg-emerald-500/95 text-white"
-      : t === "amber"
-      ? "bg-amber-500/95 text-white"
-      : "bg-slate-700/90 text-white";
+        ? "bg-emerald-500/95 text-white"
+        : t === "amber"
+          ? "bg-amber-500/95 text-white"
+          : "bg-slate-700/90 text-white";
 
   const shareNative = async () => {
     const url = pageUrl || (typeof window !== "undefined" ? window.location.href : "");
@@ -252,16 +269,19 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
     const nav = typeof navigator !== "undefined" ? (navigator as Nav) : null;
     if (nav?.share) {
       try {
-        await nav.share({ title: product.name, text: `${product.name} — ${product.category}`, url });
+        await nav.share({
+          title: product.name,
+          text: `${product.name} — ${product.category}`,
+          url,
+        });
         return;
-      } catch { /* user cancelled */ }
+      } catch {
+        /* user cancelled */
+      }
     }
     share.copyLink();
     toast.success("Link copied to clipboard");
   };
-
-
-
 
   const facts: { icon: typeof Factory; label: string; value: string }[] = [
     { icon: Factory, label: "Manufacturer", value: product.brand },
@@ -289,7 +309,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   return (
     <>
       {/* HERO */}
-      <section id="overview" className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary">
+      <section
+        id="overview"
+        className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-white via-secondary/40 to-secondary"
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/[0.06] blur-3xl"
@@ -362,7 +385,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                     animate={{ opacity: isLoaded ? 1 : 0 }}
                     transition={{ duration: 0.35 }}
                     src={active}
-                    alt={product.imageAlt || `${product.brand} ${product.name} — view ${activeIndex + 1}`}
+                    alt={
+                      product.imageAlt ||
+                      `${product.brand} ${product.name} — view ${activeIndex + 1}`
+                    }
                     loading="eager"
                     decoding="async"
                     onLoad={() => markLoaded(active)}
@@ -394,7 +420,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                   <div className="absolute right-3 top-3 flex items-center gap-1.5 opacity-100 transition-opacity md:opacity-0 md:group-hover/gallery:opacity-100 md:focus-within:opacity-100">
                     <button
                       type="button"
-                      onClick={(e) => { e.stopPropagation(); setLightboxOpen(true); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLightboxOpen(true);
+                      }}
                       aria-label="View fullscreen"
                       className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75"
                     >
@@ -413,7 +442,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                     </a>
                     <button
                       type="button"
-                      onClick={(e) => { e.stopPropagation(); shareNative(); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        shareNative();
+                      }}
                       aria-label="Share product"
                       className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black/75"
                     >
@@ -454,8 +486,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               )}
             </div>
 
-
-
             {/* INFO */}
             <div>
               <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
@@ -474,7 +504,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 ]
                   .filter(Boolean)
                   .map((b) => (
-                    <div key={b as string} className="flex items-center gap-2.5 text-sm font-medium text-foreground/80">
+                    <div
+                      key={b as string}
+                      className="flex items-center gap-2.5 text-sm font-medium text-foreground/80"
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary" />
                       {b}
                     </div>
@@ -519,7 +552,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 {inCompare ? "Added to Compare" : "Add to Compare"}
               </button>
 
-
               {/* SHARE */}
               <div className="mt-7">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -562,7 +594,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                         <dt className="text-xs uppercase tracking-wide text-muted-foreground">
                           {f.label}
                         </dt>
-                        <dd className="text-[calc(15*var(--desktop-px-unit))] font-semibold text-foreground">{f.value}</dd>
+                        <dd className="text-[calc(15*var(--desktop-px-unit))] font-semibold text-foreground">
+                          {f.value}
+                        </dd>
                       </div>
                     </div>
                   ))}
@@ -594,7 +628,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 aria-current={isActive ? "true" : undefined}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  document
+                    .getElementById(s.id)
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
                 className={`relative shrink-0 px-4 py-3.5 text-sm font-semibold transition-colors ${
                   isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
@@ -613,9 +649,11 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </nav>
 
-
       {/* VALUE BLOCK — Why Choose · Snapshot · Included, unified */}
-      <section id="features" className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40">
+      <section
+        id="features"
+        className="border-b border-border/60 bg-gradient-to-b from-white to-secondary/40"
+      >
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
           {/* WHY HOSPITALS CHOOSE */}
           <div className="mx-auto max-w-2xl text-center">
@@ -657,7 +695,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               {product.snapshot.slice(0, 6).map((s, i) => {
                 const Icon = SNAPSHOT_ICONS[i % SNAPSHOT_ICONS.length];
                 return (
-                  <div key={s.label} className="group px-6 py-8 transition-colors hover:bg-secondary/30">
+                  <div
+                    key={s.label}
+                    className="group px-6 py-8 transition-colors hover:bg-secondary/30"
+                  >
                     <Icon className="h-5 w-5 text-primary/70 transition-transform duration-300 group-hover:scale-110" />
                     <dt className="mt-4 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                       {s.label}
@@ -681,8 +722,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 Included with every purchase
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Every system ships with full lifecycle support — from installation to
-                long-term after-sales service.
+                Every system ships with full lifecycle support — from installation to long-term
+                after-sales service.
               </p>
             </div>
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -715,8 +756,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 Documentation &amp; datasheets
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Download the full product profile instantly or request the OEM
-                datasheets, installation and warranty documents from our team.
+                Download the full product profile instantly or request the OEM datasheets,
+                installation and warranty documents from our team.
               </p>
               <button
                 onClick={handlePdf}
@@ -740,7 +781,9 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                       <FileText className="h-5 w-5" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-bold text-foreground">{d.label}</span>
+                      <span className="block truncate text-sm font-bold text-foreground">
+                        {d.label}
+                      </span>
                       <span className="mt-0.5 block text-[calc(11*var(--desktop-px-unit))] uppercase tracking-wide text-muted-foreground">
                         {d.type} · {d.size}
                       </span>
@@ -797,8 +840,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 Answers to common questions
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Everything you need to know about installation, training, warranty
-                and after-sales support for this system.
+                Everything you need to know about installation, training, warranty and after-sales
+                support for this system.
               </p>
             </div>
             <div className="divide-y divide-border/60 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-[0_18px_44px_-32px_rgba(0,0,0,0.28)]">
@@ -832,8 +875,8 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 Need help choosing the right system?
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Our clinical and biomedical specialists will help you match the right
-                configuration to your facility, project scope and budget.
+                Our clinical and biomedical specialists will help you match the right configuration
+                to your facility, project scope and budget.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -853,7 +896,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           </div>
         </div>
       </section>
-
 
       {/* RELATED SYSTEMS */}
       <div className="border-b border-border/60 bg-secondary/30">
@@ -925,28 +967,17 @@ const QUOTE_COUNTRIES = defaultCountries
   .map(parseCountry)
   .sort((a, b) => a.name.localeCompare(b.name));
 
-function CountrySelect({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-}) {
+function CountrySelect({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const selected = useMemo(
-    () => QUOTE_COUNTRIES.find((c) => c.name === value),
-    [value],
-  );
+  const selected = useMemo(() => QUOTE_COUNTRIES.find((c) => c.name === value), [value]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return QUOTE_COUNTRIES;
-    return QUOTE_COUNTRIES.filter(
-      (c) => c.name.toLowerCase().includes(q) || c.iso2.includes(q),
-    );
+    return QUOTE_COUNTRIES.filter((c) => c.name.toLowerCase().includes(q) || c.iso2.includes(q));
   }, [query]);
 
   useEffect(() => {
@@ -1034,13 +1065,7 @@ function CountrySelect({
   );
 }
 
-function QuoteSection({
-  product,
-  whatsappQuote,
-}: {
-  product: Product;
-  whatsappQuote: string;
-}) {
+function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQuote: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
@@ -1068,8 +1093,7 @@ function QuoteSection({
   }, []);
 
   const update =
-    (field: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -1118,8 +1142,8 @@ function QuoteSection({
             Request a Quote
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-foreground/80">
-            Our specialists will help you choose the right medical system, verify
-            availability, prepare the quotation and answer all technical questions.
+            Our specialists will help you choose the right medical system, verify availability,
+            prepare the quotation and answer all technical questions.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
@@ -1222,8 +1246,6 @@ function QuoteSection({
   );
 }
 
-
-
 function ShareButton({
   href,
   label,
@@ -1245,7 +1267,6 @@ function ShareButton({
     </a>
   );
 }
-
 
 function Lightbox({
   images,

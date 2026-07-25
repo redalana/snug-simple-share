@@ -32,8 +32,12 @@ export function OperationsDashboard() {
               <div className="flex h-2 w-2 items-center justify-center">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
               </div>
-              <div className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-white">Global Service Console</div>
-              <div className="hidden text-[calc(11*var(--desktop-px-unit))] text-white/40 sm:block">/ MEA · Central & South Asia</div>
+              <div className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-white">
+                Global Service Console
+              </div>
+              <div className="hidden text-[calc(11*var(--desktop-px-unit))] text-white/40 sm:block">
+                / MEA · Central & South Asia
+              </div>
             </div>
             <div className="hidden gap-2 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/40 sm:flex">
               <span>Today</span>
@@ -48,9 +52,25 @@ export function OperationsDashboard() {
             {[
               { label: "Active Engineers", value: 46, spark: [30, 38, 34, 41, 39, 44, 46] },
               { label: "Open Tickets", value: 128, spark: [180, 172, 160, 155, 148, 138, 128] },
-              { label: "Avg Response", value: 2.4, decimals: 1, suffix: " hrs", spark: [3.2, 3.0, 2.9, 2.7, 2.6, 2.5, 2.4] },
-              { label: "Spare Parts", value: 2350, suffix: "+", spark: [2100, 2180, 2210, 2260, 2290, 2320, 2350] },
-              { label: "Equipment Health", value: 98, suffix: "%", spark: [95, 96, 96, 97, 97, 98, 98] },
+              {
+                label: "Avg Response",
+                value: 2.4,
+                decimals: 1,
+                suffix: " hrs",
+                spark: [3.2, 3.0, 2.9, 2.7, 2.6, 2.5, 2.4],
+              },
+              {
+                label: "Spare Parts",
+                value: 2350,
+                suffix: "+",
+                spark: [2100, 2180, 2210, 2260, 2290, 2320, 2350],
+              },
+              {
+                label: "Equipment Health",
+                value: 98,
+                suffix: "%",
+                spark: [95, 96, 96, 97, 97, 98, 98],
+              },
             ].map((m, i) => (
               <motion.div
                 key={m.label}
@@ -64,7 +84,11 @@ export function OperationsDashboard() {
                   {m.label}
                 </div>
                 <div className="mt-3 font-display text-4xl font-extrabold tracking-tight text-white">
-                  <AnimatedNumber value={m.value} suffix={m.suffix ?? ""} decimals={m.decimals ?? 0} />
+                  <AnimatedNumber
+                    value={m.value}
+                    suffix={m.suffix ?? ""}
+                    decimals={m.decimals ?? 0}
+                  />
                 </div>
                 <div className="mt-3">
                   <Sparkline data={m.spark} />
@@ -77,7 +101,8 @@ export function OperationsDashboard() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/8 bg-black/30 px-5 py-4 text-[calc(12*var(--desktop-px-unit))] text-white/60">
             <div className="flex items-center gap-2">
               <MapPin className="h-3.5 w-3.5 text-primary" />
-              <span className="font-semibold text-white">10+ countries</span> · 30+ healthcare projects under active care
+              <span className="font-semibold text-white">10+ countries</span> · 30+ healthcare
+              projects under active care
             </div>
             <div className="flex items-center gap-2 text-white/50">
               <Clock className="h-3.5 w-3.5" />

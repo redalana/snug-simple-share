@@ -47,16 +47,66 @@ export type ProductCategory = {
 };
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
-  { label: "Cath Lab Systems", category: "Cath Lab Systems", seoPath: "/products/cath-lab", Icon: HeartPulse },
-  { label: "Drug-Eluting Stents (DES)", category: null, seoPath: "/products/drug-eluting-stents", Icon: Activity },
-  { label: "PET/CT Scanners", category: "PET/CT Scanners", seoPath: "/products/pet-ct-scanners", Icon: ScanLine },
-  { label: "CT Scanners", category: "CT Scanners", seoPath: "/products/ct-scanners", Icon: Layers3 },
-  { label: "MRI Scanners", category: "MRI Scanners", seoPath: "/products/mri-scanners", Icon: Magnet },
-  { label: "C-Arm Systems", category: "C-Arms", seoPath: "/products/c-arm-systems", Icon: Aperture },
-  { label: "X-Ray Systems", category: "X-Ray Systems", seoPath: "/products/x-ray-systems", Icon: Radiation },
-  { label: "Mammography Systems", category: "Mammography", seoPath: "/products/mammography-systems", Icon: CircleDot },
-  { label: "Bone Densitometers (DEXA)", category: "Bone Densitometers (DEXA)", seoPath: "/products/bone-densitometers", Icon: Bone },
-  { label: "Lithotripsy (ESWL)", category: "Lithotripsy Systems", seoPath: "/products/lithotripsy-eswl", Icon: Waves },
+  {
+    label: "Cath Lab Systems",
+    category: "Cath Lab Systems",
+    seoPath: "/products/cath-lab",
+    Icon: HeartPulse,
+  },
+  {
+    label: "Drug-Eluting Stents (DES)",
+    category: null,
+    seoPath: "/products/drug-eluting-stents",
+    Icon: Activity,
+  },
+  {
+    label: "PET/CT Scanners",
+    category: "PET/CT Scanners",
+    seoPath: "/products/pet-ct-scanners",
+    Icon: ScanLine,
+  },
+  {
+    label: "CT Scanners",
+    category: "CT Scanners",
+    seoPath: "/products/ct-scanners",
+    Icon: Layers3,
+  },
+  {
+    label: "MRI Scanners",
+    category: "MRI Scanners",
+    seoPath: "/products/mri-scanners",
+    Icon: Magnet,
+  },
+  {
+    label: "C-Arm Systems",
+    category: "C-Arms",
+    seoPath: "/products/c-arm-systems",
+    Icon: Aperture,
+  },
+  {
+    label: "X-Ray Systems",
+    category: "X-Ray Systems",
+    seoPath: "/products/x-ray-systems",
+    Icon: Radiation,
+  },
+  {
+    label: "Mammography Systems",
+    category: "Mammography",
+    seoPath: "/products/mammography-systems",
+    Icon: CircleDot,
+  },
+  {
+    label: "Bone Densitometers (DEXA)",
+    category: "Bone Densitometers (DEXA)",
+    seoPath: "/products/bone-densitometers",
+    Icon: Bone,
+  },
+  {
+    label: "Lithotripsy (ESWL)",
+    category: "Lithotripsy Systems",
+    seoPath: "/products/lithotripsy-eswl",
+    Icon: Waves,
+  },
   { label: "Others", category: null, seoPath: "/products/others", Icon: LayoutGrid },
 ];
 
@@ -74,6 +124,5 @@ export const LANGUAGES = [
   { code: "en", label: "English" },
   { code: "fr", label: "Français" },
 ] as const;
-
 
 // Brand roster lives in a single source of truth: src/lib/brands-data.ts

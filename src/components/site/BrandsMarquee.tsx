@@ -39,18 +39,18 @@ type Brand = {
 // Reduced: Toshiba/Canon, Hitachi, Shimadzu (thin/wide wordmarks).
 // Boosted: Esaote, Richard Wolf, Boston Scientific (compact wordmarks).
 const BRANDS: Brand[] = [
-  { name: "Philips",              alt: "Philips",                 url: philips.url,     h: 22 },
-  { name: "Siemens Healthineers", alt: "Siemens Healthineers",    url: siemens.url,     h: 20 },
-  { name: "GE HealthCare",        alt: "GE HealthCare",           url: ge.url,          h: 40 },
-  { name: "Canon Medical",        alt: "Canon Medical (Toshiba)", url: canon.url,       h: 22 },
-  { name: "Mindray",              alt: "Mindray",                 url: mindray.url,     h: 34 },
-  { name: "Esaote",               alt: "Esaote",                  url: esaote.url,      h: 42 },
-  { name: "Richard Wolf",         alt: "Richard Wolf",            url: richardWolf.url, h: 36 },
-  { name: "Hitachi",              alt: "Hitachi",                 url: hitachi.url,     h: 24 },
-  { name: "Shimadzu",             alt: "Shimadzu",                url: shimadzu.url,    h: 26 },
-  { name: "Abbott",               alt: "Abbott",                  url: abbott.url,      h: 34 },
-  { name: "Medtronic",            alt: "Medtronic",               url: medtronic.url,   h: 40 },
-  { name: "Boston Scientific",    alt: "Boston Scientific",       url: boston.url,      h: 44 },
+  { name: "Philips", alt: "Philips", url: philips.url, h: 22 },
+  { name: "Siemens Healthineers", alt: "Siemens Healthineers", url: siemens.url, h: 20 },
+  { name: "GE HealthCare", alt: "GE HealthCare", url: ge.url, h: 40 },
+  { name: "Canon Medical", alt: "Canon Medical (Toshiba)", url: canon.url, h: 22 },
+  { name: "Mindray", alt: "Mindray", url: mindray.url, h: 34 },
+  { name: "Esaote", alt: "Esaote", url: esaote.url, h: 42 },
+  { name: "Richard Wolf", alt: "Richard Wolf", url: richardWolf.url, h: 36 },
+  { name: "Hitachi", alt: "Hitachi", url: hitachi.url, h: 24 },
+  { name: "Shimadzu", alt: "Shimadzu", url: shimadzu.url, h: 26 },
+  { name: "Abbott", alt: "Abbott", url: abbott.url, h: 34 },
+  { name: "Medtronic", alt: "Medtronic", url: medtronic.url, h: 40 },
+  { name: "Boston Scientific", alt: "Boston Scientific", url: boston.url, h: 44 },
 ];
 
 function LogoItem({ brand }: { brand: Brand }) {

@@ -8,7 +8,11 @@ export function Certifications() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <Reveal>
           <div className="text-center">
-            <div className="flex justify-center"><Eyebrow align="center" index="11">Certifications &amp; Standards</Eyebrow></div>
+            <div className="flex justify-center">
+              <Eyebrow align="center" index="11">
+                Certifications &amp; Standards
+              </Eyebrow>
+            </div>
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
               Certified, audited and manufacturer-aligned.
             </h2>
@@ -22,9 +26,15 @@ export function Certifications() {
                   <c.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <div className="font-display text-[1.05rem] font-extrabold text-ink">{c.title}</div>
-                  <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-primary">{c.sub}</div>
-                  <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <div className="font-display text-[1.05rem] font-extrabold text-ink">
+                    {c.title}
+                  </div>
+                  <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-primary">
+                    {c.sub}
+                  </div>
+                  <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                    {c.desc}
+                  </p>
                 </div>
               </div>
             </Reveal>

@@ -36,7 +36,7 @@ export const CATEGORY_NAME_TO_SLUG: Record<string, string> = {
   "PET/CT Scanners": "pet-ct-scanners",
   "MRI Scanners": "mri-scanners",
   "CT Scanners": "ct-scanners",
-  "Mammography": "mammography-systems",
+  Mammography: "mammography-systems",
   "Bone Densitometers (DEXA)": "bone-densitometers",
   "Lithotripsy Systems": "lithotripsy-eswl",
 };
@@ -241,11 +241,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Hemodynamic recording and PACS/RIS integration",
       "Uptime targets and preventive-maintenance coverage for primary-PCI hospitals",
     ],
-    supportServices: [
-      SERVICE_LINKS.turnkey,
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-    ],
+    supportServices: [SERVICE_LINKS.turnkey, SERVICE_LINKS.aftersales, SERVICE_LINKS.services],
     faqs: [
       {
         question: "Single-plane or bi-plane — which do we need?",
@@ -298,11 +294,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Sterile-inventory strategy and stock rotation",
       "Reliable OEM-certified supply chain and lead times",
     ],
-    supportServices: [
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-      SERVICE_LINKS.contact,
-    ],
+    supportServices: [SERVICE_LINKS.aftersales, SERVICE_LINKS.services, SERVICE_LINKS.contact],
     faqs: [
       {
         question: "Which DES platforms do you supply?",
@@ -350,11 +342,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Dose-management features and storage/PACS integration",
       "Preventive-maintenance and battery/tube service planning",
     ],
-    supportServices: [
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-      SERVICE_LINKS.training,
-    ],
+    supportServices: [SERVICE_LINKS.aftersales, SERVICE_LINKS.services, SERVICE_LINKS.training],
     faqs: [
       {
         question: "Full-size or mini C-arm?",
@@ -402,11 +390,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "PACS/RIS integration and worklist configuration",
       "Preventive-maintenance and detector-warranty coverage",
     ],
-    supportServices: [
-      SERVICE_LINKS.turnkey,
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-    ],
+    supportServices: [SERVICE_LINKS.turnkey, SERVICE_LINKS.aftersales, SERVICE_LINKS.services],
     faqs: [
       {
         question: "What does a full DR room installation cover?",
@@ -507,11 +491,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "PACS/RIS integration",
       "Preventive-maintenance and calibration coverage",
     ],
-    supportServices: [
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-      SERVICE_LINKS.training,
-    ],
+    supportServices: [SERVICE_LINKS.aftersales, SERVICE_LINKS.services, SERVICE_LINKS.training],
     faqs: [
       {
         question: "What does a DEXA installation involve?",
@@ -559,11 +539,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Consumable strategy (electrodes, coupling media)",
       "Preventive-maintenance coverage for source and imaging chain",
     ],
-    supportServices: [
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.services,
-      SERVICE_LINKS.training,
-    ],
+    supportServices: [SERVICE_LINKS.aftersales, SERVICE_LINKS.services, SERVICE_LINKS.training],
     faqs: [
       {
         question: "What clinical services benefit most from ESWL?",
@@ -594,7 +570,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     related: ["cath-lab", "x-ray-systems"],
   },
 
-  "others": {
+  others: {
     intro:
       "Beyond the major imaging and interventional modalities, hospitals rely on a wide range of specialised equipment — ultrasound, endoscopy, patient monitoring, sterilisation, anaesthesia and surgical platforms among them. AbuFarha's biomedical engineering team supplies, installs, commissions and services these systems from a portfolio of OEM-certified partners. If the equipment you are planning is not listed on a dedicated category page, talk to our engineers about current availability, specifications and lead times.",
     applications: [
@@ -611,11 +587,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       "Preventive-maintenance and training coverage",
       "Compliance with local regulatory requirements",
     ],
-    supportServices: [
-      SERVICE_LINKS.services,
-      SERVICE_LINKS.aftersales,
-      SERVICE_LINKS.contact,
-    ],
+    supportServices: [SERVICE_LINKS.services, SERVICE_LINKS.aftersales, SERVICE_LINKS.contact],
     faqs: [
       {
         question: "How do I know if you supply the equipment I need?",
@@ -654,5 +626,5 @@ export const CATEGORY_LABELS: Record<string, string> = {
   "mammography-systems": "Mammography Systems",
   "bone-densitometers": "Bone Densitometers (DEXA)",
   "lithotripsy-eswl": "Lithotripsy (ESWL)",
-  "others": "Other Equipment",
+  others: "Other Equipment",
 };

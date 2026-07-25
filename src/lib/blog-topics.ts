@@ -34,7 +34,6 @@ export type MedicalTopic = {
   audience?: string;
 };
 
-
 /**
  * Per-slug medical knowledge. When a slug is missing here, the generator
  * falls back to sensible generic content derived from the article category.
@@ -84,11 +83,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Intravascular imaging (IVUS, OCT) and physiology (FFR, iFR)",
     ],
     technologies: [
-      { name: "Fixed C-arm angiography system", role: "High-resolution fluoroscopy for real-time vascular imaging and precise catheter navigation." },
-      { name: "Hemodynamic monitoring", role: "Continuous ECG, pressure and oxygen tracking during interventions." },
-      { name: "IVUS & OCT", role: "Intravascular imaging that guides stent sizing and confirms optimal deployment." },
-      { name: "FFR / iFR physiology", role: "Measures the functional significance of a coronary lesion before treatment." },
-      { name: "Rotational and 3D angiography", role: "Volumetric vascular imaging for complex bifurcations and structural cases." },
+      {
+        name: "Fixed C-arm angiography system",
+        role: "High-resolution fluoroscopy for real-time vascular imaging and precise catheter navigation.",
+      },
+      {
+        name: "Hemodynamic monitoring",
+        role: "Continuous ECG, pressure and oxygen tracking during interventions.",
+      },
+      {
+        name: "IVUS & OCT",
+        role: "Intravascular imaging that guides stent sizing and confirms optimal deployment.",
+      },
+      {
+        name: "FFR / iFR physiology",
+        role: "Measures the functional significance of a coronary lesion before treatment.",
+      },
+      {
+        name: "Rotational and 3D angiography",
+        role: "Volumetric vascular imaging for complex bifurcations and structural cases.",
+      },
     ],
     clinicalBenefits: [
       "Immediate diagnosis and treatment in a single session",
@@ -120,11 +134,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { value: "7–10 yrs", label: "Typical service life", source: "OEM" },
     ],
     faq: [
-      { q: "How long does a diagnostic angiogram take?", a: "A standard diagnostic coronary angiogram takes 30–45 minutes; PCI adds another 30–60 minutes depending on complexity." },
-      { q: "Is a cath lab procedure safe?", a: "Yes. Major complications occur in fewer than 1% of diagnostic cases when performed by experienced operators with modern imaging systems." },
-      { q: "What is the difference between a fixed and mobile C-arm?", a: "A fixed cath lab offers higher image quality, larger detectors and integrated hemodynamics for interventional work; mobile C-arms suit lower-volume or hybrid theatre use." },
-      { q: "How much radiation does a patient receive?", a: "Modern low-dose systems typically deliver 3–10 mSv per procedure — comparable to a CT scan and well below traditional systems." },
-      { q: "How long does a refurbished cath lab last?", a: "A properly refurbished platform lasts 7–10 years with OEM parts, planned maintenance and clinical applications support." },
+      {
+        q: "How long does a diagnostic angiogram take?",
+        a: "A standard diagnostic coronary angiogram takes 30–45 minutes; PCI adds another 30–60 minutes depending on complexity.",
+      },
+      {
+        q: "Is a cath lab procedure safe?",
+        a: "Yes. Major complications occur in fewer than 1% of diagnostic cases when performed by experienced operators with modern imaging systems.",
+      },
+      {
+        q: "What is the difference between a fixed and mobile C-arm?",
+        a: "A fixed cath lab offers higher image quality, larger detectors and integrated hemodynamics for interventional work; mobile C-arms suit lower-volume or hybrid theatre use.",
+      },
+      {
+        q: "How much radiation does a patient receive?",
+        a: "Modern low-dose systems typically deliver 3–10 mSv per procedure — comparable to a CT scan and well below traditional systems.",
+      },
+      {
+        q: "How long does a refurbished cath lab last?",
+        a: "A properly refurbished platform lasts 7–10 years with OEM parts, planned maintenance and clinical applications support.",
+      },
     ],
     takeaways: [
       "Cath labs are the front line of modern cardiovascular care.",
@@ -132,7 +161,13 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Refurbished systems deliver premium clinical performance at 30–60% lower cost.",
       "The equipment is only part of the value — installation, training and after-sales support determine outcomes.",
     ],
-    relatedTech: ["Cardiac CT angiography", "Echocardiography", "Electrophysiology systems", "Intra-aortic balloon pumps", "Hybrid operating rooms"],
+    relatedTech: [
+      "Cardiac CT angiography",
+      "Echocardiography",
+      "Electrophysiology systems",
+      "Intra-aortic balloon pumps",
+      "Hybrid operating rooms",
+    ],
     clinicalTip:
       "For STEMI programs, prioritize systems with high-frame-rate fluoroscopy, integrated FFR and rapid boot-up — every saved minute preserves myocardium.",
     importantNote:
@@ -159,11 +194,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Abdominal, pelvic and prostate MRI",
     ],
     technologies: [
-      { name: "1.5T MRI systems", role: "Balanced image quality, wide clinical range and easier siting; ideal for general hospitals." },
-      { name: "3T MRI systems", role: "Higher SNR and faster scans; preferred for neuroimaging, functional MRI, cardiac and prostate studies." },
-      { name: "Multi-channel coils", role: "Improve signal capture and enable parallel imaging for faster acquisitions." },
-      { name: "Compressed sensing & AI reconstruction", role: "Reduce scan time by 30–50% while preserving diagnostic quality." },
-      { name: "Wide-bore designs", role: "70 cm bores improve patient comfort and enable bariatric and claustrophobic patients." },
+      {
+        name: "1.5T MRI systems",
+        role: "Balanced image quality, wide clinical range and easier siting; ideal for general hospitals.",
+      },
+      {
+        name: "3T MRI systems",
+        role: "Higher SNR and faster scans; preferred for neuroimaging, functional MRI, cardiac and prostate studies.",
+      },
+      {
+        name: "Multi-channel coils",
+        role: "Improve signal capture and enable parallel imaging for faster acquisitions.",
+      },
+      {
+        name: "Compressed sensing & AI reconstruction",
+        role: "Reduce scan time by 30–50% while preserving diagnostic quality.",
+      },
+      {
+        name: "Wide-bore designs",
+        role: "70 cm bores improve patient comfort and enable bariatric and claustrophobic patients.",
+      },
     ],
     clinicalBenefits: [
       "No ionizing radiation — safe for repeat imaging and pediatric use",
@@ -195,11 +245,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { value: "0 mSv", label: "Ionizing radiation" },
     ],
     faq: [
-      { q: "Is 3T always better than 1.5T?", a: "No. 3T excels for neuro, cardiac and functional work, but 1.5T is preferable for patients with certain implants and for many musculoskeletal and body applications." },
-      { q: "What is SAR and why does it matter?", a: "Specific Absorption Rate measures RF energy deposited in tissue. It is higher at 3T, so protocols must be tuned carefully — especially for pediatric and pregnant patients." },
-      { q: "Do wide-bore systems compromise image quality?", a: "Modern 70 cm wide-bore magnets deliver image quality equivalent to conventional 60 cm systems while dramatically improving patient acceptance." },
-      { q: "How is a refurbished MRI different from new?", a: "A certified refurbished MRI is fully re-tested and re-warranted; the magnet, gradient chain and coils are OEM-grade with the same clinical protocols." },
-      { q: "How long does an MRI last?", a: "With planned cryogen management and PM, a modern MRI has a clinical life of 10–15 years." },
+      {
+        q: "Is 3T always better than 1.5T?",
+        a: "No. 3T excels for neuro, cardiac and functional work, but 1.5T is preferable for patients with certain implants and for many musculoskeletal and body applications.",
+      },
+      {
+        q: "What is SAR and why does it matter?",
+        a: "Specific Absorption Rate measures RF energy deposited in tissue. It is higher at 3T, so protocols must be tuned carefully — especially for pediatric and pregnant patients.",
+      },
+      {
+        q: "Do wide-bore systems compromise image quality?",
+        a: "Modern 70 cm wide-bore magnets deliver image quality equivalent to conventional 60 cm systems while dramatically improving patient acceptance.",
+      },
+      {
+        q: "How is a refurbished MRI different from new?",
+        a: "A certified refurbished MRI is fully re-tested and re-warranted; the magnet, gradient chain and coils are OEM-grade with the same clinical protocols.",
+      },
+      {
+        q: "How long does an MRI last?",
+        a: "With planned cryogen management and PM, a modern MRI has a clinical life of 10–15 years.",
+      },
     ],
     takeaways: [
       "Choose 3T for advanced neuro, cardiac and functional imaging.",
@@ -208,7 +273,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "AI reconstruction and wide bores are now the real productivity drivers.",
     ],
     relatedTech: ["CT scanners", "PET/CT", "Ultrasound", "Bone densitometers"],
-    clinicalTip: "Match field strength to your case mix. A busy stroke and oncology center benefits from 3T; a mixed general hospital rarely does.",
+    clinicalTip:
+      "Match field strength to your case mix. A busy stroke and oncology center benefits from 3T; a mixed general hospital rarely does.",
   },
 
   "molecular-imaging-program-from-ground-up": {
@@ -231,10 +297,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Infection and inflammation imaging in select cases",
     ],
     technologies: [
-      { name: "Digital PET detectors", role: "Silicon photomultiplier (SiPM) detectors dramatically improve sensitivity, resolution and time-of-flight performance." },
-      { name: "Multi-slice CT", role: "16 to 128 slice CT provides anatomic detail and attenuation correction." },
-      { name: "Time-of-flight & motion correction", role: "Improves lesion detectability, particularly for small metastases." },
-      { name: "AI-based reconstruction", role: "Reduces tracer dose or scan time without compromising quality." },
+      {
+        name: "Digital PET detectors",
+        role: "Silicon photomultiplier (SiPM) detectors dramatically improve sensitivity, resolution and time-of-flight performance.",
+      },
+      {
+        name: "Multi-slice CT",
+        role: "16 to 128 slice CT provides anatomic detail and attenuation correction.",
+      },
+      {
+        name: "Time-of-flight & motion correction",
+        role: "Improves lesion detectability, particularly for small metastases.",
+      },
+      {
+        name: "AI-based reconstruction",
+        role: "Reduces tracer dose or scan time without compromising quality.",
+      },
     ],
     clinicalBenefits: [
       "Whole-body staging in a single exam",
@@ -265,10 +343,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { value: "24/7", label: "Radiopharmacy cold-chain" },
     ],
     faq: [
-      { q: "What tracer is used most often?", a: "FDG (fluorodeoxyglucose) is used in the vast majority of oncology and neurology studies. Specialty tracers like PSMA, DOTATATE and amyloid are increasingly common." },
-      { q: "Do we need an on-site cyclotron?", a: "No. Most centers rely on regional radiopharmacies delivering unit doses daily. A cyclotron is needed only for very short half-life tracers such as C-11." },
-      { q: "How much space does a PET/CT need?", a: "A typical installation requires a shielded scanner room, uptake rooms, hot-lab and controlled-access corridors — usually 150–250 m² total." },
-      { q: "Can a refurbished PET/CT deliver diagnostic-grade results?", a: "Yes. Fully re-certified systems with modern detectors and iterative reconstruction match or exceed the clinical performance of older new systems." },
+      {
+        q: "What tracer is used most often?",
+        a: "FDG (fluorodeoxyglucose) is used in the vast majority of oncology and neurology studies. Specialty tracers like PSMA, DOTATATE and amyloid are increasingly common.",
+      },
+      {
+        q: "Do we need an on-site cyclotron?",
+        a: "No. Most centers rely on regional radiopharmacies delivering unit doses daily. A cyclotron is needed only for very short half-life tracers such as C-11.",
+      },
+      {
+        q: "How much space does a PET/CT need?",
+        a: "A typical installation requires a shielded scanner room, uptake rooms, hot-lab and controlled-access corridors — usually 150–250 m² total.",
+      },
+      {
+        q: "Can a refurbished PET/CT deliver diagnostic-grade results?",
+        a: "Yes. Fully re-certified systems with modern detectors and iterative reconstruction match or exceed the clinical performance of older new systems.",
+      },
     ],
     takeaways: [
       "PET/CT is essential for modern oncology.",
@@ -277,7 +367,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Training and quality control determine long-term clinical value.",
     ],
     relatedTech: ["SPECT/CT", "Radiotherapy planning", "MRI", "Digital pathology"],
-    importantNote: "Regulatory approvals for radioactive materials and staff dosimetry programs are prerequisites — plan these in parallel with equipment procurement.",
+    importantNote:
+      "Regulatory approvals for radioactive materials and staff dosimetry programs are prerequisites — plan these in parallel with equipment procurement.",
   },
 
   "turnkey-hospital-departments-planning-to-commissioning": {
@@ -299,9 +390,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Regulatory and accreditation compliance mapping",
     ],
     technologies: [
-      { name: "Imaging & interventional platforms", role: "Cath labs, MRI, CT, PET/CT, C-arms integrated with hospital PACS/RIS." },
-      { name: "Operating room integration", role: "Video, lights, booms, tables and integration systems in a coordinated design." },
-      { name: "ICU & recovery equipment", role: "Ventilators, monitors, infusion, gas systems and nurse-call integration." },
+      {
+        name: "Imaging & interventional platforms",
+        role: "Cath labs, MRI, CT, PET/CT, C-arms integrated with hospital PACS/RIS.",
+      },
+      {
+        name: "Operating room integration",
+        role: "Video, lights, booms, tables and integration systems in a coordinated design.",
+      },
+      {
+        name: "ICU & recovery equipment",
+        role: "Ventilators, monitors, infusion, gas systems and nurse-call integration.",
+      },
       { name: "Medical IT & PACS", role: "DICOM/HL7 integration, worklists and archive planning." },
     ],
     clinicalBenefits: [
@@ -327,9 +427,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Optimized total cost of ownership",
     ],
     faq: [
-      { q: "What does turnkey actually include?", a: "Planning, design, civil coordination, equipment supply, installation, integration with PACS/HIS, training, commissioning and after-sales." },
-      { q: "How long does a typical department take?", a: "8–14 months for a cath lab or MRI suite; 12–24 months for full oncology or cardiac programs, depending on site readiness." },
-      { q: "Can we mix OEMs?", a: "Yes — a turnkey partner selects the best fit per modality and takes responsibility for integration and service coverage." },
+      {
+        q: "What does turnkey actually include?",
+        a: "Planning, design, civil coordination, equipment supply, installation, integration with PACS/HIS, training, commissioning and after-sales.",
+      },
+      {
+        q: "How long does a typical department take?",
+        a: "8–14 months for a cath lab or MRI suite; 12–24 months for full oncology or cardiac programs, depending on site readiness.",
+      },
+      {
+        q: "Can we mix OEMs?",
+        a: "Yes — a turnkey partner selects the best fit per modality and takes responsibility for integration and service coverage.",
+      },
     ],
     takeaways: [
       "Turnkey delivery removes the biggest source of project risk: coordination failure.",
@@ -358,10 +467,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Prostate, breast and pelvic imaging",
     ],
     technologies: [
-      { name: "1.5T superconducting magnets", role: "General-purpose workhorse for the majority of clinical exams." },
-      { name: "3T systems", role: "Higher SNR for neuro, cardiac, prostate and research applications." },
-      { name: "Multi-channel receive coils", role: "Determine effective image quality more than nominal field strength." },
-      { name: "Modern reconstruction & AI denoising", role: "Reduce scan time and improve image quality on legacy platforms." },
+      {
+        name: "1.5T superconducting magnets",
+        role: "General-purpose workhorse for the majority of clinical exams.",
+      },
+      {
+        name: "3T systems",
+        role: "Higher SNR for neuro, cardiac, prostate and research applications.",
+      },
+      {
+        name: "Multi-channel receive coils",
+        role: "Determine effective image quality more than nominal field strength.",
+      },
+      {
+        name: "Modern reconstruction & AI denoising",
+        role: "Reduce scan time and improve image quality on legacy platforms.",
+      },
     ],
     clinicalBenefits: [
       "Radiation-free imaging",
@@ -391,10 +512,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { value: "12–36 mo", label: "Warranty options" },
     ],
     faq: [
-      { q: "How is a refurbished MRI restored?", a: "Certified engineers de-install, transport, re-magnet if required, replace consumables and worn components, re-shim, re-calibrate and re-warrant the system." },
-      { q: "Does the magnet lose strength over time?", a: "A superconducting magnet holds its field indefinitely if cryogen levels are maintained. Field homogeneity is restored via shimming during refurbishment." },
-      { q: "What warranty is typical?", a: "12 months standard, extendable to 24–36 months with a full service contract including helium." },
-      { q: "Are coils included?", a: "Standard coil packages are included; specialty coils (breast, prostate, cardiac) are configured to your clinical mix." },
+      {
+        q: "How is a refurbished MRI restored?",
+        a: "Certified engineers de-install, transport, re-magnet if required, replace consumables and worn components, re-shim, re-calibrate and re-warrant the system.",
+      },
+      {
+        q: "Does the magnet lose strength over time?",
+        a: "A superconducting magnet holds its field indefinitely if cryogen levels are maintained. Field homogeneity is restored via shimming during refurbishment.",
+      },
+      {
+        q: "What warranty is typical?",
+        a: "12 months standard, extendable to 24–36 months with a full service contract including helium.",
+      },
+      {
+        q: "Are coils included?",
+        a: "Standard coil packages are included; specialty coils (breast, prostate, cardiac) are configured to your clinical mix.",
+      },
     ],
     takeaways: [
       "A properly refurbished MRI delivers the same clinical output as new at a fraction of the cost.",
@@ -402,7 +535,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Plan helium, shielding and cooling — they define the true cost of ownership.",
     ],
     relatedTech: ["CT scanners", "PET/CT", "Ultrasound"],
-    clinicalTip: "Ask for sample DICOM datasets from a live system before purchase — it is the fastest way to verify true image quality.",
+    clinicalTip:
+      "Ask for sample DICOM datasets from a live system before purchase — it is the fastest way to verify true image quality.",
   },
 
   "ct-scanners-features-benefits-buying-considerations": {
@@ -425,10 +559,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Coronary CT angiography",
     ],
     technologies: [
-      { name: "Multi-detector CT (MDCT)", role: "16, 64, 128 and 256+ slice detectors define speed and coverage." },
-      { name: "Dual-energy / spectral CT", role: "Material differentiation for kidney stones, iodine mapping and gout." },
-      { name: "Iterative & AI reconstruction", role: "Reduces radiation dose by 40–80% at equivalent image quality." },
-      { name: "Cardiac gating", role: "Coronary CTA requires low-heart-rate protocols and high temporal resolution." },
+      {
+        name: "Multi-detector CT (MDCT)",
+        role: "16, 64, 128 and 256+ slice detectors define speed and coverage.",
+      },
+      {
+        name: "Dual-energy / spectral CT",
+        role: "Material differentiation for kidney stones, iodine mapping and gout.",
+      },
+      {
+        name: "Iterative & AI reconstruction",
+        role: "Reduces radiation dose by 40–80% at equivalent image quality.",
+      },
+      {
+        name: "Cardiac gating",
+        role: "Coronary CTA requires low-heart-rate protocols and high temporal resolution.",
+      },
     ],
     clinicalBenefits: [
       "Sub-second whole-body scans in trauma",
@@ -452,9 +598,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Refurbished platforms enable multi-scanner strategies",
     ],
     faq: [
-      { q: "How many slices do we need?", a: "16 slice is fine for routine work; 64+ is needed for cardiac and complex vascular; 128–256+ is used in high-volume tertiary centers." },
-      { q: "How much radiation is involved?", a: "Modern CT delivers 1–10 mSv per exam depending on protocol. Iterative reconstruction and low-kV protocols cut dose substantially." },
-      { q: "Do refurbished CTs offer AI recon?", a: "Yes — most late-generation platforms can be upgraded with iterative or AI-based reconstruction packages." },
+      {
+        q: "How many slices do we need?",
+        a: "16 slice is fine for routine work; 64+ is needed for cardiac and complex vascular; 128–256+ is used in high-volume tertiary centers.",
+      },
+      {
+        q: "How much radiation is involved?",
+        a: "Modern CT delivers 1–10 mSv per exam depending on protocol. Iterative reconstruction and low-kV protocols cut dose substantially.",
+      },
+      {
+        q: "Do refurbished CTs offer AI recon?",
+        a: "Yes — most late-generation platforms can be upgraded with iterative or AI-based reconstruction packages.",
+      },
     ],
     takeaways: [
       "CT is the emergency backbone of modern hospitals.",
@@ -462,7 +617,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Dose reduction and workflow matter as much as raw slices.",
     ],
     relatedTech: ["MRI", "PET/CT", "Angiography systems", "X-ray"],
-    importantNote: "Room shielding calculations must be redone whenever a CT is replaced — even if the room previously housed a similar system.",
+    importantNote:
+      "Room shielding calculations must be redone whenever a CT is replaced — even if the room previously housed a similar system.",
   },
 
   "philips-gemini-gxl-16-petct-review": {
@@ -482,10 +638,19 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Selected neurology and infection studies",
     ],
     technologies: [
-      { name: "GSO PET detectors", role: "Gadolinium oxyorthosilicate crystals with proven sensitivity and reliability." },
+      {
+        name: "GSO PET detectors",
+        role: "Gadolinium oxyorthosilicate crystals with proven sensitivity and reliability.",
+      },
       { name: "Open gantry", role: "Reduces claustrophobia and simplifies patient positioning." },
-      { name: "16-slice CT", role: "Provides attenuation correction and diagnostic-grade anatomic imaging." },
-      { name: "Respiratory gating", role: "Improves lesion localization in the thorax and upper abdomen." },
+      {
+        name: "16-slice CT",
+        role: "Provides attenuation correction and diagnostic-grade anatomic imaging.",
+      },
+      {
+        name: "Respiratory gating",
+        role: "Improves lesion localization in the thorax and upper abdomen.",
+      },
     ],
     clinicalBenefits: [
       "Reliable whole-body oncology imaging",
@@ -506,9 +671,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Simple site requirements compared with newer digital PET/CT",
     ],
     faq: [
-      { q: "Is the Gemini GXL still clinically relevant?", a: "Yes — for standard oncology and cardiac work it remains diagnostic-grade and cost-effective." },
-      { q: "How does it compare with digital PET/CT?", a: "Digital systems offer higher sensitivity and shorter scans; the Gemini offers proven reliability at a much lower entry cost." },
-      { q: "What tracers can it use?", a: "All standard F-18 tracers (FDG, PSMA, FES) and Ga-68 tracers with appropriate calibration." },
+      {
+        q: "Is the Gemini GXL still clinically relevant?",
+        a: "Yes — for standard oncology and cardiac work it remains diagnostic-grade and cost-effective.",
+      },
+      {
+        q: "How does it compare with digital PET/CT?",
+        a: "Digital systems offer higher sensitivity and shorter scans; the Gemini offers proven reliability at a much lower entry cost.",
+      },
+      {
+        q: "What tracers can it use?",
+        a: "All standard F-18 tracers (FDG, PSMA, FES) and Ga-68 tracers with appropriate calibration.",
+      },
     ],
     takeaways: [
       "A dependable entry point into molecular imaging.",
@@ -536,9 +710,15 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Long-term service and lifecycle planning",
     ],
     technologies: [
-      { name: "Imaging suites", role: "MRI, CT, PET/CT, cath lab and X-ray, planned with shielding and PACS integration." },
+      {
+        name: "Imaging suites",
+        role: "MRI, CT, PET/CT, cath lab and X-ray, planned with shielding and PACS integration.",
+      },
       { name: "Operating rooms", role: "Integrated OR with lights, booms, tables and video." },
-      { name: "Critical care", role: "ICU/NICU/CCU with monitors, ventilators, gas and nurse-call integration." },
+      {
+        name: "Critical care",
+        role: "ICU/NICU/CCU with monitors, ventilators, gas and nurse-call integration.",
+      },
       { name: "Support services", role: "CSSD, laboratory, radiology, pharmacy and IT backbone." },
     ],
     clinicalBenefits: [
@@ -550,18 +730,21 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Consistent quality of care from day one",
       "Safer environment across departments",
     ],
-    physicianBenefits: [
-      "Clinician-led workflow design",
-      "Integrated data across systems",
-    ],
+    physicianBenefits: ["Clinician-led workflow design", "Integrated data across systems"],
     hospitalBenefits: [
       "Predictable schedule and budget",
       "Faster time-to-revenue",
       "Single service contract across modalities",
     ],
     faq: [
-      { q: "Does turnkey mean single-brand?", a: "No. A turnkey partner selects the best modality per department and manages integration across brands." },
-      { q: "How is risk managed?", a: "Through phased milestones, defined acceptance criteria, and a single accountable project manager." },
+      {
+        q: "Does turnkey mean single-brand?",
+        a: "No. A turnkey partner selects the best modality per department and manages integration across brands.",
+      },
+      {
+        q: "How is risk managed?",
+        a: "Through phased milestones, defined acceptance criteria, and a single accountable project manager.",
+      },
     ],
     takeaways: [
       "Turnkey execution is about coordination, not just supply.",
@@ -590,10 +773,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Spare-parts and consumables planning",
     ],
     technologies: [
-      { name: "Remote diagnostics", role: "Secure connections allow engineers to diagnose issues in minutes, not days." },
-      { name: "Predictive maintenance", role: "Sensor and log data flags failures before they occur." },
-      { name: "OEM spare parts", role: "Genuine components preserve image quality and regulatory compliance." },
-      { name: "Applications training", role: "Ongoing training keeps staff on the latest protocols." },
+      {
+        name: "Remote diagnostics",
+        role: "Secure connections allow engineers to diagnose issues in minutes, not days.",
+      },
+      {
+        name: "Predictive maintenance",
+        role: "Sensor and log data flags failures before they occur.",
+      },
+      {
+        name: "OEM spare parts",
+        role: "Genuine components preserve image quality and regulatory compliance.",
+      },
+      {
+        name: "Applications training",
+        role: "Ongoing training keeps staff on the latest protocols.",
+      },
     ],
     clinicalBenefits: [
       "Maximum uptime for critical modalities",
@@ -622,9 +817,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { value: "24/7", label: "Support coverage" },
     ],
     faq: [
-      { q: "What does a service contract typically include?", a: "Preventive maintenance visits, corrective service, remote diagnostics, spare parts, software updates and application support." },
-      { q: "Do you support multi-vendor fleets?", a: "Yes — a single service partner can cover MRI, CT, cath lab, ultrasound and OR equipment across brands." },
-      { q: "What's the difference between OEM and third-party parts?", a: "OEM parts guarantee performance, safety and regulatory compliance. Third-party parts may void warranties or degrade image quality." },
+      {
+        q: "What does a service contract typically include?",
+        a: "Preventive maintenance visits, corrective service, remote diagnostics, spare parts, software updates and application support.",
+      },
+      {
+        q: "Do you support multi-vendor fleets?",
+        a: "Yes — a single service partner can cover MRI, CT, cath lab, ultrasound and OR equipment across brands.",
+      },
+      {
+        q: "What's the difference between OEM and third-party parts?",
+        a: "OEM parts guarantee performance, safety and regulatory compliance. Third-party parts may void warranties or degrade image quality.",
+      },
     ],
     takeaways: [
       "Uptime is a strategic asset — not a maintenance line item.",
@@ -632,7 +836,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "OEM-grade parts and trained engineers protect clinical value.",
     ],
     relatedTech: ["Biomedical engineering", "Applications training", "Equipment modernization"],
-    clinicalTip: "Track mean-time-between-failure (MTBF) and first-time-fix rate — these two KPIs reveal whether your service program is truly working.",
+    clinicalTip:
+      "Track mean-time-between-failure (MTBF) and first-time-fix rate — these two KPIs reveal whether your service program is truly working.",
   },
 
   "biomedical-engineering-in-modern-healthcare": {
@@ -654,10 +859,19 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Interoperability and integration reviews",
     ],
     technologies: [
-      { name: "Test & calibration instruments", role: "Ensure devices meet manufacturer and regulatory specifications." },
+      {
+        name: "Test & calibration instruments",
+        role: "Ensure devices meet manufacturer and regulatory specifications.",
+      },
       { name: "CMMS platforms", role: "Track maintenance, work orders and compliance evidence." },
-      { name: "Remote monitoring & IoMT", role: "Continuous device health tracking across the enterprise." },
-      { name: "Cybersecurity tools", role: "Protect connected medical devices from network threats." },
+      {
+        name: "Remote monitoring & IoMT",
+        role: "Continuous device health tracking across the enterprise.",
+      },
+      {
+        name: "Cybersecurity tools",
+        role: "Protect connected medical devices from network threats.",
+      },
     ],
     clinicalBenefits: [
       "Reliable, calibrated devices at the bedside",
@@ -669,18 +883,21 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Fewer canceled procedures",
       "Confidence in the technology behind their care",
     ],
-    physicianBenefits: [
-      "Consistent device performance",
-      "Faster response to technical issues",
-    ],
+    physicianBenefits: ["Consistent device performance", "Faster response to technical issues"],
     hospitalBenefits: [
       "Accreditation readiness (JCI, CBAHI, HAAD, DHA)",
       "Lower total cost of ownership",
       "Structured lifecycle planning",
     ],
     faq: [
-      { q: "Do we need in-house biomedical engineers?", a: "Most modern hospitals combine an in-house team for daily operations with an external partner for OEM-level service on high-end modalities." },
-      { q: "What is IoMT?", a: "Internet of Medical Things — the network of connected medical devices sharing data across clinical systems." },
+      {
+        q: "Do we need in-house biomedical engineers?",
+        a: "Most modern hospitals combine an in-house team for daily operations with an external partner for OEM-level service on high-end modalities.",
+      },
+      {
+        q: "What is IoMT?",
+        a: "Internet of Medical Things — the network of connected medical devices sharing data across clinical systems.",
+      },
     ],
     takeaways: [
       "Biomedical engineering is now a strategic function, not a repair shop.",
@@ -717,11 +934,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Point-of-care ultrasound (POCUS)",
     ],
     technologies: [
-      { name: "Matrix and single-crystal transducers", role: "Higher resolution and improved penetration." },
-      { name: "AI-assisted measurements", role: "Automate ejection fraction, follicle counts and fetal biometry." },
-      { name: "Contrast-enhanced ultrasound", role: "Improves lesion characterization in liver and kidney." },
-      { name: "Handheld & POCUS systems", role: "Extend imaging to the bedside, ED and remote clinics." },
-      { name: "Elastography", role: "Non-invasive assessment of tissue stiffness — key in liver disease." },
+      {
+        name: "Matrix and single-crystal transducers",
+        role: "Higher resolution and improved penetration.",
+      },
+      {
+        name: "AI-assisted measurements",
+        role: "Automate ejection fraction, follicle counts and fetal biometry.",
+      },
+      {
+        name: "Contrast-enhanced ultrasound",
+        role: "Improves lesion characterization in liver and kidney.",
+      },
+      {
+        name: "Handheld & POCUS systems",
+        role: "Extend imaging to the bedside, ED and remote clinics.",
+      },
+      {
+        name: "Elastography",
+        role: "Non-invasive assessment of tissue stiffness — key in liver disease.",
+      },
     ],
     clinicalBenefits: [
       "Real-time imaging with no radiation",
@@ -745,8 +977,14 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "POCUS extends imaging to ED, ICU and OR",
     ],
     faq: [
-      { q: "Is 4D ultrasound clinically necessary?", a: "For most exams no; it is primarily used in obstetrics and select cardiac assessments." },
-      { q: "How often should transducers be replaced?", a: "With normal use, 5–7 years — cracks or delamination require immediate replacement to preserve image quality." },
+      {
+        q: "Is 4D ultrasound clinically necessary?",
+        a: "For most exams no; it is primarily used in obstetrics and select cardiac assessments.",
+      },
+      {
+        q: "How often should transducers be replaced?",
+        a: "With normal use, 5–7 years — cracks or delamination require immediate replacement to preserve image quality.",
+      },
     ],
     takeaways: [
       "Ultrasound is the most versatile imaging tool in medicine.",
@@ -774,23 +1012,37 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Sterility, ventilation and lighting assessment",
     ],
     technologies: [
-      { name: "LED surgical lights", role: "Better color rendering, cooler operation and longer life than halogen." },
-      { name: "OR tables", role: "Modular tops for orthopedic, cardiac, urology and general surgery." },
-      { name: "Ceiling booms & pendants", role: "Organize gases, power, data and equipment for uncluttered floors." },
-      { name: "OR integration systems", role: "Route video from endoscopes, C-arms and cameras to displays and archive." },
-      { name: "Hybrid OR imaging", role: "Fixed C-arms enable image-guided vascular, spine and cardiac procedures." },
-      { name: "Anesthesia workstations", role: "Advanced ventilation, monitoring and gas delivery." },
+      {
+        name: "LED surgical lights",
+        role: "Better color rendering, cooler operation and longer life than halogen.",
+      },
+      {
+        name: "OR tables",
+        role: "Modular tops for orthopedic, cardiac, urology and general surgery.",
+      },
+      {
+        name: "Ceiling booms & pendants",
+        role: "Organize gases, power, data and equipment for uncluttered floors.",
+      },
+      {
+        name: "OR integration systems",
+        role: "Route video from endoscopes, C-arms and cameras to displays and archive.",
+      },
+      {
+        name: "Hybrid OR imaging",
+        role: "Fixed C-arms enable image-guided vascular, spine and cardiac procedures.",
+      },
+      {
+        name: "Anesthesia workstations",
+        role: "Advanced ventilation, monitoring and gas delivery.",
+      },
     ],
     clinicalBenefits: [
       "Faster turnover between cases",
       "Reduced infection risk with laminar flow and integrated design",
       "Image-guided precision in complex procedures",
     ],
-    patientBenefits: [
-      "Safer, shorter procedures",
-      "Reduced complications",
-      "Faster recovery",
-    ],
+    patientBenefits: ["Safer, shorter procedures", "Reduced complications", "Faster recovery"],
     physicianBenefits: [
       "Ergonomic environment reduces fatigue",
       "Integrated visualization improves precision",
@@ -802,8 +1054,14 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Better staff retention and satisfaction",
     ],
     faq: [
-      { q: "What is a hybrid OR?", a: "A surgical theater with integrated fixed imaging (usually a robotic C-arm) enabling both open and image-guided minimally invasive procedures." },
-      { q: "Do we need 4K or 8K video?", a: "4K is now standard; 8K is emerging in specialty ORs — ensure the entire signal chain supports it before investing." },
+      {
+        q: "What is a hybrid OR?",
+        a: "A surgical theater with integrated fixed imaging (usually a robotic C-arm) enabling both open and image-guided minimally invasive procedures.",
+      },
+      {
+        q: "Do we need 4K or 8K video?",
+        a: "4K is now standard; 8K is emerging in specialty ORs — ensure the entire signal chain supports it before investing.",
+      },
     ],
     takeaways: [
       "The OR is an integrated system, not a collection of devices.",
@@ -829,9 +1087,15 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "MRI: brain, spine, MSK, cardiac tissue, oncology follow-up, prostate",
     ],
     technologies: [
-      { name: "Multi-slice CT", role: "Fast whole-body imaging with excellent bone and vascular detail." },
+      {
+        name: "Multi-slice CT",
+        role: "Fast whole-body imaging with excellent bone and vascular detail.",
+      },
       { name: "1.5T / 3T MRI", role: "Unmatched soft-tissue contrast without ionizing radiation." },
-      { name: "Iterative & AI reconstruction", role: "Applies to both modalities — improves image quality and reduces dose or time." },
+      {
+        name: "Iterative & AI reconstruction",
+        role: "Applies to both modalities — improves image quality and reduces dose or time.",
+      },
     ],
     clinicalBenefits: [
       "Complementary strengths",
@@ -843,18 +1107,21 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Fewer repeat exams",
       "Radiation avoided when MRI is appropriate",
     ],
-    physicianBenefits: [
-      "Full diagnostic toolkit",
-      "Confidence in modality selection",
-    ],
+    physicianBenefits: ["Full diagnostic toolkit", "Confidence in modality selection"],
     hospitalBenefits: [
       "Balanced imaging capacity",
       "Support for emergency, oncology and neuro programs",
       "Higher case-mix index",
     ],
     faq: [
-      { q: "If we can only afford one, which should we buy?", a: "For emergency and general hospitals, CT first. For neuro, oncology or orthopedic centers, MRI first." },
-      { q: "Are hybrid PET/MRI systems worth it?", a: "Only in high-volume tertiary centers with specialized research or pediatric neuro-oncology missions." },
+      {
+        q: "If we can only afford one, which should we buy?",
+        a: "For emergency and general hospitals, CT first. For neuro, oncology or orthopedic centers, MRI first.",
+      },
+      {
+        q: "Are hybrid PET/MRI systems worth it?",
+        a: "Only in high-volume tertiary centers with specialized research or pediatric neuro-oncology missions.",
+      },
     ],
     takeaways: [
       "CT and MRI are complements, not alternatives.",
@@ -892,22 +1159,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Consistent image quality and safety",
       "Accreditation evidence on demand",
     ],
-    patientBenefits: [
-      "Fewer canceled appointments",
-      "Consistent care quality",
-    ],
-    physicianBenefits: [
-      "Reliable equipment when needed",
-      "Reduced clinical risk",
-    ],
+    patientBenefits: ["Fewer canceled appointments", "Consistent care quality"],
+    physicianBenefits: ["Reliable equipment when needed", "Reduced clinical risk"],
     hospitalBenefits: [
       "Lower total lifecycle cost",
       "Extended asset life",
       "Simplified capital planning",
     ],
     faq: [
-      { q: "How often should PM be done?", a: "Frequency varies by device class — typically 1–4 times per year for major imaging, monthly for critical care equipment." },
-      { q: "Who should perform PM?", a: "OEM-trained engineers for high-end imaging, in-house biomedical teams for general equipment — with documented competency." },
+      {
+        q: "How often should PM be done?",
+        a: "Frequency varies by device class — typically 1–4 times per year for major imaging, monthly for critical care equipment.",
+      },
+      {
+        q: "Who should perform PM?",
+        a: "OEM-trained engineers for high-end imaging, in-house biomedical teams for general equipment — with documented competency.",
+      },
     ],
     takeaways: [
       "PM is an investment, not a cost.",
@@ -915,7 +1182,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Documentation is as important as the maintenance itself.",
     ],
     relatedTech: ["Biomedical engineering", "Remote diagnostics", "Spare parts management"],
-    importantNote: "A PM program without documentation is worthless at audit time. Choose service partners who deliver full digital reports.",
+    importantNote:
+      "A PM program without documentation is worthless at audit time. Choose service partners who deliver full digital reports.",
   },
 
   "radiation-therapy-equipment-latest-innovations": {
@@ -930,31 +1198,36 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Advanced RT improves survival and quality of life.",
       "Access to modern radiation therapy remains uneven, especially in emerging markets.",
     ],
-    symptoms: [
-      "Symptoms vary by cancer type; radiation therapy is used across most solid tumors.",
-    ],
+    symptoms: ["Symptoms vary by cancer type; radiation therapy is used across most solid tumors."],
     causes: [
       "Uncontrolled cell growth driven by genetic mutations",
       "Environmental factors (tobacco, UV, radiation, infections)",
       "Inherited predisposition in a subset of cancers",
     ],
-    riskFactors: [
-      "Age",
-      "Family history",
-      "Smoking and alcohol",
-      "Environmental exposures",
-    ],
+    riskFactors: ["Age", "Family history", "Smoking and alcohol", "Environmental exposures"],
     diagnosis: [
       "Diagnosis by biopsy, imaging (CT/MRI/PET) and pathology",
       "Radiation oncology consultation for staging and treatment planning",
       "Simulation CT for treatment planning",
     ],
     technologies: [
-      { name: "Linear accelerators (Linacs)", role: "Deliver high-energy photon or electron beams with sub-millimeter accuracy." },
+      {
+        name: "Linear accelerators (Linacs)",
+        role: "Deliver high-energy photon or electron beams with sub-millimeter accuracy.",
+      },
       { name: "IMRT & VMAT", role: "Shape dose around tumors and spare organs at risk." },
-      { name: "SBRT / SRS", role: "Ablative radiation for small tumors in lung, liver, spine and brain." },
-      { name: "Image-guided RT (IGRT)", role: "Cone-beam CT and surface imaging ensure precise positioning." },
-      { name: "Treatment planning systems", role: "Model dose distribution and optimize plans against clinical constraints." },
+      {
+        name: "SBRT / SRS",
+        role: "Ablative radiation for small tumors in lung, liver, spine and brain.",
+      },
+      {
+        name: "Image-guided RT (IGRT)",
+        role: "Cone-beam CT and surface imaging ensure precise positioning.",
+      },
+      {
+        name: "Treatment planning systems",
+        role: "Model dose distribution and optimize plans against clinical constraints.",
+      },
       { name: "Brachytherapy", role: "Places radioactive sources directly in or near the tumor." },
     ],
     clinicalBenefits: [
@@ -967,18 +1240,21 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Shorter treatment schedules",
       "Improved quality of life",
     ],
-    physicianBenefits: [
-      "Precise dose delivery",
-      "Adaptive re-planning based on interval imaging",
-    ],
+    physicianBenefits: ["Precise dose delivery", "Adaptive re-planning based on interval imaging"],
     hospitalBenefits: [
       "Anchors a comprehensive cancer program",
       "High-value clinical service",
       "Attracts multidisciplinary talent",
     ],
     faq: [
-      { q: "How long does a radiation course take?", a: "Traditional courses run 5–7 weeks; hypofractionated courses take 1–3 weeks; SBRT can be 1–5 sessions." },
-      { q: "Is radiation therapy painful?", a: "No — the treatment itself is painless. Side effects depend on the treated site and dose." },
+      {
+        q: "How long does a radiation course take?",
+        a: "Traditional courses run 5–7 weeks; hypofractionated courses take 1–3 weeks; SBRT can be 1–5 sessions.",
+      },
+      {
+        q: "Is radiation therapy painful?",
+        a: "No — the treatment itself is painless. Side effects depend on the treated site and dose.",
+      },
     ],
     takeaways: [
       "Modern radiation therapy is one of the most precise treatments in medicine.",
@@ -986,7 +1262,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Access remains the primary limiting factor in many regions.",
     ],
     relatedTech: ["PET/CT for planning", "MRI for target delineation", "Brachytherapy"],
-    importantNote: "Radiation therapy programs require rigorous quality assurance and physics oversight. Never underestimate the operational commitment.",
+    importantNote:
+      "Radiation therapy programs require rigorous quality assurance and physics oversight. Never underestimate the operational commitment.",
   },
 
   "planning-a-new-hospital-considerations": {
@@ -1008,19 +1285,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
     ],
     technologies: [
       { name: "Modular imaging suites", role: "Enable upgrades without major civil works." },
-      { name: "Integrated OR & ICU platforms", role: "Support flexible case mix and future robotic or hybrid procedures." },
+      {
+        name: "Integrated OR & ICU platforms",
+        role: "Support flexible case mix and future robotic or hybrid procedures.",
+      },
       { name: "Digital hospital IT backbone", role: "HIS, EMR, PACS, RIS and IoMT connectivity." },
-      { name: "Energy & utilities systems", role: "HVAC, medical gas, emergency power and shielding designed for lifetime flexibility." },
+      {
+        name: "Energy & utilities systems",
+        role: "HVAC, medical gas, emergency power and shielding designed for lifetime flexibility.",
+      },
     ],
     clinicalBenefits: [
       "Efficient patient and staff flow",
       "Right technology in the right place",
       "Support for future services without rebuilds",
     ],
-    patientBenefits: [
-      "Better access and shorter waits",
-      "Safer, more comfortable environments",
-    ],
+    patientBenefits: ["Better access and shorter waits", "Safer, more comfortable environments"],
     physicianBenefits: [
       "Well-designed clinical spaces",
       "Modern tools that support best-practice care",
@@ -1031,8 +1311,14 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Accreditation readiness",
     ],
     faq: [
-      { q: "When should we involve medical equipment planning?", a: "At concept design — not after civil drawings are complete. Late involvement is the top cause of rework." },
-      { q: "How do we future-proof imaging suites?", a: "Design for load, shielding and access paths that support at least one modality upgrade cycle." },
+      {
+        q: "When should we involve medical equipment planning?",
+        a: "At concept design — not after civil drawings are complete. Late involvement is the top cause of rework.",
+      },
+      {
+        q: "How do we future-proof imaging suites?",
+        a: "Design for load, shielding and access paths that support at least one modality upgrade cycle.",
+      },
     ],
     takeaways: [
       "Design decisions outlive every executive who makes them.",
@@ -1089,10 +1375,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Carotid Doppler and echocardiography for etiology",
     ],
     technologies: [
-      { name: "Multi-slice CT with CTA/CTP", role: "The frontline stroke tool — sub-minute acquisition, vessel imaging and tissue viability in one exam." },
-      { name: "1.5T or 3T MRI with DWI", role: "Gold standard for infarct core in wake-up strokes and posterior circulation events." },
-      { name: "Biplane angiography suite", role: "Enables mechanical thrombectomy — the single most effective treatment for large vessel occlusion." },
-      { name: "AI stroke triage software", role: "Automatically flags LVO and perfusion mismatch, alerting the stroke team in minutes." },
+      {
+        name: "Multi-slice CT with CTA/CTP",
+        role: "The frontline stroke tool — sub-minute acquisition, vessel imaging and tissue viability in one exam.",
+      },
+      {
+        name: "1.5T or 3T MRI with DWI",
+        role: "Gold standard for infarct core in wake-up strokes and posterior circulation events.",
+      },
+      {
+        name: "Biplane angiography suite",
+        role: "Enables mechanical thrombectomy — the single most effective treatment for large vessel occlusion.",
+      },
+      {
+        name: "AI stroke triage software",
+        role: "Automatically flags LVO and perfusion mismatch, alerting the stroke team in minutes.",
+      },
     ],
     clinicalBenefits: [
       "Faster door-to-needle and door-to-groin times",
@@ -1116,9 +1414,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Improved quality metrics and reimbursement",
     ],
     faq: [
-      { q: "How fast must a stroke be treated?", a: "IV thrombolysis is most effective within 4.5 hours of symptom onset; thrombectomy up to 24 hours in selected patients with a favorable imaging profile." },
-      { q: "Is CT or MRI better for stroke?", a: "CT is faster and rules out hemorrhage immediately; MRI is more sensitive for early ischemia and preferred when onset time is unknown." },
-      { q: "What is a comprehensive stroke center?", a: "A hospital with 24/7 CT/MRI, neurointerventional capability, a stroke unit and multidisciplinary team meeting certified quality standards." },
+      {
+        q: "How fast must a stroke be treated?",
+        a: "IV thrombolysis is most effective within 4.5 hours of symptom onset; thrombectomy up to 24 hours in selected patients with a favorable imaging profile.",
+      },
+      {
+        q: "Is CT or MRI better for stroke?",
+        a: "CT is faster and rules out hemorrhage immediately; MRI is more sensitive for early ischemia and preferred when onset time is unknown.",
+      },
+      {
+        q: "What is a comprehensive stroke center?",
+        a: "A hospital with 24/7 CT/MRI, neurointerventional capability, a stroke unit and multidisciplinary team meeting certified quality standards.",
+      },
     ],
     takeaways: [
       "Stroke is a treatable emergency — but only if imaging happens in minutes.",
@@ -1126,8 +1433,10 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Investing in a stroke pathway pays back in mortality, disability and reputation.",
     ],
     relatedTech: ["CT scanners", "MRI systems", "Angiography suites", "Stroke triage AI"],
-    clinicalTip: "Time is brain: every 15 minutes saved in door-to-treatment improves the odds of an independent outcome by roughly 4%.",
-    importantNote: "Never delay hemorrhage exclusion — thrombolysis in an undiagnosed bleed is fatal. Non-contrast CT comes first, always.",
+    clinicalTip:
+      "Time is brain: every 15 minutes saved in door-to-treatment improves the odds of an independent outcome by roughly 4%.",
+    importantNote:
+      "Never delay hemorrhage exclusion — thrombolysis in an undiagnosed bleed is fatal. Non-contrast CT comes first, always.",
   },
 
   "brain-mri-what-it-detects": {
@@ -1158,11 +1467,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Correlation with lumbar puncture, EEG or laboratory work-up",
     ],
     technologies: [
-      { name: "1.5T MRI", role: "Workhorse platform — excellent image quality, wide clinical coverage, robust for most implants." },
-      { name: "3T MRI", role: "Higher signal-to-noise for neurovascular, epilepsy, tumor and functional imaging." },
-      { name: "Diffusion-weighted imaging (DWI)", role: "Detects acute infarcts within minutes of symptom onset." },
-      { name: "Susceptibility-weighted imaging (SWI)", role: "Highly sensitive to microbleeds, calcifications and iron deposition." },
-      { name: "MR spectroscopy and perfusion", role: "Metabolic and hemodynamic fingerprints that help characterize brain tumors." },
+      {
+        name: "1.5T MRI",
+        role: "Workhorse platform — excellent image quality, wide clinical coverage, robust for most implants.",
+      },
+      {
+        name: "3T MRI",
+        role: "Higher signal-to-noise for neurovascular, epilepsy, tumor and functional imaging.",
+      },
+      {
+        name: "Diffusion-weighted imaging (DWI)",
+        role: "Detects acute infarcts within minutes of symptom onset.",
+      },
+      {
+        name: "Susceptibility-weighted imaging (SWI)",
+        role: "Highly sensitive to microbleeds, calcifications and iron deposition.",
+      },
+      {
+        name: "MR spectroscopy and perfusion",
+        role: "Metabolic and hemodynamic fingerprints that help characterize brain tumors.",
+      },
     ],
     clinicalBenefits: [
       "Highest soft-tissue contrast of any modality",
@@ -1186,9 +1510,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Foundation for stroke and epilepsy program certification",
     ],
     faq: [
-      { q: "Is MRI safe for everyone?", a: "MRI is very safe, but patients with certain older pacemakers, cochlear implants or metallic foreign bodies require careful screening or an alternative modality." },
-      { q: "When is contrast needed?", a: "Gadolinium contrast is used to characterize tumors, infection, inflammation and post-treatment change — the radiologist decides based on the clinical question." },
-      { q: "How long does a brain MRI take?", a: "Most protocols run 20–40 minutes depending on the sequences requested." },
+      {
+        q: "Is MRI safe for everyone?",
+        a: "MRI is very safe, but patients with certain older pacemakers, cochlear implants or metallic foreign bodies require careful screening or an alternative modality.",
+      },
+      {
+        q: "When is contrast needed?",
+        a: "Gadolinium contrast is used to characterize tumors, infection, inflammation and post-treatment change — the radiologist decides based on the clinical question.",
+      },
+      {
+        q: "How long does a brain MRI take?",
+        a: "Most protocols run 20–40 minutes depending on the sequences requested.",
+      },
     ],
     takeaways: [
       "MRI is the definitive tool for characterizing brain pathology.",
@@ -1196,7 +1529,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "A well-run MRI program is the backbone of any serious neuroscience service line.",
     ],
     relatedTech: ["3T MRI", "Neuro CT", "PET/CT for brain tumors", "Advanced MRI reconstruction"],
-    clinicalTip: "For suspected acute stroke of unknown onset, DWI–FLAIR mismatch is a validated MRI marker to select patients for thrombolysis beyond the classical time window.",
+    clinicalTip:
+      "For suspected acute stroke of unknown onset, DWI–FLAIR mismatch is a validated MRI marker to select patients for thrombolysis beyond the classical time window.",
   },
 
   "mri-vs-ct-scan-choosing-right-imaging": {
@@ -1219,10 +1553,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Follow national and international appropriateness criteria (e.g., ACR)",
     ],
     technologies: [
-      { name: "Multi-slice CT (64+ slices)", role: "Fast whole-body coverage, ideal for trauma, oncology staging, cardiac and vascular imaging." },
-      { name: "1.5T MRI", role: "Balanced platform for neuro, MSK, body and cardiac — best-fit for most hospitals." },
-      { name: "3T MRI", role: "Higher signal for demanding neuro, prostate, breast and functional imaging." },
-      { name: "Dual-energy CT", role: "Material discrimination — gout, urinary stone composition, iodine mapping." },
+      {
+        name: "Multi-slice CT (64+ slices)",
+        role: "Fast whole-body coverage, ideal for trauma, oncology staging, cardiac and vascular imaging.",
+      },
+      {
+        name: "1.5T MRI",
+        role: "Balanced platform for neuro, MSK, body and cardiac — best-fit for most hospitals.",
+      },
+      {
+        name: "3T MRI",
+        role: "Higher signal for demanding neuro, prostate, breast and functional imaging.",
+      },
+      {
+        name: "Dual-energy CT",
+        role: "Material discrimination — gout, urinary stone composition, iodine mapping.",
+      },
     ],
     clinicalBenefits: [
       "Right-modality-first policy reduces total exam count",
@@ -1245,9 +1591,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Documented adherence to international standards",
     ],
     faq: [
-      { q: "Which is safer, CT or MRI?", a: "MRI uses no ionizing radiation and is generally preferred for repeated imaging or young patients. CT exposes patients to X-rays; benefit must outweigh risk." },
-      { q: "Can MRI replace CT?", a: "In many neurological and musculoskeletal questions, yes. In trauma, acute stroke rule-out and lung imaging, CT remains the first choice." },
-      { q: "Is contrast always needed?", a: "No — contrast is used when it materially improves lesion detection or characterization. The radiologist judges based on the clinical question." },
+      {
+        q: "Which is safer, CT or MRI?",
+        a: "MRI uses no ionizing radiation and is generally preferred for repeated imaging or young patients. CT exposes patients to X-rays; benefit must outweigh risk.",
+      },
+      {
+        q: "Can MRI replace CT?",
+        a: "In many neurological and musculoskeletal questions, yes. In trauma, acute stroke rule-out and lung imaging, CT remains the first choice.",
+      },
+      {
+        q: "Is contrast always needed?",
+        a: "No — contrast is used when it materially improves lesion detection or characterization. The radiologist judges based on the clinical question.",
+      },
     ],
     takeaways: [
       "MRI and CT are complementary — the goal is the right test, first time.",
@@ -1306,11 +1661,26 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Physiology (FFR/iFR) and intravascular imaging (IVUS/OCT)",
     ],
     technologies: [
-      { name: "Fixed C-arm angiography system", role: "Real-time fluoroscopy for diagnostic angiograms, PCI and structural interventions." },
-      { name: "Hemodynamic monitoring system", role: "Continuous ECG and pressure tracking essential to safe interventions." },
-      { name: "IVUS & OCT", role: "Intravascular imaging that guides stent sizing and confirms optimal deployment." },
-      { name: "FFR / iFR physiology", role: "Confirms whether a lesion is functionally significant before treatment." },
-      { name: "Coronary CT angiography", role: "Non-invasive rule-out of CAD in low-to-intermediate risk chest pain." },
+      {
+        name: "Fixed C-arm angiography system",
+        role: "Real-time fluoroscopy for diagnostic angiograms, PCI and structural interventions.",
+      },
+      {
+        name: "Hemodynamic monitoring system",
+        role: "Continuous ECG and pressure tracking essential to safe interventions.",
+      },
+      {
+        name: "IVUS & OCT",
+        role: "Intravascular imaging that guides stent sizing and confirms optimal deployment.",
+      },
+      {
+        name: "FFR / iFR physiology",
+        role: "Confirms whether a lesion is functionally significant before treatment.",
+      },
+      {
+        name: "Coronary CT angiography",
+        role: "Non-invasive rule-out of CAD in low-to-intermediate risk chest pain.",
+      },
     ],
     clinicalBenefits: [
       "Immediate diagnosis and treatment in a single session",
@@ -1334,9 +1704,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Foundation for structural heart and electrophysiology programs",
     ],
     faq: [
-      { q: "Is angiography painful?", a: "The procedure is performed under local anesthesia with mild sedation; most patients report only pressure at the access site." },
-      { q: "How long is recovery after PCI?", a: "Most patients go home the same or next day and return to normal activities within a week, depending on their overall condition." },
-      { q: "Can CAD be reversed?", a: "Progression can be halted and modestly reversed with aggressive risk factor control, statin therapy and lifestyle change." },
+      {
+        q: "Is angiography painful?",
+        a: "The procedure is performed under local anesthesia with mild sedation; most patients report only pressure at the access site.",
+      },
+      {
+        q: "How long is recovery after PCI?",
+        a: "Most patients go home the same or next day and return to normal activities within a week, depending on their overall condition.",
+      },
+      {
+        q: "Can CAD be reversed?",
+        a: "Progression can be halted and modestly reversed with aggressive risk factor control, statin therapy and lifestyle change.",
+      },
     ],
     takeaways: [
       "CAD is treatable — but only if diagnosed on time.",
@@ -1344,7 +1723,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Physiology and intravascular imaging turn PCI from anatomy-based into evidence-based practice.",
     ],
     relatedTech: ["Cath lab systems", "Cardiac CT", "Cardiac ultrasound", "Hemodynamic monitoring"],
-    clinicalTip: "In STEMI, every 30-minute delay in reperfusion increases one-year mortality by roughly 7.5%.",
+    clinicalTip:
+      "In STEMI, every 30-minute delay in reperfusion increases one-year mortality by roughly 7.5%.",
   },
 
   "petct-transforming-cancer-diagnosis": {
@@ -1367,10 +1747,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Cardiac and neurology PET applications where indicated",
     ],
     technologies: [
-      { name: "Modern PET/CT scanner", role: "High sensitivity detectors, time-of-flight reconstruction and low-dose CT for optimal image quality." },
-      { name: "Digital PET detectors", role: "Improved lesion detection, especially for small nodes and low-uptake tumors." },
-      { name: "Radiopharmacy or unit-dose supply", role: "Reliable access to 18F-FDG and specialty tracers underpins any PET/CT service." },
-      { name: "Advanced reconstruction and AI", role: "Faster scans, lower dose and reproducible SUV quantification." },
+      {
+        name: "Modern PET/CT scanner",
+        role: "High sensitivity detectors, time-of-flight reconstruction and low-dose CT for optimal image quality.",
+      },
+      {
+        name: "Digital PET detectors",
+        role: "Improved lesion detection, especially for small nodes and low-uptake tumors.",
+      },
+      {
+        name: "Radiopharmacy or unit-dose supply",
+        role: "Reliable access to 18F-FDG and specialty tracers underpins any PET/CT service.",
+      },
+      {
+        name: "Advanced reconstruction and AI",
+        role: "Faster scans, lower dose and reproducible SUV quantification.",
+      },
     ],
     clinicalBenefits: [
       "One-stop metabolic and anatomical assessment",
@@ -1394,17 +1786,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Enabler of clinical trials and academic reputation",
     ],
     faq: [
-      { q: "How much radiation does a PET/CT deliver?", a: "Typical whole-body 18F-FDG PET/CT delivers around 7–10 mSv — comparable to a diagnostic CT — with careful benefit-risk justification." },
-      { q: "Does PET/CT detect every cancer?", a: "Most solid tumors are FDG-avid, but some (well-differentiated prostate, low-grade neuroendocrine) require specific tracers." },
-      { q: "How soon after treatment should PET/CT be repeated?", a: "Timing depends on tumor type — typically 6–12 weeks after chemotherapy or 3 months after radiotherapy to avoid false positives." },
+      {
+        q: "How much radiation does a PET/CT deliver?",
+        a: "Typical whole-body 18F-FDG PET/CT delivers around 7–10 mSv — comparable to a diagnostic CT — with careful benefit-risk justification.",
+      },
+      {
+        q: "Does PET/CT detect every cancer?",
+        a: "Most solid tumors are FDG-avid, but some (well-differentiated prostate, low-grade neuroendocrine) require specific tracers.",
+      },
+      {
+        q: "How soon after treatment should PET/CT be repeated?",
+        a: "Timing depends on tumor type — typically 6–12 weeks after chemotherapy or 3 months after radiotherapy to avoid false positives.",
+      },
     ],
     takeaways: [
       "PET/CT is the reference modality for staging, restaging and response assessment.",
       "A PET/CT program requires radiopharmacy logistics, shielded rooms and trained physicists — not just a scanner.",
       "Digital PET and new tracers are expanding the clinical value of every installation.",
     ],
-    relatedTech: ["PET/CT scanners", "Cyclotron and radiopharmacy", "Linear accelerators", "MRI for oncology"],
-    clinicalTip: "Interim PET/CT after two cycles of chemotherapy in Hodgkin lymphoma allows response-adapted therapy — dropping cures to less-toxic regimens in early responders.",
+    relatedTech: [
+      "PET/CT scanners",
+      "Cyclotron and radiopharmacy",
+      "Linear accelerators",
+      "MRI for oncology",
+    ],
+    clinicalTip:
+      "Interim PET/CT after two cycles of chemotherapy in Hodgkin lymphoma allows response-adapted therapy — dropping cures to less-toxic regimens in early responders.",
   },
 
   "breast-cancer-screening-mammography": {
@@ -1443,10 +1850,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
     ],
     technologies: [
       { name: "Digital mammography (2D)", role: "The proven standard for population screening." },
-      { name: "Digital breast tomosynthesis (DBT)", role: "3D acquisition that improves cancer detection and reduces recall rates." },
-      { name: "Breast ultrasound", role: "Supplemental screening in dense breasts and characterization of palpable lesions." },
-      { name: "Breast MRI", role: "Highest sensitivity — used in high-risk screening and problem solving." },
-      { name: "Stereotactic and ultrasound-guided biopsy", role: "Enables minimally invasive tissue diagnosis." },
+      {
+        name: "Digital breast tomosynthesis (DBT)",
+        role: "3D acquisition that improves cancer detection and reduces recall rates.",
+      },
+      {
+        name: "Breast ultrasound",
+        role: "Supplemental screening in dense breasts and characterization of palpable lesions.",
+      },
+      {
+        name: "Breast MRI",
+        role: "Highest sensitivity — used in high-risk screening and problem solving.",
+      },
+      {
+        name: "Stereotactic and ultrasound-guided biopsy",
+        role: "Enables minimally invasive tissue diagnosis.",
+      },
     ],
     clinicalBenefits: [
       "Detection of pre-clinical disease",
@@ -1470,9 +1889,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Alignment with national screening programs and funding",
     ],
     faq: [
-      { q: "At what age should screening start?", a: "Most international guidelines recommend starting between age 40 and 50 for average-risk women, and earlier for high-risk women." },
-      { q: "Is mammography painful?", a: "Compression can be uncomfortable but lasts only seconds and is essential for image quality and dose reduction." },
-      { q: "How much radiation does a mammogram deliver?", a: "About 0.4 mSv — roughly seven weeks of natural background radiation." },
+      {
+        q: "At what age should screening start?",
+        a: "Most international guidelines recommend starting between age 40 and 50 for average-risk women, and earlier for high-risk women.",
+      },
+      {
+        q: "Is mammography painful?",
+        a: "Compression can be uncomfortable but lasts only seconds and is essential for image quality and dose reduction.",
+      },
+      {
+        q: "How much radiation does a mammogram deliver?",
+        a: "About 0.4 mSv — roughly seven weeks of natural background radiation.",
+      },
     ],
     takeaways: [
       "Screening saves lives — organized, high-quality programs matter most.",
@@ -1480,7 +1908,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Recall, biopsy and treatment pathways must be as strong as the imaging itself.",
     ],
     relatedTech: ["Digital mammography", "Tomosynthesis", "Breast ultrasound", "Breast MRI"],
-    clinicalTip: "Report breast density explicitly — patients with category C or D tissue benefit most from supplemental imaging.",
+    clinicalTip:
+      "Report breast density explicitly — patients with category C or D tissue benefit most from supplemental imaging.",
   },
 
   "digital-xray-emergency-medicine": {
@@ -1504,10 +1933,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Follow-up imaging after intervention (line/tube placement)",
     ],
     technologies: [
-      { name: "Fixed digital radiography room", role: "Highest throughput for walking patients, with dose optimization and preset protocols." },
-      { name: "Mobile DR (bedside X-ray)", role: "Brings imaging to the trauma bay, ICU or isolation ward." },
-      { name: "Wireless flat-panel detectors", role: "Rapid positioning, faster exam times, ergonomic advantage." },
-      { name: "AI post-processing", role: "Automated pneumothorax, pneumonia and fracture detection prompts." },
+      {
+        name: "Fixed digital radiography room",
+        role: "Highest throughput for walking patients, with dose optimization and preset protocols.",
+      },
+      {
+        name: "Mobile DR (bedside X-ray)",
+        role: "Brings imaging to the trauma bay, ICU or isolation ward.",
+      },
+      {
+        name: "Wireless flat-panel detectors",
+        role: "Rapid positioning, faster exam times, ergonomic advantage.",
+      },
+      {
+        name: "AI post-processing",
+        role: "Automated pneumothorax, pneumonia and fracture detection prompts.",
+      },
     ],
     clinicalBenefits: [
       "Sub-minute image availability at the point of care",
@@ -1531,9 +1972,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Foundation for compliance with radiation safety standards",
     ],
     faq: [
-      { q: "How much radiation does a chest X-ray deliver?", a: "Around 0.02 mSv — roughly the same as three days of natural background radiation." },
-      { q: "When is X-ray insufficient?", a: "For complex trauma, acute stroke rule-out, and detailed soft-tissue evaluation, CT or MRI is required." },
-      { q: "Can portable X-ray replace fixed rooms?", a: "It complements them but cannot replace them for high-volume walking patients or specialized projections." },
+      {
+        q: "How much radiation does a chest X-ray deliver?",
+        a: "Around 0.02 mSv — roughly the same as three days of natural background radiation.",
+      },
+      {
+        q: "When is X-ray insufficient?",
+        a: "For complex trauma, acute stroke rule-out, and detailed soft-tissue evaluation, CT or MRI is required.",
+      },
+      {
+        q: "Can portable X-ray replace fixed rooms?",
+        a: "It complements them but cannot replace them for high-volume walking patients or specialized projections.",
+      },
     ],
     takeaways: [
       "Digital X-ray remains the most impactful low-cost investment in emergency care.",
@@ -1541,7 +1991,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "AI is turning the humble chest X-ray into a safety net for missed acute findings.",
     ],
     relatedTech: ["Digital radiography", "Fluoroscopy", "CT for advanced trauma", "PACS/RIS"],
-    clinicalTip: "In blunt chest trauma, a supine AP chest X-ray remains the fastest screen for tension pneumothorax and gross hemothorax before CT.",
+    clinicalTip:
+      "In blunt chest trauma, a supine AP chest X-ray remains the fastest screen for tension pneumothorax and gross hemothorax before CT.",
   },
 
   "ultrasound-imaging-applications-modern-healthcare": {
@@ -1566,10 +2017,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Point-of-care assessment (FAST, lung, cardiac)",
     ],
     technologies: [
-      { name: "Premium radiology ultrasound", role: "Full transducer set, advanced modes (CEUS, elastography) and shared-service radiology use." },
-      { name: "Point-of-care ultrasound (POCUS)", role: "Compact systems for ED, ICU, anesthesia and outpatient clinics." },
-      { name: "Handheld ultrasound", role: "Extends imaging to bedside, home visits and rural clinics." },
-      { name: "Echocardiography-focused systems", role: "Advanced strain, 3D and stress echo for cardiology programs." },
+      {
+        name: "Premium radiology ultrasound",
+        role: "Full transducer set, advanced modes (CEUS, elastography) and shared-service radiology use.",
+      },
+      {
+        name: "Point-of-care ultrasound (POCUS)",
+        role: "Compact systems for ED, ICU, anesthesia and outpatient clinics.",
+      },
+      {
+        name: "Handheld ultrasound",
+        role: "Extends imaging to bedside, home visits and rural clinics.",
+      },
+      {
+        name: "Echocardiography-focused systems",
+        role: "Advanced strain, 3D and stress echo for cardiology programs.",
+      },
     ],
     clinicalBenefits: [
       "Real-time, radiation-free imaging",
@@ -1593,17 +2056,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Support for outreach, mobile clinics and telemedicine",
     ],
     faq: [
-      { q: "Is ultrasound safe in pregnancy?", a: "Yes — diagnostic ultrasound has an outstanding safety record and is the modality of choice for obstetric imaging." },
-      { q: "Can ultrasound replace CT or MRI?", a: "For many superficial and abdominal questions, yes. For deep structures, lung parenchyma and complex neuro or MSK questions, cross-sectional imaging is still required." },
-      { q: "What is POCUS?", a: "Point-of-care ultrasound: focused, clinician-performed scans at the bedside to answer specific clinical questions in real time." },
+      {
+        q: "Is ultrasound safe in pregnancy?",
+        a: "Yes — diagnostic ultrasound has an outstanding safety record and is the modality of choice for obstetric imaging.",
+      },
+      {
+        q: "Can ultrasound replace CT or MRI?",
+        a: "For many superficial and abdominal questions, yes. For deep structures, lung parenchyma and complex neuro or MSK questions, cross-sectional imaging is still required.",
+      },
+      {
+        q: "What is POCUS?",
+        a: "Point-of-care ultrasound: focused, clinician-performed scans at the bedside to answer specific clinical questions in real time.",
+      },
     ],
     takeaways: [
       "Ultrasound is the most cost-effective imaging tool in modern healthcare.",
       "POCUS is a genuine clinical skill — not a substitute for full radiology imaging.",
       "Training and quality assurance matter as much as the machine.",
     ],
-    relatedTech: ["Radiology ultrasound", "Echocardiography", "Handheld POCUS", "Contrast-enhanced ultrasound"],
-    clinicalTip: "For undifferentiated hypotension, a focused cardiac and IVC POCUS scan in the ED can distinguish cardiogenic, hypovolemic, obstructive and distributive shock within minutes.",
+    relatedTech: [
+      "Radiology ultrasound",
+      "Echocardiography",
+      "Handheld POCUS",
+      "Contrast-enhanced ultrasound",
+    ],
+    clinicalTip:
+      "For undifferentiated hypotension, a focused cardiac and IVC POCUS scan in the ED can distinguish cardiogenic, hypovolemic, obstructive and distributive shock within minutes.",
   },
 
   "osteoporosis-bone-density-dexa": {
@@ -1642,10 +2120,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Follow-up DEXA at 1–2 year intervals to monitor therapy",
     ],
     technologies: [
-      { name: "Modern DEXA scanner", role: "Precise, reproducible measurement of BMD at hip and spine with very low radiation dose." },
-      { name: "Vertebral fracture assessment (VFA)", role: "Lateral spine imaging on the same visit — detects silent fractures." },
-      { name: "TBS (Trabecular Bone Score)", role: "Adds micro-architecture information to standard BMD for better risk stratification." },
-      { name: "Body composition on DEXA", role: "Optional add-on for research, endocrinology and sports medicine programs." },
+      {
+        name: "Modern DEXA scanner",
+        role: "Precise, reproducible measurement of BMD at hip and spine with very low radiation dose.",
+      },
+      {
+        name: "Vertebral fracture assessment (VFA)",
+        role: "Lateral spine imaging on the same visit — detects silent fractures.",
+      },
+      {
+        name: "TBS (Trabecular Bone Score)",
+        role: "Adds micro-architecture information to standard BMD for better risk stratification.",
+      },
+      {
+        name: "Body composition on DEXA",
+        role: "Optional add-on for research, endocrinology and sports medicine programs.",
+      },
     ],
     clinicalBenefits: [
       "Objective identification of high-risk patients",
@@ -1669,17 +2159,31 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Low cost per exam and high patient throughput",
     ],
     faq: [
-      { q: "How often should DEXA be repeated?", a: "Typically every 1–2 years for patients on therapy, and every 2–5 years for those at intermediate risk without treatment." },
-      { q: "Is DEXA safe?", a: "Yes — radiation dose is very low (about 0.001–0.01 mSv), lower than a chest X-ray." },
-      { q: "Who should be screened?", a: "Women aged 65+, men aged 70+, and younger adults with major risk factors or a fragility fracture." },
+      {
+        q: "How often should DEXA be repeated?",
+        a: "Typically every 1–2 years for patients on therapy, and every 2–5 years for those at intermediate risk without treatment.",
+      },
+      {
+        q: "Is DEXA safe?",
+        a: "Yes — radiation dose is very low (about 0.001–0.01 mSv), lower than a chest X-ray.",
+      },
+      {
+        q: "Who should be screened?",
+        a: "Women aged 65+, men aged 70+, and younger adults with major risk factors or a fragility fracture.",
+      },
     ],
     takeaways: [
       "Osteoporosis is preventable and treatable — but only when diagnosed on time.",
       "DEXA is the international standard and one of the highest-value imaging investments per patient impact.",
       "Fracture prevention pathways depend on DEXA plus a fracture liaison service.",
     ],
-    relatedTech: ["DEXA bone densitometry", "Vertebral fracture assessment", "MRI/CT for complex spine cases"],
-    clinicalTip: "A fragility fracture in any adult over 50 is an indication for DEXA, regardless of prior risk assessment.",
+    relatedTech: [
+      "DEXA bone densitometry",
+      "Vertebral fracture assessment",
+      "MRI/CT for complex spine cases",
+    ],
+    clinicalTip:
+      "A fragility fracture in any adult over 50 is an indication for DEXA, regardless of prior risk assessment.",
   },
 
   "how-diagnostic-imaging-improves-outcomes": {
@@ -1703,11 +2207,23 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Post-treatment follow-up",
     ],
     technologies: [
-      { name: "Cross-sectional imaging (CT, MRI)", role: "Detailed anatomical and functional characterization." },
+      {
+        name: "Cross-sectional imaging (CT, MRI)",
+        role: "Detailed anatomical and functional characterization.",
+      },
       { name: "Ultrasound", role: "Point-of-care and radiology-based real-time imaging." },
-      { name: "Nuclear medicine and PET/CT", role: "Metabolic and molecular information for oncology, cardiology and neurology." },
-      { name: "Interventional radiology suite", role: "Image-guided minimally invasive treatment." },
-      { name: "PACS/RIS/AI", role: "Distribution, workflow and decision support across the enterprise." },
+      {
+        name: "Nuclear medicine and PET/CT",
+        role: "Metabolic and molecular information for oncology, cardiology and neurology.",
+      },
+      {
+        name: "Interventional radiology suite",
+        role: "Image-guided minimally invasive treatment.",
+      },
+      {
+        name: "PACS/RIS/AI",
+        role: "Distribution, workflow and decision support across the enterprise.",
+      },
     ],
     clinicalBenefits: [
       "Faster time to diagnosis and treatment",
@@ -1731,17 +2247,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Enabler of accreditation and quality metrics",
     ],
     faq: [
-      { q: "Is more imaging always better?", a: "No — appropriateness matters more than volume. Unnecessary imaging exposes patients to risk without benefit." },
-      { q: "How do hospitals prevent over-imaging?", a: "By using clinical decision support at order entry and following international appropriateness criteria." },
-      { q: "What role does AI play?", a: "AI supports triage of urgent findings, quantification and workflow — it augments radiologists rather than replacing them." },
+      {
+        q: "Is more imaging always better?",
+        a: "No — appropriateness matters more than volume. Unnecessary imaging exposes patients to risk without benefit.",
+      },
+      {
+        q: "How do hospitals prevent over-imaging?",
+        a: "By using clinical decision support at order entry and following international appropriateness criteria.",
+      },
+      {
+        q: "What role does AI play?",
+        a: "AI supports triage of urgent findings, quantification and workflow — it augments radiologists rather than replacing them.",
+      },
     ],
     takeaways: [
       "Diagnostic imaging is one of the most cost-effective interventions in modern medicine.",
       "Investing in the right mix of modalities has measurable, population-level impact.",
       "People, protocols and IT determine whether that impact is realized.",
     ],
-    relatedTech: ["CT, MRI, ultrasound and X-ray", "PET/CT", "Interventional radiology", "PACS and AI"],
-    clinicalTip: "The best imaging investment is the one that closes the biggest gap in your clinical pathway — not the newest technology on the market.",
+    relatedTech: [
+      "CT, MRI, ultrasound and X-ray",
+      "PET/CT",
+      "Interventional radiology",
+      "PACS and AI",
+    ],
+    clinicalTip:
+      "The best imaging investment is the one that closes the biggest gap in your clinical pathway — not the newest technology on the market.",
   },
 
   "ct-imaging-emergency-trauma-care": {
@@ -1765,9 +2296,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "CT of extremities for complex fractures",
     ],
     technologies: [
-      { name: "64+ slice CT", role: "Fast whole-body acquisition and high-quality multiplanar reconstructions." },
-      { name: "Dual-energy CT", role: "Material discrimination, virtual non-contrast images and improved iodine sensitivity." },
-      { name: "Iterative and AI reconstruction", role: "Lower dose without loss of diagnostic image quality." },
+      {
+        name: "64+ slice CT",
+        role: "Fast whole-body acquisition and high-quality multiplanar reconstructions.",
+      },
+      {
+        name: "Dual-energy CT",
+        role: "Material discrimination, virtual non-contrast images and improved iodine sensitivity.",
+      },
+      {
+        name: "Iterative and AI reconstruction",
+        role: "Lower dose without loss of diagnostic image quality.",
+      },
       { name: "Injector integration", role: "Reproducible contrast timing for CTA and CTP." },
     ],
     clinicalBenefits: [
@@ -1792,17 +2332,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Underpins the entire ED value proposition",
     ],
     faq: [
-      { q: "How much radiation does an ED CT deliver?", a: "Varies by protocol — around 2 mSv for a head CT and 8–15 mSv for a whole-body trauma CT. Modern dose reduction protects patients." },
-      { q: "When is CT preferred over MRI in the ED?", a: "For trauma, acute hemorrhage, aortic pathology and PE — speed and availability make CT the first choice." },
-      { q: "Is whole-body CT justified in every trauma?", a: "No — it is reserved for major trauma with high suspicion of multi-region injury or unstable physiology." },
+      {
+        q: "How much radiation does an ED CT deliver?",
+        a: "Varies by protocol — around 2 mSv for a head CT and 8–15 mSv for a whole-body trauma CT. Modern dose reduction protects patients.",
+      },
+      {
+        q: "When is CT preferred over MRI in the ED?",
+        a: "For trauma, acute hemorrhage, aortic pathology and PE — speed and availability make CT the first choice.",
+      },
+      {
+        q: "Is whole-body CT justified in every trauma?",
+        a: "No — it is reserved for major trauma with high suspicion of multi-region injury or unstable physiology.",
+      },
     ],
     takeaways: [
       "CT is the single most impactful imaging investment for any serious emergency department.",
       "Dose optimization and protocol discipline make daily use safe and defensible.",
       "The scanner must sit at the heart of the ED workflow, not down a distant corridor.",
     ],
-    relatedTech: ["Multi-slice CT", "Dual-energy CT", "Angiography suite", "Interventional radiology"],
-    clinicalTip: "Locate the CT scanner adjacent to the resuscitation bay — every meter reduces time-to-diagnosis in the critically injured.",
+    relatedTech: [
+      "Multi-slice CT",
+      "Dual-energy CT",
+      "Angiography suite",
+      "Interventional radiology",
+    ],
+    clinicalTip:
+      "Locate the CT scanner adjacent to the resuscitation bay — every meter reduces time-to-diagnosis in the critically injured.",
   },
 
   "interventional-radiology-minimally-invasive": {
@@ -1825,10 +2380,19 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Pre-procedure risk stratification and consent",
     ],
     technologies: [
-      { name: "Fixed IR angiography suite", role: "High-resolution fluoroscopy, DSA and cone-beam CT for complex vascular and oncologic work." },
-      { name: "Ultrasound guidance", role: "Bedside biopsies, drainages, vascular access and nerve blocks." },
+      {
+        name: "Fixed IR angiography suite",
+        role: "High-resolution fluoroscopy, DSA and cone-beam CT for complex vascular and oncologic work.",
+      },
+      {
+        name: "Ultrasound guidance",
+        role: "Bedside biopsies, drainages, vascular access and nerve blocks.",
+      },
       { name: "CT-guided intervention", role: "Precise biopsy and ablation of deep lesions." },
-      { name: "Ablation platforms", role: "Radiofrequency, microwave and cryoablation for liver, kidney, lung and bone tumors." },
+      {
+        name: "Ablation platforms",
+        role: "Radiofrequency, microwave and cryoablation for liver, kidney, lung and bone tumors.",
+      },
     ],
     clinicalBenefits: [
       "Minimally invasive alternatives to open surgery",
@@ -1852,9 +2416,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Referral pull for oncology, vascular and stroke programs",
     ],
     faq: [
-      { q: "Is IR the same as vascular surgery?", a: "There is overlap, but IR uses image guidance and minimally invasive endovascular techniques for a broader range of non-vascular interventions as well." },
-      { q: "Does IR require general anesthesia?", a: "Most procedures use local anesthesia and conscious sedation; general anesthesia is reserved for specific cases." },
-      { q: "What is the recovery like?", a: "Many patients go home the same or next day and return to normal activity within days rather than weeks." },
+      {
+        q: "Is IR the same as vascular surgery?",
+        a: "There is overlap, but IR uses image guidance and minimally invasive endovascular techniques for a broader range of non-vascular interventions as well.",
+      },
+      {
+        q: "Does IR require general anesthesia?",
+        a: "Most procedures use local anesthesia and conscious sedation; general anesthesia is reserved for specific cases.",
+      },
+      {
+        q: "What is the recovery like?",
+        a: "Many patients go home the same or next day and return to normal activity within days rather than weeks.",
+      },
     ],
     takeaways: [
       "Interventional radiology is one of the highest-leverage investments in modern medicine.",
@@ -1862,7 +2435,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Team skills, imaging quality and after-care matter as much as the suite itself.",
     ],
     relatedTech: ["Interventional angiography", "Ultrasound", "CT", "Ablation platforms"],
-    clinicalTip: "Set up a formal IR multidisciplinary meeting — most missed IR opportunities are patients whose case never reached the interventional radiologist.",
+    clinicalTip:
+      "Set up a formal IR multidisciplinary meeting — most missed IR opportunities are patients whose case never reached the interventional radiologist.",
   },
 
   "ai-in-medical-imaging": {
@@ -1886,10 +2460,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Workflow tools (autocontouring, structured reporting)",
     ],
     technologies: [
-      { name: "Scanner-side AI reconstruction", role: "Lower dose, faster scans, sharper images without artifact penalty." },
-      { name: "AI triage platforms", role: "Prioritize urgent studies (stroke, hemorrhage, PE) in the worklist." },
-      { name: "Detection and quantification tools", role: "Second-reader support for mammography, lung nodules, oncology follow-up." },
-      { name: "Radiotherapy autocontouring", role: "Faster, more consistent target and organ-at-risk delineation." },
+      {
+        name: "Scanner-side AI reconstruction",
+        role: "Lower dose, faster scans, sharper images without artifact penalty.",
+      },
+      {
+        name: "AI triage platforms",
+        role: "Prioritize urgent studies (stroke, hemorrhage, PE) in the worklist.",
+      },
+      {
+        name: "Detection and quantification tools",
+        role: "Second-reader support for mammography, lung nodules, oncology follow-up.",
+      },
+      {
+        name: "Radiotherapy autocontouring",
+        role: "Faster, more consistent target and organ-at-risk delineation.",
+      },
     ],
     clinicalBenefits: [
       "Faster identification of life-threatening findings",
@@ -1913,18 +2499,34 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Reputation as a modern, technology-enabled provider",
     ],
     faq: [
-      { q: "Will AI replace radiologists?", a: "No — regulated AI is a decision-support tool. Radiologists remain accountable for diagnosis; AI removes repetitive work and highlights urgent findings." },
-      { q: "How is AI regulated?", a: "Medical AI is classified as software-as-a-medical-device (SaMD) and must meet FDA, CE MDR or equivalent regulatory approval before clinical use." },
-      { q: "Which AI tools deliver the most value first?", a: "Scanner-side reconstruction, stroke triage, chest X-ray triage and mammography CAD are the most mature and impactful entry points." },
+      {
+        q: "Will AI replace radiologists?",
+        a: "No — regulated AI is a decision-support tool. Radiologists remain accountable for diagnosis; AI removes repetitive work and highlights urgent findings.",
+      },
+      {
+        q: "How is AI regulated?",
+        a: "Medical AI is classified as software-as-a-medical-device (SaMD) and must meet FDA, CE MDR or equivalent regulatory approval before clinical use.",
+      },
+      {
+        q: "Which AI tools deliver the most value first?",
+        a: "Scanner-side reconstruction, stroke triage, chest X-ray triage and mammography CAD are the most mature and impactful entry points.",
+      },
     ],
     takeaways: [
       "AI is no longer optional in a modern imaging department — but selection and governance matter.",
       "Start where the clinical pain is greatest: turnaround, critical findings, dose.",
       "AI must integrate cleanly into PACS/RIS or it will not be used.",
     ],
-    relatedTech: ["CT/MRI reconstruction AI", "Stroke triage AI", "Mammography CAD", "PACS and structured reporting"],
-    clinicalTip: "Measure baseline turnaround for critical findings before deploying triage AI — you cannot prove impact without a pre-intervention baseline.",
-    importantNote: "Only deploy AI tools with valid regulatory clearance and clear performance data on populations similar to your own — off-label AI is a patient safety and legal risk.",
+    relatedTech: [
+      "CT/MRI reconstruction AI",
+      "Stroke triage AI",
+      "Mammography CAD",
+      "PACS and structured reporting",
+    ],
+    clinicalTip:
+      "Measure baseline turnaround for critical findings before deploying triage AI — you cannot prove impact without a pre-intervention baseline.",
+    importantNote:
+      "Only deploy AI tools with valid regulatory clearance and clear performance data on populations similar to your own — off-label AI is a patient safety and legal risk.",
   },
 
   "building-efficient-imaging-department": {
@@ -1948,10 +2550,19 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "IT and integration roadmap",
     ],
     technologies: [
-      { name: "Modality mix (X-ray, US, CT, MRI, PET/CT)", role: "Right-sized capacity for the hospital's clinical mission." },
+      {
+        name: "Modality mix (X-ray, US, CT, MRI, PET/CT)",
+        role: "Right-sized capacity for the hospital's clinical mission.",
+      },
       { name: "PACS/RIS/VNA", role: "Distribution, workflow, archive and cross-site sharing." },
-      { name: "Structured reporting and AI", role: "Consistent, quantitative reports and safety net for critical findings." },
-      { name: "Injector and dose management systems", role: "Contrast safety and radiation dose tracking." },
+      {
+        name: "Structured reporting and AI",
+        role: "Consistent, quantitative reports and safety net for critical findings.",
+      },
+      {
+        name: "Injector and dose management systems",
+        role: "Contrast safety and radiation dose tracking.",
+      },
     ],
     clinicalBenefits: [
       "Shorter turnaround times and waiting lists",
@@ -1975,17 +2586,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Flexibility to add or upgrade modalities as demand evolves",
     ],
     faq: [
-      { q: "How many rooms do we need?", a: "It depends on demand — a proper study, not benchmarking alone, should drive the answer." },
-      { q: "Should imaging be inside or outside the hospital?", a: "Acute imaging must be inside; outpatient volumes can move to satellite sites to protect acute capacity." },
-      { q: "What is the biggest planning mistake?", a: "Planning for the day of opening rather than for the next 10–15 years of clinical growth." },
+      {
+        q: "How many rooms do we need?",
+        a: "It depends on demand — a proper study, not benchmarking alone, should drive the answer.",
+      },
+      {
+        q: "Should imaging be inside or outside the hospital?",
+        a: "Acute imaging must be inside; outpatient volumes can move to satellite sites to protect acute capacity.",
+      },
+      {
+        q: "What is the biggest planning mistake?",
+        a: "Planning for the day of opening rather than for the next 10–15 years of clinical growth.",
+      },
     ],
     takeaways: [
       "Great imaging departments are engineered, not assembled.",
       "Workflow, staffing and IT matter as much as the equipment.",
       "Plan for lifecycle, not launch day.",
     ],
-    relatedTech: ["CT, MRI, ultrasound, mammography", "PACS/RIS/VNA", "Radiation protection systems", "AI workflow platforms"],
-    clinicalTip: "Involve radiographers, physicists and clinicians in room-level design reviews — they catch workflow errors that architects and vendors both miss.",
+    relatedTech: [
+      "CT, MRI, ultrasound, mammography",
+      "PACS/RIS/VNA",
+      "Radiation protection systems",
+      "AI workflow platforms",
+    ],
+    clinicalTip:
+      "Involve radiographers, physicists and clinicians in room-level design reviews — they catch workflow errors that architects and vendors both miss.",
   },
 
   "medical-imaging-in-cardiology": {
@@ -2009,10 +2635,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Invasive angiography and physiology in the cath lab",
     ],
     technologies: [
-      { name: "Advanced echocardiography", role: "Real-time function, strain, 3D and stress echo — the daily workhorse." },
-      { name: "Coronary CT angiography", role: "Non-invasive coronary anatomy and plaque characterization." },
-      { name: "Cardiac MRI", role: "Function, perfusion, viability and tissue characterization without radiation." },
-      { name: "Cath lab with FFR/IVUS/OCT", role: "Definitive diagnosis and treatment of significant coronary disease." },
+      {
+        name: "Advanced echocardiography",
+        role: "Real-time function, strain, 3D and stress echo — the daily workhorse.",
+      },
+      {
+        name: "Coronary CT angiography",
+        role: "Non-invasive coronary anatomy and plaque characterization.",
+      },
+      {
+        name: "Cardiac MRI",
+        role: "Function, perfusion, viability and tissue characterization without radiation.",
+      },
+      {
+        name: "Cath lab with FFR/IVUS/OCT",
+        role: "Definitive diagnosis and treatment of significant coronary disease.",
+      },
     ],
     clinicalBenefits: [
       "Personalized decisions based on anatomy plus physiology",
@@ -2036,9 +2674,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Enabler of clinical trials and academic reputation",
     ],
     faq: [
-      { q: "Is CCTA replacing invasive angiography?", a: "For rule-out of CAD in low-to-intermediate risk patients, yes. Cath lab remains essential for treatment and complex diagnosis." },
-      { q: "When is cardiac MRI the right test?", a: "For myocardial disease characterization (myocarditis, infiltrative, viability, cardiomyopathies) and complex congenital heart disease." },
-      { q: "How should a hospital sequence its investments?", a: "Echo first, then cath lab, then CCTA, then cardiac MRI — matched to case mix and skills." },
+      {
+        q: "Is CCTA replacing invasive angiography?",
+        a: "For rule-out of CAD in low-to-intermediate risk patients, yes. Cath lab remains essential for treatment and complex diagnosis.",
+      },
+      {
+        q: "When is cardiac MRI the right test?",
+        a: "For myocardial disease characterization (myocarditis, infiltrative, viability, cardiomyopathies) and complex congenital heart disease.",
+      },
+      {
+        q: "How should a hospital sequence its investments?",
+        a: "Echo first, then cath lab, then CCTA, then cardiac MRI — matched to case mix and skills.",
+      },
     ],
     takeaways: [
       "Modern cardiology is imaging-driven — no single modality is enough.",
@@ -2046,7 +2693,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Skills and reporting quality matter as much as scanner choice.",
     ],
     relatedTech: ["Echocardiography", "Cardiac CT", "Cardiac MRI", "Cath lab systems"],
-    clinicalTip: "Introduce CCTA-first pathways for stable chest pain — it lowers downstream invasive angiography by 20–40% without missing significant disease.",
+    clinicalTip:
+      "Introduce CCTA-first pathways for stable chest pain — it lowers downstream invasive angiography by 20–40% without missing significant disease.",
   },
 
   "medical-imaging-in-neurology": {
@@ -2073,7 +2721,10 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       { name: "1.5T MRI", role: "Robust workhorse for most neurological questions." },
       { name: "3T MRI", role: "Higher signal for epilepsy, MS, tumor and functional imaging." },
       { name: "Multi-slice CT", role: "Frontline acute imaging with CTA and CTP for stroke." },
-      { name: "PET/CT and PET/MR", role: "Metabolic imaging in dementia, epilepsy and brain tumors." },
+      {
+        name: "PET/CT and PET/MR",
+        role: "Metabolic imaging in dementia, epilepsy and brain tumors.",
+      },
     ],
     clinicalBenefits: [
       "Confident acute triage and treatment",
@@ -2097,9 +2748,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Referral pull for complex regional cases",
     ],
     faq: [
-      { q: "When is CT preferred over MRI in neurology?", a: "In acute trauma, suspected acute hemorrhage and any unstable patient — CT is faster and safer to obtain." },
-      { q: "Do all epilepsy patients need MRI?", a: "Yes — dedicated epilepsy-protocol MRI (preferably 3T) is standard of care in any new-onset unprovoked seizure." },
-      { q: "Is contrast always needed for brain MRI?", a: "Not always — it is added when tumors, infection, inflammation or post-treatment change are being assessed." },
+      {
+        q: "When is CT preferred over MRI in neurology?",
+        a: "In acute trauma, suspected acute hemorrhage and any unstable patient — CT is faster and safer to obtain.",
+      },
+      {
+        q: "Do all epilepsy patients need MRI?",
+        a: "Yes — dedicated epilepsy-protocol MRI (preferably 3T) is standard of care in any new-onset unprovoked seizure.",
+      },
+      {
+        q: "Is contrast always needed for brain MRI?",
+        a: "Not always — it is added when tumors, infection, inflammation or post-treatment change are being assessed.",
+      },
     ],
     takeaways: [
       "Neuroimaging is the eyes of neurology — no modern service can function without it.",
@@ -2107,7 +2767,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Investing in advanced sequences pays back in complex case throughput.",
     ],
     relatedTech: ["1.5T & 3T MRI", "Neuro CT", "PET/CT", "Advanced MRI post-processing"],
-    clinicalTip: "In first unprovoked seizure, order an epilepsy-protocol MRI (not a generic brain MRI) — the yield for surgical targets is far higher.",
+    clinicalTip:
+      "In first unprovoked seizure, order an epilepsy-protocol MRI (not a generic brain MRI) — the yield for surgical targets is far higher.",
   },
 
   "medical-imaging-in-oncology": {
@@ -2132,9 +2793,15 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
     ],
     technologies: [
       { name: "Multi-slice CT", role: "Staging, response and radiotherapy planning workhorse." },
-      { name: "MRI (1.5T and 3T)", role: "Local staging, characterization and radiotherapy contouring." },
+      {
+        name: "MRI (1.5T and 3T)",
+        role: "Local staging, characterization and radiotherapy contouring.",
+      },
       { name: "PET/CT", role: "Metabolic staging, response and theranostic planning." },
-      { name: "Linear accelerator and planning", role: "Image-guided delivery of curative radiotherapy." },
+      {
+        name: "Linear accelerator and planning",
+        role: "Image-guided delivery of curative radiotherapy.",
+      },
     ],
     clinicalBenefits: [
       "Accurate staging and personalized therapy",
@@ -2158,17 +2825,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Enabler of complex oncologic surgery and radiotherapy",
     ],
     faq: [
-      { q: "Is PET/CT always needed at diagnosis?", a: "No — indications depend on tumor type and stage; guidelines specify where PET/CT changes management." },
-      { q: "How often should follow-up imaging be performed?", a: "According to tumor-specific guidelines — over-imaging exposes patients to radiation and cost without benefit." },
-      { q: "Where does AI fit in oncologic imaging?", a: "In detection (mammography, lung nodules), quantification (tumor volume) and radiotherapy autocontouring." },
+      {
+        q: "Is PET/CT always needed at diagnosis?",
+        a: "No — indications depend on tumor type and stage; guidelines specify where PET/CT changes management.",
+      },
+      {
+        q: "How often should follow-up imaging be performed?",
+        a: "According to tumor-specific guidelines — over-imaging exposes patients to radiation and cost without benefit.",
+      },
+      {
+        q: "Where does AI fit in oncologic imaging?",
+        a: "In detection (mammography, lung nodules), quantification (tumor volume) and radiotherapy autocontouring.",
+      },
     ],
     takeaways: [
       "Oncology is imaging-driven at every step of the patient journey.",
       "A coordinated multi-modality strategy consistently outperforms scattered investment.",
       "Structured reporting and multidisciplinary teams turn imaging into outcomes.",
     ],
-    relatedTech: ["CT, MRI, PET/CT", "Digital mammography", "Linear accelerators", "AI oncology tools"],
-    clinicalTip: "Build response assessment into your PACS templates — inconsistent RECIST measurements erode the value of every follow-up scan.",
+    relatedTech: [
+      "CT, MRI, PET/CT",
+      "Digital mammography",
+      "Linear accelerators",
+      "AI oncology tools",
+    ],
+    clinicalTip:
+      "Build response assessment into your PACS templates — inconsistent RECIST measurements erode the value of every follow-up scan.",
   },
 
   "preventive-healthcare-early-detection": {
@@ -2193,10 +2875,19 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
     ],
     technologies: [
       { name: "Digital mammography and tomosynthesis", role: "Breast cancer screening." },
-      { name: "Low-dose lung CT", role: "Lung cancer screening in current and former heavy smokers." },
-      { name: "Coronary calcium scoring", role: "Cardiovascular risk stratification in asymptomatic adults." },
+      {
+        name: "Low-dose lung CT",
+        role: "Lung cancer screening in current and former heavy smokers.",
+      },
+      {
+        name: "Coronary calcium scoring",
+        role: "Cardiovascular risk stratification in asymptomatic adults.",
+      },
       { name: "DEXA bone densitometry", role: "Osteoporosis and fracture risk." },
-      { name: "Ultrasound (thyroid, liver, vascular)", role: "Selective screening in high-risk populations." },
+      {
+        name: "Ultrasound (thyroid, liver, vascular)",
+        role: "Selective screening in high-risk populations.",
+      },
     ],
     clinicalBenefits: [
       "Earlier, less invasive treatment",
@@ -2220,9 +2911,18 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Alignment with regional public health priorities",
     ],
     faq: [
-      { q: "Is more screening always better?", a: "No — screening must be targeted to the right population and matched with quality assurance and follow-up pathways." },
-      { q: "At what age should screening begin?", a: "Depends on the disease and risk profile — most cancer screening starts between 40 and 55 for average-risk adults." },
-      { q: "How can hospitals build a preventive care program?", a: "Start with risk assessment, add high-yield screening pathways, and invest in patient recall and follow-up." },
+      {
+        q: "Is more screening always better?",
+        a: "No — screening must be targeted to the right population and matched with quality assurance and follow-up pathways.",
+      },
+      {
+        q: "At what age should screening begin?",
+        a: "Depends on the disease and risk profile — most cancer screening starts between 40 and 55 for average-risk adults.",
+      },
+      {
+        q: "How can hospitals build a preventive care program?",
+        a: "Start with risk assessment, add high-yield screening pathways, and invest in patient recall and follow-up.",
+      },
     ],
     takeaways: [
       "Prevention is the highest-leverage investment in modern healthcare.",
@@ -2230,7 +2930,8 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "A well-designed preventive service anchors long-term hospital relationships with patients.",
     ],
     relatedTech: ["Digital mammography", "Low-dose CT", "DEXA", "Ultrasound"],
-    clinicalTip: "Recall rates matter more than test choice — even the best screening test has no impact if abnormal results are not followed up.",
+    clinicalTip:
+      "Recall rates matter more than test choice — even the best screening test has no impact if abnormal results are not followed up.",
   },
 
   "medical-equipment-maintenance-reliability": {
@@ -2254,10 +2955,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Lifecycle and replacement planning",
     ],
     technologies: [
-      { name: "CMMS (computerized maintenance management)", role: "Central record of every device, service action and part." },
-      { name: "Remote monitoring platforms", role: "Real-time alerts for imaging and critical care equipment." },
-      { name: "Calibration and safety testing tools", role: "IEC 62353 electrical safety, patient monitor and imaging QA tools." },
-      { name: "Genuine spare parts and consumables", role: "Ensure long-term reliability and warranty compliance." },
+      {
+        name: "CMMS (computerized maintenance management)",
+        role: "Central record of every device, service action and part.",
+      },
+      {
+        name: "Remote monitoring platforms",
+        role: "Real-time alerts for imaging and critical care equipment.",
+      },
+      {
+        name: "Calibration and safety testing tools",
+        role: "IEC 62353 electrical safety, patient monitor and imaging QA tools.",
+      },
+      {
+        name: "Genuine spare parts and consumables",
+        role: "Ensure long-term reliability and warranty compliance.",
+      },
     ],
     clinicalBenefits: [
       "Higher device uptime and availability",
@@ -2281,17 +2994,32 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Documentation ready for accreditation and audit",
     ],
     faq: [
-      { q: "Who should perform preventive maintenance?", a: "Certified biomedical engineers — in-house, OEM or accredited third-party — following manufacturer procedures with traceable records." },
-      { q: "Is remote monitoring worthwhile?", a: "Yes — for high-value imaging and critical care equipment, it prevents failures and shortens repair cycles." },
-      { q: "How long should medical equipment last?", a: "Typically 7–15 years depending on modality — well-maintained systems consistently reach the upper end." },
+      {
+        q: "Who should perform preventive maintenance?",
+        a: "Certified biomedical engineers — in-house, OEM or accredited third-party — following manufacturer procedures with traceable records.",
+      },
+      {
+        q: "Is remote monitoring worthwhile?",
+        a: "Yes — for high-value imaging and critical care equipment, it prevents failures and shortens repair cycles.",
+      },
+      {
+        q: "How long should medical equipment last?",
+        a: "Typically 7–15 years depending on modality — well-maintained systems consistently reach the upper end.",
+      },
     ],
     takeaways: [
       "Maintenance is patient safety — not a back-office function.",
       "Structured programs pay for themselves in uptime, lifespan and compliance.",
       "Data-driven service is the fastest path to reliability.",
     ],
-    relatedTech: ["Biomedical engineering", "Remote monitoring", "Calibration tools", "CMMS platforms"],
-    clinicalTip: "Track downtime and mean-time-between-failure by device — the data quickly shows which units to service, retrain on or replace.",
+    relatedTech: [
+      "Biomedical engineering",
+      "Remote monitoring",
+      "Calibration tools",
+      "CMMS platforms",
+    ],
+    clinicalTip:
+      "Track downtime and mean-time-between-failure by device — the data quickly shows which units to service, retrain on or replace.",
   },
 
   "choosing-right-imaging-equipment-hospital": {
@@ -2315,10 +3043,22 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Total cost of ownership and service model",
     ],
     technologies: [
-      { name: "New OEM systems", role: "Latest features and full lifecycle from a single manufacturer." },
-      { name: "Certified refurbished systems", role: "Proven platforms at lower capital cost with strong ROI when siting and service are right." },
-      { name: "Modality-specific options (1.5T vs 3T MRI, 64 vs 128 slice CT, etc.)", role: "Right-sized capability for the clinical mission." },
-      { name: "IT and integration (PACS/RIS/AI)", role: "The scanner is worth what its workflow lets it produce." },
+      {
+        name: "New OEM systems",
+        role: "Latest features and full lifecycle from a single manufacturer.",
+      },
+      {
+        name: "Certified refurbished systems",
+        role: "Proven platforms at lower capital cost with strong ROI when siting and service are right.",
+      },
+      {
+        name: "Modality-specific options (1.5T vs 3T MRI, 64 vs 128 slice CT, etc.)",
+        role: "Right-sized capability for the clinical mission.",
+      },
+      {
+        name: "IT and integration (PACS/RIS/AI)",
+        role: "The scanner is worth what its workflow lets it produce.",
+      },
     ],
     clinicalBenefits: [
       "Right-sized capability for actual clinical need",
@@ -2342,18 +3082,33 @@ export const MEDICAL_TOPICS: Record<string, MedicalTopic> = {
       "Foundation for accreditation and growth",
     ],
     faq: [
-      { q: "New or refurbished?", a: "Depends on program maturity, case mix and financial model — well-executed refurbished projects deliver excellent value; complex, high-throughput mission-critical use often justifies new." },
-      { q: "How do we compare vendors fairly?", a: "Match specifications to a written clinical brief, then evaluate total cost of ownership, service, uptime guarantees and training — not just headline price." },
-      { q: "What matters most in the long term?", a: "After-sales support and staff skills — even the best scanner underperforms without them." },
+      {
+        q: "New or refurbished?",
+        a: "Depends on program maturity, case mix and financial model — well-executed refurbished projects deliver excellent value; complex, high-throughput mission-critical use often justifies new.",
+      },
+      {
+        q: "How do we compare vendors fairly?",
+        a: "Match specifications to a written clinical brief, then evaluate total cost of ownership, service, uptime guarantees and training — not just headline price.",
+      },
+      {
+        q: "What matters most in the long term?",
+        a: "After-sales support and staff skills — even the best scanner underperforms without them.",
+      },
     ],
     takeaways: [
       "Imaging equipment decisions must start with clinical mission, not vendor brochures.",
       "Total cost of ownership and after-sales support decide long-term value.",
       "Independent clinical and biomedical review protects the hospital from over- or under-investment.",
     ],
-    relatedTech: ["CT, MRI, ultrasound, X-ray, mammography, PET/CT", "PACS/RIS/AI", "Biomedical engineering and service"],
-    clinicalTip: "Write the clinical brief before meeting any vendor — it prevents the specification from being shaped by whoever presents first.",
-    importantNote: "Include a formal after-sales service and training plan in every purchase evaluation — a scanner without service is a liability, not an asset.",
+    relatedTech: [
+      "CT, MRI, ultrasound, X-ray, mammography, PET/CT",
+      "PACS/RIS/AI",
+      "Biomedical engineering and service",
+    ],
+    clinicalTip:
+      "Write the clinical brief before meeting any vendor — it prevents the specification from being shaped by whoever presents first.",
+    importantNote:
+      "Include a formal after-sales service and training plan in every purchase evaluation — a scanner without service is a liability, not an asset.",
   },
 };
 
@@ -2392,10 +3147,22 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac arrhythmia",
     ],
     references: [
-      { label: "WHO — Cardiovascular Diseases (CVDs) fact sheet", url: "https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)" },
-      { label: "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization", url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038" },
-      { label: "ESC Guidelines for the Management of Acute Coronary Syndromes (2023)", url: "https://academic.oup.com/eurheartj/article/44/38/3720/7243210" },
-      { label: "SCAI — Society for Cardiovascular Angiography & Interventions", url: "https://scai.org/" },
+      {
+        label: "WHO — Cardiovascular Diseases (CVDs) fact sheet",
+        url: "https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)",
+      },
+      {
+        label: "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization",
+        url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038",
+      },
+      {
+        label: "ESC Guidelines for the Management of Acute Coronary Syndromes (2023)",
+        url: "https://academic.oup.com/eurheartj/article/44/38/3720/7243210",
+      },
+      {
+        label: "SCAI — Society for Cardiovascular Angiography & Interventions",
+        url: "https://scai.org/",
+      },
     ],
   },
   MRI: {
@@ -2429,10 +3196,19 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac tissue characterization",
     ],
     references: [
-      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
-      { label: "ESR — European Society of Radiology, MRI safety guidance", url: "https://www.myesr.org/" },
+      {
+        label: "ACR Appropriateness Criteria",
+        url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria",
+      },
+      {
+        label: "ESR — European Society of Radiology, MRI safety guidance",
+        url: "https://www.myesr.org/",
+      },
       { label: "RSNA — MRI safety information", url: "https://www.rsna.org/patient-resources" },
-      { label: "ACR Manual on MR Safety (2024)", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
+      {
+        label: "ACR Manual on MR Safety (2024)",
+        url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety",
+      },
     ],
   },
   "MRI Scanners": {
@@ -2465,9 +3241,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Cardiac disease",
     ],
     references: [
-      { label: "ACR Practice Parameter for Performing and Interpreting MRI", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
-      { label: "IEC 60601-2-33 — MR equipment safety standard", url: "https://webstore.iec.ch/publication/68147" },
-      { label: "ACR Manual on MR Safety", url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety" },
+      {
+        label: "ACR Practice Parameter for Performing and Interpreting MRI",
+        url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards",
+      },
+      {
+        label: "IEC 60601-2-33 — MR equipment safety standard",
+        url: "https://webstore.iec.ch/publication/68147",
+      },
+      {
+        label: "ACR Manual on MR Safety",
+        url: "https://www.acr.org/Clinical-Resources/Radiology-Safety/MR-Safety",
+      },
     ],
   },
   "CT Scanners": {
@@ -2499,10 +3284,22 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Lung and abdominal cancers",
     ],
     references: [
-      { label: "ACR–SPR–STR Practice Parameter for CT", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
-      { label: "ICRP Publication 135 — Diagnostic Reference Levels in Medical Imaging", url: "https://www.icrp.org/publication.asp?id=ICRP%20Publication%20135" },
-      { label: "Image Gently — Pediatric CT dose stewardship", url: "https://www.imagegently.org/" },
-      { label: "RSNA — Computed Tomography (CT) patient information", url: "https://www.radiologyinfo.org/en/info/bodyct" },
+      {
+        label: "ACR–SPR–STR Practice Parameter for CT",
+        url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards",
+      },
+      {
+        label: "ICRP Publication 135 — Diagnostic Reference Levels in Medical Imaging",
+        url: "https://www.icrp.org/publication.asp?id=ICRP%20Publication%20135",
+      },
+      {
+        label: "Image Gently — Pediatric CT dose stewardship",
+        url: "https://www.imagegently.org/",
+      },
+      {
+        label: "RSNA — Computed Tomography (CT) patient information",
+        url: "https://www.radiologyinfo.org/en/info/bodyct",
+      },
     ],
   },
   "PET/CT": {
@@ -2533,9 +3330,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Myocardial viability assessment",
     ],
     references: [
-      { label: "EANM Procedure Guidelines for Tumour Imaging (FDG PET/CT)", url: "https://www.eanm.org/publications/guidelines/" },
-      { label: "SNMMI — PET/CT Practice Guidelines & Appropriate Use Criteria", url: "https://www.snmmi.org/ClinicalPractice/content.aspx?ItemNumber=6414" },
-      { label: "NCCN Clinical Practice Guidelines in Oncology", url: "https://www.nccn.org/guidelines/category_1" },
+      {
+        label: "EANM Procedure Guidelines for Tumour Imaging (FDG PET/CT)",
+        url: "https://www.eanm.org/publications/guidelines/",
+      },
+      {
+        label: "SNMMI — PET/CT Practice Guidelines & Appropriate Use Criteria",
+        url: "https://www.snmmi.org/ClinicalPractice/content.aspx?ItemNumber=6414",
+      },
+      {
+        label: "NCCN Clinical Practice Guidelines in Oncology",
+        url: "https://www.nccn.org/guidelines/category_1",
+      },
     ],
   },
   Ultrasound: {
@@ -2566,9 +3372,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Obstetric assessment",
     ],
     references: [
-      { label: "AIUM Practice Parameters", url: "https://www.aium.org/officialStatements/PracticeParameters" },
-      { label: "WFUMB — Safety of diagnostic ultrasound", url: "https://wfumb.info/safety-of-ultrasound/" },
-      { label: "ACR–AIUM–SPR–SRU Practice Parameter for Ultrasound Examinations", url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards" },
+      {
+        label: "AIUM Practice Parameters",
+        url: "https://www.aium.org/officialStatements/PracticeParameters",
+      },
+      {
+        label: "WFUMB — Safety of diagnostic ultrasound",
+        url: "https://wfumb.info/safety-of-ultrasound/",
+      },
+      {
+        label: "ACR–AIUM–SPR–SRU Practice Parameter for Ultrasound Examinations",
+        url: "https://www.acr.org/Clinical-Resources/Practice-Parameters-and-Technical-Standards",
+      },
     ],
   },
   "Operating Room": {
@@ -2588,9 +3403,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Trauma",
     ],
     references: [
-      { label: "AORN Guidelines for Perioperative Practice", url: "https://www.aorn.org/guidelines" },
-      { label: "WHO Surgical Safety Checklist", url: "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources" },
-      { label: "CDC — Guideline for Prevention of Surgical Site Infection", url: "https://www.cdc.gov/infection-control/hcp/surgical-site-infection/" },
+      {
+        label: "AORN Guidelines for Perioperative Practice",
+        url: "https://www.aorn.org/guidelines",
+      },
+      {
+        label: "WHO Surgical Safety Checklist",
+        url: "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources",
+      },
+      {
+        label: "CDC — Guideline for Prevention of Surgical Site Infection",
+        url: "https://www.cdc.gov/infection-control/hcp/surgical-site-infection/",
+      },
     ],
   },
   "Radiation Therapy": {
@@ -2611,9 +3435,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Brain metastases",
     ],
     references: [
-      { label: "IAEA Human Health Series — Radiotherapy Quality Assurance", url: "https://www.iaea.org/publications/search/type/human-health-series" },
-      { label: "ASTRO — Clinical Practice Guidelines", url: "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines" },
-      { label: "ESTRO — European Society for Radiotherapy and Oncology", url: "https://www.estro.org/Science/Guidelines" },
+      {
+        label: "IAEA Human Health Series — Radiotherapy Quality Assurance",
+        url: "https://www.iaea.org/publications/search/type/human-health-series",
+      },
+      {
+        label: "ASTRO — Clinical Practice Guidelines",
+        url: "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines",
+      },
+      {
+        label: "ESTRO — European Society for Radiotherapy and Oncology",
+        url: "https://www.estro.org/Science/Guidelines",
+      },
     ],
   },
   "Turnkey Projects": {
@@ -2632,9 +3465,18 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Advanced diagnostic imaging",
     ],
     references: [
-      { label: "WHO — Health Facility Planning and Design Guidance", url: "https://www.who.int/publications/i/item/9789240032897" },
-      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
-      { label: "FGI — Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
+      {
+        label: "WHO — Health Facility Planning and Design Guidance",
+        url: "https://www.who.int/publications/i/item/9789240032897",
+      },
+      {
+        label: "IEC 60601 series — Medical electrical equipment",
+        url: "https://webstore.iec.ch/publication/2606",
+      },
+      {
+        label: "FGI — Guidelines for Design and Construction of Hospitals",
+        url: "https://fgiguidelines.org/guidelines/",
+      },
     ],
   },
   "After Sales": {
@@ -2647,12 +3489,17 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "A structured PM plan can extend equipment life by several years.",
       "Uptime SLAs should be measured against tracked, auditable data.",
     ],
-    relatedDiseases: [
-      "Continuity of care across cardiology, oncology and imaging services",
-    ],
+    relatedDiseases: ["Continuity of care across cardiology, oncology and imaging services"],
     references: [
-      { label: "IEC 62353 — Recurrent test and testing after repair of medical electrical equipment", url: "https://webstore.iec.ch/publication/22705" },
-      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
+      {
+        label:
+          "IEC 62353 — Recurrent test and testing after repair of medical electrical equipment",
+        url: "https://webstore.iec.ch/publication/22705",
+      },
+      {
+        label: "ISO 13485 — Medical devices quality management",
+        url: "https://www.iso.org/standard/59752.html",
+      },
       { label: "AAMI — Medical equipment management resources", url: "https://array.aami.org/" },
     ],
   },
@@ -2666,13 +3513,20 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Lifecycle planning avoids reactive, high-cost equipment replacement.",
       "Training bridges design intent and daily clinical practice.",
     ],
-    relatedDiseases: [
-      "All clinical services depend on well-maintained medical technology.",
-    ],
+    relatedDiseases: ["All clinical services depend on well-maintained medical technology."],
     references: [
-      { label: "IEC 60601 series — Medical electrical equipment", url: "https://webstore.iec.ch/publication/2606" },
-      { label: "WHO — Medical devices management publications", url: "https://www.who.int/health-topics/medical-devices" },
-      { label: "ISO 13485 — Medical devices quality management", url: "https://www.iso.org/standard/59752.html" },
+      {
+        label: "IEC 60601 series — Medical electrical equipment",
+        url: "https://webstore.iec.ch/publication/2606",
+      },
+      {
+        label: "WHO — Medical devices management publications",
+        url: "https://www.who.int/health-topics/medical-devices",
+      },
+      {
+        label: "ISO 13485 — Medical devices quality management",
+        url: "https://www.iso.org/standard/59752.html",
+      },
     ],
   },
   "Technical Support": {
@@ -2689,8 +3543,14 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "Any interruption to imaging or interventional services affects patient care.",
     ],
     references: [
-      { label: "AAMI TIR56 — Medical device recall management", url: "https://array.aami.org/doi/10.2345/9781570206481.ch1" },
-      { label: "ISO 55000 — Asset management overview", url: "https://www.iso.org/standard/55088.html" },
+      {
+        label: "AAMI TIR56 — Medical device recall management",
+        url: "https://array.aami.org/doi/10.2345/9781570206481.ch1",
+      },
+      {
+        label: "ISO 55000 — Asset management overview",
+        url: "https://www.iso.org/standard/55088.html",
+      },
       { label: "ECRI — Health Devices resources", url: "https://www.ecri.org/" },
     ],
   },
@@ -2715,14 +3575,12 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
         ["PET/CT", "Oncology staging & response", "Ionizing"],
       ],
     },
-    relatedDiseases: [
-      "Cardiovascular disease",
-      "Cancer",
-      "Trauma",
-      "Neurological disorders",
-    ],
+    relatedDiseases: ["Cardiovascular disease", "Cancer", "Trauma", "Neurological disorders"],
     references: [
-      { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+      {
+        label: "ACR Appropriateness Criteria",
+        url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria",
+      },
       { label: "ESR — European Society of Radiology", url: "https://www.myesr.org/" },
       { label: "RSNA — RadiologyInfo patient resources", url: "https://www.radiologyinfo.org/" },
     ],
@@ -2737,13 +3595,20 @@ const CATEGORY_DEFAULTS: Record<string, CategoryDefaults> = {
       "IT and clinical workflow must be designed together, not sequentially.",
       "Accreditation readiness should be built in from day one.",
     ],
-    relatedDiseases: [
-      "All patient populations benefit from thoughtful facility design.",
-    ],
+    relatedDiseases: ["All patient populations benefit from thoughtful facility design."],
     references: [
-      { label: "WHO — Hospital planning and design publications", url: "https://www.who.int/publications/i/item/9789240032897" },
-      { label: "FGI Guidelines for Design and Construction of Hospitals", url: "https://fgiguidelines.org/guidelines/" },
-      { label: "IHFG — International Health Facility Guidelines", url: "https://healthfacilityguidelines.com/" },
+      {
+        label: "WHO — Hospital planning and design publications",
+        url: "https://www.who.int/publications/i/item/9789240032897",
+      },
+      {
+        label: "FGI Guidelines for Design and Construction of Hospitals",
+        url: "https://fgiguidelines.org/guidelines/",
+      },
+      {
+        label: "IHFG — International Health Facility Guidelines",
+        url: "https://healthfacilityguidelines.com/",
+      },
     ],
   },
 };
@@ -2757,12 +3622,13 @@ const GENERIC_DEFAULTS: CategoryDefaults = {
     "Training and after-sales support are decisive for long-term success.",
     "Evidence-based investment beats trend-driven procurement.",
   ],
-  relatedDiseases: [
-    "Common conditions relevant to the specialty covered in this article.",
-  ],
+  relatedDiseases: ["Common conditions relevant to the specialty covered in this article."],
   references: [
     { label: "WHO — Medical devices", url: "https://www.who.int/health-topics/medical-devices" },
-    { label: "ACR Appropriateness Criteria", url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria" },
+    {
+      label: "ACR Appropriateness Criteria",
+      url: "https://www.acr.org/Clinical-Resources/ACR-Appropriateness-Criteria",
+    },
     { label: "NIH — MedlinePlus health information", url: "https://medlineplus.gov/" },
   ],
 };
@@ -2793,10 +3659,12 @@ const HEADINGS: { id: string; title: string }[] = [
   { id: "conclusion", title: "Conclusion" },
 ];
 
-
-export function makeMedicalContent(
-  a: { title: string; category: string; coverImage: string; slug: string },
-): { content: ContentBlock[]; toc: TocItem[] } {
+export function makeMedicalContent(a: {
+  title: string;
+  category: string;
+  coverImage: string;
+  slug: string;
+}): { content: ContentBlock[]; toc: TocItem[] } {
   const topic = MEDICAL_TOPICS[a.slug];
   const subject = topic?.subject ?? a.category;
 
@@ -2816,29 +3684,32 @@ export function makeMedicalContent(
       "Multidisciplinary review where indicated",
     ],
     technologies: [
-      { name: `Modern ${subject.toLowerCase()} systems`, role: "Deliver high image quality and streamlined workflow." },
-      { name: "AI-assisted reconstruction", role: "Improves image quality and reduces acquisition time." },
+      {
+        name: `Modern ${subject.toLowerCase()} systems`,
+        role: "Deliver high image quality and streamlined workflow.",
+      },
+      {
+        name: "AI-assisted reconstruction",
+        role: "Improves image quality and reduces acquisition time.",
+      },
     ],
     clinicalBenefits: [
       "Reliable diagnostic performance",
       "Streamlined clinical workflow",
       "Compliance with international standards",
     ],
-    patientBenefits: [
-      "Faster diagnosis and treatment",
-      "Improved comfort and safety",
-    ],
-    physicianBenefits: [
-      "High diagnostic confidence",
-      "Efficient reporting workflow",
-    ],
-    hospitalBenefits: [
-      "Expanded clinical capability",
-      "Better return on capital investment",
-    ],
+    patientBenefits: ["Faster diagnosis and treatment", "Improved comfort and safety"],
+    physicianBenefits: ["High diagnostic confidence", "Efficient reporting workflow"],
+    hospitalBenefits: ["Expanded clinical capability", "Better return on capital investment"],
     faq: [
-      { q: `Why is ${subject.toLowerCase()} important?`, a: `${subject} is central to diagnosing and treating many common and serious conditions.` },
-      { q: "How do we plan for a new system?", a: "Start with clinical mission, then define workflow, siting, staffing, service and lifecycle before selecting equipment." },
+      {
+        q: `Why is ${subject.toLowerCase()} important?`,
+        a: `${subject} is central to diagnosing and treating many common and serious conditions.`,
+      },
+      {
+        q: "How do we plan for a new system?",
+        a: "Start with clinical mission, then define workflow, siting, staffing, service and lifecycle before selecting equipment.",
+      },
     ],
     takeaways: [
       `${subject} is an essential part of modern care.`,
@@ -2983,10 +3854,26 @@ export function makeMedicalContent(
   content.push({
     type: "benefits",
     items: [
-      { icon: "reliability", title: "Clinical Confidence", description: "Consistent, evidence-based performance." },
-      { icon: "performance", title: "Better Outcomes", description: "Earlier diagnosis and precise treatment." },
-      { icon: "delivery", title: "Faster Care", description: "Streamlined workflow, shorter waits." },
-      { icon: "cost", title: "Sustainable Value", description: "Improved efficiency and lifecycle economics." },
+      {
+        icon: "reliability",
+        title: "Clinical Confidence",
+        description: "Consistent, evidence-based performance.",
+      },
+      {
+        icon: "performance",
+        title: "Better Outcomes",
+        description: "Earlier diagnosis and precise treatment.",
+      },
+      {
+        icon: "delivery",
+        title: "Faster Care",
+        description: "Streamlined workflow, shorter waits.",
+      },
+      {
+        icon: "cost",
+        title: "Sustainable Value",
+        description: "Improved efficiency and lifecycle economics.",
+      },
     ],
   });
 
@@ -3050,4 +3937,3 @@ export function makeMedicalContent(
 
   return { content, toc };
 }
-

@@ -87,9 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: COMPANY.shortName },
       { name: "twitter:card", content: "summary_large_image" },
       // Google Search Console — verification meta (rendered only when set).
-      ...(GSC_TOKEN
-        ? [{ name: "google-site-verification", content: GSC_TOKEN }]
-        : []),
+      ...(GSC_TOKEN ? [{ name: "google-site-verification", content: GSC_TOKEN }] : []),
     ],
     links: [
       {
@@ -176,7 +174,6 @@ function RootComponent() {
     };
   }, []);
 
-
   return (
     <QueryClientProvider client={queryClient}>
       <MotionConfig reducedMotion="user">
@@ -199,4 +196,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

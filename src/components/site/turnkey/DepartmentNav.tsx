@@ -11,7 +11,9 @@ export function DepartmentNav() {
             Explore Departments
           </p>
           <h2 className="mt-3 font-display text-2xl font-extrabold leading-[1.15] sm:text-[calc(26*var(--desktop-px-unit))]">
-            Choose your<br />clinical environment
+            Choose your
+            <br />
+            clinical environment
           </h2>
         </div>
 
@@ -32,7 +34,9 @@ export function DepartmentNav() {
                   className={`h-6 w-6 transition-colors ${isActive ? "text-primary" : "text-white/80"}`}
                   strokeWidth={1.4}
                 />
-                <span className="text-[calc(12*var(--desktop-px-unit))] font-semibold text-white">{d.name}</span>
+                <span className="text-[calc(12*var(--desktop-px-unit))] font-semibold text-white">
+                  {d.name}
+                </span>
               </button>
             );
           })}

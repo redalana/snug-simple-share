@@ -53,7 +53,6 @@ export function LanguageSelector() {
                 />
               </button>
             ))}
-
           </motion.div>
         )}
       </AnimatePresence>

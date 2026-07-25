@@ -323,19 +323,41 @@ function Hero() {
   );
 }
 
-
-
 /* ================================================================== */
 /*  HOW WE SUPPORT YOU                                                */
 /* ================================================================== */
 
 const STEPS: { icon: LucideIcon; title: string; desc: string }[] = [
-  { icon: MessageCircle, title: "Consultation", desc: "We understand your needs and recommend the right solution." },
-  { icon: ClipboardList, title: "Planning", desc: "We design a tailored plan with the best technology and workflow." },
-  { icon: Wrench, title: "Installation", desc: "Our certified engineers install and configure the system with precision." },
-  { icon: GraduationCap, title: "Training", desc: "We train your team for safe, efficient and confident operation." },
-  { icon: Settings2, title: "Maintenance", desc: "Preventive and corrective maintenance to ensure peak performance." },
-  { icon: Headphones, title: "Lifetime Support", desc: "We stand by you with 24/7 support and long-term partnership." },
+  {
+    icon: MessageCircle,
+    title: "Consultation",
+    desc: "We understand your needs and recommend the right solution.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Planning",
+    desc: "We design a tailored plan with the best technology and workflow.",
+  },
+  {
+    icon: Wrench,
+    title: "Installation",
+    desc: "Our certified engineers install and configure the system with precision.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Training",
+    desc: "We train your team for safe, efficient and confident operation.",
+  },
+  {
+    icon: Settings2,
+    title: "Maintenance",
+    desc: "Preventive and corrective maintenance to ensure peak performance.",
+  },
+  {
+    icon: Headphones,
+    title: "Lifetime Support",
+    desc: "We stand by you with 24/7 support and long-term partnership.",
+  },
 ];
 
 function HowWeSupport() {
@@ -475,11 +497,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
   return (
     <article className="grid grid-cols-[42%_58%] overflow-hidden rounded-2xl border border-border bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
       <div className="relative">
-        <img
-          src={item.img}
-          alt={item.title}
-          className="h-full w-full object-cover"
-        />
+        <img src={item.img} alt={item.title} className="h-full w-full object-cover" />
       </div>
       <div className="flex flex-col p-6">
         <div className="flex items-start gap-3">
@@ -495,7 +513,10 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
         </p>
         <ul className="mt-3 space-y-1.5">
           {item.bullets.map((b) => (
-            <li key={b} className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground/85">
+            <li
+              key={b}
+              className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground/85"
+            >
               <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
@@ -539,12 +560,72 @@ function CoreServices() {
 /* ================================================================== */
 
 const EQUIPMENT: { name: string; img: string; services: string[] }[] = [
-  { name: "MRI Systems", img: mriImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
-  { name: "CT Scanners", img: ctImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
-  { name: "Cath Lab Systems", img: cathImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
-  { name: "PET/CT Systems", img: petImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
-  { name: "X-Ray & Fluoroscopy", img: xrayImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
-  { name: "Ultrasound Systems", img: usImg, services: ["Installation", "Calibration", "Maintenance", "Software Updates", "Clinical Training"] },
+  {
+    name: "MRI Systems",
+    img: mriImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
+  {
+    name: "CT Scanners",
+    img: ctImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
+  {
+    name: "Cath Lab Systems",
+    img: cathImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
+  {
+    name: "PET/CT Systems",
+    img: petImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
+  {
+    name: "X-Ray & Fluoroscopy",
+    img: xrayImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
+  {
+    name: "Ultrasound Systems",
+    img: usImg,
+    services: [
+      "Installation",
+      "Calibration",
+      "Maintenance",
+      "Software Updates",
+      "Clinical Training",
+    ],
+  },
 ];
 
 function Equipment() {
@@ -568,7 +649,9 @@ function Equipment() {
                 <img src={eq.img} alt={eq.name} className="h-full w-full object-cover" />
               </div>
               <div className="p-4">
-                <h3 className="font-display text-[calc(14*var(--desktop-px-unit))] font-bold text-foreground">{eq.name}</h3>
+                <h3 className="font-display text-[calc(14*var(--desktop-px-unit))] font-bold text-foreground">
+                  {eq.name}
+                </h3>
                 <ul className="mt-3 space-y-1 text-[calc(12*var(--desktop-px-unit))] text-muted-foreground">
                   {eq.services.map((s) => (
                     <li key={s} className="flex items-center gap-1.5">
@@ -597,10 +680,26 @@ function Equipment() {
 /* ================================================================== */
 
 const WHY: { icon: LucideIcon; title: string; desc: string }[] = [
-  { icon: ShieldCheck, title: "Certified Engineers", desc: "Our biomedical engineers are highly trained and OEM certified with years of field experience." },
-  { icon: BadgeCheck, title: "OEM Standards", desc: "We follow manufacturer guidelines and use approved procedures and tools." },
-  { icon: Radar, title: "Fast Response", desc: "Quick turnaround time with 24/7 support to minimize downtime." },
-  { icon: MapPin, title: "Regional Coverage", desc: "Strong presence across Africa & the Middle East with local support teams." },
+  {
+    icon: ShieldCheck,
+    title: "Certified Engineers",
+    desc: "Our biomedical engineers are highly trained and OEM certified with years of field experience.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "OEM Standards",
+    desc: "We follow manufacturer guidelines and use approved procedures and tools.",
+  },
+  {
+    icon: Radar,
+    title: "Fast Response",
+    desc: "Quick turnaround time with 24/7 support to minimize downtime.",
+  },
+  {
+    icon: MapPin,
+    title: "Regional Coverage",
+    desc: "Strong presence across Africa & the Middle East with local support teams.",
+  },
 ];
 
 function WhyChoose() {
@@ -619,8 +718,12 @@ function WhyChoose() {
                 <div className="grid h-10 w-10 place-items-center rounded-full border border-primary/40 bg-primary/10">
                   <Icon className="h-5 w-5 text-primary" strokeWidth={1.7} />
                 </div>
-                <div className="mt-4 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-white">{title}</div>
-                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/65">{desc}</p>
+                <div className="mt-4 font-display text-[calc(15*var(--desktop-px-unit))] font-bold text-white">
+                  {title}
+                </div>
+                <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/65">
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
@@ -688,9 +791,7 @@ function Coverage() {
       <div className="mx-auto grid max-w-[100rem] gap-8 px-6 lg:grid-cols-2 lg:px-10">
         {/* LEFT — coverage */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">
-          <h2 className="font-display text-2xl font-extrabold text-foreground">
-            Our Coverage
-          </h2>
+          <h2 className="font-display text-2xl font-extrabold text-foreground">Our Coverage</h2>
           <p className="mt-2 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] text-muted-foreground">
             Supporting healthcare across Africa &amp; the Middle East.
           </p>
@@ -699,15 +800,21 @@ function Coverage() {
             <div className="grid grid-cols-3 gap-6">
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">10+</div>
-                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Countries</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
+                  Countries
+                </div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">60+</div>
-                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Cities</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
+                  Cities
+                </div>
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-foreground">24/7</div>
-                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">Support</div>
+                <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
+                  Support
+                </div>
               </div>
             </div>
           </div>
@@ -728,7 +835,9 @@ function Coverage() {
 
         {/* RIGHT — form */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">
-          <h2 className="font-display text-2xl font-extrabold text-foreground">Request a Service</h2>
+          <h2 className="font-display text-2xl font-extrabold text-foreground">
+            Request a Service
+          </h2>
           <p className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] text-muted-foreground">
             Tell us about your needs and our team will get back to you.
           </p>
@@ -759,22 +868,43 @@ function Coverage() {
               </Field>
               <Field label="Country" required>
                 <select required className={inputCls} defaultValue="">
-                  <option value="" disabled>Select Country</option>
-                  {["Jordan","Saudi Arabia","UAE","Egypt","Iraq","Libya","Sudan","Kenya","Ethiopia","Nigeria"].map(c => (
+                  <option value="" disabled>
+                    Select Country
+                  </option>
+                  {[
+                    "Jordan",
+                    "Saudi Arabia",
+                    "UAE",
+                    "Egypt",
+                    "Iraq",
+                    "Libya",
+                    "Sudan",
+                    "Kenya",
+                    "Ethiopia",
+                    "Nigeria",
+                  ].map((c) => (
                     <option key={c}>{c}</option>
                   ))}
                 </select>
               </Field>
               <Field label="Service Type" required>
                 <select required className={inputCls} defaultValue="">
-                  <option value="" disabled>Select Service</option>
-                  {SERVICE_TYPES.map(s => <option key={s}>{s}</option>)}
+                  <option value="" disabled>
+                    Select Service
+                  </option>
+                  {SERVICE_TYPES.map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
                 </select>
               </Field>
               <Field label="Equipment Type">
                 <select className={inputCls} defaultValue="">
-                  <option value="" disabled>Select Equipment</option>
-                  {EQUIPMENT_TYPES.map(s => <option key={s}>{s}</option>)}
+                  <option value="" disabled>
+                    Select Equipment
+                  </option>
+                  {EQUIPMENT_TYPES.map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
                 </select>
               </Field>
               <Field label="Equipment Serial Number">
@@ -784,7 +914,12 @@ function Coverage() {
                 <input type="date" className={inputCls} />
               </Field>
               <Field label="Problem Description" required>
-                <textarea required rows={1} placeholder="Please describe the issue or service you need..." className={cn(inputCls, "resize-none")} />
+                <textarea
+                  required
+                  rows={1}
+                  placeholder="Please describe the issue or service you need..."
+                  className={cn(inputCls, "resize-none")}
+                />
               </Field>
 
               <div className="sm:col-span-2">
@@ -830,7 +965,15 @@ function PhoneFieldWrapper() {
   return <PhoneField value={value} onChange={setValue} />;
 }
 
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-[calc(12*var(--desktop-px-unit))] font-semibold text-foreground/80">
@@ -849,7 +992,11 @@ function EmergencyCTA() {
   return (
     <section className="relative isolate overflow-hidden bg-[#0d0f12] text-white">
       <div className="absolute inset-y-0 right-0 w-1/2">
-        <img src={ctaImg} alt="AbuFarha service engineer" className="h-full w-full object-cover opacity-70" />
+        <img
+          src={ctaImg}
+          alt="AbuFarha service engineer"
+          className="h-full w-full object-cover opacity-70"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f12] via-[#0d0f12]/70 to-transparent" />
       </div>
       <div className="relative mx-auto grid max-w-[100rem] gap-8 px-6 py-14 lg:grid-cols-[1.1fr_1fr] lg:px-10">
@@ -863,25 +1010,46 @@ function EmergencyCTA() {
             Our engineers are ready to help you anytime, anywhere.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <a href="tel:+96264026063" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
+            <a
+              href="tel:+96264026063"
+              className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
+            >
               <Phone className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Call Us</div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">+20 123 456 7890</div>
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+                  Call Us
+                </div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                  +20 123 456 7890
+                </div>
               </div>
             </a>
-            <a href="https://wa.me/962799741318" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
+            <a
+              href="https://wa.me/962799741318"
+              className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
+            >
               <MessageCircle className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">WhatsApp</div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">Chat with our team</div>
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+                  WhatsApp
+                </div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                  Chat with our team
+                </div>
               </div>
             </a>
-            <a href="mailto:support@abufarhamedical.com" className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40">
+            <a
+              href="mailto:support@abufarhamedical.com"
+              className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
+            >
               <Mail className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">Email Us</div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">support@abufarhamedical.com</div>
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+                  Email Us
+                </div>
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                  support@abufarhamedical.com
+                </div>
               </div>
             </a>
           </div>

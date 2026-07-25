@@ -24,7 +24,13 @@ function Platform() {
     <group position={[0, -0.9, 0]}>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.55, 1.9, 96]} />
-        <meshStandardMaterial color="#e11d2e" emissive="#e11d2e" emissiveIntensity={0.4} transparent opacity={0.35} />
+        <meshStandardMaterial
+          color="#e11d2e"
+          emissive="#e11d2e"
+          emissiveIntensity={0.4}
+          transparent
+          opacity={0.35}
+        />
       </mesh>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.001, 0]}>
         <circleGeometry args={[1.55, 96]} />
@@ -83,7 +89,12 @@ function DeptCard({
   return (
     <animated.group ref={ref} position-x={x} position-z={z} position-y={y} scale={scale}>
       <Float speed={1.4} rotationIntensity={0.15} floatIntensity={0.35}>
-        <group onClick={(e) => { e.stopPropagation(); onClick(); }}>
+        <group
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+        >
           <RoundedBox args={[1.35, 0.9, 0.08]} radius={0.06} smoothness={6} castShadow>
             <meshStandardMaterial color="#ffffff" roughness={0.4} metalness={0.1} />
           </RoundedBox>
@@ -96,7 +107,12 @@ function DeptCard({
           {active && (
             <mesh position={[0, 0, -0.05]}>
               <ringGeometry args={[0.82, 0.92, 64]} />
-              <meshBasicMaterial color="#e11d2e" transparent opacity={0.55} side={THREE.DoubleSide} />
+              <meshBasicMaterial
+                color="#e11d2e"
+                transparent
+                opacity={0.55}
+                side={THREE.DoubleSide}
+              />
             </mesh>
           )}
         </group>
@@ -122,14 +138,16 @@ function Connectors({ activeIndex, count }: { activeIndex: number; count: number
         return (
           <primitive
             key={i}
-            object={new THREE.Line(
-              geo,
-              new THREE.LineBasicMaterial({
-                color: active ? 0xe11d2e : 0x9aa1ab,
-                transparent: true,
-                opacity: active ? 0.9 : 0.35,
-              }),
-            )}
+            object={
+              new THREE.Line(
+                geo,
+                new THREE.LineBasicMaterial({
+                  color: active ? 0xe11d2e : 0x9aa1ab,
+                  transparent: true,
+                  opacity: active ? 0.9 : 0.35,
+                }),
+              )
+            }
           />
         );
       })}
@@ -178,12 +196,11 @@ function Rig({ activeIndex, count }: { activeIndex: number; count: number }) {
   );
 }
 
-export function OrbitHub3D({
-  activeId,
-}: {
-  activeId: string;
-}) {
-  const activeIndex = Math.max(0, DEPTS.findIndex((d) => d.id === activeId));
+export function OrbitHub3D({ activeId }: { activeId: string }) {
+  const activeIndex = Math.max(
+    0,
+    DEPTS.findIndex((d) => d.id === activeId),
+  );
   return (
     <Canvas
       shadows

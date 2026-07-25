@@ -13,12 +13,12 @@ export function FinalCTA() {
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
               <h2 className="font-display text-[calc(32*var(--desktop-px-unit))] font-extrabold leading-[1.05] sm:text-[calc(42*var(--desktop-px-unit))]">
-                Ready to Build Your<br />
+                Ready to Build Your
+                <br />
                 <span className="text-primary">Next Department?</span>
               </h2>
               <p className="mt-4 max-w-md text-[calc(14*var(--desktop-px-unit))] text-white/70">
-                Let's discuss your project and create a solution that exceeds
-                your expectations.
+                Let's discuss your project and create a solution that exceeds your expectations.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
@@ -41,7 +41,10 @@ export function FinalCTA() {
                 "Global Supply Chain",
                 "End-to-End Project Management",
               ].map((f) => (
-                <li key={f} className="flex items-center gap-3 text-[calc(14*var(--desktop-px-unit))] font-semibold">
+                <li
+                  key={f}
+                  className="flex items-center gap-3 text-[calc(14*var(--desktop-px-unit))] font-semibold"
+                >
                   <span className="grid h-7 w-7 place-items-center rounded-full border border-white/25 text-white">
                     <Check className="h-3.5 w-3.5" />
                   </span>

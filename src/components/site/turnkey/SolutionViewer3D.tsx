@@ -81,7 +81,13 @@ function CeilingMonitors() {
       {[-0.55, 0, 0.55].map((x) => (
         <mesh key={x} position={[x, 0, 0]} castShadow>
           <boxGeometry args={[0.5, 0.3, 0.05]} />
-          <meshStandardMaterial color="#0a0b0d" emissive="#1a2a55" emissiveIntensity={0.55} metalness={0.5} roughness={0.4} />
+          <meshStandardMaterial
+            color="#0a0b0d"
+            emissive="#1a2a55"
+            emissiveIntensity={0.55}
+            metalness={0.5}
+            roughness={0.4}
+          />
         </mesh>
       ))}
     </group>
@@ -127,7 +133,13 @@ function RadiationShield() {
       </mesh>
       <mesh castShadow>
         <boxGeometry args={[0.7, 0.5, 0.04]} />
-        <meshStandardMaterial color="#eaf2ff" transparent opacity={0.45} metalness={0.2} roughness={0.05} />
+        <meshStandardMaterial
+          color="#eaf2ff"
+          transparent
+          opacity={0.45}
+          metalness={0.2}
+          roughness={0.05}
+        />
       </mesh>
     </group>
   );
@@ -147,7 +159,13 @@ function Room() {
       {/* platform */}
       <mesh position={[0, 0.02, 0.2]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2.6, 2.9, 96]} />
-        <meshStandardMaterial color="#e11d2e" emissive="#e11d2e" emissiveIntensity={0.5} transparent opacity={0.3} />
+        <meshStandardMaterial
+          color="#e11d2e"
+          emissive="#e11d2e"
+          emissiveIntensity={0.5}
+          transparent
+          opacity={0.3}
+        />
       </mesh>
     </group>
   );
@@ -188,7 +206,12 @@ function HotspotMarker({
       {/* pulse ring */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.14, 0.18, 32]} />
-        <meshBasicMaterial color="#e11d2e" transparent opacity={active ? 0.9 : 0.4} side={THREE.DoubleSide} />
+        <meshBasicMaterial
+          color="#e11d2e"
+          transparent
+          opacity={active ? 0.9 : 0.4}
+          side={THREE.DoubleSide}
+        />
       </mesh>
       {active && (
         <Html distanceFactor={6} position={[0, 0.28, 0]} center>
@@ -254,14 +277,17 @@ export function SolutionViewer3D({
             <RadiationShield />
           </group>
         </Float>
-        <Sparkles count={40} size={1.5} scale={[8, 3, 4]} position={[0, 2, 0]} speed={0.2} opacity={0.35} color="#e11d2e" />
+        <Sparkles
+          count={40}
+          size={1.5}
+          scale={[8, 3, 4]}
+          position={[0, 2, 0]}
+          speed={0.2}
+          opacity={0.35}
+          color="#e11d2e"
+        />
         {CATH_HOTSPOTS_3D.map((h) => (
-          <HotspotMarker
-            key={h.n}
-            h={h}
-            active={h.n === activeN}
-            onClick={() => onSelect(h.n)}
-          />
+          <HotspotMarker key={h.n} h={h} active={h.n === activeN} onClick={() => onSelect(h.n)} />
         ))}
         <Rig activeN={activeN} />
         <Environment preset="studio" />

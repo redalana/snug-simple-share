@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Radio,
-  Signal,
-  LineChart,
-  Cog,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, Radio, Signal, LineChart, Cog, Zap } from "lucide-react";
 import { LIVE_STATUS, TONE_MAP, remoteImg } from "./data";
 
 function FeatureCard({
@@ -34,9 +27,7 @@ function FeatureCard({
       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
         <Icon className="h-5 w-5" strokeWidth={1.75} />
       </div>
-      <div className="mt-5 font-display text-[1.1rem] font-bold text-foreground">
-        {title}
-      </div>
+      <div className="mt-5 font-display text-[1.1rem] font-bold text-foreground">{title}</div>
       <div className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
         {desc}
       </div>
@@ -114,9 +105,8 @@ export function RemoteDiagnostics() {
             Always Connected.
           </h2>
           <p className="mt-6 max-w-lg text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-            Our biomedical engineers monitor installed systems around the clock
-            — detecting issues early and resolving them remotely before
-            downtime reaches your hospital.
+            Our biomedical engineers monitor installed systems around the clock — detecting issues
+            early and resolving them remotely before downtime reaches your hospital.
           </p>
 
           {/* Asymmetric feature grid */}
@@ -193,9 +183,7 @@ export function RemoteDiagnostics() {
                           <span
                             className={`absolute inline-flex h-full w-full animate-ping rounded-full ${c.dot} opacity-60`}
                           />
-                          <span
-                            className={`relative inline-flex h-2 w-2 rounded-full ${c.dot}`}
-                          />
+                          <span className={`relative inline-flex h-2 w-2 rounded-full ${c.dot}`} />
                         </span>
                         {status}
                       </span>

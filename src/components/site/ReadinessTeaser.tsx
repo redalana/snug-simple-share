@@ -15,10 +15,8 @@ export function ReadinessTeaser() {
           backgroundImage:
             "linear-gradient(to right, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-ink) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(48*var(--desktop-px-unit)) calc(48*var(--desktop-px-unit))",
-          maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
+          maskImage: "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
         }}
       />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
@@ -33,15 +31,17 @@ export function ReadinessTeaser() {
             <ClipboardCheck className="h-6 w-6" strokeWidth={1.8} />
           </span>
           <div className="mt-6 flex justify-center">
-            <Eyebrow index="06" align="center">Hospital Readiness</Eyebrow>
+            <Eyebrow index="06" align="center">
+              Hospital Readiness
+            </Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
             Hospital Readiness Assessment
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[calc(16*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-            Most installation delays come from the building, not the equipment.
-            Check your facility, clinical and operational readiness before you
-            invest — so your new technology goes live on schedule.
+            Most installation delays come from the building, not the equipment. Check your facility,
+            clinical and operational readiness before you invest — so your new technology goes live
+            on schedule.
           </p>
           <Link
             to="/hospital-readiness-assessment"

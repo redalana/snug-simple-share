@@ -70,10 +70,25 @@ const SOCIALS: SocialItem[] = [
 
 const CONTACTS = [
   { Icon: Phone, label: "Landline", value: "+962 6 4026063", href: "tel:+96264026063" },
-  { Icon: Smartphone, label: "WhatsApp & Mobile", value: "+962 79 9741318", href: "tel:+962799741318" },
+  {
+    Icon: Smartphone,
+    label: "WhatsApp & Mobile",
+    value: "+962 79 9741318",
+    href: "tel:+962799741318",
+  },
   { Icon: MapPin, label: "Location", value: "Amman, Jordan" },
-  { Icon: Mail, label: "Email", value: "info@abufarhamedical.com", href: "mailto:info@abufarhamedical.com" },
-  { Icon: Globe, label: "Website", value: "www.abufarhamedical.com", href: "https://www.abufarhamedical.com" },
+  {
+    Icon: Mail,
+    label: "Email",
+    value: "info@abufarhamedical.com",
+    href: "mailto:info@abufarhamedical.com",
+  },
+  {
+    Icon: Globe,
+    label: "Website",
+    value: "www.abufarhamedical.com",
+    href: "https://www.abufarhamedical.com",
+  },
 ];
 
 export function Footer() {
@@ -94,8 +109,6 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-[#111315] text-white/70">
-
-
       {/* LAYER 1 — deep charcoal gradient + soft radial lighting */}
       <div
         aria-hidden="true"
@@ -150,7 +163,6 @@ export function Footer() {
         }}
       />
 
-
       {/* LAYER 4 — film grain + vignette */}
       <div
         aria-hidden="true"
@@ -178,9 +190,9 @@ export function Footer() {
             <div className="min-w-0">
               <Logo light />
               <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
-                Delivering advanced medical technologies, turnkey project delivery,
-                biomedical engineering and long-term support for healthcare providers
-                across Africa, the Middle East and emerging healthcare markets.
+                Delivering advanced medical technologies, turnkey project delivery, biomedical
+                engineering and long-term support for healthcare providers across Africa, the Middle
+                East and emerging healthcare markets.
               </p>
               <div className="mt-5 flex items-center gap-6">
                 {SOCIALS.map(({ label, Icon, color, href }) => (
@@ -201,9 +213,9 @@ export function Footer() {
 
             {COLS.map((col) => (
               <div key={col.title} className="min-w-0">
-                <h4 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
+                <h3 className="font-display text-[calc(12*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/85">
                   {col.title}
-                </h4>
+                </h3>
                 <ul className="mt-4 space-y-2.5 text-[calc(13.5*var(--desktop-px-unit))]">
                   {col.links.map((l) => (
                     <li key={l.label}>
@@ -221,23 +233,24 @@ export function Footer() {
           </div>
         </MobileScaledDesktopBlock>
 
-
-
-
         {/* Premium divider + contact bar */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
         <div className="py-4 lg:py-6">
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
-
             {CONTACTS.map(({ Icon, label, value, href }) => {
               const inner = (
                 <div className="flex items-start gap-3">
-                  <Icon className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45" strokeWidth={1.5} />
+                  <Icon
+                    className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45"
+                    strokeWidth={1.5}
+                  />
                   <div className="min-w-0">
                     <div className="text-[calc(10.5*var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
                       {label}
                     </div>
-                    <div className="mt-1 truncate text-[calc(13.5*var(--desktop-px-unit))] text-white/75">{value}</div>
+                    <div className="mt-1 truncate text-[calc(13.5*var(--desktop-px-unit))] text-white/75">
+                      {value}
+                    </div>
                   </div>
                 </div>
               );
@@ -258,7 +271,10 @@ export function Footer() {
           <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
             © 2026 AbuFarha Medical Equipment. All Rights Reserved.
           </div>
-          <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[calc(12.5*var(--desktop-px-unit))]">
+          <nav
+            aria-label="Legal"
+            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[calc(12.5*var(--desktop-px-unit))]"
+          >
             {[
               { label: "Privacy Policy", to: "/privacy-policy" },
               { label: "Terms & Conditions", to: "/terms" },
@@ -344,4 +360,3 @@ function MobileScaledDesktopBlock({
     </div>
   );
 }
-

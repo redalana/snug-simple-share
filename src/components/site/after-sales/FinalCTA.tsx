@@ -32,8 +32,8 @@ export function FinalCTA() {
             <span className="text-white">.</span>
           </h2>
           <p className="mt-7 max-w-xl text-lg leading-[1.7] text-white/80">
-            A certified engineer is on call around the clock — from remote
-            diagnostics to on-site emergency repair, wherever your hospital is.
+            A certified engineer is on call around the clock — from remote diagnostics to on-site
+            emergency repair, wherever your hospital is.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[calc(13*var(--desktop-px-unit))] font-medium text-white/70">
             <div className="flex items-center gap-2">
@@ -46,7 +46,6 @@ export function FinalCTA() {
               Genuine OEM spare parts
             </div>
           </div>
-
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-[calc(280*var(--desktop-px-unit))]">
           <a
@@ -57,9 +56,7 @@ export function FinalCTA() {
               <div className="text-[calc(10.5*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/80">
                 Emergency Line
               </div>
-              <div className="mt-0.5 font-display text-lg font-extrabold">
-                +962 6 402 6063
-              </div>
+              <div className="mt-0.5 font-display text-lg font-extrabold">+962 6 402 6063</div>
             </div>
             <Phone className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-12" />
           </a>

@@ -18,12 +18,42 @@ type Step = {
 };
 
 const STEPS: Step[] = [
-  { n: "01", title: "Consultation", desc: "We meet your clinical and biomedical teams to align on goals.", icon: MessagesSquare },
-  { n: "02", title: "Planning", desc: "Workflows, room conditions and technical needs are documented.", icon: ClipboardCheck },
-  { n: "03", title: "Procurement", desc: "The right systems are specified and sourced through OEM channels.", icon: PackageSearch },
-  { n: "04", title: "Installation", desc: "Engineers install, calibrate and acceptance-test before handover.", icon: Wrench },
-  { n: "05", title: "Training", desc: "Clinical and technical staff are trained on safe daily use.", icon: GraduationCap },
-  { n: "06", title: "After Sales", desc: "Servicing, spare parts and remote support keep systems running.", icon: LifeBuoy },
+  {
+    n: "01",
+    title: "Consultation",
+    desc: "We meet your clinical and biomedical teams to align on goals.",
+    icon: MessagesSquare,
+  },
+  {
+    n: "02",
+    title: "Planning",
+    desc: "Workflows, room conditions and technical needs are documented.",
+    icon: ClipboardCheck,
+  },
+  {
+    n: "03",
+    title: "Procurement",
+    desc: "The right systems are specified and sourced through OEM channels.",
+    icon: PackageSearch,
+  },
+  {
+    n: "04",
+    title: "Installation",
+    desc: "Engineers install, calibrate and acceptance-test before handover.",
+    icon: Wrench,
+  },
+  {
+    n: "05",
+    title: "Training",
+    desc: "Clinical and technical staff are trained on safe daily use.",
+    icon: GraduationCap,
+  },
+  {
+    n: "06",
+    title: "After Sales",
+    desc: "Servicing, spare parts and remote support keep systems running.",
+    icon: LifeBuoy,
+  },
 ];
 
 export function Process() {
@@ -37,8 +67,7 @@ export function Process() {
             </Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]">
-            A clear path from first call to{" "}
-            <span className="text-primary">ongoing support</span>.
+            A clear path from first call to <span className="text-primary">ongoing support</span>.
           </h2>
         </div>
 

@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  type PanInfo,
-} from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
@@ -25,7 +20,6 @@ import {
 import heroCath from "@/assets/hero-cathlab.jpg";
 import turnkeyInstall from "@/assets/turnkey-hero.jpg";
 import engineerService from "@/assets/aftersales-engineering.jpg";
-
 
 type TrustItem = { icon: LucideIcon; label: string };
 
@@ -57,7 +51,10 @@ const SLIDES: Slide[] = [
       "AbuFarha supplies certified imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — from the world's leading OEMs to hospitals across Africa and the Middle East.",
     image: heroCath,
     imageAlt: "Modern cath lab suite with advanced interventional imaging system",
-    card: { title: "Certified Medical Systems", body: "Imaging and interventional technology, delivered." },
+    card: {
+      title: "Certified Medical Systems",
+      body: "Imaging and interventional technology, delivered.",
+    },
     trust: [
       { icon: BadgeCheck, label: "Certified Systems" },
       { icon: Factory, label: "OEM Brands" },
@@ -114,7 +111,6 @@ const SLIDES: Slide[] = [
     secondary: { label: "Contact Support", href: "/contact" },
   },
 ];
-
 
 const AUTOPLAY_MS = 7500;
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -252,7 +248,10 @@ export function Hero() {
           dragElastic={0.15}
           onDragEnd={onDragEnd}
           className="pl-0 lg:max-w-[46%] lg:pl-12"
-          style={{ minHeight: "clamp(calc(560*var(--desktop-px-unit)), 62vh, calc(680*var(--desktop-px-unit)))" }}
+          style={{
+            minHeight:
+              "clamp(calc(560*var(--desktop-px-unit)), 62vh, calc(680*var(--desktop-px-unit)))",
+          }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -340,7 +339,6 @@ export function Hero() {
                   );
                 })}
               </div>
-
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -357,7 +355,10 @@ export function Hero() {
               initial={{ opacity: 0, scale: 1.06 }}
               animate={{ opacity: 1, scale: 1.1 }}
               exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 0.9, ease: EASE }, scale: { duration: 8, ease: "linear" } }}
+              transition={{
+                opacity: { duration: 0.9, ease: EASE },
+                scale: { duration: 8, ease: "linear" },
+              }}
               className="absolute inset-0 h-full w-full object-cover"
             />
           </AnimatePresence>

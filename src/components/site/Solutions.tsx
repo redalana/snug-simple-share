@@ -28,7 +28,6 @@ import eswl from "@/assets/sol-eswl.jpg";
 const AUTOPLAY_MS = 3000;
 const RESUME_DELAY_MS = 2000;
 
-
 type Meta = { label: string; value: string };
 
 type Category = {
@@ -265,8 +264,6 @@ export function Solutions() {
     setCycleKey((k) => k + 1);
   }, []);
 
-
-
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* subtle technical grid */}
@@ -278,7 +275,8 @@ export function Solutions() {
             "linear-gradient(to right, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit))), linear-gradient(to bottom, var(--color-border) calc(1*var(--desktop-px-unit)), transparent calc(1*var(--desktop-px-unit)))",
           backgroundSize: "calc(72*var(--desktop-px-unit)) calc(72*var(--desktop-px-unit))",
           maskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 40%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 40%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 90% 70% at 50% 40%, black 40%, transparent 100%)",
         }}
       />
 
@@ -346,7 +344,9 @@ export function Solutions() {
                       className="h-full w-full object-cover object-[center_38%]"
                     />
                   </span>
-                  <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>{c.nav}</span>
+                  <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>
+                    {c.nav}
+                  </span>
 
                   {/* hover underline hint */}
                   <span
@@ -373,12 +373,10 @@ export function Solutions() {
                     </motion.span>
                   )}
                 </button>
-
               );
             })}
           </div>
         </div>
-
 
         {/* Explorer */}
         <div
@@ -388,7 +386,6 @@ export function Solutions() {
         >
           {/* Content */}
           <div className="order-2 flex flex-col lg:order-1">
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -401,7 +398,6 @@ export function Solutions() {
                 }}
                 className="flex h-full flex-col will-change-[opacity,transform]"
               >
-
                 <span className="text-[calc(10*var(--desktop-px-unit))] font-medium uppercase tracking-[0.28em] text-primary">
                   Featured Category
                 </span>
@@ -419,22 +415,31 @@ export function Solutions() {
                       key={cap}
                       initial={{ opacity: 0, x: -8 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.15 + i * 0.09, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.15 + i * 0.09,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className="flex items-center gap-3.5 text-[calc(15*var(--desktop-px-unit))] font-medium text-ink"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
-                        <Check className="h-[calc(15*var(--desktop-px-unit))] w-[calc(15*var(--desktop-px-unit))]" strokeWidth={2.75} />
+                        <Check
+                          className="h-[calc(15*var(--desktop-px-unit))] w-[calc(15*var(--desktop-px-unit))]"
+                          strokeWidth={2.75}
+                        />
                       </span>
                       <span className="leading-snug">{cap}</span>
                     </motion.li>
                   ))}
                 </ul>
 
-
                 {/* Engineered information panel */}
                 <div className="mt-9 grid overflow-hidden rounded-2xl border border-border/80 bg-secondary/30 sm:grid-cols-3 sm:divide-x sm:divide-border/70">
                   {active.meta.map((m) => (
-                    <div key={m.label} className="px-5 py-5 not-last:border-b not-last:border-border/70 sm:border-b-0">
+                    <div
+                      key={m.label}
+                      className="px-5 py-5 not-last:border-b not-last:border-border/70 sm:border-b-0"
+                    >
                       <div className="text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
                         {m.label}
                       </div>
@@ -496,8 +501,6 @@ export function Solutions() {
               <div className="pointer-events-none absolute inset-0 rounded-[1.25rem] ring-1 ring-inset ring-white/10" />
             </div>
           </div>
-
-
         </div>
       </div>
     </section>
