@@ -20,7 +20,9 @@ export function Eyebrow({
   const text = tone === "light" ? "text-white/70" : "text-primary";
   const line = tone === "light" ? "bg-white/40" : "bg-primary/50";
   const dot = tone === "light" ? "bg-white" : "bg-primary";
-  const num = tone === "light" ? "text-white/40" : "text-primary/45";
+  // Opacity kept as high as the design allows while clearing WCAG AA (4.5:1)
+  // for this 11px bold numeral: /85 -> 4.67:1 on white, /60 -> 4.9:1 on dark.
+  const num = tone === "light" ? "text-white/60" : "text-primary/85";
   const label = `text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] ${text}`;
   const chapter = index ? (
     <span
