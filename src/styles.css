@@ -163,22 +163,23 @@
 }
 
 /*
- * Desktop scale system.
+ * Desktop scale system — NATIVE.
  *
- * Rem-based Tailwind tokens and formerly fixed pixel values use parallel
- * desktop scale tokens. Both resolve to 75% at desktop widths while retaining
- * their original values on mobile and tablet. This is real computed sizing,
- * not zoom or transform scaling.
+ * Desktop renders at native browser scale: root font-size stays 16px and
+ * --desktop-px-unit stays 1px, so 1rem = 16px and calc(N*var(--desktop-px-unit))
+ * equals N physical px. Never reintroduce global desktop shrinking here —
+ * any size correction belongs at the component level.
  */
 @media (min-width: 1024px) {
   :root {
-    --desktop-px-unit: 0.75px;
+    --desktop-px-unit: 1px;
   }
 
   html {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
+
 
 
 
