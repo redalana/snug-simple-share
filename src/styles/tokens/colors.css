@@ -19,6 +19,10 @@
   --primary-foreground: oklch(0.99 0.003 247.858);
   --primary-glow: oklch(0.63 0.23 27.5);
   --primary-dark: oklch(0.42 0.18 28);
+  /* Accessible brand red for text placed on the dark surfaces (#0a0d14 …
+     #13171f). --primary is 3.3–3.6:1 there, below WCAG AA 4.5:1 for small
+     text; this variant clears 4.9:1 on every dark surface used in the app. */
+  --primary-on-dark: oklch(0.645 0.215 27.5);
   --ink: oklch(0.16 0.02 264);
 
   /* --- Neutrals --------------------------------------------------------- */

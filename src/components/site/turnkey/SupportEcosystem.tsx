@@ -6,7 +6,7 @@ export function SupportEcosystem() {
     <section className="bg-[#111315] py-20 text-white lg:py-20">
       <div className="mx-auto grid max-w-[100rem] gap-12 px-6 lg:grid-cols-[1fr_3fr] lg:gap-14 lg:px-10">
         <div>
-          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
+          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary-on-dark">
             Beyond Installation
           </p>
           <h2 className="mt-4 font-display text-[calc(30*var(--desktop-px-unit))] font-extrabold leading-[1.1] sm:text-[calc(36*var(--desktop-px-unit))]">

@@ -11,7 +11,7 @@ export function SupportJourney() {
       <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="max-w-3xl">
-          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+          <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary-on-dark">
             Support Journey
           </div>
           <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">

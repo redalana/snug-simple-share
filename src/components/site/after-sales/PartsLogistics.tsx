@@ -36,7 +36,7 @@ export function PartsLogistics() {
         </div>
         <div className="flex items-center bg-[#0a0d14] px-6 py-20 lg:px-14 lg:py-20">
           <div className="w-full">
-            <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary">
+            <div className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.28em] text-primary-on-dark">
               OEM Parts & Logistics
             </div>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">

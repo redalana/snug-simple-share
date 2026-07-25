@@ -7,7 +7,7 @@ export function DepartmentNav() {
     <section className="bg-[#111315] py-10 text-white lg:py-12">
       <div className="mx-auto grid max-w-[100rem] items-center gap-8 px-6 lg:grid-cols-[1fr_2.8fr] lg:gap-10 lg:px-10">
         <div>
-          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary">
+          <p className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] text-primary-on-dark">
             Explore Departments
           </p>
           <h2 className="mt-3 font-display text-2xl font-extrabold leading-[1.15] sm:text-[calc(26*var(--desktop-px-unit))]">
