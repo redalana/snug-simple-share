@@ -50,8 +50,9 @@ export function HowWeWork() {
                   <p className="mt-2 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-white/60">
                     {s.desc}
                   </p>
-                </li>
-              </Reveal>
+                  </div>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
