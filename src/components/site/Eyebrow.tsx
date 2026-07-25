@@ -24,6 +24,7 @@ export function Eyebrow({
   const label = `text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.26em] ${text}`;
   const chapter = index ? (
     <span
+      aria-hidden="true"
       className={`font-display text-[calc(11*var(--desktop-px-unit))] font-extrabold tabular-nums ${num}`}
     >
       {index}

@@ -52,7 +52,7 @@ export function ContactBar() {
                   {title}
                 </div>
                 <div className="mt-0.5 truncate text-sm text-muted-foreground">{lines[0]}</div>
-                <div className="truncate text-[calc(13*var(--desktop-px-unit))] text-muted-foreground/80">
+                <div className="truncate text-[calc(13*var(--desktop-px-unit))] text-muted-foreground">
                   {lines[1]}
                 </div>
               </div>

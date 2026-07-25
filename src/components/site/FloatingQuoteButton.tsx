@@ -49,7 +49,7 @@ export function FloatingQuoteButton() {
         aria-label="Request a quote"
         className={`af-quote-wrap fixed right-4 z-[90] transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
         aria-hidden={modalOpen}
-        style={{ bottom: `calc(var(--af-quote-base) + ${footerLift}px)` }}
+        style={{ bottom: `calc(var(--af-quote-base) + var(--af-cookie-bar, 0px) + ${footerLift}px)` }}
       >
         <button
           type="button"

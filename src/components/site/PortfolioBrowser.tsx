@@ -215,7 +215,7 @@ function FilterAccordion({
           )}
           <ul className="space-y-3.5 pb-5">
             {visibleOptions.length === 0 && (
-              <li className="text-sm text-muted-foreground/70">No matches.</li>
+              <li className="text-sm text-muted-foreground">No matches.</li>
             )}
             {visibleOptions.map((opt) => (
               <li key={opt.value}>
@@ -227,7 +227,7 @@ function FilterAccordion({
                     className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
                   />
                   <span className="flex-1">{opt.value}</span>
-                  <span className="text-xs font-medium text-muted-foreground/70">
+                  <span className="text-xs font-medium text-muted-foreground">
                     ({opt.count})
                   </span>
                 </label>
@@ -658,7 +658,7 @@ export function PortfolioBrowser() {
                   }`}
                 >
                   <span>{brand.name}</span>
-                  <span className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground/70">
+                  <span className="mt-1 text-[calc(11*var(--desktop-px-unit))] font-medium text-muted-foreground">
                     {brand.count} {brand.count === 1 ? "system" : "systems"}
                   </span>
                 </button>

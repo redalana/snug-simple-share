@@ -71,7 +71,10 @@ function ComparePage() {
       <Breadcrumbs />
 
       {/* HERO */}
-      <section className="border-b border-border/70 bg-gradient-to-b from-secondary/60 to-background">
+      <section
+        aria-label="Product comparison introduction"
+        className="border-b border-border/70 bg-gradient-to-b from-secondary/60 to-background"
+      >
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
             <GitCompare className="h-3 w-3" /> Product Comparison
