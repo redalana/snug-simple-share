@@ -123,7 +123,7 @@ export function WhatsAppFloat() {
             >
               <X className="h-3.5 w-3.5" />
             </button>
-          </div>
+          </aside>
         )}
       </div>
     </>
