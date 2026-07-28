@@ -173,9 +173,7 @@ function FilterAccordion({
                     className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
                   />
                   <span className="flex-1">{opt.value}</span>
-                  <span className="text-xs font-medium text-muted-foreground">
-                    ({opt.count})
-                  </span>
+                  <span className="text-xs font-medium text-muted-foreground">({opt.count})</span>
                 </label>
               </li>
             ))}
@@ -239,13 +237,13 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
           {product.specs
             .filter((s) => !/^YOM\b/i.test(s))
             .map((s) => (
-            <span
-              key={s}
-              className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground/70 sm:px-3 sm:py-1"
-            >
-              {s}
-            </span>
-          ))}
+              <span
+                key={s}
+                className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground/70 sm:px-3 sm:py-1"
+              >
+                {s}
+              </span>
+            ))}
         </div>
         <div className="mt-3 space-y-1 border-t border-border/60 pt-3 text-xs font-medium leading-snug text-foreground/70 sm:mt-4 sm:space-y-2 sm:pt-4">
           <div className="flex items-center gap-2">
@@ -642,9 +640,6 @@ export function PortfolioBrowser() {
 
       {/* MAIN */}
       <section className="mx-auto max-w-[100rem] px-6 pt-8 pb-12 lg:px-10 lg:pt-10 lg:pb-16">
-
-
-
         <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
           <div className="mb-8 lg:mb-0">
@@ -750,8 +745,6 @@ export function PortfolioBrowser() {
               </span>{" "}
               of <span className="font-bold text-foreground">{total}</span> Medical Systems
             </p>
-
-
 
             {/* ACTIVE FILTER CHIPS */}
             {activeChips.length > 0 && (
