@@ -69,18 +69,19 @@ export function Hero() {
             {HERO_KPIS.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
-                className="flex min-w-0 flex-col rounded-2xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary/50 hover:bg-white/[0.07]"
+                className="flex min-w-0 flex-col rounded-2xl border border-white/12 bg-white/[0.04] p-3.5 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary/50 hover:bg-white/[0.07]"
               >
                 <Icon className="h-5 w-5 shrink-0 text-primary" />
-                <div className="mt-3 font-display text-2xl font-extrabold leading-none text-white">
+                <div className="mt-3 min-w-0 font-display text-[clamp(0.95rem,1.1vw,1.2rem)] font-extrabold leading-[1.15] break-words hyphens-auto text-white">
                   {value}
                 </div>
-                <div className="mt-2 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider text-white/55">
+                <div className="mt-2 min-w-0 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider break-words text-white/55">
                   {label}
                 </div>
               </div>
             ))}
           </div>
+
         </div>
 
         <div className="relative hidden lg:block">
