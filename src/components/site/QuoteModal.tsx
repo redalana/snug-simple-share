@@ -341,7 +341,7 @@ export function QuoteModal() {
               </div>
 
               {/* RIGHT COLUMN */}
-              <div className="space-y-6">
+              <div className="flex flex-col gap-4">
                 <div>
                   <span className={fieldLabel}>I'm Interested In *</span>
                   <Popover open={interestOpen} onOpenChange={setInterestOpen}>
