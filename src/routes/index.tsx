@@ -59,7 +59,10 @@ function Index() {
         <BrandsMarquee />
         {/* What technologies do we supply? */}
         <Solutions />
+        {/* Why choose AbuFarha for the selected category? */}
+        <CategorySolution />
         {/* Why do hospitals choose AbuFarha? */}
+
         <WhyAbuFarha />
         {/* Featured case studies */}
         <Projects />
