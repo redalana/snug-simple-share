@@ -163,26 +163,26 @@ export function QuoteModal() {
   };
 
   const fieldLabel =
-    "mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75";
+    "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75";
   const inputBase =
-    "h-14 w-full rounded-xl border bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 focus:border-primary focus:ring-4 focus:ring-primary/12";
+    "h-12 w-full rounded-xl border bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 focus:border-primary focus:ring-4 focus:ring-primary/12";
   const inputOk = "border-border/80 hover:border-border";
   const inputBad = "border-destructive/70 focus:border-destructive focus:ring-destructive/15";
   const fieldInput = (bad?: boolean) => `${inputBase} ${bad ? inputBad : inputOk}`;
-  const errText = "mt-1.5 text-[11px] font-medium text-destructive";
+  const errText = "mt-1 text-[11px] font-medium text-destructive";
 
   return (
     <Dialog open={open} onOpenChange={resetOnClose}>
-      <DialogContent className="max-h-[94vh] w-[calc(100vw-1rem)] max-w-[900px] overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]">
+      <DialogContent className="flex max-h-[94dvh] w-[calc(100vw-1rem)] max-w-[900px] flex-col overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]">
         {/* HEADER */}
-        <div className="relative border-b border-border/60 px-5 pb-6 pt-7 sm:px-9 sm:pb-8 sm:pt-10">
+        <div className="relative shrink-0 border-b border-border/60 px-5 pb-4 pt-5 sm:px-9 sm:pb-5 sm:pt-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
             <FileText className="h-3 w-3" /> Quotation Request
           </div>
-          <DialogTitle className="mt-4 font-display text-[22px] font-extrabold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-[30px]">
+          <DialogTitle className="mt-3 font-display text-[22px] font-extrabold leading-tight tracking-tight text-foreground sm:text-[30px]">
             Request a Quote
           </DialogTitle>
-          <DialogDescription className="mt-2 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:mt-3 sm:text-[13.5px]">
+          <DialogDescription className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:text-[13.5px]">
             Tell us about your healthcare project and our specialists will prepare the best
             quotation for your requirements.
           </DialogDescription>
@@ -191,12 +191,13 @@ export function QuoteModal() {
         <form
           onSubmit={onSubmit}
           aria-busy={submitting || success}
-          className="relative max-h-[calc(94vh-12rem)] overflow-y-auto px-5 py-6 sm:max-h-[calc(94vh-14rem)] sm:px-9 sm:py-9"
+          className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5 md:overflow-visible sm:px-9 sm:py-6"
         >
           <fieldset disabled={submitting || success} className="contents">
-            <div className="grid grid-cols-1 gap-x-7 gap-y-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2">
               {/* LEFT COLUMN */}
-              <div className="space-y-6">
+              <div className="space-y-4">
+
                 <div>
                   <label htmlFor="qm-name" className={fieldLabel}>
                     Full Name *
