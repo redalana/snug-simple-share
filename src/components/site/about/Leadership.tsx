@@ -716,12 +716,14 @@ export function Leadership() {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
-              <CinematicBackdrop
-                env={active.env}
-                nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
-                alt={`Environment reflecting ${active.role}`}
-              />
+            <div className="relative grid overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
+              <div className="col-start-1 row-start-1 self-stretch [&>*]:h-full">
+                <CinematicBackdrop
+                  env={active.env}
+                  nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
+                  alt={`Environment reflecting ${active.role}`}
+                />
+              </div>
 
               {/* Localized readability gradient — only behind the console area, fades to fully transparent */}
               <div
@@ -734,7 +736,7 @@ export function Leadership() {
               />
 
               {/* Floating console — vertically centered within the image area */}
-              <div className="absolute inset-6 flex items-center justify-center sm:justify-end">
+              <div className="col-start-1 row-start-1 flex items-center justify-center p-6 sm:justify-end">
                 <div className="w-full sm:w-[62%] lg:w-[58%] xl:w-[54%]">
                   <ExecutiveConsole
                     leader={active}
@@ -745,6 +747,7 @@ export function Leadership() {
                   />
                 </div>
               </div>
+
 
             </div>
           </Reveal>
