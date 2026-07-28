@@ -667,7 +667,7 @@ export function Leadership() {
           margin-inline: auto;
           width: 100%;
         }
-        @container (min-width: 260px) {
+        @container (min-width: 420px) {
           .leadership-stats-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
           }
