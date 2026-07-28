@@ -447,7 +447,7 @@ export function QuoteModal() {
                   </Popover>
                 </div>
 
-                <div>
+                <div className="flex min-h-0 flex-1 flex-col">
                   <label htmlFor="qm-message" className={fieldLabel}>
                     Message
                   </label>
@@ -455,11 +455,12 @@ export function QuoteModal() {
                     id="qm-message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12"
-                    style={{ minHeight: 220 }}
+                    className="w-full flex-1 resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12"
+                    style={{ minHeight: 116 }}
                     placeholder="Tell us about your project, preferred equipment, installation requirements, destination country and any additional information."
                   />
                 </div>
+
 
                 <div>
                   <span className={fieldLabel}>Preferred Contact</span>
