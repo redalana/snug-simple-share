@@ -163,26 +163,26 @@ export function QuoteModal() {
   };
 
   const fieldLabel =
-    "mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75";
+    "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75";
   const inputBase =
-    "h-14 w-full rounded-xl border bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 focus:border-primary focus:ring-4 focus:ring-primary/12";
+    "h-12 w-full rounded-xl border bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 focus:border-primary focus:ring-4 focus:ring-primary/12";
   const inputOk = "border-border/80 hover:border-border";
   const inputBad = "border-destructive/70 focus:border-destructive focus:ring-destructive/15";
   const fieldInput = (bad?: boolean) => `${inputBase} ${bad ? inputBad : inputOk}`;
-  const errText = "mt-1.5 text-[11px] font-medium text-destructive";
+  const errText = "mt-1 text-[11px] font-medium text-destructive";
 
   return (
     <Dialog open={open} onOpenChange={resetOnClose}>
-      <DialogContent className="max-h-[94vh] w-[calc(100vw-1rem)] max-w-[900px] overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]">
+      <DialogContent className="flex max-h-[94dvh] w-[calc(100vw-1rem)] max-w-[900px] flex-col overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]">
         {/* HEADER */}
-        <div className="relative border-b border-border/60 px-5 pb-6 pt-7 sm:px-9 sm:pb-8 sm:pt-10">
+        <div className="relative shrink-0 border-b border-border/60 px-5 pb-4 pt-5 sm:px-9 sm:pb-5 sm:pt-6 sm:[@media(max-height:820px)]:pb-4 sm:[@media(max-height:820px)]:pt-4">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
             <FileText className="h-3 w-3" /> Quotation Request
           </div>
-          <DialogTitle className="mt-4 font-display text-[22px] font-extrabold leading-tight tracking-tight text-foreground sm:mt-5 sm:text-[30px]">
+          <DialogTitle className="mt-3 font-display text-[22px] font-extrabold leading-tight tracking-tight text-foreground sm:text-[30px]">
             Request a Quote
           </DialogTitle>
-          <DialogDescription className="mt-2 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:mt-3 sm:text-[13.5px]">
+          <DialogDescription className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:text-[13.5px]">
             Tell us about your healthcare project and our specialists will prepare the best
             quotation for your requirements.
           </DialogDescription>
@@ -191,12 +191,13 @@ export function QuoteModal() {
         <form
           onSubmit={onSubmit}
           aria-busy={submitting || success}
-          className="relative max-h-[calc(94vh-12rem)] overflow-y-auto px-5 py-6 sm:max-h-[calc(94vh-14rem)] sm:px-9 sm:py-9"
+          className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5 md:overflow-visible sm:px-9 sm:py-6 sm:[@media(max-height:820px)]:py-4"
         >
           <fieldset disabled={submitting || success} className="contents">
-            <div className="grid grid-cols-1 gap-x-7 gap-y-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2 [@media(max-height:800px)]:gap-y-3">
               {/* LEFT COLUMN */}
-              <div className="space-y-6">
+              <div className="space-y-4 [@media(max-height:800px)]:space-y-3">
+
                 <div>
                   <label htmlFor="qm-name" className={fieldLabel}>
                     Full Name *
@@ -309,7 +310,7 @@ export function QuoteModal() {
                       setPhone(v);
                       if (!touched.phone) markTouched("phone");
                     }}
-                    className="[&_input]:h-14 [&_input]:rounded-xl [&_input]:text-sm"
+                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
                   />
                   {showError("phone", !phoneValid) && (
                     <p className={errText}>Enter a valid phone number.</p>
@@ -340,7 +341,7 @@ export function QuoteModal() {
               </div>
 
               {/* RIGHT COLUMN */}
-              <div className="space-y-6">
+              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
                 <div>
                   <span className={fieldLabel}>I'm Interested In *</span>
                   <Popover open={interestOpen} onOpenChange={setInterestOpen}>
@@ -446,7 +447,7 @@ export function QuoteModal() {
                   </Popover>
                 </div>
 
-                <div>
+                <div className="flex min-h-0 flex-1 flex-col">
                   <label htmlFor="qm-message" className={fieldLabel}>
                     Message
                   </label>
@@ -454,11 +455,11 @@ export function QuoteModal() {
                     id="qm-message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12"
-                    style={{ minHeight: 220 }}
+                    className="w-full flex-1 resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12 min-h-[clamp(84px,11vh,150px)]"
                     placeholder="Tell us about your project, preferred equipment, installation requirements, destination country and any additional information."
                   />
                 </div>
+
 
                 <div>
                   <span className={fieldLabel}>Preferred Contact</span>
@@ -502,7 +503,7 @@ export function QuoteModal() {
             </div>
 
             {/* TRUST STRIP */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-6 text-xs font-medium text-muted-foreground">
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 [@media(max-height:800px)]:mt-4 [@media(max-height:800px)]:pt-3 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-primary/80" /> Your information is securely
                 transmitted
@@ -513,11 +514,12 @@ export function QuoteModal() {
             </div>
 
             {/* ACTIONS */}
-            <div className="mt-5 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
+            <div className="mt-4 flex flex-col-reverse items-stretch gap-3 [@media(max-height:800px)]:mt-3 sm:flex-row sm:items-center sm:justify-end">
+
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-[52px] items-center justify-center gap-1.5 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                className="inline-flex h-12 items-center justify-center gap-1.5 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
               >
                 <X className="h-4 w-4" /> Cancel
               </button>
@@ -530,7 +532,7 @@ export function QuoteModal() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.18 }}
-                  className={`inline-flex h-[52px] items-center justify-center gap-2 rounded-full px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
+                  className={`inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
                     success
                       ? "bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-100"
                       : "bg-gradient-to-r from-primary to-primary-dark disabled:opacity-50"
