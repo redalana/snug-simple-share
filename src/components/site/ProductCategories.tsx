@@ -136,7 +136,7 @@ export function ProductCategories() {
                 <div className="flex min-w-0 flex-1 flex-col gap-2 px-4 py-4">
                   <span className="block h-[3px] w-8 rounded-full bg-primary transition-all duration-300 ease-out group-hover:w-14" />
                   <span className="flex min-w-0 items-start gap-1.5">
-                    <span className="min-w-0 text-sm font-bold leading-snug text-ink [overflow-wrap:anywhere]">
+                    <span className="line-clamp-2 min-h-[2.6em] min-w-0 text-sm font-bold leading-[1.3] text-ink [overflow-wrap:anywhere]">
                       {c.title}
                     </span>
                     <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-primary opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
