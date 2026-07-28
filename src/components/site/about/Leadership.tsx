@@ -544,34 +544,29 @@ function ExecutiveConsole({
                 </p>
 
                 {/* Statistics */}
-                <div
-                  className="mt-6 grid gap-2"
-                  style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
-                >
-                  {[
-                    { v: leader.years, l: "Years" },
-                    { v: leader.countries, l: "Countries" },
-                    { v: leader.projects, l: "Projects" },
-                  ].map((s) => (
-                    <div
-                      key={s.l}
-                      className="min-w-0 rounded-xl bg-white/[0.04] px-2 py-3 text-center ring-1 ring-white/10"
-                    >
-                      <div className="font-display text-[18px] font-bold leading-none text-white tabular-nums">
-                        <StatValue raw={s.v} />
-                      </div>
+                <div className="leadership-stats-shell mt-6">
+                  <div className="leadership-stats-grid grid gap-1.5">
+                    {[
+                      { v: leader.years, l: "Years" },
+                      { v: leader.countries, l: "Countries" },
+                      { v: leader.projects, l: "Projects" },
+                    ].map((s) => (
                       <div
-                        className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60"
-                        style={{
-                          letterSpacing: "var(--tracking-label)",
-                          wordBreak: "normal",
-                          overflowWrap: "break-word",
-                        }}
+                        key={s.l}
+                        className="flex min-h-[72px] min-w-0 flex-col items-center justify-center rounded-xl bg-white/[0.04] px-1.5 py-3 text-center ring-1 ring-white/10"
                       >
-                        {s.l}
+                        <div className="font-display text-[18px] font-bold leading-none text-white tabular-nums [hyphens:none] [overflow-wrap:normal] [word-break:normal]">
+                          <StatValue raw={s.v} />
+                        </div>
+                        <div
+                          className="mt-2 text-[8.5px] font-semibold uppercase leading-tight text-white/60 [hyphens:none] [overflow-wrap:normal] [word-break:normal]"
+                          style={{ letterSpacing: "var(--tracking-label)" }}
+                        >
+                          {s.l}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
                 {/* Areas of expertise */}
@@ -665,6 +660,18 @@ export function Leadership() {
           50%      { opacity: 0.85; }
         }
         .leader-ambient { animation: leader-ambient 7s ease-in-out infinite; opacity: 0.55; }
+        .leadership-stats-shell { container-type: inline-size; }
+        .leadership-stats-grid {
+          grid-template-columns: minmax(0, 1fr);
+          grid-auto-rows: minmax(72px, 1fr);
+          margin-inline: auto;
+          width: 100%;
+        }
+        @container (min-width: 420px) {
+          .leadership-stats-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
         @keyframes leader-portrait-breath {
           0%   { transform: scale(1.00) translate3d(0, 0, 0); }
           100% { transform: scale(1.04) translate3d(0, -1.5%, 0); }
