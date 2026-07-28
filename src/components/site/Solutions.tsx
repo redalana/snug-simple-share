@@ -12,7 +12,10 @@ import {
   Waves,
   Activity,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import cathlab from "@/assets/hero-cathlab.jpg";
@@ -264,6 +267,36 @@ export function Solutions() {
     setCycleKey((k) => k + 1);
   }, []);
 
+  // Horizontal scroll state for the category rail
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < max - 4);
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    const el = navRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(updateScrollState);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [updateScrollState]);
+
+  const scrollNav = useCallback((dir: 1 | -1) => {
+    const el = navRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
+  }, []);
+
+
+
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* subtle technical grid */}
@@ -299,84 +332,110 @@ export function Solutions() {
         </div>
 
         {/* Category navigation */}
-        <div
-          className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
-          onMouseEnter={pause}
-          onMouseLeave={scheduleResume}
-        >
-          <div className="flex min-w-max gap-1 border-b border-border lg:min-w-0">
-            {CATEGORIES.map((c, i) => {
-              const isActive = c.id === activeId;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => selectCategory(i)}
-                  className={`group relative flex shrink-0 items-center gap-2.5 rounded-t-lg px-5 py-3.5 text-[calc(13*var(--desktop-px-unit))] tracking-[0.01em] transition-all duration-300 ${
-                    isActive
-                      ? "font-semibold text-ink"
-                      : "font-medium text-muted-foreground/70 hover:text-ink"
-                  }`}
-                >
-                  {/* soft active background tint */}
-                  {isActive && (
-                    <motion.span
-                      layoutId="cat-tint"
-                      aria-hidden
-                      className="absolute inset-0 rounded-t-lg bg-primary/[0.04]"
-                      transition={{ type: "spring", stiffness: 480, damping: 42 }}
-                    />
-                  )}
-                  {/* premium product thumbnail */}
-                  <span
-                    className={`relative z-10 overflow-hidden rounded-[calc(10*var(--desktop-px-unit))] bg-secondary ring-1 transition-all duration-300 ${
-                      isActive
-                        ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
-                        : "opacity-70 shadow-sm ring-white/80 grayscale-[0.15] group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-[1.05]"
-                    }`}
-                    style={{ width: 38, height: 38 }}
-                  >
-                    <img
-                      src={c.img}
-                      alt=""
-                      aria-hidden
-                      width={38}
-                      height={38}
-                      className="h-full w-full object-cover object-[center_38%]"
-                    />
-                  </span>
-                  <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>
-                    {c.nav}
-                  </span>
+        <div className="relative mb-10 lg:px-14">
+          {/* left control */}
+          <button
+            type="button"
+            aria-label="Scroll categories left"
+            onClick={() => scrollNav(-1)}
+            disabled={!canScrollLeft}
+            className="absolute left-0 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-ink shadow-[0_6px_16px_-8px_rgba(15,23,42,0.35)] transition-all duration-200 hover:-translate-y-1/2 hover:scale-105 hover:shadow-[0_10px_22px_-10px_rgba(15,23,42,0.45)] disabled:pointer-events-none disabled:opacity-0 lg:flex"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          {/* right control */}
+          <button
+            type="button"
+            aria-label="Scroll categories right"
+            onClick={() => scrollNav(1)}
+            disabled={!canScrollRight}
+            className="absolute right-0 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-ink shadow-[0_6px_16px_-8px_rgba(15,23,42,0.35)] transition-all duration-200 hover:-translate-y-1/2 hover:scale-105 hover:shadow-[0_10px_22px_-10px_rgba(15,23,42,0.45)] disabled:pointer-events-none disabled:opacity-0 lg:flex"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
 
-                  {/* hover underline hint */}
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  />
-                  {isActive && (
-                    <motion.span
-                      layoutId="cat-underline"
-                      className="absolute inset-x-3 -bottom-[calc(3*var(--desktop-px-unit))] z-20 h-0.5 overflow-hidden rounded-full bg-ink/10"
-                      transition={{ type: "spring", stiffness: 480, damping: 42 }}
+          <div
+            ref={navRef}
+            onScroll={updateScrollState}
+            className="-mx-6 overflow-x-auto px-6 [scrollbar-width:none] lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
+            onMouseEnter={pause}
+            onMouseLeave={scheduleResume}
+          >
+            <div className="flex min-w-max gap-2 border-b border-border sm:gap-3 lg:min-w-full lg:justify-between lg:gap-4">
+              {CATEGORIES.map((c, i) => {
+                const isActive = c.id === activeId;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => selectCategory(i)}
+                    className={`group relative flex shrink-0 items-center gap-3 rounded-t-lg px-4 py-5 text-[calc(13*var(--desktop-px-unit))] tracking-[0.01em] transition-all duration-300 sm:px-5 ${
+                      isActive
+                        ? "font-semibold text-ink"
+                        : "font-medium text-muted-foreground/70 hover:text-ink"
+                    }`}
+                  >
+                    {/* soft active background tint */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="cat-tint"
+                        aria-hidden
+                        className="absolute inset-0 rounded-t-lg bg-primary/[0.04]"
+                        transition={{ type: "spring", stiffness: 480, damping: 42 }}
+                      />
+                    )}
+                    {/* premium product thumbnail */}
+                    <span
+                      className={`relative z-10 overflow-hidden rounded-[calc(12*var(--desktop-px-unit))] bg-secondary ring-1 transition-all duration-300 ${
+                        isActive
+                          ? "-translate-y-px scale-[1.08] ring-primary/70 shadow-[0_8px_18px_-8px_rgba(15,23,42,0.45)]"
+                          : "opacity-70 shadow-sm ring-white/80 grayscale-[0.15] group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-[1.05]"
+                      }`}
+                      style={{ width: 52, height: 52 }}
                     >
-                      {/* editorial autoplay progress line */}
-                      {!paused && (
-                        <motion.span
-                          key={cycleKey}
-                          className="block h-full w-full origin-left rounded-full bg-primary"
-                          initial={{ scaleX: 0 }}
-                          animate={{ scaleX: 1 }}
-                          transition={{ duration: AUTOPLAY_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
-                        />
-                      )}
-                      {paused && <span className="block h-full w-full rounded-full bg-primary" />}
-                    </motion.span>
-                  )}
-                </button>
-              );
-            })}
+                      <img
+                        src={c.img}
+                        alt=""
+                        aria-hidden
+                        width={52}
+                        height={52}
+                        className="h-full w-full object-cover object-[center_38%]"
+                      />
+                    </span>
+                    <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>
+                      {c.nav}
+                    </span>
+
+                    {/* hover underline hint */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-3 -bottom-px z-10 h-0.5 rounded-full bg-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    />
+                    {isActive && (
+                      <motion.span
+                        layoutId="cat-underline"
+                        className="absolute inset-x-3 -bottom-[calc(3*var(--desktop-px-unit))] z-20 h-0.5 overflow-hidden rounded-full bg-ink/10"
+                        transition={{ type: "spring", stiffness: 480, damping: 42 }}
+                      >
+                        {/* editorial autoplay progress line */}
+                        {!paused && (
+                          <motion.span
+                            key={cycleKey}
+                            className="block h-full w-full origin-left rounded-full bg-primary"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: AUTOPLAY_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
+                          />
+                        )}
+                        {paused && <span className="block h-full w-full rounded-full bg-primary" />}
+                      </motion.span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
+
 
         {/* Explorer */}
         <div
