@@ -267,6 +267,36 @@ export function Solutions() {
     setCycleKey((k) => k + 1);
   }, []);
 
+  // Horizontal scroll state for the category rail
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < max - 4);
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    const el = navRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(updateScrollState);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [updateScrollState]);
+
+  const scrollNav = useCallback((dir: 1 | -1) => {
+    const el = navRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
+  }, []);
+
+
+
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* subtle technical grid */}
