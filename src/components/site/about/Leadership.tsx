@@ -662,6 +662,11 @@ export function Leadership() {
         }
         .leader-ambient { animation: leader-ambient 7s ease-in-out infinite; opacity: 0.55; }
         .leadership-stats-shell { container-type: inline-size; }
+        .leadership-console-slot { width: 100%; }
+        @media (min-width: 1280px) {
+          .leadership-console-slot { width: min(100%, clamp(820px, 20rem + 34vw, 1000px)); }
+        }
+
         .leadership-stats-grid {
           grid-template-columns: minmax(0, 1fr);
           grid-auto-rows: minmax(72px, 1fr);
