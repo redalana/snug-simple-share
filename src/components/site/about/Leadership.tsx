@@ -491,9 +491,10 @@ function ExecutiveConsole({
 
       <div className="grid gap-0 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
         {/* LEFT — Hero portrait (~55% of console on desktop) */}
-        <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[520px] lg:min-h-[560px]">
+        <div className="relative aspect-[4/5] sm:aspect-auto sm:min-h-[clamp(460px,38vw,600px)]">
           <HeroPortrait leader={leader} />
         </div>
+
 
         {/* RIGHT — Executive information */}
         <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
@@ -661,6 +662,11 @@ export function Leadership() {
         }
         .leader-ambient { animation: leader-ambient 7s ease-in-out infinite; opacity: 0.55; }
         .leadership-stats-shell { container-type: inline-size; }
+        .leadership-console-slot { width: 100%; }
+        @media (min-width: 1280px) {
+          .leadership-console-slot { width: min(100%, clamp(820px, 20rem + 34vw, 1000px)); }
+        }
+
         .leadership-stats-grid {
           grid-template-columns: minmax(0, 1fr);
           grid-auto-rows: minmax(72px, 1fr);
@@ -699,10 +705,11 @@ export function Leadership() {
         </Reveal>
 
         {/* Desktop */}
-        <div className="mt-12 hidden lg:grid lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] lg:gap-10">
-          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+        <div className="mt-12 hidden xl:grid xl:grid-cols-[minmax(0,clamp(260px,20vw,300px))_minmax(0,1fr)] xl:gap-10">
+          <Reveal className="xl:sticky xl:top-28 xl:self-start">
             <div className="rounded-3xl bg-secondary/40 p-3 ring-1 ring-border">
               <div className="max-h-[calc(680*var(--desktop-px-unit))] space-y-1 overflow-y-auto pr-1">
+
                 {LEADERS.map((l, i) => (
                   <LeaderRow
                     key={l.id}
@@ -737,7 +744,8 @@ export function Leadership() {
 
               {/* Floating console — vertically centered within the image area */}
               <div className="col-start-1 row-start-1 flex min-w-0 items-center justify-center p-6 sm:justify-end">
-                <div className="w-full sm:w-[62%] lg:w-[58%] xl:w-[54%]">
+                <div className="leadership-console-slot">
+
                   <ExecutiveConsole
                     leader={active}
                     paused={paused}
@@ -753,15 +761,18 @@ export function Leadership() {
           </Reveal>
         </div>
 
-        {/* Tablet */}
-        <div className="mt-10 hidden md:block lg:hidden">
-          <ExecutiveConsole
-            leader={active}
-            paused={paused}
-            onToggle={togglePause}
-            activeIndex={activeIndex}
-            total={LEADERS.length}
-          />
+        {/* Tablet / small desktop */}
+        <div className="mt-10 hidden md:block xl:hidden">
+          <div className="mx-auto w-full max-w-[56rem]">
+            <ExecutiveConsole
+              leader={active}
+              paused={paused}
+              onToggle={togglePause}
+              activeIndex={activeIndex}
+              total={LEADERS.length}
+            />
+          </div>
+
           <div className="mt-6 grid grid-cols-2 gap-2">
             {LEADERS.map((l, i) => (
               <LeaderRow
