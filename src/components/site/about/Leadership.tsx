@@ -739,7 +739,7 @@ export function Leadership() {
 
               {/* Floating console — vertically centered within the image area */}
               <div className="col-start-1 row-start-1 flex min-w-0 items-center justify-center p-6 sm:justify-end">
-                <div className="w-full sm:w-[min(100%,clamp(820px,20rem_+_34vw,1000px))]">
+                <div className="leadership-console-slot">
 
                   <ExecutiveConsole
                     leader={active}
