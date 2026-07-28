@@ -701,7 +701,23 @@ export function PortfolioBrowser() {
       </section>
 
       {/* MAIN */}
-      <section className="mx-auto max-w-[100rem] px-6 py-12 lg:px-10 lg:py-16">
+      <section className="mx-auto max-w-[100rem] px-6 pt-8 pb-12 lg:px-10 lg:pt-10 lg:pb-16">
+        {/* SEARCH — belongs to the products grid */}
+        <div className="group/search relative mx-auto mb-8 max-w-5xl lg:mb-10">
+          <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
+          <input
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              resetPage();
+            }}
+            type="search"
+            placeholder="Search by system name, manufacturer, model, technology, or keyword..."
+            aria-label="Search medical systems"
+            className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
+          />
+        </div>
+
         <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
           <div className="mb-8 lg:mb-0">
