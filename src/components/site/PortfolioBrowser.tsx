@@ -818,6 +818,17 @@ export function PortfolioBrowser() {
               </div>
             </div>
 
+            {/* SHOWING RESULTS */}
+            <p className="mb-6 text-sm text-muted-foreground">
+              Showing{" "}
+              <span className="font-bold text-foreground">
+                {rangeStart}–{rangeEnd}
+              </span>{" "}
+              of <span className="font-bold text-foreground">{total}</span> Medical Systems
+            </p>
+
+
+
             {/* ACTIVE FILTER CHIPS */}
             {activeChips.length > 0 && (
               <div className="mb-8 flex flex-wrap items-center gap-2">
