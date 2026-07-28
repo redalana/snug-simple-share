@@ -194,9 +194,9 @@ export function QuoteModal() {
           className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5 md:overflow-visible sm:px-9 sm:py-6 sm:[@media(max-height:820px)]:py-4"
         >
           <fieldset disabled={submitting || success} className="contents">
-            <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2 [@media(max-height:800px)]:gap-y-3">
               {/* LEFT COLUMN */}
-              <div className="space-y-4">
+              <div className="space-y-4 [@media(max-height:800px)]:space-y-3">
 
                 <div>
                   <label htmlFor="qm-name" className={fieldLabel}>
@@ -341,7 +341,7 @@ export function QuoteModal() {
               </div>
 
               {/* RIGHT COLUMN */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
                 <div>
                   <span className={fieldLabel}>I'm Interested In *</span>
                   <Popover open={interestOpen} onOpenChange={setInterestOpen}>
@@ -503,7 +503,7 @@ export function QuoteModal() {
             </div>
 
             {/* TRUST STRIP */}
-            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 text-xs font-medium text-muted-foreground">
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 [@media(max-height:800px)]:mt-4 [@media(max-height:800px)]:pt-3 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-primary/80" /> Your information is securely
                 transmitted
@@ -514,7 +514,7 @@ export function QuoteModal() {
             </div>
 
             {/* ACTIONS */}
-            <div className="mt-4 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
+            <div className="mt-4 flex flex-col-reverse items-stretch gap-3 [@media(max-height:800px)]:mt-3 sm:flex-row sm:items-center sm:justify-end">
 
               <button
                 type="button"
