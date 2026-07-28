@@ -12,7 +12,10 @@ import {
   Waves,
   Activity,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import cathlab from "@/assets/hero-cathlab.jpg";
