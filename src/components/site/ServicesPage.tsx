@@ -507,7 +507,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
           <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/30 bg-primary/10">
             <Icon className="h-4.5 w-4.5 text-primary" strokeWidth={1.7} />
           </div>
-          <h3 className="font-display text-[calc(17*var(--desktop-px-unit))] font-extrabold leading-tight text-foreground">
+          <h3 className="min-w-0 font-display text-[calc(17*var(--desktop-px-unit))] font-extrabold leading-tight text-foreground [overflow-wrap:anywhere]">
             {item.title}
           </h3>
         </div>
@@ -1017,12 +1017,12 @@ function EmergencyCTA() {
               href="tel:+96264026063"
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
-              <Phone className="h-5 w-5 text-primary" />
-              <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+              <Phone className="h-5 w-5 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60 [overflow-wrap:anywhere]">
                   Call Us
                 </div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white [overflow-wrap:anywhere]">
                   +20 123 456 7890
                 </div>
               </div>
@@ -1031,12 +1031,12 @@ function EmergencyCTA() {
               href="https://wa.me/962799741318"
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
-              <MessageCircle className="h-5 w-5 text-primary" />
-              <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+              <MessageCircle className="h-5 w-5 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60 [overflow-wrap:anywhere]">
                   WhatsApp
                 </div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white [overflow-wrap:anywhere]">
                   Chat with our team
                 </div>
               </div>
@@ -1045,12 +1045,12 @@ function EmergencyCTA() {
               href="mailto:support@abufarhamedical.com"
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
-              <Mail className="h-5 w-5 text-primary" />
-              <div>
-                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60">
+              <Mail className="h-5 w-5 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <div className="text-[calc(12*var(--desktop-px-unit))] uppercase tracking-wider text-white/60 [overflow-wrap:anywhere]">
                   Email Us
                 </div>
-                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white">
+                <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white [overflow-wrap:anywhere]">
                   support@abufarhamedical.com
                 </div>
               </div>
