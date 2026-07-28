@@ -62,6 +62,7 @@ function MarqueeRow({
   const [setWidth, setSetWidth] = useState(0);
   const paused = useRef(false);
   const dragging = useRef(false);
+  const didDrag = useRef(false);
 
   useEffect(() => {
     const el = setRef.current;
@@ -105,10 +106,24 @@ function MarqueeRow({
         style={{ x, willChange: "transform" }}
         drag="x"
         dragMomentum={false}
-        onDragStart={() => (dragging.current = true)}
+        onDragStart={() => {
+          dragging.current = true;
+          didDrag.current = false;
+        }}
+        onDrag={(_, info) => {
+          if (Math.abs(info.offset.x) > 5) didDrag.current = true;
+        }}
+        onClickCapture={(e) => {
+          // A drag must never trigger navigation on the card underneath.
+          if (didDrag.current) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }}
         onDragEnd={() => {
           dragging.current = false;
           x.set(wrap(x.get()));
+          window.setTimeout(() => (didDrag.current = false), 0);
         }}
       >
         <div ref={setRef} className="flex items-center gap-4 pr-4">
