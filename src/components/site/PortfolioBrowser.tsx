@@ -50,15 +50,6 @@ const STATUS_STYLES: Record<Product["status"], string> = {
 
 const CATEGORIES = ["All Categories", ...PRIMARY_CATEGORIES] as const;
 
-const SORT_OPTIONS = [
-  "Newest",
-  "Recently Added",
-  "Manufacturer A–Z",
-  "Manufacturer Z–A",
-  "Category",
-  "System Name",
-] as const;
-
 const PER_PAGE_OPTIONS = [12, 24, 48, 96] as const;
 const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 
@@ -66,51 +57,16 @@ const PER_PAGE_STORAGE_KEY = "abufarha:products:perPage";
 // is always shown (with a live count) so brands/categories are never hidden
 // just because they currently hold few or no systems.
 const CONDITIONS = ["Brand New", "Certified Refurbished", "Factory Certified", "Used"] as const;
-const COUNTRIES = ["Germany", "Japan", "USA", "Netherlands", "Italy", "China"] as const;
-const SYSTEM_TYPES = ["Fixed", "Mobile", "Ceiling Mounted", "Floor Mounted", "Portable"] as const;
-const SERVICES = [
-  "Installation Available",
-  "Commissioning Available",
-  "Clinical Training",
-  "Preventive Maintenance",
-  "Spare Parts Available",
-  "Remote Support",
-  "Technical Support",
-  "Warranty Included",
-] as const;
-const SPECIALTIES = [
-  "Cardiology",
-  "Radiology",
-  "Oncology",
-  "Neurology",
-  "Women's Health",
-  "Orthopedics",
-  "Urology",
-] as const;
-const YEARS = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018] as const;
 
 // Filter facet definitions — values + live counts are computed from the catalog
 // at render time and merged with the master taxonomies above, so nothing is
 // hidden and adding a product simply increases the relevant counts.
-type FacetKey =
-  | "category"
-  | "manufacturer"
-  | "condition"
-  | "country"
-  | "year"
-  | "systemType"
-  | "service"
-  | "specialty";
+type FacetKey = "category" | "manufacturer" | "condition";
 
 const FIELD_BY_KEY: Record<FacetKey, (p: Product) => string[]> = {
   category: (p) => [p.category],
   manufacturer: (p) => [p.brand],
   condition: (p) => [p.status],
-  country: (p) => [p.country],
-  year: (p) => [String(p.year)],
-  systemType: (p) => [p.systemType],
-  service: (p) => p.services,
-  specialty: (p) => p.specialty,
 };
 
 const FACET_CONFIG: {
@@ -129,11 +85,6 @@ const FACET_CONFIG: {
     searchable: true,
   },
   { key: "condition", title: "Condition", master: CONDITIONS },
-  { key: "country", title: "Country of Origin", master: COUNTRIES },
-  { key: "year", title: "Year", master: YEARS.map(String) },
-  { key: "systemType", title: "System Type", master: SYSTEM_TYPES },
-  { key: "service", title: "Availability of Services", master: SERVICES },
-  { key: "specialty", title: "Clinical Specialty", master: SPECIALTIES },
 ];
 
 type Selected = Record<FacetKey, string[]>;
@@ -141,11 +92,6 @@ const EMPTY_SELECTED: Selected = {
   category: [],
   manufacturer: [],
   condition: [],
-  country: [],
-  year: [],
-  systemType: [],
-  service: [],
-  specialty: [],
 };
 
 const FILTERS_OPEN_STORAGE_KEY = "abufarha:products:openFilters";
@@ -272,11 +218,13 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           />
         </div>
-        <span
-          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[product.status]}`}
-        >
-          {product.status}
-        </span>
+        {product.status !== "Used" && (
+          <span
+            className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[product.status]}`}
+          >
+            {product.status}
+          </span>
+        )}
         <span className="absolute bottom-3 left-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.brand}
         </span>
@@ -288,7 +236,9 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">{product.category}</p>
         <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">
-          {product.specs.map((s) => (
+          {product.specs
+            .filter((s) => !/^YOM\b/i.test(s))
+            .map((s) => (
             <span
               key={s}
               className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground/70 sm:px-3 sm:py-1"
@@ -371,7 +321,6 @@ function buildPageList(current: number, total: number): (number | "…")[] {
 export function PortfolioBrowser() {
   const [activeCat, setActiveCat] = useState<string>("All Categories");
   const [view, setView] = useState<"grid" | "list">("grid");
-  const [sort, setSort] = useState<string>(SORT_OPTIONS[0]);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Selected>(EMPTY_SELECTED);
   const [perPage, setPerPage] = useState<number>(PER_PAGE_OPTIONS[0]);
@@ -496,19 +445,10 @@ export function PortfolioBrowser() {
   }, [baseList, selected]);
 
   const filtered = useMemo(() => {
-    let list = baseList.filter((p) => productPassesFacets(p));
-    if (sort === "Newest" || sort === "Recently Added")
-      list = [...list].sort((a, b) => b.addedOrder - a.addedOrder);
-    else if (sort === "Manufacturer A–Z")
-      list = [...list].sort((a, b) => a.brand.localeCompare(b.brand));
-    else if (sort === "Manufacturer Z–A")
-      list = [...list].sort((a, b) => b.brand.localeCompare(a.brand));
-    else if (sort === "Category")
-      list = [...list].sort((a, b) => a.category.localeCompare(b.category));
-    else if (sort === "System Name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
-    return list;
+    const list = baseList.filter((p) => productPassesFacets(p));
+    return [...list].sort((a, b) => b.addedOrder - a.addedOrder);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [baseList, selected, sort]);
+  }, [baseList, selected]);
 
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
@@ -760,22 +700,6 @@ export function PortfolioBrowser() {
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <div className="relative">
-                  <select
-                    value={sort}
-                    onChange={(e) => {
-                      setSort(e.target.value);
-                      resetPage();
-                    }}
-                    aria-label="Sort systems"
-                    className="h-10 appearance-none rounded-full border border-border bg-background pl-4 pr-9 text-sm font-medium text-foreground/80 outline-none focus:ring-2 focus:ring-primary/30"
-                  >
-                    {SORT_OPTIONS.map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                </div>
                 <div className="relative">
                   <select
                     value={perPage}
