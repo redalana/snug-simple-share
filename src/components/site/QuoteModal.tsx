@@ -175,7 +175,7 @@ export function QuoteModal() {
     <Dialog open={open} onOpenChange={resetOnClose}>
       <DialogContent className="flex max-h-[94dvh] w-[calc(100vw-1rem)] max-w-[900px] flex-col overflow-hidden rounded-[16px] border border-border/60 bg-background p-0 shadow-[0_50px_120px_-30px_rgba(15,23,42,0.4)] sm:w-[calc(100vw-2rem)] sm:rounded-[20px]">
         {/* HEADER */}
-        <div className="relative shrink-0 border-b border-border/60 px-5 pb-4 pt-5 sm:px-9 sm:pb-5 sm:pt-6">
+        <div className="relative shrink-0 border-b border-border/60 px-5 pb-4 pt-5 sm:px-9 sm:pb-5 sm:pt-6 [@media(max-height:820px)]:sm:pb-4 [@media(max-height:820px)]:sm:pt-4">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
             <FileText className="h-3 w-3" /> Quotation Request
           </div>
@@ -191,7 +191,7 @@ export function QuoteModal() {
         <form
           onSubmit={onSubmit}
           aria-busy={submitting || success}
-          className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5 md:overflow-visible sm:px-9 sm:py-6"
+          className="relative min-h-0 flex-1 overflow-y-auto px-5 py-5 md:overflow-visible sm:px-9 sm:py-6 [@media(max-height:820px)]:sm:py-4"
         >
           <fieldset disabled={submitting || success} className="contents">
             <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2">
@@ -455,8 +455,7 @@ export function QuoteModal() {
                     id="qm-message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full flex-1 resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12"
-                    style={{ minHeight: 116 }}
+                    className="w-full flex-1 resize-y rounded-xl border border-border/80 bg-background p-4 text-sm leading-relaxed text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/55 hover:border-border focus:border-primary focus:ring-4 focus:ring-primary/12 min-h-[clamp(84px,11vh,150px)]"
                     placeholder="Tell us about your project, preferred equipment, installation requirements, destination country and any additional information."
                   />
                 </div>
