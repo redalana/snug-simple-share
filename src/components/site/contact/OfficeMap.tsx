@@ -16,10 +16,10 @@ function OfficeRow({
         <Icon className="h-4 w-4" />
       </span>
       <div className="min-w-0">
-        <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+        <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.16em] text-muted-foreground [overflow-wrap:anywhere]">
           {label}
         </div>
-        <div className="mt-0.5 text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-foreground">
+        <div className="mt-0.5 text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-foreground [overflow-wrap:anywhere]">
           {children}
         </div>
       </div>
@@ -78,7 +78,7 @@ export function OfficeMap() {
                   href={DIRECTIONS_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                  className="inline-flex min-w-0 flex-1 flex-wrap items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
                 >
                   Get Directions <Navigation className="h-4 w-4" />
                 </a>
@@ -86,7 +86,7 @@ export function OfficeMap() {
                   href={MAP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
+                  className="inline-flex min-w-0 flex-1 flex-wrap items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:text-primary"
                 >
                   Open in Google Maps <ExternalLink className="h-3.5 w-3.5" />
                 </a>

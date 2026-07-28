@@ -995,11 +995,11 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-3 border-t border-border pt-4">
-          <span className="text-xs font-semibold text-foreground/70">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+          <span className="min-w-0 text-xs font-semibold text-foreground/70">
             {count > 0 ? `${count}+ ` : "20+ "}Products
           </span>
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
             <Link
               to="/products"
               className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground transition-all hover:-translate-y-0.5"

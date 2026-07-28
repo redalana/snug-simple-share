@@ -499,10 +499,10 @@ export function Solutions() {
                       key={m.label}
                       className="px-5 py-5 not-last:border-b not-last:border-border/70 sm:border-b-0"
                     >
-                      <div className="text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70">
+                      <div className="text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.16em] text-muted-foreground/70 [overflow-wrap:anywhere]">
                         {m.label}
                       </div>
-                      <div className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] font-bold leading-snug text-ink">
+                      <div className="mt-2 text-[calc(13.5*var(--desktop-px-unit))] font-bold leading-snug text-ink [overflow-wrap:anywhere]">
                         {m.value}
                       </div>
                     </div>
