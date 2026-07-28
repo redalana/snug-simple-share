@@ -54,7 +54,7 @@ function StatCard({ stat }: { stat: Stat }) {
   const { ref, value } = useCountUp(stat.value);
   const Icon = stat.icon;
   return (
-    <div className="flex min-w-0 items-center gap-3.5 rounded-xl p-3 transition-shadow duration-300 hover:shadow-(--shadow-panel) sm:p-4">
+    <div className="flex min-w-0 items-center gap-3 rounded-xl p-2.5 transition-shadow duration-300 hover:shadow-(--shadow-panel) sm:p-4">
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/8 text-primary ring-1 ring-inset ring-primary/12">
         <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
       </span>
@@ -65,10 +65,10 @@ function StatCard({ stat }: { stat: Stat }) {
           </span>
           <span className="text-primary">{stat.suffix}</span>
         </span>
-        <span className="mt-1.5 block text-[calc(13.5*var(--desktop-px-unit))] font-bold leading-snug text-ink [overflow-wrap:anywhere]">
+        <span className="mt-1.5 block text-[calc(13.5*var(--desktop-px-unit))] font-bold leading-snug text-ink [hyphens:none] [word-break:normal]">
           {stat.label}
         </span>
-        <span className="block text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground [overflow-wrap:anywhere]">
+        <span className="block text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-muted-foreground [hyphens:none] [word-break:normal]">
           {stat.sub}
         </span>
       </span>
