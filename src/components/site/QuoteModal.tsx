@@ -310,7 +310,7 @@ export function QuoteModal() {
                       setPhone(v);
                       if (!touched.phone) markTouched("phone");
                     }}
-                    className="[&_input]:h-14 [&_input]:rounded-xl [&_input]:text-sm"
+                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
                   />
                   {showError("phone", !phoneValid) && (
                     <p className={errText}>Enter a valid phone number.</p>
