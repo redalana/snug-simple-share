@@ -668,29 +668,9 @@ export function PortfolioBrowser() {
         </div>
       </section>
 
-      {/* SEARCH */}
-      <section className="border-b border-border/60 bg-white">
-        <div className="mx-auto max-w-[100rem] px-6 py-8 lg:px-10 lg:py-10">
-          <div className="group/search relative mx-auto max-w-4xl">
-            <Search className="pointer-events-none absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-primary" />
-            <input
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                resetPage();
-              }}
-              type="search"
-              placeholder="Search by system name, manufacturer, model, technology, or keyword..."
-              aria-label="Search medical systems"
-              className="h-16 w-full rounded-2xl bg-white pl-16 pr-5 text-base text-foreground shadow-[0_18px_44px_-18px_rgba(15,23,42,0.32)] ring-1 ring-primary/10 outline-none transition-all placeholder:text-muted-foreground hover:ring-primary/20 focus:shadow-[0_22px_54px_-18px_rgba(15,23,42,0.4)] focus:ring-2 focus:ring-primary/50"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* CATEGORY NAV */}
-      <section className="sticky top-[calc(112*var(--desktop-px-unit))] z-30 border-b border-border/60 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-[80rem] items-center gap-3 px-6 pt-4 pb-6 lg:px-10">
+      <section className="border-b border-border/60 bg-background">
+        <div className="mx-auto flex max-w-[80rem] items-center gap-3 px-6 pt-6 pb-6 lg:px-10">
           <div className="relative w-full [mask-image:linear-gradient(to_right,black_calc(100%-40px),transparent)] md:[mask-image:none]">
             <div
               role="tablist"
@@ -725,7 +705,7 @@ export function PortfolioBrowser() {
         <div className="lg:grid lg:grid-cols-[calc(320*var(--desktop-px-unit))_1fr] lg:gap-10">
           {/* FILTERS */}
           <div className="mb-8 lg:mb-0">
-            <div className="lg:sticky lg:top-[calc(188*var(--desktop-px-unit))]">
+            <div className="lg:sticky lg:top-[calc(128*var(--desktop-px-unit))]">
               <div className="rounded-2xl border border-border/70 bg-card p-7 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]">
                 <div className="mb-1 flex items-center justify-between">
                   <div className="flex items-center gap-2 font-display font-bold text-foreground">
