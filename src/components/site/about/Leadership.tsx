@@ -716,7 +716,7 @@ export function Leadership() {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="relative grid overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
+            <div className="relative grid grid-cols-1 overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
               <div className="col-start-1 row-start-1 self-stretch [&>*]:h-full">
                 <CinematicBackdrop
                   env={active.env}
@@ -736,7 +736,7 @@ export function Leadership() {
               />
 
               {/* Floating console — vertically centered within the image area */}
-              <div className="col-start-1 row-start-1 flex items-center justify-center p-6 sm:justify-end">
+              <div className="col-start-1 row-start-1 flex min-w-0 items-center justify-center p-6 sm:justify-end">
                 <div className="w-full sm:w-[62%] lg:w-[58%] xl:w-[54%]">
                   <ExecutiveConsole
                     leader={active}
