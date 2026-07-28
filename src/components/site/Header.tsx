@@ -163,7 +163,19 @@ export function Header() {
             })}
           </div>
         </nav>
+
+        {/* Level 3 — centered global search (homepage) */}
+        {isHome && (
+          <div className="border-t border-border/50">
+            <div className="mx-auto flex max-w-[100rem] justify-center px-6 py-3 lg:px-10">
+              <div className="w-full md:w-[560px] lg:w-[680px] xl:w-[760px]">
+                <SearchField />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
 
       {/* Mobile search drawer */}
       <AnimatePresence>
