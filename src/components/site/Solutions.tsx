@@ -18,6 +18,7 @@ import {
 
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
+import { setActiveCategoryId } from "@/lib/solutions-category";
 import cathlab from "@/assets/hero-cathlab.jpg";
 import mri from "@/assets/sol-mri.jpg";
 import ct from "@/assets/sol-ct.jpg";
@@ -226,6 +227,12 @@ export function Solutions() {
     }, AUTOPLAY_MS);
     return () => clearTimeout(t);
   }, [activeIndex, paused, cycleKey]);
+
+  // Publish the selection so the Dynamic Product Solutions section below stays
+  // in sync without lifting state into the homepage route.
+  useEffect(() => {
+    setActiveCategoryId(activeId);
+  }, [activeId]);
 
   // Preload every category image so switches are instant, no flash.
   useEffect(() => {
