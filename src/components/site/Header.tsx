@@ -93,14 +93,16 @@ export function Header() {
           </div>
 
           {/* Mobile controls */}
-          <div className="ml-auto flex items-center gap-1.5 md:ml-0 xl:hidden">
-            <button
-              aria-label="Search"
-              onClick={() => setMobileSearch((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
-            >
-              <Search className="h-5 w-5" />
-            </button>
+          <div className="ml-auto flex items-center gap-1.5 xl:hidden">
+            {!isHome && (
+              <button
+                aria-label="Search"
+                onClick={() => setMobileSearch((v) => !v)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+            )}
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
