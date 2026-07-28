@@ -504,7 +504,7 @@ export function QuoteModal() {
             </div>
 
             {/* TRUST STRIP */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-6 text-xs font-medium text-muted-foreground">
+            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-primary/80" /> Your information is securely
                 transmitted
@@ -515,7 +515,8 @@ export function QuoteModal() {
             </div>
 
             {/* ACTIONS */}
-            <div className="mt-5 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
+            <div className="mt-4 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
+
               <button
                 type="button"
                 onClick={() => setOpen(false)}
