@@ -204,7 +204,7 @@ export function WhyAbuFarha() {
           <motion.div
             {...fade}
             transition={{ duration: 0.65, delay: 0.08, ease: EASE }}
-            className="grid min-w-0 gap-6 lg:col-span-7 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
+            className="grid min-w-0 gap-6 lg:col-span-7 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.02fr)]"
           >
             <div className="overflow-hidden rounded-2xl border border-border/70 bg-white shadow-(--shadow-panel)">
               <img
@@ -218,8 +218,8 @@ export function WhyAbuFarha() {
               />
             </div>
 
-            <div className="flex min-w-0 flex-col justify-center rounded-2xl border border-border/70 bg-white p-4 shadow-(--shadow-panel) sm:p-5">
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className="@container flex min-w-0 flex-col justify-center rounded-2xl border border-border/70 bg-white p-4 shadow-(--shadow-panel) sm:p-5">
+              <div className="grid grid-cols-1 gap-2 @[26rem]:grid-cols-2">
                 {STATS.map((s) => (
                   <StatCard key={s.label + s.sub} stat={s} />
                 ))}
