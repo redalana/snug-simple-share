@@ -705,7 +705,7 @@ export function Leadership() {
         </Reveal>
 
         {/* Desktop */}
-        <div className="mt-12 hidden xl:grid xl:grid-cols-[minmax(0,clamp(220px,18vw,300px))_minmax(0,1fr)] xl:gap-10">
+        <div className="mt-12 hidden xl:grid xl:grid-cols-[minmax(0,clamp(260px,20vw,300px))_minmax(0,1fr)] xl:gap-10">
           <Reveal className="xl:sticky xl:top-28 xl:self-start">
             <div className="rounded-3xl bg-secondary/40 p-3 ring-1 ring-border">
               <div className="max-h-[calc(680*var(--desktop-px-unit))] space-y-1 overflow-y-auto pr-1">
