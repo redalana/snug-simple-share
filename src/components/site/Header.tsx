@@ -38,6 +38,8 @@ export function Header() {
   const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  const isHome = pathname === "/";
+
   const isActive = (href: string) => {
     if (!href.startsWith("/")) return false;
     if (href === "/") return pathname === "/";
