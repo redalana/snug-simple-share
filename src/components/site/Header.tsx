@@ -66,15 +66,9 @@ export function Header() {
             <Logo />
           </Link>
 
-          {/* Search — centered hero element of the header */}
-          <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[calc(400*var(--desktop-px-unit))] lg:w-[calc(420*var(--desktop-px-unit))]">
-              <SearchField />
-            </div>
-          </div>
-
           {/* Right cluster — language, socials */}
-          <div className="hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
+          <div className="ml-auto hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
+
             <LanguageSelector />
 
             <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
