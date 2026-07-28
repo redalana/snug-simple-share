@@ -23,14 +23,10 @@ import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/use-count-up";
+import { TechnologyPartners } from "./TechnologyPartners";
 
 import heroImg from "@/assets/why-cathlab.jpg";
 import engineerImg from "@/assets/aftersales-remote-engineer.jpg";
-import canon from "@/assets/brands/toshiba-canon.png.asset.json";
-import ge from "@/assets/brands/ge.png.asset.json";
-import mindray from "@/assets/brands/mindray.png.asset.json";
-import philips from "@/assets/brands/philips.png.asset.json";
-import siemens from "@/assets/brands/siemens.png.asset.json";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -126,16 +122,6 @@ const PILLARS: Pillar[] = [
     title: "24/7 Technical Support",
     copy: "Remote diagnostics and on-site engineers across the full lifecycle of every installed system.",
   },
-];
-
-/* -------------------------------- Partners ------------------------------- */
-
-const PARTNERS = [
-  { name: "Philips", url: philips.url, h: 30 },
-  { name: "Siemens Healthineers", url: siemens.url, h: 26 },
-  { name: "Canon Medical", url: canon.url, h: 28 },
-  { name: "GE HealthCare", url: ge.url, h: 48 },
-  { name: "Mindray", url: mindray.url, h: 40 },
 ];
 
 const TRUST = [
@@ -317,32 +303,8 @@ export function WhyAbuFarha() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mt-20 rounded-3xl border border-border/70 bg-white p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:p-12 lg:mt-28"
         >
-          <div className="mx-auto max-w-2xl text-center">
-            <h3 className="font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-ink sm:text-[2.1rem]">
-              Technology Partners
-            </h3>
-            <p className="mt-3 text-[calc(15.5*var(--desktop-px-unit))] leading-[1.6] text-muted-foreground">
-              Trusted global medical manufacturers
-            </p>
-          </div>
+          <TechnologyPartners />
 
-          <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {PARTNERS.map((b) => (
-              <li
-                key={b.name}
-                className="flex h-24 min-w-0 items-center justify-center rounded-2xl border border-border/60 bg-white px-6 transition-shadow duration-300 hover:shadow-(--shadow-panel)"
-              >
-                <img
-                  src={b.url}
-                  alt={b.name}
-                  loading="lazy"
-                  decoding="async"
-                  style={{ height: b.h }}
-                  className="w-auto max-w-full object-contain"
-                />
-              </li>
-            ))}
-          </ul>
 
           <ul className="mt-10 grid grid-cols-1 gap-6 border-t border-border/70 pt-8 sm:grid-cols-3">
             {TRUST.map((t) => {

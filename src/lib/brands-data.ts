@@ -106,3 +106,76 @@ export const BRANDS_LIST: BrandEntry[] = [
     logo: { kind: "text" },
   },
 ];
+
+/* -------------------------------------------------------------------------
+ * Partner view of the roster (logo artwork + live product counts).
+ *
+ * Derived from BRANDS_LIST above so every surface — Brands page, header
+ * dropdown, homepage Technology Partners marquee — stays in sync. Add or
+ * remove a brand in BRANDS_LIST (plus its artwork entry below) and every
+ * surface updates automatically.
+ * ---------------------------------------------------------------------- */
+
+import { PRODUCTS } from "@/lib/products";
+
+import abbott from "@/assets/brands/abbott.png.asset.json";
+import boston from "@/assets/brands/boston-scientific.png.asset.json";
+import canon from "@/assets/brands/toshiba-canon.png.asset.json";
+import esaote from "@/assets/brands/esaote.png.asset.json";
+import ge from "@/assets/brands/ge.png.asset.json";
+import hitachi from "@/assets/brands/hitachi.png.asset.json";
+import medtronic from "@/assets/brands/medtronic.png.asset.json";
+import mindray from "@/assets/brands/mindray.png.asset.json";
+import philips from "@/assets/brands/philips.png.asset.json";
+import richardWolf from "@/assets/brands/richard-wolf.png.asset.json";
+import shimadzu from "@/assets/brands/shimadzu.png.asset.json";
+import siemens from "@/assets/brands/siemens.png.asset.json";
+
+/**
+ * Per-brand artwork: trimmed PNG wordmark + optically calibrated render
+ * height (px) so no single logo dominates. `productKey` links to
+ * PRODUCTS[].brand for live counts.
+ */
+const BRAND_ARTWORK: Record<string, { url: string; h: number; productKey?: string }> = {
+  Philips: { url: philips.url, h: 22, productKey: "Philips" },
+  Siemens: { url: siemens.url, h: 20, productKey: "Siemens" },
+  GE: { url: ge.url, h: 40, productKey: "GE" },
+  "Canon Medical": { url: canon.url, h: 22, productKey: "Canon Medical" },
+  Mindray: { url: mindray.url, h: 34 },
+  Esaote: { url: esaote.url, h: 42 },
+  "Richard Wolf": { url: richardWolf.url, h: 36 },
+  Hitachi: { url: hitachi.url, h: 24 },
+  Shimadzu: { url: shimadzu.url, h: 26 },
+  Abbott: { url: abbott.url, h: 34 },
+  Medtronic: { url: medtronic.url, h: 40 },
+  "Boston Scientific": { url: boston.url, h: 44 },
+};
+
+export type BrandPartner = {
+  /** Full display name, e.g. "Siemens Healthineers". */
+  name: string;
+  color: string;
+  href: string;
+  logoUrl: string;
+  /** Calibrated optical render height in px. */
+  logoHeight: number;
+  /** Live count from the product catalogue; 0 when none are listed. */
+  productCount: number;
+};
+
+/** Every brand of the roster, with artwork and live product counts. */
+export function getBrandPartners(): BrandPartner[] {
+  return BRANDS_LIST.filter((b) => BRAND_ARTWORK[b.name]).map((b) => {
+    const art = BRAND_ARTWORK[b.name];
+    return {
+      name: b.sub ? `${b.name} ${b.sub}` : b.name,
+      color: b.color,
+      href: b.href,
+      logoUrl: art.url,
+      logoHeight: art.h,
+      productCount: art.productKey
+        ? PRODUCTS.filter((p) => p.brand === art.productKey).length
+        : 0,
+    };
+  });
+}
