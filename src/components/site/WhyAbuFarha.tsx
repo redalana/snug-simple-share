@@ -15,7 +15,6 @@ import {
   Handshake,
   Globe,
   Briefcase,
-  CalendarClock,
   Boxes,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -375,8 +374,3 @@ export function WhyAbuFarha() {
     </section>
   );
 }
-
-/** Kept for compatibility with existing imports. */
-export const WhyAbuFarhaSection = WhyAbuFarha;
-
-export { CalendarClock };
