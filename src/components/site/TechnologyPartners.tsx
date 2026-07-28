@@ -20,6 +20,7 @@ function PartnerCard({ brand }: { brand: BrandPartner }) {
       to="/brands"
       hash={brand.href.split("#")[1]}
       aria-label={`${brand.name} — view brand details`}
+      draggable={false}
       className="group flex h-[7.75rem] w-[8.75rem] shrink-0 select-none flex-col items-center justify-center gap-2 rounded-[18px] border border-[oklch(0.93_0_0)] bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] hover:border-primary/35 hover:shadow-[0_24px_50px_-24px_rgba(15,23,42,0.35),0_0_0_3px_rgba(220,38,38,0.08)] focus-visible:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:w-[11rem] lg:w-[11.5rem]"
     >
       <span className="flex h-14 w-full items-center justify-center">
@@ -104,7 +105,6 @@ function MarqueeRow({
         style={{ x, willChange: "transform" }}
         drag="x"
         dragMomentum={false}
-        dragConstraints={false}
         onDragStart={() => (dragging.current = true)}
         onDragEnd={() => {
           dragging.current = false;
