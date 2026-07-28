@@ -38,6 +38,8 @@ export function Header() {
   const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  const isHome = pathname === "/";
+
   const isActive = (href: string) => {
     if (!href.startsWith("/")) return false;
     if (href === "/") return pathname === "/";
@@ -66,15 +68,9 @@ export function Header() {
             <Logo />
           </Link>
 
-          {/* Search — centered hero element of the header */}
-          <div className="hidden flex-1 justify-center md:flex">
-            <div className="w-[calc(400*var(--desktop-px-unit))] lg:w-[calc(420*var(--desktop-px-unit))]">
-              <SearchField />
-            </div>
-          </div>
-
           {/* Right cluster — language, socials */}
-          <div className="hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
+          <div className="ml-auto hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
+
             <LanguageSelector />
 
             <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
@@ -97,14 +93,16 @@ export function Header() {
           </div>
 
           {/* Mobile controls */}
-          <div className="ml-auto flex items-center gap-1.5 md:ml-0 xl:hidden">
-            <button
-              aria-label="Search"
-              onClick={() => setMobileSearch((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
-            >
-              <Search className="h-5 w-5" />
-            </button>
+          <div className="ml-auto flex items-center gap-1.5 xl:hidden">
+            {!isHome && (
+              <button
+                aria-label="Search"
+                onClick={() => setMobileSearch((v) => !v)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+            )}
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
@@ -169,7 +167,19 @@ export function Header() {
             })}
           </div>
         </nav>
+
+        {/* Level 3 — centered global search (homepage) */}
+        {isHome && (
+          <div className="border-t border-border/50">
+            <div className="mx-auto flex max-w-[100rem] justify-center px-6 py-3 lg:px-10">
+              <div className="w-full md:w-[560px] lg:w-[680px] xl:w-[760px]">
+                <SearchField />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
 
       {/* Mobile search drawer */}
       <AnimatePresence>
