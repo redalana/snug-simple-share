@@ -204,7 +204,7 @@ export function WhyAbuFarha() {
           <motion.div
             {...fade}
             transition={{ duration: 0.65, delay: 0.08, ease: EASE }}
-            className="grid min-w-0 gap-6 lg:col-span-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-6"
+            className="grid min-w-0 gap-6 lg:col-span-7 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
           >
             <div className="overflow-hidden rounded-2xl border border-border/70 bg-white shadow-(--shadow-panel)">
               <img
@@ -214,7 +214,7 @@ export function WhyAbuFarha() {
                 decoding="async"
                 width={1200}
                 height={900}
-                className="h-full min-h-[16rem] w-full object-cover"
+                className="h-full min-h-[16rem] w-full object-cover max-h-[22rem] xl:max-h-none"
               />
             </div>
 
