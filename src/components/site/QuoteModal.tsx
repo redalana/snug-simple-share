@@ -520,7 +520,7 @@ export function QuoteModal() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-[52px] items-center justify-center gap-1.5 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                className="inline-flex h-12 items-center justify-center gap-1.5 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
               >
                 <X className="h-4 w-4" /> Cancel
               </button>
@@ -533,7 +533,7 @@ export function QuoteModal() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.18 }}
-                  className={`inline-flex h-[52px] items-center justify-center gap-2 rounded-full px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
+                  className={`inline-flex h-12 items-center justify-center gap-2 rounded-full px-8 text-sm font-bold text-primary-foreground shadow-[0_16px_38px_-14px_var(--primary)] transition-all duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
                     success
                       ? "bg-gradient-to-r from-emerald-500 to-emerald-600 opacity-100"
                       : "bg-gradient-to-r from-primary to-primary-dark disabled:opacity-50"
