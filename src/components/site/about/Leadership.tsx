@@ -716,12 +716,14 @@ export function Leadership() {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
-              <CinematicBackdrop
-                env={active.env}
-                nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
-                alt={`Environment reflecting ${active.role}`}
-              />
+            <div className="relative grid grid-cols-1 overflow-hidden rounded-3xl ring-1 ring-border shadow-[0_40px_100px_-40px_rgba(15,23,42,0.35)]">
+              <div className="col-start-1 row-start-1 self-stretch [&>*]:h-full">
+                <CinematicBackdrop
+                  env={active.env}
+                  nextEnv={LEADERS[(activeIndex + 1) % LEADERS.length].env}
+                  alt={`Environment reflecting ${active.role}`}
+                />
+              </div>
 
               {/* Localized readability gradient — only behind the console area, fades to fully transparent */}
               <div
@@ -729,20 +731,24 @@ export function Leadership() {
                 className="pointer-events-none absolute inset-0 hidden sm:block"
                 style={{
                   background:
-                    "radial-gradient(70% 65% at 82% 88%, rgba(10,14,20,0.72) 0%, rgba(10,14,20,0.45) 35%, rgba(10,14,20,0) 70%)",
+                    "radial-gradient(70% 70% at 82% 50%, rgba(10,14,20,0.72) 0%, rgba(10,14,20,0.45) 35%, rgba(10,14,20,0) 70%)",
                 }}
               />
 
-              {/* Floating console — smaller footprint so the cath lab remains visible */}
-              <div className="absolute inset-x-6 bottom-6 sm:right-6 sm:left-auto sm:bottom-6 sm:w-[62%] lg:w-[58%] xl:w-[54%]">
-                <ExecutiveConsole
-                  leader={active}
-                  paused={paused}
-                  onToggle={togglePause}
-                  activeIndex={activeIndex}
-                  total={LEADERS.length}
-                />
+              {/* Floating console — vertically centered within the image area */}
+              <div className="col-start-1 row-start-1 flex min-w-0 items-center justify-center p-6 sm:justify-end">
+                <div className="w-full sm:w-[62%] lg:w-[58%] xl:w-[54%]">
+                  <ExecutiveConsole
+                    leader={active}
+                    paused={paused}
+                    onToggle={togglePause}
+                    activeIndex={activeIndex}
+                    total={LEADERS.length}
+                  />
+                </div>
               </div>
+
+
             </div>
           </Reveal>
         </div>
