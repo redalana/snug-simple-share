@@ -52,6 +52,7 @@ export function Breadcrumbs({
   items,
   className = "",
   variant = "bar",
+  emitJsonLd = true,
 }: {
   items?: Crumb[];
   className?: string;
@@ -61,6 +62,8 @@ export function Breadcrumbs({
    * matching the markup previously duplicated across pages.
    */
   variant?: "bar" | "inline";
+  /** Set false when the route's head() already emits a BreadcrumbList. */
+  emitJsonLd?: boolean;
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (HIDDEN_ON.has(pathname)) return null;
