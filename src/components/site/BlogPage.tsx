@@ -444,6 +444,14 @@ function SearchBar({
   setSort: (value: KnowledgeSort) => void;
 }) {
   const [open, setOpen] = useState(false);
+  /* Debounced so typing does not re-run the graph query on every keystroke. */
+  const [draft, setDraft] = useState(q);
+  useEffect(() => setDraft(q), [q]);
+  useEffect(() => {
+    if (draft === q) return;
+    const id = setTimeout(() => setQ(draft), 250);
+    return () => clearTimeout(id);
+  }, [draft, q, setQ]);
 
   return (
     <section className="bg-white pt-10 lg:pt-14">
@@ -452,11 +460,13 @@ function SearchBar({
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            aria-label="Search the Knowledge Center"
             placeholder="Search articles, topics, or keywords…"
             className="h-12 w-full rounded-full border border-border bg-white pl-11 pr-14 text-sm text-ink shadow-[0_2px_10px_-6px_rgba(15,23,42,0.15)] outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10"
           />
+
           <button
             type="button"
             aria-label="Search"
