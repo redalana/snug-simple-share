@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import {
   ArrowRight,
   Award,
@@ -387,6 +388,37 @@ function BrandsPage() {
   const featured = filtered.filter((b) => b.featured);
   const rest = filtered.filter((b) => !b.featured);
 
+  // Featured carousel shows every matching manufacturer, flagged ones first.
+  const featuredSlides = useMemo(() => [...featured, ...rest], [featured, rest]);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+    containScroll: "trimSnaps",
+  });
+  const [selectedSnap, setSelectedSnap] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedSnap(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, featuredSlides.length]);
+
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -504,7 +536,7 @@ function BrandsPage() {
         </section>
 
         {/* ============ FEATURED MANUFACTURERS ============ */}
-        {featured.length > 0 && (
+        {featuredSlides.length > 0 && (
           <section className="bg-white pt-8">
             <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
               <div className="mb-6 flex items-end justify-between gap-6">
@@ -517,20 +549,27 @@ function BrandsPage() {
                   </h2>
                 </div>
                 <div className="hidden items-center gap-3 md:flex">
-                  <span className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    {featured.length} of {BRANDS.length}
+                  <span
+                    aria-live="polite"
+                    className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+                  >
+                    {Math.min(selectedSnap + 1, featuredSlides.length)} of {featuredSlides.length}
                   </span>
                   <div className="flex items-center gap-1.5">
                     <button
                       type="button"
+                      onClick={scrollPrev}
                       aria-label="Previous brand"
+                      aria-controls="featured-brands-carousel"
                       className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
                     >
                       <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                     </button>
                     <button
                       type="button"
+                      onClick={scrollNext}
                       aria-label="Next brand"
+                      aria-controls="featured-brands-carousel"
                       className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
                     >
                       <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -538,10 +577,36 @@ function BrandsPage() {
                   </div>
                 </div>
               </div>
-              <div className="grid gap-5 md:grid-cols-3">
-                {featured.map((brand) => (
-                  <FeaturedBrandCard key={brand.name} brand={brand} />
-                ))}
+              <div
+                id="featured-brands-carousel"
+                ref={emblaRef}
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Featured manufacturers"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    scrollPrev();
+                  } else if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    scrollNext();
+                  }
+                }}
+                className="overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                <div className="-ml-5 flex">
+                  {featuredSlides.map((brand) => (
+                    <div
+                      key={brand.name}
+                      role="group"
+                      aria-roledescription="slide"
+                      className="min-w-0 shrink-0 grow-0 basis-full pl-5 [&>article]:h-full md:basis-1/2 lg:basis-1/3"
+                    >
+                      <FeaturedBrandCard brand={brand} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
