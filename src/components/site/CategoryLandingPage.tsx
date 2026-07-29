@@ -83,20 +83,12 @@ export function CategoryLandingPage({
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
           <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
-            <nav
-              aria-label="Breadcrumb"
+            <Breadcrumbs
+              variant="inline"
               className="flex items-center gap-1.5 text-sm text-muted-foreground"
-            >
-              <Link to="/" className="hover:text-primary">
-                Home
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-              <Link to="/products" className="hover:text-primary">
-                All Products
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-              <span className="text-foreground">{title}</span>
-            </nav>
+              items={[{ label: "All Products", to: "/products" }, { label: title }]}
+            />
+
 
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
               {title}
