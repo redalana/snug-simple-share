@@ -124,15 +124,6 @@ const PILLARS: Pillar[] = [
   },
 ];
 
-const TRUST = [
-  { icon: BadgeCheck, title: "Authorized Distributor", copy: "For leading global medical brands" },
-  { icon: CheckCircle2, title: "100% Genuine OEM Parts", copy: "Original & fully certified components" },
-  {
-    icon: Handshake,
-    title: "Long-Term Strategic Partnerships",
-    copy: "Built on trust and proven performance",
-  },
-];
 
 /* --------------------------------- Section -------------------------------- */
 
