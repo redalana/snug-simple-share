@@ -710,7 +710,7 @@ function Pagination({
               <button
                 key={p}
                 type="button"
-                onClick={() => setPage(p)}
+                onClick={() => onPage(p)}
                 aria-current={p === page ? "page" : undefined}
                 className={`h-10 min-w-10 rounded-full px-3 text-sm font-bold transition ${
                   p === page
@@ -728,8 +728,9 @@ function Pagination({
           )}
           <button
             type="button"
-            onClick={() => setPage((p) => Math.min(10, p + 1))}
-            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary disabled:opacity-40"
           >
             Next <ChevronRight className="h-4 w-4" />
           </button>
