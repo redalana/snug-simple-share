@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import {
   ArrowLeft,
   ArrowRight,
