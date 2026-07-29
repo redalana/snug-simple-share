@@ -514,24 +514,54 @@ function SearchBar({
 
 /* ---------------- Article Grid ---------------- */
 
-function ArticleGrid({ heading, items }: { heading: string; items: Article[] }) {
+function ArticleGrid({
+  heading,
+  count,
+  items,
+}: {
+  heading: string;
+  count: number;
+  items: ContentItem[];
+}) {
   return (
     <section className="bg-white pt-10 lg:pt-14">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <h2 className="mb-6 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-[1.75rem]">
           {heading}
+          <span className="ml-3 align-middle text-base font-bold text-muted-foreground">
+            {count} {count === 1 ? "Article" : "Articles"}
+          </span>
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          id="kc-results"
+          role="tabpanel"
+          aria-live="polite"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {items.map((a) => (
             <ArticleCard key={a.slug} a={a} />
           ))}
         </div>
+        {items.length === 0 && (
+          <p className="py-10 text-center text-sm text-muted-foreground">
+            No articles match the current filters. Try clearing a filter or searching for a
+            different topic.
+          </p>
+        )}
       </div>
     </section>
   );
 }
 
-function ArticleCard({ a }: { a: Article }) {
+function ArticleCard({ a }: { a: ContentItem }) {
+  /* Badges are graph facets, not editorial fields. */
+  const badges = [
+    a.primaryCategory,
+    a.technologies[0] ? technologyLabel(a.technologies[0]) : undefined,
+    a.manufacturers[0],
+    a.readingTime,
+  ].filter((v): v is string => Boolean(v));
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -546,7 +576,7 @@ function ArticleCard({ a }: { a: Article }) {
       >
         <div className="aspect-[16/10] w-full overflow-hidden bg-secondary">
           <img
-            src={a.coverImage}
+            src={a.image}
             alt={a.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -554,8 +584,13 @@ function ArticleCard({ a }: { a: Article }) {
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
-            {a.category}
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+            {badges.map((badge, i) => (
+              <span key={badge} className="inline-flex items-center gap-2">
+                {i > 0 && <span className="text-muted-foreground/50">•</span>}
+                <span className={i === 0 ? "" : "text-muted-foreground"}>{badge}</span>
+              </span>
+            ))}
           </span>
           <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
             {a.title}
