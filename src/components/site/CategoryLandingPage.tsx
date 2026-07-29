@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  ChevronRight,
   ShieldCheck,
   Wrench,
   GraduationCap,

@@ -114,6 +114,7 @@ function Breadcrumb({ category, title }: { category: string; title: string }) {
       <div className="mx-auto max-w-[87.5rem] px-6 pt-6 lg:px-10">
         <Breadcrumbs
           variant="inline"
+          emitJsonLd={false}
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
           items={[
             { label: "Blog", to: "/blog" },
