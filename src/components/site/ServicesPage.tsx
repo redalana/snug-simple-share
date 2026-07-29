@@ -42,6 +42,8 @@ import remoteEngineerImg from "@/assets/aftersales-remote-engineer.jpg";
 import engineeringImg from "@/assets/aftersales-engineering.jpg";
 import ctaImg from "@/assets/aftersales-cta.jpg";
 import trainingImg from "@/assets/aftersales-hero.jpg";
+import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
+import { SERVICE_ITEMS } from "@/lib/content";
 
 /* ================================================================== */
 /*  HERO                                                              */
@@ -1087,6 +1089,8 @@ function EmergencyCTA() {
 
 /* ================================================================== */
 
+const SERVICE_REFS = SERVICE_ITEMS.map((item) => item.id);
+
 export function ServicesPage() {
   return (
     <>
@@ -1097,6 +1101,7 @@ export function ServicesPage() {
       <WhyChoose />
       <Coverage />
       <EmergencyCTA />
+      <ExploreRelatedKnowledge refs={SERVICE_REFS} preset="service" />
     </>
   );
 }

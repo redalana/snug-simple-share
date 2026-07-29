@@ -26,6 +26,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PRODUCTS } from "@/lib/products";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
+import { BRAND_ITEMS } from "@/lib/content";
 
 type BrandCategory =
   | "Imaging"
@@ -368,6 +370,8 @@ export const Route = createFileRoute("/brands")({
   }),
   component: BrandsPage,
 });
+
+const BRAND_REFS = BRAND_ITEMS.map((item) => item.id);
 
 function BrandsPage() {
   const [query, setQuery] = useState("");
@@ -854,6 +858,7 @@ function BrandsPage() {
           </div>
         </section>
       </main>
+      <ExploreRelatedKnowledge refs={BRAND_REFS} preset="brand" />
       <Footer />
     </div>
   );
