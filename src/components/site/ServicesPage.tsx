@@ -317,11 +317,18 @@ function Hero() {
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
             onClick={() => goTo(i)}
-            className={cn(
-              "h-1.5 rounded-full transition-all duration-300",
-              i === index ? "w-8 bg-primary" : "w-3 bg-white/40 hover:bg-white/70",
-            )}
-          />
+            /* 24x24 hit area (WCAG 2.2 target-size); negative margins keep the
+               visible pill size and spacing pixel-identical. */
+            className="-m-2 grid h-6 place-items-center p-2"
+          >
+            <span
+              aria-hidden
+              className={cn(
+                "block h-1.5 rounded-full transition-all duration-300",
+                i === index ? "w-8 bg-primary" : "w-3 bg-white/40 hover:bg-white/70",
+              )}
+            />
+          </button>
         ))}
       </div>
     </section>

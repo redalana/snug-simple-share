@@ -170,7 +170,8 @@ function FilterAccordion({
                     type="checkbox"
                     checked={selected.includes(opt.value)}
                     onChange={() => onToggle(opt.value)}
-                    className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
+                    /* 24px target (WCAG 2.2) scaled back to the original 18px visual box. */
+                    className="h-6 w-6 origin-center scale-[0.75] rounded-[calc(5*var(--desktop-px-unit))] border-border text-primary accent-primary"
                   />
                   <span className="flex-1">{opt.value}</span>
                   <span className="text-xs font-medium text-muted-foreground">({opt.count})</span>
