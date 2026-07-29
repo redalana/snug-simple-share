@@ -17,7 +17,7 @@ export const Route = createFileRoute("/compare")({
         content:
           "Compare up to 4 medical systems side-by-side — specifications, warranty, availability, and support.",
       },
-      { name: "robots", content: "noindex" },
+      { name: "robots", content: "noindex, follow" },
     ],
   }),
   component: ComparePage,
@@ -157,6 +157,8 @@ function ComparePage() {
                             src={p.image}
                             alt={p.name}
                             className="mb-3 h-28 w-full rounded-xl object-cover"
+                            loading="lazy"
+                            decoding="async"
                           />
                           <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
                             {p.category}
@@ -259,7 +261,13 @@ function MobileProductAccordion({
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card">
       <div className="flex items-center gap-3 p-3">
-        <img src={product.image} alt="" className="h-14 w-20 rounded-md object-cover" />
+        <img
+          src={product.image}
+          alt=""
+          className="h-14 w-20 rounded-md object-cover"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="min-w-0 flex-1">
           <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
             {product.category}

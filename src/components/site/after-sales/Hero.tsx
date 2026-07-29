@@ -12,6 +12,9 @@ export function Hero() {
           className="h-full w-full object-cover object-center"
           width={1600}
           height={1100}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/20 to-ink/50" />

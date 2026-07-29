@@ -197,7 +197,6 @@ export function QuoteModal() {
             <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2 [@media(max-height:800px)]:gap-y-3">
               {/* LEFT COLUMN */}
               <div className="space-y-4 [@media(max-height:800px)]:space-y-3">
-
                 <div>
                   <label htmlFor="qm-name" className={fieldLabel}>
                     Full Name *
@@ -430,6 +429,8 @@ export function QuoteModal() {
                                 src={p.image}
                                 alt=""
                                 className="h-9 w-12 shrink-0 rounded-md object-cover"
+                                loading="lazy"
+                                decoding="async"
                               />
                               <span className="min-w-0 flex-1">
                                 <span className="block truncate text-sm font-semibold text-foreground">
@@ -459,7 +460,6 @@ export function QuoteModal() {
                     placeholder="Tell us about your project, preferred equipment, installation requirements, destination country and any additional information."
                   />
                 </div>
-
 
                 <div>
                   <span className={fieldLabel}>Preferred Contact</span>
@@ -515,7 +515,6 @@ export function QuoteModal() {
 
             {/* ACTIONS */}
             <div className="mt-4 flex flex-col-reverse items-stretch gap-3 [@media(max-height:800px)]:mt-3 sm:flex-row sm:items-center sm:justify-end">
-
               <button
                 type="button"
                 onClick={() => setOpen(false)}

@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/bone-densitometers")({
           "Full-body DEXA systems with clinical training, QC protocols and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/bone-densitometers" },
       { property: "og:image", content: OG_IMAGES.productCategory["bone-densitometers"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["bone-densitometers"] },

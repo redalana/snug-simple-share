@@ -31,6 +31,7 @@ export function Bento() {
                   alt={b.title}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
                   loading="lazy"
+                  decoding="async"
                 />
                 {/* stronger dark gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/85 to-ink/20" />

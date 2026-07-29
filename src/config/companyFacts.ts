@@ -142,8 +142,69 @@ export const ORGANIZATION_JSONLD = {
     { "@type": "Place", name: "Africa" },
     { "@type": "Place", name: "Middle East" },
   ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      telephone: COMPANY.phone,
+      email: COMPANY.email,
+      areaServed: ["Africa", "Middle East"],
+      availableLanguage: ["en", "fr", "ar"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "technical support",
+      telephone: COMPANY.phone,
+      email: COMPANY.email,
+      areaServed: ["Africa", "Middle East"],
+      availableLanguage: ["en", "fr", "ar"],
+    },
+  ],
+  knowsAbout: [
+    "Medical imaging equipment",
+    "Cath lab systems",
+    "MRI scanners",
+    "CT scanners",
+    "PET/CT scanners",
+    "C-arm systems",
+    "X-ray systems",
+    "Mammography systems",
+    "Bone densitometry (DEXA)",
+    "Lithotripsy (ESWL)",
+    "Drug-eluting stents",
+    "Biomedical engineering",
+    "Medical equipment installation and commissioning",
+    "Clinical applications training",
+    "Preventive maintenance and after-sales service",
+    "Turnkey hospital department delivery",
+  ],
   description: COPY.longDescription,
 } as const;
+
+/**
+ * WebSite entity + SearchAction. The site search is the product catalog
+ * browser at /products, which reads the `q` query parameter.
+ */
+export const WEBSITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${COMPANY.website}/#website`,
+  url: COMPANY.website,
+  name: COMPANY.shortName,
+  alternateName: COMPANY.legalName,
+  description: COPY.shortDescription,
+  inLanguage: "en",
+  publisher: { "@id": `${COMPANY.website}/#organization` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${COMPANY.website}/products?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+} as const;
+
 
 /** Person schema for the founder. Referenced from /about via JSON-LD. */
 export const FOUNDER_JSONLD = {

@@ -70,7 +70,6 @@ export function Header() {
 
           {/* Right cluster — language, socials */}
           <div className="ml-auto hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
-
             <LanguageSelector />
 
             <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
@@ -179,7 +178,6 @@ export function Header() {
           </div>
         )}
       </div>
-
 
       {/* Mobile search drawer */}
       <AnimatePresence>

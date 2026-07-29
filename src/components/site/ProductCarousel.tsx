@@ -122,6 +122,7 @@ function ProductSlideCard({ product }: { product: Product }) {
           alt={product.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+          decoding="async"
         />
         <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-foreground/80 shadow-sm">
           {product.category}

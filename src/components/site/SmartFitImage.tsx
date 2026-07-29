@@ -178,6 +178,7 @@ export function SmartFitImage({
         loading={loading}
         className={`absolute inset-0 h-full w-full object-contain ${imgClassName}`}
         style={style}
+        decoding="async"
       />
     </div>
   );

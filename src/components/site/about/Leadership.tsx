@@ -188,6 +188,7 @@ function Portrait({ leader, size }: { leader: Leader; size: number }) {
           height={size}
           decoding="async"
           className="h-full w-full object-cover object-[center_top]"
+          loading="lazy"
         />
       </div>
     );
@@ -495,7 +496,6 @@ function ExecutiveConsole({
           <HeroPortrait leader={leader} />
         </div>
 
-
         {/* RIGHT — Executive information */}
         <div className="relative flex min-w-0 flex-col p-6 sm:p-7">
           {/* Header row: status (left) ↔ counter (right) */}
@@ -709,7 +709,6 @@ export function Leadership() {
           <Reveal className="xl:sticky xl:top-28 xl:self-start">
             <div className="rounded-3xl bg-secondary/40 p-3 ring-1 ring-border">
               <div className="max-h-[calc(680*var(--desktop-px-unit))] space-y-1 overflow-y-auto pr-1">
-
                 {LEADERS.map((l, i) => (
                   <LeaderRow
                     key={l.id}
@@ -745,7 +744,6 @@ export function Leadership() {
               {/* Floating console — vertically centered within the image area */}
               <div className="col-start-1 row-start-1 flex min-w-0 items-center justify-center p-6 sm:justify-end">
                 <div className="leadership-console-slot">
-
                   <ExecutiveConsole
                     leader={active}
                     paused={paused}
@@ -755,8 +753,6 @@ export function Leadership() {
                   />
                 </div>
               </div>
-
-
             </div>
           </Reveal>
         </div>

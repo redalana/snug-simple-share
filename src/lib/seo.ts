@@ -72,3 +72,28 @@ export const OG_IMAGES = {
     others: absUrl(solOr),
   },
 } as const;
+
+/**
+ * Normalize a human-readable date string ("May 20, 2026") to an ISO-8601
+ * date ("2026-05-20"). Returns undefined when the input cannot be parsed —
+ * never guesses a date.
+ */
+export function isoDate(value?: string): string | undefined {
+  if (!value) return undefined;
+  const t = Date.parse(value);
+  return Number.isFinite(t) ? new Date(t).toISOString().slice(0, 10) : undefined;
+}
+
+/** Schema.org BreadcrumbList with absolute `item` URLs. */
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: absUrl(it.path),
+    })),
+  };
+}

@@ -176,6 +176,8 @@ function Hero({ article }: { article: Article }) {
           alt={article.title}
           style={{ objectPosition: article.focus ?? "center center" }}
           className="h-full w-full cursor-zoom-in object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </motion.div>
     </div>
@@ -280,6 +282,7 @@ function Block({ block }: { block: ContentBlock }) {
                   height="390"
                   className="h-full w-full cursor-zoom-in object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <p className="text-[calc(15.5*var(--desktop-px-unit))] leading-[1.8] text-foreground/85">
@@ -323,6 +326,7 @@ function Block({ block }: { block: ContentBlock }) {
                 width="520"
                 height="390"
                 className="h-full w-full cursor-zoom-in object-cover"
+                decoding="async"
               />
             </div>
           )}
@@ -415,6 +419,7 @@ function Block({ block }: { block: ContentBlock }) {
               width="1200"
               height="675"
               className="h-full w-full cursor-zoom-in object-cover"
+              decoding="async"
             />
           </div>
           {block.caption && (
@@ -1125,6 +1130,7 @@ function RelatedArticles({ items }: { items: Article[] }) {
                 alt={a.title}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                decoding="async"
               />
             </div>
             <div className="min-w-0 flex-1">
@@ -1192,6 +1198,7 @@ function SidebarNewsletter() {
           alt="Medical technology"
           loading="lazy"
           className="h-full w-full object-cover"
+          decoding="async"
         />
       </div>
     </div>
@@ -1243,6 +1250,7 @@ function ExpertCTA() {
                 alt="Medical specialists"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>
@@ -1306,6 +1314,7 @@ function NewsletterBand() {
                 alt="Newsletter"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>
@@ -1489,6 +1498,8 @@ function ArticleLightbox() {
               setZoomed((value) => !value);
             }}
             className={`max-h-[88vh] max-w-[88vw] object-contain transition-transform duration-300 ${zoomed ? "cursor-zoom-out scale-150" : "cursor-zoom-in scale-100"}`}
+            loading="lazy"
+            decoding="async"
           />
           {images.length > 1 && (
             <button

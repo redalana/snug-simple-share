@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/x-ray-systems")({
           "Digital DR systems with flat-panel detectors, clinical training and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/x-ray-systems" },
       { property: "og:image", content: OG_IMAGES.productCategory["x-ray-systems"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["x-ray-systems"] },

@@ -280,6 +280,7 @@ export function CategoryLandingPage({
                       alt={p.name}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                     <span
                       className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-semibold ${STATUS_STYLES[p.status]}`}

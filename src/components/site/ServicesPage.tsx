@@ -199,6 +199,8 @@ function Hero() {
               "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-out",
               i === index ? "opacity-80" : "opacity-0",
             )}
+            loading="lazy"
+            decoding="async"
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f12] via-[#0d0f12]/85 to-[#0d0f12]/30" />
@@ -500,7 +502,13 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
   return (
     <article className="grid grid-cols-[42%_58%] overflow-hidden rounded-2xl border border-border bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
       <div className="relative">
-        <img src={item.img} alt={item.title} className="h-full w-full object-cover" />
+        <img
+          src={item.img}
+          alt={item.title}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className="flex flex-col p-6">
         <div className="flex items-start gap-3">
@@ -649,7 +657,13 @@ function Equipment() {
               className="overflow-hidden rounded-xl border border-border bg-white transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg"
             >
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={eq.img} alt={eq.name} className="h-full w-full object-cover" />
+                <img
+                  src={eq.img}
+                  alt={eq.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="p-4">
                 <h3 className="font-display text-[calc(14*var(--desktop-px-unit))] font-bold text-foreground">
@@ -999,6 +1013,8 @@ function EmergencyCTA() {
           src={ctaImg}
           alt="AbuFarha service engineer"
           className="h-full w-full object-cover opacity-70"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f12] via-[#0d0f12]/70 to-transparent" />
       </div>

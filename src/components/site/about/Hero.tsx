@@ -12,6 +12,9 @@ export function Hero() {
           className="h-full w-full object-cover opacity-80"
           width={1600}
           height={1100}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/10" />
       </div>
@@ -81,7 +84,6 @@ export function Hero() {
               </div>
             ))}
           </div>
-
         </div>
 
         <div className="relative hidden lg:block">
@@ -93,6 +95,8 @@ export function Hero() {
               className="h-[calc(560*var(--desktop-px-unit))] w-full object-cover"
               width={900}
               height={560}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

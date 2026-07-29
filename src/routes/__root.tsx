@@ -19,7 +19,7 @@ import { QuoteModal } from "@/components/site/QuoteModal";
 import { CookieConsent } from "@/components/site/CookieConsent";
 import { CompareBar } from "@/components/site/CompareBar";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
-import { COMPANY, COPY, ORGANIZATION_JSONLD } from "@/config/companyFacts";
+import { COMPANY, COPY, ORGANIZATION_JSONLD, WEBSITE_JSONLD } from "@/config/companyFacts";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
@@ -108,6 +108,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         type: "application/ld+json",
         children: JSON.stringify(ORGANIZATION_JSONLD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(WEBSITE_JSONLD),
       },
       // Google Analytics 4 — loaded only when VITE_GA_MEASUREMENT_ID is set.
       ...(GA_ID

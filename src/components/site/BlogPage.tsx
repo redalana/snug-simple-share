@@ -279,6 +279,7 @@ function ArticleCard({ a }: { a: Article }) {
             alt={a.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            decoding="async"
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
@@ -351,6 +352,7 @@ function CTABand() {
                 alt="Medical specialists"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>
@@ -459,6 +461,7 @@ function Newsletter() {
                 alt="Healthcare newsletter"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>

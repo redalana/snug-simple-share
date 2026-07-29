@@ -34,24 +34,24 @@ export const Route = createFileRoute("/turnkey")({
               "@type": "WebPage",
               name: TITLE,
               description: DESC,
-              url: "/turnkey",
+              url: SITE_URL + "/turnkey",
             },
             {
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+                { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL + "/" },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Turnkey",
-                  item: "/turnkey",
+                  item: SITE_URL + "/turnkey",
                 },
               ],
             },
             {
               "@type": "Organization",
               name: "AbuFarha Medical Equipment",
-              url: "/",
+              url: SITE_URL + "/",
               areaServed: [
                 "Jordan",
                 "Yemen",

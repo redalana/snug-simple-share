@@ -31,6 +31,7 @@ export function Engineering() {
               className="h-full w-full object-cover"
               width={1600}
               height={1100}
+              decoding="async"
             />
           </div>
           <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-xl sm:block">

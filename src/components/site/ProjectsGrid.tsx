@@ -72,6 +72,7 @@ export function ProjectsGrid() {
                   alt={proj.name}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  decoding="async"
                 />
                 <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-0.5 text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground shadow">
                   Case Study

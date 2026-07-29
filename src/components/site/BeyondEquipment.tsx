@@ -282,6 +282,7 @@ export function BeyondEquipment() {
                 height={1200}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover contrast-[1.06] saturate-[1.03]"
+                decoding="async"
               />
               {/* subtle depth: cool clarity from top, gentle grounding at base */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-ink/12" />
@@ -516,6 +517,7 @@ export function BeyondEquipment() {
                 height={1200}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover contrast-[1.06] saturate-[1.03]"
+                decoding="async"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-ink/12" />
               {ADVANTAGES.map((a, i) => (

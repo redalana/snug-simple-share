@@ -359,6 +359,7 @@ export const Route = createFileRoute("/brands")({
           "12 world-leading manufacturers — one trusted partner for supply, installation, commissioning and after-sales.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/brands" },
       { property: "og:image", content: OG_IMAGES.brands },
       { name: "twitter:image", content: OG_IMAGES.brands },
       { name: "twitter:card", content: "summary_large_image" },
@@ -393,7 +394,7 @@ function BrandsPage() {
   const featuredSlides = useMemo(() => [...featured, ...rest], [featured, rest]);
 
   const autoplay = useRef(
-    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -403,7 +404,7 @@ function BrandsPage() {
       slidesToScroll: 1,
       containScroll: "trimSnaps",
     },
-    [autoplay.current]
+    [autoplay.current],
   );
   const [selectedSnap, setSelectedSnap] = useState(0);
 
@@ -439,8 +440,6 @@ function BrandsPage() {
   useEffect(() => {
     emblaApi?.reInit();
   }, [emblaApi, featuredSlides.length]);
-
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -644,7 +643,6 @@ function BrandsPage() {
                   })}
                 </div>
               </div>
-
             </div>
           </section>
         )}

@@ -70,6 +70,8 @@ export function CompareBar() {
                     src={p.image}
                     alt=""
                     className="h-10 w-14 shrink-0 rounded-md object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-semibold text-foreground">{p.name}</div>

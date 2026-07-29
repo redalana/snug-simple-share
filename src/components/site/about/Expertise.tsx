@@ -18,6 +18,7 @@ export function Expertise() {
                   alt="AbuFarha engineering team"
                   className="h-full w-full min-h-[calc(520*var(--desktop-px-unit))] object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-7 text-white">
                   <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/70">
@@ -78,6 +79,7 @@ export function Expertise() {
                               alt=""
                               className="h-full w-full object-cover"
                               loading="lazy"
+                              decoding="async"
                             />
                           </div>
                           <p className="text-[calc(14*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">

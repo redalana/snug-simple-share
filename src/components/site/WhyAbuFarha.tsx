@@ -21,7 +21,6 @@ import { Eyebrow } from "./Eyebrow";
 import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/use-count-up";
 
-
 import heroImg from "@/assets/why-cathlab.jpg";
 import engineerImg from "@/assets/aftersales-remote-engineer.jpg";
 
@@ -120,7 +119,6 @@ const PILLARS: Pillar[] = [
     copy: "Remote diagnostics and on-site engineers across the full lifecycle of every installed system.",
   },
 ];
-
 
 /* --------------------------------- Section -------------------------------- */
 

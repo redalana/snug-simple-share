@@ -44,6 +44,7 @@ export function FeaturedProjects() {
                     alt={p.title}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    decoding="async"
                   />
                   <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2.5 py-1 text-[calc(11*var(--desktop-px-unit))] font-bold text-foreground shadow-sm">
                     {p.country}

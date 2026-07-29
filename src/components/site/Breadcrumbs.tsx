@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronRight, Home } from "lucide-react";
+import { absUrl } from "@/lib/seo";
 
 export type Crumb = { label: string; to?: string };
 
@@ -56,12 +57,12 @@ export function Breadcrumbs({ items, className = "" }: { items?: Crumb[]; classN
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+      { "@type": "ListItem", position: 1, name: "Home", item: absUrl("/") },
       ...crumbs.map((c, i) => ({
         "@type": "ListItem",
         position: i + 2,
         name: c.label,
-        ...(c.to ? { item: c.to } : {}),
+        ...(c.to ? { item: absUrl(c.to) } : {}),
       })),
     ],
   };

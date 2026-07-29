@@ -71,6 +71,7 @@ export function Insights() {
               alt={FEATURED.title}
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
             <div className="relative z-10 p-7">
@@ -113,6 +114,7 @@ export function Insights() {
                     alt={article.title}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    decoding="async"
                   />
                 </div>
                 <div className="min-w-0">

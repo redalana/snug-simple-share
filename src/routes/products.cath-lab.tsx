@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/cath-lab")({
           "Interventional cardiology and neurovascular cath lab systems with installation, training and lifetime support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/cath-lab" },
       { property: "og:image", content: OG_IMAGES.productCategory["cath-lab"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["cath-lab"] },

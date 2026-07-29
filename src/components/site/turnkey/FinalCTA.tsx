@@ -7,7 +7,13 @@ export function FinalCTA() {
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="relative overflow-hidden rounded-2xl bg-[#111315] p-10 text-white lg:p-14">
           <div className="pointer-events-none absolute inset-0 opacity-25">
-            <img src={beyondCath} alt="" className="h-full w-full object-cover" />
+            <img
+              src={beyondCath}
+              alt=""
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-[#111315] via-[#111315]/85 to-[#111315]/40" />
           </div>
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">

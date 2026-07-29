@@ -39,7 +39,13 @@ export function TurnkeyJourney() {
                 className="relative"
               >
                 <div className="relative aspect-square overflow-hidden rounded-xl bg-neutral-100 ring-1 ring-black/5">
-                  <img src={p.img} alt={p.title} className="h-full w-full object-cover" />
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="absolute -bottom-3 left-1/2 grid h-7 w-7 -translate-x-1/2 place-items-center rounded-full bg-primary text-[calc(10*var(--desktop-px-unit))] font-bold text-white ring-4 ring-white">
                     {p.n}
                   </span>

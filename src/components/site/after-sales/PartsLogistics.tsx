@@ -17,6 +17,7 @@ export function PartsLogistics() {
             className="absolute inset-0 h-full w-full object-cover"
             width={1600}
             height={1100}
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-ink" />
           <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-8 p-10">
