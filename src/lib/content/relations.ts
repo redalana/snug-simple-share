@@ -16,7 +16,9 @@ import type { ContentItem, ContentType, ScoredContentItem } from "./types";
 export const RELATION_WEIGHTS = {
   technology: 10,
   manufacturer: 6,
+  clinicalApplication: 5,
   specialty: 4,
+  country: 2,
   equipmentType: 3,
   primaryCategory: 3,
   tag: 1,
@@ -47,6 +49,10 @@ export function relevanceScore(subject: ContentItem, candidate: ContentItem): nu
   score +=
     overlap(lower(subject.equipmentTypes), lower(candidate.equipmentTypes)) *
     RELATION_WEIGHTS.equipmentType;
+  score +=
+    overlap(subject.clinicalApplications ?? [], candidate.clinicalApplications ?? []) *
+    RELATION_WEIGHTS.clinicalApplication;
+  score += overlap(subject.countries ?? [], candidate.countries ?? []) * RELATION_WEIGHTS.country;
   score += overlap(subject.tags, candidate.tags) * RELATION_WEIGHTS.tag;
 
   if (

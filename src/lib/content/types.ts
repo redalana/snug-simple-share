@@ -40,6 +40,12 @@ export type ContentItem = {
   equipmentTypes: string[];
   specialties: string[];
   manufacturers: Manufacturer[];
+  /**
+   * Knowledge-graph facets (optional so every existing consumer keeps working).
+   * Populated by the adapters via `inferClinicalApplications` / `inferCountries`.
+   */
+  clinicalApplications?: string[];
+  countries?: string[];
 
   /* --- Editorial metadata --- */
   featured?: boolean;
