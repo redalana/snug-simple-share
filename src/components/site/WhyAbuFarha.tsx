@@ -10,9 +10,6 @@ import {
   ShieldCheck,
   Headset,
   ArrowRight,
-  BadgeCheck,
-  CheckCircle2,
-  Handshake,
   ClipboardList,
   Truck,
   PlugZap,
@@ -23,7 +20,7 @@ import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/use-count-up";
-import { TechnologyPartners } from "./TechnologyPartners";
+
 
 import heroImg from "@/assets/why-cathlab.jpg";
 import engineerImg from "@/assets/aftersales-remote-engineer.jpg";
@@ -124,15 +121,6 @@ const PILLARS: Pillar[] = [
   },
 ];
 
-const TRUST = [
-  { icon: BadgeCheck, title: "Authorized Distributor", copy: "For leading global medical brands" },
-  { icon: CheckCircle2, title: "100% Genuine OEM Parts", copy: "Original & fully certified components" },
-  {
-    icon: Handshake,
-    title: "Long-Term Strategic Partnerships",
-    copy: "Built on trust and proven performance",
-  },
-];
 
 /* --------------------------------- Section -------------------------------- */
 
@@ -296,39 +284,6 @@ export function WhyAbuFarha() {
             })}
           </ul>
         </div>
-
-        {/* --------------------- BLOCK 4 — Technology partners ----------------- */}
-        <motion.div
-          {...fade}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="mt-20 rounded-3xl border border-border/70 bg-white p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)] sm:p-12 lg:mt-28"
-        >
-          <TechnologyPartners />
-
-
-          <ul className="mt-10 grid grid-cols-1 gap-6 border-t border-border/70 pt-8 sm:grid-cols-3">
-            {TRUST.map((t) => {
-              const Icon = t.icon;
-              return (
-                <li key={t.title} className="flex min-w-0 items-start gap-3">
-                  <Icon
-                    aria-hidden="true"
-                    className="mt-0.5 h-6 w-6 shrink-0 text-primary"
-                    strokeWidth={1.75}
-                  />
-                  <span className="min-w-0">
-                    <span className="block text-[calc(15*var(--desktop-px-unit))] font-bold leading-snug text-ink [overflow-wrap:anywhere]">
-                      {t.title}
-                    </span>
-                    <span className="mt-1 block text-[calc(13.5*var(--desktop-px-unit))] leading-snug text-muted-foreground [overflow-wrap:anywhere]">
-                      {t.copy}
-                    </span>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </motion.div>
 
         {/* ------------------------- BLOCK 5 — Final CTA ----------------------- */}
         <motion.div
