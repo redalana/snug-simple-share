@@ -114,6 +114,8 @@ export type Article = {
 };
 
 import { makeMedicalContent } from "./blog-topics";
+import { MRI_SCANNER_CONTENT, MRI_SCANNER_TOC } from "./articles/what-is-an-mri-scanner";
+
 
 function makeDefaultContent(a: {
   slug: string;
