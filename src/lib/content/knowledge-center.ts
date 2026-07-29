@@ -11,8 +11,10 @@
 import { ARTICLE_ITEMS } from "./adapters";
 import { memoizeKeyed } from "./cache";
 import { expandQuery } from "./graph";
-import { getPopularArticles } from "./relations-queries";
 import { searchContent } from "./search";
+// `getPopularArticles` lives in the public API module; imported lazily at call
+// time so the two modules can reference each other safely.
+import { getPopularArticles } from "./index";
 import { SPECIALTIES } from "./specialties";
 import {
   ALL_MANUFACTURERS,
@@ -139,7 +141,9 @@ function matchesFacets(item: ContentItem, f: KnowledgeFilters): boolean {
 
 const POPULARITY = () => {
   const map = new Map<string, number>();
-  getPopularArticles(ARTICLE_ITEMS.length).forEach((a, i) => map.set(a.id, -i));
+  getPopularArticles(ARTICLE_ITEMS.length).forEach((a: ContentItem, i: number) =>
+    map.set(a.id, -i),
+  );
   return map;
 };
 let popularityCache: Map<string, number> | undefined;
