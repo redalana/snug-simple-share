@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import {
   ArrowRight,
   Calendar,
@@ -48,9 +48,11 @@ export function BlogPage() {
 
 type BlogSearchState = KnowledgeFilters & { page?: number };
 
+const blogRoute = getRouteApi("/blog/");
+
 function KnowledgeLibrary() {
-  const search = useSearch({ from: "/blog/" }) as BlogSearchState;
-  const navigate = useNavigate({ from: "/blog/" });
+  const search = blogRoute.useSearch();
+  const navigate = blogRoute.useNavigate();
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const filters = useMemo<KnowledgeFilters>(
