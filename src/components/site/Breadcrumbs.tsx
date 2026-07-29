@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronRight, Home } from "lucide-react";
 import { absUrl } from "@/lib/seo";
 
-export type Crumb = { label: string; to?: string };
+export type Crumb = { label: string; to?: string; className?: string };
 
 const HIDDEN_ON = new Set<string>(["/", ""]);
 
