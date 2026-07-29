@@ -17,6 +17,7 @@ export * from "./clinical";
 export * from "./geography";
 export * from "./entities";
 export * from "./graph";
+export * from "./related-sections";
 export {
   CONTENT_ITEMS,
   ARTICLE_ITEMS,
