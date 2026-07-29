@@ -107,10 +107,13 @@ export function Breadcrumbs({
             )}
           </span>
         ))}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-        />
+        {emitJsonLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+          />
+        )}
+
       </nav>
     );
   }
