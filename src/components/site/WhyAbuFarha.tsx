@@ -285,8 +285,6 @@ export function WhyAbuFarha() {
           </ul>
         </div>
 
-
-
         {/* ------------------------- BLOCK 5 — Final CTA ----------------------- */}
         <motion.div
           {...fade}
