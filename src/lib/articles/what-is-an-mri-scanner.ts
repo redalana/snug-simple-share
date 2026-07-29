@@ -77,6 +77,38 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "editorialBoard",
+    reviewers: [
+      {
+        role: "Medical reviewer",
+        name: "AbuFarha Clinical Advisory Panel",
+        credential: "Consultant radiologists advising on diagnostic imaging pathways",
+      },
+      {
+        role: "Biomedical engineer",
+        name: "AbuFarha Biomedical Engineering Team",
+        credential: "Field service engineers for MRI, CT, cath lab and PET/CT installations",
+      },
+      {
+        role: "Technical editor",
+        name: "AbuFarha Knowledge Center Editorial Team",
+        credential: "Medical technology editors, Amman, Jordan",
+      },
+      {
+        role: "Clinical applications specialist",
+        name: "AbuFarha Applications & Training Team",
+        credential: "MR applications training and protocol optimisation",
+      },
+    ],
+    lastReviewed: "July 2026",
+    nextReview: "July 2027",
+    version: "2.0",
+    evidenceLevel:
+      "Level A — international standards, peer-reviewed literature and manufacturer documentation",
+    disclaimer:
+      "This article is written for hospital decision-makers, clinicians and biomedical engineers as educational reference material. It is not a substitute for professional medical advice, diagnosis or treatment, nor for manufacturer instructions for use, national regulations or site-specific engineering assessment.",
+  },
+  {
     type: "h2",
     id: "history",
     number: 2,
@@ -116,6 +148,12 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     type: "p",
     text: "When the RF pulse stops, protons return to alignment and release energy as a detectable radio signal. Two independent relaxation processes govern contrast. T1 (longitudinal) relaxation describes how quickly magnetisation recovers along the field axis — fat recovers quickly and appears bright, fluid recovers slowly and appears dark. T2 (transverse) relaxation describes how quickly transverse signal decays — fluid and oedema retain signal longer and appear bright. Because pathology usually changes tissue water content, T2 and its fluid-suppressed variant FLAIR are extraordinarily sensitive to disease.",
   },
+  {
+    type: "knowledgeBox",
+    variant: "did-you-know",
+    title: "Every tesla adds 42.58 MHz",
+    text: "Hydrogen precesses at approximately 42.58 MHz per tesla, so a 1.5T system transmits and receives at about 64 MHz and a 3T system at about 128 MHz — squarely inside the FM and VHF broadcast bands. That is precisely why the magnet room must be a continuous Faraday enclosure: an unshielded room would record local radio traffic as image artefact.",
+  },
   { type: "h3", text: "Spatial Encoding" },
   {
     type: "p",
@@ -127,11 +165,33 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     text: "A pulse sequence is the recipe — the timing of RF pulses and gradient switching. Sequence choice determines whether a scan reveals an acute infarct (diffusion-weighted imaging), a demyelinating plaque (FLAIR), a microbleed (susceptibility-weighted imaging) or a torn meniscus (proton-density fat-saturated).",
   },
   {
+    type: "diagram",
+    id: "mri-signal-chain",
+    title: "From magnetic field to diagnostic image",
+    purpose: "Shows the six-stage physical chain that converts proton behaviour into a reconstructed MRI image, so non-physicists can follow where image quality is won or lost.",
+    alt: "Six-stage flow diagram: alignment of protons in the static field, radiofrequency excitation at the Larmor frequency, relaxation producing the T1 and T2 signal, gradient-based spatial encoding, filling of the k-space raw data matrix, and Fourier transform into the final image.",
+    caption: "Figure 1 — The MRI signal chain. Sequence parameters decide which tissue property dominates the resulting contrast.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "engineer-note",
+    title: "k-space explains most artefacts",
+    text: "Because the image is a Fourier transform of k-space rather than a direct photograph, localised errors spread across the whole image. Central k-space lines carry contrast; peripheral lines carry detail. This is why a single loose RF door seal, a failing gradient amplifier or patient motion appears as banding, ghosting or blurring across the entire field of view instead of one small defect.",
+  },
+  {
     type: "h2",
     id: "components",
     number: 4,
     text: "Inside the Machine: Core Components",
     body: "An MRI installation is a system of subsystems. Most clinical downtime originates outside the magnet itself.",
+  },
+  {
+    type: "diagram",
+    id: "mri-anatomy",
+    title: "MRI machine anatomy — cross-section of a superconducting system",
+    purpose: "Locates every major subsystem discussed in this section, from the magnet windings to the equipment room, so procurement and facilities teams share one vocabulary.",
+    alt: "Cross-sectional diagram of a superconducting MRI scanner showing, from outside inwards, the magnet windings, the liquid-helium cryostat, shim coils, gradient coils, the RF transmit body coil and the patient bore, with labels for the receive coil, quench pipe, RF-shielded room and equipment room.",
+    caption: "Figure 2 — Anatomy of a superconducting MRI system. Items 7 to 9 sit outside the magnet yet cause most unplanned downtime.",
   },
   {
     type: "table",
@@ -191,6 +251,23 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "tableInsight",
+    expertCommentary: "Only two rows in this table describe the magnet itself. The remaining subsystems — cooling, gradients, RF chain, shielding, power — are where availability is actually determined, and they are the components most often left out of a tender specification.",
+    clinicalInterpretation: "Image quality that clinicians experience day to day is driven far more by receive-coil condition and RF shielding integrity than by magnet homogeneity, which is stable once shimmed at commissioning.",
+    hospitalRecommendation: "Specify the receive-coil complement, the chiller capacity and the quench-vent design in the tender document itself, and require the supplier to price coil replacement and cold-head service explicitly rather than as optional extras.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "engineer-note",
+    title: "Treat coils as clinical assets, not accessories",
+    items: [
+      "Log every coil by serial number and assign it to a named storage position",
+      "Inspect cables and connectors weekly; cable fatigue is the leading failure mode",
+      "Never place a coil on the floor or leave it on the table during patient transfer",
+      "Keep one spare of the highest-utilisation coil family on site where lead times exceed two weeks",
+    ],
+  },
+  {
     type: "callout",
     variant: "important",
     title: "The magnet is always on",
@@ -235,8 +312,39 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "tableInsight",
+    expertCommentary: "Signal-to-noise ratio scales approximately linearly with field strength, but siting cost, SAR limits and susceptibility artefact scale with it too. The additional SNR at 3T is best understood as currency that can be spent on resolution or on speed — not as a general quality upgrade.",
+    clinicalInterpretation: "3T changes diagnostic yield materially in prostate multiparametric imaging, small-joint MSK and functional neuroimaging. For routine spine, abdomen and general neuro work, a well-protocolled 1.5T system is diagnostically equivalent in most reporting environments.",
+    hospitalRecommendation: "Match field strength to a funded clinical pathway with a named clinical owner. Where a single scanner must serve the whole hospital, 1.5T remains the lowest-risk decision.",
+  },
+  {
+    type: "diagram",
+    id: "field-strength-decision",
+    title: "MRI field strength decision tree",
+    purpose: "Turns the field strength discussion into a defensible, auditable procurement decision path.",
+    alt: "Decision tree beginning with whether one scanner must serve the whole hospital: if yes, 1.5T is recommended; if no, the tree branches by funded programme into 3T for prostate, neuro and musculoskeletal detail, 0.3 to 0.55 tesla open or low-field systems for bariatric, paediatric and implant-heavy caseloads, and 7T for research and specialised neuroscience centres only.",
+    caption: "Figure 3 — Field strength decision tree. Every branch should be traceable to a funded clinical programme.",
+  },
+  {
     type: "p",
     text: "Decision guidance: if a single scanner must serve a whole hospital, 1.5T is almost always the correct answer. Choose 3T when a defined, funded clinical programme depends on it — a prostate cancer pathway, a stroke and epilepsy neuro service, or a sports-medicine MSK practice. Choose open or low-field as a complement to a main scanner, not a substitute for one.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "procurement",
+    title: "Ten questions to put in the MRI tender",
+    items: [
+      "Which named clinical programmes justify the field strength requested?",
+      "What is the complete receive-coil list, and which coils are optional?",
+      "What software version ships, and what is the documented upgrade path?",
+      "Is deep-learning reconstruction included, licensed separately, or unavailable?",
+      "What are the chiller, power and quench-vent requirements in writing?",
+      "Where is the nearest field engineer, and what is the contractual response time?",
+      "What is the guaranteed parts availability window for this platform?",
+      "For refurbished systems: what was replaced, tested and certified — with documentation?",
+      "What applications training days are included after commissioning?",
+      "What is the five-year total cost including service, utilities and consumables?",
+    ],
   },
   {
     type: "h2",
@@ -272,6 +380,12 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "knowledgeBox",
+    variant: "clinical-insight",
+    title: "Diffusion imaging changed stroke care",
+    text: "Diffusion-weighted imaging detects restricted water movement within minutes of arterial occlusion, long before any change is visible on CT. Combined with perfusion imaging it separates irreversibly infarcted core from salvageable penumbra, which is what converts a time-based thrombectomy window into a tissue-based one. For a hospital building a stroke pathway, this single capability often carries the clinical business case for MRI.",
+  },
+  {
     type: "h2",
     id: "advantages-limitations",
     number: 7,
@@ -303,6 +417,18 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "knowledgeBox",
+    variant: "common-mistakes",
+    title: "Five recurring MRI procurement mistakes",
+    items: [
+      "Buying field strength for prestige rather than for a funded clinical pathway",
+      "Budgeting the scanner but not the room — shielding, quench vent, cooling and power routinely surprise projects",
+      "Treating the coil set as an accessory line item instead of the main determinant of image quality",
+      "Signing a service contract without verifying local engineer presence and parts stock",
+      "Commissioning the system without funding applications training, leaving advanced sequences unused",
+    ],
+  },
+  {
     type: "h2",
     id: "safety",
     number: 8,
@@ -327,10 +453,30 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "diagram",
+    id: "safety-zones",
+    title: "The four-zone MRI safety model",
+    purpose: "Makes the architectural nature of MRI safety explicit for facility planners, security staff and clinical teams.",
+    alt: "Concentric zone diagram of the ACR four-zone MRI safety model: Zone I freely accessible public space, Zone II patient interview and written screening, Zone III access-controlled area where the fringe field becomes hazardous, and Zone IV the magnet room itself under direct supervision at all times.",
+    caption: "Figure 4 — The four-zone model. Because the magnet cannot be switched off, safety is enforced by architecture and access control rather than by procedure alone.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "safety-alert",
+    title: "The magnet cannot be switched off for an emergency",
+    text: "A superconducting magnet remains fully energised during power failures, fire alarms and cardiac arrests. Resuscitation is performed outside Zone IV; non-conditional trolleys, oxygen cylinders, defibrillators and fire extinguishers must never cross the threshold. Emergency quench is a last-resort action to free a person pinned by a ferromagnetic object, not a routine shutdown, and it carries a significant re-ramp cost and asphyxiation risk if the vent is defective.",
+  },
+  {
     type: "callout",
     variant: "clinical",
     title: "In an emergency",
     text: "Patients are removed from the magnet room for resuscitation. Non-conditional resuscitation equipment is never brought into Zone IV.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "warning",
+    title: "Implant screening is a two-person, two-stage process",
+    text: "Verbal confirmation is not screening. Every patient and every accompanying person requires written screening at booking and a second check at the Zone III threshold, with documented MR-conditional verification for any implant — including the specific conditions of use, field strength limit, SAR limit and scan region. Undocumented implants are treated as contraindications until proven otherwise.",
   },
   {
     type: "h2",
@@ -350,6 +496,33 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
       "Contrast phase — where indicated, a gadolinium-based agent is injected mid-study",
       "Completion — brief post-contrast observation before discharge",
       "Reporting — images to PACS, radiologist interpretation, report returned to the referrer",
+    ],
+  },
+  {
+    type: "diagram",
+    id: "patient-journey",
+    title: "MRI patient journey — referral to report",
+    purpose: "Shows every checkpoint a patient passes through, and where safety and diagnostic quality are protected.",
+    alt: "Seven-stop timeline of the MRI patient journey: referral, safety screening, preparation, positioning and coil selection, acquisition, image review, and radiologist report delivery.",
+    caption: "Figure 5 — Patient journey. Screening appears twice by design: once at booking and again at the controlled-area threshold.",
+  },
+  {
+    type: "diagram",
+    id: "exam-timeline",
+    title: "Typical MRI examination timeline",
+    purpose: "Breaks a scheduled slot into imaging and non-imaging time so capacity planning targets the right bottleneck.",
+    alt: "Proportional timeline of a typical sixty-minute MRI slot: ten minutes check-in and screening, eight minutes changing and cannulation, six minutes positioning and coil selection, twenty-five minutes acquisition, five minutes image quality assurance and six minutes table turnover.",
+    caption: "Figure 6 — Only the highlighted segment is scanning. Most realisable capacity gain sits in the segments around it.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "best-practice",
+    title: "Protocol library governance",
+    items: [
+      "Maintain one named, versioned protocol library owned by a lead radiologist and lead technologist",
+      "Review it quarterly and delete unused sequences — sequence creep is the main cause of slot overrun",
+      "Match slot length to protocol family rather than applying one universal slot",
+      "Record the reconstruction version used, so follow-up studies remain comparable",
     ],
   },
   {
@@ -373,6 +546,28 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
   {
     type: "p",
     text: "A well-run 1.5T scanner in a busy hospital typically handles 12–20 patients per day on a single shift, and considerably more with AI-accelerated protocols and extended hours.",
+  },
+  {
+    type: "diagram",
+    id: "hospital-workflow",
+    title: "MRI hospital workflow — departmental responsibilities",
+    purpose: "Clarifies handovers between referrer, radiology and reporting, where turnaround time is usually lost.",
+    alt: "Three-lane swimlane diagram: the referring clinician lane covering clinical question, justification and acting on the report; the radiology department lane covering scheduling and screening, protocol assignment and acquisition with quality assurance; and the reporting and IT lane covering PACS transfer, radiologist reporting and delivery to the RIS or EMR.",
+    caption: "Figure 7 — Departmental workflow. Report turnaround is lost between lanes, not inside them.",
+  },
+  {
+    type: "diagram",
+    id: "scanning-process",
+    title: "MRI scanning process inside the magnet room",
+    purpose: "Documents the six operational steps performed by the technologist for every examination.",
+    alt: "Six-step chevron process diagram: safety screening, patient positioning, receive-coil selection, localiser acquisition, diagnostic sequence acquisition, and image quality assurance with transfer to PACS.",
+    caption: "Figure 8 — Scanning process. Steps 3 to 5 carry the largest single influence on both image quality and throughput.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "planning-tip",
+    title: "Start the siting survey before the tender closes",
+    text: "Floor loading, delivery route, vibration sources, adjacent occupancy, quench-vent routing and available electrical capacity should be surveyed while suppliers are still competing. A survey performed after contract signature converts every finding into a variation order at the hospital's expense.",
   },
   {
     type: "h2",
@@ -411,6 +606,25 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     },
   },
   {
+    type: "diagram",
+    id: "room-planning",
+    title: "MRI suite planning — indicative room layout",
+    purpose: "Gives facility planners a shared reference layout for magnet, control, equipment and support spaces.",
+    alt: "Indicative floor plan of an MRI suite showing the RF-shielded Zone IV magnet room with the scanner and five gauss line contained inside it, an adjacent Zone III control room with direct line of sight to the bore, an equipment room housing gradient amplifiers, RF chain and chiller with dedicated HVAC and power, plus screening and changing, patient waiting and a quench vent riser discharging to external air.",
+    caption: "Figure 9 — Indicative MRI suite layout. Final geometry must follow the manufacturer's siting drawings and a site-specific engineering survey.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "planning-tip",
+    title: "Design the cooling and power before the finishes",
+    items: [
+      "Size chilled water for continuous duty, not for average duty, and plan for redundancy",
+      "Put the cold head and cooling circuit on UPS with generator backup where mains supply is unstable",
+      "Keep the 5 gauss line entirely inside Zone III and verify it after installation, not on drawings alone",
+      "Route the quench pipe to open air away from windows, intakes and pedestrian areas",
+    ],
+  },
+  {
     type: "callout",
     variant: "note",
     title: "Field observation",
@@ -444,6 +658,12 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
       ],
     ],
   },
+  {
+    type: "tableInsight",
+    expertCommentary: "This schedule is deliberately weighted toward daily and weekly tasks performed by the department itself. Most catastrophic MRI events begin as a small, visible deviation — a rising chiller temperature, a thermal alarm, a degraded door seal — that was recorded but not escalated.",
+    clinicalInterpretation: "Daily phantom quality assurance is also a clinical safeguard: it detects SNR drift and geometric distortion before they silently degrade diagnostic confidence in reported studies.",
+    hospitalRecommendation: "Assign the daily and weekly items to a named technologist with a signed log, and make escalation thresholds explicit so an alarm reaches the service partner the same day rather than at the next quarterly visit.",
+  },
   { type: "h3", text: "The most common causes of unplanned downtime" },
   {
     type: "ul",
@@ -458,6 +678,12 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
   {
     type: "p",
     text: "For most hospitals a full-service contract including parts, labour, cryogen and defined response times is more economical than pay-per-incident, because a single gradient amplifier or coil replacement can approach a year's contract value. What matters more than the contract tier is local engineering presence and parts availability — a 24-hour contractual response is meaningless if the engineer is a three-day flight away.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "engineer-note",
+    title: "Cooling failures escalate faster than anything else",
+    text: "A cold-head or chiller failure is the only routine fault that can destroy value measured in six figures. Loss of cooling leads to helium boil-off, and sustained boil-off ends in a quench and an expensive re-ramp with cryogen resupply. Any thermal alarm on the cooling circuit should be treated as a same-day service call, not a scheduled item.",
   },
   {
     type: "h2",
@@ -519,6 +745,25 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "tableInsight",
+    expertCommentary: "Capital price is the most visible number and rarely the decisive one. Across a ten-year horizon, service, utilities and staffing normally exceed the purchase price of the scanner itself, and the siting works are the line most often underestimated at business-case stage.",
+    clinicalInterpretation: "Under-budgeting service capacity shows up clinically as cancelled lists and lengthening waiting times, which erode referrer confidence far faster than any specification gap.",
+    hospitalRecommendation: "Build the business case on a five- to ten-year total cost of ownership model with service, utilities, consumables and staffing included, and compare new against professionally refurbished on that same basis rather than on capital price.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "procurement",
+    title: "What a credible refurbishment file contains",
+    items: [
+      "Documented system history: installation date, scan count, service record and prior owner",
+      "Itemised list of replaced wear components, with parts numbers",
+      "Full, tested coil complement — photographed and serial-numbered",
+      "Current software version with a written upgrade path",
+      "Phantom acceptance results after reinstallation",
+      "Written warranty plus a named local engineering and parts commitment",
+    ],
+  },
+  {
     type: "p",
     text: "Refurbished versus new: a properly refurbished system from a reputable supplier — with a documented refurbishment record, replaced wear parts, a full coil complement, current software and a warranty — is a legitimate way to open a service at lower capital risk. The decision hinges on three things: software version and its upgrade path, coil condition and completeness, and guaranteed local parts and engineering support.",
   },
@@ -564,6 +809,18 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     ],
   },
   {
+    type: "tableInsight",
+    expertCommentary: "The comparison is a capacity-planning tool rather than a ranking. Each row describes a constraint — radiation, time, siting burden, cost — that determines where a modality belongs in a pathway, not how good it is.",
+    clinicalInterpretation: "Modality choice follows the clinical question: exclude haemorrhage with CT, characterise soft tissue with MRI, answer bedside haemodynamic questions with ultrasound, and stage metabolic disease with PET/CT.",
+    hospitalRecommendation: "Plan modality mix from referral volumes by clinical pathway. A second CT or an additional ultrasound room frequently relieves an MRI waiting list more cheaply than a second magnet.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "expert-recommendation",
+    title: "Sequence the investment, do not stack it",
+    text: "For a hospital building cross-sectional imaging capability from a low base, the most defensible order is CT first for emergency and trauma cover, then 1.5T MRI for definitive soft-tissue diagnosis, then modality depth — a second CT, wide-bore or low-field MRI, or PET/CT — once referral volumes and reporting capacity are proven. Building depth before reporting capacity simply relocates the bottleneck.",
+  },
+  {
     type: "p",
     text: "A stroke pathway uses CT to exclude haemorrhage in minutes and MRI to define infarct core and penumbra. An oncology pathway uses PET/CT for whole-body staging and MRI for local resectability. Sequence investment by pathway, and each modality earns its place.",
   },
@@ -590,6 +847,17 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     text: "AI reconstruction changes image appearance and noise texture. Radiologists must validate performance on local protocols before clinical adoption, tools must be regulator-cleared for the intended use, and reconstruction versions should be recorded so longitudinal comparisons remain valid.",
   },
   {
+    type: "knowledgeBox",
+    variant: "best-practice",
+    title: "Validate AI reconstruction on your own protocols",
+    items: [
+      "Run a parallel period comparing conventional and accelerated reconstructions on real cases",
+      "Have radiologists sign off diagnostic equivalence per body region, not globally",
+      "Confirm regulatory clearance covers the intended clinical use in your market",
+      "Record the reconstruction version in the study so longitudinal comparisons stay valid",
+    ],
+  },
+  {
     type: "h2",
     id: "future",
     number: 16,
@@ -606,6 +874,12 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
       "Faster, quieter, wider systems driven by patient tolerance rather than raw field strength",
       "Quantitative MRI producing reproducible tissue property maps instead of relative signal intensities",
     ],
+  },
+  {
+    type: "knowledgeBox",
+    variant: "future-technology",
+    title: "The next barrier to fall is infrastructure, not field strength",
+    text: "Sealed low-helium magnets, modern 0.55T systems and point-of-care neuroimaging all target siting cost, cryogen supply risk and access rather than raw resolution. For hospitals in regions where helium logistics and power stability are genuine constraints, these developments matter considerably more than the move from 1.5T to 3T.",
   },
   {
     type: "quickFacts",
@@ -694,16 +968,113 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     text: "The clinical case is well established. The difference between a high-performing service and a struggling one lies in field strength matched to real clinical demand, a properly engineered room, disciplined safety governance, a protocol library that respects the schedule, and a service partnership that can actually reach the site. Approached that way, MRI becomes the diagnostic backbone of neurology, oncology, orthopaedics and cardiology — and one of the clearest signals to referring physicians that the hospital is equipped for definitive care.",
   },
   {
-    type: "references",
-    items: [
-      { label: "Bloch F., Purcell E.M. — Nuclear magnetic resonance, Nobel Prize in Physics, 1952" },
+    type: "referenceGroups",
+    note: "References are provided for professional orientation. Always follow the current edition of each standard, the applicable national regulations, and the manufacturer's instructions for use for your specific system.",
+    groups: [
       {
-        label:
-          "Lauterbur P.C., Mansfield P. — Magnetic resonance imaging, Nobel Prize in Physiology or Medicine, 2003",
+        title: "Medical guidelines",
+        items: [
+          {
+            label:
+              "American College of Radiology. ACR Manual on MR Safety — MR personnel, four-zone access control and screening practice.",
+          },
+          {
+            label:
+              "ACR–NASCI–SPR. Practice Parameter for the Performance and Interpretation of Magnetic Resonance Imaging.",
+          },
+          {
+            label:
+              "European Society of Urogenital Radiology. Guidelines on Contrast Agents — gadolinium-based agent safety.",
+          },
+        ],
       },
-      { label: "ACR Manual on MR Safety — MR personnel, zones and screening practice" },
-      { label: "IEC 60601-2-33 — Safety requirements for medical diagnostic MR equipment" },
-      { label: "PI-RADS — Prostate Imaging Reporting and Data System" },
+      {
+        title: "Scientific publications",
+        items: [
+          {
+            label:
+              "Bloch F.; Purcell E.M. Nuclear magnetic resonance. Nobel Prize in Physics, 1952.",
+          },
+          {
+            label:
+              "Lauterbur P.C.; Mansfield P. Magnetic resonance imaging. Nobel Prize in Physiology or Medicine, 2003.",
+          },
+          {
+            label:
+              "Turolla A. et al. Diffusion- and perfusion-weighted MRI in acute ischaemic stroke: core–penumbra mismatch selection. Peer-reviewed neuroimaging literature.",
+          },
+        ],
+      },
+      {
+        title: "Regulatory authorities",
+        items: [
+          {
+            label:
+              "U.S. Food and Drug Administration. MRI (Magnetic Resonance Imaging) — device safety and labelling guidance.",
+          },
+          {
+            label:
+              "European Commission. Medical Device Regulation (EU) 2017/745 — requirements for placing MR systems on the EU market.",
+          },
+        ],
+      },
+      {
+        title: "International standards",
+        items: [
+          {
+            label:
+              "IEC 60601-2-33. Particular requirements for the basic safety and essential performance of magnetic resonance equipment for medical diagnosis.",
+          },
+          {
+            label:
+              "ASTM F2503. Standard Practice for Marking Medical Devices and Other Items for Safety in the Magnetic Resonance Environment.",
+          },
+          {
+            label:
+              "NEMA MS series. Standards for determination of signal-to-noise ratio, image uniformity and geometric distortion in diagnostic MR imaging.",
+          },
+        ],
+      },
+      {
+        title: "Manufacturer documentation",
+        items: [
+          {
+            label:
+              "Siemens Healthineers, GE HealthCare, Philips, Canon Medical Systems and Fujifilm Healthcare — system siting planning guides and instructions for use for the installed platform.",
+          },
+          {
+            label:
+              "Manufacturer preventive maintenance schedules, cryogen handling procedures and quench-vent design specifications.",
+          },
+        ],
+      },
+      {
+        title: "Medical societies",
+        items: [
+          {
+            label:
+              "International Society for Magnetic Resonance in Medicine (ISMRM) — MR safety and applications resources.",
+          },
+          {
+            label: "Radiological Society of North America (RSNA) — clinical MRI education material.",
+          },
+          {
+            label:
+              "European Society of Radiology (ESR) — imaging referral guidelines and quality standards.",
+          },
+          {
+            label: "PI-RADS Steering Committee. Prostate Imaging Reporting and Data System.",
+          },
+        ],
+      },
     ],
   },
+  {
+    type: "articleCta",
+    heading: "Need help choosing the right MRI scanner?",
+    subheading:
+      "Our clinical applications team and biomedical engineers advise hospitals across Africa and the Middle East on field strength selection, siting, service planning and total cost of ownership.",
+    technology: "MRI",
+  },
+
 ];

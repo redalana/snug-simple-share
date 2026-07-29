@@ -92,7 +92,74 @@ export type ContentBlock =
       name: string;
       specialty: string;
       date: string;
-    };
+    }
+  /* ---- Enterprise editorial blocks (flagship article layer) ---- */
+  | {
+      type: "knowledgeBox";
+      variant: KnowledgeBoxVariant;
+      title?: string;
+      text?: string;
+      items?: string[];
+    }
+  | {
+      type: "diagram";
+      id: DiagramId;
+      title: string;
+      purpose: string;
+      alt: string;
+      caption?: string;
+    }
+  | {
+      type: "tableInsight";
+      expertCommentary: string;
+      clinicalInterpretation: string;
+      hospitalRecommendation: string;
+    }
+  | {
+      type: "editorialBoard";
+      reviewers: { role: string; name: string; credential: string }[];
+      lastReviewed: string;
+      nextReview: string;
+      version: string;
+      evidenceLevel: string;
+      disclaimer: string;
+    }
+  | {
+      type: "referenceGroups";
+      groups: { title: string; items: { label: string; url?: string }[] }[];
+      note?: string;
+    }
+  | { type: "articleCta"; heading: string; subheading: string; technology?: string };
+
+/** Premium in-article information box styles. */
+export type KnowledgeBoxVariant =
+  | "clinical-insight"
+  | "engineer-note"
+  | "planning-tip"
+  | "procurement"
+  | "did-you-know"
+  | "best-practice"
+  | "common-mistakes"
+  | "expert-recommendation"
+  | "quick-facts"
+  | "safety-alert"
+  | "future-technology"
+  | "important"
+  | "warning";
+
+/** Medical/technical diagrams rendered as inline, responsive SVG. */
+export type DiagramId =
+  | "mri-anatomy"
+  | "mri-signal-chain"
+  | "scanning-process"
+  | "patient-journey"
+  | "hospital-workflow"
+  | "room-planning"
+  | "safety-zones"
+  | "field-strength-decision"
+  | "exam-timeline";
+
+
 
 export type Article = {
   slug: string;

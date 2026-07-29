@@ -3,7 +3,15 @@ import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import { RelatedGraph } from "@/components/site/knowledge/RelatedGraph";
+import { KnowledgeBox } from "@/components/site/blog/KnowledgeBox";
+import { ArticleDiagram } from "@/components/site/blog/ArticleDiagram";
+import { TableInsight } from "@/components/site/blog/TableInsight";
+import { EditorialBoard } from "@/components/site/blog/EditorialBoard";
+import { ReferenceGroups } from "@/components/site/blog/ReferenceGroups";
+import { ArticleCta } from "@/components/site/blog/ArticleCta";
+import { ArticleToolbar } from "@/components/site/blog/ArticleToolbar";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+
 import {
   ArrowLeft,
   ArrowRight,
@@ -80,6 +88,8 @@ export function BlogArticlePage({ slug }: { slug: string }) {
   }
 
   const related = getRelated(article.slug, 4);
+  const ctaBlock = article.content.find((b) => b.type === "articleCta");
+  const body = article.content.filter((b) => b.type !== "articleCta");
 
   return (
     <div className="bg-white">
@@ -90,8 +100,14 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         <div className="mx-auto grid max-w-[87.5rem] gap-10 px-6 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-10 lg:pt-10 xl:gap-12">
           <div className="min-w-0">
             <Hero article={article} />
+            <ArticleToolbar
+              slug={article.slug}
+              title={article.title}
+              readingTime={article.readingTime}
+              lastUpdated={article.lastUpdated}
+            />
             <div className="mt-14 max-w-[78ch] space-y-16 lg:space-y-20" data-article-content>
-              {article.content.map((block, i) => (
+              {body.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
               <AuthorReview />
@@ -101,8 +117,17 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         </div>
       </section>
       <RelatedGraph slug={article.slug} />
-      <ExpertCTA />
+      {ctaBlock && ctaBlock.type === "articleCta" ? (
+        <ArticleCta
+          heading={ctaBlock.heading}
+          subheading={ctaBlock.subheading}
+          technology={ctaBlock.technology}
+        />
+      ) : (
+        <ExpertCTA />
+      )}
       <NewsletterBand />
+
       <BackToTop />
     </div>
   );
@@ -390,6 +415,41 @@ function Block({ block }: { block: ContentBlock }) {
 
     case "reviewedBy":
       return <ReviewedBy name={block.name} specialty={block.specialty} date={block.date} />;
+
+    case "knowledgeBox":
+      return (
+        <KnowledgeBox
+          variant={block.variant}
+          title={block.title}
+          text={block.text}
+          items={block.items}
+        />
+      );
+
+    case "diagram":
+      return (
+        <ArticleDiagram
+          id={block.id}
+          title={block.title}
+          purpose={block.purpose}
+          alt={block.alt}
+          caption={block.caption}
+        />
+      );
+
+    case "tableInsight":
+      return <TableInsight {...block} />;
+
+    case "editorialBoard":
+      return <EditorialBoard {...block} />;
+
+    case "referenceGroups":
+      return <ReferenceGroups groups={block.groups} note={block.note} />;
+
+    case "articleCta":
+      return null;
+
+
 
     case "quote":
       return (
