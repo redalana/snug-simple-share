@@ -353,7 +353,12 @@ export function CategoryLandingPage({
         </section>
 
         {/* Knowledge Hub — graph-driven, lazily rendered */}
-        <KnowledgeHub categorySlug={slug} productCategories={showRest ? [] : productCategories} />
+        <KnowledgeHub
+          categorySlug={slug}
+          productCategories={
+            showRest ? [...new Set(matches.map((p) => p.category))] : productCategories
+          }
+        />
 
         {/* Category FAQ */}
         {content && content.faqs.length > 0 && (
