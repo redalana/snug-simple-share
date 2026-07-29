@@ -388,6 +388,42 @@ function BrandsPage() {
   const featured = filtered.filter((b) => b.featured);
   const rest = filtered.filter((b) => !b.featured);
 
+  // Featured carousel shows every matching manufacturer, flagged ones first.
+  const featuredSlides = useMemo(() => [...featured, ...rest], [featured, rest]);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+    containScroll: "trimSnaps",
+  });
+  const [selectedSnap, setSelectedSnap] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedSnap(emblaApi.selectedScrollSnap());
+    const onInit = () => setSnapCount(emblaApi.scrollSnapList().length);
+    onInit();
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onInit);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onInit);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, featuredSlides.length]);
+
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
