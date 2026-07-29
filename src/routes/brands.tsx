@@ -398,7 +398,6 @@ function BrandsPage() {
     containScroll: "trimSnaps",
   });
   const [selectedSnap, setSelectedSnap] = useState(0);
-  const [snapCount, setSnapCount] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -406,15 +405,11 @@ function BrandsPage() {
   useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setSelectedSnap(emblaApi.selectedScrollSnap());
-    const onInit = () => setSnapCount(emblaApi.scrollSnapList().length);
-    onInit();
     onSelect();
     emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onInit);
     emblaApi.on("reInit", onSelect);
     return () => {
       emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onInit);
       emblaApi.off("reInit", onSelect);
     };
   }, [emblaApi]);
@@ -606,7 +601,7 @@ function BrandsPage() {
                       key={brand.name}
                       role="group"
                       aria-roledescription="slide"
-                      className="min-w-0 shrink-0 grow-0 basis-full pl-5 md:basis-1/2 lg:basis-1/3"
+                      className="min-w-0 shrink-0 grow-0 basis-full pl-5 [&>article]:h-full md:basis-1/2 lg:basis-1/3"
                     >
                       <FeaturedBrandCard brand={brand} />
                     </div>
