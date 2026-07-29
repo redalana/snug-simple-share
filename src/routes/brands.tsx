@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowRight,
   Award,
@@ -426,8 +427,7 @@ function BrandsPage() {
     if (!emblaApi) return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => {
-      const plugin = emblaApi.plugins().autoplay;
-      if (!plugin) return;
+      const plugin = autoplay.current;
       if (mq.matches) plugin.stop();
       else plugin.play();
     };
