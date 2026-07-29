@@ -32,6 +32,7 @@ const STATIC_ROUTES: SitemapEntry[] = [
   // Product catalog
   { path: "/products", changefreq: "weekly", priority: "0.9" },
   { path: "/products/mri-scanners", changefreq: "monthly", priority: "0.8" },
+  { path: "/products/ct-scanners", changefreq: "monthly", priority: "0.8" },
   { path: "/products/pet-ct-scanners", changefreq: "monthly", priority: "0.8" },
   { path: "/products/cath-lab", changefreq: "monthly", priority: "0.8" },
   { path: "/products/c-arm-systems", changefreq: "monthly", priority: "0.8" },
@@ -41,7 +42,13 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/products/lithotripsy-eswl", changefreq: "monthly", priority: "0.8" },
   { path: "/products/drug-eluting-stents", changefreq: "monthly", priority: "0.8" },
   { path: "/products/others", changefreq: "monthly", priority: "0.8" },
+  // Utility / legal
+  { path: "/faqs", changefreq: "monthly", priority: "0.5" },
+  { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
+  { path: "/terms", changefreq: "yearly", priority: "0.3" },
+  { path: "/sitemap", changefreq: "monthly", priority: "0.3" },
 ];
+
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
