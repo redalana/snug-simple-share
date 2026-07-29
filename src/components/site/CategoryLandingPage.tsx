@@ -57,6 +57,8 @@ export function CategoryLandingPage({
 
   const content = CATEGORY_CONTENT[slug];
 
+  const pageUrl = `${SITE_URL}/products/${slug}`;
+
   const itemListSchema = itemListJsonLd(
     matches.map((p) => ({
       name: p.name,
@@ -65,6 +67,21 @@ export function CategoryLandingPage({
     title,
   );
 
+  // CollectionPage wrapping the category's ItemList so search / AI engines
+  // can resolve the page entity and its members in one graph node.
+  const { "@context": _ctx, ...itemListNode } = itemListSchema as Record<string, unknown>;
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collection`,
+    url: pageUrl,
+    name: title,
+    description,
+    isPartOf: { "@id": `${COMPANY.website}/#website` },
+    publisher: { "@id": `${COMPANY.website}/#organization` },
+    mainEntity: itemListNode,
+  };
+
   const faqSchema = content && content.faqs.length > 0 ? faqPageJsonLd(content.faqs) : null;
 
   return (
@@ -72,8 +89,9 @@ export function CategoryLandingPage({
       <Header />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
+
       {faqSchema && (
         <script
           type="application/ld+json"
