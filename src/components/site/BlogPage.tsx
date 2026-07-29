@@ -670,9 +670,28 @@ function CTABand() {
 
 /* ---------------- Pagination ---------------- */
 
-function Pagination() {
-  const [page, setPage] = useState(1);
-  const pages = useMemo(() => [1, 2, 3, 4, 5, "…", 10] as const, []);
+function Pagination({
+  page,
+  totalPages,
+  onPage,
+}: {
+  page: number;
+  totalPages: number;
+  onPage: (next: number) => void;
+}) {
+  const setPage = (updater: (p: number) => number) => onPage(updater(page));
+  /* Page numbers are derived from the filtered result count. */
+  const pages = useMemo<(number | "…")[]>(() => {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const set = new Set<number>([1, totalPages, page, page - 1, page + 1]);
+    const list = [...set].filter((p) => p >= 1 && p <= totalPages).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    list.forEach((p, i) => {
+      if (i > 0 && p - (list[i - 1] as number) > 1) out.push("…");
+      out.push(p);
+    });
+    return out;
+  }, [page, totalPages]);
 
   return (
     <section className="bg-white pt-12 lg:pt-16">
