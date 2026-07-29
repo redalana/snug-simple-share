@@ -1074,7 +1074,7 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     heading: "Need help choosing the right MRI scanner?",
     subheading:
       "Our clinical applications team and biomedical engineers advise hospitals across Africa and the Middle East on field strength selection, siting, service planning and total cost of ownership.",
-    technology: "mri",
+    technology: "MRI",
   },
 
 ];
