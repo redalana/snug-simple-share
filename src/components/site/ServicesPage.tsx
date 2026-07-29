@@ -319,7 +319,7 @@ function Hero() {
             onClick={() => goTo(i)}
             /* 24x24 hit area (WCAG 2.2 target-size); negative margins keep the
                visible pill size and spacing pixel-identical. */
-            className="-m-2 grid h-6 place-items-center p-2"
+            className="-mx-1 -my-2 grid h-6 place-items-center px-1 py-2"
           >
             <span
               aria-hidden

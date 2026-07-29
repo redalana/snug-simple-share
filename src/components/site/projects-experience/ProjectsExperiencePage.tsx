@@ -807,7 +807,7 @@ function CtaBanner() {
             <h2 className="font-display text-xl font-extrabold sm:text-2xl">
               Planning a Healthcare Infrastructure Project?
             </h2>
-            <p className="mt-1 text-sm text-white/85">
+            <p className="mt-1 text-sm text-white">
               Talk to AbuFarha specialists and discuss your requirements.
             </p>
           </div>

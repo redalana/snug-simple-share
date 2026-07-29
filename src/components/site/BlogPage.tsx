@@ -163,7 +163,7 @@ function HeroSlider() {
                 onClick={() => setActive(i)}
                 /* 24x24 hit area (WCAG 2.2 target-size) with negative margins so
                    the visible dot size and spacing stay identical. */
-                className="-m-2 grid h-6 place-items-center p-2"
+                className="-mx-1 -my-2 grid h-6 place-items-center px-1 py-2"
               >
                 <span
                   aria-hidden
