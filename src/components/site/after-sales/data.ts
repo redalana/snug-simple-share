@@ -101,11 +101,11 @@ export const EQUIPMENT = [
   { name: "MRI Systems", href: "/products/mri-scanners", img: mriImg },
   { name: "CT Scanners", href: "/products/ct-scanners", img: ctImg },
   { name: "Cath Lab Systems", href: "/products/cath-lab", img: cathLabImg },
-  { name: "PET / CT", href: "/products/pet-ct", img: petctImg },
-  { name: "Ultrasound", href: "/products/ultrasound", img: ultrasoundImg },
-  { name: "X-Ray Systems", href: "/products/x-ray", img: xrayImg },
-  { name: "Mammography", href: "/products/mammography", img: mammoImg },
-  { name: "C-Arm Systems", href: "/products/c-arm", img: carmImg },
+  { name: "PET / CT", href: "/products/pet-ct-scanners", img: petctImg },
+  { name: "Ultrasound", href: "/products/others", img: ultrasoundImg },
+  { name: "X-Ray Systems", href: "/products/x-ray-systems", img: xrayImg },
+  { name: "Mammography", href: "/products/mammography-systems", img: mammoImg },
+  { name: "C-Arm Systems", href: "/products/c-arm-systems", img: carmImg },
 ];
 
 export type EquipmentItem = (typeof EQUIPMENT)[number];
