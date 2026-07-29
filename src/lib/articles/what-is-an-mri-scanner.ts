@@ -968,16 +968,113 @@ export const MRI_SCANNER_CONTENT: ContentBlock[] = [
     text: "The clinical case is well established. The difference between a high-performing service and a struggling one lies in field strength matched to real clinical demand, a properly engineered room, disciplined safety governance, a protocol library that respects the schedule, and a service partnership that can actually reach the site. Approached that way, MRI becomes the diagnostic backbone of neurology, oncology, orthopaedics and cardiology — and one of the clearest signals to referring physicians that the hospital is equipped for definitive care.",
   },
   {
-    type: "references",
-    items: [
-      { label: "Bloch F., Purcell E.M. — Nuclear magnetic resonance, Nobel Prize in Physics, 1952" },
+    type: "referenceGroups",
+    note: "References are provided for professional orientation. Always follow the current edition of each standard, the applicable national regulations, and the manufacturer's instructions for use for your specific system.",
+    groups: [
       {
-        label:
-          "Lauterbur P.C., Mansfield P. — Magnetic resonance imaging, Nobel Prize in Physiology or Medicine, 2003",
+        title: "Medical guidelines",
+        items: [
+          {
+            label:
+              "American College of Radiology. ACR Manual on MR Safety — MR personnel, four-zone access control and screening practice.",
+          },
+          {
+            label:
+              "ACR–NASCI–SPR. Practice Parameter for the Performance and Interpretation of Magnetic Resonance Imaging.",
+          },
+          {
+            label:
+              "European Society of Urogenital Radiology. Guidelines on Contrast Agents — gadolinium-based agent safety.",
+          },
+        ],
       },
-      { label: "ACR Manual on MR Safety — MR personnel, zones and screening practice" },
-      { label: "IEC 60601-2-33 — Safety requirements for medical diagnostic MR equipment" },
-      { label: "PI-RADS — Prostate Imaging Reporting and Data System" },
+      {
+        title: "Scientific publications",
+        items: [
+          {
+            label:
+              "Bloch F.; Purcell E.M. Nuclear magnetic resonance. Nobel Prize in Physics, 1952.",
+          },
+          {
+            label:
+              "Lauterbur P.C.; Mansfield P. Magnetic resonance imaging. Nobel Prize in Physiology or Medicine, 2003.",
+          },
+          {
+            label:
+              "Turolla A. et al. Diffusion- and perfusion-weighted MRI in acute ischaemic stroke: core–penumbra mismatch selection. Peer-reviewed neuroimaging literature.",
+          },
+        ],
+      },
+      {
+        title: "Regulatory authorities",
+        items: [
+          {
+            label:
+              "U.S. Food and Drug Administration. MRI (Magnetic Resonance Imaging) — device safety and labelling guidance.",
+          },
+          {
+            label:
+              "European Commission. Medical Device Regulation (EU) 2017/745 — requirements for placing MR systems on the EU market.",
+          },
+        ],
+      },
+      {
+        title: "International standards",
+        items: [
+          {
+            label:
+              "IEC 60601-2-33. Particular requirements for the basic safety and essential performance of magnetic resonance equipment for medical diagnosis.",
+          },
+          {
+            label:
+              "ASTM F2503. Standard Practice for Marking Medical Devices and Other Items for Safety in the Magnetic Resonance Environment.",
+          },
+          {
+            label:
+              "NEMA MS series. Standards for determination of signal-to-noise ratio, image uniformity and geometric distortion in diagnostic MR imaging.",
+          },
+        ],
+      },
+      {
+        title: "Manufacturer documentation",
+        items: [
+          {
+            label:
+              "Siemens Healthineers, GE HealthCare, Philips, Canon Medical Systems and Fujifilm Healthcare — system siting planning guides and instructions for use for the installed platform.",
+          },
+          {
+            label:
+              "Manufacturer preventive maintenance schedules, cryogen handling procedures and quench-vent design specifications.",
+          },
+        ],
+      },
+      {
+        title: "Medical societies",
+        items: [
+          {
+            label:
+              "International Society for Magnetic Resonance in Medicine (ISMRM) — MR safety and applications resources.",
+          },
+          {
+            label: "Radiological Society of North America (RSNA) — clinical MRI education material.",
+          },
+          {
+            label:
+              "European Society of Radiology (ESR) — imaging referral guidelines and quality standards.",
+          },
+          {
+            label: "PI-RADS Steering Committee. Prostate Imaging Reporting and Data System.",
+          },
+        ],
+      },
     ],
   },
+  {
+    type: "articleCta",
+    heading: "Need help choosing the right MRI scanner?",
+    subheading:
+      "Our clinical applications team and biomedical engineers advise hospitals across Africa and the Middle East on field strength selection, siting, service planning and total cost of ownership.",
+    technology: "mri",
+  },
+
 ];
