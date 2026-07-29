@@ -10,6 +10,7 @@ export function FinalCTA() {
           alt=""
           className="h-full w-full object-cover object-center opacity-45"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />

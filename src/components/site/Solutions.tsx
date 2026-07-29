@@ -302,8 +302,6 @@ export function Solutions() {
     el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
   }, []);
 
-
-
   return (
     <section id="solutions" className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* subtle technical grid */}
@@ -406,6 +404,8 @@ export function Solutions() {
                         width={52}
                         height={52}
                         className="h-full w-full object-cover object-[center_38%]"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </span>
                     <span className={`relative z-10 ${isActive ? "font-bold text-ink" : ""}`}>
@@ -442,7 +442,6 @@ export function Solutions() {
             </div>
           </div>
         </div>
-
 
         {/* Explorer */}
         <div

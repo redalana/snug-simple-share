@@ -28,6 +28,7 @@ export function Industries() {
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/10" />
               <div className="relative">

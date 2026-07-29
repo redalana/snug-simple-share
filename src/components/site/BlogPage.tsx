@@ -159,11 +159,19 @@ function HeroSlider() {
                 key={s.slug}
                 type="button"
                 aria-label={`Show slide ${i + 1}`}
+                aria-current={i === active}
                 onClick={() => setActive(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === active ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
-                }`}
-              />
+                /* 24x24 hit area (WCAG 2.2 target-size) with negative margins so
+                   the visible dot size and spacing stay identical. */
+                className="-mx-1 -my-2 grid h-6 place-items-center px-1 py-2"
+              >
+                <span
+                  aria-hidden
+                  className={`block h-2 rounded-full transition-all ${
+                    i === active ? "w-8 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -279,6 +287,7 @@ function ArticleCard({ a }: { a: Article }) {
             alt={a.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            decoding="async"
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
@@ -351,6 +360,7 @@ function CTABand() {
                 alt="Medical specialists"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>
@@ -459,6 +469,7 @@ function Newsletter() {
                 alt="Healthcare newsletter"
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
             </div>
           </div>

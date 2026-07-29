@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/mammography-systems")({
           "Tomosynthesis mammography with integrated biopsy, clinical training and QA support.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/mammography-systems" },
       { property: "og:image", content: OG_IMAGES.productCategory["mammography-systems"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["mammography-systems"] },

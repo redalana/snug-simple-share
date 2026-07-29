@@ -60,6 +60,8 @@ export function FAQ() {
             src={abufarhaHq}
             alt="AbuFarha support engineer"
             className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

@@ -17,7 +17,7 @@ export const Route = createFileRoute("/thank-you")({
         name: "description",
         content: "Your request has been received. Our team will contact you within 24 hours.",
       },
-      { name: "robots", content: "noindex" },
+      { name: "robots", content: "noindex, follow" },
     ],
   }),
   component: ThankYouPage,

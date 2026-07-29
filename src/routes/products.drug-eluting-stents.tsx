@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/drug-eluting-stents")({
           "Coronary DES platforms with clinical training, inventory support and OEM-aligned service.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/drug-eluting-stents" },
       { property: "og:image", content: OG_IMAGES.productCategory["drug-eluting-stents"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["drug-eluting-stents"] },

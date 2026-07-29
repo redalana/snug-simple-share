@@ -10,7 +10,13 @@ export function DepartmentComponents() {
       <div className="mx-auto grid max-w-[100rem] gap-0 lg:grid-cols-2">
         {/* LEFT — full-bleed clinical image with hotspots */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 lg:aspect-auto">
-          <img src={heroCath} alt="Department anatomy" className="h-full w-full object-cover" />
+          <img
+            src={heroCath}
+            alt="Department anatomy"
+            className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
           {HOTSPOTS.map((h, i) => (
             <button
               key={i}
@@ -86,6 +92,8 @@ export function DepartmentComponents() {
                     src={active.thumb}
                     alt={active.title}
                     className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <p className="mt-4 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">

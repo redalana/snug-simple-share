@@ -509,6 +509,7 @@ export function GlobalPresence() {
                     alt={active.name}
                     className="h-24 w-full object-cover transition-transform duration-500 hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

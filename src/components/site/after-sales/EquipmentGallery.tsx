@@ -21,6 +21,7 @@ function EquipmentCard({ item, index }: { item: EquipmentItem; index: number }) 
           width={800}
           height={600}
           className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+          decoding="async"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/5 to-transparent transition-colors duration-300 group-hover:from-ink/85 group-hover:via-ink/15" />
       </div>

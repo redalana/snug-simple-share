@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/lithotripsy-eswl")({
           "ESWL platforms with urology-focused clinical training and long-term service coverage.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/lithotripsy-eswl" },
       { property: "og:image", content: OG_IMAGES.productCategory["lithotripsy-eswl"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["lithotripsy-eswl"] },

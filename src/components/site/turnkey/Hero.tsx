@@ -84,6 +84,9 @@ export function Hero() {
               src={turnkeyHero}
               alt="Clinical department"
               className="h-full w-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </motion.div>
 

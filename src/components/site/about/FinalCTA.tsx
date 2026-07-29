@@ -11,6 +11,7 @@ export function FinalCTA() {
         alt=""
         className="absolute inset-0 h-full w-full object-cover opacity-40"
         loading="lazy"
+        decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/50" />
       <div className="relative mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">

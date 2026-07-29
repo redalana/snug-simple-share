@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/ct-scanners")({
           "Multi-slice CT systems for emergency, oncology, cardiac and vascular imaging — with full room design, installation, training and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/ct-scanners" },
       { property: "og:image", content: OG_IMAGES.productCategory["ct-scanners"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["ct-scanners"] },

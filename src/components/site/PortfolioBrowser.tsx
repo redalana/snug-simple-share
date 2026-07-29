@@ -214,6 +214,7 @@ function ProductCard({ product, view }: { product: Product; view: "grid" | "list
             alt={product.name}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+            decoding="async"
           />
         </div>
         {product.status !== "Used" && (

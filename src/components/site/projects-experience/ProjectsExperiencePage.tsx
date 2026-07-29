@@ -111,6 +111,8 @@ function Hero() {
               src={heroImg}
               alt="Advanced cardiac cath lab installation"
               className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         </div>
@@ -161,6 +163,7 @@ function CountryFlag({ name, className = "" }: { name: string; className?: strin
       aria-hidden="true"
       loading="lazy"
       className={`inline-block shrink-0 rounded-[3px] object-cover shadow-[0_1px_2px_rgba(15,23,42,0.15)] ring-1 ring-black/5 ${className}`}
+      decoding="async"
     />
   );
 }
@@ -542,7 +545,13 @@ function Specialties() {
           className="mt-10 grid gap-8 rounded-3xl border border-border bg-white p-6 shadow-(--shadow-panel) lg:grid-cols-[1fr_1.1fr] lg:p-8"
         >
           <div className="relative overflow-hidden rounded-2xl bg-neutral-100 aspect-[4/3]">
-            <img src={active.image} alt={active.title} className="h-full w-full object-cover" />
+            <img
+              src={active.image}
+              alt={active.title}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="font-display text-2xl font-extrabold text-ink sm:text-3xl">
@@ -744,6 +753,7 @@ function ExperienceGrid() {
                 alt={c.title}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
               <div
@@ -797,7 +807,7 @@ function CtaBanner() {
             <h2 className="font-display text-xl font-extrabold sm:text-2xl">
               Planning a Healthcare Infrastructure Project?
             </h2>
-            <p className="mt-1 text-sm text-white/85">
+            <p className="mt-1 text-sm text-white">
               Talk to AbuFarha specialists and discuss your requirements.
             </p>
           </div>
@@ -850,6 +860,7 @@ function Technologies() {
                   alt={t.title}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                  decoding="async"
                 />
                 <div
                   aria-hidden

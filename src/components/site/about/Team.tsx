@@ -15,6 +15,7 @@ export function Team() {
                 alt="AbuFarha engineering team"
                 className="h-full w-full min-h-[calc(600*var(--desktop-px-unit))] object-cover"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent p-8 text-white">
                 <div className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">

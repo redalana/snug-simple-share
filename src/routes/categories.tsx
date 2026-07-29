@@ -104,6 +104,7 @@ function CategoriesPage() {
                       alt={cat.name}
                       loading="lazy"
                       className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>

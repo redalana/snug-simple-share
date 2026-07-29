@@ -425,6 +425,7 @@ export function StrokeCareProgram() {
                 height={1200}
                 loading="lazy"
                 className="h-full w-full object-cover"
+                decoding="async"
               />
               <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-[calc(13*var(--desktop-px-unit))] font-bold text-ink shadow-[0_10px_30px_-14px_rgba(15,23,42,0.5)] backdrop-blur-sm">
                 <MapPin className="h-4 w-4 text-primary" strokeWidth={2} />

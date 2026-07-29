@@ -44,12 +44,40 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
-// Production security headers applied to every response. Kept intentionally
-// permissive for CSP (`default-src *` + inline/eval) because the SSR runtime,
-// Google Fonts, GA4, and inline JSON-LD/gtag bootstrap all need it. Tighten
-// later once a full CSP inventory is done. The remaining headers (frame,
-// content-type, referrer, permissions, HSTS) are safe universally.
+// Production security headers applied to every response.
+//
+// CSP is now scoped to the origins the app actually uses instead of a blanket
+// `default-src *`:
+//   - scripts: self + Google Tag Manager (GA4 loader) + inline bootstrap
+//   - styles:  self + Google Fonts stylesheet + inline (Tailwind/JSX styles)
+//   - images:  self + data/blob + https (product images are hosted on the
+//              legacy abufarhamedical.com CDN and asset CDN)
+//   - connect: self + Google Analytics collection endpoints
+// `unsafe-inline` remains required for the inline JSON-LD/gtag bootstrap and
+// React inline style attributes; `unsafe-eval` is intentionally NOT granted.
+const CSP = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+  "object-src 'none'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https:",
+  "media-src 'self' https:",
+  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
+  "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const SECURITY_HEADERS: Record<string, string> = {
+  "Content-Security-Policy": CSP,
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Cross-Origin-Resource-Policy": "same-site",
+  "X-Permitted-Cross-Domain-Policies": "none",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "SAMEORIGIN",
   "Referrer-Policy": "strict-origin-when-cross-origin",

@@ -2,8 +2,8 @@ import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProductDetail } from "@/components/site/ProductDetail";
-import { getProductBySlug } from "@/lib/products";
-import { SITE_URL, absUrl } from "@/lib/seo";
+import { getProductBySlug, getRelatedProducts } from "@/lib/products";
+import { SITE_URL, absUrl, breadcrumbJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
@@ -16,42 +16,106 @@ export const Route = createFileRoute("/products/$slug")({
       return {
         meta: [
           { title: "System Not Found | AbuFarha Medical" },
-          { name: "robots", content: "noindex" },
+          { name: "robots", content: "noindex, follow" },
         ],
       };
     }
     const { product } = loaderData;
-    const desc = `${product.name} — ${product.subtitle}. ${product.status}, ${product.warranty}. Request a quote from AbuFarha Medical Equipment.`;
+    const title = product.seoTitle ?? `${product.name} | AbuFarha Medical`;
+    const desc =
+      product.seoDescription ??
+      `${product.name} — ${product.subtitle}. ${product.status}, ${product.warranty}. Request a quote from AbuFarha Medical Equipment.`;
+    const url = `${SITE_URL}/products/${params.slug}`;
+    const image = absUrl(product.image);
+    const gallery = (product.gallery ?? [product.image]).map((src) => absUrl(src));
+    const itemCondition =
+      product.status === "Brand New"
+        ? "https://schema.org/NewCondition"
+        : "https://schema.org/RefurbishedCondition";
+
+    const productSchema = {
+      "@context": "https://schema.org",
+      "@type": ["Product", "MedicalDevice"],
+      "@id": `${url}#product`,
+      name: product.name,
+      url,
+      category: product.category,
+      brand: { "@type": "Brand", name: product.brand },
+      manufacturer: { "@type": "Organization", name: product.brand },
+      model: product.model,
+      sku: product.slug,
+      image: gallery,
+      description: product.description ?? desc,
+      countryOfOrigin: { "@type": "Country", name: product.country },
+      productionDate: String(product.year),
+      itemCondition,
+      isSimilarTo: getRelatedProducts(product, 3).map((r) => ({
+        "@type": "Product",
+        name: r.name,
+        url: `${SITE_URL}/products/${r.slug}`,
+      })),
+      additionalProperty: [
+        { "@type": "PropertyValue", name: "Condition", value: product.status },
+        { "@type": "PropertyValue", name: "System Type", value: product.systemType },
+        { "@type": "PropertyValue", name: "Year of Manufacture", value: String(product.year) },
+        ...product.snapshot.map((s) => ({
+          "@type": "PropertyValue",
+          name: s.label,
+          value: s.value,
+        })),
+      ],
+      ...(product.specialty.length
+        ? {
+            relevantSpecialty: product.specialty.map((s) => ({
+              "@type": "MedicalSpecialty",
+              name: s,
+            })),
+          }
+        : {}),
+      offers: {
+        "@type": "Offer",
+        url,
+        availability: product.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+        itemCondition,
+        availableDeliveryMethod: "https://schema.org/OnSitePickup",
+        seller: { "@id": `${SITE_URL}/#organization` },
+        areaServed: ["Africa", "Middle East"],
+      },
+    };
+
     return {
       meta: [
-        { title: `${product.name} | AbuFarha Medical` },
+        { title },
         { name: "description", content: desc },
-        { property: "og:title", content: `${product.name} | AbuFarha Medical` },
+        { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "product" },
-        { property: "og:url", content: `${SITE_URL}/products/${params.slug}` },
-        { property: "og:image", content: absUrl(product.image) },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        { property: "og:image:alt", content: product.imageAlt ?? product.name },
+        { property: "og:site_name", content: "AbuFarha Medical" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: absUrl(product.image) },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: desc },
+        { name: "twitter:image", content: image },
       ],
-      links: [{ rel: "canonical", href: `${SITE_URL}/products/${params.slug}` }],
+      links: [{ rel: "canonical", href: url }],
       scripts: [
+        { type: "application/ld+json", children: JSON.stringify(productSchema) },
         {
           type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: product.name,
-            category: product.category,
-            brand: { "@type": "Brand", name: product.brand },
-            image: product.image,
-            description: desc,
-            countryOfOrigin: product.country,
-          }),
+          children: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Products", path: "/products" },
+              { name: product.name, path: `/products/${params.slug}` },
+            ]),
+          ),
         },
       ],
     };
   },
+
   component: ProductDetailPage,
   errorComponent: ({ error }) => (
     <SimpleShell>

@@ -356,17 +356,10 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
             <div>
               <div className="group/gallery relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_18px_44px_-24px_rgba(0,0,0,0.28)]">
                 {/* Hover-zoom stage (desktop) + click-to-fullscreen */}
+                {/* Not a role="button": it contains focusable children (nested-interactive).
+                    Keyboard users open the lightbox via the "View fullscreen" button below. */}
                 <div
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Open fullscreen gallery"
                   onClick={() => setLightboxOpen(true)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setLightboxOpen(true);
-                    }
-                  }}
                   onMouseEnter={() => setZoomHover(true)}
                   onMouseLeave={() => setZoomHover(false)}
                   onMouseMove={handleZoomMove}
@@ -588,16 +581,20 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 <span className="mt-2 block h-1 w-12 rounded-full bg-primary" />
                 <dl className="mt-5 space-y-4">
                   {facts.map((f) => (
-                    <div key={f.label} className="flex items-start gap-3">
-                      <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                      <div className="min-w-0">
-                        <dt className="text-xs uppercase tracking-wide text-muted-foreground">
-                          {f.label}
-                        </dt>
-                        <dd className="text-[calc(15*var(--desktop-px-unit))] font-semibold text-foreground">
-                          {f.value}
-                        </dd>
-                      </div>
+                    <div
+                      key={f.label}
+                      className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3"
+                    >
+                      <f.icon
+                        aria-hidden
+                        className="row-span-2 mt-0.5 h-5 w-5 shrink-0 text-primary"
+                      />
+                      <dt className="min-w-0 text-xs uppercase tracking-wide text-muted-foreground">
+                        {f.label}
+                      </dt>
+                      <dd className="col-start-2 min-w-0 text-[calc(15*var(--desktop-px-unit))] font-semibold text-foreground">
+                        {f.value}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -1005,7 +1002,7 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (value: s
               <span className="flex-1 truncate">{selected.name}</span>
             </>
           ) : (
-            <span className="flex-1 truncate text-muted-foreground/70">Select country</span>
+            <span className="flex-1 truncate text-muted-foreground">Select country</span>
           )}
           <ChevronRight className="h-4 w-4 rotate-90 text-muted-foreground" />
         </button>
@@ -1215,8 +1212,11 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
               />
             </div>
             <div>
-              <label className={labelClass}>Interested Product</label>
+              <label className={labelClass} htmlFor="pd-interested-product">
+                Interested Product
+              </label>
               <input
+                id="pd-interested-product"
                 readOnly
                 value={product.name}
                 className={`${inputClass} cursor-not-allowed bg-secondary/60 font-medium`}
@@ -1224,8 +1224,11 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
             </div>
           </div>
           <div className="mt-6">
-            <label className={labelClass}>Message</label>
+            <label className={labelClass} htmlFor="pd-message">
+              Message
+            </label>
             <textarea
+              id="pd-message"
               rows={5}
               value={form.message}
               onChange={update("message")}
@@ -1367,6 +1370,8 @@ function Lightbox({
           className={`max-h-full max-w-full select-none rounded-lg object-contain transition-transform duration-300 ${
             zoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in"
           }`}
+          loading="lazy"
+          decoding="async"
         />
         {images.length > 1 && (
           <button
@@ -1397,7 +1402,13 @@ function Lightbox({
                 i === index ? "border-white" : "border-white/25 opacity-60 hover:opacity-100"
               }`}
             >
-              <img src={img} alt="" loading="lazy" className="h-full w-full object-cover" />
+              <img
+                src={img}
+                alt=""
+                loading="lazy"
+                className="h-full w-full object-cover"
+                decoding="async"
+              />
             </button>
           ))}
         </div>

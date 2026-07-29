@@ -43,6 +43,7 @@ export function Journey() {
                         loading="lazy"
                         width={260}
                         height={260}
+                        decoding="async"
                       />
                     </div>
                     <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full bg-primary ring-4 ring-white shadow-[0_0_0_2px_var(--primary)] transition-all group-hover:scale-125" />

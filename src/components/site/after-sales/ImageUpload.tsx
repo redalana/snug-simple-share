@@ -130,7 +130,13 @@ export function ImageUpload({
               className="group relative overflow-hidden rounded-xl border border-border bg-background"
             >
               <div className="aspect-square w-full overflow-hidden">
-                <img src={it.preview} alt={it.file.name} className="h-full w-full object-cover" />
+                <img
+                  src={it.preview}
+                  alt={it.file.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               {it.progress < 100 && (
                 <div className="absolute inset-x-0 bottom-0 h-1 bg-black/20">

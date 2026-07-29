@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/c-arm-systems")({
           "Flat-detector C-arms with clinical training, installation and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/c-arm-systems" },
       { property: "og:image", content: OG_IMAGES.productCategory["c-arm-systems"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["c-arm-systems"] },

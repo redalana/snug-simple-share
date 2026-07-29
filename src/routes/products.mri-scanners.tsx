@@ -18,6 +18,7 @@ export const Route = createFileRoute("/products/mri-scanners")({
           "Whole-body MRI systems with helium logistics, RF/shield planning, clinical training and preventive maintenance.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/products/mri-scanners" },
       { property: "og:image", content: OG_IMAGES.productCategory["mri-scanners"] },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: OG_IMAGES.productCategory["mri-scanners"] },

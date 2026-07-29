@@ -21,8 +21,7 @@ export function ExperienceAbuFarha() {
   const active = CLINICAL_SOLUTIONS[Math.max(activeIndex, 0)];
 
   const move = (delta: number) => {
-    const next =
-      (activeIndex + delta + CLINICAL_SOLUTIONS.length) % CLINICAL_SOLUTIONS.length;
+    const next = (activeIndex + delta + CLINICAL_SOLUTIONS.length) % CLINICAL_SOLUTIONS.length;
     setActiveId(CLINICAL_SOLUTIONS[next].id);
     document.getElementById(`clinical-tab-${CLINICAL_SOLUTIONS[next].id}`)?.focus();
   };
@@ -122,11 +121,7 @@ export function ExperienceAbuFarha() {
           {/* Content — second on mobile, first on tablet/desktop */}
           <div className="order-2 min-w-0 md:order-1">
             <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={active.id}
-                {...anim}
-                transition={{ duration: 0.35, ease: EASE }}
-              >
+              <motion.div key={active.id} {...anim} transition={{ duration: 0.35, ease: EASE }}>
                 <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink [overflow-wrap:anywhere]">
                   {active.title}
                 </h3>
