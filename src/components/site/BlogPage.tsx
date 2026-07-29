@@ -595,7 +595,7 @@ function ArticleCard({ a }: { a: ContentItem }) {
           <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
             {a.title}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.excerpt}</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.summary}</p>
           <div className="mt-auto flex items-center justify-between gap-3 pt-5">
             <div className="flex items-center gap-4 border-t border-border pt-4 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
