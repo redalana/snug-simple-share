@@ -78,22 +78,15 @@ function KnowledgeLibrary() {
 
   const update = useCallback(
     (patch: Partial<BlogSearchState>, keepPage = false) => {
-      void navigate({
-        to: ".",
-        search: (prev) => {
-          const next: BlogSearchState = { ...(prev as BlogSearchState), ...patch };
-          if (!keepPage) delete next.page;
-          for (const key of Object.keys(next) as (keyof BlogSearchState)[]) {
-            const value = next[key];
-            if (value === undefined || value === "" || value === ALL_CATEGORY_ID) delete next[key];
-          }
-          return next;
-        },
-        replace: true,
-        resetScroll: false,
-      });
+      const next: BlogSearchState = { ...search, ...patch };
+      if (!keepPage) delete next.page;
+      for (const key of Object.keys(next) as (keyof BlogSearchState)[]) {
+        const value = next[key];
+        if (value === undefined || value === "" || value === ALL_CATEGORY_ID) delete next[key];
+      }
+      void navigate({ to: ".", search: next, replace: true, resetScroll: false });
     },
-    [navigate],
+    [navigate, search],
   );
 
   /* Every list below comes from the knowledge graph — nothing is hardcoded. */
