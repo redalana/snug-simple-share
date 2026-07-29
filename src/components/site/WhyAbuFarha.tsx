@@ -10,9 +10,6 @@ import {
   ShieldCheck,
   Headset,
   ArrowRight,
-  BadgeCheck,
-  CheckCircle2,
-  Handshake,
   ClipboardList,
   Truck,
   PlugZap,
@@ -23,7 +20,7 @@ import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/use-count-up";
-import { TechnologyPartners } from "./TechnologyPartners";
+
 
 import heroImg from "@/assets/why-cathlab.jpg";
 import engineerImg from "@/assets/aftersales-remote-engineer.jpg";
