@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   ArrowRight,
   Award,
@@ -391,12 +392,19 @@ function BrandsPage() {
   // Featured carousel shows every matching manufacturer, flagged ones first.
   const featuredSlides = useMemo(() => [...featured, ...rest], [featured, rest]);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "start",
-    slidesToScroll: 1,
-    containScroll: "trimSnaps",
-  });
+  const autoplay = useRef(
+    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      slidesToScroll: 1,
+      containScroll: "trimSnaps",
+    },
+    [autoplay.current]
+  );
   const [selectedSnap, setSelectedSnap] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -414,9 +422,24 @@ function BrandsPage() {
     };
   }, [emblaApi]);
 
+  // Respect users who prefer reduced motion: no autoplay for them.
+  useEffect(() => {
+    if (!emblaApi) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => {
+      const plugin = autoplay.current;
+      if (mq.matches) plugin.stop();
+      else plugin.play();
+    };
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, [emblaApi]);
+
   useEffect(() => {
     emblaApi?.reInit();
   }, [emblaApi, featuredSlides.length]);
+
 
 
   return (
@@ -548,31 +571,35 @@ function BrandsPage() {
                     The manufacturers most hospitals start with.
                   </h2>
                 </div>
-                <div className="hidden items-center gap-3 md:flex">
+                <div className="hidden items-center gap-3 sm:flex">
                   <span
                     aria-live="polite"
-                    className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+                    aria-atomic="true"
+                    className="text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.18em] text-muted-foreground tabular-nums"
                   >
-                    {Math.min(selectedSnap + 1, featuredSlides.length)} of {featuredSlides.length}
+                    <span className="text-foreground">
+                      {String(Math.min(selectedSnap + 1, featuredSlides.length)).padStart(2, "0")}
+                    </span>{" "}
+                    / {String(featuredSlides.length).padStart(2, "0")}
                   </span>
                   <div className="flex items-center gap-1.5">
                     <button
                       type="button"
                       onClick={scrollPrev}
-                      aria-label="Previous brand"
+                      aria-label="Previous manufacturer"
                       aria-controls="featured-brands-carousel"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors duration-300 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 md:h-8 md:w-8"
                     >
-                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                      <ChevronLeft className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden="true" />
                     </button>
                     <button
                       type="button"
                       onClick={scrollNext}
-                      aria-label="Next brand"
+                      aria-label="Next manufacturer"
                       aria-controls="featured-brands-carousel"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors duration-300 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 md:h-8 md:w-8"
                     >
-                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                      <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4" aria-hidden="true" />
                     </button>
                   </div>
                 </div>
@@ -593,21 +620,31 @@ function BrandsPage() {
                     scrollNext();
                   }
                 }}
-                className="overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="overflow-hidden py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <div className="-ml-5 flex">
-                  {featuredSlides.map((brand) => (
-                    <div
-                      key={brand.name}
-                      role="group"
-                      aria-roledescription="slide"
-                      className="min-w-0 shrink-0 grow-0 basis-full pl-5 [&>article]:h-full md:basis-1/2 lg:basis-1/3"
-                    >
-                      <FeaturedBrandCard brand={brand} />
-                    </div>
-                  ))}
+                  {featuredSlides.map((brand, i) => {
+                    const isActive = i === selectedSnap;
+                    return (
+                      <div
+                        key={brand.name}
+                        role="group"
+                        aria-roledescription="slide"
+                        aria-label={`${i + 1} of ${featuredSlides.length}: ${brand.name}`}
+                        aria-current={isActive ? "true" : undefined}
+                        className={`min-w-0 shrink-0 grow-0 basis-full pl-5 transition-transform duration-500 ease-out [&>article]:h-full md:basis-1/2 lg:basis-1/3 ${
+                          isActive
+                            ? "scale-[1.02] [&>article]:border-foreground/25 [&>article]:shadow-[0_18px_45px_-28px_rgba(15,23,42,0.35)]"
+                            : ""
+                        }`}
+                      >
+                        <FeaturedBrandCard brand={brand} />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
+
             </div>
           </section>
         )}
@@ -1020,6 +1057,9 @@ function FeaturedBrandCard({ brand }: { brand: Brand }) {
             src={thumb}
             alt={`${brand.name} equipment`}
             loading="lazy"
+            decoding="async"
+            width={640}
+            height={480}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
         </div>
