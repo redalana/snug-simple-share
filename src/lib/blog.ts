@@ -131,6 +131,24 @@ const RAW: Array<
   }
 > = [
   {
+    slug: "what-is-an-mri-scanner",
+    title: "What Is an MRI Scanner?",
+    seoTitle: "What Is an MRI Scanner? How It Works, Costs & Hospital Guide",
+    metaDescription:
+      "A clinically reviewed guide to MRI scanners — how magnetic resonance imaging works, system components, field strengths, siting, safety zones, costs and maintenance for hospitals.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "How magnetic resonance imaging works, what is inside the machine, and what hospitals must plan for — field strength, siting, safety zones, maintenance and cost of ownership.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 29, 2026",
+    lastUpdated: "July 29, 2026",
+    readingTime: "15 min read",
+    featured: true,
+    content: MRI_SCANNER_CONTENT,
+    tableOfContents: MRI_SCANNER_TOC,
+  },
+  {
     slug: "cath-lab-buying-guide",
     title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
     metaDescription:
