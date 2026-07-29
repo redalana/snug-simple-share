@@ -351,6 +351,9 @@ export function CategoryLandingPage({
           )}
         </section>
 
+        {/* Knowledge Hub — graph-driven, lazily rendered */}
+        <KnowledgeHub categorySlug={slug} productCategories={showRest ? [] : productCategories} />
+
         {/* Category FAQ */}
         {content && content.faqs.length > 0 && (
           <section className="border-t border-border/60 bg-muted/30">
