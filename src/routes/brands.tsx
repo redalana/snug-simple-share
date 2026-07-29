@@ -391,12 +391,19 @@ function BrandsPage() {
   // Featured carousel shows every matching manufacturer, flagged ones first.
   const featuredSlides = useMemo(() => [...featured, ...rest], [featured, rest]);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "start",
-    slidesToScroll: 1,
-    containScroll: "trimSnaps",
-  });
+  const autoplay = useRef(
+    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      slidesToScroll: 1,
+      containScroll: "trimSnaps",
+    },
+    [autoplay.current]
+  );
   const [selectedSnap, setSelectedSnap] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -414,9 +421,25 @@ function BrandsPage() {
     };
   }, [emblaApi]);
 
+  // Respect users who prefer reduced motion: no autoplay for them.
+  useEffect(() => {
+    if (!emblaApi) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => {
+      const plugin = emblaApi.plugins().autoplay;
+      if (!plugin) return;
+      if (mq.matches) plugin.stop();
+      else plugin.play();
+    };
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, [emblaApi]);
+
   useEffect(() => {
     emblaApi?.reInit();
   }, [emblaApi, featuredSlides.length]);
+
 
 
   return (
