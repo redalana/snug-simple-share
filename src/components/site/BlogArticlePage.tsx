@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { RelatedGraph } from "@/components/site/knowledge/RelatedGraph";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import {
   ArrowLeft,
@@ -99,6 +100,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           <Sidebar article={article} related={related} />
         </div>
       </section>
+      <RelatedGraph slug={article.slug} />
       <ExpertCTA />
       <NewsletterBand />
       <BackToTop />

@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import {
   ArrowRight,
   Calendar,
@@ -11,25 +11,275 @@ import {
   Mail,
   MessageCircle,
   Search,
+  X,
 } from "lucide-react";
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
-import { FEATURED_ARTICLES, LATEST_ARTICLES, MORE_ARTICLES, type Article } from "@/lib/blog";
+import { FEATURED_ARTICLES } from "@/lib/blog";
+import {
+  ALL_CATEGORY_ID,
+  KNOWLEDGE_SORTS,
+  getCategoryTabs,
+  getFacetOptions,
+  getResultsHeading,
+  queryArticles,
+  technologyLabel,
+  type FacetOption,
+  type KnowledgeFilters,
+  type KnowledgeSort,
+} from "@/lib/content";
+import type { ContentItem } from "@/lib/content";
 
-const SORTS = ["Latest", "Oldest", "Most Popular"] as const;
+const SORTS = KNOWLEDGE_SORTS;
+const PAGE_SIZE = 12;
 
 export function BlogPage() {
   return (
     <div className="bg-white">
       <PageIntro />
       <HeroSlider />
-      <SearchBar />
-      <ArticleGrid heading="Latest Articles" items={LATEST_ARTICLES} />
-      <CTABand />
-      <ArticleGrid heading="More Articles" items={MORE_ARTICLES} />
-      <Pagination />
+      <KnowledgeLibrary />
       <Newsletter />
     </div>
+  );
+}
+
+/* ---------------- Knowledge Library (graph-driven) ---------------- */
+
+type BlogSearchState = KnowledgeFilters & { page?: number };
+
+const blogRoute = getRouteApi("/blog/");
+
+function KnowledgeLibrary() {
+  const search = blogRoute.useSearch();
+  const navigate = blogRoute.useNavigate();
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const filters = useMemo<KnowledgeFilters>(
+    () => ({
+      category: search.category,
+      technology: search.technology,
+      manufacturer: search.manufacturer,
+      specialty: search.specialty,
+      tag: search.tag,
+      q: search.q,
+      sort: search.sort,
+    }),
+    [
+      search.category,
+      search.technology,
+      search.manufacturer,
+      search.specialty,
+      search.tag,
+      search.q,
+      search.sort,
+    ],
+  );
+
+  const update = useCallback(
+    (patch: Partial<BlogSearchState>, keepPage = false) => {
+      const next: BlogSearchState = { ...search, ...patch };
+      if (!keepPage) delete next.page;
+      for (const key of Object.keys(next) as (keyof BlogSearchState)[]) {
+        const value = next[key];
+        if (value === undefined || value === "" || value === ALL_CATEGORY_ID) delete next[key];
+      }
+      void navigate({ to: ".", search: next, replace: true, resetScroll: false });
+    },
+    [navigate, search],
+  );
+
+  /* Every list below comes from the knowledge graph — nothing is hardcoded. */
+  const articles = useMemo(() => queryArticles(filters), [filters]);
+  const tabs = useMemo(() => getCategoryTabs(filters), [filters]);
+  const facets = useMemo(() => getFacetOptions(filters), [filters]);
+  const heading = getResultsHeading(filters, articles.length);
+
+  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+  const page = Math.min(Math.max(1, search.page ?? 1), totalPages);
+  const pageItems = useMemo(
+    () => articles.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [articles, page],
+  );
+
+  const goToPage = useCallback(
+    (next: number) => {
+      update({ page: next > 1 ? next : undefined }, true);
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    },
+    [update],
+  );
+
+  return (
+    <>
+      <SearchBar
+        q={search.q ?? ""}
+        setQ={(value) => update({ q: value || undefined })}
+        sort={search.sort ?? "Latest"}
+        setSort={(value) => update({ sort: value === "Latest" ? undefined : value })}
+      />
+      <CategoryTabs
+        tabs={tabs}
+        active={search.category ?? ALL_CATEGORY_ID}
+        onSelect={(id) => update({ category: id })}
+      />
+      <FacetFilters
+        facets={facets}
+        filters={filters}
+        onChange={(patch) => update(patch)}
+        onClear={() =>
+          update({
+            technology: undefined,
+            manufacturer: undefined,
+            specialty: undefined,
+            tag: undefined,
+          })
+        }
+      />
+      <div ref={resultsRef}>
+        <ArticleGrid heading={heading.title} count={heading.count} items={pageItems} />
+      </div>
+      <CTABand />
+      {totalPages > 1 && <Pagination page={page} totalPages={totalPages} onPage={goToPage} />}
+    </>
+  );
+}
+
+/* ---------------- Category Tabs ---------------- */
+
+function CategoryTabs({
+  tabs,
+  active,
+  onSelect,
+}: {
+  tabs: FacetOption[];
+  active: string;
+  onSelect: (id: string) => void;
+}) {
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndex = Math.max(
+    0,
+    tabs.findIndex((t) => t.id === active),
+  );
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    const delta =
+      event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : event.key === "Home" ? -999 : event.key === "End" ? 999 : 0;
+    if (!delta) return;
+    event.preventDefault();
+    const next =
+      delta === -999
+        ? 0
+        : delta === 999
+          ? tabs.length - 1
+          : (activeIndex + delta + tabs.length) % tabs.length;
+    refs.current[next]?.focus();
+    onSelect(tabs[next].id);
+  };
+
+  return (
+    <section className="bg-white pt-6 lg:pt-8">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+        <div
+          role="tablist"
+          aria-label="Article categories"
+          onKeyDown={onKeyDown}
+          className="flex flex-wrap gap-2"
+        >
+          {tabs.map((tab, i) => {
+            const isActive = tab.id === active;
+            return (
+              <button
+                key={tab.id}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                type="button"
+                role="tab"
+                id={`kc-tab-${tab.id}`}
+                aria-selected={isActive}
+                aria-controls="kc-results"
+                tabIndex={isActive ? 0 : -1}
+                disabled={tab.count === 0 && !isActive}
+                onClick={() => onSelect(tab.id)}
+                className={`inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-40 ${
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-white text-ink hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                {tab.label}
+                <span
+                  className={`text-[calc(11*var(--desktop-px-unit))] font-bold ${
+                    isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+                  }`}
+                >
+                  ({tab.count})
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Smart Filters ---------------- */
+
+function FacetFilters({
+  facets,
+  filters,
+  onChange,
+  onClear,
+}: {
+  facets: { technologies: FacetOption[]; manufacturers: FacetOption[]; specialties: FacetOption[] };
+  filters: KnowledgeFilters;
+  onChange: (patch: Partial<BlogSearchState>) => void;
+  onClear: () => void;
+}) {
+  const groups = [
+    { key: "technology" as const, label: "Technology", options: facets.technologies },
+    { key: "manufacturer" as const, label: "Manufacturer", options: facets.manufacturers },
+    { key: "specialty" as const, label: "Specialty", options: facets.specialties },
+  ].filter((g) => g.options.length > 0);
+
+  const hasActive = Boolean(
+    filters.technology || filters.manufacturer || filters.specialty || filters.tag,
+  );
+  if (!groups.length) return null;
+
+  return (
+    <section className="bg-white pt-4 lg:pt-5">
+      <div className="mx-auto flex max-w-[87.5rem] flex-wrap items-center gap-3 px-6 lg:px-10">
+        {groups.map((group) => (
+          <label key={group.key} className="inline-flex items-center gap-2 text-sm">
+            <span className="font-medium text-muted-foreground">{group.label}:</span>
+            <select
+              value={filters[group.key] ?? ""}
+              onChange={(e) => onChange({ [group.key]: e.target.value || undefined })}
+              className="h-10 rounded-full border border-border bg-white px-3 text-sm font-semibold text-ink outline-none transition hover:border-primary/40 focus:border-primary focus:ring-4 focus:ring-primary/10"
+            >
+              <option value="">All</option>
+              {group.options.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label} ({option.count})
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+        {hasActive && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+          >
+            <X className="h-3.5 w-3.5" /> Clear filters
+          </button>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -182,10 +432,26 @@ function HeroSlider() {
 
 /* ---------------- Search Bar ---------------- */
 
-function SearchBar() {
-  const [q, setQ] = useState("");
-  const [sort, setSort] = useState<(typeof SORTS)[number]>("Latest");
+function SearchBar({
+  q,
+  setQ,
+  sort,
+  setSort,
+}: {
+  q: string;
+  setQ: (value: string) => void;
+  sort: KnowledgeSort;
+  setSort: (value: KnowledgeSort) => void;
+}) {
   const [open, setOpen] = useState(false);
+  /* Debounced so typing does not re-run the graph query on every keystroke. */
+  const [draft, setDraft] = useState(q);
+  useEffect(() => setDraft(q), [q]);
+  useEffect(() => {
+    if (draft === q) return;
+    const id = setTimeout(() => setQ(draft), 250);
+    return () => clearTimeout(id);
+  }, [draft, q, setQ]);
 
   return (
     <section className="bg-white pt-10 lg:pt-14">
@@ -194,11 +460,13 @@ function SearchBar() {
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            aria-label="Search the Knowledge Center"
             placeholder="Search articles, topics, or keywords…"
             className="h-12 w-full rounded-full border border-border bg-white pl-11 pr-14 text-sm text-ink shadow-[0_2px_10px_-6px_rgba(15,23,42,0.15)] outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10"
           />
+
           <button
             type="button"
             aria-label="Search"
@@ -251,24 +519,54 @@ function SearchBar() {
 
 /* ---------------- Article Grid ---------------- */
 
-function ArticleGrid({ heading, items }: { heading: string; items: Article[] }) {
+function ArticleGrid({
+  heading,
+  count,
+  items,
+}: {
+  heading: string;
+  count: number;
+  items: ContentItem[];
+}) {
   return (
     <section className="bg-white pt-10 lg:pt-14">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
         <h2 className="mb-6 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-[1.75rem]">
           {heading}
+          <span className="ml-3 align-middle text-base font-bold text-muted-foreground">
+            {count} {count === 1 ? "Article" : "Articles"}
+          </span>
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          id="kc-results"
+          role="tabpanel"
+          aria-live="polite"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {items.map((a) => (
             <ArticleCard key={a.slug} a={a} />
           ))}
         </div>
+        {items.length === 0 && (
+          <p className="py-10 text-center text-sm text-muted-foreground">
+            No articles match the current filters. Try clearing a filter or searching for a
+            different topic.
+          </p>
+        )}
       </div>
     </section>
   );
 }
 
-function ArticleCard({ a }: { a: Article }) {
+function ArticleCard({ a }: { a: ContentItem }) {
+  /* Badges are graph facets, not editorial fields. */
+  const badges = [
+    a.primaryCategory,
+    a.technologies[0] ? technologyLabel(a.technologies[0]) : undefined,
+    a.manufacturers[0],
+    a.readingTime,
+  ].filter((v): v is string => Boolean(v));
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -283,7 +581,7 @@ function ArticleCard({ a }: { a: Article }) {
       >
         <div className="aspect-[16/10] w-full overflow-hidden bg-secondary">
           <img
-            src={a.coverImage}
+            src={a.image}
             alt={a.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -291,13 +589,18 @@ function ArticleCard({ a }: { a: Article }) {
           />
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
-            {a.category}
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary">
+            {badges.map((badge, i) => (
+              <span key={badge} className="inline-flex items-center gap-2">
+                {i > 0 && <span className="text-muted-foreground/50">•</span>}
+                <span className={i === 0 ? "" : "text-muted-foreground"}>{badge}</span>
+              </span>
+            ))}
           </span>
           <h3 className="mt-2 font-display text-lg font-extrabold leading-snug text-ink transition-colors group-hover:text-primary">
             {a.title}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.excerpt}</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.summary}</p>
           <div className="mt-auto flex items-center justify-between gap-3 pt-5">
             <div className="flex items-center gap-4 border-t border-border pt-4 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
@@ -372,9 +675,28 @@ function CTABand() {
 
 /* ---------------- Pagination ---------------- */
 
-function Pagination() {
-  const [page, setPage] = useState(1);
-  const pages = useMemo(() => [1, 2, 3, 4, 5, "…", 10] as const, []);
+function Pagination({
+  page,
+  totalPages,
+  onPage,
+}: {
+  page: number;
+  totalPages: number;
+  onPage: (next: number) => void;
+}) {
+  const setPage = (updater: (p: number) => number) => onPage(updater(page));
+  /* Page numbers are derived from the filtered result count. */
+  const pages = useMemo<(number | "…")[]>(() => {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const set = new Set<number>([1, totalPages, page, page - 1, page + 1]);
+    const list = [...set].filter((p) => p >= 1 && p <= totalPages).sort((a, b) => a - b);
+    const out: (number | "…")[] = [];
+    list.forEach((p, i) => {
+      if (i > 0 && p - (list[i - 1] as number) > 1) out.push("…");
+      out.push(p);
+    });
+    return out;
+  }, [page, totalPages]);
 
   return (
     <section className="bg-white pt-12 lg:pt-16">
@@ -393,7 +715,7 @@ function Pagination() {
               <button
                 key={p}
                 type="button"
-                onClick={() => setPage(p)}
+                onClick={() => onPage(p)}
                 aria-current={p === page ? "page" : undefined}
                 className={`h-10 min-w-10 rounded-full px-3 text-sm font-bold transition ${
                   p === page
@@ -411,8 +733,9 @@ function Pagination() {
           )}
           <button
             type="button"
-            onClick={() => setPage((p) => Math.min(10, p + 1))}
-            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary disabled:opacity-40"
           >
             Next <ChevronRight className="h-4 w-4" />
           </button>

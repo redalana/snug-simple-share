@@ -189,3 +189,4 @@ export function getRelatedContent(subject: ContentItem | string, limitPerType = 
     brands: rankRelated(item, BRAND_ITEMS, { limit: limitPerType }),
   };
 }
+export * from "./knowledge-center";
