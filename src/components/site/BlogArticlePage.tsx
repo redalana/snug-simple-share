@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -111,26 +112,21 @@ function Breadcrumb({ category, title }: { category: string; title: string }) {
   return (
     <section className="bg-white pt-[calc(100*var(--desktop-px-unit))] xl:pt-[calc(150*var(--desktop-px-unit))]">
       <div className="mx-auto max-w-[87.5rem] px-6 pt-6 lg:px-10">
-        <nav
-          aria-label="Breadcrumb"
+        <Breadcrumbs
+          variant="inline"
+          emitJsonLd={false}
           className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground"
-        >
-          <Link to="/" className="hover:text-primary">
-            Home
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <Link to="/blog" className="hover:text-primary">
-            Blog
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="hover:text-primary">{category}</span>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="line-clamp-1 text-ink">{title}</span>
-        </nav>
+          items={[
+            { label: "Blog", to: "/blog" },
+            { label: category, className: "hover:text-primary" },
+            { label: title, className: "line-clamp-1 text-ink" },
+          ]}
+        />
       </div>
     </section>
   );
 }
+
 
 /* ---------------- Hero (title left, image right) ---------------- */
 

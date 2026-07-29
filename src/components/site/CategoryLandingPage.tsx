@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  ChevronRight,
   ShieldCheck,
   Wrench,
   GraduationCap,
@@ -14,8 +13,9 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
-import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
+import { faqPageJsonLd, itemListJsonLd, COMPANY } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
 import { openQuoteModal } from "@/lib/quote-modal";
 import { CATEGORY_CONTENT, CATEGORY_LABELS } from "@/lib/category-content";
@@ -56,6 +56,8 @@ export function CategoryLandingPage({
 
   const content = CATEGORY_CONTENT[slug];
 
+  const pageUrl = `${SITE_URL}/products/${slug}`;
+
   const itemListSchema = itemListJsonLd(
     matches.map((p) => ({
       name: p.name,
@@ -64,6 +66,21 @@ export function CategoryLandingPage({
     title,
   );
 
+  // CollectionPage wrapping the category's ItemList so search / AI engines
+  // can resolve the page entity and its members in one graph node.
+  const { "@context": _ctx, ...itemListNode } = itemListSchema as Record<string, unknown>;
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collection`,
+    url: pageUrl,
+    name: title,
+    description,
+    isPartOf: { "@id": `${COMPANY.website}/#website` },
+    publisher: { "@id": `${COMPANY.website}/#organization` },
+    mainEntity: itemListNode,
+  };
+
   const faqSchema = content && content.faqs.length > 0 ? faqPageJsonLd(content.faqs) : null;
 
   return (
@@ -71,8 +88,9 @@ export function CategoryLandingPage({
       <Header />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
+
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -83,20 +101,12 @@ export function CategoryLandingPage({
         {/* Hero */}
         <section className="border-b border-border/60 bg-gradient-to-b from-muted/40 to-background">
           <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
-            <nav
-              aria-label="Breadcrumb"
+            <Breadcrumbs
+              variant="inline"
               className="flex items-center gap-1.5 text-sm text-muted-foreground"
-            >
-              <Link to="/" className="hover:text-primary">
-                Home
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-              <Link to="/products" className="hover:text-primary">
-                All Products
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-              <span className="text-foreground">{title}</span>
-            </nav>
+              items={[{ label: "All Products", to: "/products" }, { label: title }]}
+            />
+
 
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
               {title}

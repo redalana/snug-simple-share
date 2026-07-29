@@ -32,6 +32,7 @@ const STATIC_ROUTES: SitemapEntry[] = [
   // Product catalog
   { path: "/products", changefreq: "weekly", priority: "0.9" },
   { path: "/products/mri-scanners", changefreq: "monthly", priority: "0.8" },
+  { path: "/products/ct-scanners", changefreq: "monthly", priority: "0.8" },
   { path: "/products/pet-ct-scanners", changefreq: "monthly", priority: "0.8" },
   { path: "/products/cath-lab", changefreq: "monthly", priority: "0.8" },
   { path: "/products/c-arm-systems", changefreq: "monthly", priority: "0.8" },
@@ -41,24 +42,32 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/products/lithotripsy-eswl", changefreq: "monthly", priority: "0.8" },
   { path: "/products/drug-eluting-stents", changefreq: "monthly", priority: "0.8" },
   { path: "/products/others", changefreq: "monthly", priority: "0.8" },
+  // Utility / legal
+  { path: "/faqs", changefreq: "monthly", priority: "0.5" },
+  { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
+  { path: "/terms", changefreq: "yearly", priority: "0.3" },
+  { path: "/sitemap", changefreq: "monthly", priority: "0.3" },
 ];
+
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const today = new Date().toISOString().slice(0, 10);
+        // `lastmod` is only emitted when a page-specific, authoritative date
+        // exists (articles). Static routes and products have no per-page
+        // timestamp, so the element is omitted rather than faked with
+        // the generation date.
         const toIso = (d: string) => {
           const t = Date.parse(d);
-          return Number.isFinite(t) ? new Date(t).toISOString().slice(0, 10) : today;
+          return Number.isFinite(t) ? new Date(t).toISOString().slice(0, 10) : undefined;
         };
         const entries: (SitemapEntry & { lastmod?: string })[] = [
-          ...STATIC_ROUTES.map((e) => ({ ...e, lastmod: today })),
+          ...STATIC_ROUTES,
           ...PRODUCTS.map((p) => ({
             path: `/products/${productSlug(p)}`,
             changefreq: "monthly" as const,
             priority: "0.7",
-            lastmod: today,
           })),
           ...ARTICLES.map((a) => ({
             path: `/blog/${a.slug}`,
@@ -67,6 +76,7 @@ export const Route = createFileRoute("/sitemap.xml")({
             lastmod: toIso(a.lastUpdated ?? a.publishedDate),
           })),
         ];
+
 
         const urls = entries.map((e) =>
           [
