@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { StrokeCareProgram } from "@/components/site/StrokeCareProgram";
 import { VisitAbuFarha } from "@/components/site/stroke/VisitAbuFarha";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
 
 export const Route = createFileRoute("/programs/stroke-care")({
   head: () => ({
@@ -48,6 +49,7 @@ function StrokeCarePage() {
         </div>
         <VisitAbuFarha />
         <StrokeCareProgram />
+        <ExploreRelatedKnowledge refs="clinical-application:stroke" preset="clinical" />
       </main>
       <Footer />
     </div>

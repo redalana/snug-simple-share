@@ -22,6 +22,8 @@ import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 import { faqPageJsonLd } from "@/config/companyFacts";
 import heroImg from "@/assets/sol-mri.jpg";
 import { cn } from "@/lib/utils";
+import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
+import { FAQ_ITEMS } from "@/lib/content";
 
 const TITLE = "Frequently Asked Questions | AbuFarha Medical Supplies";
 const DESC =
@@ -99,6 +101,8 @@ export const Route = createFileRoute("/faqs")({
 type Category = "All" | "Products" | "Services" | "Warranty" | "Support" | "General";
 
 type QA = { q: string; a: React.ReactNode; category: Exclude<Category, "All"> };
+
+const FAQ_REFS = FAQ_ITEMS.map((item) => item.id);
 
 const FAQS: QA[] = [
   {
@@ -338,6 +342,7 @@ function FaqsRoute() {
           </div>
         </section>
       </main>
+      <ExploreRelatedKnowledge refs={FAQ_REFS} preset="faq" />
       <Footer />
     </div>
   );

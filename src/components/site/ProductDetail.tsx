@@ -41,6 +41,7 @@ import { pushRecentlyViewed } from "@/lib/recently-viewed";
 import { toggleCompare, useCompare } from "@/lib/compare-store";
 import { RecentlyViewed } from "@/components/site/RecentlyViewed";
 import { RelatedProducts } from "@/components/site/RelatedProducts";
+import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
 import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
@@ -949,6 +950,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           onClose={() => setLightboxOpen(false)}
         />
       )}
+      <ExploreRelatedKnowledge refs={`product:${slug}`} preset="product" />
       <RecentlyViewed excludeSlug={slug} />
       <script
         type="application/ld+json"
