@@ -437,9 +437,17 @@ function HeroSlider() {
 
 /* ---------------- Search Bar ---------------- */
 
-function SearchBar() {
-  const [q, setQ] = useState("");
-  const [sort, setSort] = useState<(typeof SORTS)[number]>("Latest");
+function SearchBar({
+  q,
+  setQ,
+  sort,
+  setSort,
+}: {
+  q: string;
+  setQ: (value: string) => void;
+  sort: KnowledgeSort;
+  setSort: (value: KnowledgeSort) => void;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
