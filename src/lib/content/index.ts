@@ -191,3 +191,4 @@ export function getRelatedContent(subject: ContentItem | string, limitPerType = 
   };
 }
 export * from "./knowledge-center";
+export * from "./knowledge-hub";
