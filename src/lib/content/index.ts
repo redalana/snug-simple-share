@@ -10,6 +10,13 @@ export * from "./taxonomy";
 export * from "./services";
 export * from "./relations";
 export * from "./search";
+/* Knowledge graph layer (additive — nothing above changed behaviour). */
+export * from "./cache";
+export * from "./specialties";
+export * from "./clinical";
+export * from "./geography";
+export * from "./entities";
+export * from "./graph";
 export {
   CONTENT_ITEMS,
   ARTICLE_ITEMS,

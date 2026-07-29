@@ -10,6 +10,8 @@ import { BRANDS_LIST, type BrandEntry } from "@/lib/brands-data";
 import { CATEGORY_CONTENT, CATEGORY_NAME_TO_SLUG } from "@/lib/category-content";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
 import { SERVICES, type ServiceEntry } from "./services";
+import { inferClinicalApplications } from "./clinical";
+import { inferCountries } from "./geography";
 import {
   inferArticleCategory,
   inferManufacturers,
@@ -256,12 +258,26 @@ function documentItems(): ContentItem[] {
 
 /* ------------------------------ The registry ---------------------------- */
 
-export const PRODUCT_ITEMS: ContentItem[] = PRODUCTS.map(fromProduct);
-export const ARTICLE_ITEMS: ContentItem[] = ARTICLES.map(fromArticle);
-export const SERVICE_ITEMS: ContentItem[] = SERVICES.map(fromService);
-export const BRAND_ITEMS: ContentItem[] = BRANDS_LIST.map(fromBrand);
-export const FAQ_ITEMS: ContentItem[] = faqItems();
-export const DOCUMENT_ITEMS: ContentItem[] = documentItems();
+/**
+ * Enrich every projected item with the knowledge-graph facets (clinical
+ * applications and countries). Doing it once, centrally, means adding a new
+ * article/product automatically joins the graph with no manual linking.
+ */
+function withGraphFacets(item: ContentItem): ContentItem {
+  const text = joinSearch(item.title, item.summary, item.searchText, item.tags);
+  return {
+    ...item,
+    clinicalApplications: inferClinicalApplications(text),
+    countries: inferCountries(text),
+  };
+}
+
+export const PRODUCT_ITEMS: ContentItem[] = PRODUCTS.map(fromProduct).map(withGraphFacets);
+export const ARTICLE_ITEMS: ContentItem[] = ARTICLES.map(fromArticle).map(withGraphFacets);
+export const SERVICE_ITEMS: ContentItem[] = SERVICES.map(fromService).map(withGraphFacets);
+export const BRAND_ITEMS: ContentItem[] = BRANDS_LIST.map(fromBrand).map(withGraphFacets);
+export const FAQ_ITEMS: ContentItem[] = faqItems().map(withGraphFacets);
+export const DOCUMENT_ITEMS: ContentItem[] = documentItems().map(withGraphFacets);
 
 /** Every content item on the site, in one flat, uniform collection. */
 export const CONTENT_ITEMS: ContentItem[] = [
