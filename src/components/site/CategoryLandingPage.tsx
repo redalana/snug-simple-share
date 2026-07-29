@@ -20,6 +20,7 @@ import { SITE_URL } from "@/lib/seo";
 import { openQuoteModal } from "@/lib/quote-modal";
 import { CATEGORY_CONTENT, CATEGORY_LABELS } from "@/lib/category-content";
 import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
+import { KnowledgeHub } from "@/components/site/knowledge/KnowledgeHub";
 
 export type CategoryLandingProps = {
   /** Slug segment used in the URL, e.g. "cath-lab". */
