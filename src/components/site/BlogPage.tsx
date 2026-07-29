@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import {
   ArrowRight,
   Calendar,
@@ -11,25 +11,280 @@ import {
   Mail,
   MessageCircle,
   Search,
+  X,
 } from "lucide-react";
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
-import { FEATURED_ARTICLES, LATEST_ARTICLES, MORE_ARTICLES, type Article } from "@/lib/blog";
+import { FEATURED_ARTICLES } from "@/lib/blog";
+import {
+  ALL_CATEGORY_ID,
+  KNOWLEDGE_SORTS,
+  getCategoryTabs,
+  getFacetOptions,
+  getResultsHeading,
+  queryArticles,
+  technologyLabel,
+  type FacetOption,
+  type KnowledgeFilters,
+  type KnowledgeSort,
+} from "@/lib/content";
+import type { ContentItem } from "@/lib/content";
 
-const SORTS = ["Latest", "Oldest", "Most Popular"] as const;
+const SORTS = KNOWLEDGE_SORTS;
+const PAGE_SIZE = 12;
 
 export function BlogPage() {
   return (
     <div className="bg-white">
       <PageIntro />
       <HeroSlider />
-      <SearchBar />
-      <ArticleGrid heading="Latest Articles" items={LATEST_ARTICLES} />
-      <CTABand />
-      <ArticleGrid heading="More Articles" items={MORE_ARTICLES} />
-      <Pagination />
+      <KnowledgeLibrary />
       <Newsletter />
     </div>
+  );
+}
+
+/* ---------------- Knowledge Library (graph-driven) ---------------- */
+
+type BlogSearchState = KnowledgeFilters & { page?: number };
+
+function KnowledgeLibrary() {
+  const search = useSearch({ from: "/blog/" }) as BlogSearchState;
+  const navigate = useNavigate({ from: "/blog/" });
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const filters = useMemo<KnowledgeFilters>(
+    () => ({
+      category: search.category,
+      technology: search.technology,
+      manufacturer: search.manufacturer,
+      specialty: search.specialty,
+      tag: search.tag,
+      q: search.q,
+      sort: search.sort,
+    }),
+    [
+      search.category,
+      search.technology,
+      search.manufacturer,
+      search.specialty,
+      search.tag,
+      search.q,
+      search.sort,
+    ],
+  );
+
+  const update = useCallback(
+    (patch: Partial<BlogSearchState>, keepPage = false) => {
+      void navigate({
+        to: ".",
+        search: (prev) => {
+          const next: BlogSearchState = { ...(prev as BlogSearchState), ...patch };
+          if (!keepPage) delete next.page;
+          for (const key of Object.keys(next) as (keyof BlogSearchState)[]) {
+            const value = next[key];
+            if (value === undefined || value === "" || value === ALL_CATEGORY_ID) delete next[key];
+          }
+          return next;
+        },
+        replace: true,
+        resetScroll: false,
+      });
+    },
+    [navigate],
+  );
+
+  /* Every list below comes from the knowledge graph — nothing is hardcoded. */
+  const articles = useMemo(() => queryArticles(filters), [filters]);
+  const tabs = useMemo(() => getCategoryTabs(filters), [filters]);
+  const facets = useMemo(() => getFacetOptions(filters), [filters]);
+  const heading = getResultsHeading(filters, articles.length);
+
+  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+  const page = Math.min(Math.max(1, search.page ?? 1), totalPages);
+  const pageItems = useMemo(
+    () => articles.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [articles, page],
+  );
+
+  const goToPage = useCallback(
+    (next: number) => {
+      update({ page: next > 1 ? next : undefined }, true);
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    },
+    [update],
+  );
+
+  return (
+    <>
+      <SearchBar
+        q={search.q ?? ""}
+        setQ={(value) => update({ q: value || undefined })}
+        sort={search.sort ?? "Latest"}
+        setSort={(value) => update({ sort: value === "Latest" ? undefined : value })}
+      />
+      <CategoryTabs
+        tabs={tabs}
+        active={search.category ?? ALL_CATEGORY_ID}
+        onSelect={(id) => update({ category: id })}
+      />
+      <FacetFilters
+        facets={facets}
+        filters={filters}
+        onChange={(patch) => update(patch)}
+        onClear={() =>
+          update({
+            technology: undefined,
+            manufacturer: undefined,
+            specialty: undefined,
+            tag: undefined,
+          })
+        }
+      />
+      <div ref={resultsRef}>
+        <ArticleGrid heading={heading.title} count={heading.count} items={pageItems} />
+      </div>
+      <CTABand />
+      {totalPages > 1 && <Pagination page={page} totalPages={totalPages} onPage={goToPage} />}
+    </>
+  );
+}
+
+/* ---------------- Category Tabs ---------------- */
+
+function CategoryTabs({
+  tabs,
+  active,
+  onSelect,
+}: {
+  tabs: FacetOption[];
+  active: string;
+  onSelect: (id: string) => void;
+}) {
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndex = Math.max(
+    0,
+    tabs.findIndex((t) => t.id === active),
+  );
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    const delta =
+      event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : event.key === "Home" ? -999 : event.key === "End" ? 999 : 0;
+    if (!delta) return;
+    event.preventDefault();
+    const next =
+      delta === -999
+        ? 0
+        : delta === 999
+          ? tabs.length - 1
+          : (activeIndex + delta + tabs.length) % tabs.length;
+    refs.current[next]?.focus();
+    onSelect(tabs[next].id);
+  };
+
+  return (
+    <section className="bg-white pt-6 lg:pt-8">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
+        <div
+          role="tablist"
+          aria-label="Article categories"
+          onKeyDown={onKeyDown}
+          className="flex flex-wrap gap-2"
+        >
+          {tabs.map((tab, i) => {
+            const isActive = tab.id === active;
+            return (
+              <button
+                key={tab.id}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                type="button"
+                role="tab"
+                id={`kc-tab-${tab.id}`}
+                aria-selected={isActive}
+                aria-controls="kc-results"
+                tabIndex={isActive ? 0 : -1}
+                disabled={tab.count === 0 && !isActive}
+                onClick={() => onSelect(tab.id)}
+                className={`inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-40 ${
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-white text-ink hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                {tab.label}
+                <span
+                  className={`text-[calc(11*var(--desktop-px-unit))] font-bold ${
+                    isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+                  }`}
+                >
+                  ({tab.count})
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Smart Filters ---------------- */
+
+function FacetFilters({
+  facets,
+  filters,
+  onChange,
+  onClear,
+}: {
+  facets: { technologies: FacetOption[]; manufacturers: FacetOption[]; specialties: FacetOption[] };
+  filters: KnowledgeFilters;
+  onChange: (patch: Partial<BlogSearchState>) => void;
+  onClear: () => void;
+}) {
+  const groups = [
+    { key: "technology" as const, label: "Technology", options: facets.technologies },
+    { key: "manufacturer" as const, label: "Manufacturer", options: facets.manufacturers },
+    { key: "specialty" as const, label: "Specialty", options: facets.specialties },
+  ].filter((g) => g.options.length > 0);
+
+  const hasActive = Boolean(
+    filters.technology || filters.manufacturer || filters.specialty || filters.tag,
+  );
+  if (!groups.length) return null;
+
+  return (
+    <section className="bg-white pt-4 lg:pt-5">
+      <div className="mx-auto flex max-w-[87.5rem] flex-wrap items-center gap-3 px-6 lg:px-10">
+        {groups.map((group) => (
+          <label key={group.key} className="inline-flex items-center gap-2 text-sm">
+            <span className="font-medium text-muted-foreground">{group.label}:</span>
+            <select
+              value={filters[group.key] ?? ""}
+              onChange={(e) => onChange({ [group.key]: e.target.value || undefined })}
+              className="h-10 rounded-full border border-border bg-white px-3 text-sm font-semibold text-ink outline-none transition hover:border-primary/40 focus:border-primary focus:ring-4 focus:ring-primary/10"
+            >
+              <option value="">All</option>
+              {group.options.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label} ({option.count})
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+        {hasActive && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border bg-white px-4 text-sm font-semibold text-ink transition hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+          >
+            <X className="h-3.5 w-3.5" /> Clear filters
+          </button>
+        )}
+      </div>
+    </section>
   );
 }
 
