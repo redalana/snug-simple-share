@@ -48,7 +48,20 @@ function buildFromPath(pathname: string, custom?: Crumb[]): Crumb[] {
   return crumbs;
 }
 
-export function Breadcrumbs({ items, className = "" }: { items?: Crumb[]; className?: string }) {
+export function Breadcrumbs({
+  items,
+  className = "",
+  variant = "bar",
+}: {
+  items?: Crumb[];
+  className?: string;
+  /**
+   * "bar" — the full-width bar used on standalone pages.
+   * "inline" — bare inline trail used inside page heroes (no chrome),
+   * matching the markup previously duplicated across pages.
+   */
+  variant?: "bar" | "inline";
+}) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (HIDDEN_ON.has(pathname)) return null;
 
@@ -66,6 +79,39 @@ export function Breadcrumbs({ items, className = "" }: { items?: Crumb[]; classN
       })),
     ],
   };
+
+  if (variant === "inline") {
+    const lastIndex = crumbs.length - 1;
+    return (
+      <nav aria-label="Breadcrumb" className={className}>
+        <Link to="/" className="hover:text-primary">
+          Home
+        </Link>
+        {crumbs.map((c, i) => (
+          <span key={i} className="contents">
+            <ChevronRight className="h-3.5 w-3.5 opacity-60" aria-hidden />
+            {c.to ? (
+              <Link to={c.to} className="hover:text-primary">
+                {c.label}
+              </Link>
+            ) : (
+              <span
+                className={c.className ?? "text-foreground"}
+                {...(i === lastIndex ? { "aria-current": "page" as const } : {})}
+              >
+                {c.label}
+              </span>
+            )}
+          </span>
+        ))}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+        />
+      </nav>
+    );
+  }
+
 
   return (
     <nav
