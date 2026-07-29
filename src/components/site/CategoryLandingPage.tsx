@@ -14,8 +14,9 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
-import { faqPageJsonLd, itemListJsonLd } from "@/config/companyFacts";
+import { faqPageJsonLd, itemListJsonLd, COMPANY } from "@/config/companyFacts";
 import { SITE_URL } from "@/lib/seo";
 import { openQuoteModal } from "@/lib/quote-modal";
 import { CATEGORY_CONTENT, CATEGORY_LABELS } from "@/lib/category-content";
