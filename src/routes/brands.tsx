@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import {
   ArrowRight,
   Award,
