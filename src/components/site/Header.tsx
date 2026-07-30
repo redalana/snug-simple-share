@@ -63,7 +63,7 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[calc(72*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 pr-6 xl:h-[calc(88*var(--desktop-px-unit))] lg:pr-10">
+        <div className="mx-auto flex h-[calc(72*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 pr-6 xl:h-[calc(108*var(--desktop-px-unit))] lg:pr-10">
           <Link
             to="/"
             aria-label="AbuFarha Medical Supplies — home"

@@ -19,7 +19,7 @@ export function Logo({
     default: "h-11 md:h-14",
     lg: "h-16 md:h-24",
     header:
-      "h-[calc(44*var(--desktop-px-unit))] md:h-[calc(48*var(--desktop-px-unit))] xl:h-[calc(64*var(--desktop-px-unit))]",
+      "h-[calc(44*var(--desktop-px-unit))] md:h-[calc(48*var(--desktop-px-unit))] xl:h-[calc(84*var(--desktop-px-unit))]",
   };
   return (
     <span className={`inline-flex items-center ${className}`}>
