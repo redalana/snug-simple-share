@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
@@ -45,6 +45,28 @@ export function Header() {
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(href + "/");
   };
+
+  // Measure the navigation content width so the search bar ends exactly
+  // beneath the last nav item ("Contact Us") — no fixed widths.
+  const navRowRef = useRef<HTMLDivElement | null>(null);
+  const [navWidth, setNavWidth] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    const row = navRowRef.current;
+    if (!row || typeof ResizeObserver === "undefined") return;
+    const measure = () => {
+      const items = Array.from(row.children) as HTMLElement[];
+      if (!items.length) return;
+      const first = items[0].getBoundingClientRect();
+      const last = items[items.length - 1].getBoundingClientRect();
+      setNavWidth(Math.round(last.right - first.left));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(row);
+    for (const child of Array.from(row.children)) ro.observe(child);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -121,7 +143,10 @@ export function Header() {
 
             {/* Row 2 — navigation, aligned to the panel edge */}
             <nav className="hidden xl:block">
-              <div className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
+              <div
+                ref={navRowRef}
+                className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8"
+              >
                 {NAV.map((item) => {
                   const active = isActive(item.href);
                   const isContact = item.label === "Contact Us";
@@ -180,7 +205,10 @@ export function Header() {
             {isHome && (
               <div className="hidden border-t border-border/50 xl:block">
                 <div className="flex items-center py-[calc(10*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
-                  <div className="w-full max-w-[calc(860*var(--desktop-px-unit))]">
+                  <div
+                    className="w-full min-w-0"
+                    style={navWidth ? { maxWidth: `${navWidth}px` } : undefined}
+                  >
                     <SearchField />
                   </div>
                 </div>
