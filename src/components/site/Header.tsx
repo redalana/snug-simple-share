@@ -62,127 +62,143 @@ export function Header() {
             : "bg-white"
         }`}
       >
-        {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[calc(72*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 pr-6 xl:h-[calc(108*var(--desktop-px-unit))] lg:pr-10">
+        {/* One continuous grid: full-height branding panel + stacked rows */}
+        <div className="mx-auto flex max-w-[100rem] items-stretch">
+          {/* Left branding panel — spans utility + nav + search rows */}
           <Link
             to="/"
             aria-label="AbuFarha Medical Supplies — home"
-            className="flex h-full w-[calc(180*var(--desktop-px-unit))] shrink-0 items-center justify-center border-r border-border/50 bg-white px-4 py-2.5 xl:w-[calc(240*var(--desktop-px-unit))] xl:px-5 xl:py-3"
+            className="flex w-[calc(148*var(--desktop-px-unit))] shrink-0 items-center justify-center self-stretch bg-white px-2 md:w-[calc(190*var(--desktop-px-unit))] md:px-3 xl:w-[calc(232*var(--desktop-px-unit))] xl:px-4"
           >
             <Logo size="header" />
           </Link>
 
+          {/* Right column — everything begins immediately after the panel */}
+          <div className="flex min-w-0 flex-1 flex-col">
+            {/* Row 1 — utility bar */}
+            <div className="flex h-[calc(72*var(--desktop-px-unit))] items-center gap-4 pr-4 xl:h-[calc(38*var(--desktop-px-unit))] xl:border-b xl:border-border/50 lg:pr-8">
+              <div className="ml-auto hidden shrink-0 items-center gap-[calc(20*var(--desktop-px-unit))] lg:flex">
+                <LanguageSelector />
 
-          {/* Right cluster — language, socials */}
-          <div className="ml-auto hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
-            <LanguageSelector />
+                <div className="flex items-center gap-[calc(16*var(--desktop-px-unit))]">
+                  {HEADER_SOCIALS.map(({ label, href, Icon, hoverColor }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-foreground/60 transition-all duration-200 hover:-translate-y-0.5"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+                    >
+                      <Icon className="h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))]" />
+                    </a>
+                  ))}
+                </div>
+              </div>
 
-            <div className="flex items-center gap-[calc(18*var(--desktop-px-unit))]">
-              {HEADER_SOCIALS.map(({ label, href, Icon, hoverColor }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="text-foreground/60 transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ ["--hover-color" as string]: hoverColor }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+              {/* Mobile controls */}
+              <div className="ml-auto flex items-center gap-1.5 xl:hidden">
+                {!isHome && (
+                  <button
+                    aria-label="Search"
+                    onClick={() => setMobileSearch((v) => !v)}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
+                  >
+                    <Search className="h-5 w-5" />
+                  </button>
+                )}
+                <button
+                  aria-label="Menu"
+                  onClick={() => setOpen((v) => !v)}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-border"
                 >
-                  <Icon className="h-[calc(21*var(--desktop-px-unit))] w-[calc(21*var(--desktop-px-unit))]" />
-                </a>
-              ))}
+                  {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Mobile controls */}
-          <div className="ml-auto flex items-center gap-1.5 xl:hidden">
-            {!isHome && (
-              <button
-                aria-label="Search"
-                onClick={() => setMobileSearch((v) => !v)}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary md:hidden"
-              >
-                <Search className="h-5 w-5" />
-              </button>
+            {/* Row 2 — navigation, aligned to the panel edge */}
+            <nav className="hidden xl:block">
+              <div className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
+                {NAV.map((item) => {
+                  const active = isActive(item.href);
+                  const isContact = item.label === "Contact Us";
+                  const baseColor = isContact
+                    ? "text-primary hover:text-primary-dark"
+                    : active
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary";
+                  const weight = isContact ? "font-bold" : "font-semibold";
+                  return (
+                    <div key={item.label} className="group relative flex items-center">
+                      <a
+                        href={item.href}
+                        className={`flex items-center gap-1 px-[calc(13*var(--desktop-px-unit))] py-2 text-[calc(15*var(--desktop-px-unit))] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        {item.label}
+
+                        {item.dropdown && (
+                          <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
+                        )}
+                        <span
+                          className={`absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
+                            active ? "scale-x-100" : "origin-left scale-x-0 group-hover:scale-x-100"
+                          }`}
+                        />
+                      </a>
+
+                      {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
+                      {item.label === "All Products" && <ProductsMegaDropdown />}
+
+                      {item.dropdown &&
+                        item.label !== "Brands" &&
+                        item.label !== "All Products" && (
+                          <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+                            <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
+                              {item.dropdown.map((sub) => (
+                                <a
+                                  key={sub.label}
+                                  href={sub.href}
+                                  className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/75 transition-colors hover:bg-accent hover:text-primary"
+                                >
+                                  {sub.label}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                    </div>
+                  );
+                })}
+              </div>
+            </nav>
+
+            {/* Row 3 — global search (homepage), left-aligned with the navigation */}
+            {isHome && (
+              <div className="hidden border-t border-border/50 xl:block">
+                <div className="flex items-center py-[calc(10*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
+                  <div className="w-full max-w-[calc(860*var(--desktop-px-unit))]">
+                    <SearchField />
+                  </div>
+                </div>
+              </div>
             )}
-            <button
-              aria-label="Menu"
-              onClick={() => setOpen((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border"
-            >
-              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
           </div>
         </div>
 
-        {/* Level 2 — navigation */}
-        <nav className="hidden border-t border-border/50 xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-center gap-[calc(10*var(--desktop-px-unit))] px-6 lg:px-10">
-            {NAV.map((item) => {
-              const active = isActive(item.href);
-              const isContact = item.label === "Contact Us";
-              const baseColor = isContact
-                ? "text-primary hover:text-primary-dark"
-                : active
-                  ? "text-primary"
-                  : "text-foreground/80 hover:text-primary";
-              const weight = isContact ? "font-bold" : "font-semibold";
-              return (
-                <div key={item.label} className="group relative flex items-center">
-                  <a
-                    href={item.href}
-                    className={`flex items-center gap-1 px-4 py-2 text-[calc(15*var(--desktop-px-unit))] leading-6 tracking-[0.0125em] transition-colors ${weight} ${baseColor}`}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    {item.label}
-
-                    {item.dropdown && (
-                      <ChevronDown className="h-3.5 w-3.5 opacity-50 transition-transform group-hover:rotate-180" />
-                    )}
-                    <span
-                      className={`absolute inset-x-4 bottom-1 h-0.5 rounded-full bg-primary transition-transform duration-300 ${
-                        active ? "scale-x-100" : "origin-left scale-x-0 group-hover:scale-x-100"
-                      }`}
-                    />
-                  </a>
-
-                  {item.dropdown && item.label === "Brands" && <BrandsMegaDropdown />}
-                  {item.label === "All Products" && <ProductsMegaDropdown />}
-
-                  {item.dropdown && item.label !== "Brands" && item.label !== "All Products" && (
-                    <div className="pointer-events-none absolute left-1/2 top-full z-10 w-56 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                      <div className="translate-y-1 rounded-2xl border border-border/70 bg-white p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-transform duration-200 group-hover:translate-y-0">
-                        {item.dropdown.map((sub) => (
-                          <a
-                            key={sub.label}
-                            href={sub.href}
-                            className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/75 transition-colors hover:bg-accent hover:text-primary"
-                          >
-                            {sub.label}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </nav>
-
-        {/* Level 3 — centered global search (homepage) */}
+        {/* Search row — tablet & mobile (homepage) */}
         {isHome && (
-          <div className="border-t border-border/50">
-            <div className="mx-auto flex max-w-[100rem] justify-center px-6 py-3 lg:px-10">
-              <div className="w-full md:w-[560px] lg:w-[680px] xl:w-[760px]">
-                <SearchField />
-              </div>
+          <div className="border-t border-border/50 xl:hidden">
+            <div className="mx-auto max-w-[100rem] px-6 py-3 lg:px-10">
+              <SearchField />
             </div>
           </div>
         )}
       </div>
+
 
       {/* Mobile search drawer */}
       <AnimatePresence>
