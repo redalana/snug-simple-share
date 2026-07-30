@@ -12,9 +12,15 @@ export function Logo({
 }: {
   className?: string;
   light?: boolean;
-  size?: "default" | "lg";
+  size?: "default" | "lg" | "header";
 }) {
   void light;
+  const heights: Record<string, string> = {
+    default: "h-11 md:h-14",
+    lg: "h-16 md:h-24",
+    header:
+      "h-[calc(44*var(--desktop-px-unit))] md:h-[calc(48*var(--desktop-px-unit))] xl:h-[calc(84*var(--desktop-px-unit))]",
+  };
   return (
     <span className={`inline-flex items-center ${className}`}>
       <img
@@ -23,9 +29,7 @@ export function Logo({
         width={2280}
         height={1310}
         decoding="async"
-        className={`w-auto max-w-full object-contain ${
-          size === "lg" ? "h-16 md:h-24" : "h-11 md:h-14"
-        }`}
+        className={`w-auto max-w-full object-contain ${heights[size]}`}
       />
     </span>
   );

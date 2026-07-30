@@ -154,7 +154,7 @@ function SitemapRoute() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="pt-[calc(96*var(--desktop-px-unit))]">
+      <main id="main-content" className="pt-[var(--header-h)]">
         {/* HERO */}
         <section className="relative overflow-hidden bg-white pt-4 pb-10 sm:pb-14">
           <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">

@@ -93,6 +93,14 @@
   /* Font families resolve from styles/tokens/typography.css — never hardcode. */
   --font-display: var(--font-heading);
   --font-body: var(--font-main);
+  /* Total sticky header height — brand row only until the nav row appears at xl. */
+  --header-h: calc(72 * var(--desktop-px-unit));
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --header-h: calc(148 * var(--desktop-px-unit));
+  }
 }
 
 @layer base {
