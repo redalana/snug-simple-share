@@ -63,10 +63,15 @@ export function Header() {
         }`}
       >
         {/* Level 1 — logo, centered search, language, socials, CTA */}
-        <div className="mx-auto flex h-[calc(56*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 px-6 lg:px-10">
-          <Link to="/" className="ml-1 shrink-0 origin-left scale-[1.0]">
-            <Logo />
+        <div className="mx-auto flex h-[calc(72*var(--desktop-px-unit))] max-w-[100rem] items-center gap-6 pr-6 xl:h-[calc(88*var(--desktop-px-unit))] lg:pr-10">
+          <Link
+            to="/"
+            aria-label="AbuFarha Medical Supplies — home"
+            className="flex h-full w-[calc(180*var(--desktop-px-unit))] shrink-0 items-center justify-center border-r border-border/50 bg-white px-4 py-2.5 xl:w-[calc(240*var(--desktop-px-unit))] xl:px-5 xl:py-3"
+          >
+            <Logo size="header" />
           </Link>
+
 
           {/* Right cluster — language, socials */}
           <div className="ml-auto hidden shrink-0 items-center gap-[calc(24*var(--desktop-px-unit))] lg:flex">
