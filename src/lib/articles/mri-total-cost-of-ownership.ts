@@ -376,7 +376,6 @@ export const MRI_TOTAL_COST_OF_OWNERSHIP_CONTENT: ContentBlock[] = [
     text: "A single day of unplanned downtime on a busy 1.5T scanner can represent the loss of 12 to 20 patient slots, each carrying both a direct revenue value and, more importantly in many settings, a delayed diagnosis for a patient already in a clinical pathway. Referral behaviour compounds the loss: referring clinicians who experience repeated cancellations tend to redirect future referrals elsewhere, and that volume does not automatically return once the scanner is repaired. This is why the true cost of downtime should be modelled against contribution margin per slot and pathway impact, not simply the engineer call-out fee.",
   },
   {
-  {
     type: "stats",
     items: [
       { value: "12-20", label: "Typical patient slots lost per unplanned downtime day on a busy 1.5T scanner (indicative)" },
