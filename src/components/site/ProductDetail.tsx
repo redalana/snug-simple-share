@@ -122,12 +122,6 @@ const TRUST = [
   },
 ];
 
-const DOWNLOADS = [
-  { label: "Product Brochure", type: "PDF", size: "1.8 MB" },
-  { label: "Technical Datasheet", type: "PDF", size: "0.9 MB" },
-  { label: "Installation Guide", type: "PDF", size: "1.2 MB" },
-  { label: "Warranty Information", type: "PDF", size: "0.4 MB" },
-];
 
 const FAQS = [
   {
