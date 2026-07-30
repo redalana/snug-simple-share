@@ -99,7 +99,7 @@
 
 @media (min-width: 1280px) {
   :root {
-    --header-h: calc(148 * var(--desktop-px-unit));
+    --header-h: calc(96 * var(--desktop-px-unit));
   }
 }
 
