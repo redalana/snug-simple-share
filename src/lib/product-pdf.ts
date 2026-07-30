@@ -193,43 +193,57 @@ async function loadLogo(): Promise<string | null> {
   return logoCache;
 }
 
-function brandHeader(doc: Doc, right: string, logo: string | null) {
-  doc.setFillColor(...INK);
-  doc.rect(0, 0, PAGE_W, 78, "F");
-  doc.setFillColor(...BRAND);
-  doc.rect(0, 0, 6, 78, "F");
+/**
+ * Shared white enterprise header used by every generated PDF
+ * (brochures, company profile, technical reports, quotations).
+ * Red accent rule on top, full-colour logo left, document label right.
+ */
+export function brandHeader(doc: Doc, right: string, logo: string | null) {
+  const HEADER_H = 92;
 
-  const logoH = 44;
+  /* Clean white field */
+  doc.setFillColor(255, 255, 255);
+  doc.rect(0, 0, PAGE_W, HEADER_H, "F");
+
+  /* Brand red accent rule across the very top */
+  doc.setFillColor(...BRAND);
+  doc.rect(0, 0, PAGE_W, 5, "F");
+
+  const centerY = 5 + (HEADER_H - 5) / 2;
+
+  /* Full-colour logo, vertically centred */
+  const logoH = 46;
   const logoW = logoH * LOGO_ASPECT;
   if (logo) {
     try {
-      doc.addImage(logo, "PNG", M, 12, logoW, logoH, undefined, "FAST");
+      doc.addImage(logo, "PNG", M, centerY - logoH / 2, logoW, logoH, undefined, "SLOW");
     } catch {
       /* ignore */
     }
   } else {
-    doc.setTextColor(255, 255, 255);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(19);
-    doc.text("Abu", M, 36);
+    doc.setTextColor(...INK);
+    doc.text("Abu", M, centerY + 6);
     const w = doc.getTextWidth("Abu");
     doc.setTextColor(...BRAND);
-    doc.text("Farha", M + w, 36);
+    doc.text("Farha", M + w, centerY + 6);
   }
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(6.6);
-  doc.setTextColor(150, 156, 168);
-  doc.text(CONTACT.tagline.toUpperCase(), M, 68);
-
+  /* Document label + website, right aligned on the same centre line */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(8);
-  doc.setTextColor(255, 255, 255);
-  doc.text(right.toUpperCase(), PAGE_W - M, 40, { align: "right" });
+  doc.setFontSize(9);
+  doc.setTextColor(...INK);
+  doc.text(right.toUpperCase(), PAGE_W - M, centerY - 2, { align: "right" });
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(7);
-  doc.setTextColor(170, 176, 188);
-  doc.text(CONTACT.website, PAGE_W - M, 53, { align: "right" });
+  doc.setFontSize(7.6);
+  doc.setTextColor(88, 94, 105);
+  doc.text(CONTACT.website, PAGE_W - M, centerY + 11, { align: "right" });
+
+  /* Subtle light grey divider below the header */
+  doc.setDrawColor(...LINE);
+  doc.setLineWidth(0.7);
+  doc.line(M, HEADER_H, PAGE_W - M, HEADER_H);
 }
 
 function sectionTitle(doc: Doc, label: string, y: number, x = M, width = CW): number {
