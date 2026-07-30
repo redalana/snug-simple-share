@@ -182,6 +182,25 @@ export type Article = {
 
 import { makeMedicalContent } from "./blog-topics";
 import { MRI_SCANNER_CONTENT, MRI_SCANNER_TOC } from "./articles/what-is-an-mri-scanner";
+import { CHOOSING_BETWEEN_1_5T_AND_3T_MRI_CONTENT, CHOOSING_BETWEEN_1_5T_AND_3T_MRI_TOC } from "./articles/choosing-between-1-5t-and-3t-mri";
+import { REFURBISHED_MRI_SCANNERS_GUIDE_CONTENT, REFURBISHED_MRI_SCANNERS_GUIDE_TOC } from "./articles/refurbished-mri-scanners-guide";
+import { BRAIN_MRI_WHAT_IT_DETECTS_CONTENT, BRAIN_MRI_WHAT_IT_DETECTS_TOC } from "./articles/brain-mri-what-it-detects";
+import { MEDICAL_IMAGING_IN_NEUROLOGY_CONTENT, MEDICAL_IMAGING_IN_NEUROLOGY_TOC } from "./articles/medical-imaging-in-neurology";
+import { MRI_SAFETY_ZONES_AND_SCREENING_CONTENT, MRI_SAFETY_ZONES_AND_SCREENING_TOC } from "./articles/mri-safety-zones-and-screening";
+import { MRI_ROOM_PLANNING_AND_SITING_CONTENT, MRI_ROOM_PLANNING_AND_SITING_TOC } from "./articles/mri-room-planning-and-siting";
+import { MRI_MAGNET_TYPES_EXPLAINED_CONTENT, MRI_MAGNET_TYPES_EXPLAINED_TOC } from "./articles/mri-magnet-types-explained";
+import { MRI_GRADIENT_AND_RF_COIL_SYSTEMS_CONTENT, MRI_GRADIENT_AND_RF_COIL_SYSTEMS_TOC } from "./articles/mri-gradient-and-rf-coil-systems";
+import { MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_CONTENT, MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_TOC } from "./articles/mri-helium-and-cryogen-management";
+import { MRI_SEQUENCES_EXPLAINED_CONTENT, MRI_SEQUENCES_EXPLAINED_TOC } from "./articles/mri-sequences-explained";
+import { MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_CONTENT, MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_TOC } from "./articles/mri-contrast-agents-gadolinium-safety";
+import { MRI_TOTAL_COST_OF_OWNERSHIP_CONTENT, MRI_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/mri-total-cost-of-ownership";
+import { MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_CONTENT, MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_TOC } from "./articles/mri-preventive-maintenance-and-service-contracts";
+import { MRI_INSTALLATION_AND_COMMISSIONING_CONTENT, MRI_INSTALLATION_AND_COMMISSIONING_TOC } from "./articles/mri-installation-and-commissioning";
+import { MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_CONTENT, MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_TOC } from "./articles/mri-artefacts-and-image-quality-troubleshooting";
+import { CARDIAC_MRI_CLINICAL_GUIDE_CONTENT, CARDIAC_MRI_CLINICAL_GUIDE_TOC } from "./articles/cardiac-mri-clinical-guide";
+import { MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_CONTENT, MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_TOC } from "./articles/musculoskeletal-mri-clinical-guide";
+import { PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_CONTENT, PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_TOC } from "./articles/prostate-mri-multiparametric-guide";
+import { OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_CONTENT, OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_TOC } from "./articles/open-vs-closed-bore-mri-systems";
 
 
 function makeDefaultContent(a: {
@@ -238,14 +257,17 @@ const RAW: Array<
     title: "Choosing Between 1.5T and 3T MRI for Your Hospital",
     metaDescription:
       "Compare image quality, throughput, siting costs and clinical fit between 1.5T and 3T MRI systems.",
-    category: "MRI",
+    category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
       "A field-tested comparison of image quality, throughput, siting costs and clinical fit — so you buy the scanner your program actually needs.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 15, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
     featured: true,
+    content: CHOOSING_BETWEEN_1_5T_AND_3T_MRI_CONTENT,
+    tableOfContents: CHOOSING_BETWEEN_1_5T_AND_3T_MRI_TOC,
   },
   {
     slug: "molecular-imaging-program-from-ground-up",
@@ -290,6 +312,8 @@ const RAW: Array<
     publishedDate: "May 20, 2026",
     lastUpdated: "July 14, 2026",
     readingTime: "10 min read",
+    content: REFURBISHED_MRI_SCANNERS_GUIDE_CONTENT,
+    tableOfContents: REFURBISHED_MRI_SCANNERS_GUIDE_TOC,
   },
   {
     slug: "ct-scanners-features-benefits-buying-considerations",
@@ -457,7 +481,10 @@ const RAW: Array<
       "The most sensitive non-invasive window into the brain — and how modern MRI is used across neurology, neurosurgery and oncology.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 9, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
+    content: BRAIN_MRI_WHAT_IT_DETECTS_CONTENT,
+    tableOfContents: BRAIN_MRI_WHAT_IT_DETECTS_TOC,
   },
   {
     slug: "mri-vs-ct-scan-choosing-right-imaging",
@@ -639,7 +666,10 @@ const RAW: Array<
       "Imaging is the eyes of modern neurology. A guide to the sequences, scanners and pathways that make the difference.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jun 25, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
+    content: MEDICAL_IMAGING_IN_NEUROLOGY_CONTENT,
+    tableOfContents: MEDICAL_IMAGING_IN_NEUROLOGY_TOC,
   },
   {
     slug: "medical-imaging-in-oncology",
