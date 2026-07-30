@@ -614,7 +614,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
           {[
             { id: "overview", label: "Overview" },
             { id: "features", label: "Features" },
-            { id: "downloads", label: "Downloads" },
+            
             { id: "faq", label: "FAQ" },
             { id: "request-quote", label: "Request Quote" },
           ].map((s) => {
