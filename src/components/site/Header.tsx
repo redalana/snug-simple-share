@@ -64,9 +64,7 @@ export function Header() {
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(row);
-    items_observe: {
-      for (const child of Array.from(row.children)) ro.observe(child);
-    }
+    for (const child of Array.from(row.children)) ro.observe(child);
     return () => ro.disconnect();
   }, []);
 
