@@ -182,6 +182,25 @@ export type Article = {
 
 import { makeMedicalContent } from "./blog-topics";
 import { MRI_SCANNER_CONTENT, MRI_SCANNER_TOC } from "./articles/what-is-an-mri-scanner";
+import { CHOOSING_BETWEEN_1_5T_AND_3T_MRI_CONTENT, CHOOSING_BETWEEN_1_5T_AND_3T_MRI_TOC } from "./articles/choosing-between-1-5t-and-3t-mri";
+import { REFURBISHED_MRI_SCANNERS_GUIDE_CONTENT, REFURBISHED_MRI_SCANNERS_GUIDE_TOC } from "./articles/refurbished-mri-scanners-guide";
+import { BRAIN_MRI_WHAT_IT_DETECTS_CONTENT, BRAIN_MRI_WHAT_IT_DETECTS_TOC } from "./articles/brain-mri-what-it-detects";
+import { MEDICAL_IMAGING_IN_NEUROLOGY_CONTENT, MEDICAL_IMAGING_IN_NEUROLOGY_TOC } from "./articles/medical-imaging-in-neurology";
+import { MRI_SAFETY_ZONES_AND_SCREENING_CONTENT, MRI_SAFETY_ZONES_AND_SCREENING_TOC } from "./articles/mri-safety-zones-and-screening";
+import { MRI_ROOM_PLANNING_AND_SITING_CONTENT, MRI_ROOM_PLANNING_AND_SITING_TOC } from "./articles/mri-room-planning-and-siting";
+import { MRI_MAGNET_TYPES_EXPLAINED_CONTENT, MRI_MAGNET_TYPES_EXPLAINED_TOC } from "./articles/mri-magnet-types-explained";
+import { MRI_GRADIENT_AND_RF_COIL_SYSTEMS_CONTENT, MRI_GRADIENT_AND_RF_COIL_SYSTEMS_TOC } from "./articles/mri-gradient-and-rf-coil-systems";
+import { MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_CONTENT, MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_TOC } from "./articles/mri-helium-and-cryogen-management";
+import { MRI_SEQUENCES_EXPLAINED_CONTENT, MRI_SEQUENCES_EXPLAINED_TOC } from "./articles/mri-sequences-explained";
+import { MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_CONTENT, MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_TOC } from "./articles/mri-contrast-agents-gadolinium-safety";
+import { MRI_TOTAL_COST_OF_OWNERSHIP_CONTENT, MRI_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/mri-total-cost-of-ownership";
+import { MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_CONTENT, MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_TOC } from "./articles/mri-preventive-maintenance-and-service-contracts";
+import { MRI_INSTALLATION_AND_COMMISSIONING_CONTENT, MRI_INSTALLATION_AND_COMMISSIONING_TOC } from "./articles/mri-installation-and-commissioning";
+import { MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_CONTENT, MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_TOC } from "./articles/mri-artefacts-and-image-quality-troubleshooting";
+import { CARDIAC_MRI_CLINICAL_GUIDE_CONTENT, CARDIAC_MRI_CLINICAL_GUIDE_TOC } from "./articles/cardiac-mri-clinical-guide";
+import { MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_CONTENT, MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_TOC } from "./articles/musculoskeletal-mri-clinical-guide";
+import { PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_CONTENT, PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_TOC } from "./articles/prostate-mri-multiparametric-guide";
+import { OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_CONTENT, OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_TOC } from "./articles/open-vs-closed-bore-mri-systems";
 
 
 function makeDefaultContent(a: {
@@ -218,6 +237,261 @@ const RAW: Array<
     tableOfContents: MRI_SCANNER_TOC,
   },
   {
+    slug: "mri-safety-zones-and-screening",
+    title: "MRI Safety Zones and Patient Screening: The Complete Hospital Protocol",
+    seoTitle: "MRI Safety Zones & Patient Screening: Complete Hospital Protocol",
+    metaDescription:
+      "The four-zone ACR safety model, screening workflow, implant and device checks, ferromagnetic detection, quench and emergency procedures for hospital MRI units.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "How hospitals build a defensible MRI safety programme — zones, screening, implants, RF and acoustic risk, and emergency response.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: MRI_SAFETY_ZONES_AND_SCREENING_CONTENT,
+    tableOfContents: MRI_SAFETY_ZONES_AND_SCREENING_TOC,
+  },
+  {
+    slug: "mri-room-planning-and-siting",
+    title: "MRI Room Planning and Siting: Requirements Hospitals Must Get Right",
+    seoTitle: "MRI Room Planning & Siting: Shielding, Fringe Field and Layout",
+    metaDescription:
+      "Fringe field mapping, RF and magnetic shielding, floor loading, cryogen venting, HVAC, power and delivery access — the siting decisions that determine MRI project success.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "A practical siting guide covering fringe fields, shielding, structural loading, cryogen venting and the layout choices that make an MRI suite work.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: MRI_ROOM_PLANNING_AND_SITING_CONTENT,
+    tableOfContents: MRI_ROOM_PLANNING_AND_SITING_TOC,
+  },
+  {
+    slug: "mri-magnet-types-explained",
+    title: "MRI Magnet Types Explained: Superconducting, Permanent and Resistive",
+    seoTitle: "MRI Magnet Types: Superconducting vs Permanent vs Resistive",
+    metaDescription:
+      "How superconducting, permanent and resistive MRI magnets differ in field strength, homogeneity, running cost, siting and clinical capability.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Field strength is only part of the story — magnet architecture drives homogeneity, running cost, siting and what your service can actually scan.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "14 min read",
+    content: MRI_MAGNET_TYPES_EXPLAINED_CONTENT,
+    tableOfContents: MRI_MAGNET_TYPES_EXPLAINED_TOC,
+  },
+  {
+    slug: "mri-gradient-and-rf-coil-systems",
+    title: "MRI Gradient and RF Coil Systems: What Really Drives Image Quality",
+    seoTitle: "MRI Gradients & RF Coils: What Really Drives Image Quality",
+    metaDescription:
+      "Gradient amplitude, slew rate, duty cycle and RF coil channel counts explained — and how these specifications translate into real clinical image quality.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Beyond Tesla: how gradient performance and receive coil design determine resolution, speed and diagnostic confidence.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "15 min read",
+    content: MRI_GRADIENT_AND_RF_COIL_SYSTEMS_CONTENT,
+    tableOfContents: MRI_GRADIENT_AND_RF_COIL_SYSTEMS_TOC,
+  },
+  {
+    slug: "mri-helium-and-cryogen-management",
+    title: "MRI Helium and Cryogen Management: Cold Head, Quench and Supply Risk",
+    seoTitle: "MRI Helium & Cryogen Management: Quench, Cold Head & Supply",
+    metaDescription:
+      "How MRI cryogenic systems work, why cold head and chiller failures cause boil-off, what a quench costs, and how hospitals manage helium supply risk.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Cryogens are the single biggest operational risk in an MRI service. Here is how to monitor, maintain and protect them.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "14 min read",
+    content: MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_CONTENT,
+    tableOfContents: MRI_HELIUM_AND_CRYOGEN_MANAGEMENT_TOC,
+  },
+  {
+    slug: "mri-sequences-explained",
+    title: "MRI Sequences Explained: T1, T2, FLAIR, DWI and Beyond",
+    seoTitle: "MRI Sequences Explained: T1, T2, FLAIR, DWI, STIR & More",
+    metaDescription:
+      "A clinically reviewed guide to MRI pulse sequences — spin echo, gradient echo, inversion recovery, diffusion, and how protocol design affects diagnosis and scan time.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "What each sequence actually measures, why protocols are built the way they are, and how sequence choice changes scan time and diagnosis.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "17 min read",
+    content: MRI_SEQUENCES_EXPLAINED_CONTENT,
+    tableOfContents: MRI_SEQUENCES_EXPLAINED_TOC,
+  },
+  {
+    slug: "mri-contrast-agents-gadolinium-safety",
+    title: "MRI Contrast Agents: Gadolinium Use, Safety and Hospital Protocols",
+    seoTitle: "MRI Contrast Agents: Gadolinium Safety & Hospital Protocols",
+    metaDescription:
+      "Linear vs macrocyclic gadolinium agents, dosing, renal screening, NSF risk, gadolinium retention evidence, adverse reaction management and departmental protocols.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "When contrast is indicated, which agents to stock, and the screening and safety protocols every MRI department needs.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_CONTENT,
+    tableOfContents: MRI_CONTRAST_AGENTS_GADOLINIUM_SAFETY_TOC,
+  },
+  {
+    slug: "mri-total-cost-of-ownership",
+    title: "MRI Total Cost of Ownership: Budgeting Beyond the Purchase Price",
+    seoTitle: "MRI Total Cost of Ownership: Full Lifecycle Budgeting Guide",
+    metaDescription:
+      "Site preparation, shielding, power, cooling, service contracts, cryogens, coils, software, staffing and downtime — a complete MRI lifecycle cost model for hospitals.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "The purchase price is often under half of a ten-year MRI budget. Here is the full lifecycle cost model.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "17 min read",
+    content: MRI_TOTAL_COST_OF_OWNERSHIP_CONTENT,
+    tableOfContents: MRI_TOTAL_COST_OF_OWNERSHIP_TOC,
+  },
+  {
+    slug: "mri-preventive-maintenance-and-service-contracts",
+    title: "MRI Preventive Maintenance and Service Contracts: What Hospitals Should Demand",
+    seoTitle: "MRI Preventive Maintenance & Service Contracts Explained",
+    metaDescription:
+      "PM schedules, daily QA, cold head servicing, uptime guarantees, response times, parts stocking and contract structures — how to buy MRI service properly.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "How to structure an MRI service contract that actually protects uptime — SLAs, KPIs, parts and escalation.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "15 min read",
+    content: MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_CONTENT,
+    tableOfContents: MRI_PREVENTIVE_MAINTENANCE_AND_SERVICE_CONTRACTS_TOC,
+  },
+  {
+    slug: "mri-installation-and-commissioning",
+    title: "MRI Installation and Commissioning: From Delivery to First Patient",
+    seoTitle: "MRI Installation & Commissioning: Delivery to First Patient",
+    metaDescription:
+      "Pre-installation survey, rigging, magnet placement, ramping, shimming, RF shield testing, acceptance QA, applications training and clinical handover explained.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "A step-by-step project view of an MRI installation — and the delays that cost hospitals months.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "15 min read",
+    content: MRI_INSTALLATION_AND_COMMISSIONING_CONTENT,
+    tableOfContents: MRI_INSTALLATION_AND_COMMISSIONING_TOC,
+  },
+  {
+    slug: "mri-artefacts-and-image-quality-troubleshooting",
+    title: "MRI Artefacts and Image Quality: A Troubleshooting Guide",
+    seoTitle: "MRI Artefacts & Image Quality: Complete Troubleshooting Guide",
+    metaDescription:
+      "Motion, aliasing, chemical shift, susceptibility, zipper and coil artefacts explained — with a systematic workflow to separate patient, protocol and hardware causes.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Recognise the artefact, find the cause, fix it — a systematic guide for radiographers and biomedical engineers.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_CONTENT,
+    tableOfContents: MRI_ARTEFACTS_AND_IMAGE_QUALITY_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "cardiac-mri-clinical-guide",
+    title: "Cardiac MRI: Clinical Value, Protocols and Equipment Requirements",
+    seoTitle: "Cardiac MRI (CMR): Clinical Value, Protocols & Requirements",
+    metaDescription:
+      "CMR indications, cine SSFP, late gadolinium enhancement, T1/T2 mapping and stress perfusion — plus the scanner, coil, gating and staffing requirements.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "What cardiac MRI adds beyond echo and CT, and what a hospital needs in place to deliver it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: CARDIAC_MRI_CLINICAL_GUIDE_CONTENT,
+    tableOfContents: CARDIAC_MRI_CLINICAL_GUIDE_TOC,
+  },
+  {
+    slug: "musculoskeletal-mri-clinical-guide",
+    title: "Musculoskeletal MRI: Protocols, Coils and Service Design",
+    seoTitle: "Musculoskeletal MRI: Protocols, Coils & Service Design Guide",
+    metaDescription:
+      "MSK MRI by joint, PD fat-sat and 3D isotropic protocols, MR arthrography, metal artefact reduction, dedicated coils and sports medicine service models.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "How to build a high-throughput MSK MRI service — protocols, coils, positioning and referral design.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "15 min read",
+    content: MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_CONTENT,
+    tableOfContents: MUSCULOSKELETAL_MRI_CLINICAL_GUIDE_TOC,
+  },
+  {
+    slug: "prostate-mri-multiparametric-guide",
+    title: "Multiparametric Prostate MRI: Building a PI-RADS-Compliant Service",
+    seoTitle: "Multiparametric Prostate MRI: Building a PI-RADS Service",
+    metaDescription:
+      "PI-RADS v2.1 technical standards, T2, DWI and DCE requirements, biparametric MRI, PI-QUAL, reporting training and MRI-targeted biopsy integration.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "The technical standards, reporting discipline and pathway integration behind a credible prostate MRI service.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "16 min read",
+    content: PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_CONTENT,
+    tableOfContents: PROSTATE_MRI_MULTIPARAMETRIC_GUIDE_TOC,
+  },
+  {
+    slug: "open-vs-closed-bore-mri-systems",
+    title: "Open vs Closed-Bore MRI: Patient Comfort, Image Quality and Service Mix",
+    seoTitle: "Open vs Closed-Bore MRI: Comfort, Image Quality & Service Mix",
+    metaDescription:
+      "Closed, wide-bore and open MRI designs compared on claustrophobia, bariatric and paediatric access, image quality, coil support, siting and running cost.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Which magnet design fits which service — and when a mixed two-scanner strategy is the right answer.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 30, 2026",
+    lastUpdated: "July 30, 2026",
+    readingTime: "14 min read",
+    content: OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_CONTENT,
+    tableOfContents: OPEN_VS_CLOSED_BORE_MRI_SYSTEMS_TOC,
+  },
+  {
     slug: "cath-lab-buying-guide",
     title: "Refurbished Cath Lab Systems in Africa: Complete Buyer's Guide",
     metaDescription:
@@ -238,14 +512,17 @@ const RAW: Array<
     title: "Choosing Between 1.5T and 3T MRI for Your Hospital",
     metaDescription:
       "Compare image quality, throughput, siting costs and clinical fit between 1.5T and 3T MRI systems.",
-    category: "MRI",
+    category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
       "A field-tested comparison of image quality, throughput, siting costs and clinical fit — so you buy the scanner your program actually needs.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 15, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
     featured: true,
+    content: CHOOSING_BETWEEN_1_5T_AND_3T_MRI_CONTENT,
+    tableOfContents: CHOOSING_BETWEEN_1_5T_AND_3T_MRI_TOC,
   },
   {
     slug: "molecular-imaging-program-from-ground-up",
@@ -290,6 +567,8 @@ const RAW: Array<
     publishedDate: "May 20, 2026",
     lastUpdated: "July 14, 2026",
     readingTime: "10 min read",
+    content: REFURBISHED_MRI_SCANNERS_GUIDE_CONTENT,
+    tableOfContents: REFURBISHED_MRI_SCANNERS_GUIDE_TOC,
   },
   {
     slug: "ct-scanners-features-benefits-buying-considerations",
@@ -457,7 +736,10 @@ const RAW: Array<
       "The most sensitive non-invasive window into the brain — and how modern MRI is used across neurology, neurosurgery and oncology.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jul 9, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
+    content: BRAIN_MRI_WHAT_IT_DETECTS_CONTENT,
+    tableOfContents: BRAIN_MRI_WHAT_IT_DETECTS_TOC,
   },
   {
     slug: "mri-vs-ct-scan-choosing-right-imaging",
@@ -639,7 +921,10 @@ const RAW: Array<
       "Imaging is the eyes of modern neurology. A guide to the sequences, scanners and pathways that make the difference.",
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "Jun 25, 2026",
+    lastUpdated: "July 30, 2026",
     readingTime: "10 min read",
+    content: MEDICAL_IMAGING_IN_NEUROLOGY_CONTENT,
+    tableOfContents: MEDICAL_IMAGING_IN_NEUROLOGY_TOC,
   },
   {
     slug: "medical-imaging-in-oncology",
