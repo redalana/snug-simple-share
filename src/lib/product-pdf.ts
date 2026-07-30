@@ -232,10 +232,10 @@ function kvTable(
 
   rows.forEach((r, i) => {
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(8);
+    doc.setFontSize(7.6);
     const valLines = doc.splitTextToSize(r[1] || "—", width - labelW - padX * 2);
     const labLines = doc.splitTextToSize(r[0], labelW - padX * 2);
-    const h = Math.max(labLines.length, valLines.length) * 10 + 10;
+    const h = Math.max(labLines.length, valLines.length) * 9.4 + 9;
 
     if (i % 2 === 0) {
       doc.setFillColor(...TINT);
@@ -248,10 +248,10 @@ function kvTable(
 
     doc.setFont("helvetica", "bold");
     doc.setTextColor(...SLATE);
-    doc.text(labLines, x + padX, cy + 13);
+    doc.text(labLines, x + padX, cy + 12);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(...INK);
-    doc.text(valLines, x + labelW + padX, cy + 13);
+    doc.text(valLines, x + labelW + padX, cy + 12);
     cy += h;
   });
   return cy;
@@ -391,7 +391,7 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
     if (col === 0) leftY = cy + h + 6;
     else rightY = cy + h + 6;
   });
-  y = Math.max(leftY, rightY) + 4;
+  y = Math.max(leftY, rightY) + 10;
 
   /* Quick facts — compact two-pair grid */
   y = sectionTitle(doc, "Quick Facts", y);
@@ -432,7 +432,7 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   y += Math.ceil(facts.length / 2) * rowH + 16;
 
   /* Contact strip with QR */
-  const stripH = 76;
+  const stripH = 84;
   const cy = Math.min(y, PAGE_H - 52 - stripH);
   doc.setFillColor(...INK);
   doc.roundedRect(M, cy, CW, stripH, 6, 6, "F");
@@ -447,24 +447,24 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   doc.setTextColor(198, 204, 214);
   doc.text(`Tel ${CONTACT.landline}   ·   WhatsApp ${CONTACT.whatsapp}`, M + 16, cy + 38);
   doc.text(`${CONTACT.email}   ·   ${CONTACT.website}`, M + 16, cy + 51);
-  doc.text(doc.splitTextToSize(CONTACT.address, CW - 130)[0], M + 16, cy + 64);
+  doc.text(doc.splitTextToSize(CONTACT.address, CW - 160)[0], M + 16, cy + 64);
 
   /* QR block inside the strip */
-  const qs = 52;
+  const qs = 48;
   const qx = PAGE_W - M - 16 - qs;
   doc.setFillColor(255, 255, 255);
-  doc.roundedRect(qx - 5, cy + 8, qs + 10, qs + 10, 4, 4, "F");
+  doc.roundedRect(qx - 5, cy + 9, qs + 10, qs + 10, 4, 4, "F");
   if (qr) {
     try {
-      doc.addImage(qr, "PNG", qx, cy + 13, qs, qs);
+      doc.addImage(qr, "PNG", qx, cy + 14, qs, qs);
     } catch {
       /* ignore */
     }
   }
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(6);
+  doc.setFontSize(5.8);
   doc.setTextColor(170, 176, 188);
-  doc.text("SCAN FOR PRODUCT PAGE", qx + qs / 2, cy + 68, { align: "center" });
+  doc.text("SCAN FOR PRODUCT PAGE", qx + qs / 2, cy + 74, { align: "center" });
 
   pageFooter(doc, 1, p);
 }
@@ -483,13 +483,21 @@ function drawTechnical(doc: Doc, p: Product) {
 
   /* Technical specifications */
   y = sectionTitle(doc, "Technical Specifications", y);
-  const specs: [string, string][] = [
+  const specSource: [string, string][] = [
     ...p.snapshot.map((s) => [s.label, s.value] as [string, string]),
     ["Modality", p.category],
     ["Manufacturer", p.brand],
+    ["Country of Origin", p.country],
     ["Installation Type", p.systemType],
   ];
-  y = kvTable(doc, specs, M, y, CW, { labelW: CW * 0.34 }) + 20;
+  const seen = new Set<string>();
+  const specs = specSource.filter(([label]) => {
+    const k = label.trim().toLowerCase();
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  y = kvTable(doc, specs, M, y, CW, { labelW: CW * 0.34 }) + 18;
 
   /* Clinical applications + Key benefits (two columns) */
   const colW = (CW - 22) / 2;
@@ -498,16 +506,16 @@ function drawTechnical(doc: Doc, p: Product) {
   const apps = p.specialty.length
     ? p.specialty.map((s) => `${titleCase(s)} imaging and diagnostic workflows`)
     : [`${p.category} diagnostic imaging`, "Routine and specialist clinical workflows"];
-  ly = bulletList(doc, apps, M, ly + 2, colW, 7.8);
+  ly = bulletList(doc, apps, M, ly + 2, colW, 7.4);
 
   let ry = sectionTitle(doc, "Key Benefits", colTop, M + colW + 22, colW);
-  ry = bulletList(doc, buildBenefits(p), M + colW + 22, ry + 2, colW, 7.8);
+  ry = bulletList(doc, buildBenefits(p), M + colW + 22, ry + 2, colW, 7.4);
 
-  y = Math.max(ly, ry) + 12;
+  y = Math.max(ly, ry) + 8;
 
   /* Included with purchase */
   y = sectionTitle(doc, "Included With Purchase", y);
-  y = bulletList(doc, buildIncluded(p), M, y + 2, CW, 8) + 8;
+  y = bulletList(doc, buildIncluded(p), M, y + 2, CW, 7.6) + 4;
 
   /* Installation / Warranty / After-sales */
   y = sectionTitle(doc, "Installation, Warranty & After-Sales Support", y);
@@ -521,14 +529,14 @@ function drawTechnical(doc: Doc, p: Product) {
     ["Warranty", p.warranty || "Warranty terms are confirmed with each quotation."],
     [
       "After-Sales Support",
-      "Preventive maintenance programmes, corrective service, spare parts supply, remote technical assistance and user application training across the Middle East and Africa.",
+      "Preventive maintenance, corrective service, spare parts supply, remote technical assistance and user training across the Middle East and Africa.",
     ],
   ];
-  y = kvTable(doc, support, M, y, CW, { labelW: CW * 0.26 }) + 20;
+  y = kvTable(doc, support, M, y, CW, { labelW: CW * 0.26 }) + 18;
 
   /* CTA block */
-  const ctaH = 108;
-  const cy = Math.min(y, PAGE_H - 52 - ctaH);
+  const ctaH = 104;
+  const cy = PAGE_H - 52 - ctaH;
   doc.setFillColor(...INK);
   doc.roundedRect(M, cy, CW, ctaH, 7, 7, "F");
   doc.setFillColor(...BRAND);
@@ -550,7 +558,7 @@ function drawTechnical(doc: Doc, p: Product) {
   );
 
   const actions: [string, string][] = [
-    ["Request a Quote", `${SITE_URL}/contact`],
+    ["Request a Quote", `${CONTACT.website}/contact`],
     ["WhatsApp", CONTACT.whatsapp],
     ["Website", CONTACT.website],
     ["Email", CONTACT.email],
