@@ -24,7 +24,7 @@ export function Logo({
         height={1310}
         decoding="async"
         className={`w-auto max-w-full object-contain ${
-          size === "lg" ? "h-14 md:h-20" : "h-11 md:h-14"
+          size === "lg" ? "h-16 md:h-24" : "h-11 md:h-14"
         }`}
       />
     </span>
