@@ -742,59 +742,6 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
         </div>
       </section>
 
-      {/* DOWNLOADS */}
-      <section id="downloads" className="border-b border-border/60">
-        <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:items-start">
-            <div>
-              <span className="text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary">
-                Product Downloads
-              </span>
-              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-                Documentation &amp; datasheets
-              </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Download the full product profile instantly or request the OEM datasheets,
-                installation and warranty documents from our team.
-              </p>
-              <button
-                onClick={handlePdf}
-                disabled={generating}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-(--shadow-brand-sm) transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
-              >
-                <FileText className="h-4 w-4" />
-                {generating ? "Preparing PDF…" : "Download Full Product Profile"}
-              </button>
-            </div>
-            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {DOWNLOADS.map((d) => (
-                <li key={d.label}>
-                  <button
-                    type="button"
-                    onClick={handlePdf}
-                    disabled={generating}
-                    className="group flex w-full items-center gap-4 rounded-2xl border border-border/70 bg-card p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_18px_44px_-30px_rgba(0,0,0,0.28)] disabled:opacity-60"
-                  >
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      <FileText className="h-5 w-5" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-bold text-foreground">
-                        {d.label}
-                      </span>
-                      <span className="mt-0.5 block text-[calc(11*var(--desktop-px-unit))] uppercase tracking-wide text-muted-foreground">
-                        {d.type} · {d.size}
-                      </span>
-                    </span>
-                    <Download className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* WHY BUY FROM ABUFARHA */}
       <section className="border-b border-border/60 bg-gradient-to-b from-secondary/30 to-white">
         <div className="mx-auto max-w-[100rem] px-6 py-16 lg:px-10 lg:py-20">
