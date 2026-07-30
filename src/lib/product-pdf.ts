@@ -493,12 +493,15 @@ function drawTechnical(doc: Doc, p: Product) {
     ["Installation Type", p.systemType],
   ];
   const seen = new Set<string>();
-  const specs = specSource.filter(([label]) => {
-    const k = label.trim().toLowerCase();
-    if (seen.has(k)) return false;
-    seen.add(k);
-    return true;
-  });
+  const specs = specSource
+    .filter(([label]) => {
+      const k = label.trim().toLowerCase();
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    })
+    /* Keeps the technical page to one A4 sheet regardless of catalogue depth. */
+    .slice(0, 9);
   y = kvTable(doc, specs, M, y, CW, { labelW: CW * 0.34 }) + 18;
 
   /* Clinical applications + Key benefits (two columns) */
@@ -517,7 +520,7 @@ function drawTechnical(doc: Doc, p: Product) {
 
   /* Included with purchase */
   y = sectionTitle(doc, "Included With Purchase", y);
-  y = bulletList(doc, buildIncluded(p), M, y + 2, CW, 7.6) + 4;
+  y = bulletList(doc, buildIncluded(p).slice(0, 6), M, y + 2, CW, 7.6) + 4;
 
   /* Installation / Warranty / After-sales */
   y = sectionTitle(doc, "Installation, Warranty & After-Sales Support", y);
