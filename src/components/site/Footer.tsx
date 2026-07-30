@@ -188,7 +188,7 @@ export function Footer() {
         <MobileScaledDesktopBlock referenceWidth={1024}>
           <div className="grid grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] gap-x-8 gap-y-10 py-10 lg:py-14">
             <div className="min-w-0">
-              <Logo light />
+              <Logo light size="lg" />
               <p className="mt-4 max-w-sm text-[calc(13.5*var(--desktop-px-unit))] leading-[1.7] text-white/50">
                 Delivering advanced medical technologies, turnkey project delivery, biomedical
                 engineering and long-term support for healthcare providers across Africa, the Middle
