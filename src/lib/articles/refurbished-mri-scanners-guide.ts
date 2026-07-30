@@ -1,0 +1,628 @@
+import type { ContentBlock, TocItem } from "@/lib/blog";
+import solMri from "@/assets/sol-mri.jpg";
+
+export const REFURBISHED_MRI_SCANNERS_GUIDE_TOC: TocItem[] = [
+  { id: "overview", title: "What \"Refurbished\" Actually Means" },
+  { id: "refurbishment-process", title: "Inside a Professional Refurbishment Programme" },
+  { id: "grading", title: "Grading Systems: A, B and C Explained" },
+  { id: "magnet-history", title: "Magnet History, Ramp and De-ramp Risk" },
+  { id: "coil-inventory", title: "Coil Inventory and Verification" },
+  { id: "software-licences", title: "Software Licences and Sequence Packages" },
+  { id: "parts-availability", title: "Parts Availability Windows" },
+  { id: "warranty-service", title: "Warranty Structures and Service Contracts" },
+  { id: "due-diligence", title: "The Buyer's Due Diligence Checklist" },
+  { id: "cost-comparison", title: "Total Cost: Refurbished vs New" },
+  { id: "regulatory", title: "Regulatory Considerations" },
+  { id: "siting-installation", title: "Siting and Reinstallation Risk" },
+  { id: "vendor-selection", title: "Choosing a Refurbishment Partner" },
+  { id: "clinical-performance", title: "Clinical Performance After Refurbishment" },
+  { id: "faq", title: "Frequently Asked Questions" },
+  { id: "conclusion", title: "Conclusion" },
+];
+
+export const REFURBISHED_MRI_SCANNERS_GUIDE_CONTENT: ContentBlock[] = [
+  {
+    type: "intro",
+    image: solMri,
+    imageAlt: "Refurbished superconducting MRI scanner being recommissioned in a hospital imaging suite",
+    paragraphs: [
+      "A refurbished MRI scanner is not a second-hand appliance sold as-is. Done properly, it is a de-installed system that has been fully stripped, inspected, upgraded where necessary, reassembled, re-ramped, re-shimmed and re-validated against the same acceptance criteria a manufacturer applies to a new install — carrying a fresh warranty and a documented service history. Done poorly, it is a magnet of unknown age with a coil inventory nobody has checked, sold on price alone. The difference between the two is not visible in a glossy brochure; it is visible in the paperwork, the grading, and the questions the seller is willing to answer before money changes hands.",
+      "For many hospitals across Africa, the Middle East and other price-sensitive markets, a well-graded refurbished 1.5T system is the only realistic route to modern MRI capability — new-system pricing and multi-year manufacturer lead times simply do not fit the budget or the timeline. That is a legitimate procurement strategy, not a compromise, provided the buyer understands exactly what refurbishment involves, what can and cannot be verified before shipment, and what ongoing cost of ownership actually looks like once the system is running.",
+      "This guide is written for hospital administrators, procurement committees and biomedical engineering teams evaluating a refurbished MRI purchase. It covers what professional refurbishment involves, how grading systems work, why magnet history and the ramp/de-ramp cycle matter more than almost any other factor, how to verify coil inventory and software licensing, what parts availability windows mean for a system's remaining useful life, how warranty and service contracts should be structured, and how to build a due diligence checklist that protects the capital outlay. AbuFarha Medical supplies, installs, commissions, trains on and services refurbished and new imaging equipment; it does not construct hospital buildings, and any facility works referenced here sit within a turnkey project delivered alongside licensed contractors.",
+    ],
+  },
+  {
+    type: "keyFacts",
+    covers:
+      "Refurbishment processes, grading standards, magnet ramp/de-ramp risk, coil and software verification, parts availability, warranty structures, due diligence and total cost of ownership",
+    audience:
+      "Hospital administrators, procurement managers, radiology directors and biomedical engineers evaluating refurbished MRI purchases",
+    readingTime: "17 min read",
+    technology: "Refurbished Magnetic Resonance Imaging (MRI) systems",
+  },
+  {
+    type: "h2",
+    id: "overview",
+    number: 1,
+    text: "What \"Refurbished\" Actually Means",
+    body: "Refurbished is a spectrum, not a single standard. The term legally covers everything from a factory-grade, fully requalified system to a used magnet cleaned and reshipped with no functional testing at all.",
+  },
+  {
+    type: "ul",
+    items: [
+      "The word \"refurbished\" carries no universal regulatory definition across markets, so two systems advertised identically can differ enormously in scope of work — one may have had gradient coils, RF chain and every receive coil bench-tested and replaced where marginal, the other may only have been cleaned and repainted.",
+      "The single biggest hidden cost driver is not the magnet purchase price but the gap between the de-installation site's power, cooling and room specification and the receiving hospital's actual site conditions — a mismatch that a refurbisher's site survey is meant to catch before shipment, not after.",
+      "A system's true remaining useful life is set less by its calendar age than by three independent clocks running in parallel: magnet helium-fill efficiency, gradient coil duty-cycle wear, and manufacturer parts-support end-of-life — the shortest of the three determines the realistic ownership horizon.",
+    ],
+  },
+  {
+    type: "takeaways",
+    items: [
+      "\"Refurbished\" describes a process, not a fixed quality level — insist on documented scope of work, not marketing language.",
+      "Magnet ramp/de-ramp history is the single highest-risk item in a refurbished purchase; every ramp cycle carries quench and helium-loss risk.",
+      "A verified coil inventory with serial numbers and test reports is worth more at negotiation than a lower headline price.",
+      "Software licences do not automatically transfer with the hardware — confirm entitlement in writing before committing funds.",
+      "Manufacturer parts-support end-of-life, not scanner age, is usually the real ceiling on a system's practical service life.",
+      "A refurbished system typically costs 40-60% of new list price but requires the same siting, power and RF-shielding investment as a new one.",
+    ],
+  },
+  {
+    type: "editorialBoard",
+    reviewers: [
+      {
+        role: "Medical reviewer",
+        name: "AbuFarha Clinical Advisory Panel",
+        credential: "Consultant radiologists advising on diagnostic imaging pathways",
+      },
+      {
+        role: "Biomedical engineer",
+        name: "AbuFarha Biomedical Engineering Team",
+        credential: "Field service engineers for MRI, CT, cath lab and PET/CT installations",
+      },
+      {
+        role: "Technical editor",
+        name: "AbuFarha Knowledge Center Editorial Team",
+        credential: "Medical technology editors, Amman, Jordan",
+      },
+      {
+        role: "Clinical applications specialist",
+        name: "AbuFarha Applications & Training Team",
+        credential: "MR applications training and protocol optimisation",
+      },
+    ],
+    lastReviewed: "July 2026",
+    nextReview: "July 2027",
+    version: "1.0",
+    evidenceLevel:
+      "Level A — international standards, peer-reviewed literature and manufacturer documentation",
+    disclaimer:
+      "This article is written for hospital decision-makers, clinicians and biomedical engineers as educational reference material. It is not a substitute for professional medical advice, diagnosis or treatment, nor for manufacturer instructions for use, national regulations or site-specific engineering assessment.",
+  },
+  {
+    type: "h2",
+    id: "refurbishment-process",
+    number: 2,
+    text: "Inside a Professional Refurbishment Programme",
+    image: solMri,
+    imagePosition: "right",
+    imageAlt: "Biomedical engineer inspecting an MRI gradient coil during refurbishment",
+    body: "A defensible refurbishment programme follows a documented sequence from de-installation through to acceptance testing at the new site — each stage produces a paper trail the buyer should be able to request.",
+  },
+  { type: "h3", text: "De-installation and Transport" },
+  {
+    type: "p",
+    text: "Professional de-installation begins with a controlled magnet de-ramp under manufacturer-approved procedure, careful draining or venting of residual cryogen, and mechanical disassembly of the magnet, gradient coil, patient table and RF cabin components by technicians trained on that specific platform. Components are packed in shock- and tilt-monitored crates; a magnet that has been dropped, tilted beyond its rated angle, or exposed to condensation in transit can suffer shim degradation or winding damage that only becomes apparent after re-ramp.",
+  },
+  { type: "h3", text: "Bench Testing and Component Renewal" },
+  {
+    type: "p",
+    text: "At the refurbishment facility, subsystems are tested individually against original manufacturer specification: gradient amplifiers under load, RF transmit and receive chains for signal-to-noise performance, cold heads and compressors for cooling capacity, and every receive coil for element failure and cable continuity. Components outside tolerance are replaced, not merely cleaned — cold heads and compressors in particular have a finite bearing life and are common renewal items regardless of how the system otherwise tests.",
+  },
+  { type: "h3", text: "Cosmetic and Mechanical Refresh" },
+  {
+    type: "p",
+    text: "Patient-facing surfaces, table mechanisms, covers and cabling are refinished or replaced to remove wear that would otherwise signal the system's age to patients and staff. This stage is cosmetically important but clinically the least significant — buyers should not let a pristine exterior substitute for verified internal test data.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "procurement",
+    title: "Ask for the work order, not the brochure",
+    text: "A credible refurbisher can produce a component-by-component work order showing what was tested, what passed, what was replaced and why. If a supplier cannot produce this document, treat the word \"refurbished\" as marketing language rather than an engineering claim.",
+  },
+  { type: "h3", text: "Reinstallation and Acceptance Testing" },
+  {
+    type: "p",
+    text: "At the destination hospital, the magnet is re-ramped under controlled procedure, shimmed to the receiving room's specific magnetic environment, and put through the same acceptance test protocol used for a new installation — image uniformity, signal-to-noise ratio, geometric distortion, slice profile and safety interlock verification. This acceptance testing, not the refurbishment work itself, is the buyer's real proof of performance and should be witnessed by the hospital's own biomedical engineering staff wherever possible.",
+  },
+  {
+    type: "diagram",
+    id: "scanning-process",
+    title: "The refurbishment pathway from de-installation to clinical acceptance",
+    purpose: "Shows every stage a professionally refurbished MRI system passes through, so buyers can map a supplier's quoted scope of work against an accepted end-to-end standard.",
+    alt: "Flow diagram showing six sequential stages: controlled magnet de-ramp and de-installation at the source site, monitored transport, bench testing and component renewal at the refurbishment facility, cosmetic and mechanical refresh, reinstallation and re-ramp at the destination hospital, and final acceptance testing against manufacturer specification.",
+    caption: "Figure 1 — The refurbishment pathway. Skipping bench testing or acceptance testing is the most common source of early failures in refurbished systems.",
+  },
+  {
+    type: "callout",
+    variant: "important",
+    title: "Refurbishment is a process claim, not a condition claim",
+    text: "A system is only as \"refurbished\" as the work actually performed on it. Two systems of identical age and history can have completely different remaining service lives depending on which components were bench-tested, repaired or renewed.",
+  },
+  {
+    type: "h2",
+    id: "grading",
+    number: 3,
+    text: "Grading Systems: A, B and C Explained",
+    body: "Most refurbishers use an informal A/B/C or Premium/Standard/Economy grading scheme. None of these are regulated, so the grade name matters less than the specification behind it.",
+  },
+  {
+    type: "table",
+    caption: "Typical refurbishment grade tiers and what they usually include",
+    headers: ["Grade", "Typical scope", "Typical warranty", "Best fit"],
+    rows: [
+      [
+        "Premium / Grade A",
+        "Full component-level bench testing, proactive renewal of wear items (cold head, compressor, gradient amplifier modules), new coil complement or fully tested originals, full cosmetic refresh, manufacturer-equivalent acceptance testing",
+        "12-24 months, comparable to new-system terms",
+        "Hospitals needing near-new reliability and predictable budgeting",
+      ],
+      [
+        "Standard / Grade B",
+        "Functional testing of major subsystems, replacement only where a component fails test, moderate cosmetic refresh",
+        "6-12 months",
+        "Hospitals with an in-house or contracted biomedical team able to manage moderate downtime risk",
+      ],
+      [
+        "Economy / Grade C",
+        "Basic functional check, minimal component renewal, \"as-is\" coil inventory, limited or no acceptance testing",
+        "90 days or none",
+        "Rarely appropriate for primary clinical service; higher risk than the price discount usually justifies",
+      ],
+    ],
+  },
+  {
+    type: "tableInsight",
+    expertCommentary: "Grade names are marketing terms invented by each supplier, not an industry standard — a \"Grade A\" from one refurbisher may match a competitor's \"Standard\" tier. The scope-of-work document behind the grade is the only reliable comparator.",
+    clinicalInterpretation: "Image quality on day one can look identical across all three grades; the difference shows up eighteen months later as unplanned downtime, coil failures and unbudgeted parts costs.",
+    hospitalRecommendation: "Request the itemised scope of work for the specific unit being quoted, not a generic grade description, and have your biomedical engineering team compare it line-by-line against the Premium/Grade A column above before signing.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "common-mistakes",
+    title: "The three grading mistakes buyers repeat",
+    items: [
+      "Comparing price per grade name across suppliers without comparing the underlying scope of work",
+      "Assuming a lower grade with a longer warranty is automatically safer than a higher grade with a shorter one",
+      "Accepting a grade assigned by the seller without an independent inspection report",
+      "Treating cosmetic condition as a proxy for internal component condition",
+    ],
+  },
+  {
+    type: "h2",
+    id: "magnet-history",
+    number: 4,
+    text: "Magnet History, Ramp and De-ramp Risk",
+    body: "The superconducting magnet is the single component a hospital cannot meaningfully inspect after purchase, which is exactly why its ramp history is the most consequential due diligence item in a refurbished deal.",
+  },
+  {
+    type: "p",
+    text: "A superconducting magnet is ramped once at commissioning and, under normal operation, stays energised for its entire service life. Every additional ramp — whether for de-installation, transport, or an unplanned quench — is a discrete event that carries real risk: winding stress, shim disturbance, and in the worst case, an inability to re-ramp to full field strength at all. A magnet that has been ramped and de-ramped multiple times across several redeployments is a materially different asset from one moved once, even if both are the same age and model.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "engineer-note",
+    title: "What to request about magnet history",
+    items: [
+      "Total number of ramp and de-ramp cycles since original commissioning",
+      "Any documented quench events, planned or unplanned, and their resolution",
+      "Cumulative helium boil-off records and current helium level at time of sale",
+      "Shim history — how many times the system has required re-shimming and why",
+      "Original commissioning date versus number of subsequent relocations",
+    ],
+  },
+  {
+    type: "p",
+    text: "Helium economy is a related but distinct risk. Older magnet generations (pre-2010 in many cases) have significantly higher annual helium boil-off than modern zero-boil-off or low-boil-off designs, meaning a refurbished older magnet can carry a materially higher recurring consumable cost even if the purchase price is attractive. Buyers should ask specifically for the magnet's rated annual boil-off or confirm it is a zero-helium-boil-off design, since this single specification affects operating cost for the entire ownership period.",
+  },
+  {
+    type: "quote",
+    text: "A quench is not primarily an equipment risk; it is a life-safety event that must be planned for architecturally, at every site, refurbished or new, through a correctly engineered quench vent.",
+  },
+  {
+    type: "diagram",
+    id: "safety-zones",
+    title: "Why re-ramp risk concentrates at the magnet, not the peripherals",
+    purpose: "Illustrates that unlike gradient amplifiers or coils, a superconducting magnet cannot be bench-tested to destruction or non-destructively verified before re-ramp, making its documented history the primary risk indicator.",
+    alt: "Diagram contrasting testable subsystems — gradient amplifiers, RF chain, receive coils, cooling system — each shown with a bench-test icon, against the superconducting magnet shown with a documentation icon, indicating that magnet condition is inferred from ramp and quench history rather than direct pre-purchase testing.",
+    caption: "Figure 2 — Testable subsystems versus the magnet. Only the magnet's condition must be inferred from documented history rather than confirmed by direct bench test.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "safety-alert",
+    title: "Never accept a magnet with undocumented quench history",
+    text: "If a seller cannot produce quench and ramp records, assume the worst case for budgeting purposes and require a full field-strength and homogeneity verification test at the seller's cost before final payment, in addition to the standard acceptance test after installation.",
+  },
+  {
+    type: "h2",
+    id: "coil-inventory",
+    number: 5,
+    text: "Coil Inventory and Verification",
+    body: "Receive coils are the accessory most likely to be damaged, missing or mismatched in a refurbished deal, and they have an outsized effect on day-to-day image quality and clinical throughput.",
+  },
+  {
+    type: "ul",
+    items: [
+      "Confirm every coil by serial number against a written inventory list, not a generic description such as \"head/neck coil included\" — model and channel-count variants are not interchangeable.",
+      "Request individual test reports for each coil (element function, cable continuity, connector condition) rather than a single blanket statement covering the whole coil set.",
+      "Verify channel count matches the console software licence — a 16-channel coil connected to a system licensed for 8 channels will not deliver its rated performance.",
+      "Check that specialty coils required for the hospital's planned clinical programme (breast, cardiac, extremity, endorectal) are included and compatible, since these are frequently excluded from a base package and quoted as costly add-ons later.",
+    ],
+  },
+  {
+    type: "knowledgeBox",
+    variant: "quick-facts",
+    title: "Coils in numbers",
+    items: [
+      "A full clinical coil set typically represents 8-15% of total system value",
+      "Cable fatigue, not element failure, is the leading cause of coil malfunction",
+      "Replacement lead times for discontinued coil models can exceed 12 weeks",
+      "Multi-channel coils cannot be substituted across incompatible console generations",
+    ],
+  },
+  {
+    type: "h2",
+    id: "software-licences",
+    number: 6,
+    text: "Software Licences and Sequence Packages",
+    body: "Hardware and software entitlement are legally and commercially separate in most manufacturer ecosystems, and licence transfer is one of the most commonly overlooked risks in a refurbished purchase.",
+  },
+  {
+    type: "p",
+    text: "Manufacturers typically licence advanced sequence packages, coil-specific applications, and platform software versions to the original purchasing institution, not to the hardware itself. When a system changes hands, licences do not automatically transfer, and some manufacturers charge substantial re-licensing fees, require proof of legitimate ownership transfer, or decline to reissue certain licences entirely for units sold outside authorised channels. A hospital that buys a system expecting a full sequence library and then discovers key packages are locked has effectively bought a lower-specification machine at a higher-specification price.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "warning",
+    title: "Get licence entitlement in writing before payment",
+    text: "Request written confirmation from the refurbisher — ideally corroborated by the manufacturer or an authorised service partner — listing every software package, sequence licence and platform version included, and confirm in the purchase contract that licence transfer is the seller's responsibility and cost, not the buyer's.",
+  },
+  {
+    type: "p",
+    text: "Platform software version also determines cybersecurity posture and future upgrade path. An older software version may no longer receive security patches, may be incompatible with the hospital's PACS or RIS integration standards, and may block eligibility for later hardware upgrades. Confirm the installed software version, its end-of-support date, and whether an upgrade path exists before committing to the purchase.",
+  },
+  {
+    type: "h2",
+    id: "parts-availability",
+    number: 7,
+    text: "Parts Availability Windows",
+    body: "Every imaging platform has a manufacturer-defined parts-support lifecycle, and this window — not the scanner's calendar age — is usually the real ceiling on how long a refurbished system remains economically serviceable.",
+  },
+  {
+    type: "p",
+    text: "Manufacturers generally commit to parts availability for a defined period after a platform's last production date, commonly in the region of seven to ten years, after which parts become progressively harder to source, more expensive, or dependent on a shrinking secondary market of reclaimed components. A refurbished system purchased near the end of this window may look identical on delivery to one purchased near the start, but the two carry very different risk profiles for the remainder of a typical ten- to fifteen-year hospital ownership horizon.",
+  },
+  {
+    type: "table",
+    caption: "Questions that reveal a system's real parts-availability runway",
+    headers: ["Question", "Why it matters"],
+    rows: [
+      ["What is the platform's last production year?", "Establishes the starting point of the manufacturer's parts-support clock"],
+      ["Is the manufacturer's parts-support window still active for this model?", "Determines whether OEM parts remain sourceable at standard lead times"],
+      ["Does the refurbisher hold spare stock of high-failure items (coils, cold heads, RF amplifiers)?", "Shortens real-world repair time once OEM support ends"],
+      ["What is the typical lead time for a gradient amplifier or major RF component?", "Directly predicts unplanned downtime duration"],
+    ],
+  },
+  {
+    type: "tableInsight",
+    expertCommentary: "Parts-availability windows are rarely volunteered by sellers because they cap the resale narrative — a system otherwise in excellent condition can still be a poor investment if it is entering the final two or three years of manufacturer parts support.",
+    clinicalInterpretation: "A parts shortage does not usually stop a scanner working outright; it manifests first as extended repair times for intermittent faults, which erode clinical scheduling reliability long before a full breakdown occurs.",
+    hospitalRecommendation: "Ask the refurbisher to state, in writing, the platform's last production date and the manufacturer's stated parts-support end date, and weight the purchase decision — and the depreciation schedule used internally — against the years of support genuinely remaining.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "planning-tip",
+    title: "Build a parts bridge into the contract",
+    text: "For platforms nearing the end of their support window, negotiate a guaranteed critical-spares package (gradient amplifier module, cold head, key coil elements) held on-site or at the supplier's regional depot, rather than relying on the open parts market once a fault occurs.",
+  },
+  {
+    type: "h2",
+    id: "warranty-service",
+    number: 8,
+    text: "Warranty Structures and Service Contracts",
+    body: "A refurbished system's warranty terms and the service contract that follows it typically determine total cost of ownership more than the purchase price itself.",
+  },
+  { type: "h3", text: "What a Credible Warranty Covers" },
+  {
+    type: "p",
+    text: "A credible refurbished-system warranty should explicitly name the magnet, gradient system, RF chain, cooling system and console as covered items, state whether coils are included or covered separately, define response-time commitments for on-site service, and specify whether loaner coils or parts are provided during repair. Warranties that only cover \"manufacturing defects\" without naming specific subsystems offer little practical protection.",
+  },
+  { type: "h3", text: "Structuring the Post-Warranty Service Contract" },
+  {
+    type: "p",
+    text: "Once the initial warranty expires, an ongoing service contract should be negotiated before, not after, the warranty lapses, since pricing leverage is highest while the supplier still wants to close the original sale. Options typically range from full comprehensive cover (parts, labour and preventive maintenance) to time-and-materials arrangements; comprehensive cover carries a higher annual cost but converts an unpredictable repair budget into a fixed, plannable line item — usually the right trade-off for a hospital's first few years with an unfamiliar refurbished unit.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "expert-recommendation",
+    title: "Match contract type to system maturity",
+    items: [
+      "Years 1-2 (initial warranty): confirm subsystem-level coverage and response-time SLAs in writing",
+      "Years 3-5: comprehensive service contract recommended while parts availability is strongest",
+      "Years 6+: consider a hybrid contract with guaranteed access to critical spares as parts availability narrows",
+      "Throughout: require quarterly preventive maintenance visits regardless of contract type",
+    ],
+  },
+  {
+    type: "callout",
+    variant: "note",
+    title: "Preventive maintenance is not optional",
+    text: "Cryogenic, gradient and RF subsystems degrade predictably with use. A structured preventive maintenance schedule, whether delivered under warranty or a service contract, is what keeps a refurbished system's failure rate comparable to a new one.",
+  },
+  {
+    type: "h2",
+    id: "due-diligence",
+    number: 9,
+    text: "The Buyer's Due Diligence Checklist",
+    body: "A structured due diligence process converts an opaque refurbished purchase into a documented, auditable procurement decision.",
+  },
+  {
+    type: "requirements",
+    checklist: [
+      "Written scope-of-work document detailing every component tested, repaired or replaced",
+      "Full magnet ramp, de-ramp and quench history since original commissioning",
+      "Coil inventory by serial number with individual test reports",
+      "Written confirmation of software licence entitlement and platform version",
+      "Manufacturer's stated parts-support end date for the specific model and configuration",
+      "Site survey confirming the receiving room meets the system's power, cooling, shielding and structural requirements",
+      "Warranty document naming covered subsystems, response times and loaner-equipment terms",
+      "Proposed post-warranty service contract terms and pricing",
+      "Reference sites where the same refurbisher has installed the same platform",
+      "Import, customs and regulatory documentation appropriate to the destination country",
+    ],
+    specs: {
+      title: "Minimum documentation to request before signing",
+      rows: [
+        { label: "Ramp/quench history", value: "Full record since original commissioning" },
+        { label: "Coil test reports", value: "Per-coil, by serial number" },
+        { label: "Software licence letter", value: "Signed by refurbisher or manufacturer partner" },
+        { label: "Acceptance test protocol", value: "Same standard used for new-system installs" },
+        { label: "Parts-support end date", value: "Stated in writing for the specific configuration" },
+      ],
+    },
+  },
+  {
+    type: "h2",
+    id: "cost-comparison",
+    number: 10,
+    text: "Total Cost: Refurbished vs New",
+    body: "Purchase price is only one line in the total cost comparison; siting, service contracts, consumables and remaining useful life all shift the real economics.",
+  },
+  {
+    type: "comparison",
+    title: "Indicative total cost of ownership comparison over a 10-year horizon",
+    headers: ["Cost element", "Refurbished 1.5T (typical)", "New 1.5T (typical)"],
+    rows: [
+      [
+        "Purchase price",
+        "Roughly 40-60% of new list price (indicative range only)",
+        "Full manufacturer list price, often with longer lead times",
+      ],
+      [
+        "Siting and room preparation",
+        "Comparable to new — same RF shielding, cooling and power requirements apply",
+        "Comparable to refurbished",
+      ],
+      [
+        "Initial warranty coverage",
+        "Typically shorter (6-24 months depending on grade)",
+        "Typically longer (12-36 months) with full manufacturer backing",
+      ],
+      [
+        "Helium and consumables",
+        "Can be higher if an older-generation, higher-boil-off magnet",
+        "Usually lower with modern zero/low-boil-off designs",
+      ],
+      [
+        "Remaining parts-support window",
+        "Shorter and must be verified case by case",
+        "Longest available, starting from a fresh production date",
+      ],
+      [
+        "Resale/residual value",
+        "Lower, given shorter remaining support life",
+        "Higher, given longer support horizon",
+      ],
+    ],
+  },
+  {
+    type: "tableInsight",
+    expertCommentary: "The purchase-price gap between refurbished and new is real and often decisive for budget-constrained hospitals, but it narrows once shorter parts-support windows, higher potential helium consumption and shorter initial warranties are annualised over the ownership period.",
+    clinicalInterpretation: "Clinical image quality is not the differentiator here — a well-graded refurbished 1.5T system performs equivalently to a new one for the vast majority of diagnostic protocols.",
+    hospitalRecommendation: "Model total cost across a full ownership horizon, not just acquisition cost, and treat any refurbished quotation that omits siting, service-contract and parts-support figures as incomplete.",
+  },
+  {
+    type: "stats",
+    items: [
+      { value: "40-60%", label: "Typical refurbished price as a share of new list price (indicative)" },
+      { value: "7-10 yrs", label: "Common manufacturer parts-support window after last production" },
+      { value: "10-15 yrs", label: "Typical planned hospital ownership horizon for an MRI system" },
+    ],
+  },
+  {
+    type: "h2",
+    id: "regulatory",
+    number: 11,
+    text: "Regulatory Considerations",
+    body: "Refurbished medical imaging equipment is subject to import, device and radiation-safety regulation that varies materially by destination country and must be resolved before shipment, not after.",
+  },
+  {
+    type: "ul",
+    items: [
+      "Many jurisdictions classify a refurbished MRI system as a distinct regulatory event from a new import, requiring proof of the original CE marking or FDA clearance plus documentation that refurbishment did not alter the device's original intended use or essential performance.",
+      "The EU Medical Device Regulation (EU MDR) places specific obligations on \"refurbishers\" who substantially remanufacture a device, distinct from simple resale of a used unit — buyers importing into or from EU-regulated supply chains should confirm which category the transaction falls under.",
+      "National radiation and health-technology authorities in the destination country may require site licensing, magnetic-field safety sign-off and biomedical engineering registration specific to MRI installations, independent of whether the system is new or refurbished.",
+    ],
+  },
+  {
+    type: "knowledgeBox",
+    variant: "important",
+    title: "Confirm regulatory pathway before contracting",
+    text: "Request written confirmation from the seller of the system's original regulatory clearance (CE mark, FDA 510(k) or equivalent) and how that clearance status is maintained through refurbishment and import into the destination country, ideally supported by the national regulatory authority's own guidance for used medical devices.",
+  },
+  {
+    type: "h2",
+    id: "siting-installation",
+    number: 12,
+    text: "Siting and Reinstallation Risk",
+    body: "A refurbished magnet requires the same room engineering as a new one — RF shielding, quench venting, structural floor loading, power quality and cooling — and site mismatches are a leading cause of installation delay.",
+  },
+  {
+    type: "diagram",
+    id: "room-planning",
+    title: "Room readiness requirements common to new and refurbished MRI installs",
+    purpose: "Shows that siting requirements do not shrink because a system is refurbished, helping procurement teams avoid under-budgeting the facility side of the project.",
+    alt: "Floor plan diagram of an MRI suite showing the RF-shielded scan room, equipment room, quench vent routing to atmosphere, control room, and patient preparation area, annotated with power supply, chilled-water and structural floor-loading requirements common to both new and refurbished installations.",
+    caption: "Figure 3 — Siting requirements for a refurbished MRI suite. Facility works are typically delivered by licensed contractors as part of a coordinated turnkey project.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "best-practice",
+    title: "Sequence the site survey before the shipment date",
+    text: "Commission an independent site survey against the specific unit's shim and power requirements before the system leaves the de-installation site, so any room modifications can be completed in parallel with transport rather than after the equipment has already arrived.",
+  },
+  {
+    type: "h2",
+    id: "vendor-selection",
+    number: 13,
+    text: "Choosing a Refurbishment Partner",
+    body: "The supplier matters as much as the equipment: a refurbisher's track record, transparency and post-sale service network determine whether the documented process on paper is actually delivered in practice.",
+  },
+  {
+    type: "table",
+    caption: "Questions to ask any prospective refurbishment supplier",
+    headers: ["Area", "What to ask"],
+    rows: [
+      ["Experience", "How many units of this specific platform has the supplier refurbished and installed?"],
+      ["Transparency", "Will the supplier provide the full scope-of-work and test documentation before payment?"],
+      ["Local presence", "Does the supplier have installation and service engineers based in or near the destination region?"],
+      ["References", "Can the supplier provide hospital references for the same model, ideally installed in the last 24 months?"],
+      ["Training", "Is applications and biomedical engineering training included, and by whom?"],
+    ],
+  },
+  {
+    type: "tableInsight",
+    expertCommentary: "A refurbisher's willingness to answer these questions in writing, before any deposit is paid, is itself a strong signal of overall reliability.",
+    clinicalInterpretation: "Suppliers without local service presence tend to correlate with longer downtime episodes, regardless of the equipment's underlying condition.",
+    hospitalRecommendation: "Favour suppliers who combine documented refurbishment scope with in-region installation, training and service capability over suppliers offering equipment alone at a lower headline price.",
+  },
+  {
+    type: "h2",
+    id: "clinical-performance",
+    number: 14,
+    text: "Clinical Performance After Refurbishment",
+    body: "Properly refurbished systems that pass full acceptance testing perform clinically equivalent to new systems of the same platform generation for the great majority of diagnostic protocols.",
+  },
+  {
+    type: "p",
+    text: "The determinant of clinical image quality is not whether a system is new or refurbished but whether it passes the same acceptance tests: signal-to-noise ratio, image uniformity, geometric distortion, slice thickness accuracy and ghosting artefact levels. A refurbished system that meets these benchmarks at commissioning will deliver comparable diagnostic image quality across its service life, provided the preventive maintenance schedule is followed and coils are managed as clinical assets rather than accessories.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "clinical-insight",
+    title: "Radiologists judge coils and protocols, not the sale history",
+    text: "In blinded reading conditions, radiologists cannot reliably distinguish images from a well-maintained refurbished 1.5T system and a new one of the same generation. Protocol optimisation and coil condition affect perceived image quality far more than the equipment's sale history.",
+  },
+  {
+    type: "knowledgeBox",
+    variant: "future-technology",
+    title: "AI reconstruction can be retrofitted",
+    text: "Many refurbished platforms are eligible for manufacturer AI-based reconstruction upgrades post-installation, allowing hospitals to add throughput and noise-reduction improvements later rather than only at initial purchase — confirm upgrade eligibility for the specific software version being purchased.",
+  },
+  {
+    type: "h2",
+    id: "faq",
+    number: 15,
+    text: "Frequently Asked Questions",
+    body: "Answers to the questions hospital procurement teams most often raise when evaluating a refurbished MRI purchase.",
+  },
+  {
+    type: "faq",
+    items: [
+      { q: "Is a refurbished MRI scanner as safe as a new one?", a: "Yes, provided it passes the same acceptance testing and safety interlock verification applied to new installations. Safety depends on documented process and testing, not on whether the unit is new or refurbished." },
+      { q: "How much does a refurbished MRI scanner typically cost compared to new?", a: "Refurbished systems commonly range from roughly 40-60% of new list price, though this varies by field strength, grade, coil complement and remaining parts-support window. Treat any specific figure as an indicative market range, not a fixed quote." },
+      { q: "What is the biggest risk in buying a refurbished MRI system?", a: "Undocumented magnet ramp and quench history, since the magnet cannot be non-destructively inspected before purchase. The second biggest risk is incomplete or unverifiable coil and software licence inventories." },
+      { q: "Do software licences transfer automatically with a refurbished system?", a: "No. Software and sequence package licences are usually tied to the original purchasing institution and require explicit re-licensing or transfer confirmation, which should be secured in writing before payment." },
+      { q: "How long will a refurbished MRI scanner remain serviceable?", a: "This is set by the shortest of three factors: manufacturer parts-support end date, gradient and cooling component wear, and magnet helium economy — not simply the unit's calendar age." },
+      { q: "What grading system should I trust?", a: "None of the informal A/B/C or Premium/Standard/Economy labels are regulated. Request the itemised scope of work behind the grade rather than relying on the grade name alone." },
+      { q: "Does a refurbished system need the same room as a new one?", a: "Yes. RF shielding, quench venting, power quality, cooling capacity and structural floor loading requirements are essentially unchanged between new and refurbished installations of the same platform." },
+      { q: "What warranty should I expect on a refurbished MRI system?", a: "A credible warranty should name covered subsystems explicitly (magnet, gradients, RF chain, cooling, console), state response-time commitments, and typically run from six months to two years depending on refurbishment grade." },
+      { q: "Can a refurbished system be upgraded with AI reconstruction later?", a: "Many platforms support post-installation software upgrades, including AI-based reconstruction, provided the underlying software version and licence are eligible — this should be confirmed for the specific unit before purchase." },
+      { q: "How do I verify a magnet's quench history?", a: "Request the full ramp and quench log from the seller, ideally corroborated by the original manufacturer or an authorised service provider, and treat undocumented history as a reason to require additional pre-purchase field-strength verification." },
+      { q: "Is it worth buying a Grade C or economy-tier refurbished system?", a: "Rarely for primary clinical service. The price discount at this tier is usually smaller than the additional downtime and parts risk it introduces; economy-tier units are better suited to non-critical backup roles, if at all." },
+      { q: "Who is responsible for import and regulatory compliance on a refurbished system?", a: "Responsibility should be defined explicitly in the purchase contract, but the buyer bears ultimate accountability to national regulators, so documentation of original clearance and refurbishment scope should be secured directly, not taken on trust." },
+      { q: "How long does refurbishment and reinstallation typically take?", a: "From de-installation to clinical acceptance, a well-run refurbishment and reinstallation project typically takes several months, driven mainly by shipping logistics, room readiness and the refurbisher's bench-testing schedule rather than the equipment itself." },
+    ],
+  },
+  {
+    type: "referenceGroups",
+    groups: [
+      {
+        title: "Medical guidelines",
+        items: [
+          { label: "American College of Radiology (ACR) — MRI Accreditation Program requirements" },
+          { label: "European Society of Radiology (ESR) — guidance on imaging equipment quality assurance" },
+        ],
+      },
+      {
+        title: "Scientific publications",
+        items: [
+          { label: "International Society for Magnetic Resonance in Medicine (ISMRM) — technical standards and quality assurance literature" },
+        ],
+      },
+      {
+        title: "Regulatory authorities",
+        items: [
+          { label: "U.S. Food and Drug Administration (FDA) — guidance on refurbished and remanufactured medical devices" },
+          { label: "UK Medicines and Healthcare products Regulatory Agency (MHRA) — guidance on used and refurbished medical equipment" },
+        ],
+      },
+      {
+        title: "International standards",
+        items: [
+          { label: "IEC 60601-2-33 — Particular requirements for the basic safety and essential performance of magnetic resonance equipment for medical diagnosis" },
+          { label: "EU Medical Device Regulation (EU MDR 2017/745) — provisions relevant to refurbished and remanufactured devices" },
+        ],
+      },
+      {
+        title: "Manufacturer documentation",
+        items: [
+          { label: "Original equipment manufacturer instructions for use (IFU) and site planning guides for the specific MRI platform" },
+        ],
+      },
+      {
+        title: "Medical societies",
+        items: [
+          { label: "Radiological Society of North America (RSNA) — imaging technology and equipment resources" },
+        ],
+      },
+    ],
+    note: "Hospitals should always confirm current requirements with the applicable national regulator, as import and device rules for refurbished equipment vary by country and change periodically.",
+  },
+  {
+    type: "h2",
+    id: "conclusion",
+    number: 16,
+    text: "Conclusion",
+    body: "A refurbished MRI scanner can deliver near-new clinical performance at a fraction of new-system pricing, but only when the buyer verifies the process, not just the price.",
+  },
+  {
+    type: "p",
+    text: "The hospitals that get the most value from refurbished MRI systems are the ones that treat the purchase as a technical due diligence exercise rather than a straightforward equipment order: verifying magnet ramp history, testing coils individually, confirming software licence entitlement in writing, checking the manufacturer's remaining parts-support window, and negotiating warranty and service terms before, not after, signing. Done this way, a refurbished system is not a compromise on quality — it is a disciplined way to bring modern MRI capability to a hospital's patients on a realistic budget and timeline.",
+  },
+  {
+    type: "articleCta",
+    heading: "Considering a refurbished MRI system for your hospital?",
+    subheading: "AbuFarha Medical supplies, installs, commissions, trains on and services refurbished and new MRI systems, with full transparency on grading, coil inventory, licensing and warranty terms.",
+    technology: "MRI",
+  },
+];
