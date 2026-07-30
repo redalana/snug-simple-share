@@ -342,7 +342,7 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   y += 22;
 
   /* Hero image */
-  const heroAspect = 2.5;
+  const heroAspect = 2.95;
   const hero = await imageToDataUrl(p.gallery?.[0] ?? p.image, heroAspect, 1900);
   const imgH = CW / heroAspect;
   doc.setFillColor(...TINT);
@@ -364,7 +364,9 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(60, 66, 76);
-  const desc = doc.splitTextToSize(buildDescription(p), CW);
+  const descAll: string[] = doc.splitTextToSize(buildDescription(p), CW);
+  const desc =
+    descAll.length > 6 ? [...descAll.slice(0, 5), `${descAll[5].replace(/\s+\S*$/, "")} …`] : descAll;
   doc.text(desc, M, y, { lineHeightFactor: 1.4 });
   y += desc.length * 11.2 + 12;
 
@@ -464,7 +466,7 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(5.8);
   doc.setTextColor(170, 176, 188);
-  doc.text("SCAN FOR PRODUCT PAGE", qx + qs / 2, cy + 74, { align: "center" });
+  doc.text("SCAN FOR PRODUCT PAGE", qx + qs / 2, cy + 72, { align: "center" });
 
   pageFooter(doc, 1, p);
 }
