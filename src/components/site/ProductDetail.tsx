@@ -206,7 +206,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
   // Sticky in-page nav — track the currently visible section for a11y + orientation.
   const [activeSection, setActiveSection] = useState<string>("overview");
   useEffect(() => {
-    const ids = ["overview", "features", "downloads", "faq", "request-quote"];
+    const ids = ["overview", "features", "faq", "request-quote"];
     const els = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
