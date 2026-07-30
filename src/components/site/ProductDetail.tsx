@@ -524,7 +524,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
                 className="mt-3 inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3.5 text-sm font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary disabled:opacity-60"
               >
                 <FileText className="h-4 w-4" />
-                {generating ? "Preparing PDF…" : "Download Product PDF"}
+                {generating ? "Preparing brochure…" : "Download Brochure (PDF)"}
               </button>
               <button
                 type="button"
