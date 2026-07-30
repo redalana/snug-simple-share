@@ -390,7 +390,7 @@ export const MRI_SAFETY_ZONES_AND_SCREENING_CONTENT: ContentBlock[] = [
   },
   {
     type: "callout",
-    variant: "warning",
+    variant: "important",
     text: "Never estimate patient weight. An inaccurate weight entry undermines the SAR safety margin the scanner is designed to enforce.",
   },
   {
