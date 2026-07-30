@@ -1,5 +1,6 @@
 import type { Product } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
+import logoAsset from "@/assets/abufarha-logo.png.asset.json";
 
 /* ==========================================================================
    AbuFarha Medical — Product Brochure Generator
@@ -171,27 +172,55 @@ function buildIncluded(p: Product): string[] {
 
 /* ------------------------------------------------------------ draw helpers */
 
-function brandHeader(doc: Doc, right: string) {
+/* Official AbuFarha logo, fetched once and reused across every generated page. */
+const LOGO_ASPECT = 2280 / 1310;
+let logoCache: string | null | undefined;
+
+async function loadLogo(): Promise<string | null> {
+  if (logoCache !== undefined) return logoCache;
+  try {
+    const res = await fetch(logoAsset.url);
+    const blob = await res.blob();
+    logoCache = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = () => reject(new Error("logo read failed"));
+      reader.readAsDataURL(blob);
+    });
+  } catch {
+    logoCache = null;
+  }
+  return logoCache;
+}
+
+function brandHeader(doc: Doc, right: string, logo: string | null) {
   doc.setFillColor(...INK);
   doc.rect(0, 0, PAGE_W, 78, "F");
   doc.setFillColor(...BRAND);
   doc.rect(0, 0, 6, 78, "F");
 
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(19);
-  doc.text("Abu", M, 36);
-  const w = doc.getTextWidth("Abu");
-  doc.setTextColor(...BRAND);
-  doc.text("Farha", M + w, 36);
+  const logoH = 44;
+  const logoW = logoH * LOGO_ASPECT;
+  if (logo) {
+    try {
+      doc.addImage(logo, "PNG", M, 12, logoW, logoH, undefined, "FAST");
+    } catch {
+      /* ignore */
+    }
+  } else {
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(19);
+    doc.text("Abu", M, 36);
+    const w = doc.getTextWidth("Abu");
+    doc.setTextColor(...BRAND);
+    doc.text("Farha", M + w, 36);
+  }
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(7.4);
-  doc.setTextColor(190, 195, 205);
-  doc.text("MEDICAL EQUIPMENT", M, 49);
   doc.setFontSize(6.6);
   doc.setTextColor(150, 156, 168);
-  doc.text(CONTACT.tagline.toUpperCase(), M, 61);
+  doc.text(CONTACT.tagline.toUpperCase(), M, 68);
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8);
@@ -298,8 +327,8 @@ function pageFooter(doc: Doc, page: number, product: Product) {
 
 /* ------------------------------------------------------------------ page 1 */
 
-async function drawOverview(doc: Doc, p: Product, qr: string | null) {
-  brandHeader(doc, "Product Brochure");
+async function drawOverview(doc: Doc, p: Product, qr: string | null, logo: string | null) {
+  brandHeader(doc, "Product Brochure", logo);
 
   let y = 104;
 
@@ -473,8 +502,8 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
 
 /* ------------------------------------------------------------------ page 2 */
 
-function drawTechnical(doc: Doc, p: Product) {
-  brandHeader(doc, "Technical Profile");
+function drawTechnical(doc: Doc, p: Product, logo: string | null) {
+  brandHeader(doc, "Technical Profile", logo);
 
   let y = 106;
   doc.setFont("helvetica", "bold");
@@ -607,11 +636,11 @@ export async function generateProductPdf(product: Product): Promise<void> {
   });
 
   const productUrl = `${SITE_URL}/products/${product.slug}`;
-  const qr = await qrDataUrl(productUrl);
+  const [qr, logo] = await Promise.all([qrDataUrl(productUrl), loadLogo()]);
 
-  await drawOverview(doc, product, qr);
+  await drawOverview(doc, product, qr, logo);
   doc.addPage("a4", "portrait");
-  drawTechnical(doc, product);
+  drawTechnical(doc, product, logo);
 
   const safeName = product.name.replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, "");
   doc.save(`${safeName}-Brochure-AbuFarha.pdf`);
