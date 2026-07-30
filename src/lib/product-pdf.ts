@@ -342,8 +342,9 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   y += 22;
 
   /* Hero image */
-  const hero = await imageToDataUrl(p.gallery?.[0] ?? p.image, 16 / 9, 1900);
-  const imgH = CW * (9 / 16);
+  const heroAspect = 2.5;
+  const hero = await imageToDataUrl(p.gallery?.[0] ?? p.image, heroAspect, 1900);
+  const imgH = CW / heroAspect;
   doc.setFillColor(...TINT);
   doc.rect(M, y, CW, imgH, "F");
   if (hero) {
@@ -356,97 +357,114 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null) {
   doc.setDrawColor(...LINE);
   doc.setLineWidth(0.6);
   doc.rect(M, y, CW, imgH, "S");
-  y += imgH + 24;
+  y += imgH + 22;
 
   /* Description */
   y = sectionTitle(doc, "Product Overview", y);
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.4);
+  doc.setFontSize(8);
   doc.setTextColor(60, 66, 76);
   const desc = doc.splitTextToSize(buildDescription(p), CW);
-  doc.text(desc, M, y, { lineHeightFactor: 1.45 });
-  y += desc.length * 12 + 14;
+  doc.text(desc, M, y, { lineHeightFactor: 1.4 });
+  y += desc.length * 11.2 + 12;
 
   /* Highlights — two columns */
   y = sectionTitle(doc, "Key Highlights", y);
-  const colW = (CW - 18) / 2;
+  const colW = (CW - 16) / 2;
   const hl = buildHighlights(p);
-  const startY = y;
   let leftY = y;
   let rightY = y;
   hl.forEach((t, i) => {
     const col = i % 2;
-    const x = M + col * (colW + 18);
+    const x = M + col * (colW + 16);
     const cy = col === 0 ? leftY : rightY;
     const lines = doc.splitTextToSize(t, colW - 16);
-    const h = lines.length * 10 + 14;
+    const h = lines.length * 9.5 + 11;
     doc.setFillColor(...TINT);
-    doc.roundedRect(x, cy, colW, h, 4, 4, "F");
+    doc.roundedRect(x, cy, colW, h, 3.5, 3.5, "F");
     doc.setFillColor(...BRAND);
-    doc.roundedRect(x, cy, 2.6, h, 1.3, 1.3, "F");
+    doc.roundedRect(x, cy, 2.4, h, 1.2, 1.2, "F");
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(7.8);
+    doc.setFontSize(7.4);
     doc.setTextColor(...INK);
-    doc.text(lines, x + 10, cy + 12);
-    if (col === 0) leftY = cy + h + 7;
-    else rightY = cy + h + 7;
+    doc.text(lines, x + 9, cy + 10.5);
+    if (col === 0) leftY = cy + h + 6;
+    else rightY = cy + h + 6;
   });
-  y = Math.max(leftY, rightY, startY) + 6;
+  y = Math.max(leftY, rightY) + 4;
 
-  /* Quick facts + QR */
+  /* Quick facts — compact two-pair grid */
   y = sectionTitle(doc, "Quick Facts", y);
-  const qrBox = 92;
-  const tableW = CW - qrBox - 20;
   const facts: [string, string][] = [
     ["Manufacturer", p.brand],
     ["Category", p.category],
     ["Model", p.model],
     ["Year of Manufacture", String(p.year)],
     ["Condition", p.status],
-    ["Availability", p.sold ? "Sold — similar systems available" : "In stock"],
+    ["Availability", p.sold ? "Sold — similar available" : "In stock"],
     ["Country of Origin", p.country],
     ["System Type", p.systemType],
   ];
-  const endY = kvTable(doc, facts, M, y, tableW, { labelW: tableW * 0.42 });
-
-  const qx = M + tableW + 20;
-  doc.setDrawColor(...LINE);
-  doc.setLineWidth(0.6);
-  doc.roundedRect(qx, y, qrBox, qrBox + 28, 5, 5, "S");
-  if (qr) {
-    try {
-      doc.addImage(qr, "PNG", qx + 14, y + 12, qrBox - 28, qrBox - 28);
-    } catch {
-      /* ignore */
+  const cellW = CW / 2;
+  const labelW = cellW * 0.44;
+  const rowH = 17;
+  facts.forEach(([label, value], i) => {
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const x = M + col * cellW;
+    const ry = y + row * rowH;
+    if (row % 2 === 0) {
+      doc.setFillColor(...TINT);
+      doc.rect(x, ry, cellW, rowH, "F");
     }
-  }
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(6.6);
-  doc.setTextColor(...SLATE);
-  doc.text("SCAN FOR FULL", qx + qrBox / 2, y + qrBox + 2, { align: "center" });
-  doc.text("PRODUCT PAGE", qx + qrBox / 2, y + qrBox + 12, { align: "center" });
+    doc.setDrawColor(...LINE);
+    doc.setLineWidth(0.4);
+    doc.rect(x, ry, cellW, rowH, "S");
+    doc.line(x + labelW, ry, x + labelW, ry + rowH);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.2);
+    doc.setTextColor(...SLATE);
+    doc.text(doc.splitTextToSize(label, labelW - 12)[0], x + 7, ry + 11);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...INK);
+    doc.text(doc.splitTextToSize(value, cellW - labelW - 12)[0], x + labelW + 7, ry + 11);
+  });
+  y += Math.ceil(facts.length / 2) * rowH + 16;
 
-  /* Contact strip */
-  const cY = Math.max(endY, y + qrBox + 28) + 18;
-  const stripH = 62;
-  const cy = Math.min(cY, PAGE_H - 48 - stripH);
+  /* Contact strip with QR */
+  const stripH = 76;
+  const cy = Math.min(y, PAGE_H - 52 - stripH);
   doc.setFillColor(...INK);
   doc.roundedRect(M, cy, CW, stripH, 6, 6, "F");
   doc.setFillColor(...BRAND);
   doc.roundedRect(M, cy, 3.5, stripH, 2, 2, "F");
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
+  doc.setFontSize(9.5);
   doc.setTextColor(255, 255, 255);
-  doc.text(CONTACT.company, M + 16, cy + 20);
+  doc.text(CONTACT.company, M + 16, cy + 22);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.4);
   doc.setTextColor(198, 204, 214);
-  doc.text(
-    `Tel ${CONTACT.landline}   ·   WhatsApp ${CONTACT.whatsapp}   ·   ${CONTACT.email}`,
-    M + 16,
-    cy + 36,
-  );
-  doc.text(CONTACT.address, M + 16, cy + 49);
+  doc.text(`Tel ${CONTACT.landline}   ·   WhatsApp ${CONTACT.whatsapp}`, M + 16, cy + 38);
+  doc.text(`${CONTACT.email}   ·   ${CONTACT.website}`, M + 16, cy + 51);
+  doc.text(doc.splitTextToSize(CONTACT.address, CW - 130)[0], M + 16, cy + 64);
+
+  /* QR block inside the strip */
+  const qs = 52;
+  const qx = PAGE_W - M - 16 - qs;
+  doc.setFillColor(255, 255, 255);
+  doc.roundedRect(qx - 5, cy + 8, qs + 10, qs + 10, 4, 4, "F");
+  if (qr) {
+    try {
+      doc.addImage(qr, "PNG", qx, cy + 13, qs, qs);
+    } catch {
+      /* ignore */
+    }
+  }
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(6);
+  doc.setTextColor(170, 176, 188);
+  doc.text("SCAN FOR PRODUCT PAGE", qx + qs / 2, cy + 68, { align: "center" });
 
   pageFooter(doc, 1, p);
 }
