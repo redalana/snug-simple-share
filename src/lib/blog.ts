@@ -214,6 +214,10 @@ import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } fr
 import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
 import { CATH_LAB_ROOM_PLANNING_CONTENT, CATH_LAB_ROOM_PLANNING_TOC } from "./articles/cath-lab-room-planning-and-installation";
 import { CATH_LAB_MAINTENANCE_CONTENT, CATH_LAB_MAINTENANCE_TOC } from "./articles/cath-lab-preventive-maintenance-and-uptime";
+import { SINGLE_VS_BIPLANE_CONTENT, SINGLE_VS_BIPLANE_TOC } from "./articles/single-plane-vs-bi-plane-angiography-systems";
+import { CATH_LAB_TCO_CONTENT, CATH_LAB_TCO_TOC } from "./articles/cath-lab-total-cost-of-ownership";
+import { ANGIOGRAPHY_TROUBLESHOOTING_CONTENT, ANGIOGRAPHY_TROUBLESHOOTING_TOC } from "./articles/angiography-image-quality-troubleshooting";
+import { CATH_LAB_RADIATION_PROTECTION_CONTENT, CATH_LAB_RADIATION_PROTECTION_TOC } from "./articles/radiation-protection-in-the-cath-lab";
 
 
 function makeDefaultContent(a: {
@@ -281,6 +285,74 @@ const RAW: Array<
     readingTime: "14 min read",
     content: CATH_LAB_MAINTENANCE_CONTENT,
     tableOfContents: CATH_LAB_MAINTENANCE_TOC,
+  },
+  {
+    slug: "single-plane-vs-bi-plane-angiography-systems",
+    title: "Single-Plane vs Bi-Plane Angiography Systems",
+    seoTitle: "Single-Plane vs Bi-Plane Angiography: Configuration Guide",
+    metaDescription:
+      "How to choose between single-plane and bi-plane angiography: clinical indications, room and structural impact, ten-year cost, staffing and a decision framework.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Bi-plane is not a premium single-plane system. Which configuration your case mix actually requires, and what the second plane costs in room, service and staffing.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: SINGLE_VS_BIPLANE_CONTENT,
+    tableOfContents: SINGLE_VS_BIPLANE_TOC,
+  },
+  {
+    slug: "cath-lab-total-cost-of-ownership",
+    title: "Cath Lab Total Cost of Ownership",
+    seoTitle: "Cath Lab Total Cost of Ownership: 10-Year Cost Guide",
+    metaDescription:
+      "The complete ten-year cost of a cath lab: capital, infrastructure, service contracts, tube replacement, consumables and staffing — plus the omissions that break budgets.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Equipment price is the minority of a cath lab's ten-year cost. The five cost categories, how to normalise vendor service quotations, and what most business cases omit.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CATH_LAB_TCO_CONTENT,
+    tableOfContents: CATH_LAB_TCO_TOC,
+  },
+  {
+    slug: "angiography-image-quality-troubleshooting",
+    title: "Angiography Image Quality Troubleshooting",
+    seoTitle: "Angiography Image Quality Troubleshooting Guide",
+    metaDescription:
+      "Diagnose cath lab image quality problems: noise, poor vessel contrast, motion and subtraction artefacts, detector faults, geometry errors and dose creep.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Most angiography image quality complaints are protocol or positioning problems, not equipment faults. A structured method for telling the difference before calling service.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: ANGIOGRAPHY_TROUBLESHOOTING_CONTENT,
+    tableOfContents: ANGIOGRAPHY_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "radiation-protection-in-the-cath-lab",
+    title: "Radiation Protection in the Cath Lab",
+    seoTitle: "Radiation Protection in the Cath Lab: Staff & Patient Guide",
+    metaDescription:
+      "Radiation protection for interventional teams: scatter physics, geometry, shielding layers, dosimetry, patient dose management, pregnancy policy and governance.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "The cath lab is the highest occupational exposure setting in most hospitals. Where staff dose really comes from, and the measures that reduce it at no cost.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: CATH_LAB_RADIATION_PROTECTION_CONTENT,
+    tableOfContents: CATH_LAB_RADIATION_PROTECTION_TOC,
   },
   {
     slug: "what-is-a-ct-scanner",
