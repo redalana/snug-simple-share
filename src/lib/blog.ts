@@ -431,6 +431,75 @@ const RAW: Array<
     tableOfContents: PET_CT_ROOM_PLANNING_TOC,
   },
   {
+    slug: "pet-ct-oncology-staging-protocols",
+    title: "PET/CT Oncology Staging and Response Protocols",
+    seoTitle: "PET/CT Oncology Staging Protocols: Preparation, SUV & Response",
+    metaDescription:
+      "How oncology PET/CT protocols are built: fasting and glucose control, uptake time, coverage, indication-specific variations, response criteria, pitfalls and SUV comparability.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "Staging and response reporting depend on protocol consistency, not scanner specification. Preparation, acquisition, criteria and the pitfalls that generate false positives.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: PET_CT_ONCOLOGY_STAGING_CONTENT,
+    tableOfContents: PET_CT_ONCOLOGY_STAGING_TOC,
+  },
+  {
+    slug: "pet-ct-vs-spect-ct-selection-guide",
+    title: "PET/CT vs SPECT/CT: How to Choose",
+    seoTitle: "PET/CT vs SPECT/CT: Clinical & Procurement Selection Guide",
+    metaDescription:
+      "PET/CT vs SPECT/CT compared on physics, clinical indications, tracer supply, shielding, staffing and cost — with a decision framework and acquisition sequencing advice.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "They are complements, not substitutes. What each modality answers well, what each demands of a hospital, and which one a new service should build first.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: PET_CT_VS_SPECT_CT_CONTENT,
+    tableOfContents: PET_CT_VS_SPECT_CT_TOC,
+  },
+  {
+    slug: "pet-ct-total-cost-of-ownership",
+    title: "PET/CT Total Cost of Ownership",
+    seoTitle: "PET/CT Total Cost of Ownership: 10-Year Hospital Cost Model",
+    metaDescription:
+      "A ten-year PET/CT cost model: capital and configuration, shielding and uptake rooms, tracer decay economics, service scope, staffing, physics and the levers that matter.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "PET/CT is the imaging investment whose consumable decays. How to model tracer, suite construction, service scope and utilisation over ten years.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: PET_CT_TCO_CONTENT,
+    tableOfContents: PET_CT_TCO_TOC,
+  },
+  {
+    slug: "pet-ct-cardiac-and-neurology-applications",
+    title: "PET/CT in Cardiology and Neurology",
+    seoTitle: "Cardiac & Brain PET/CT: Viability, Perfusion, Dementia, Epilepsy",
+    metaDescription:
+      "Cardiac and neurological PET/CT: viability and perfusion imaging, sarcoidosis and device infection, dementia differentiation, epilepsy localisation and brain tumour assessment.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "The same scanner answers questions beyond oncology — if the preparation, software, tracer supply and clinical partnership are in place first.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: PET_CT_CARDIAC_NEURO_CONTENT,
+    tableOfContents: PET_CT_CARDIAC_NEURO_TOC,
+  },
+
+  {
     slug: "what-is-a-ct-scanner",
     title: "What Is a CT Scanner? How Computed Tomography Works",
     seoTitle: "What Is a CT Scanner? How CT Works, Components & Hospital Guide",
