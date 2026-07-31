@@ -214,6 +214,10 @@ import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } fr
 import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
 import { CATH_LAB_ROOM_PLANNING_CONTENT, CATH_LAB_ROOM_PLANNING_TOC } from "./articles/cath-lab-room-planning-and-installation";
 import { CATH_LAB_MAINTENANCE_CONTENT, CATH_LAB_MAINTENANCE_TOC } from "./articles/cath-lab-preventive-maintenance-and-uptime";
+import { SINGLE_VS_BIPLANE_CONTENT, SINGLE_VS_BIPLANE_TOC } from "./articles/single-plane-vs-bi-plane-angiography-systems";
+import { CATH_LAB_TCO_CONTENT, CATH_LAB_TCO_TOC } from "./articles/cath-lab-total-cost-of-ownership";
+import { ANGIOGRAPHY_TROUBLESHOOTING_CONTENT, ANGIOGRAPHY_TROUBLESHOOTING_TOC } from "./articles/angiography-image-quality-troubleshooting";
+import { CATH_LAB_RADIATION_PROTECTION_CONTENT, CATH_LAB_RADIATION_PROTECTION_TOC } from "./articles/radiation-protection-in-the-cath-lab";
 
 
 function makeDefaultContent(a: {
