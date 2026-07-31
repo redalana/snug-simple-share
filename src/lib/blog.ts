@@ -218,6 +218,10 @@ import { SINGLE_VS_BIPLANE_CONTENT, SINGLE_VS_BIPLANE_TOC } from "./articles/sin
 import { CATH_LAB_TCO_CONTENT, CATH_LAB_TCO_TOC } from "./articles/cath-lab-total-cost-of-ownership";
 import { ANGIOGRAPHY_TROUBLESHOOTING_CONTENT, ANGIOGRAPHY_TROUBLESHOOTING_TOC } from "./articles/angiography-image-quality-troubleshooting";
 import { CATH_LAB_RADIATION_PROTECTION_CONTENT, CATH_LAB_RADIATION_PROTECTION_TOC } from "./articles/radiation-protection-in-the-cath-lab";
+import { HYBRID_OT_PLANNING_CONTENT, HYBRID_OT_PLANNING_TOC } from "./articles/hybrid-operating-theatre-planning-guide";
+import { WHAT_IS_A_PET_CT_SCANNER_CONTENT, WHAT_IS_A_PET_CT_SCANNER_TOC } from "./articles/what-is-a-pet-ct-scanner";
+import { PET_CT_RADIOTRACERS_CONTENT, PET_CT_RADIOTRACERS_TOC } from "./articles/pet-ct-radiotracers-and-fdg-explained";
+import { PET_CT_ROOM_PLANNING_CONTENT, PET_CT_ROOM_PLANNING_TOC } from "./articles/pet-ct-room-planning-and-radiopharmacy";
 
 
 function makeDefaultContent(a: {
@@ -353,6 +357,74 @@ const RAW: Array<
     readingTime: "15 min read",
     content: CATH_LAB_RADIATION_PROTECTION_CONTENT,
     tableOfContents: CATH_LAB_RADIATION_PROTECTION_TOC,
+  },
+  {
+    slug: "hybrid-operating-theatre-planning-guide",
+    title: "Hybrid Operating Theatre Planning Guide",
+    seoTitle: "Hybrid Operating Theatre Planning: Design & Build Guide",
+    metaDescription:
+      "How to plan a hybrid OR: imaging configuration, surgical ventilation, structural loads for rail and ceiling systems, clash detection, workflow and commissioning.",
+    category: "Cath Lab",
+    coverImage: solOr,
+    excerpt:
+      "A hybrid theatre is not a cath lab with a scrub sink. The ventilation, structural, clash-detection and governance decisions that determine whether it works.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: HYBRID_OT_PLANNING_CONTENT,
+    tableOfContents: HYBRID_OT_PLANNING_TOC,
+  },
+  {
+    slug: "what-is-a-pet-ct-scanner",
+    title: "What Is a PET/CT Scanner? How Molecular Imaging Works",
+    seoTitle: "What Is a PET/CT Scanner? How PET/CT Works & Hospital Guide",
+    metaDescription:
+      "A clinically reviewed guide to PET/CT: annihilation physics, coincidence detection, time-of-flight, SUV quantification, clinical uses, infrastructure and cost.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "How PET/CT turns an injected tracer into quantified images of biology, what the technology actually requires of a hospital, and where it changes clinical decisions.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "17 min read",
+    content: WHAT_IS_A_PET_CT_SCANNER_CONTENT,
+    tableOfContents: WHAT_IS_A_PET_CT_SCANNER_TOC,
+  },
+  {
+    slug: "pet-ct-radiotracers-and-fdg-explained",
+    title: "PET/CT Radiotracers and FDG Explained",
+    seoTitle: "PET Radiotracers & FDG Explained: Clinical Guide",
+    metaDescription:
+      "How PET radiotracers work: FDG biology and pitfalls, PSMA and somatostatin-receptor tracers, half-life logistics, injected activity, hot lab handling and QC.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "The tracer, not the scanner, decides what a PET/CT study can answer. Where FDG succeeds, where it misleads, and what the targeted tracer portfolio adds.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: PET_CT_RADIOTRACERS_CONTENT,
+    tableOfContents: PET_CT_RADIOTRACERS_TOC,
+  },
+  {
+    slug: "pet-ct-room-planning-and-radiopharmacy",
+    title: "PET/CT Room Planning and Radiopharmacy Infrastructure",
+    seoTitle: "PET/CT Room Planning & Hot Lab Design Guide for Hospitals",
+    metaDescription:
+      "Plan a PET/CT suite: room programme, uptake capacity, patient flow, 511 keV shielding, structural loads, cooling, hot lab, waste decay store and acceptance testing.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "Installing PET/CT means creating a controlled area for unsealed sources. The rooms, shielding logic, hot lab and licensing steps that decide whether the service runs.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: PET_CT_ROOM_PLANNING_CONTENT,
+    tableOfContents: PET_CT_ROOM_PLANNING_TOC,
   },
   {
     slug: "what-is-a-ct-scanner",
