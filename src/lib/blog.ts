@@ -245,6 +245,10 @@ import { WHAT_IS_A_MOBILE_C_ARM_CONTENT, WHAT_IS_A_MOBILE_C_ARM_TOC } from "./ar
 import { C_ARM_SURGICAL_APPLICATIONS_CONTENT, C_ARM_SURGICAL_APPLICATIONS_TOC } from "./articles/c-arm-clinical-applications-in-surgery";
 import { C_ARM_RADIATION_SAFETY_CONTENT, C_ARM_RADIATION_SAFETY_TOC } from "./articles/c-arm-radiation-safety-in-theatre";
 import { MOBILE_C_ARM_BUYING_GUIDE_CONTENT, MOBILE_C_ARM_BUYING_GUIDE_TOC } from "./articles/mobile-c-arm-buying-guide";
+import { C_ARM_TCO_CONTENT, C_ARM_TCO_TOC } from "./articles/c-arm-total-cost-of-ownership";
+import { C_ARM_PM_CONTENT, C_ARM_PM_TOC } from "./articles/c-arm-preventive-maintenance-and-tube-care";
+import { C_ARM_IMAGE_QUALITY_CONTENT, C_ARM_IMAGE_QUALITY_TOC } from "./articles/c-arm-image-quality-troubleshooting";
+import { C_ARM_VS_FIXED_CONTENT, C_ARM_VS_FIXED_TOC } from "./articles/mobile-c-arm-vs-fixed-angiography-system";
 
 
 function makeDefaultContent(a: {
