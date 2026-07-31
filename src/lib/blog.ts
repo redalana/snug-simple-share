@@ -1171,6 +1171,40 @@ const RAW: Array<
     tableOfContents: US_CART_VS_HANDHELD_TOC,
   },
   {
+    slug: "ultrasound-room-setup-and-commissioning",
+    title: "Ultrasound Room Setup and Commissioning",
+    seoTitle: "Ultrasound Room Setup & Commissioning: Planning Guide",
+    metaDescription:
+      "How to plan and commission an ultrasound room: space and layout, lighting and acoustics, power and DICOM connectivity, probe reprocessing routes, acceptance testing and clinical handover.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "No shielding, no cryogens — and still a project. What a working ultrasound room actually requires.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: US_ROOM_SETUP_CONTENT,
+    tableOfContents: US_ROOM_SETUP_TOC,
+  },
+  {
+    slug: "ultrasound-probe-care-and-maintenance",
+    title: "Ultrasound Probe Care and Maintenance",
+    seoTitle: "Ultrasound Probe Care & Maintenance: Failures & Testing",
+    metaDescription:
+      "Ultrasound probe care explained: how transducers fail, daily handling and cleaning rules, reprocessing levels, dropout testing against baselines, and repair versus replacement economics.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Probes dominate ultrasound lifetime cost — and most failures are preventable by handling, not engineering.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: US_PROBE_CARE_CONTENT,
+    tableOfContents: US_PROBE_CARE_TOC,
+  },
+  {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
     title: "Mobile C-Arm vs Fixed Angiography System",
     seoTitle: "Mobile C-Arm vs Fixed Angiography: How to Choose",
