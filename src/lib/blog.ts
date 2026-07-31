@@ -359,6 +359,41 @@ import {
   OR_PLANNING_CONTENT,
   OR_PLANNING_TOC,
 } from "./articles/operating-room-equipment-planning";
+import { MODERN_OR_CONTENT, MODERN_OR_TOC } from "./articles/what-is-a-modern-operating-room";
+import { SURGICAL_LIGHTS_CONTENT, SURGICAL_LIGHTS_TOC } from "./articles/surgical-lights-and-pendant-systems";
+import { OR_INTEGRATION_CONTENT, OR_INTEGRATION_TOC } from "./articles/or-integration-and-video-management";
+import { OR_AIR_QUALITY_CONTENT, OR_AIR_QUALITY_TOC } from "./articles/laminar-flow-and-or-air-quality";
+import { STANDARD_VS_HYBRID_OR_CONTENT, STANDARD_VS_HYBRID_OR_TOC } from "./articles/standard-or-vs-hybrid-operating-theatre";
+import { OR_BUYING_GUIDE_CONTENT, OR_BUYING_GUIDE_TOC } from "./articles/operating-room-equipment-buying-guide";
+import { OR_BUILD_COMMISSIONING_CONTENT, OR_BUILD_COMMISSIONING_TOC } from "./articles/operating-room-build-and-commissioning";
+import { OR_PREVENTIVE_MAINTENANCE_CONTENT, OR_PREVENTIVE_MAINTENANCE_TOC } from "./articles/or-equipment-preventive-maintenance";
+import { OR_FAULT_TROUBLESHOOTING_CONTENT, OR_FAULT_TROUBLESHOOTING_TOC } from "./articles/or-equipment-fault-troubleshooting";
+import { OR_TCO_CONTENT, OR_TCO_TOC } from "./articles/operating-room-total-cost-of-ownership";
+import { FRAX_RISK_CONTENT, FRAX_RISK_TOC } from "./articles/frax-and-fracture-risk-assessment";
+import { DEXA_BODY_COMP_CONTENT, DEXA_BODY_COMP_TOC } from "./articles/body-composition-analysis-with-dexa";
+import { DEXA_VS_QCT_QUS_CONTENT, DEXA_VS_QCT_QUS_TOC } from "./articles/dexa-vs-quantitative-ct-and-ultrasound";
+import { DEXA_ROOM_INSTALL_CONTENT, DEXA_ROOM_INSTALL_TOC } from "./articles/dexa-room-planning-and-installation";
+import { DEXA_PRECISION_TROUBLESHOOTING_CONTENT, DEXA_PRECISION_TROUBLESHOOTING_TOC } from "./articles/dexa-precision-error-troubleshooting";
+import { DEXA_TCO_CONTENT, DEXA_TCO_TOC } from "./articles/dexa-total-cost-of-ownership";
+import { US_ARTEFACT_TROUBLESHOOTING_CONTENT, US_ARTEFACT_TROUBLESHOOTING_TOC } from "./articles/ultrasound-artefacts-and-image-troubleshooting";
+import { US_TCO_CONTENT, US_TCO_TOC } from "./articles/ultrasound-total-cost-of-ownership";
+import { WHAT_ARE_DES_CONTENT, WHAT_ARE_DES_TOC } from "./articles/what-are-drug-eluting-stents";
+import { STENT_PLATFORM_CONTENT, STENT_PLATFORM_TOC } from "./articles/stent-platform-and-polymer-technology";
+import { ANTIPLATELET_THERAPY_CONTENT, ANTIPLATELET_THERAPY_TOC } from "./articles/antiplatelet-therapy-after-stenting";
+import { RESTENOSIS_THROMBOSIS_CONTENT, RESTENOSIS_THROMBOSIS_TOC } from "./articles/in-stent-restenosis-and-thrombosis";
+import { DES_PROCUREMENT_CONTENT, DES_PROCUREMENT_TOC } from "./articles/drug-eluting-stent-procurement-guide";
+import { DES_VS_BMS_CONTENT, DES_VS_BMS_TOC } from "./articles/drug-eluting-vs-bare-metal-stents";
+import { DCB_VS_DES_CONTENT, DCB_VS_DES_TOC } from "./articles/drug-coated-balloon-vs-des";
+import { STENT_INVENTORY_CONTENT, STENT_INVENTORY_TOC } from "./articles/stent-inventory-and-consignment-management";
+import { ESWL_PATIENT_SELECTION_CONTENT, ESWL_PATIENT_SELECTION_TOC } from "./articles/eswl-patient-selection-and-stone-criteria";
+import { SHOCK_WAVE_GENERATION_TECH_CONTENT, SHOCK_WAVE_GENERATION_TECH_TOC } from "./articles/shock-wave-generation-technologies-explained";
+import { ELECTROHYDRAULIC_VS_ELECTROMAGNETIC_CONTENT, ELECTROHYDRAULIC_VS_ELECTROMAGNETIC_TOC } from "./articles/electrohydraulic-vs-electromagnetic-lithotripters";
+import { ESWL_VS_SURGICAL_CONTENT, ESWL_VS_SURGICAL_TOC } from "./articles/eswl-versus-surgical-stone-management";
+import { ESWL_DECISION_FRAMEWORK_CONTENT, ESWL_DECISION_FRAMEWORK_TOC } from "./articles/eswl-system-buying-guide";
+import { ESWL_ROOM_PLANNING_CONTENT, ESWL_ROOM_PLANNING_TOC } from "./articles/eswl-room-planning-and-installation";
+import { ESWL_MAINTENANCE_ELECTRODE_CONTENT, ESWL_MAINTENANCE_ELECTRODE_TOC } from "./articles/eswl-preventive-maintenance-and-electrode-life";
+import { ESWL_TREATMENT_TROUBLESHOOTING_CONTENT, ESWL_TREATMENT_TROUBLESHOOTING_TOC } from "./articles/eswl-treatment-failure-troubleshooting";
+import { ESWL_TCO_CONTENT, ESWL_TCO_TOC } from "./articles/eswl-total-cost-of-ownership";
 
 
 
@@ -2745,6 +2780,602 @@ const RAW: Array<
     content: OR_PLANNING_CONTENT,
     tableOfContents: OR_PLANNING_TOC,
   },
+  {
+    slug: "what-is-a-modern-operating-room",
+    title: "What Is a Modern Operating Room?",
+    seoTitle: "What Is a Modern Operating Room? Complete Guide",
+    metaDescription:
+      "A guide to the modern operating room: surgical lights, pendants, tables, air handling, integration systems and the infrastructure a theatre depends on.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "A modern theatre is an integrated environment, not a room with equipment in it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: MODERN_OR_CONTENT,
+    tableOfContents: MODERN_OR_TOC,
+  },
+  {
+    slug: "surgical-lights-and-pendant-systems",
+    title: "Surgical Lights and Pendant Systems",
+    seoTitle: "Surgical Lights & Pendant Systems Explained",
+    metaDescription:
+      "How surgical lighting and ceiling pendant systems work, what specifications matter, and how they are planned into the theatre ceiling.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Lighting and pendants are ceiling decisions made long before the equipment arrives.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: SURGICAL_LIGHTS_CONTENT,
+    tableOfContents: SURGICAL_LIGHTS_TOC,
+  },
+  {
+    slug: "or-integration-and-video-management",
+    title: "OR Integration and Video Management",
+    seoTitle: "OR Integration & Video Management Guide",
+    metaDescription:
+      "How operating room integration systems route surgical video, imaging and data, and what they require of network and clinical workflow.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Integration succeeds on routing discipline and network design, not on screen count.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+
+    content: OR_INTEGRATION_CONTENT,
+    tableOfContents: OR_INTEGRATION_TOC,
+  },
+  {
+    slug: "laminar-flow-and-or-air-quality",
+    title: "Laminar Flow and Operating Room Air Quality",
+    seoTitle: "Laminar Flow & Operating Room Air Quality",
+    metaDescription:
+      "Operating room ventilation explained: laminar flow, air change rates, pressure cascades, filtration and the validation air quality requires.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Air handling is the least visible and most consequential system in a theatre.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: OR_AIR_QUALITY_CONTENT,
+    tableOfContents: OR_AIR_QUALITY_TOC,
+  },
+  {
+    slug: "standard-or-vs-hybrid-operating-theatre",
+    title: "Standard OR vs Hybrid Operating Theatre",
+    seoTitle: "Standard OR vs Hybrid Operating Theatre",
+    metaDescription:
+      "How a hybrid theatre differs from a standard operating room in imaging, structure, shielding, staffing and cost — and when it is justified.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "A hybrid theatre is a structural commitment, not an equipment upgrade.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: STANDARD_VS_HYBRID_OR_CONTENT,
+    tableOfContents: STANDARD_VS_HYBRID_OR_TOC,
+  },
+  {
+    slug: "operating-room-equipment-buying-guide",
+    title: "Operating Room Equipment Buying Guide",
+    seoTitle: "Operating Room Equipment Buying Guide",
+    metaDescription:
+      "How to specify and tender operating room equipment: tables, lights, pendants, integration and the compatibility issues that decide the outcome.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Specify the theatre as a system; buying it item by item is where projects fail.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: OR_BUYING_GUIDE_CONTENT,
+    tableOfContents: OR_BUYING_GUIDE_TOC,
+  },
+  {
+    slug: "operating-room-build-and-commissioning",
+    title: "Operating Room Build and Commissioning",
+    seoTitle: "Operating Room Build & Commissioning Guide",
+    metaDescription:
+      "What happens between construction and first case: coordination, installation sequencing, air quality validation, testing and handover.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Commissioning is where a built room becomes a usable theatre.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: OR_BUILD_COMMISSIONING_CONTENT,
+    tableOfContents: OR_BUILD_COMMISSIONING_TOC,
+  },
+  {
+    slug: "or-equipment-preventive-maintenance",
+    title: "Operating Room Equipment Preventive Maintenance",
+    seoTitle: "OR Equipment Preventive Maintenance Guide",
+    metaDescription:
+      "Preventive maintenance for theatre equipment: tables, lights, pendants, electrosurgical units and integration systems, and how to schedule it around cases.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Theatre maintenance is scheduling as much as it is engineering.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: OR_PREVENTIVE_MAINTENANCE_CONTENT,
+    tableOfContents: OR_PREVENTIVE_MAINTENANCE_TOC,
+  },
+  {
+    slug: "or-equipment-fault-troubleshooting",
+    title: "Operating Room Equipment Fault Troubleshooting",
+    seoTitle: "OR Equipment Fault Troubleshooting Guide",
+    metaDescription:
+      "A structured approach to theatre equipment faults: table, lighting, pendant, integration and power issues, and what can be resolved intra-operatively.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "In theatre, triage order matters more than diagnostic depth.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: OR_FAULT_TROUBLESHOOTING_CONTENT,
+    tableOfContents: OR_FAULT_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "operating-room-total-cost-of-ownership",
+    title: "Operating Room Total Cost of Ownership",
+    seoTitle: "Operating Room Total Cost of Ownership",
+    metaDescription:
+      "The lifetime cost of a theatre: construction, equipment, air handling, maintenance, consumables and the cost of downtime.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Theatre cost is dominated by the systems no one sees.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: OR_TCO_CONTENT,
+    tableOfContents: OR_TCO_TOC,
+  },
+  {
+    slug: "frax-and-fracture-risk-assessment",
+    title: "FRAX and Fracture Risk Assessment",
+    seoTitle: "FRAX & Fracture Risk Assessment in DEXA",
+    metaDescription:
+      "How fracture risk tools combine bone density with clinical risk factors, and how to integrate risk assessment into DEXA reporting workflows.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Fracture risk tools turn a density measurement into an actionable probability.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: FRAX_RISK_CONTENT,
+    tableOfContents: FRAX_RISK_TOC,
+  },
+  {
+    slug: "body-composition-analysis-with-dexa",
+    title: "Body Composition Analysis With DEXA",
+    seoTitle: "DEXA Body Composition Analysis Guide",
+    metaDescription:
+      "How DEXA's dual-energy principle measures fat and lean mass, its clinical applications, and the protocol and QC discipline it requires.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "The same dual-energy measurement extends densitometry into metabolic and sports medicine services.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_BODY_COMP_CONTENT,
+    tableOfContents: DEXA_BODY_COMP_TOC,
+  },
+  {
+    slug: "dexa-vs-quantitative-ct-and-ultrasound",
+    title: "DEXA vs Quantitative CT and Ultrasound",
+    seoTitle: "DEXA vs Quantitative CT & Ultrasound",
+    metaDescription:
+      "Comparing DEXA, quantitative CT and quantitative ultrasound for bone assessment, and how to choose or combine them in a service pathway.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Three bone assessment methods, three non-interchangeable roles.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: DEXA_VS_QCT_QUS_CONTENT,
+    tableOfContents: DEXA_VS_QCT_QUS_TOC,
+  },
+  {
+    slug: "dexa-room-planning-and-installation",
+    title: "DEXA Room Planning and Installation",
+    seoTitle: "DEXA Room Planning & Installation Guide",
+    metaDescription:
+      "What hospitals must plan for space, radiation protection, environment and data integration before installing a DEXA system.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Most DEXA commissioning delay is decided by room planning, not by the scanner.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_ROOM_INSTALL_CONTENT,
+    tableOfContents: DEXA_ROOM_INSTALL_TOC,
+  },
+  {
+    slug: "dexa-precision-error-troubleshooting",
+    title: "DEXA Precision Error Troubleshooting",
+    seoTitle: "DEXA Precision Error Troubleshooting Guide",
+    metaDescription:
+      "A structured approach to separating positioning, analysis and instrument causes of unexpected DEXA follow-up results.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Separating true biological change from positioning, analysis and instrument drift.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_PRECISION_TROUBLESHOOTING_CONTENT,
+    tableOfContents: DEXA_PRECISION_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "dexa-total-cost-of-ownership",
+    title: "DEXA Total Cost of Ownership",
+    seoTitle: "DEXA Total Cost of Ownership Explained",
+    metaDescription:
+      "The full lifecycle cost structure of a DEXA service, from installation and QC through maintenance to end-of-life replacement.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Capital price is the smallest decision in a DEXA service's lifetime cost.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_TCO_CONTENT,
+    tableOfContents: DEXA_TCO_TOC,
+  },
+  {
+    slug: "ultrasound-artefacts-and-image-troubleshooting",
+    title: "Ultrasound Artefacts and Image Troubleshooting",
+    seoTitle: "Ultrasound Artefacts & Image Troubleshooting",
+    metaDescription:
+      "How to distinguish genuine ultrasound imaging artefacts from equipment faults, with a structured troubleshooting workflow.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Physics or fault: the distinction protects both diagnosis and uptime.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: US_ARTEFACT_TROUBLESHOOTING_CONTENT,
+    tableOfContents: US_ARTEFACT_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "ultrasound-total-cost-of-ownership",
+    title: "Ultrasound Total Cost of Ownership",
+    seoTitle: "Ultrasound Total Cost of Ownership Guide",
+    metaDescription:
+      "The full lifecycle cost of ultrasound systems, including the dominant role of transducer repair and replacement in real running cost.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Transducers, not consoles, decide what an ultrasound fleet really costs.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: US_TCO_CONTENT,
+    tableOfContents: US_TCO_TOC,
+  },
+  {
+    slug: "what-are-drug-eluting-stents",
+    title: "What Are Drug-Eluting Stents?",
+    seoTitle: "What Are Drug-Eluting Stents? Complete Guide",
+    metaDescription:
+      "How drug-eluting stents work: the stent platform, drug and polymer, how they prevent restenosis, and what an interventional programme needs to use them.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "The stent is a delivery system for a drug as much as a mechanical scaffold.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: WHAT_ARE_DES_CONTENT,
+    tableOfContents: WHAT_ARE_DES_TOC,
+  },
+  {
+    slug: "stent-platform-and-polymer-technology",
+    title: "Stent Platform and Polymer Technology",
+    seoTitle: "Stent Platform & Polymer Technology Explained",
+    metaDescription:
+      "Stent alloys, strut design, drug carriers and polymer generations explained, and how each design choice affects deliverability and healing.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Strut thickness, alloy and polymer decide deliverability and healing in equal measure.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: STENT_PLATFORM_CONTENT,
+    tableOfContents: STENT_PLATFORM_TOC,
+  },
+  {
+    slug: "antiplatelet-therapy-after-stenting",
+    title: "Antiplatelet Therapy After Stenting",
+    seoTitle: "Antiplatelet Therapy After Stenting: Guide",
+    metaDescription:
+      "Why dual antiplatelet therapy follows coronary stenting, how duration decisions balance ischaemic and bleeding risk, and how adherence is supported.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "The stent is only as safe as the antiplatelet plan that follows it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: ANTIPLATELET_THERAPY_CONTENT,
+    tableOfContents: ANTIPLATELET_THERAPY_TOC,
+  },
+  {
+    slug: "in-stent-restenosis-and-thrombosis",
+    title: "In-Stent Restenosis and Stent Thrombosis",
+    seoTitle: "In-Stent Restenosis & Stent Thrombosis Guide",
+    metaDescription:
+      "The two principal stent failure modes explained: mechanisms, timing, risk factors, imaging assessment and how each is prevented and managed.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Two failure modes, two mechanisms, two entirely different responses.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: RESTENOSIS_THROMBOSIS_CONTENT,
+    tableOfContents: RESTENOSIS_THROMBOSIS_TOC,
+  },
+  {
+    slug: "drug-eluting-stent-procurement-guide",
+    title: "Drug-Eluting Stent Procurement Guide",
+    seoTitle: "Drug-Eluting Stent Procurement Guide",
+    metaDescription:
+      "How to specify, evaluate and tender drug-eluting stents: clinical criteria, size matrix, supply terms, traceability and supplier evaluation.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Specify the size matrix and the supply terms, not just the device.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: DES_PROCUREMENT_CONTENT,
+    tableOfContents: DES_PROCUREMENT_TOC,
+  },
+  {
+    slug: "drug-eluting-vs-bare-metal-stents",
+    title: "Drug-Eluting vs Bare-Metal Stents",
+    seoTitle: "Drug-Eluting vs Bare-Metal Stents Compared",
+    metaDescription:
+      "How drug-eluting and bare-metal stents differ in mechanism, healing, restenosis behaviour and the narrow remaining role of bare-metal platforms.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "The comparison is settled in most settings — but knowing why still matters.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: DES_VS_BMS_CONTENT,
+    tableOfContents: DES_VS_BMS_TOC,
+  },
+  {
+    slug: "drug-coated-balloon-vs-des",
+    title: "Drug-Coated Balloon vs Drug-Eluting Stent",
+    seoTitle: "Drug-Coated Balloon vs Drug-Eluting Stent",
+    metaDescription:
+      "When a leave-nothing-behind drug-coated balloon strategy is preferred to a drug-eluting stent, and what each requires of the lab.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Leaving nothing behind is a strategy, not a shortcut.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: DCB_VS_DES_CONTENT,
+    tableOfContents: DCB_VS_DES_TOC,
+  },
+  {
+    slug: "stent-inventory-and-consignment-management",
+    title: "Stent Inventory and Consignment Management",
+    seoTitle: "Stent Inventory & Consignment Management",
+    metaDescription:
+      "Owned versus consigned stent stock, size matrix design, traceability, expiry control and replenishment workflow for interventional programmes.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "A missing size is a clinical event, not an administrative one.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: STENT_INVENTORY_CONTENT,
+    tableOfContents: STENT_INVENTORY_TOC,
+  },
+  {
+    slug: "eswl-patient-selection-and-stone-criteria",
+    title: "ESWL Patient Selection and Stone Criteria",
+    seoTitle: "ESWL Patient Selection & Stone Criteria",
+    metaDescription:
+      "Stone size, density, location and skin-to-stone distance, plus patient factors and contraindications that determine ESWL suitability.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Selection, not power, decides lithotripsy success rates.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_PATIENT_SELECTION_CONTENT,
+    tableOfContents: ESWL_PATIENT_SELECTION_TOC,
+  },
+  {
+    slug: "shock-wave-generation-technologies-explained",
+    title: "Shock Wave Generation Technologies Explained",
+    seoTitle: "Shock Wave Generation Technologies Explained",
+    metaDescription:
+      "Electrohydraulic, electromagnetic and piezoelectric shock wave generation compared: focal characteristics, consumables and clinical implications.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Three ways to make a shock wave, three very different service profiles.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: SHOCK_WAVE_GENERATION_TECH_CONTENT,
+    tableOfContents: SHOCK_WAVE_GENERATION_TECH_TOC,
+  },
+  {
+    slug: "electrohydraulic-vs-electromagnetic-lithotripters",
+    title: "Electrohydraulic vs Electromagnetic Lithotripters",
+    seoTitle: "Electrohydraulic vs Electromagnetic Lithotripters",
+    metaDescription:
+      "How electrohydraulic and electromagnetic lithotripters differ in focal zone, consumable cost, maintenance burden and clinical handling.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Focal zone and consumable life separate these two generation principles.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: ELECTROHYDRAULIC_VS_ELECTROMAGNETIC_CONTENT,
+    tableOfContents: ELECTROHYDRAULIC_VS_ELECTROMAGNETIC_TOC,
+  },
+  {
+    slug: "eswl-versus-surgical-stone-management",
+    title: "ESWL Versus Surgical Stone Management",
+    seoTitle: "ESWL vs Surgical Stone Management Compared",
+    metaDescription:
+      "Comparing ESWL with ureteroscopy and percutaneous nephrolithotomy across stone characteristics, clearance, anaesthesia and service requirements.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Lithotripsy and endoscopy are complementary pathways, not competitors.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_VS_SURGICAL_CONTENT,
+    tableOfContents: ESWL_VS_SURGICAL_TOC,
+  },
+  {
+    slug: "eswl-system-buying-guide",
+    title: "ESWL System Buying Guide",
+    seoTitle: "ESWL System Buying Guide: Decision Framework",
+    metaDescription:
+      "How to specify a lithotripsy system: case mix, generation principle, imaging configuration, consumable cost and tender evaluation criteria.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Specify from case mix and consumable cost, not from headline output.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_DECISION_FRAMEWORK_CONTENT,
+    tableOfContents: ESWL_DECISION_FRAMEWORK_TOC,
+  },
+  {
+    slug: "eswl-room-planning-and-installation",
+    title: "ESWL Room Planning and Installation",
+    seoTitle: "ESWL Room Planning & Installation Guide",
+    metaDescription:
+      "Space, radiation protection, power, water and imaging integration requirements for installing an extracorporeal lithotripsy system.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Lithotripsy commissioning delay is usually decided by the room, not the machine.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_ROOM_PLANNING_CONTENT,
+    tableOfContents: ESWL_ROOM_PLANNING_TOC,
+  },
+  {
+    slug: "eswl-preventive-maintenance-and-electrode-life",
+    title: "ESWL Preventive Maintenance and Electrode Life",
+    seoTitle: "ESWL Maintenance & Electrode Life Guide",
+    metaDescription:
+      "Preventive maintenance for lithotripters, including electrode and wear-component life, coupling systems and shock-wave output verification.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Consumable discipline, not repair response, keeps a lithotripter treating.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_MAINTENANCE_ELECTRODE_CONTENT,
+    tableOfContents: ESWL_MAINTENANCE_ELECTRODE_TOC,
+  },
+  {
+    slug: "eswl-treatment-failure-troubleshooting",
+    title: "ESWL Treatment Failure Troubleshooting",
+    seoTitle: "ESWL Treatment Failure Troubleshooting",
+    metaDescription:
+      "A structured way to separate patient, technique and equipment causes when lithotripsy fails to fragment a stone.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Patient, technique or machine — the cause determines the fix.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_TREATMENT_TROUBLESHOOTING_CONTENT,
+    tableOfContents: ESWL_TREATMENT_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "eswl-total-cost-of-ownership",
+    title: "ESWL Total Cost of Ownership",
+    seoTitle: "ESWL Total Cost of Ownership Framework",
+    metaDescription:
+      "The full lifetime cost of a lithotripsy service: consumables, service contracts, utilisation effects and the costs most models omit.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Electrodes and utilisation, not capital price, set the real cost per treatment.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: ESWL_TCO_CONTENT,
+    tableOfContents: ESWL_TCO_TOC,
+  },
 ];
 
 /* -----------------------------------------------------------
@@ -2797,6 +3428,247 @@ function getReviewer(category: string) {
    slugs; the first 3 present in ARTICLES are surfaced.
    ----------------------------------------------------------- */
 const TOPIC_CLUSTERS: Record<string, string[]> = {
+  "what-is-a-modern-operating-room": [
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "standard-or-vs-hybrid-operating-theatre",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "surgical-lights-and-pendant-systems": [
+    "what-is-a-modern-operating-room",
+    "laminar-flow-and-or-air-quality",
+    "standard-or-vs-hybrid-operating-theatre",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "or-integration-and-video-management": [
+
+  ],
+  "laminar-flow-and-or-air-quality": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "standard-or-vs-hybrid-operating-theatre",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "standard-or-vs-hybrid-operating-theatre": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "operating-room-equipment-buying-guide": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "operating-room-build-and-commissioning": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "or-equipment-preventive-maintenance": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "or-equipment-fault-troubleshooting": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "operating-room-total-cost-of-ownership": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "frax-and-fracture-risk-assessment": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "body-composition-analysis-with-dexa": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "dexa-vs-quantitative-ct-and-ultrasound": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "dexa-room-planning-and-installation": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "dexa-precision-error-troubleshooting": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "dexa-total-cost-of-ownership": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "ultrasound-artefacts-and-image-troubleshooting": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "ultrasound-total-cost-of-ownership": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "what-are-drug-eluting-stents": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "stent-platform-and-polymer-technology": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "antiplatelet-therapy-after-stenting": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "in-stent-restenosis-and-thrombosis": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "drug-eluting-stent-procurement-guide": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "drug-eluting-vs-bare-metal-stents": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "drug-coated-balloon-vs-des": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "stent-inventory-and-consignment-management": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-patient-selection-and-stone-criteria": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "shock-wave-generation-technologies-explained": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "electrohydraulic-vs-electromagnetic-lithotripters": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-versus-surgical-stone-management": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-system-buying-guide": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-room-planning-and-installation": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-preventive-maintenance-and-electrode-life": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-treatment-failure-troubleshooting": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
+  "eswl-total-cost-of-ownership": [
+    "what-is-a-modern-operating-room",
+    "surgical-lights-and-pendant-systems",
+    "laminar-flow-and-or-air-quality",
+    "hybrid-or-integration-guide",
+    "turnkey-project-delivery",
+  ],
   // Stroke pathway
   "stroke-why-every-minute-matters": [
     "brain-mri-what-it-detects",
