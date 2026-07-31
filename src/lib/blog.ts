@@ -2816,18 +2816,19 @@ const RAW: Array<
   },
   {
     slug: "or-integration-and-video-management",
-    title: "How operating room integration systems route surgical video, imaging and data, and what they require of network and clinical workflow.",
-    seoTitle: "Integration succeeds on routing discipline and network design, not on screen count.",
+    title: "OR Integration and Video Management",
+    seoTitle: "OR Integration & Video Management Guide",
     metaDescription:
-      "11 min read",
-    category: "OR Integration and Video Management",
-    coverImage: OR Integration & Video Management Guide,
+      "How operating room integration systems route surgical video, imaging and data, and what they require of network and clinical workflow.",
+    category: "Operating Room",
+    coverImage: solOr,
     excerpt:
-      undefined,
+      "Integration succeeds on routing discipline and network design, not on screen count.",
     author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
     publishedDate: "July 31, 2026",
     lastUpdated: "July 31, 2026",
-    readingTime: undefined,
+    readingTime: "11 min read",
+
     content: OR_INTEGRATION_CONTENT,
     tableOfContents: OR_INTEGRATION_TOC,
   },
