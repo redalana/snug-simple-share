@@ -293,6 +293,12 @@ import {
   PHILIPS_DOSE_QUALITY_CONTENT,
   PHILIPS_DOSE_QUALITY_TOC,
 } from "./articles/philips-cath-lab-dose-management-and-image-quality";
+import { DEXA_PILLAR_CONTENT, DEXA_PILLAR_TOC } from "./articles/what-is-a-dexa-bone-densitometer";
+import { DEXA_SCORES_CONTENT, DEXA_SCORES_TOC } from "./articles/t-scores-and-z-scores-explained";
+import { DEXA_BUYING_CONTENT, DEXA_BUYING_TOC } from "./articles/dexa-scanner-buying-guide";
+import { DEXA_QC_CONTENT, DEXA_QC_TOC } from "./articles/dexa-phantom-qc-and-maintenance";
+
+
 
 
 
