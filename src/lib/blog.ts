@@ -211,6 +211,7 @@ import { CT_CONTRAST_PROTOCOLS_AND_SAFETY_CONTENT, CT_CONTRAST_PROTOCOLS_AND_SAF
 import { CARDIAC_CT_ANGIOGRAPHY_GUIDE_CONTENT, CARDIAC_CT_ANGIOGRAPHY_GUIDE_TOC } from "./articles/cardiac-ct-angiography-guide";
 import { CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_CONTENT, CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_TOC } from "./articles/ct-image-artefacts-troubleshooting";
 import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/ct-total-cost-of-ownership";
+import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
 
 
 function makeDefaultContent(a: {
@@ -229,11 +230,28 @@ const RAW: Array<
   }
 > = [
   {
+    slug: "what-is-a-cath-lab",
+    title: "What Is a Cardiac Catheterization Laboratory (Cath Lab)?",
+    seoTitle: "What Is a Cath Lab? Equipment, Procedures & Planning Guide",
+    metaDescription:
+      "A clinically reviewed guide to cath labs — how angiography systems work, core components, procedures, staffing, room planning, dose management and lifecycle cost.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "What a cardiac catheterization laboratory is, what happens inside it, and what equipment, infrastructure and staffing a hospital commits to when it runs one.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: WHAT_IS_A_CATH_LAB_CONTENT,
+    tableOfContents: WHAT_IS_A_CATH_LAB_TOC,
+  },
+  {
     slug: "what-is-a-ct-scanner",
     title: "What Is a CT Scanner? How Computed Tomography Works",
     seoTitle: "What Is a CT Scanner? How CT Works, Components & Hospital Guide",
     metaDescription:
-      "A clinically reviewed guide to CT scanners — how computed tomography works, gantry, tube and detector design, helical acquisition, Hounsfield units, clinical uses and hospital planning.",
+      "A clinically reviewed guide to CT scanners — how computed tomography works, tube and detector design, Hounsfield units, clinical uses and hospital planning.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -250,7 +268,7 @@ const RAW: Array<
     title: "CT Slice Counts Explained: 16 vs 64 vs 128 Slice and Beyond",
     seoTitle: "CT Slice Counts Explained: 16 vs 64 vs 128 Slice Comparison",
     metaDescription:
-      "Detector rows versus slices, temporal and z-axis coverage, and which CT slice configuration genuinely fits a district hospital, a general referral centre or a cardiac programme.",
+      "Detector rows versus slices, z-axis and temporal coverage, and which CT slice configuration genuinely fits a district, referral or cardiac hospital.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -267,7 +285,7 @@ const RAW: Array<
     title: "CT Radiation Dose and Safety: Optimisation, Audit and Governance",
     seoTitle: "CT Radiation Dose & Safety: CTDIvol, DLP, SSDE and Optimisation",
     metaDescription:
-      "CTDIvol, DLP and SSDE explained, ALARA in practice, iterative and deep-learning reconstruction, paediatric protocols, dose monitoring and radiation protection governance.",
+      "CTDIvol, DLP and SSDE explained, ALARA in practice, iterative reconstruction, paediatric protocols and radiation protection governance for hospitals.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -284,7 +302,7 @@ const RAW: Array<
     title: "CT Room Planning and Shielding: Requirements for a Working Suite",
     seoTitle: "CT Room Planning & Shielding: Layout, Load, HVAC and Power",
     metaDescription:
-      "Room size, structural loading, radiation shielding principles, control room sightlines, HVAC heat load, power quality, cable routing, delivery access and acceptance testing for CT installations.",
+      "Room size, structural loading, radiation shielding, control room sightlines, HVAC heat load, power quality and acceptance testing for CT installations.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -301,7 +319,7 @@ const RAW: Array<
     title: "CT Preventive Maintenance and X-Ray Tube Life",
     seoTitle: "CT Preventive Maintenance & X-Ray Tube Life: Uptime Planning",
     metaDescription:
-      "Tube ageing and heat loading, replacement planning, detector and slip-ring care, calibration and QA schedules, uptime SLAs and spare-parts strategy for hospital CT fleets.",
+      "Tube ageing and heat loading, replacement planning, detector and slip-ring care, QA schedules, uptime SLAs and spare-parts strategy for hospital CT.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -318,7 +336,7 @@ const RAW: Array<
     title: "Refurbished CT Scanners: A Hospital Procurement Guide",
     seoTitle: "Refurbished CT Scanners: Inspection, Tube Life & Warranty Guide",
     metaDescription:
-      "What genuine CT refurbishment involves, how to assess remaining tube life, the pre-purchase inspection checklist, documentation, warranty expectations and when new is the better decision.",
+      "What genuine CT refurbishment involves, how to assess remaining tube life, the pre-purchase inspection checklist, warranty terms and when new wins.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -335,7 +353,7 @@ const RAW: Array<
     title: "CT Contrast Protocols and Safety: Iodinated Media in Practice",
     seoTitle: "CT Contrast Protocols & Safety: Dosing, Renal Risk, Reactions",
     metaDescription:
-      "Iodinated contrast media in CT — injection protocols and bolus timing, renal safety, allergic-like reaction preparedness, extravasation management and department policy essentials.",
+      "Iodinated contrast in CT — injection protocols and bolus timing, renal safety, reaction preparedness, extravasation management and department policy.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -352,7 +370,7 @@ const RAW: Array<
     title: "Cardiac CT Angiography: A Clinical and Service Guide",
     seoTitle: "Cardiac CT Angiography Guide: Gating, Calcium Score, CAD-RADS",
     metaDescription:
-      "Coronary CTA indications, patient preparation and heart-rate control, prospective versus retrospective ECG gating, calcium scoring, FFR-CT and structured reporting requirements.",
+      "Coronary CTA indications, patient preparation and heart-rate control, prospective versus retrospective ECG gating, calcium scoring and CAD-RADS reporting.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -369,7 +387,7 @@ const RAW: Array<
     title: "CT Image Artefacts: Recognition and Troubleshooting",
     seoTitle: "CT Image Artefacts: Causes, Recognition and Troubleshooting",
     metaDescription:
-      "Beam hardening, metal, motion, ring and streak, cone-beam, partial volume, photon starvation and truncation artefacts — cause, recognition and whether the fix is protocol or engineering.",
+      "Beam hardening, metal, motion, ring, streak, cone-beam and photon starvation artefacts — cause, recognition, and whether the fix is protocol or engineering.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -386,7 +404,7 @@ const RAW: Array<
     title: "CT Total Cost of Ownership: Modelling the Real Lifetime Cost",
     seoTitle: "CT Total Cost of Ownership: Tube, Service, Power and Throughput",
     metaDescription:
-      "How to model CT lifetime cost — capital versus running cost, tube replacement as the dominant consumable, service contract tiers, power and HVAC, staffing, throughput and upgrade paths.",
+      "How to model CT lifetime cost — capital versus running cost, tube replacement, service contract tiers, power and HVAC, staffing, throughput and upgrades.",
     category: "CT Scanners",
     coverImage: solCt,
     excerpt:
@@ -403,7 +421,7 @@ const RAW: Array<
     title: "What Is an MRI Scanner?",
     seoTitle: "What Is an MRI Scanner? How It Works, Costs & Hospital Guide",
     metaDescription:
-      "A clinically reviewed guide to MRI scanners — how magnetic resonance imaging works, system components, field strengths, siting, safety zones, costs and maintenance for hospitals.",
+      "A clinically reviewed guide to MRI scanners — how magnetic resonance imaging works, system components, field strengths, siting, safety, costs and upkeep.",
     category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
@@ -438,7 +456,7 @@ const RAW: Array<
     title: "MRI Room Planning and Siting: Requirements Hospitals Must Get Right",
     seoTitle: "MRI Room Planning & Siting: Shielding, Fringe Field and Layout",
     metaDescription:
-      "Fringe field mapping, RF and magnetic shielding, floor loading, cryogen venting, HVAC, power and delivery access — the siting decisions that determine MRI project success.",
+      "Fringe field mapping, RF and magnetic shielding, floor loading, cryogen venting, HVAC, power and delivery access for a successful MRI suite.",
     category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
@@ -506,7 +524,7 @@ const RAW: Array<
     title: "MRI Sequences Explained: T1, T2, FLAIR, DWI and Beyond",
     seoTitle: "MRI Sequences Explained: T1, T2, FLAIR, DWI, STIR & More",
     metaDescription:
-      "A clinically reviewed guide to MRI pulse sequences — spin echo, gradient echo, inversion recovery, diffusion, and how protocol design affects diagnosis and scan time.",
+      "A clinically reviewed guide to MRI pulse sequences — spin echo, gradient echo, inversion recovery and diffusion, and how protocol design shapes diagnosis.",
     category: "MRI Scanners",
     coverImage: solMri,
     excerpt:
@@ -737,6 +755,7 @@ const RAW: Array<
     slug: "refurbished-mri-scanners-guide",
     title:
       "The Ultimate Guide to Refurbished MRI Scanners: Costs, Brands, Installation & ROI for Hospitals",
+    seoTitle: "Refurbished MRI Scanners: Costs, Brands, Install & ROI",
     metaDescription:
       "A complete guide for hospital administrators and investors on refurbished MRI systems — including costs, brands, installation requirements, and return on investment.",
     category: "MRI Scanners",
@@ -779,10 +798,10 @@ const RAW: Array<
     slug: "biomedical-engineering-in-modern-healthcare",
     title: "The Role of Biomedical Engineering in Modern Healthcare",
     metaDescription:
-      "Why biomedical engineering is essential for safety, efficiency, and compliance.",
+      "Why biomedical engineering underpins equipment safety, uptime and regulatory compliance — and how hospitals structure the function to protect patients.",
     category: "Biomedical",
     coverImage: whyCathlab,
-    excerpt: "Why biomedical engineering is essential for safety, efficiency, and compliance.",
+    excerpt: "Why biomedical engineering underpins equipment safety, uptime and regulatory compliance — and how hospitals structure the function to protect patients.",
     author: { name: "Fadi Nasser", role: "Service Operations Manager" },
     publishedDate: "May 6, 2026",
     readingTime: "5 min read",
@@ -845,7 +864,7 @@ const RAW: Array<
     slug: "stroke-why-every-minute-matters",
     title: "Stroke: Why Every Minute Matters",
     metaDescription:
-      "How modern stroke pathways — from CT and MRI to thrombectomy — turn a devastating emergency into a treatable one. A guide for hospitals, clinicians and decision-makers.",
+      "How modern stroke pathways — from CT and MRI to thrombectomy — turn a devastating emergency into a treatable one, for hospitals and clinicians.",
     category: "Imaging Solutions",
     coverImage: solMri,
     excerpt:
@@ -886,6 +905,7 @@ const RAW: Array<
   {
     slug: "coronary-artery-disease-cath-lab-diagnosis",
     title: "Coronary Artery Disease: Diagnosis, Treatment, and the Importance of Cath Labs",
+    seoTitle: "Coronary Artery Disease: Diagnosis and the Cath Lab Role",
     metaDescription:
       "How coronary artery disease is diagnosed and treated in the modern cath lab — and why time-to-treatment defines the outcome.",
     category: "Cath Lab",
@@ -951,6 +971,7 @@ const RAW: Array<
   {
     slug: "osteoporosis-bone-density-dexa",
     title: "Osteoporosis and Bone Density (DEXA): Early Detection Saves Mobility",
+    seoTitle: "Osteoporosis & DEXA Bone Density: Early Detection Guide",
     metaDescription:
       "How DEXA bone densitometry identifies patients at high fracture risk — before the first fracture — and anchors fracture-prevention programs.",
     category: "Imaging Solutions",
@@ -1084,6 +1105,7 @@ const RAW: Array<
   {
     slug: "medical-equipment-maintenance-reliability",
     title: "Medical Equipment Maintenance: Protecting Patients Through Reliability",
+    seoTitle: "Medical Equipment Maintenance & Reliability Explained",
     metaDescription:
       "How structured preventive maintenance, calibration and lifecycle management keep medical equipment safe, accurate and available.",
     category: "After Sales",
@@ -1169,14 +1191,13 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
   "brain-mri-what-it-detects": [
     "stroke-why-every-minute-matters",
     "medical-imaging-in-neurology",
-    "mri-vs-ct-scan-choosing-right-imaging",
+    "prostate-mri-multiparametric-guide",
     "choosing-between-1-5t-and-3t-mri",
   ],
   "ct-imaging-emergency-trauma-care": [
     "stroke-why-every-minute-matters",
     "digital-xray-emergency-medicine",
     "mri-vs-ct-scan-choosing-right-imaging",
-    "ct-scanners-features-benefits-buying-considerations",
   ],
   "medical-imaging-in-neurology": [
     "brain-mri-what-it-detects",
@@ -1197,7 +1218,6 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
   "medical-imaging-in-cardiology": [
     "cath-lab-buying-guide",
     "coronary-artery-disease-cath-lab-diagnosis",
-    "ct-scanners-features-benefits-buying-considerations",
   ],
   "interventional-radiology-minimally-invasive": [
     "cath-lab-buying-guide",
@@ -1214,13 +1234,13 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
   "petct-transforming-cancer-diagnosis": [
     "medical-imaging-in-oncology",
     "philips-gemini-gxl-16-petct-review",
-    "interventional-radiology-minimally-invasive",
+    "radiation-therapy-equipment-latest-innovations",
     "molecular-imaging-program-from-ground-up",
   ],
   "medical-imaging-in-oncology": [
     "petct-transforming-cancer-diagnosis",
-    "breast-cancer-screening-mammography",
-    "interventional-radiology-minimally-invasive",
+    "prostate-mri-multiparametric-guide",
+    "radiation-therapy-equipment-latest-innovations",
   ],
   "molecular-imaging-program-from-ground-up": [
     "petct-transforming-cancer-diagnosis",
@@ -1239,24 +1259,14 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
     "how-diagnostic-imaging-improves-outcomes",
   ],
   "choosing-between-1-5t-and-3t-mri": [
+    "open-vs-closed-bore-mri-systems",
     "refurbished-mri-scanners-guide",
     "brain-mri-what-it-detects",
-    "medical-imaging-in-neurology",
   ],
   "refurbished-mri-scanners-guide": [
     "choosing-between-1-5t-and-3t-mri",
     "choosing-right-imaging-equipment-hospital",
     "brain-mri-what-it-detects",
-  ],
-  "ct-scanners-features-benefits-buying-considerations": [
-    "ct-imaging-emergency-trauma-care",
-    "mri-vs-ct-scan-choosing-right-imaging",
-    "choosing-right-imaging-equipment-hospital",
-  ],
-  "ct-vs-mri-which-is-right-for-your-hospital": [
-    "mri-vs-ct-scan-choosing-right-imaging",
-    "choosing-right-imaging-equipment-hospital",
-    "how-diagnostic-imaging-improves-outcomes",
   ],
   // Ultrasound / DEXA / X-Ray
   "ultrasound-imaging-applications-modern-healthcare": [
@@ -1306,27 +1316,20 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
   "planning-a-new-hospital-considerations": [
     "building-efficient-imaging-department",
     "turnkey-hospital-departments-planning-to-commissioning",
-    "choosing-right-imaging-equipment-hospital",
+    "modern-operating-room-equipment-key-technologies",
   ],
   "turnkey-hospital-departments-planning-to-commissioning": [
-    "turnkey-hospital-projects-planning-to-commissioning",
+    "modern-operating-room-equipment-key-technologies",
     "planning-a-new-hospital-considerations",
     "building-efficient-imaging-department",
-  ],
-  "turnkey-hospital-projects-planning-to-commissioning": [
-    "turnkey-hospital-departments-planning-to-commissioning",
-    "planning-a-new-hospital-considerations",
-    "medical-equipment-maintenance-reliability",
   ],
   // Service / biomedical
   "medical-equipment-maintenance-reliability": [
     "after-sales-support-that-keeps-equipment-running",
-    "preventive-maintenance-equipment-reliability",
     "biomedical-engineering-in-modern-healthcare",
   ],
   "after-sales-support-that-keeps-equipment-running": [
     "medical-equipment-maintenance-reliability",
-    "preventive-maintenance-equipment-reliability",
     "biomedical-engineering-in-modern-healthcare",
   ],
   "preventive-maintenance-equipment-reliability": [
@@ -1336,7 +1339,6 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
   ],
   "biomedical-engineering-in-modern-healthcare": [
     "medical-equipment-maintenance-reliability",
-    "preventive-maintenance-equipment-reliability",
     "building-efficient-imaging-department",
   ],
   "modern-operating-room-equipment-key-technologies": [

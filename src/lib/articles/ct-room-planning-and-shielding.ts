@@ -381,6 +381,29 @@ export const CT_ROOM_PLANNING_AND_SHIELDING_CONTENT: ContentBlock[] = [
     text: "None of the individual requirements covered in this guide — room dimensions, structural loading, radiation shielding, control room layout, HVAC, power quality, cable routing, delivery logistics or commissioning testing — is unusually difficult in isolation. What consistently makes CT installation projects run late or over budget is treating them as sequential, siloed tasks rather than a coordinated design process anchored to the specific scanner model's actual technical documentation from the earliest possible stage. Hospitals that engage medical physics, structural engineering and the equipment vendor's site planning team in parallel, well before construction begins, are the ones that reach a smooth, on-schedule commissioning and clinical go-live.",
   },
   {
+    type: "referenceGroups",
+    groups: [
+      {
+        title: "Shielding and radiation protection",
+        items: [
+          { label: "NCRP Report No. 147 — Structural Shielding Design for Medical X-Ray Imaging Facilities", url: "https://ncrponline.org" },
+          { label: "IAEA — Radiation Protection of Patients (RPOP): facility design guidance", url: "https://www.iaea.org" },
+          { label: "ICRP — Publications on radiological protection in medicine", url: "https://www.icrp.org" },
+        ],
+      },
+      {
+        title: "Equipment, acceptance and facility standards",
+        items: [
+          { label: "IEC 60601 series — Medical electrical equipment safety and performance standards", url: "https://www.iec.ch" },
+          { label: "AAPM — CT acceptance testing and quality assurance reports", url: "https://www.aapm.org" },
+          { label: "ACR — CT accreditation programme requirements", url: "https://www.acr.org" },
+          { label: "ASHRAE — HVAC design guidance for health care facilities", url: "https://www.ashrae.org" },
+        ],
+      },
+    ],
+    note: "Room dimensions, floor loading, heat rejection and electrical requirements are equipment-specific: always design against the selected scanner model's current manufacturer site-planning documentation, and confirm the edition of each standard adopted in the project's jurisdiction.",
+  },
+  {
     type: "articleCta",
     heading: "Planning a new CT installation or department renovation?",
     subheading: "AbuFarha's biomedical engineering and projects team supports hospitals through site survey, shielding coordination, structural and power planning, and installation logistics from initial design through commissioning.",
