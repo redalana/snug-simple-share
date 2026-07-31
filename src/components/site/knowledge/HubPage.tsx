@@ -97,6 +97,7 @@ export function HubPage({ hub }: { hub: ResolvedHub }) {
             <Breadcrumbs
               variant="inline"
               emitJsonLd={false}
+              className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground"
               items={[
                 { label: "Knowledge Center", to: "/blog" },
                 { label: HUB_FAMILY_LABEL[def.kind], to: HUB_BASE_PATH[def.kind] },

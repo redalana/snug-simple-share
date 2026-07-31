@@ -81,7 +81,7 @@ const TECHNOLOGY_HUBS: HubDef[] = TECHNOLOGIES.map((tech) => ({
   heading: `${tech.label} — Technology Hub`,
   metaTitle: `${tech.label} Technology Hub | AbuFarha Medical`,
   metaDescription: `Everything AbuFarha Medical publishes on ${tech.label.toLowerCase()}: technology explainers, buying and procurement guides, installation and maintenance resources, systems and support services.`,
-  intro: `A single entry point to every ${tech.label.toLowerCase()} resource we publish — how the technology works, how to evaluate and procure it, how it is installed, and how it is kept clinically available.`,
+  intro: `A single entry point to every ${tech.label} resource we publish — how the technology works, how to evaluate and procure it, how it is installed, and how it is kept clinically available.`,
   catalogPath: tech.categorySlug ? `/products/${tech.categorySlug}` : undefined,
   technology: tech.id,
 }));
@@ -109,7 +109,7 @@ const PRODUCT_HUBS: HubDef[] = PRIMARY_CATEGORIES.map((category) => {
     heading: `${category} — Product Hub`,
     metaTitle: `${category} Product Hub | AbuFarha Medical`,
     metaDescription: `${category} available through AbuFarha Medical, with the specifications, comparison guides, planning resources and maintenance documentation that support each system.`,
-    intro: `Every ${category.toLowerCase()} system in our portfolio, mapped to the technology explainers, comparisons, planning notes and service resources a hospital needs before it buys.`,
+    intro: `Every ${category} system in our portfolio, mapped to the technology explainers, comparisons, planning notes and service resources a hospital needs before it buys.`,
     catalogPath: tech?.categorySlug ? `/products/${tech.categorySlug}` : "/products",
     technology,
   };
