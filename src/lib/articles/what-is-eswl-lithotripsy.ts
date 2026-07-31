@@ -92,7 +92,12 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
   },
   {
     type: "tableInsight",
-    text: "Cumulative impulse count is to a lithotripter what tube exposure history is to a CT scanner: the single number that predicts the next major service event.",
+    expertCommentary:
+      "Cumulative impulse count is to a lithotripter what tube exposure history is to a CT scanner: the single number that predicts the next major service event.",
+    clinicalInterpretation:
+      "Fragmentation performance degrades gradually as the source ages, so declining session efficiency is a service signal rather than a case-selection failure.",
+    hospitalRecommendation:
+      "Record impulse count alongside every session and review it against the manufacturer's service interval at each preventive maintenance visit.",
   },
   {
     type: "h2",
@@ -115,7 +120,7 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
   },
   {
     type: "knowledgeBox",
-    variant: "note",
+    variant: "engineer-note",
     title: "Focal size is a clinical choice",
     text: "A tight focus concentrates energy and reduces the tissue volume exposed, but demands more accurate localisation and stable patient positioning. A wider focus is more forgiving of movement but spreads energy over more tissue.",
   },
@@ -145,7 +150,7 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
     number: 6,
   },
   {
-    type: "ol",
+    type: "ul",
     items: [
       "Case selection: stone size, location, composition where known, anatomy, skin-to-stone distance and clearance prospects are reviewed against alternatives such as ureteroscopy.",
       "Preparation: analgesia or sedation as protocol requires; positioning on the treatment table.",
@@ -188,29 +193,24 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
     id: "faq",
     items: [
       {
-        question: "Is ESWL suitable for every urinary stone?",
-        answer:
-          "No. Suitability depends on stone size, location, composition, patient anatomy and the likelihood of fragments clearing naturally. Selection is a clinical decision made before treatment, and some stones are better managed endoscopically.",
+        q: "Is ESWL suitable for every urinary stone?",
+        a: "No. Suitability depends on stone size, location, composition, patient anatomy and the likelihood of fragments clearing naturally. Selection is a clinical decision made before treatment, and some stones are better managed endoscopically.",
       },
       {
-        question: "Does ESWL require general anaesthesia?",
-        answer:
-          "Not necessarily. Requirements vary with the generation principle, entry pressure and energy protocol; piezoelectric systems in particular are often used with limited analgesia. Local clinical protocol governs the choice.",
+        q: "Does ESWL require general anaesthesia?",
+        a: "Not necessarily. Requirements vary with the generation principle, entry pressure and energy protocol; piezoelectric systems in particular are often used with limited analgesia. Local clinical protocol governs the choice.",
       },
       {
-        question: "How many sessions does a stone need?",
-        answer:
-          "Some stones fragment adequately in one session; others require retreatment. Follow-up imaging to confirm clearance is part of the treatment pathway, not an optional extra.",
+        q: "How many sessions does a stone need?",
+        a: "Some stones fragment adequately in one session; others require retreatment. Follow-up imaging to confirm clearance is part of the treatment pathway, not an optional extra.",
       },
       {
-        question: "What limits the working life of a lithotripter?",
-        answer:
-          "Cumulative impulse count consumes the shock wave source and its consumables, while imaging subsystems age on their own schedule. A system's remaining life is assessed from its impulse history and service record, not its age alone.",
+        q: "What limits the working life of a lithotripter?",
+        a: "Cumulative impulse count consumes the shock wave source and its consumables, while imaging subsystems age on their own schedule. A system's remaining life is assessed from its impulse history and service record, not its age alone.",
       },
       {
-        question: "Why does a used lithotripter's impulse count matter when buying?",
-        answer:
-          "Because it indicates how much of the source's service life has already been used, and therefore what near-term service investment the system will require. It is one of the first specifications to verify on any pre-owned system.",
+        q: "Why does a used lithotripter's impulse count matter when buying?",
+        a: "Because it indicates how much of the source's service life has already been used, and therefore what near-term service investment the system will require. It is one of the first specifications to verify on any pre-owned system.",
       },
     ],
   },
@@ -226,13 +226,23 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
   },
   {
     type: "editorialBoard",
+    reviewers: [
+      { role: "Clinical review", name: "AbuFarha Clinical Editorial Board", credential: "Urology treatment service practice" },
+      { role: "Engineering review", name: "AbuFarha Biomedical Engineering", credential: "Lithotripsy installation and preventive maintenance" },
+    ],
+    lastReviewed: "July 31, 2026",
+    nextReview: "July 31, 2027",
+    version: "1.0",
+    evidenceLevel: "Manufacturer documentation and field service practice synthesis",
+    disclaimer:
+      "Educational guidance on extracorporeal shock wave lithotripsy. It does not replace manufacturer documentation or clinical judgement.",
   },
   {
     type: "references",
     items: [
-      "Manufacturer technical documentation and operating instructions for installed lithotripsy systems.",
-      "Institutional urology treatment protocols and quality assurance records.",
-      "National radiation protection requirements applicable to fluoroscopy-equipped treatment rooms.",
+      { label: "Manufacturer technical documentation and operating instructions for installed lithotripsy systems." },
+      { label: "Institutional urology treatment protocols and quality assurance records." },
+      { label: "National radiation protection requirements applicable to fluoroscopy-equipped treatment rooms." },
     ],
   },
 ];
