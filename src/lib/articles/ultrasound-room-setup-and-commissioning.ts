@@ -174,7 +174,7 @@ export const US_ROOM_SETUP_CONTENT: ContentBlock[] = [
   },
   {
     type: "knowledgeBox",
-    variant: "note",
+    variant: "best-practice",
     title: "Second-phase training pays for itself",
     text: "Advanced features are rarely retained from the initial session. A follow-up applications visit several weeks after go-live, once staff have real questions, converts purchased capability into used capability.",
   },
