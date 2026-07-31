@@ -264,6 +264,9 @@ import { MAMMO_TCO_CONTENT, MAMMO_TCO_TOC } from "./articles/mammography-total-c
 import { US_PILLAR_CONTENT, US_PILLAR_TOC } from "./articles/what-is-an-ultrasound-system";
 import { US_TRANSDUCERS_CONTENT, US_TRANSDUCERS_TOC } from "./articles/ultrasound-transducer-types-explained";
 import { POCUS_CONTENT, POCUS_TOC } from "./articles/point-of-care-ultrasound-in-emergency-care";
+import { US_DOPPLER_CONTENT, US_DOPPLER_TOC } from "./articles/doppler-and-vascular-ultrasound-guide";
+import { US_BUYING_CONTENT, US_BUYING_TOC } from "./articles/ultrasound-system-buying-guide";
+import { US_CART_VS_HANDHELD_CONTENT, US_CART_VS_HANDHELD_TOC } from "./articles/cart-based-vs-handheld-ultrasound";
 
 
 function makeDefaultContent(a: {
@@ -1113,6 +1116,57 @@ const RAW: Array<
     readingTime: "14 min read",
     content: POCUS_CONTENT,
     tableOfContents: POCUS_TOC,
+  },
+  {
+    slug: "doppler-and-vascular-ultrasound-guide",
+    title: "Doppler and Vascular Ultrasound: A Practical Guide",
+    seoTitle: "Doppler & Vascular Ultrasound: Modes, Settings & Examinations",
+    metaDescription:
+      "Doppler ultrasound explained for practice: colour, power and spectral modes, angle and scale settings, core vascular examinations, probe requirements, artefacts and service governance.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Doppler measures haemodynamics, not anatomy — and its accuracy is decided by angle, scale and filter settings at the console.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: US_DOPPLER_CONTENT,
+    tableOfContents: US_DOPPLER_TOC,
+  },
+  {
+    slug: "ultrasound-system-buying-guide",
+    title: "Ultrasound System Buying Guide",
+    seoTitle: "Ultrasound System Buying Guide: Specification & Evaluation",
+    metaDescription:
+      "How to buy an ultrasound system: casemix-led requirements, system tiers, probe set specification, evaluation matrix, DICOM integration and lifetime cost beyond the purchase price.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "The probe set and the evaluation protocol decide the outcome — not the feature list on the quotation.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: US_BUYING_CONTENT,
+    tableOfContents: US_BUYING_TOC,
+  },
+  {
+    slug: "cart-based-vs-handheld-ultrasound",
+    title: "Cart-Based vs Handheld Ultrasound",
+    seoTitle: "Cart-Based vs Handheld Ultrasound: How to Choose",
+    metaDescription:
+      "Cart-based or handheld ultrasound? Capability and workflow comparison, where each format wins, hidden fleet and governance costs, and a decision framework for combined deployment.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Handheld removes delay; cart-based delivers reportable studies. Name the intended output and the format follows.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: US_CART_VS_HANDHELD_CONTENT,
+    tableOfContents: US_CART_VS_HANDHELD_TOC,
   },
   {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
