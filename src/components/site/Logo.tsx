@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/abufarha-logo.png.asset.json";
+import logoAsset from "@/assets/abufarha-logo.png";
 
 /**
  * Official AbuFarha Medical Supplies logo.
@@ -26,7 +26,7 @@ export function Logo({
       className={`inline-flex items-center justify-center ${isHeader ? "h-full w-full" : ""} ${className}`}
     >
       <img
-        src={logoAsset.url}
+        src={logoAsset}
         alt="AbuFarha Medical Supplies"
         width={2280}
         height={1310}
