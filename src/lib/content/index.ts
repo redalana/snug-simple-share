@@ -192,3 +192,6 @@ export function getRelatedContent(subject: ContentItem | string, limitPerType = 
 }
 export * from "./knowledge-center";
 export * from "./knowledge-hub";
+/* Persistent Article Registry — production source of truth (§52). */
+export * from "./registry";
+
