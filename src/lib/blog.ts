@@ -269,6 +269,32 @@ import { US_BUYING_CONTENT, US_BUYING_TOC } from "./articles/ultrasound-system-b
 import { US_CART_VS_HANDHELD_CONTENT, US_CART_VS_HANDHELD_TOC } from "./articles/cart-based-vs-handheld-ultrasound";
 import { US_ROOM_SETUP_CONTENT, US_ROOM_SETUP_TOC } from "./articles/ultrasound-room-setup-and-commissioning";
 import { US_PROBE_CARE_CONTENT, US_PROBE_CARE_TOC } from "./articles/ultrasound-probe-care-and-maintenance";
+import {
+  PHILIPS_FD10_VS_FD20_CONTENT,
+  PHILIPS_FD10_VS_FD20_TOC,
+} from "./articles/philips-allura-xper-fd10-vs-fd20-selection-guide";
+import {
+  PHILIPS_MONO_VS_BIPLANE_CONTENT,
+  PHILIPS_MONO_VS_BIPLANE_TOC,
+} from "./articles/philips-allura-xper-monoplane-vs-biplane";
+import {
+  PHILIPS_ALLURA_INSTALL_CONTENT,
+  PHILIPS_ALLURA_INSTALL_TOC,
+} from "./articles/philips-allura-xper-installation-and-room-requirements";
+import {
+  PHILIPS_ALLURA_PM_CONTENT,
+  PHILIPS_ALLURA_PM_TOC,
+} from "./articles/philips-allura-xper-preventive-maintenance-and-uptime";
+import {
+  PHILIPS_GEMINI_GXL_CONTENT,
+  PHILIPS_GEMINI_GXL_TOC,
+} from "./articles/philips-gemini-gxl-16-pet-ct-system-guide";
+import {
+  PHILIPS_DOSE_QUALITY_CONTENT,
+  PHILIPS_DOSE_QUALITY_TOC,
+} from "./articles/philips-cath-lab-dose-management-and-image-quality";
+
+
 
 
 function makeDefaultContent(a: {
