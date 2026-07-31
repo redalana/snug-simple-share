@@ -190,7 +190,6 @@ export const ESWL_PILLAR_CONTENT: ContentBlock[] = [
   },
   {
     type: "faq",
-    id: "faq",
     items: [
       {
         q: "Is ESWL suitable for every urinary stone?",
