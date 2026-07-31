@@ -2967,6 +2967,58 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
     "petct-transforming-cancer-diagnosis",
     "building-efficient-imaging-department",
   ],
+
+  // Service knowledge cluster
+  "clinical-training-for-imaging-teams": [
+    "technical-support-escalation-and-fault-response",
+    "spare-parts-supply-and-uptime",
+    "turnkey-project-delivery",
+    "medical-equipment-evaluation-methodology",
+  ],
+  "spare-parts-supply-and-uptime": [
+    "technical-support-escalation-and-fault-response",
+    "remote-diagnostics-vs-onsite-service",
+    "medical-equipment-replacement-planning",
+    "clinical-training-for-imaging-teams",
+  ],
+  "technical-support-escalation-and-fault-response": [
+    "remote-diagnostics-vs-onsite-service",
+    "spare-parts-supply-and-uptime",
+    "clinical-training-for-imaging-teams",
+    "turnkey-project-delivery",
+  ],
+  "remote-diagnostics-vs-onsite-service": [
+    "technical-support-escalation-and-fault-response",
+    "spare-parts-supply-and-uptime",
+    "clinical-training-for-imaging-teams",
+    "medical-equipment-replacement-planning",
+  ],
+  "turnkey-project-delivery": [
+    "operating-room-equipment-planning",
+    "imaging-department-planning-and-capacity",
+    "clinical-training-for-imaging-teams",
+    "hospital-capital-equipment-purchasing-framework",
+  ],
+
+  // Women's healthcare and theatre clusters
+  "womens-healthcare-imaging-service-planning": [
+    "what-is-an-obstetric-ultrasound-service",
+    "what-is-a-mammography-system",
+    "what-is-a-dexa-bone-densitometer",
+    "breast-imaging-quality-assurance-programme",
+  ],
+  "what-is-an-obstetric-ultrasound-service": [
+    "womens-healthcare-imaging-service-planning",
+    "what-is-an-ultrasound-system",
+    "ultrasound-transducer-types-explained",
+    "ultrasound-probe-care-and-maintenance",
+  ],
+  "operating-room-equipment-planning": [
+    "hybrid-operating-theatre-planning-guide",
+    "what-is-a-mobile-c-arm",
+    "c-arm-commissioning-and-theatre-integration",
+    "turnkey-project-delivery",
+  ],
 };
 
 export const ARTICLES: Article[] = RAW.map((a) => {
