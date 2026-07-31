@@ -308,6 +308,31 @@ import {
   ESWL_MAINTENANCE_CONTENT,
   ESWL_MAINTENANCE_TOC,
 } from "./articles/lithotripsy-preventive-maintenance-and-qa";
+import {
+  SIEMENS_AXIOM_CONTENT,
+  SIEMENS_AXIOM_TOC,
+} from "./articles/siemens-axiom-artis-cath-lab-system-guide";
+import {
+  SIEMENS_MAMMOMAT_CONTENT,
+  SIEMENS_MAMMOMAT_TOC,
+} from "./articles/siemens-mammomat-inspiration-system-guide";
+import { AQUILION_64_CONTENT, AQUILION_64_TOC } from "./articles/toshiba-aquilion-64-ct-system-guide";
+import {
+  INFINIX_LIFECYCLE_CONTENT,
+  INFINIX_LIFECYCLE_TOC,
+} from "./articles/toshiba-infinix-infx-8000c-cath-lab-lifecycle-and-upgrade-planning";
+import {
+  APERTO_INSPIRE_CONTENT,
+  APERTO_INSPIRE_TOC,
+} from "./articles/hitachi-aperto-inspire-open-mri-system-guide";
+import {
+  LUNAR_PRODIGY_CONTENT,
+  LUNAR_PRODIGY_TOC,
+} from "./articles/ge-lunar-prodigy-dexa-system-guide";
+import {
+  PIEZOLITH_3000_CONTENT,
+  PIEZOLITH_3000_TOC,
+} from "./articles/richard-wolf-piezolith-3000-plus-system-guide";
 
 
 
