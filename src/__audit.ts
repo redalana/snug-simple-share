@@ -1,0 +1,14 @@
+import { coverageReport, missingPillars, REGISTRY } from "@/lib/content/registry";
+const r = coverageReport();
+console.log("TOTAL", r.total, "A", r.tierA, "B", r.tierB);
+console.log("\nCATEGORIES");
+r.categories.forEach(c=>console.log(` ${c.articles.toString().padStart(3)} flagship=${c.flagship}  ${c.label}`));
+console.log("\nMANUFACTURERS");
+r.manufacturers.sort((a,b)=>a.articles-b.articles).forEach(m=>console.log(` ${m.articles.toString().padStart(3)}  ${m.label}`));
+console.log("\nSERVICES");
+r.services.sort((a,b)=>a.articles-b.articles).forEach(s=>console.log(` ${s.articles.toString().padStart(3)}  ${s.title}`));
+console.log("\nJOURNEY");
+r.journeyStages.forEach(s=>console.log(` ${s.articles.toString().padStart(3)}  ${s.stage}`));
+console.log("\nINTENTS");
+r.intents.forEach(i=>console.log(` ${i.count.toString().padStart(3)} actual=${i.actual}% target=${i.target}% delta=${i.delta.toFixed(1)}  ${i.intent}`));
+console.log("\nMISSING PILLARS", missingPillars());
