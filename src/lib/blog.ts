@@ -751,19 +751,6 @@ const RAW: Array<
     tableOfContents: REFURBISHED_MRI_SCANNERS_GUIDE_TOC,
   },
   {
-    slug: "ct-scanners-features-benefits-buying-considerations",
-    title: "CT Scanners: Key Features, Benefits & Buying Considerations",
-    metaDescription:
-      "A practical guide to selecting the best CT scanner for your clinical and budgetary needs.",
-    category: "CT Scanners",
-    coverImage: solCt,
-    excerpt:
-      "A practical guide to selecting the best CT scanner for your clinical and budgetary needs.",
-    author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
-    publishedDate: "May 16, 2026",
-    readingTime: "7 min read",
-  },
-  {
     slug: "philips-gemini-gxl-16-petct-review",
     title: "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
     metaDescription:
@@ -775,19 +762,6 @@ const RAW: Array<
     author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
     publishedDate: "May 12, 2026",
     readingTime: "8 min read",
-  },
-  {
-    slug: "turnkey-hospital-projects-planning-to-commissioning",
-    title: "Turnkey Hospital Projects: From Planning to Commissioning",
-    metaDescription:
-      "How we deliver complete healthcare facilities on time, on budget, and to the highest standards.",
-    category: "Turnkey Projects",
-    coverImage: solOr,
-    excerpt:
-      "How we deliver complete healthcare facilities on time, on budget, and to the highest standards.",
-    author: { name: "Omar AbuFarha", role: "Managing Director" },
-    publishedDate: "May 10, 2026",
-    readingTime: "6 min read",
   },
   {
     slug: "after-sales-support-that-keeps-equipment-running",
@@ -837,31 +811,6 @@ const RAW: Array<
     author: { name: "Dr. Amir Khaled", role: "Head of Clinical Solutions" },
     publishedDate: "May 6, 2026",
     readingTime: "7 min read",
-  },
-  {
-    slug: "ct-vs-mri-which-is-right-for-your-hospital",
-    title: "CT vs MRI: Which Imaging Solution is Right for Your Hospital?",
-    metaDescription:
-      "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
-    category: "Imaging Solutions",
-    coverImage: solCarm,
-    excerpt: "Compare clinical use cases, cost of ownership, and siting requirements at a glance.",
-    author: { name: "Sara Al-Mansouri", role: "Imaging Applications Lead" },
-    publishedDate: "May 1, 2026",
-    readingTime: "6 min read",
-  },
-  {
-    slug: "preventive-maintenance-equipment-reliability",
-    title: "Preventive Maintenance: The Key to Equipment Reliability",
-    metaDescription:
-      "A structured PM program reduces downtime, extends lifetime and protects patient safety.",
-    category: "Technical Support",
-    coverImage: solXray,
-    excerpt:
-      "A structured PM program reduces downtime, extends lifetime and protects patient safety.",
-    author: { name: "Fadi Nasser", role: "Service Operations Manager" },
-    publishedDate: "Apr 29, 2026",
-    readingTime: "6 min read",
   },
   {
     slug: "radiation-therapy-equipment-latest-innovations",
