@@ -844,6 +844,74 @@ const RAW: Array<
     content: MOBILE_C_ARM_BUYING_GUIDE_CONTENT,
     tableOfContents: MOBILE_C_ARM_BUYING_GUIDE_TOC,
   },
+  {
+    slug: "mobile-c-arm-vs-fixed-angiography-system",
+    title: "Mobile C-Arm vs Fixed Angiography System",
+    seoTitle: "Mobile C-Arm vs Fixed Angiography: How to Choose",
+    metaDescription:
+      "Mobile C-arm or fixed angiography suite? Capability limits, procedure suitability, infrastructure demands, utilisation economics, hybrid theatres and a casemix-led decision framework.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "The boundary is not image quality — it is sustained output, field size and subtraction. How to decide from casemix rather than ambition.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: C_ARM_VS_FIXED_CONTENT,
+    tableOfContents: C_ARM_VS_FIXED_TOC,
+  },
+  {
+    slug: "c-arm-preventive-maintenance-and-tube-care",
+    title: "C-Arm Preventive Maintenance and Tube Care",
+    seoTitle: "C-Arm Preventive Maintenance: Schedule, Tube & Detector Care",
+    metaDescription:
+      "A practical C-arm maintenance programme: daily to annual schedule, tube thermal management, detector protection, mechanical and brake care, quality assurance checks and downtime reduction.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "C-arm failures are mechanical and handling problems far more often than electronic ones. The schedule, ownership and habits that keep theatre lists running.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: C_ARM_PM_CONTENT,
+    tableOfContents: C_ARM_PM_TOC,
+  },
+  {
+    slug: "c-arm-image-quality-troubleshooting",
+    title: "C-Arm Image Quality Troubleshooting",
+    seoTitle: "C-Arm Image Quality Troubleshooting: Noise, Contrast & Artefacts",
+    metaDescription:
+      "Structured C-arm image quality troubleshooting: noise, contrast loss, motion blur and lag, artefacts and distortion, theatre display and lighting factors, plus a fault-finding matrix.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "Every complaint sounds the same. A baseline phantom image and a known-good display separate equipment faults from geometry, technique and theatre lighting.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: C_ARM_IMAGE_QUALITY_CONTENT,
+    tableOfContents: C_ARM_IMAGE_QUALITY_TOC,
+  },
+  {
+    slug: "c-arm-total-cost-of-ownership",
+    title: "C-Arm Total Cost of Ownership",
+    seoTitle: "C-Arm Total Cost of Ownership: 10-Year Cost Model",
+    metaDescription:
+      "A complete C-arm cost model: fully loaded acquisition, consumables and wear items, service contract options, indirect theatre costs, ten-year modelling and practical cost-control levers.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "The lowest purchase price in the fleet and one of the highest lifetime-to-price ratios. Where C-arm money actually goes — and how to control it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: C_ARM_TCO_CONTENT,
+    tableOfContents: C_ARM_TCO_TOC,
+  },
 
   {
     slug: "what-is-a-ct-scanner",
