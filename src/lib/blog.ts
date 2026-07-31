@@ -772,6 +772,74 @@ const RAW: Array<
     content: EQUIPMENT_REPLACEMENT_PLANNING_CONTENT,
     tableOfContents: EQUIPMENT_REPLACEMENT_PLANNING_TOC,
   },
+  {
+    slug: "what-is-a-mobile-c-arm",
+    title: "What Is a Mobile C-Arm?",
+    seoTitle: "What Is a Mobile C-Arm? Imaging Chain, Types & Specifications",
+    metaDescription:
+      "A complete guide to mobile C-arm fluoroscopy: imaging chain, flat panel versus image intensifier, mini and 3D systems, key specifications, theatre dose control and siting requirements.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "The most widely shared imaging system in a hospital. How a mobile C-arm works, which specifications decide clinical capability, and what it demands from your theatres.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: WHAT_IS_A_MOBILE_C_ARM_CONTENT,
+    tableOfContents: WHAT_IS_A_MOBILE_C_ARM_TOC,
+  },
+  {
+    slug: "c-arm-clinical-applications-in-surgery",
+    title: "C-Arm Clinical Applications in Surgery",
+    seoTitle: "C-Arm Applications in Surgery: Orthopaedics to Endovascular",
+    metaDescription:
+      "How each surgical specialty uses intraoperative fluoroscopy: orthopaedics, spine, endovascular, urology, cardiac devices and pain management, plus theatre workflow and system matching.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "The same C-arm is used six different ways. What each specialty demands from intraoperative fluoroscopy — and how to match system class to casemix.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: C_ARM_SURGICAL_APPLICATIONS_CONTENT,
+    tableOfContents: C_ARM_SURGICAL_APPLICATIONS_TOC,
+  },
+  {
+    slug: "c-arm-radiation-safety-in-theatre",
+    title: "C-Arm Radiation Safety in the Operating Theatre",
+    seoTitle: "C-Arm Radiation Safety in Theatre: Scatter, PPE & Dosimetry",
+    metaDescription:
+      "Theatre fluoroscopy radiation protection: scatter behaviour, operator dose controls, protective equipment, dosimetry for surgical teams, patient skin dose in long cases and governance.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "In theatre, the most exposed people stand beside the beam. The controls that work, why they are free, and the governance that makes them stick.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: C_ARM_RADIATION_SAFETY_CONTENT,
+    tableOfContents: C_ARM_RADIATION_SAFETY_TOC,
+  },
+  {
+    slug: "mobile-c-arm-buying-guide",
+    title: "Mobile C-Arm Buying Guide",
+    seoTitle: "Mobile C-Arm Buying Guide: Specification, Evaluation & TCO",
+    metaDescription:
+      "How to buy a mobile C-arm: casemix-led requirements, system class selection, measurable specifications, fair evaluation, total cost of ownership, refurbished options and commissioning.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "Shared assets are systematically underspecified. How to count the real casemix, write a specification that cannot be gamed, and evaluate on your hardest projection.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: MOBILE_C_ARM_BUYING_GUIDE_CONTENT,
+    tableOfContents: MOBILE_C_ARM_BUYING_GUIDE_TOC,
+  },
 
   {
     slug: "what-is-a-ct-scanner",
