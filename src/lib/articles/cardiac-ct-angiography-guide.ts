@@ -378,7 +378,7 @@ export const CARDIAC_CT_ANGIOGRAPHY_GUIDE_CONTENT: ContentBlock[] = [
     text: "Hospitals building or expanding a cardiac CT programme should evaluate their scanner's true gating and temporal-resolution capability, invest as seriously in the heart-rate control and reporting pathway as in the hardware, and plan from the outset for how calcium scoring, FFR-CT access and CAD-RADS-structured reporting fit into the referral relationship with cardiology. Done well, CCTA becomes one of the most efficient rule-out tools available to a cardiology service; done without this underlying discipline, it becomes a source of non-diagnostic studies and eroded referrer trust.",
   },
   {
-    type: "referenceGroups">
+    type: "referenceGroups",
     groups: [
       {
         title: "Professional and specialty society guidance",
