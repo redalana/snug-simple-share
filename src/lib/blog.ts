@@ -249,6 +249,14 @@ import { C_ARM_TCO_CONTENT, C_ARM_TCO_TOC } from "./articles/c-arm-total-cost-of
 import { C_ARM_PM_CONTENT, C_ARM_PM_TOC } from "./articles/c-arm-preventive-maintenance-and-tube-care";
 import { C_ARM_IMAGE_QUALITY_CONTENT, C_ARM_IMAGE_QUALITY_TOC } from "./articles/c-arm-image-quality-troubleshooting";
 import { C_ARM_VS_FIXED_CONTENT, C_ARM_VS_FIXED_TOC } from "./articles/mobile-c-arm-vs-fixed-angiography-system";
+import { C_ARM_3D_CONTENT, C_ARM_3D_TOC } from "./articles/3d-imaging-and-cone-beam-c-arms";
+import { C_ARM_COMMISSIONING_CONTENT, C_ARM_COMMISSIONING_TOC } from "./articles/c-arm-commissioning-and-theatre-integration";
+import { WHAT_IS_MAMMOGRAPHY_CONTENT, WHAT_IS_MAMMOGRAPHY_TOC } from "./articles/what-is-a-mammography-system";
+import { DBT_CONTENT, DBT_TOC } from "./articles/digital-breast-tomosynthesis-explained";
+import { BREAST_QA_CONTENT, BREAST_QA_TOC } from "./articles/breast-imaging-quality-assurance-programme";
+import { STEREOTACTIC_BIOPSY_CONTENT, STEREOTACTIC_BIOPSY_TOC } from "./articles/stereotactic-breast-biopsy-guide";
+import { MAMMO_BUYING_CONTENT, MAMMO_BUYING_TOC } from "./articles/mammography-system-buying-guide";
+import { MAMMO_2D_VS_DBT_CONTENT, MAMMO_2D_VS_DBT_TOC } from "./articles/2d-mammography-vs-tomosynthesis";
 
 
 function makeDefaultContent(a: {
@@ -843,6 +851,142 @@ const RAW: Array<
     readingTime: "16 min read",
     content: MOBILE_C_ARM_BUYING_GUIDE_CONTENT,
     tableOfContents: MOBILE_C_ARM_BUYING_GUIDE_TOC,
+  },
+  {
+    slug: "3d-imaging-and-cone-beam-c-arms",
+    title: "3D Imaging and Cone-Beam C-Arms",
+    seoTitle: "3D C-Arm Imaging: Cone-Beam CT in Theatre Explained",
+    metaDescription:
+      "How 3D-capable mobile C-arms reconstruct intraoperative volumes: cone-beam acquisition, image quality limits, navigation integration, dose, clinical applications and procurement guidance.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "Intraoperative volume imaging answers questions fluoroscopy cannot. What cone-beam C-arms can and cannot show, and what the workflow really costs.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: C_ARM_3D_CONTENT,
+    tableOfContents: C_ARM_3D_TOC,
+  },
+  {
+    slug: "c-arm-commissioning-and-theatre-integration",
+    title: "C-Arm Commissioning and Theatre Integration",
+    seoTitle: "C-Arm Commissioning: Acceptance Testing & Theatre Integration",
+    metaDescription:
+      "A complete C-arm commissioning programme: delivery checks, acceptance and physics testing, PACS and network integration, theatre workflow, staff training and handover documentation.",
+    category: "C-Arm Systems",
+    coverImage: solCarm,
+    excerpt:
+      "Most C-arm disappointment is commissioning failure, not equipment failure. The acceptance, integration and training sequence that prevents it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: C_ARM_COMMISSIONING_CONTENT,
+    tableOfContents: C_ARM_COMMISSIONING_TOC,
+  },
+  {
+    slug: "what-is-a-mammography-system",
+    title: "What Is a Mammography System?",
+    seoTitle: "What Is a Mammography System? Technology & Clinical Guide",
+    metaDescription:
+      "A complete guide to digital mammography: low-energy X-ray physics, detector and AEC technology, compression, image quality, dose, screening requirements and system configuration.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Mammography asks a harder question than any other X-ray examination: find millimetre lesions in tissue that barely differs from them.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: WHAT_IS_MAMMOGRAPHY_CONTENT,
+    tableOfContents: WHAT_IS_MAMMOGRAPHY_TOC,
+  },
+  {
+    slug: "digital-breast-tomosynthesis-explained",
+    title: "Digital Breast Tomosynthesis Explained",
+    seoTitle: "Digital Breast Tomosynthesis: How DBT Works & When to Use It",
+    metaDescription:
+      "How digital breast tomosynthesis acquires and reconstructs thin sections, what synthetic 2D adds, dose considerations, artefacts, reading workload and clinical evidence.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Tomosynthesis solves one specific problem — overlapping tissue — and leaves others untouched. What it changes, and what it costs to run.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: DBT_CONTENT,
+    tableOfContents: DBT_TOC,
+  },
+  {
+    slug: "breast-imaging-quality-assurance-programme",
+    title: "Breast Imaging Quality Assurance Programme",
+    seoTitle: "Mammography Quality Assurance: Daily, Physics & Clinical Audit",
+    metaDescription:
+      "Building a mammography QA programme: daily and weekly tests, monthly and annual physics testing, clinical image audit, dose monitoring, display QA and governance responsibilities.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Mammography QA is not paperwork — it is the only mechanism that detects gradual degradation before cancers are missed.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: BREAST_QA_CONTENT,
+    tableOfContents: BREAST_QA_TOC,
+  },
+  {
+    slug: "stereotactic-breast-biopsy-guide",
+    title: "Stereotactic Breast Biopsy Guide",
+    seoTitle: "Stereotactic Breast Biopsy: Targeting, Equipment & Workflow",
+    metaDescription:
+      "How stereotactic and tomosynthesis-guided breast biopsy works: targeting geometry, vacuum-assisted sampling, prone and upright platforms, specimen handling and failure modes.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Image-guided sampling turns a suspicious calcification cluster into a diagnosis without surgery — if the targeting geometry is right.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: STEREOTACTIC_BIOPSY_CONTENT,
+    tableOfContents: STEREOTACTIC_BIOPSY_TOC,
+  },
+  {
+    slug: "mammography-system-buying-guide",
+    title: "Mammography System Buying Guide",
+    seoTitle: "Mammography Buying Guide: Specification, Evaluation & Cost",
+    metaDescription:
+      "How to buy a mammography system: service definition, casemix-driven requirements, testable specifications, structured evaluation, accessories, ten-year cost and implementation.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Specify the service, not the detector. The accessories, displays and storage decide whether the clinical benefit is ever realised.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: MAMMO_BUYING_CONTENT,
+    tableOfContents: MAMMO_BUYING_TOC,
+  },
+  {
+    slug: "2d-mammography-vs-tomosynthesis",
+    title: "2D Mammography vs Tomosynthesis",
+    seoTitle: "2D Mammography vs Tomosynthesis: Evidence & Decision Guide",
+    metaDescription:
+      "Comparing 2D digital mammography with tomosynthesis: detection and recall, breast density effects, calcifications and synthetic 2D, dose, reading workload and how to choose.",
+    category: "Mammography Systems",
+    coverImage: solXray,
+    excerpt:
+      "Tomosynthesis is the better technique. Whether it is the better service depends on reading capacity, storage and biopsy capability.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: MAMMO_2D_VS_DBT_CONTENT,
+    tableOfContents: MAMMO_2D_VS_DBT_TOC,
   },
   {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
