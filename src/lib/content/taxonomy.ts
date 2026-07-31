@@ -264,11 +264,14 @@ export type Manufacturer = (typeof ALL_MANUFACTURERS)[number];
 const MANUFACTURER_ALIASES: Record<string, Manufacturer> = {
   "siemens healthineers": "Siemens",
   "ge healthcare": "GE",
+  "ge medical": "GE",
   "general electric": "GE",
   toshiba: "Canon Medical",
   "toshiba medical": "Canon Medical",
   canon: "Canon Medical",
   esaote: "eSaote",
+  "philips healthcare": "Philips",
+  "boston scientific corporation": "Boston Scientific",
 };
 
 /** Normalise a free-text brand string to the canonical manufacturer name. */
@@ -279,18 +282,54 @@ export function normaliseManufacturer(value: string): Manufacturer | undefined {
   return MANUFACTURER_ALIASES[v];
 }
 
-/** Extract every manufacturer mentioned in free text. */
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * Brand terms shorter than four characters (notably "GE") are matched
+ * case-sensitively on their exact brand casing, so ordinary English words
+ * containing the letters — "imaging", "large", "range" — never register as a
+ * manufacturer mention. Longer brand names are matched case-insensitively but
+ * always on whole-word boundaries.
+ */
+type BrandMatcher = { re: RegExp; manufacturer: Manufacturer };
+
+const BRAND_MATCHERS: BrandMatcher[] = [
+  ...ALL_MANUFACTURERS.map((m) => ({
+    re: new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(m)}($|[^\\p{L}\\p{N}])`, m.length <= 3 ? "u" : "iu"),
+    manufacturer: m as Manufacturer,
+  })),
+  ...Object.entries(MANUFACTURER_ALIASES).map(([alias, canonical]) => ({
+    re: new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRe(alias)}($|[^\\p{L}\\p{N}])`, "iu"),
+    manufacturer: canonical,
+  })),
+];
+
+/** Extract every manufacturer explicitly named in free text. */
 export function inferManufacturers(...parts: (string | undefined)[]): Manufacturer[] {
-  const haystack = ` ${parts.filter(Boolean).join(" ").toLowerCase()} `;
+  const haystack = ` ${parts.filter(Boolean).join(" ")} `;
   const found = new Set<Manufacturer>();
-  for (const m of ALL_MANUFACTURERS) {
-    if (haystack.includes(m.toLowerCase())) found.add(m);
-  }
-  for (const [alias, canonical] of Object.entries(MANUFACTURER_ALIASES)) {
-    if (haystack.includes(alias)) found.add(canonical);
+  for (const { re, manufacturer } of BRAND_MATCHERS) {
+    if (re.test(haystack)) found.add(manufacturer);
   }
   return [...found];
 }
+
+/**
+ * Editorial vendor stance for a content item, used by the Manufacturer filter:
+ * no brand named → vendor-neutral ("Independent"); more than one brand named →
+ * multi-brand comparison ("Multiple").
+ */
+export const VENDOR_STANCE = {
+  independent: { id: "independent", label: "Independent (vendor-neutral)" },
+  multiple: { id: "multiple", label: "Multiple (comparison)" },
+} as const;
+
+export function vendorStance(manufacturers: readonly Manufacturer[]): "independent" | "multiple" | "single" {
+  if (manufacturers.length === 0) return "independent";
+  if (manufacturers.length > 1) return "multiple";
+  return "single";
+}
+
 
 /* ------------------------------------------------------------------ */
 /*  Tags                                                               */

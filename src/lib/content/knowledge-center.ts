@@ -21,6 +21,8 @@ import {
   ARTICLE_CATEGORIES,
   TECHNOLOGIES,
   type ArticleCategory,
+  VENDOR_STANCE,
+  vendorStance,
   type Manufacturer,
   type TechnologyId,
 } from "./taxonomy";
@@ -123,8 +125,15 @@ function matchesFacets(item: ContentItem, f: KnowledgeFilters): boolean {
   const technology = technologyFromSlug(f.technology);
   if (technology && !item.technologies.includes(technology)) return false;
 
-  const manufacturer = manufacturerFromSlug(f.manufacturer);
-  if (manufacturer && !item.manufacturers.includes(manufacturer)) return false;
+  const manufacturerFacet = f.manufacturer?.toLowerCase();
+  if (manufacturerFacet === VENDOR_STANCE.independent.id) {
+    if (vendorStance(item.manufacturers) !== "independent") return false;
+  } else if (manufacturerFacet === VENDOR_STANCE.multiple.id) {
+    if (vendorStance(item.manufacturers) !== "multiple") return false;
+  } else {
+    const manufacturer = manufacturerFromSlug(f.manufacturer);
+    if (manufacturer && !item.manufacturers.includes(manufacturer)) return false;
+  }
 
   const specialty = specialtyFromSlug(f.specialty);
   if (
@@ -224,6 +233,22 @@ export const getCategoryTabs = memoizeKeyed(
   (f) => filterKey({ ...f, category: undefined }),
 );
 
+/**
+ * A manufacturer facet value per item: every brand it names, plus the
+ * editorial stance option ("Independent" when no brand is named, "Multiple"
+ * when it compares more than one).
+ */
+function manufacturerFacetValues(item: ContentItem): (readonly [string, string])[] {
+  const stance = vendorStance(item.manufacturers);
+  if (stance === "independent") {
+    return [[VENDOR_STANCE.independent.id, VENDOR_STANCE.independent.label] as const];
+  }
+  const brands = item.manufacturers.map((m) => [slugifyFacet(m), m as string] as const);
+  return stance === "multiple"
+    ? [...brands, [VENDOR_STANCE.multiple.id, VENDOR_STANCE.multiple.label] as const]
+    : brands;
+}
+
 function facetOptions(
   filters: KnowledgeFilters,
   axis: "technology" | "manufacturer" | "specialty",
@@ -236,7 +261,7 @@ function facetOptions(
       axis === "technology"
         ? item.technologies.map((t) => [t as string, technologyLabel(t)] as const)
         : axis === "manufacturer"
-          ? item.manufacturers.map((m) => [slugifyFacet(m), m] as const)
+          ? manufacturerFacetValues(item)
           : item.specialties.map((s) => [slugifyFacet(s), s] as const);
     for (const [id, label] of values) {
       counts.set(id, (counts.get(id) ?? 0) + 1);
