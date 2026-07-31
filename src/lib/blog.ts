@@ -241,6 +241,10 @@ import { CAPITAL_PURCHASING_FRAMEWORK_CONTENT, CAPITAL_PURCHASING_FRAMEWORK_TOC 
 import { EQUIPMENT_EVALUATION_METHODOLOGY_CONTENT, EQUIPMENT_EVALUATION_METHODOLOGY_TOC } from "./articles/medical-equipment-evaluation-methodology";
 import { IMAGING_DEPARTMENT_PLANNING_CONTENT, IMAGING_DEPARTMENT_PLANNING_TOC } from "./articles/imaging-department-planning-and-capacity";
 import { EQUIPMENT_REPLACEMENT_PLANNING_CONTENT, EQUIPMENT_REPLACEMENT_PLANNING_TOC } from "./articles/medical-equipment-replacement-planning";
+import { WHAT_IS_A_MOBILE_C_ARM_CONTENT, WHAT_IS_A_MOBILE_C_ARM_TOC } from "./articles/what-is-a-mobile-c-arm";
+import { C_ARM_SURGICAL_APPLICATIONS_CONTENT, C_ARM_SURGICAL_APPLICATIONS_TOC } from "./articles/c-arm-clinical-applications-in-surgery";
+import { C_ARM_RADIATION_SAFETY_CONTENT, C_ARM_RADIATION_SAFETY_TOC } from "./articles/c-arm-radiation-safety-in-theatre";
+import { MOBILE_C_ARM_BUYING_GUIDE_CONTENT, MOBILE_C_ARM_BUYING_GUIDE_TOC } from "./articles/mobile-c-arm-buying-guide";
 
 
 function makeDefaultContent(a: {
