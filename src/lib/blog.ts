@@ -333,6 +333,32 @@ import {
   PIEZOLITH_3000_CONTENT,
   PIEZOLITH_3000_TOC,
 } from "./articles/richard-wolf-piezolith-3000-plus-system-guide";
+import {
+  CLINICAL_TRAINING_CONTENT,
+  CLINICAL_TRAINING_TOC,
+} from "./articles/clinical-training-for-imaging-teams";
+import { SPARE_PARTS_CONTENT, SPARE_PARTS_TOC } from "./articles/spare-parts-supply-and-uptime";
+import {
+  TECH_SUPPORT_CONTENT,
+  TECH_SUPPORT_TOC,
+} from "./articles/technical-support-escalation-and-fault-response";
+import {
+  REMOTE_DIAGNOSTICS_CONTENT,
+  REMOTE_DIAGNOSTICS_TOC,
+} from "./articles/remote-diagnostics-vs-onsite-service";
+import { TURNKEY_DELIVERY_CONTENT, TURNKEY_DELIVERY_TOC } from "./articles/turnkey-project-delivery";
+import {
+  WOMENS_HEALTHCARE_CONTENT,
+  WOMENS_HEALTHCARE_TOC,
+} from "./articles/womens-healthcare-imaging-service-planning";
+import {
+  OBSTETRIC_ULTRASOUND_CONTENT,
+  OBSTETRIC_ULTRASOUND_TOC,
+} from "./articles/what-is-an-obstetric-ultrasound-service";
+import {
+  OR_PLANNING_CONTENT,
+  OR_PLANNING_TOC,
+} from "./articles/operating-room-equipment-planning";
 
 
 
