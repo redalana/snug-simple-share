@@ -230,6 +230,23 @@ const RAW: Array<
   }
 > = [
   {
+    slug: "what-is-a-cath-lab",
+    title: "What Is a Cardiac Catheterization Laboratory (Cath Lab)?",
+    seoTitle: "What Is a Cath Lab? Equipment, Procedures & Planning Guide",
+    metaDescription:
+      "A clinically reviewed guide to cath labs — how angiography systems work, core components, procedures, staffing, room planning, dose management and lifecycle cost.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "What a cardiac catheterization laboratory is, what happens inside it, and what equipment, infrastructure and staffing a hospital commits to when it runs one.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: WHAT_IS_A_CATH_LAB_CONTENT,
+    tableOfContents: WHAT_IS_A_CATH_LAB_TOC,
+  },
+  {
     slug: "what-is-a-ct-scanner",
     title: "What Is a CT Scanner? How Computed Tomography Works",
     seoTitle: "What Is a CT Scanner? How CT Works, Components & Hospital Guide",
