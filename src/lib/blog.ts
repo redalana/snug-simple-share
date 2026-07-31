@@ -235,6 +235,8 @@ import { CR_VS_DR_CONTENT, CR_VS_DR_TOC } from "./articles/cr-vs-dr-radiography-
 import { XRAY_DOSE_SAFETY_CONTENT, XRAY_DOSE_SAFETY_TOC } from "./articles/x-ray-radiation-dose-and-patient-safety";
 import { XRAY_ROOM_PLANNING_CONTENT, XRAY_ROOM_PLANNING_TOC } from "./articles/x-ray-room-planning-and-shielding";
 import { XRAY_MAINTENANCE_CONTENT, XRAY_MAINTENANCE_TOC } from "./articles/x-ray-tube-life-and-preventive-maintenance";
+import { MOBILE_XRAY_CONTENT, MOBILE_XRAY_TOC } from "./articles/portable-and-mobile-x-ray-systems";
+import { XRAY_IMAGE_QUALITY_CONTENT, XRAY_IMAGE_QUALITY_TOC } from "./articles/x-ray-image-quality-troubleshooting";
 
 
 function makeDefaultContent(a: {
@@ -659,6 +661,40 @@ const RAW: Array<
     readingTime: "14 min read",
     content: XRAY_MAINTENANCE_CONTENT,
     tableOfContents: XRAY_MAINTENANCE_TOC,
+  },
+  {
+    slug: "portable-and-mobile-x-ray-systems",
+    title: "Portable and Mobile X-Ray Systems",
+    seoTitle: "Mobile X-Ray Systems: Specification, Workflow & Bedside Safety",
+    metaDescription:
+      "Mobile and portable radiography explained: equipment categories, specification criteria, ICU and ward workflow, bedside radiation protection, cleaning and fleet planning.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Mobile radiography exists because some patients cannot be moved. How to specify a unit that actually reaches the bedside and works there.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: MOBILE_XRAY_CONTENT,
+    tableOfContents: MOBILE_XRAY_TOC,
+  },
+  {
+    slug: "x-ray-image-quality-troubleshooting",
+    title: "X-Ray Image Quality Troubleshooting",
+    seoTitle: "Radiography Image Quality Troubleshooting: Noise, Artefacts & Dose",
+    metaDescription:
+      "A systematic method for diagnosing digital radiography image faults: noise and exposure, grid and detector artefacts, geometry errors, processing, repeat analysis and escalation.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Digital radiography degrades quietly because processing hides it. The diagnostic method that finds the cause instead of raising the dose.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: XRAY_IMAGE_QUALITY_CONTENT,
+    tableOfContents: XRAY_IMAGE_QUALITY_TOC,
   },
 
   {
@@ -1142,7 +1178,7 @@ const RAW: Array<
     title: "Building a Modern Molecular Imaging Program from the Ground Up",
     metaDescription:
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
@@ -1189,7 +1225,7 @@ const RAW: Array<
     title: "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
     metaDescription:
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
@@ -1336,7 +1372,7 @@ const RAW: Array<
     title: "How PET/CT Is Transforming Cancer Diagnosis",
     metaDescription:
       "PET/CT is the metabolic backbone of modern oncology. A clinician-focused guide to how it changes staging, treatment and follow-up.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "Metabolic imaging that changes management in 3–4 of every 10 oncology patients scanned — and how to build a program around it.",
@@ -1496,7 +1532,7 @@ const RAW: Array<
     title: "Medical Imaging in Oncology",
     metaDescription:
       "From screening to staging, response and surveillance — how multi-modality imaging drives modern cancer care.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "A coordinated imaging strategy shapes every step of the cancer journey — from screening to survivorship.",
