@@ -1,6 +1,6 @@
 import type { Product } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
-import logoAsset from "@/assets/abufarha-logo.png.asset.json";
+import logoAsset from "@/assets/abufarha-logo.png";
 
 /* ==========================================================================
    AbuFarha Medical — Product Brochure Generator
@@ -179,7 +179,7 @@ let logoCache: string | null | undefined;
 async function loadLogo(): Promise<string | null> {
   if (logoCache !== undefined) return logoCache;
   try {
-    const res = await fetch(logoAsset.url);
+    const res = await fetch(logoAsset);
     const blob = await res.blob();
     logoCache = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();

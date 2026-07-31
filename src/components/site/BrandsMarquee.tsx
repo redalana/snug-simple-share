@@ -2,18 +2,18 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 
-import abbott from "@/assets/brands/abbott.png.asset.json";
-import boston from "@/assets/brands/boston-scientific.png.asset.json";
-import canon from "@/assets/brands/toshiba-canon.png.asset.json";
-import esaote from "@/assets/brands/esaote.png.asset.json";
-import ge from "@/assets/brands/ge.png.asset.json";
-import hitachi from "@/assets/brands/hitachi.png.asset.json";
-import medtronic from "@/assets/brands/medtronic.png.asset.json";
-import mindray from "@/assets/brands/mindray.png.asset.json";
-import philips from "@/assets/brands/philips.png.asset.json";
-import richardWolf from "@/assets/brands/richard-wolf.png.asset.json";
-import shimadzu from "@/assets/brands/shimadzu.png.asset.json";
-import siemens from "@/assets/brands/siemens.png.asset.json";
+import abbott from "@/assets/brands/abbott.png";
+import boston from "@/assets/brands/boston-scientific.png";
+import canon from "@/assets/brands/toshiba-canon.png";
+import esaote from "@/assets/brands/esaote.png";
+import ge from "@/assets/brands/ge.png";
+import hitachi from "@/assets/brands/hitachi.png";
+import medtronic from "@/assets/brands/medtronic.png";
+import mindray from "@/assets/brands/mindray.png";
+import philips from "@/assets/brands/philips.png";
+import richardWolf from "@/assets/brands/richard-wolf.png";
+import shimadzu from "@/assets/brands/shimadzu.png";
+import siemens from "@/assets/brands/siemens.png";
 
 /**
  * Trusted Brands — enterprise logo marquee.
@@ -39,18 +39,18 @@ type Brand = {
 // Reduced: Toshiba/Canon, Hitachi, Shimadzu (thin/wide wordmarks).
 // Boosted: Esaote, Richard Wolf, Boston Scientific (compact wordmarks).
 const BRANDS: Brand[] = [
-  { name: "Philips", alt: "Philips", url: philips.url, h: 22 },
-  { name: "Siemens Healthineers", alt: "Siemens Healthineers", url: siemens.url, h: 20 },
-  { name: "GE HealthCare", alt: "GE HealthCare", url: ge.url, h: 40 },
-  { name: "Canon Medical", alt: "Canon Medical (Toshiba)", url: canon.url, h: 22 },
-  { name: "Mindray", alt: "Mindray", url: mindray.url, h: 34 },
-  { name: "Esaote", alt: "Esaote", url: esaote.url, h: 42 },
-  { name: "Richard Wolf", alt: "Richard Wolf", url: richardWolf.url, h: 36 },
-  { name: "Hitachi", alt: "Hitachi", url: hitachi.url, h: 24 },
-  { name: "Shimadzu", alt: "Shimadzu", url: shimadzu.url, h: 26 },
-  { name: "Abbott", alt: "Abbott", url: abbott.url, h: 34 },
-  { name: "Medtronic", alt: "Medtronic", url: medtronic.url, h: 40 },
-  { name: "Boston Scientific", alt: "Boston Scientific", url: boston.url, h: 44 },
+  { name: "Philips", alt: "Philips", url: philips, h: 22 },
+  { name: "Siemens Healthineers", alt: "Siemens Healthineers", url: siemens, h: 20 },
+  { name: "GE HealthCare", alt: "GE HealthCare", url: ge, h: 40 },
+  { name: "Canon Medical", alt: "Canon Medical (Toshiba)", url: canon, h: 22 },
+  { name: "Mindray", alt: "Mindray", url: mindray, h: 34 },
+  { name: "Esaote", alt: "Esaote", url: esaote, h: 42 },
+  { name: "Richard Wolf", alt: "Richard Wolf", url: richardWolf, h: 36 },
+  { name: "Hitachi", alt: "Hitachi", url: hitachi, h: 24 },
+  { name: "Shimadzu", alt: "Shimadzu", url: shimadzu, h: 26 },
+  { name: "Abbott", alt: "Abbott", url: abbott, h: 34 },
+  { name: "Medtronic", alt: "Medtronic", url: medtronic, h: 40 },
+  { name: "Boston Scientific", alt: "Boston Scientific", url: boston, h: 44 },
 ];
 
 function LogoItem({ brand }: { brand: Brand }) {

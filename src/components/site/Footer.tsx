@@ -5,8 +5,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import cathLabBg from "@/assets/footer-cathlab.jpg.asset.json";
-import vascularBg from "@/assets/footer-vascular.jpg.asset.json";
+import cathLabBg from "@/assets/footer-cathlab.jpg";
+import vascularBg from "@/assets/footer-vascular.jpg";
 
 type FooterLink = { label: string; to: string };
 
@@ -134,7 +134,7 @@ export function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-y-0 left-0 w-[62%]"
         style={{
-          backgroundImage: `url(${cathLabBg.url})`,
+          backgroundImage: `url(${cathLabBg})`,
           backgroundSize: "cover",
           backgroundPosition: "left center",
           opacity: 0.16,
@@ -151,7 +151,7 @@ export function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-y-0 right-0 w-[52%]"
         style={{
-          backgroundImage: `url(${vascularBg.url})`,
+          backgroundImage: `url(${vascularBg})`,
           backgroundSize: "cover",
           backgroundPosition: "right center",
           opacity: 0.5,
