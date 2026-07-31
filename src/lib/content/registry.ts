@@ -166,7 +166,7 @@ export const REGISTRY: RegistryEntry[] = ARTICLES.map((article) => ({
   id: `article:${article.slug}`,
   slug: article.slug,
   title: article.title,
-  cluster: article.category,
+  cluster: normaliseCluster(article.category),
   category: inferArticleCategory({
     slug: article.slug,
     title: article.title,
