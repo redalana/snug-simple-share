@@ -696,6 +696,74 @@ const RAW: Array<
     content: XRAY_IMAGE_QUALITY_CONTENT,
     tableOfContents: XRAY_IMAGE_QUALITY_TOC,
   },
+  {
+    slug: "hospital-capital-equipment-purchasing-framework",
+    title: "The Hospital Capital Equipment Purchasing Framework",
+    seoTitle: "Hospital Capital Equipment Purchasing Framework: 6 Stages",
+    metaDescription:
+      "A stage-by-stage capital purchasing framework for hospitals: need definition, options appraisal, site feasibility, specification, evaluation, acceptance and handover documentation.",
+    category: "Buyer's Guides",
+    coverImage: abufarhaHq,
+    excerpt:
+      "Hospitals rarely choose the wrong equipment — they choose it in the wrong order. The six stages, governance and documents a defensible capital purchase requires.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "17 min read",
+    content: CAPITAL_PURCHASING_FRAMEWORK_CONTENT,
+    tableOfContents: CAPITAL_PURCHASING_FRAMEWORK_TOC,
+  },
+  {
+    slug: "medical-equipment-evaluation-methodology",
+    title: "Medical Equipment Evaluation Methodology",
+    seoTitle: "Medical Equipment Evaluation: Criteria, Weighting & Scoring",
+    metaDescription:
+      "How hospital panels evaluate medical equipment objectively: six assessment axes, defensible weighting, evidence hierarchy, site visit protocol and scoring discipline.",
+    category: "Buyer's Guides",
+    coverImage: whyCathlab,
+    excerpt:
+      "Feature counting is not evaluation. The six axes, evidence hierarchy and scoring discipline that make an equipment decision defensible a decade later.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: EQUIPMENT_EVALUATION_METHODOLOGY_CONTENT,
+    tableOfContents: EQUIPMENT_EVALUATION_METHODOLOGY_TOC,
+  },
+  {
+    slug: "imaging-department-planning-and-capacity",
+    title: "Imaging Department Planning and Capacity Design",
+    seoTitle: "Imaging Department Planning: Capacity, Adjacency & Phasing",
+    metaDescription:
+      "Plan an imaging department rather than a room: demand analysis, capacity and room count method, adjacency rules, staffing, phased works and design for future replacement.",
+    category: "Buyer's Guides",
+    coverImage: solCt,
+    excerpt:
+      "Throughput is usually limited by the spaces around the scanner. How to size, arrange, staff and phase an imaging department that still works three equipment generations later.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: IMAGING_DEPARTMENT_PLANNING_CONTENT,
+    tableOfContents: IMAGING_DEPARTMENT_PLANNING_TOC,
+  },
+  {
+    slug: "medical-equipment-replacement-planning",
+    title: "Medical Equipment Replacement and Upgrade Planning",
+    seoTitle: "Medical Equipment Replacement Planning: Signals & Programmes",
+    metaDescription:
+      "Replace equipment on a plan rather than a failure: replacement signals, fleet priority scoring, upgrade versus replace analysis, rolling programmes and safe decommissioning.",
+    category: "Buyer's Guides",
+    coverImage: beyondCathlab,
+    excerpt:
+      "Age is a poor replacement signal. Support status, outage profile and fleet scoring — and how to build a rolling programme that makes replacement competitive.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: EQUIPMENT_REPLACEMENT_PLANNING_CONTENT,
+    tableOfContents: EQUIPMENT_REPLACEMENT_PLANNING_TOC,
+  },
 
   {
     slug: "what-is-a-ct-scanner",
