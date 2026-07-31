@@ -347,7 +347,7 @@ export const CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_CONTENT: ContentBlock[] = [
   },
   {
     type: "callout",
-    variant: "warning",
+    variant: "important",
     title: "A fixed, repeatable step discontinuity is a table or slip-ring fault",
     text: "Windmill-pattern streaking that varies with pitch selection is expected helical reconstruction physics and is reduced by adjusting pitch or using a dedicated wide-detector acquisition. A step artefact that appears at the same fixed table position on every scan, regardless of protocol, points to a table-drive or slip-ring contact fault and requires immediate engineering investigation, since it also implies positional accuracy is compromised for every study.",
   },
