@@ -4,9 +4,6 @@
 
 import type { ContentBlock, TocItem } from "../blog";
 
-export const ESWL_TOTAL_COST_OWNERSHIP_TOC: TocItem[] = [
-  { id: "beyond", text: "Beyond the Capital Price" } as unknown as TocItem,
-];
 
 export const ESWL_TCO_TOC: TocItem[] = [
   { id: "beyond", title: "Why Capital Price Is Only the Starting Point" },
