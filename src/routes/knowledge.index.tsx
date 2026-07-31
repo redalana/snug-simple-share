@@ -92,6 +92,7 @@ function KnowledgeHubsIndex() {
             <Breadcrumbs
               variant="inline"
               emitJsonLd={false}
+              className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground"
               items={[{ label: "Knowledge Center", to: "/blog" }, { label: "Knowledge Hubs" }]}
             />
             <h1 className="mt-6 max-w-4xl font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
