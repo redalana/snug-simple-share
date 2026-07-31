@@ -249,6 +249,40 @@ const RAW: Array<
     tableOfContents: WHAT_IS_A_CATH_LAB_TOC,
   },
   {
+    slug: "cath-lab-room-planning-and-installation",
+    title: "Cath Lab Room Planning, Installation and Commissioning",
+    seoTitle: "Cath Lab Room Planning & Installation Guide for Hospitals",
+    metaDescription:
+      "How to plan and commission a cath lab: room layout, clearances, structural loading, shielding, power, HVAC, delivery route and acceptance testing.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Cath lab projects slip on infrastructure, not imaging. The layout, loads, shielding, power, cooling and acceptance testing a hospital must plan — and in what order.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CATH_LAB_ROOM_PLANNING_CONTENT,
+    tableOfContents: CATH_LAB_ROOM_PLANNING_TOC,
+  },
+  {
+    slug: "cath-lab-preventive-maintenance-and-uptime",
+    title: "Cath Lab Preventive Maintenance, Uptime and Service Contracts",
+    seoTitle: "Cath Lab Maintenance & Uptime: Service Contract Guide",
+    metaDescription:
+      "Angiography maintenance that protects uptime: failure modes, tube life, PM schedules, quality assurance, service contract terms and parts logistics.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "What fails in a cath lab, how to structure a service contract that delivers real availability, and how to plan for the outage that will eventually happen.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CATH_LAB_MAINTENANCE_CONTENT,
+    tableOfContents: CATH_LAB_MAINTENANCE_TOC,
+  },
+  {
     slug: "what-is-a-ct-scanner",
     title: "What Is a CT Scanner? How Computed Tomography Works",
     seoTitle: "What Is a CT Scanner? How CT Works, Components & Hospital Guide",
