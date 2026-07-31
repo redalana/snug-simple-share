@@ -211,6 +211,7 @@ import { CT_CONTRAST_PROTOCOLS_AND_SAFETY_CONTENT, CT_CONTRAST_PROTOCOLS_AND_SAF
 import { CARDIAC_CT_ANGIOGRAPHY_GUIDE_CONTENT, CARDIAC_CT_ANGIOGRAPHY_GUIDE_TOC } from "./articles/cardiac-ct-angiography-guide";
 import { CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_CONTENT, CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_TOC } from "./articles/ct-image-artefacts-troubleshooting";
 import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/ct-total-cost-of-ownership";
+import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
 
 
 function makeDefaultContent(a: {
