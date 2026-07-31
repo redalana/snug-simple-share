@@ -22,6 +22,7 @@ import {
   technologyForProductCategory,
   type TechnologyId,
 } from "./taxonomy";
+import { articleFullText } from "./article-text";
 import type { ContentItem } from "./types";
 
 const LANGUAGE = "en";
@@ -89,6 +90,9 @@ function fromProduct(product: Product): ContentItem {
 
 function fromArticle(article: Article): ContentItem {
   const primaryCategory = inferArticleCategory(article);
+  // Brands are named in the body (comparison tables, reference lists), so the
+  // full article text is the only reliable input for manufacturer detection.
+  const fullText = articleFullText(article);
   const technologies = inferTechnologies(
     article.category,
     article.title,
@@ -108,7 +112,7 @@ function fromArticle(article: Article): ContentItem {
     technologies,
     equipmentTypes: [article.category],
     specialties: [],
-    manufacturers: inferManufacturers(article.title, article.excerpt, article.metaDescription),
+    manufacturers: inferManufacturers(fullText),
     featured: article.featured,
     readingTime: article.readingTime,
     language: LANGUAGE,
@@ -124,6 +128,7 @@ function fromArticle(article: Article): ContentItem {
       article.category,
       primaryCategory,
       article.author.name,
+      fullText,
     ),
     source: article,
   };
