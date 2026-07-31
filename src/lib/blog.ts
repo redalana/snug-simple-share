@@ -1142,7 +1142,7 @@ const RAW: Array<
     title: "Building a Modern Molecular Imaging Program from the Ground Up",
     metaDescription:
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "From radiopharmacy logistics to shielded rooms and reporting workflows — what it takes to launch PET/CT successfully.",
@@ -1189,7 +1189,7 @@ const RAW: Array<
     title: "Philips Gemini GXL 16 PET/CT Scanner: Advanced Molecular Imaging",
     metaDescription:
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "Discover the clinical benefits and performance of the Philips Gemini GXL 16 PET/CT system.",
@@ -1336,7 +1336,7 @@ const RAW: Array<
     title: "How PET/CT Is Transforming Cancer Diagnosis",
     metaDescription:
       "PET/CT is the metabolic backbone of modern oncology. A clinician-focused guide to how it changes staging, treatment and follow-up.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "Metabolic imaging that changes management in 3–4 of every 10 oncology patients scanned — and how to build a program around it.",
@@ -1496,7 +1496,7 @@ const RAW: Array<
     title: "Medical Imaging in Oncology",
     metaDescription:
       "From screening to staging, response and surveillance — how multi-modality imaging drives modern cancer care.",
-    category: "PET/CT",
+    category: "PET/CT Scanners",
     coverImage: solPetct,
     excerpt:
       "A coordinated imaging strategy shapes every step of the cancer journey — from screening to survivorship.",
