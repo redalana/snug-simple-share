@@ -237,6 +237,10 @@ import { XRAY_ROOM_PLANNING_CONTENT, XRAY_ROOM_PLANNING_TOC } from "./articles/x
 import { XRAY_MAINTENANCE_CONTENT, XRAY_MAINTENANCE_TOC } from "./articles/x-ray-tube-life-and-preventive-maintenance";
 import { MOBILE_XRAY_CONTENT, MOBILE_XRAY_TOC } from "./articles/portable-and-mobile-x-ray-systems";
 import { XRAY_IMAGE_QUALITY_CONTENT, XRAY_IMAGE_QUALITY_TOC } from "./articles/x-ray-image-quality-troubleshooting";
+import { CAPITAL_PURCHASING_FRAMEWORK_CONTENT, CAPITAL_PURCHASING_FRAMEWORK_TOC } from "./articles/hospital-capital-equipment-purchasing-framework";
+import { EQUIPMENT_EVALUATION_METHODOLOGY_CONTENT, EQUIPMENT_EVALUATION_METHODOLOGY_TOC } from "./articles/medical-equipment-evaluation-methodology";
+import { IMAGING_DEPARTMENT_PLANNING_CONTENT, IMAGING_DEPARTMENT_PLANNING_TOC } from "./articles/imaging-department-planning-and-capacity";
+import { EQUIPMENT_REPLACEMENT_PLANNING_CONTENT, EQUIPMENT_REPLACEMENT_PLANNING_TOC } from "./articles/medical-equipment-replacement-planning";
 
 
 function makeDefaultContent(a: {
