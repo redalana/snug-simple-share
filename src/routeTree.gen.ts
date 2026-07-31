@@ -30,6 +30,7 @@ import { Route as AfterSalesRouteImport } from './routes/after-sales'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
@@ -47,6 +48,14 @@ import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as KnowledgeTechnologiesIndexRouteImport } from './routes/knowledge.technologies.index'
+import { Route as KnowledgeServicesIndexRouteImport } from './routes/knowledge.services.index'
+import { Route as KnowledgeProductsIndexRouteImport } from './routes/knowledge.products.index'
+import { Route as KnowledgeManufacturersIndexRouteImport } from './routes/knowledge.manufacturers.index'
+import { Route as KnowledgeTechnologiesSlugRouteImport } from './routes/knowledge.technologies.$slug'
+import { Route as KnowledgeServicesSlugRouteImport } from './routes/knowledge.services.$slug'
+import { Route as KnowledgeProductsSlugRouteImport } from './routes/knowledge.products.$slug'
+import { Route as KnowledgeManufacturersSlugRouteImport } from './routes/knowledge.manufacturers.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const TurnkeyRoute = TurnkeyRouteImport.update({
@@ -155,6 +164,11 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProductsRoute,
 } as any)
+const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
+  id: '/knowledge/',
+  path: '/knowledge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -245,6 +259,50 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const KnowledgeTechnologiesIndexRoute =
+  KnowledgeTechnologiesIndexRouteImport.update({
+    id: '/knowledge/technologies/',
+    path: '/knowledge/technologies/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const KnowledgeServicesIndexRoute = KnowledgeServicesIndexRouteImport.update({
+  id: '/knowledge/services/',
+  path: '/knowledge/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeProductsIndexRoute = KnowledgeProductsIndexRouteImport.update({
+  id: '/knowledge/products/',
+  path: '/knowledge/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeManufacturersIndexRoute =
+  KnowledgeManufacturersIndexRouteImport.update({
+    id: '/knowledge/manufacturers/',
+    path: '/knowledge/manufacturers/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const KnowledgeTechnologiesSlugRoute =
+  KnowledgeTechnologiesSlugRouteImport.update({
+    id: '/knowledge/technologies/$slug',
+    path: '/knowledge/technologies/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const KnowledgeServicesSlugRoute = KnowledgeServicesSlugRouteImport.update({
+  id: '/knowledge/services/$slug',
+  path: '/knowledge/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeProductsSlugRoute = KnowledgeProductsSlugRouteImport.update({
+  id: '/knowledge/products/$slug',
+  path: '/knowledge/products/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeManufacturersSlugRoute =
+  KnowledgeManufacturersSlugRouteImport.update({
+    id: '/knowledge/manufacturers/$slug',
+    path: '/knowledge/manufacturers/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -290,8 +348,17 @@ export interface FileRoutesByFullPath {
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
+  '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
+  '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
+  '/knowledge/services/$slug': typeof KnowledgeServicesSlugRoute
+  '/knowledge/technologies/$slug': typeof KnowledgeTechnologiesSlugRoute
+  '/knowledge/manufacturers/': typeof KnowledgeManufacturersIndexRoute
+  '/knowledge/products/': typeof KnowledgeProductsIndexRoute
+  '/knowledge/services/': typeof KnowledgeServicesIndexRoute
+  '/knowledge/technologies/': typeof KnowledgeTechnologiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -329,8 +396,17 @@ export interface FileRoutesByTo {
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog': typeof BlogIndexRoute
+  '/knowledge': typeof KnowledgeIndexRoute
   '/products': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
+  '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
+  '/knowledge/services/$slug': typeof KnowledgeServicesSlugRoute
+  '/knowledge/technologies/$slug': typeof KnowledgeTechnologiesSlugRoute
+  '/knowledge/manufacturers': typeof KnowledgeManufacturersIndexRoute
+  '/knowledge/products': typeof KnowledgeProductsIndexRoute
+  '/knowledge/services': typeof KnowledgeServicesIndexRoute
+  '/knowledge/technologies': typeof KnowledgeTechnologiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -371,8 +447,17 @@ export interface FileRoutesById {
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
+  '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
+  '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
+  '/knowledge/services/$slug': typeof KnowledgeServicesSlugRoute
+  '/knowledge/technologies/$slug': typeof KnowledgeTechnologiesSlugRoute
+  '/knowledge/manufacturers/': typeof KnowledgeManufacturersIndexRoute
+  '/knowledge/products/': typeof KnowledgeProductsIndexRoute
+  '/knowledge/services/': typeof KnowledgeServicesIndexRoute
+  '/knowledge/technologies/': typeof KnowledgeTechnologiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -414,8 +499,17 @@ export interface FileRouteTypes {
     | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog/'
+    | '/knowledge/'
     | '/products/'
     | '/.mcp/invoke-tool/$tool'
+    | '/knowledge/manufacturers/$slug'
+    | '/knowledge/products/$slug'
+    | '/knowledge/services/$slug'
+    | '/knowledge/technologies/$slug'
+    | '/knowledge/manufacturers/'
+    | '/knowledge/products/'
+    | '/knowledge/services/'
+    | '/knowledge/technologies/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -453,8 +547,17 @@ export interface FileRouteTypes {
     | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog'
+    | '/knowledge'
     | '/products'
     | '/.mcp/invoke-tool/$tool'
+    | '/knowledge/manufacturers/$slug'
+    | '/knowledge/products/$slug'
+    | '/knowledge/services/$slug'
+    | '/knowledge/technologies/$slug'
+    | '/knowledge/manufacturers'
+    | '/knowledge/products'
+    | '/knowledge/services'
+    | '/knowledge/technologies'
   id:
     | '__root__'
     | '/'
@@ -494,8 +597,17 @@ export interface FileRouteTypes {
     | '/products/x-ray-systems'
     | '/programs/stroke-care'
     | '/blog/'
+    | '/knowledge/'
     | '/products/'
     | '/.mcp/invoke-tool/$tool'
+    | '/knowledge/manufacturers/$slug'
+    | '/knowledge/products/$slug'
+    | '/knowledge/services/$slug'
+    | '/knowledge/technologies/$slug'
+    | '/knowledge/manufacturers/'
+    | '/knowledge/products/'
+    | '/knowledge/services/'
+    | '/knowledge/technologies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -522,7 +634,16 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
+  KnowledgeIndexRoute: typeof KnowledgeIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  KnowledgeManufacturersSlugRoute: typeof KnowledgeManufacturersSlugRoute
+  KnowledgeProductsSlugRoute: typeof KnowledgeProductsSlugRoute
+  KnowledgeServicesSlugRoute: typeof KnowledgeServicesSlugRoute
+  KnowledgeTechnologiesSlugRoute: typeof KnowledgeTechnologiesSlugRoute
+  KnowledgeManufacturersIndexRoute: typeof KnowledgeManufacturersIndexRoute
+  KnowledgeProductsIndexRoute: typeof KnowledgeProductsIndexRoute
+  KnowledgeServicesIndexRoute: typeof KnowledgeServicesIndexRoute
+  KnowledgeTechnologiesIndexRoute: typeof KnowledgeTechnologiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -674,6 +795,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/knowledge/': {
+      id: '/knowledge/'
+      path: '/knowledge'
+      fullPath: '/knowledge/'
+      preLoaderRoute: typeof KnowledgeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/'
@@ -793,6 +921,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/knowledge/technologies/': {
+      id: '/knowledge/technologies/'
+      path: '/knowledge/technologies'
+      fullPath: '/knowledge/technologies/'
+      preLoaderRoute: typeof KnowledgeTechnologiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/services/': {
+      id: '/knowledge/services/'
+      path: '/knowledge/services'
+      fullPath: '/knowledge/services/'
+      preLoaderRoute: typeof KnowledgeServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/products/': {
+      id: '/knowledge/products/'
+      path: '/knowledge/products'
+      fullPath: '/knowledge/products/'
+      preLoaderRoute: typeof KnowledgeProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/manufacturers/': {
+      id: '/knowledge/manufacturers/'
+      path: '/knowledge/manufacturers'
+      fullPath: '/knowledge/manufacturers/'
+      preLoaderRoute: typeof KnowledgeManufacturersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/technologies/$slug': {
+      id: '/knowledge/technologies/$slug'
+      path: '/knowledge/technologies/$slug'
+      fullPath: '/knowledge/technologies/$slug'
+      preLoaderRoute: typeof KnowledgeTechnologiesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/services/$slug': {
+      id: '/knowledge/services/$slug'
+      path: '/knowledge/services/$slug'
+      fullPath: '/knowledge/services/$slug'
+      preLoaderRoute: typeof KnowledgeServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/products/$slug': {
+      id: '/knowledge/products/$slug'
+      path: '/knowledge/products/$slug'
+      fullPath: '/knowledge/products/$slug'
+      preLoaderRoute: typeof KnowledgeProductsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/manufacturers/$slug': {
+      id: '/knowledge/manufacturers/$slug'
+      path: '/knowledge/manufacturers/$slug'
+      fullPath: '/knowledge/manufacturers/$slug'
+      preLoaderRoute: typeof KnowledgeManufacturersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -876,7 +1060,16 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
+  KnowledgeIndexRoute: KnowledgeIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  KnowledgeManufacturersSlugRoute: KnowledgeManufacturersSlugRoute,
+  KnowledgeProductsSlugRoute: KnowledgeProductsSlugRoute,
+  KnowledgeServicesSlugRoute: KnowledgeServicesSlugRoute,
+  KnowledgeTechnologiesSlugRoute: KnowledgeTechnologiesSlugRoute,
+  KnowledgeManufacturersIndexRoute: KnowledgeManufacturersIndexRoute,
+  KnowledgeProductsIndexRoute: KnowledgeProductsIndexRoute,
+  KnowledgeServicesIndexRoute: KnowledgeServicesIndexRoute,
+  KnowledgeTechnologiesIndexRoute: KnowledgeTechnologiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

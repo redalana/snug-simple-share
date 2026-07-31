@@ -192,6 +192,8 @@ export function getRelatedContent(subject: ContentItem | string, limitPerType = 
 }
 export * from "./knowledge-center";
 export * from "./knowledge-hub";
+/* Technology / Manufacturer / Product / Service hub layer. */
+export * from "./hubs";
 /* Persistent Article Registry — production source of truth (§52). */
 export * from "./registry";
 

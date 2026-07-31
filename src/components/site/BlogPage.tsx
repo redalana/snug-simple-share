@@ -300,6 +300,38 @@ function PageIntro() {
           educational resources, and expert knowledge designed for hospitals, physicians, biomedical
           engineers, and healthcare professionals across Africa and the Middle East.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Link
+            to="/knowledge"
+            className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-transform hover:-translate-y-0.5"
+          >
+            All knowledge hubs
+          </Link>
+          <Link
+            to="/knowledge/technologies"
+            className="inline-flex items-center rounded-full border border-border/70 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            Technology hubs
+          </Link>
+          <Link
+            to="/knowledge/manufacturers"
+            className="inline-flex items-center rounded-full border border-border/70 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            Manufacturer hubs
+          </Link>
+          <Link
+            to="/knowledge/products"
+            className="inline-flex items-center rounded-full border border-border/70 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            Product hubs
+          </Link>
+          <Link
+            to="/knowledge/services"
+            className="inline-flex items-center rounded-full border border-border/70 bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            Service hubs
+          </Link>
+        </div>
       </div>
     </section>
   );
