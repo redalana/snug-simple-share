@@ -218,6 +218,10 @@ import { SINGLE_VS_BIPLANE_CONTENT, SINGLE_VS_BIPLANE_TOC } from "./articles/sin
 import { CATH_LAB_TCO_CONTENT, CATH_LAB_TCO_TOC } from "./articles/cath-lab-total-cost-of-ownership";
 import { ANGIOGRAPHY_TROUBLESHOOTING_CONTENT, ANGIOGRAPHY_TROUBLESHOOTING_TOC } from "./articles/angiography-image-quality-troubleshooting";
 import { CATH_LAB_RADIATION_PROTECTION_CONTENT, CATH_LAB_RADIATION_PROTECTION_TOC } from "./articles/radiation-protection-in-the-cath-lab";
+import { HYBRID_OT_PLANNING_CONTENT, HYBRID_OT_PLANNING_TOC } from "./articles/hybrid-operating-theatre-planning-guide";
+import { WHAT_IS_A_PET_CT_SCANNER_CONTENT, WHAT_IS_A_PET_CT_SCANNER_TOC } from "./articles/what-is-a-pet-ct-scanner";
+import { PET_CT_RADIOTRACERS_CONTENT, PET_CT_RADIOTRACERS_TOC } from "./articles/pet-ct-radiotracers-and-fdg-explained";
+import { PET_CT_ROOM_PLANNING_CONTENT, PET_CT_ROOM_PLANNING_TOC } from "./articles/pet-ct-room-planning-and-radiopharmacy";
 
 
 function makeDefaultContent(a: {
