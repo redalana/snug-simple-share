@@ -212,6 +212,8 @@ import { CARDIAC_CT_ANGIOGRAPHY_GUIDE_CONTENT, CARDIAC_CT_ANGIOGRAPHY_GUIDE_TOC 
 import { CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_CONTENT, CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_TOC } from "./articles/ct-image-artefacts-troubleshooting";
 import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/ct-total-cost-of-ownership";
 import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
+import { CATH_LAB_ROOM_PLANNING_CONTENT, CATH_LAB_ROOM_PLANNING_TOC } from "./articles/cath-lab-room-planning-and-installation";
+import { CATH_LAB_MAINTENANCE_CONTENT, CATH_LAB_MAINTENANCE_TOC } from "./articles/cath-lab-preventive-maintenance-and-uptime";
 
 
 function makeDefaultContent(a: {
