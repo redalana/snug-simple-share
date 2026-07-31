@@ -212,6 +212,8 @@ import { CARDIAC_CT_ANGIOGRAPHY_GUIDE_CONTENT, CARDIAC_CT_ANGIOGRAPHY_GUIDE_TOC 
 import { CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_CONTENT, CT_IMAGE_ARTEFACTS_TROUBLESHOOTING_TOC } from "./articles/ct-image-artefacts-troubleshooting";
 import { CT_TOTAL_COST_OF_OWNERSHIP_CONTENT, CT_TOTAL_COST_OF_OWNERSHIP_TOC } from "./articles/ct-total-cost-of-ownership";
 import { WHAT_IS_A_CATH_LAB_CONTENT, WHAT_IS_A_CATH_LAB_TOC } from "./articles/what-is-a-cath-lab";
+import { CATH_LAB_ROOM_PLANNING_CONTENT, CATH_LAB_ROOM_PLANNING_TOC } from "./articles/cath-lab-room-planning-and-installation";
+import { CATH_LAB_MAINTENANCE_CONTENT, CATH_LAB_MAINTENANCE_TOC } from "./articles/cath-lab-preventive-maintenance-and-uptime";
 
 
 function makeDefaultContent(a: {
@@ -245,6 +247,40 @@ const RAW: Array<
     readingTime: "16 min read",
     content: WHAT_IS_A_CATH_LAB_CONTENT,
     tableOfContents: WHAT_IS_A_CATH_LAB_TOC,
+  },
+  {
+    slug: "cath-lab-room-planning-and-installation",
+    title: "Cath Lab Room Planning, Installation and Commissioning",
+    seoTitle: "Cath Lab Room Planning & Installation Guide for Hospitals",
+    metaDescription:
+      "How to plan and commission a cath lab: room layout, clearances, structural loading, shielding, power, HVAC, delivery route and acceptance testing.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Cath lab projects slip on infrastructure, not imaging. The layout, loads, shielding, power, cooling and acceptance testing a hospital must plan — and in what order.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CATH_LAB_ROOM_PLANNING_CONTENT,
+    tableOfContents: CATH_LAB_ROOM_PLANNING_TOC,
+  },
+  {
+    slug: "cath-lab-preventive-maintenance-and-uptime",
+    title: "Cath Lab Preventive Maintenance, Uptime and Service Contracts",
+    seoTitle: "Cath Lab Maintenance & Uptime: Service Contract Guide",
+    metaDescription:
+      "Angiography maintenance that protects uptime: failure modes, tube life, PM schedules, quality assurance, service contract terms and parts logistics.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "What fails in a cath lab, how to structure a service contract that delivers real availability, and how to plan for the outage that will eventually happen.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CATH_LAB_MAINTENANCE_CONTENT,
+    tableOfContents: CATH_LAB_MAINTENANCE_TOC,
   },
   {
     slug: "what-is-a-ct-scanner",
