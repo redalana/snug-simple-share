@@ -77,6 +77,24 @@ export type RegistryEntry = {
 /*  Derivation                                                         */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Published article category labels are editorial; product categories are
+ * canonical. This map normalises the former onto the latter so coverage
+ * reporting measures real gaps instead of label drift. Every value must be a
+ * member of `PRIMARY_CATEGORIES`.
+ */
+const CLUSTER_ALIASES: Record<string, (typeof PRIMARY_CATEGORIES)[number]> = {
+  "Cath Lab": "Cath Lab Systems",
+  "C-Arm Systems": "C-Arms",
+  "Mammography Systems": "Mammography",
+  "PET/CT": "PET/CT Scanners",
+};
+
+function normaliseCluster(label: string): string {
+  return CLUSTER_ALIASES[label] ?? label;
+}
+
+
 const STOP_WORDS = new Set([
   "the","a","an","and","or","for","of","to","in","on","with","your","what","is",
   "are","how","why","from","guide","complete","practical","ultimate","hospital",
