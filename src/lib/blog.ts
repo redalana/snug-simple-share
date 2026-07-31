@@ -269,6 +269,32 @@ import { US_BUYING_CONTENT, US_BUYING_TOC } from "./articles/ultrasound-system-b
 import { US_CART_VS_HANDHELD_CONTENT, US_CART_VS_HANDHELD_TOC } from "./articles/cart-based-vs-handheld-ultrasound";
 import { US_ROOM_SETUP_CONTENT, US_ROOM_SETUP_TOC } from "./articles/ultrasound-room-setup-and-commissioning";
 import { US_PROBE_CARE_CONTENT, US_PROBE_CARE_TOC } from "./articles/ultrasound-probe-care-and-maintenance";
+import {
+  PHILIPS_FD10_VS_FD20_CONTENT,
+  PHILIPS_FD10_VS_FD20_TOC,
+} from "./articles/philips-allura-xper-fd10-vs-fd20-selection-guide";
+import {
+  PHILIPS_MONO_VS_BIPLANE_CONTENT,
+  PHILIPS_MONO_VS_BIPLANE_TOC,
+} from "./articles/philips-allura-xper-monoplane-vs-biplane";
+import {
+  PHILIPS_ALLURA_INSTALL_CONTENT,
+  PHILIPS_ALLURA_INSTALL_TOC,
+} from "./articles/philips-allura-xper-installation-and-room-requirements";
+import {
+  PHILIPS_ALLURA_PM_CONTENT,
+  PHILIPS_ALLURA_PM_TOC,
+} from "./articles/philips-allura-xper-preventive-maintenance-and-uptime";
+import {
+  PHILIPS_GEMINI_GXL_CONTENT,
+  PHILIPS_GEMINI_GXL_TOC,
+} from "./articles/philips-gemini-gxl-16-pet-ct-system-guide";
+import {
+  PHILIPS_DOSE_QUALITY_CONTENT,
+  PHILIPS_DOSE_QUALITY_TOC,
+} from "./articles/philips-cath-lab-dose-management-and-image-quality";
+
+
 
 
 function makeDefaultContent(a: {
@@ -1203,6 +1229,108 @@ const RAW: Array<
     readingTime: "13 min read",
     content: US_PROBE_CARE_CONTENT,
     tableOfContents: US_PROBE_CARE_TOC,
+  },
+  {
+    slug: "philips-allura-xper-fd10-vs-fd20-selection-guide",
+    title: "Philips Allura Xper FD10 vs FD20: Selection Guide",
+    seoTitle: "Philips Allura Xper FD10 vs FD20: Which to Choose",
+    metaDescription:
+      "Philips Allura Xper FD10 vs FD20 compared: detector size, anatomical coverage, cardiac versus peripheral casemix, room implications and a procurement decision framework.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Detector size is a casemix decision, not a quality ranking. Match the field of view to the work you actually do.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: PHILIPS_FD10_VS_FD20_CONTENT,
+    tableOfContents: PHILIPS_FD10_VS_FD20_TOC,
+  },
+  {
+    slug: "philips-allura-xper-monoplane-vs-biplane",
+    title: "Philips Allura Xper Monoplane vs Biplane",
+    seoTitle: "Allura Xper Monoplane vs Biplane: Procurement Guide",
+    metaDescription:
+      "Monoplane or biplane Philips Allura Xper? Simultaneous orthogonal acquisition, contrast and dose implications, neuro and paediatric drivers, room size and cost trade-offs.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Biplane buys simultaneous orthogonal views. Only some casemixes need what that costs.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: PHILIPS_MONO_VS_BIPLANE_CONTENT,
+    tableOfContents: PHILIPS_MONO_VS_BIPLANE_TOC,
+  },
+  {
+    slug: "philips-allura-xper-installation-and-room-requirements",
+    title: "Philips Allura Xper Installation and Room Requirements",
+    seoTitle: "Allura Xper Installation & Room Requirements Guide",
+    metaDescription:
+      "Planning a Philips Allura Xper installation: room dimensions, structural and ceiling loading, shielding design, power and cooling, technical rooms, delivery routes and commissioning.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Most cath lab delays are civil works, not equipment. Plan the room before the order.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: PHILIPS_ALLURA_INSTALL_CONTENT,
+    tableOfContents: PHILIPS_ALLURA_INSTALL_TOC,
+  },
+  {
+    slug: "philips-allura-xper-preventive-maintenance-and-uptime",
+    title: "Philips Allura Xper Preventive Maintenance and Uptime",
+    seoTitle: "Allura Xper Preventive Maintenance & Uptime Guide",
+    metaDescription:
+      "Keeping a Philips Allura Xper available: preventive maintenance scope, constancy testing, tube and detector lifecycle, spare parts strategy, response times and uptime governance.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Cath lab downtime cancels lists. Availability is engineered by contract and schedule, not luck.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: PHILIPS_ALLURA_PM_CONTENT,
+    tableOfContents: PHILIPS_ALLURA_PM_TOC,
+  },
+  {
+    slug: "philips-gemini-gxl-16-pet-ct-system-guide",
+    title: "Philips Gemini GXL 16 PET/CT: System Guide",
+    seoTitle: "Philips Gemini GXL 16 PET/CT: Capability & Planning",
+    metaDescription:
+      "Philips Gemini GXL 16 PET/CT explained: PET ring and 16-slice CT architecture, oncology capability, throughput and tracer logistics, radiopharmacy infrastructure and lifecycle cost.",
+    category: "PET/CT",
+    coverImage: solPetct,
+    excerpt:
+      "The scanner is one component of a molecular imaging service. Tracer supply decides the rest.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: PHILIPS_GEMINI_GXL_CONTENT,
+    tableOfContents: PHILIPS_GEMINI_GXL_TOC,
+  },
+  {
+    slug: "philips-cath-lab-dose-management-and-image-quality",
+    title: "Philips Cath Lab Dose Management and Image Quality",
+    seoTitle: "Cath Lab Dose Management & Image Quality: Philips Rooms",
+    metaDescription:
+      "Dose and image quality in a Philips Allura Xper room: where dose is determined, operator levers, protocol governance, dose audit and a structured image-quality investigation order.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "Dose and image quality are two readings of one system state — not a trade-off improvised per case.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: PHILIPS_DOSE_QUALITY_CONTENT,
+    tableOfContents: PHILIPS_DOSE_QUALITY_TOC,
   },
   {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
