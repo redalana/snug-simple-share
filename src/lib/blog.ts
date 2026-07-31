@@ -2464,6 +2464,125 @@ const RAW: Array<
     publishedDate: "Jun 21, 2026",
     readingTime: "10 min read",
   },
+  {
+    slug: "siemens-axiom-artis-cath-lab-system-guide",
+    title: "Siemens Axiom Artis Cath Lab: System Guide",
+    seoTitle: "Siemens Axiom Artis Cath Lab: Configurations & Service",
+    metaDescription:
+      "Siemens Axiom Artis cath lab explained: flat-detector platform architecture, monoplane and biplane configurations, subsystem evaluation, pre-owned checks and service planning.",
+    category: "Cath Lab",
+    coverImage: heroCathlab,
+    excerpt:
+      "A cath lab is a room, not a device. Axiom Artis performance is decided subsystem by subsystem.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: SIEMENS_AXIOM_CONTENT,
+    tableOfContents: SIEMENS_AXIOM_TOC,
+  },
+  {
+    slug: "siemens-mammomat-inspiration-system-guide",
+    title: "Siemens Mammomat Inspiration: System Guide",
+    seoTitle: "Siemens Mammomat Inspiration: Capability & QC Planning",
+    metaDescription:
+      "Siemens Mammomat Inspiration explained: detector and image chain, screening and diagnostic workflow, configuration options, room requirements, quality control and service obligations.",
+    category: "Mammography",
+    coverImage: solXray,
+    excerpt:
+      "A mammography system is acquired with a quality control programme — never as a standalone gantry.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: SIEMENS_MAMMOMAT_CONTENT,
+    tableOfContents: SIEMENS_MAMMOMAT_TOC,
+  },
+  {
+    slug: "toshiba-aquilion-64-ct-system-guide",
+    title: "Toshiba Aquilion 64 CT: System Guide",
+    seoTitle: "Toshiba Aquilion 64 CT (Canon Medical): System Guide",
+    metaDescription:
+      "Toshiba Aquilion 64 CT explained: 64-slice architecture, clinical capability, dose management, pre-owned evaluation and tube lifecycle planning from Canon Medical's Toshiba lineage.",
+    category: "CT Scanners",
+    coverImage: solCt,
+    excerpt:
+      "Sixty-four slices still cover most hospital CT workload. Tube history decides the deal.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: AQUILION_64_CONTENT,
+    tableOfContents: AQUILION_64_TOC,
+  },
+  {
+    slug: "toshiba-infinix-infx-8000c-cath-lab-lifecycle-and-upgrade-planning",
+    title: "Toshiba Infinix INFX-8000C Cath Lab: Upgrade and Lifecycle Planning",
+    seoTitle: "Infinix INFX-8000C: Upgrade, Refurbish or Replace",
+    metaDescription:
+      "Lifecycle planning for a Toshiba Infinix INFX-8000C cath lab: reading service data, upgrade paths, upgrade-versus-replace criteria, outage planning and clinical continuity.",
+    category: "Cath Lab",
+    coverImage: beyondCathlab,
+    excerpt:
+      "The real cost of a cath lab refresh sits in the outage window, not the equipment price.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: INFINIX_LIFECYCLE_CONTENT,
+    tableOfContents: INFINIX_LIFECYCLE_TOC,
+  },
+  {
+    slug: "hitachi-aperto-inspire-open-mri-system-guide",
+    title: "Hitachi Aperto Inspire Open MRI: System Guide",
+    seoTitle: "Hitachi Aperto Inspire: Open MRI System Guide",
+    metaDescription:
+      "Hitachi Aperto Inspire explained: open permanent-magnet architecture, patient access advantages, clinical scope, siting without helium, operating protocols and lifecycle service.",
+    category: "MRI Scanners",
+    coverImage: solMri,
+    excerpt:
+      "Open MRI solves an access problem: patients who cannot tolerate a closed bore still get scanned.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: APERTO_INSPIRE_CONTENT,
+    tableOfContents: APERTO_INSPIRE_TOC,
+  },
+  {
+    slug: "ge-lunar-prodigy-dexa-system-guide",
+    title: "GE Lunar Prodigy DEXA: System Guide",
+    seoTitle: "GE Lunar Prodigy DEXA: Measurement & QC Guide",
+    metaDescription:
+      "GE Lunar Prodigy explained: fan-beam DEXA measurement, T-score and Z-score reporting, precision and least significant change, cross-calibration, room needs and pre-owned checks.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "A densitometer is a measuring instrument first. Precision and calibration outrank image appearance.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: LUNAR_PRODIGY_CONTENT,
+    tableOfContents: LUNAR_PRODIGY_TOC,
+  },
+  {
+    slug: "richard-wolf-piezolith-3000-plus-system-guide",
+    title: "Richard Wolf Piezolith 3000 plus: System Guide",
+    seoTitle: "Richard Wolf Piezolith 3000 plus: System Guide",
+    metaDescription:
+      "Richard Wolf Piezolith 3000 plus explained: piezoelectric shock wave generation, integrated ultrasound localisation, session workflow, portable configuration, service and training.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "A tight focus and low skin pressure — earned by localisation accuracy and coupling discipline.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: PIEZOLITH_3000_CONTENT,
+    tableOfContents: PIEZOLITH_3000_TOC,
+  },
 ];
 
 /* -----------------------------------------------------------
