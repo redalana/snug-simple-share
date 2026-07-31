@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { PRODUCTS, productSlug } from "@/lib/products";
 import { ARTICLES } from "@/lib/blog";
+import { ALL_HUBS, HUB_BASE_PATH, HUB_KINDS } from "@/lib/content";
 import { SITE_URL } from "@/lib/seo";
 
 const BASE_URL = SITE_URL;
@@ -29,6 +30,8 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/hospital-readiness-assessment", changefreq: "monthly", priority: "0.6" },
   { path: "/programs/stroke-care", changefreq: "monthly", priority: "0.6" },
   { path: "/blog", changefreq: "weekly", priority: "0.8" },
+  // Knowledge hub directories
+  { path: "/knowledge", changefreq: "weekly", priority: "0.8" },
   // Product catalog
   { path: "/products", changefreq: "weekly", priority: "0.9" },
   { path: "/products/mri-scanners", changefreq: "monthly", priority: "0.8" },
@@ -67,6 +70,17 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...PRODUCTS.map((p) => ({
             path: `/products/${productSlug(p)}`,
             changefreq: "monthly" as const,
+            priority: "0.7",
+          })),
+          // Hub family directories + one entry per hub page.
+          ...HUB_KINDS.map((kind) => ({
+            path: HUB_BASE_PATH[kind],
+            changefreq: "weekly" as const,
+            priority: "0.7",
+          })),
+          ...ALL_HUBS.map((hub) => ({
+            path: hub.path,
+            changefreq: "weekly" as const,
             priority: "0.7",
           })),
           ...ARTICLES.map((a) => ({

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import { RelatedGraph } from "@/components/site/knowledge/RelatedGraph";
+import { ArticleHubLinks } from "@/components/site/knowledge/ArticleHubLinks";
 import { KnowledgeBox } from "@/components/site/blog/KnowledgeBox";
 import { ArticleDiagram } from "@/components/site/blog/ArticleDiagram";
 import { TableInsight } from "@/components/site/blog/TableInsight";
@@ -116,6 +117,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           <Sidebar article={article} related={related} />
         </div>
       </section>
+      <ArticleHubLinks slug={article.slug} />
       <RelatedGraph slug={article.slug} />
       {ctaBlock && ctaBlock.type === "articleCta" ? (
         <ArticleCta
