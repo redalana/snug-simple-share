@@ -7,6 +7,7 @@ import solOr from "@/assets/sol-or.jpg";
 import solUltrasound from "@/assets/sol-ultrasound.jpg";
 import solXray from "@/assets/sol-xray.jpg";
 import solDexa from "@/assets/sol-dexa.jpg";
+import solEswl from "@/assets/sol-eswl.jpg";
 import beyondCathlab from "@/assets/beyond-cathlab.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
 import abufarhaHq from "@/assets/abufarha-hq.jpg";
@@ -297,6 +298,16 @@ import { DEXA_PILLAR_CONTENT, DEXA_PILLAR_TOC } from "./articles/what-is-a-dexa-
 import { DEXA_SCORES_CONTENT, DEXA_SCORES_TOC } from "./articles/t-scores-and-z-scores-explained";
 import { DEXA_BUYING_CONTENT, DEXA_BUYING_TOC } from "./articles/dexa-scanner-buying-guide";
 import { DEXA_QC_CONTENT, DEXA_QC_TOC } from "./articles/dexa-phantom-qc-and-maintenance";
+import { ESWL_PILLAR_CONTENT, ESWL_PILLAR_TOC } from "./articles/what-is-eswl-lithotripsy";
+import {
+  ESWL_INDICATIONS_CONTENT,
+  ESWL_INDICATIONS_TOC,
+} from "./articles/eswl-clinical-indications-and-case-selection";
+import { ESWL_BUYING_CONTENT, ESWL_BUYING_TOC } from "./articles/lithotripsy-system-buying-guide";
+import {
+  ESWL_MAINTENANCE_CONTENT,
+  ESWL_MAINTENANCE_TOC,
+} from "./articles/lithotripsy-preventive-maintenance-and-qa";
 
 
 
@@ -1406,6 +1417,75 @@ const RAW: Array<
     content: DEXA_QC_CONTENT,
     tableOfContents: DEXA_QC_TOC,
   },
+  {
+    slug: "what-is-eswl-lithotripsy",
+    title: "What Is ESWL (Extracorporeal Shock Wave Lithotripsy)?",
+    seoTitle: "What Is ESWL? Shock Wave Lithotripsy Explained",
+    metaDescription:
+      "Extracorporeal shock wave lithotripsy explained: shock wave physics and fragmentation, system components, generation principles, stone localisation, treatment workflow and service planning.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Non-invasive does not mean effortless \u2014 focus accuracy and imaging decide the outcome, not raw power.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: ESWL_PILLAR_CONTENT,
+    tableOfContents: ESWL_PILLAR_TOC,
+  },
+  {
+    slug: "eswl-clinical-indications-and-case-selection",
+    title: "ESWL Clinical Indications and Case Selection",
+    seoTitle: "ESWL Case Selection: Indications & Patient Factors",
+    metaDescription:
+      "ESWL case selection: stone size, location, density and skin-to-stone distance, patient factors, comparison with endoscopic routes, and building a defensible selection pathway.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Lithotripsy services underperform on selection far more often than on equipment.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_INDICATIONS_CONTENT,
+    tableOfContents: ESWL_INDICATIONS_TOC,
+  },
+  {
+    slug: "lithotripsy-system-buying-guide",
+    title: "Lithotripsy System Buying Guide",
+    seoTitle: "Lithotripsy Buying Guide: Specify, Compare & Tender",
+    metaDescription:
+      "How to buy a lithotripsy system: case-mix-led specification, generation principles, imaging configuration, consumable cost per treatment, pre-owned evaluation and tender criteria.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "Cost per treatment, not capital cost, decides whether a lithotripsy service is sustainable.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: ESWL_BUYING_CONTENT,
+    tableOfContents: ESWL_BUYING_TOC,
+  },
+  {
+    slug: "lithotripsy-preventive-maintenance-and-qa",
+    title: "Lithotripsy Preventive Maintenance and Quality Assurance",
+    seoTitle: "Lithotripsy Maintenance & QA: Protect Performance",
+    metaDescription:
+      "Lithotripsy maintenance: impulse-count-driven servicing, preventive maintenance scope, coupling and source care, imaging subsystem upkeep, localisation verification and QA records.",
+    category: "Lithotripsy Systems",
+    coverImage: solEswl,
+    excerpt:
+      "A lithotripter never announces that it is underperforming \u2014 it just needs more pulses.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: ESWL_MAINTENANCE_CONTENT,
+    tableOfContents: ESWL_MAINTENANCE_TOC,
+  },
+
 
   {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
