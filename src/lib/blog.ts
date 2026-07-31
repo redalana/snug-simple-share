@@ -264,6 +264,9 @@ import { MAMMO_TCO_CONTENT, MAMMO_TCO_TOC } from "./articles/mammography-total-c
 import { US_PILLAR_CONTENT, US_PILLAR_TOC } from "./articles/what-is-an-ultrasound-system";
 import { US_TRANSDUCERS_CONTENT, US_TRANSDUCERS_TOC } from "./articles/ultrasound-transducer-types-explained";
 import { POCUS_CONTENT, POCUS_TOC } from "./articles/point-of-care-ultrasound-in-emergency-care";
+import { US_DOPPLER_CONTENT, US_DOPPLER_TOC } from "./articles/doppler-and-vascular-ultrasound-guide";
+import { US_BUYING_CONTENT, US_BUYING_TOC } from "./articles/ultrasound-system-buying-guide";
+import { US_CART_VS_HANDHELD_CONTENT, US_CART_VS_HANDHELD_TOC } from "./articles/cart-based-vs-handheld-ultrasound";
 
 
 function makeDefaultContent(a: {
