@@ -226,6 +226,15 @@ import { PET_CT_ONCOLOGY_STAGING_CONTENT, PET_CT_ONCOLOGY_STAGING_TOC } from "./
 import { PET_CT_VS_SPECT_CT_CONTENT, PET_CT_VS_SPECT_CT_TOC } from "./articles/pet-ct-vs-spect-ct-selection-guide";
 import { PET_CT_TCO_CONTENT, PET_CT_TCO_TOC } from "./articles/pet-ct-total-cost-of-ownership";
 import { PET_CT_CARDIAC_NEURO_CONTENT, PET_CT_CARDIAC_NEURO_TOC } from "./articles/pet-ct-cardiac-and-neurology-applications";
+import { PET_CT_REFURBISHED_CONTENT, PET_CT_REFURBISHED_TOC } from "./articles/refurbished-pet-ct-scanners-guide";
+import { PET_CT_MAINTENANCE_CONTENT, PET_CT_MAINTENANCE_TOC } from "./articles/pet-ct-detector-and-preventive-maintenance";
+import { PET_CT_TROUBLESHOOTING_CONTENT, PET_CT_TROUBLESHOOTING_TOC } from "./articles/pet-ct-image-quality-and-suv-troubleshooting";
+import { WHAT_IS_DIGITAL_XRAY_CONTENT, WHAT_IS_DIGITAL_XRAY_TOC } from "./articles/what-is-a-digital-x-ray-system";
+import { DR_DETECTOR_TECH_CONTENT, DR_DETECTOR_TECH_TOC } from "./articles/dr-detector-technology-explained";
+import { CR_VS_DR_CONTENT, CR_VS_DR_TOC } from "./articles/cr-vs-dr-radiography-comparison";
+import { XRAY_DOSE_SAFETY_CONTENT, XRAY_DOSE_SAFETY_TOC } from "./articles/x-ray-radiation-dose-and-patient-safety";
+import { XRAY_ROOM_PLANNING_CONTENT, XRAY_ROOM_PLANNING_TOC } from "./articles/x-ray-room-planning-and-shielding";
+import { XRAY_MAINTENANCE_CONTENT, XRAY_MAINTENANCE_TOC } from "./articles/x-ray-tube-life-and-preventive-maintenance";
 
 
 function makeDefaultContent(a: {
@@ -497,6 +506,159 @@ const RAW: Array<
     readingTime: "16 min read",
     content: PET_CT_CARDIAC_NEURO_CONTENT,
     tableOfContents: PET_CT_CARDIAC_NEURO_TOC,
+  },
+  {
+    slug: "refurbished-pet-ct-scanners-guide",
+    title: "Refurbished PET/CT Scanners: A Buyer's Guide",
+    seoTitle: "Refurbished PET/CT Scanners: Detector, Licence & Due Diligence",
+    metaDescription:
+      "How to buy a refurbished PET/CT safely: detector performance evidence, CT tube history, software licence transfer, parts support and on-site NEMA acceptance testing.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "Refurbished PET/CT can open a nuclear medicine service years earlier — if detector condition, licences and parts support are verified before signing.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: PET_CT_REFURBISHED_CONTENT,
+    tableOfContents: PET_CT_REFURBISHED_TOC,
+  },
+  {
+    slug: "pet-ct-detector-and-preventive-maintenance",
+    title: "PET/CT Detector Care and Preventive Maintenance",
+    seoTitle: "PET/CT Maintenance: Detectors, Cooling, QA & Service Contracts",
+    metaDescription:
+      "What fails on a PET/CT and how to prevent it: detector calibration, cooling resilience, CT tube care, a daily-to-annual QA programme and service contract scope.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "PET/CT downtime destroys tracer as well as sessions. The QA programme, cooling design and contract scope that keep a service running.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: PET_CT_MAINTENANCE_CONTENT,
+    tableOfContents: PET_CT_MAINTENANCE_TOC,
+  },
+  {
+    slug: "pet-ct-image-quality-and-suv-troubleshooting",
+    title: "PET/CT Image Quality and SUV Troubleshooting",
+    seoTitle: "PET/CT Troubleshooting: Artefacts, Misregistration & SUV Errors",
+    metaDescription:
+      "A structured guide to PET/CT quality problems: noise, artefact patterns, attenuation misregistration, SUV input verification and patient preparation failures.",
+    category: "PET/CT Scanners",
+    coverImage: solPetct,
+    excerpt:
+      "Most PET/CT quality problems are process problems. How to triage artefacts, misregistration and suspicious SUV values in a fixed order.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: PET_CT_TROUBLESHOOTING_CONTENT,
+    tableOfContents: PET_CT_TROUBLESHOOTING_TOC,
+  },
+  {
+    slug: "what-is-a-digital-x-ray-system",
+    title: "What Is a Digital X-Ray System?",
+    seoTitle: "What Is a Digital X-Ray System? Components, Dose & Planning",
+    metaDescription:
+      "A clinically reviewed guide to digital radiography — how X-ray imaging works, generators, tubes and flat panel detectors, configurations, dose governance and room planning.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Radiography is the highest-volume imaging service in the hospital. How digital X-ray systems work, and what a department commits to when installing one.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "16 min read",
+    content: WHAT_IS_DIGITAL_XRAY_CONTENT,
+    tableOfContents: WHAT_IS_DIGITAL_XRAY_TOC,
+  },
+  {
+    slug: "dr-detector-technology-explained",
+    title: "DR Detector Technology Explained",
+    seoTitle: "DR Detector Technology: DQE, Caesium Iodide & Panel Selection",
+    metaDescription:
+      "How flat panel detectors work in digital radiography — direct and indirect conversion, scintillator materials, DQE and MTF, panel formats, durability and selection criteria.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "The detector sets the dose required for a given image quality. How to read a detector specification and select one for a real examination mix.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: DR_DETECTOR_TECH_CONTENT,
+    tableOfContents: DR_DETECTOR_TECH_TOC,
+  },
+  {
+    slug: "cr-vs-dr-radiography-comparison",
+    title: "CR vs DR: Comparing Radiography Technologies",
+    seoTitle: "CR vs DR Radiography: Workflow, Dose and 10-Year Cost Compared",
+    metaDescription:
+      "Computed radiography versus digital radiography compared on workflow and throughput, dose efficiency, ten-year cost structure, resilience and phased conversion strategy.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Both produce digital images, but only one produces them where the exposure happened. What that difference means for throughput, dose and cost.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: CR_VS_DR_CONTENT,
+    tableOfContents: CR_VS_DR_TOC,
+  },
+  {
+    slug: "x-ray-radiation-dose-and-patient-safety",
+    title: "X-Ray Radiation Dose and Patient Safety",
+    seoTitle: "X-Ray Dose & Patient Safety: Technique, Dose Creep & Governance",
+    metaDescription:
+      "Radiography dose governance: justification and optimisation, kV and mAs effects, collimation and grids, exposure index monitoring, paediatric practice and staff protection.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Digital radiography hides overexposure. The technique factors, monitoring and governance that keep radiography dose where it should be.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "15 min read",
+    content: XRAY_DOSE_SAFETY_CONTENT,
+    tableOfContents: XRAY_DOSE_SAFETY_TOC,
+  },
+  {
+    slug: "x-ray-room-planning-and-shielding",
+    title: "X-Ray Room Planning and Shielding",
+    seoTitle: "X-Ray Room Planning: Shielding, Structure, Services & Acceptance",
+    metaDescription:
+      "How to plan a digital radiography room: shielding design inputs, ceiling structure verification, dimensions and trolley access, services, control area and acceptance testing.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "The simplest imaging installation is the most frequently underestimated. What an X-ray room actually requires, in the order the project needs it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: XRAY_ROOM_PLANNING_CONTENT,
+    tableOfContents: XRAY_ROOM_PLANNING_TOC,
+  },
+  {
+    slug: "x-ray-tube-life-and-preventive-maintenance",
+    title: "X-Ray Tube Life and Preventive Maintenance",
+    seoTitle: "X-Ray Maintenance: Tube Life, Detector Care & Contract Scope",
+    metaDescription:
+      "What fails on radiography systems and how to prevent it: X-ray tube life drivers, detector damage prevention, mobile unit care, QA programme and service contract scope.",
+    category: "X-Ray Systems",
+    coverImage: solXray,
+    excerpt:
+      "Tubes, portable detectors and mechanics account for almost all radiography downtime. The discipline and contract scope that keep rooms available.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: XRAY_MAINTENANCE_CONTENT,
+    tableOfContents: XRAY_MAINTENANCE_TOC,
   },
 
   {
