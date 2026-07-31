@@ -293,6 +293,12 @@ import {
   PHILIPS_DOSE_QUALITY_CONTENT,
   PHILIPS_DOSE_QUALITY_TOC,
 } from "./articles/philips-cath-lab-dose-management-and-image-quality";
+import { DEXA_PILLAR_CONTENT, DEXA_PILLAR_TOC } from "./articles/what-is-a-dexa-bone-densitometer";
+import { DEXA_SCORES_CONTENT, DEXA_SCORES_TOC } from "./articles/t-scores-and-z-scores-explained";
+import { DEXA_BUYING_CONTENT, DEXA_BUYING_TOC } from "./articles/dexa-scanner-buying-guide";
+import { DEXA_QC_CONTENT, DEXA_QC_TOC } from "./articles/dexa-phantom-qc-and-maintenance";
+
+
 
 
 
@@ -1332,6 +1338,75 @@ const RAW: Array<
     content: PHILIPS_DOSE_QUALITY_CONTENT,
     tableOfContents: PHILIPS_DOSE_QUALITY_TOC,
   },
+  {
+    slug: "what-is-a-dexa-bone-densitometer",
+    title: "What Is a DEXA Bone Densitometer?",
+    seoTitle: "What Is a DEXA Bone Densitometer? Complete Guide",
+    metaDescription:
+      "DEXA bone densitometry explained: dual-energy X-ray physics, system components, what a scan measures, clinical applications, workflow, quality control and service planning.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "A densitometer's output is a number, not a picture — which changes everything about how it must be operated.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "14 min read",
+    content: DEXA_PILLAR_CONTENT,
+    tableOfContents: DEXA_PILLAR_TOC,
+  },
+  {
+    slug: "t-scores-and-z-scores-explained",
+    title: "T-Scores and Z-Scores Explained",
+    seoTitle: "T-Scores vs Z-Scores: Bone Density Interpretation",
+    metaDescription:
+      "T-scores and Z-scores explained: what each compares against, which patients each applies to, how reference databases change results, interpretation pitfalls and reporting conventions.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Two scores, two questions. Applying the wrong one to the wrong patient produces a misleading report.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_SCORES_CONTENT,
+    tableOfContents: DEXA_SCORES_TOC,
+  },
+  {
+    slug: "dexa-scanner-buying-guide",
+    title: "DEXA Scanner Buying Guide",
+    seoTitle: "DEXA Scanner Buying Guide: Specify, Compare & Tender",
+    metaDescription:
+      "How to buy a bone densitometer: service-led requirements, configuration decisions, precision and dose specifications, reference data, installation scope, lifecycle cost and tender criteria.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Low capital cost invites lazy specification. Precision and configuration decide clinical value.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "13 min read",
+    content: DEXA_BUYING_CONTENT,
+    tableOfContents: DEXA_BUYING_TOC,
+  },
+  {
+    slug: "dexa-phantom-qc-and-maintenance",
+    title: "DEXA Phantom QC and Preventive Maintenance",
+    seoTitle: "DEXA Phantom QC & Maintenance: Precision Protection",
+    metaDescription:
+      "Bone densitometry quality control: daily phantom scans, control charts and action limits, operator precision assessment, preventive maintenance scope and post-service verification.",
+    category: "Bone Densitometers (DEXA)",
+    coverImage: solDexa,
+    excerpt:
+      "Calibration drift in densitometry is silent. Only a phantom and a control chart reveal it.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "12 min read",
+    content: DEXA_QC_CONTENT,
+    tableOfContents: DEXA_QC_TOC,
+  },
+
   {
     slug: "mobile-c-arm-vs-fixed-angiography-system",
     title: "Mobile C-Arm vs Fixed Angiography System",
