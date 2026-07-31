@@ -143,7 +143,7 @@ export const US_BUYING_CONTENT: ContentBlock[] = [
   },
   {
     type: "knowledgeBox",
-    variant: "tip",
+    variant: "planning-tip",
     title: "Keep the scoring matrix",
     text: "A written matrix completed during evaluation is the strongest defence against a decision being reopened later, and the fastest way to justify the chosen system to finance and clinical governance.",
   },
