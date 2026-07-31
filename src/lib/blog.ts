@@ -333,6 +333,32 @@ import {
   PIEZOLITH_3000_CONTENT,
   PIEZOLITH_3000_TOC,
 } from "./articles/richard-wolf-piezolith-3000-plus-system-guide";
+import {
+  CLINICAL_TRAINING_CONTENT,
+  CLINICAL_TRAINING_TOC,
+} from "./articles/clinical-training-for-imaging-teams";
+import { SPARE_PARTS_CONTENT, SPARE_PARTS_TOC } from "./articles/spare-parts-supply-and-uptime";
+import {
+  TECH_SUPPORT_CONTENT,
+  TECH_SUPPORT_TOC,
+} from "./articles/technical-support-escalation-and-fault-response";
+import {
+  REMOTE_DIAGNOSTICS_CONTENT,
+  REMOTE_DIAGNOSTICS_TOC,
+} from "./articles/remote-diagnostics-vs-onsite-service";
+import { TURNKEY_DELIVERY_CONTENT, TURNKEY_DELIVERY_TOC } from "./articles/turnkey-project-delivery";
+import {
+  WOMENS_HEALTHCARE_CONTENT,
+  WOMENS_HEALTHCARE_TOC,
+} from "./articles/womens-healthcare-imaging-service-planning";
+import {
+  OBSTETRIC_ULTRASOUND_CONTENT,
+  OBSTETRIC_ULTRASOUND_TOC,
+} from "./articles/what-is-an-obstetric-ultrasound-service";
+import {
+  OR_PLANNING_CONTENT,
+  OR_PLANNING_TOC,
+} from "./articles/operating-room-equipment-planning";
 
 
 
@@ -2583,6 +2609,142 @@ const RAW: Array<
     content: PIEZOLITH_3000_CONTENT,
     tableOfContents: PIEZOLITH_3000_TOC,
   },
+  {
+    slug: "clinical-training-for-imaging-teams",
+    title: "Clinical Training for Imaging Teams",
+    seoTitle: "Clinical Training for Imaging Teams: Scope & Competency",
+    metaDescription:
+      "How clinical training turns installed imaging capability into clinical output: training scope, role-based levels, sequencing around installation, competency records and measurable outcomes.",
+    category: "After Sales",
+    coverImage: abufarhaHq,
+    excerpt:
+      "The gap between a trained and an untrained team is wider than the gap between competing systems.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "10 min read",
+    content: CLINICAL_TRAINING_CONTENT,
+    tableOfContents: CLINICAL_TRAINING_TOC,
+  },
+  {
+    slug: "spare-parts-supply-and-uptime",
+    title: "Spare Parts Supply and Uptime",
+    seoTitle: "Spare Parts Supply & Uptime: Critical Parts Strategy",
+    metaDescription:
+      "Why parts strategy decides equipment availability: classifying parts by clinical consequence, local stocking decisions, lead-time commitments, provenance and service records.",
+    category: "Biomedical",
+    coverImage: abufarhaHq,
+    excerpt:
+      "Downtime is restoration time, and restoration time is dominated by parts — not by fault frequency.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "10 min read",
+    content: SPARE_PARTS_CONTENT,
+    tableOfContents: SPARE_PARTS_TOC,
+  },
+  {
+    slug: "technical-support-escalation-and-fault-response",
+    title: "Technical Support: Escalation and Fault Response",
+    seoTitle: "Technical Support: Escalation & Fault Response Guide",
+    metaDescription:
+      "How structured technical support restores a service: support tiers and escalation, first-line triage, reporting a fault well, reading a support agreement and closing the loop afterwards.",
+    category: "Technical Support",
+    coverImage: whyCathlab,
+    excerpt:
+      "Most avoidable downtime is lost in the first hour, between fault detection and a precise report.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "10 min read",
+    content: TECH_SUPPORT_CONTENT,
+    tableOfContents: TECH_SUPPORT_TOC,
+  },
+  {
+    slug: "remote-diagnostics-vs-onsite-service",
+    title: "Remote Diagnostics vs On-Site Service",
+    seoTitle: "Remote Diagnostics vs On-Site Service: Hybrid Model",
+    metaDescription:
+      "What remote diagnostics resolves and what still requires an engineer: capability comparison, fault suitability, connectivity and security governance, and hybrid service design.",
+    category: "Technical Support",
+    coverImage: beyondCathlab,
+    excerpt:
+      "Remote access changes when diagnosis happens — not who must be present to complete a repair.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "10 min read",
+    content: REMOTE_DIAGNOSTICS_CONTENT,
+    tableOfContents: REMOTE_DIAGNOSTICS_TOC,
+  },
+  {
+    slug: "turnkey-project-delivery",
+    title: "Turnkey Project Delivery",
+    seoTitle: "Turnkey Project Delivery: Scope, Phases & Handover",
+    metaDescription:
+      "How turnkey medical equipment projects are delivered: scope boundaries, delivery phases, the interfaces where schedules fail, and what acceptance and clinical release must include.",
+    category: "Turnkey Projects",
+    coverImage: abufarhaHq,
+    excerpt:
+      "Equipment projects rarely fail on the equipment. They fail at the interfaces nobody owned.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: TURNKEY_DELIVERY_CONTENT,
+    tableOfContents: TURNKEY_DELIVERY_TOC,
+  },
+  {
+    slug: "womens-healthcare-imaging-service-planning",
+    title: "Women's Healthcare Imaging: Service Planning",
+    seoTitle: "Women's Healthcare Imaging: Service Planning Guide",
+    metaDescription:
+      "Planning a women's healthcare imaging service: breast imaging, obstetric ultrasound and bone health equipment sets, pathway-driven selection, privacy requirements and quality assurance.",
+    category: "Women's Healthcare",
+    coverImage: solUltrasound,
+    excerpt:
+      "A women's healthcare service is defined by its pathways — the equipment set follows from them.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: WOMENS_HEALTHCARE_CONTENT,
+    tableOfContents: WOMENS_HEALTHCARE_TOC,
+  },
+  {
+    slug: "what-is-an-obstetric-ultrasound-service",
+    title: "What Is an Obstetric Ultrasound Service?",
+    seoTitle: "Obstetric Ultrasound Service: Equipment & Planning",
+    metaDescription:
+      "Obstetric ultrasound explained: examination types across pregnancy, transducer and system requirements, room and list capacity, acoustic output safety, probe care and maintenance.",
+    category: "Ultrasound",
+    coverImage: solUltrasound,
+    excerpt:
+      "Transducer condition and operator technique limit image quality long before system specification does.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: OBSTETRIC_ULTRASOUND_CONTENT,
+    tableOfContents: OBSTETRIC_ULTRASOUND_TOC,
+  },
+  {
+    slug: "operating-room-equipment-planning",
+    title: "Operating Room Equipment Planning",
+    seoTitle: "Operating Room Equipment Planning: Layout & Imaging",
+    metaDescription:
+      "Planning theatre equipment from the procedures hosted: equipment categories, intraoperative imaging geometry, layout and ceiling services, utilities, and commissioning to clinical release.",
+    category: "Operating Room",
+    coverImage: solOr,
+    excerpt:
+      "Equipment fits any room when static. The question is whether it can move during a case.",
+    author: { name: "AbuFarha Clinical & Biomedical Editorial Board", role: "Editorial Team" },
+    publishedDate: "July 31, 2026",
+    lastUpdated: "July 31, 2026",
+    readingTime: "11 min read",
+    content: OR_PLANNING_CONTENT,
+    tableOfContents: OR_PLANNING_TOC,
+  },
 ];
 
 /* -----------------------------------------------------------
@@ -2804,6 +2966,58 @@ const TOPIC_CLUSTERS: Record<string, string[]> = {
     "medical-imaging-in-oncology",
     "petct-transforming-cancer-diagnosis",
     "building-efficient-imaging-department",
+  ],
+
+  // Service knowledge cluster
+  "clinical-training-for-imaging-teams": [
+    "technical-support-escalation-and-fault-response",
+    "spare-parts-supply-and-uptime",
+    "turnkey-project-delivery",
+    "medical-equipment-evaluation-methodology",
+  ],
+  "spare-parts-supply-and-uptime": [
+    "technical-support-escalation-and-fault-response",
+    "remote-diagnostics-vs-onsite-service",
+    "medical-equipment-replacement-planning",
+    "clinical-training-for-imaging-teams",
+  ],
+  "technical-support-escalation-and-fault-response": [
+    "remote-diagnostics-vs-onsite-service",
+    "spare-parts-supply-and-uptime",
+    "clinical-training-for-imaging-teams",
+    "turnkey-project-delivery",
+  ],
+  "remote-diagnostics-vs-onsite-service": [
+    "technical-support-escalation-and-fault-response",
+    "spare-parts-supply-and-uptime",
+    "clinical-training-for-imaging-teams",
+    "medical-equipment-replacement-planning",
+  ],
+  "turnkey-project-delivery": [
+    "operating-room-equipment-planning",
+    "imaging-department-planning-and-capacity",
+    "clinical-training-for-imaging-teams",
+    "hospital-capital-equipment-purchasing-framework",
+  ],
+
+  // Women's healthcare and theatre clusters
+  "womens-healthcare-imaging-service-planning": [
+    "what-is-an-obstetric-ultrasound-service",
+    "what-is-a-mammography-system",
+    "what-is-a-dexa-bone-densitometer",
+    "breast-imaging-quality-assurance-programme",
+  ],
+  "what-is-an-obstetric-ultrasound-service": [
+    "womens-healthcare-imaging-service-planning",
+    "what-is-an-ultrasound-system",
+    "ultrasound-transducer-types-explained",
+    "ultrasound-probe-care-and-maintenance",
+  ],
+  "operating-room-equipment-planning": [
+    "hybrid-operating-theatre-planning-guide",
+    "what-is-a-mobile-c-arm",
+    "c-arm-commissioning-and-theatre-integration",
+    "turnkey-project-delivery",
   ],
 };
 
