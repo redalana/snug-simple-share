@@ -267,6 +267,8 @@ import { POCUS_CONTENT, POCUS_TOC } from "./articles/point-of-care-ultrasound-in
 import { US_DOPPLER_CONTENT, US_DOPPLER_TOC } from "./articles/doppler-and-vascular-ultrasound-guide";
 import { US_BUYING_CONTENT, US_BUYING_TOC } from "./articles/ultrasound-system-buying-guide";
 import { US_CART_VS_HANDHELD_CONTENT, US_CART_VS_HANDHELD_TOC } from "./articles/cart-based-vs-handheld-ultrasound";
+import { US_ROOM_SETUP_CONTENT, US_ROOM_SETUP_TOC } from "./articles/ultrasound-room-setup-and-commissioning";
+import { US_PROBE_CARE_CONTENT, US_PROBE_CARE_TOC } from "./articles/ultrasound-probe-care-and-maintenance";
 
 
 function makeDefaultContent(a: {
