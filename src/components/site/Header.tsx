@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
@@ -46,27 +46,10 @@ export function Header() {
     return pathname === href || pathname.startsWith(href + "/");
   };
 
-  // Measure the navigation content width so the search bar ends exactly
-  // beneath the last nav item ("Contact Us") — no fixed widths.
-  const navRowRef = useRef<HTMLDivElement | null>(null);
-  const [navWidth, setNavWidth] = useState<number | null>(null);
+  // The search bar is fluid: it starts at the navigation's left edge and ends
+  // at the same right padding as the utility row (language + social icons),
+  // so no fixed width is used anywhere.
 
-  useLayoutEffect(() => {
-    const row = navRowRef.current;
-    if (!row || typeof ResizeObserver === "undefined") return;
-    const measure = () => {
-      const items = Array.from(row.children) as HTMLElement[];
-      if (!items.length) return;
-      const first = items[0].getBoundingClientRect();
-      const last = items[items.length - 1].getBoundingClientRect();
-      setNavWidth(Math.round(last.right - first.left));
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(row);
-    for (const child of Array.from(row.children)) ro.observe(child);
-    return () => ro.disconnect();
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -144,7 +127,6 @@ export function Header() {
             {/* Row 2 — navigation, aligned to the panel edge */}
             <nav className="hidden xl:block">
               <div
-                ref={navRowRef}
                 className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8"
               >
                 {NAV.map((item) => {
@@ -201,14 +183,11 @@ export function Header() {
               </div>
             </nav>
 
-            {/* Row 3 — global search (homepage), left-aligned with the navigation */}
+            {/* Row 3 — global search (homepage): fluid, aligned with the nav */}
             {isHome && (
               <div className="hidden border-t border-border/50 xl:block">
                 <div className="flex items-center py-[calc(10*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
-                  <div
-                    className="w-full min-w-0"
-                    style={navWidth ? { maxWidth: `${navWidth}px` } : undefined}
-                  >
+                  <div className="w-full min-w-0">
                     <SearchField />
                   </div>
                 </div>

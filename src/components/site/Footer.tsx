@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
 import { useGSAP } from "@gsap/react";
@@ -89,6 +89,13 @@ const CONTACTS = [
     value: "www.abufarhamedical.com",
     href: "https://www.abufarhamedical.com",
   },
+];
+
+const LEGAL: FooterLink[] = [
+  { label: "Privacy Policy", to: "/privacy-policy" },
+  { label: "Terms & Conditions", to: "/terms" },
+  { label: "FAQs", to: "/faqs" },
+  { label: "Sitemap", to: "/sitemap" },
 ];
 
 export function Footer() {
@@ -184,8 +191,114 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-[100rem] px-6 lg:px-10">
-        {/* Top footer — desktop layout, proportionally scaled on mobile */}
-        <MobileScaledDesktopBlock referenceWidth={1024}>
+        {/* ============ MOBILE / TABLET (<lg) — purpose-built layout ============ */}
+        <div className="lg:hidden">
+          {/* Brand */}
+          <div className="py-8">
+            <Logo light size="default" />
+            <p className="mt-4 max-w-prose text-[15px] leading-relaxed text-white/55">
+              Delivering advanced medical technologies, turnkey project delivery, biomedical
+              engineering and long-term support for healthcare providers across Africa, the Middle
+              East and emerging healthcare markets.
+            </p>
+            <div className="mt-5 flex items-center gap-4">
+              {SOCIALS.map(({ label, Icon, color, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-white/5"
+                  style={{ ["--sc" as string]: color }}
+                >
+                  <Icon className="h-5 w-5 text-white/75" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact — one readable row per item */}
+          <div className="h-px w-full bg-white/10" />
+          <ul className="grid gap-4 py-7 sm:grid-cols-2 sm:gap-x-8">
+            {CONTACTS.map(({ Icon, label, value, href }) => {
+              const inner = (
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5">
+                    <Icon className="h-4 w-4 text-white/55" strokeWidth={1.6} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[11px] font-medium uppercase tracking-[0.16em] text-white/40">
+                      {label}
+                    </span>
+                    <span className="mt-0.5 block text-[15px] leading-snug text-white/85 [overflow-wrap:anywhere]">
+                      {value}
+                    </span>
+                  </span>
+                </div>
+              );
+              return (
+                <li key={label}>
+                  {href ? (
+                    <a href={href} className="block py-1">
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className="py-1">{inner}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Link groups — two readable columns, wrap-safe */}
+          <div className="h-px w-full bg-white/10" />
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 py-8">
+            {COLS.map((col) => (
+              <nav key={col.title} aria-label={col.title} className="min-w-0">
+                <h2 className="font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-white/85">
+                  {col.title}
+                </h2>
+                <ul className="mt-3 space-y-2.5 text-[14px]">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <Link
+                        to={l.to}
+                        className="block leading-snug text-white/55 [overflow-wrap:anywhere]"
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
+
+          {/* Legal links, then a clear separation before the copyright */}
+          <div className="h-px w-full bg-white/10" />
+          <nav aria-label="Legal" className="grid grid-cols-2 gap-x-6 gap-y-1 py-4 text-[14px]">
+            {LEGAL.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                activeProps={{ className: "text-primary font-semibold" }}
+                className="flex min-h-[44px] items-center text-white/60"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="h-px w-full bg-white/10" />
+          <div className="py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center text-[12.5px] leading-relaxed text-white/40">
+            © 2026 AbuFarha Medical Equipment.
+            <br />
+            All Rights Reserved.
+          </div>
+        </div>
+
+        {/* ============ DESKTOP (lg+) — unchanged ============ */}
+        <div className="hidden lg:block">
           <div className="grid grid-cols-[1.7fr_1fr_1.1fr_0.9fr_0.9fr] gap-x-8 gap-y-10 py-10 lg:py-14">
             <div className="min-w-0">
               <Logo light size="lg" />
@@ -231,132 +344,66 @@ export function Footer() {
               </div>
             ))}
           </div>
-        </MobileScaledDesktopBlock>
 
-        {/* Premium divider + contact bar */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="py-4 lg:py-6">
-          <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
-            {CONTACTS.map(({ Icon, label, value, href }) => {
-              const inner = (
-                <div className="flex items-start gap-3">
-                  <Icon
-                    className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45"
-                    strokeWidth={1.5}
-                  />
-                  <div className="min-w-0">
-                    <div className="text-[calc(10.5*var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
-                      {label}
-                    </div>
-                    <div className="mt-1 truncate text-[calc(13.5*var(--desktop-px-unit))] text-white/75">
-                      {value}
+          {/* Premium divider + contact bar */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+          <div className="py-4 lg:py-6">
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
+              {CONTACTS.map(({ Icon, label, value, href }) => {
+                const inner = (
+                  <div className="flex items-start gap-3">
+                    <Icon
+                      className="mt-0.5 h-[calc(18*var(--desktop-px-unit))] w-[calc(18*var(--desktop-px-unit))] shrink-0 text-white/45"
+                      strokeWidth={1.5}
+                    />
+                    <div className="min-w-0">
+                      <div className="text-[calc(10.5*var(--desktop-px-unit))] font-medium uppercase tracking-[0.16em] text-white/35">
+                        {label}
+                      </div>
+                      <div className="mt-1 truncate text-[calc(13.5*var(--desktop-px-unit))] text-white/75">
+                        {value}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-              return href ? (
-                <a key={label} href={href} className="transition-colors hover:[&_*]:text-white/90">
-                  {inner}
-                </a>
-              ) : (
-                <div key={label}>{inner}</div>
-              );
-            })}
+                );
+                return href ? (
+                  <a key={label} href={href} className="transition-colors hover:[&_*]:text-white/90">
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={label}>{inner}</div>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* Copyright + Legal */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-        <div className="flex flex-col items-center justify-between gap-3 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row sm:pb-4 lg:py-5">
-          <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
-            © 2026 AbuFarha Medical Equipment. All Rights Reserved.
+          {/* Copyright + Legal */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+          <div className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row lg:py-5">
+            <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
+              © 2026 AbuFarha Medical Equipment. All Rights Reserved.
+            </div>
+            <nav
+              aria-label="Legal"
+              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[calc(12.5*var(--desktop-px-unit))]"
+            >
+              {LEGAL.map((l, i, arr) => (
+                <span key={l.to} className="flex items-center gap-2">
+                  <Link
+                    to={l.to}
+                    activeProps={{ className: "text-primary font-semibold" }}
+                    className="text-white/50 transition-colors hover:text-white"
+                  >
+                    {l.label}
+                  </Link>
+                  {i < arr.length - 1 ? <span className="text-white/20">|</span> : null}
+                </span>
+              ))}
+            </nav>
           </div>
-          <nav
-            aria-label="Legal"
-            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[calc(12.5*var(--desktop-px-unit))]"
-          >
-            {[
-              { label: "Privacy Policy", to: "/privacy-policy" },
-              { label: "Terms & Conditions", to: "/terms" },
-              { label: "FAQs", to: "/faqs" },
-              { label: "Sitemap", to: "/sitemap" },
-            ].map((l, i, arr) => (
-              <span key={l.to} className="flex items-center gap-2">
-                <Link
-                  to={l.to}
-                  activeProps={{ className: "text-primary font-semibold" }}
-                  className="text-white/50 transition-colors hover:text-white"
-                >
-                  {l.label}
-                </Link>
-                {i < arr.length - 1 ? <span className="text-white/20">|</span> : null}
-              </span>
-            ))}
-          </nav>
         </div>
       </div>
     </footer>
   );
 }
 
-/**
- * Renders desktop-styled content at a fixed reference width and proportionally
- * scales it down on viewports narrower than `referenceWidth` so the desktop
- * layout fits without horizontal overflow. At `lg` and above (>=1024px),
- * scaling is disabled and the content renders at its natural size.
- */
-function MobileScaledDesktopBlock({
-  children,
-  referenceWidth,
-}: {
-  children: React.ReactNode;
-  referenceWidth: number;
-}) {
-  const outerRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
-  const [innerHeight, setInnerHeight] = useState<number | null>(null);
-
-  useEffect(() => {
-    const outer = outerRef.current;
-    const inner = innerRef.current;
-    if (!outer || !inner) return;
-
-    const update = () => {
-      const cw = outer.clientWidth;
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-      const s = isDesktop ? 1 : Math.min(1, cw / referenceWidth);
-      setScale(s);
-      setInnerHeight(inner.getBoundingClientRect().height / (s || 1));
-    };
-
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(outer);
-    ro.observe(inner);
-    window.addEventListener("resize", update);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", update);
-    };
-  }, [referenceWidth]);
-
-  return (
-    <div
-      ref={outerRef}
-      className="w-full overflow-hidden"
-      style={{ height: innerHeight != null ? innerHeight * scale : undefined }}
-    >
-      <div
-        ref={innerRef}
-        style={{
-          width: `${referenceWidth}px`,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}

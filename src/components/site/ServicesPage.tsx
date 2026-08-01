@@ -519,23 +519,23 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
           decoding="async"
         />
       </div>
-      <div className="flex flex-col p-6">
-        <div className="flex items-start gap-3">
-          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-primary/30 bg-primary/10">
-            <Icon className="h-4.5 w-4.5 text-primary" strokeWidth={1.7} />
+      <div className="flex flex-col p-4 sm:p-6">
+        <div className="flex items-start gap-2.5 sm:gap-3">
+          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-primary/30 bg-primary/10 sm:h-9 sm:w-9">
+            <Icon className="h-4 w-4 text-primary sm:h-4.5 sm:w-4.5" strokeWidth={1.7} />
           </div>
           <h3 className="min-w-0 font-display text-[calc(17*var(--desktop-px-unit))] font-extrabold leading-tight text-foreground [overflow-wrap:anywhere]">
             {item.title}
           </h3>
         </div>
-        <p className="mt-3 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-[calc(13*var(--desktop-px-unit))] leading-snug text-muted-foreground sm:mt-3 sm:leading-relaxed">
           {item.desc}
         </p>
-        <ul className="mt-3 space-y-1.5">
+        <ul className="mt-2 space-y-1 sm:mt-3 sm:space-y-1.5">
           {item.bullets.map((b) => (
             <li
               key={b}
-              className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] text-foreground/85"
+              className="flex items-center gap-2 text-[calc(12.5*var(--desktop-px-unit))] leading-snug text-foreground/85"
             >
               <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-primary/15">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -546,7 +546,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
         </ul>
         <a
           href="#request"
-          className="mt-4 inline-flex items-center gap-1.5 text-[calc(12.5*var(--desktop-px-unit))] font-semibold text-primary hover:underline"
+          className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 text-[calc(12.5*var(--desktop-px-unit))] font-semibold text-primary hover:underline sm:mt-4 sm:min-h-0"
         >
           Learn More <ArrowRight className="h-3.5 w-3.5" />
         </a>
@@ -557,7 +557,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
 
 function CoreServices() {
   return (
-    <section className="bg-white pb-20">
+    <section className="bg-white pb-12 sm:pb-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="text-center">
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -565,7 +565,7 @@ function CoreServices() {
           </h2>
           <div className="mx-auto mt-3 h-[calc(3*var(--desktop-px-unit))] w-14 rounded-full bg-primary" />
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
           {CORE.map((c) => (
             <ServiceCard key={c.title} item={c} />
           ))}
