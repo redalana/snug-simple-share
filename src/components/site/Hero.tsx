@@ -150,7 +150,7 @@ export function Hero() {
               decoding="async"
               className={`h-full w-full object-cover ${s.imageClass}`}
             />
-            <div className={`absolute inset-0 ${s.scrimClass}`} />
+            <div className={`absolute inset-0 ${SCRIM}`} />
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
           </div>
         ))}
@@ -166,7 +166,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -12 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className={`min-w-0 ${CONTENT_COL[slide.layout]}`}
+            className={`min-w-0 ${CONTENT_COL}`}
           >
             <p className="flex items-center gap-3 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary-on-dark">
               <span aria-hidden className="h-px w-8 bg-primary-on-dark/70" />
@@ -174,7 +174,7 @@ export function Hero() {
             </p>
 
             <h1
-              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance ${TITLE_SIZE[slide.layout]}`}
+              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance ${TITLE_SIZE}`}
             >
               {slide.title.map((line) => (
                 <span key={line} className="block">
