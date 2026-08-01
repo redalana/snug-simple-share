@@ -20,6 +20,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { PhoneField } from "@/components/site/PhoneField";
 import { PRODUCTS } from "@/lib/products";
 import { onOpenQuoteModal, emitQuoteModalState, type QuoteContext } from "@/lib/quote-modal";
+import { submitLead } from "@/lib/leads.functions";
 
 const COUNTRIES = defaultCountries.map(parseCountry).sort((a, b) => a.name.localeCompare(b.name));
 
@@ -94,6 +95,8 @@ export function QuoteModal() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [botField, setBotField] = useState("");
 
 
   const navigate = useNavigate();
@@ -158,7 +161,8 @@ export function QuoteModal() {
     !!country &&
     phoneValid &&
     emailValid &&
-    !!interest;
+    !!interest &&
+    consent;
 
 
   const showError = (k: string, cond: boolean) => touched[k] && cond;
@@ -167,13 +171,38 @@ export function QuoteModal() {
     e.preventDefault();
     if (!isValid || submitting || success) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 650));
+    try {
+      await submitLead({
+        data: {
+          source: "quote",
+          fullName: name.trim(),
+          email: email.trim(),
+          phone,
+          customerProfile: profile,
+          organization: org.trim(),
+          country: activeCountry?.name ?? country,
+          city,
+          department,
+          interest,
+          product: product.trim(),
+          preferredContact: contact,
+          message: ctx.source ? `Opened from: ${ctx.source}` : "",
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
+      });
+    } catch {
+      setSubmitting(false);
+      return;
+    }
     setSubmitting(false);
     setSuccess(true);
     await new Promise((r) => setTimeout(r, 1100));
     setOpen(false);
     navigate({ to: "/thank-you", search: { source: "quote" } as never });
   };
+
 
   const resetOnClose = (o: boolean) => {
     setOpen(o);
@@ -189,6 +218,8 @@ export function QuoteModal() {
       setTouched({});
       setSuccess(false);
       setSubmitting(false);
+      setConsent(false);
+      setBotField("");
     }
   };
 
@@ -616,8 +647,47 @@ export function QuoteModal() {
 
             </div>
 
+            {/* Spam honeypot — hidden from users and assistive technology. */}
+            <div aria-hidden className="pointer-events-none absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+              <label htmlFor="qm-company-website">Company website</label>
+              <input
+                id="qm-company-website"
+                name="company-website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={botField}
+                onChange={(e) => setBotField(e.target.value)}
+              />
+            </div>
+
+            {/* PRIVACY CONSENT */}
+            <div className="mt-5 border-t border-border/60 pt-4 [@media(max-height:800px)]:mt-4 [@media(max-height:800px)]:pt-3">
+              <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--primary)]"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                />
+                <span>
+                  I agree that AbuFarha Medical may store my details and contact me about this
+                  request, as described in the{" "}
+                  <a
+                    href="/privacy-policy"
+                    className="font-semibold text-primary hover:underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                  . *
+                </span>
+              </label>
+            </div>
+
             {/* TRUST STRIP */}
-            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 [@media(max-height:800px)]:mt-4 [@media(max-height:800px)]:pt-3 text-xs font-medium text-muted-foreground">
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 pt-0 [@media(max-height:800px)]:mt-3 text-xs font-medium text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck className="h-4 w-4 text-primary/80" /> Your information is securely
                 transmitted
@@ -626,6 +696,7 @@ export function QuoteModal() {
                 <Clock className="h-4 w-4 text-primary/80" /> We usually respond within 24 hours
               </span>
             </div>
+
 
             {/* ACTIONS */}
             <div className="mt-4 flex flex-col-reverse items-stretch gap-3 [@media(max-height:800px)]:mt-3 sm:flex-row sm:items-center sm:justify-end">

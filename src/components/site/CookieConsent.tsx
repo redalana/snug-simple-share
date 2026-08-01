@@ -15,12 +15,23 @@ function readPrefs(): Prefs | null {
   }
 }
 
+/**
+ * Persist the choice and immediately push it into Google Consent Mode v2 so
+ * analytics only ever measures visitors who opted in.
+ */
 function savePrefs(p: Prefs) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
   } catch {
     /* noop */
   }
+  const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+  w.gtag?.("consent", "update", {
+    analytics_storage: p.analytics ? "granted" : "denied",
+    ad_storage: p.marketing ? "granted" : "denied",
+    ad_user_data: p.marketing ? "granted" : "denied",
+    ad_personalization: p.marketing ? "granted" : "denied",
+  });
 }
 
 export function CookieConsent() {

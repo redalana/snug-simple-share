@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { submitLead } from "@/lib/leads.functions";
 import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { toast } from "sonner";
@@ -104,6 +106,9 @@ const schema = z.object({
     .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number for the selected country"),
 
   message: z.string().trim().min(1, "Please add a short message").max(1000),
+  consent: z
+    .boolean()
+    .refine((v) => v === true, "Please accept the Privacy Policy so we can contact you."),
 });
 
 const TRUST = [
@@ -147,6 +152,9 @@ export function ContactForm() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [botField, setBotField] = useState("");
+
 
   const dynFields = customerType ? (DYNAMIC_FIELDS[customerType] ?? []) : [];
 
@@ -159,7 +167,7 @@ export function ContactForm() {
 
   const setField = (name: string, v: string) => setValues((s) => ({ ...s, [name]: v }));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
       fullName: values.fullName ?? "",
@@ -168,6 +176,7 @@ export function ContactForm() {
       email: values.email ?? "",
       whatsapp: values.whatsapp ?? "",
       message: values.message ?? "",
+      consent,
     };
     const result = schema.safeParse(payload);
     if (!result.success) {
@@ -179,13 +188,35 @@ export function ContactForm() {
     }
     setErrors({});
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await submitLead({
+        data: {
+          source: "contact",
+          fullName: payload.fullName,
+          email: payload.email,
+          phone: payload.whatsapp,
+          customerProfile: payload.customerType,
+          organization:
+            values.hospitalName ?? values.companyName ?? values.orgName ?? values.facility ?? "",
+          country: values.country ?? "",
+          department: values.department ?? values.specialty ?? "",
+          interest: payload.interest,
+          message: payload.message,
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
+      });
       toast.success("Thank you — our team will reach out shortly.");
       setValues({});
       setCustomerType("");
       setInterest("");
-    }, 700);
+      setConsent(false);
+    } catch {
+      toast.error("Something went wrong sending your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -512,6 +543,52 @@ export function ContactForm() {
                 </p>
               )}
             </div>
+
+            {/* Spam honeypot — hidden from users and assistive technology. */}
+            <div aria-hidden className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden">
+              <label htmlFor="company-website">Company website</label>
+              <input
+                id="company-website"
+                name="company-website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={botField}
+                onChange={(e) => setBotField(e.target.value)}
+              />
+            </div>
+
+            {/* Privacy consent — required before we may contact the visitor. */}
+            <div className="mt-5">
+              <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-muted-foreground">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--primary)]"
+                  checked={consent}
+                  aria-invalid={!!errors.consent}
+                  aria-describedby={errors.consent ? "consent-error" : undefined}
+                  onChange={(e) => {
+                    setConsent(e.target.checked);
+                    setErrors((s) => ({ ...s, consent: "" }));
+                  }}
+                />
+                <span>
+                  I agree that AbuFarha Medical may store my details and contact me about this
+                  enquiry, as described in the{" "}
+                  <Link to="/privacy-policy" className="font-semibold text-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  . <span className="text-primary">*</span>
+                </span>
+              </label>
+              {errors.consent && (
+                <p id="consent-error" role="alert" className="mt-1.5 text-xs font-medium text-destructive">
+                  {errors.consent}
+                </p>
+              )}
+            </div>
+
+
 
             <motion.button
               type="submit"
