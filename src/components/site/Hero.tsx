@@ -186,7 +186,7 @@ export function Hero() {
           >
             <motion.img
               src={heroCinematic}
-              alt="Cinematic view of an advanced interventional cath lab suite with live angiography displays"
+              alt="AbuFarha biomedical engineer commissioning an advanced MRI scanner inside a hospital imaging department"
               width={1264}
               height={843}
               loading="eager"
