@@ -95,7 +95,7 @@ export function Header() {
           {/* Right column — everything begins immediately after the panel */}
           <div className="flex min-w-0 flex-1 flex-col">
             {/* Row 1 — utility bar */}
-            <div className="flex h-[calc(72*var(--desktop-px-unit))] items-center gap-4 pr-4 xl:h-[calc(38*var(--desktop-px-unit))] xl:border-b xl:border-border/50 lg:pr-8">
+            <div className="flex h-[calc(56*var(--desktop-px-unit))] items-center gap-4 pr-4 sm:h-[calc(60*var(--desktop-px-unit))] xl:h-[calc(38*var(--desktop-px-unit))] xl:border-b xl:border-border/50 lg:pr-8">
               <div className="ml-auto hidden shrink-0 items-center gap-[calc(20*var(--desktop-px-unit))] lg:flex">
                 <LanguageSelector />
 
