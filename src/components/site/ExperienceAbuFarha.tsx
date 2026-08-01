@@ -53,7 +53,7 @@ export function ExperienceAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[105rem] min-w-0 px-6 lg:px-10">
+      <div className="relative mx-auto max-w-[100rem] min-w-0 px-6 lg:px-10">
         {/* ------------------------------- Header ------------------------------ */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
