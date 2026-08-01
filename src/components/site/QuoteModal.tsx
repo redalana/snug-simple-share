@@ -71,8 +71,10 @@ export function QuoteModal() {
 
   // form state
   const [name, setName] = useState("");
+  const [profile, setProfile] = useState<string>("");
   const [org, setOrg] = useState("");
   const [country, setCountry] = useState("eg");
+  const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState<string>("");
@@ -87,8 +89,10 @@ export function QuoteModal() {
   // popovers
   const [countryQuery, setCountryQuery] = useState("");
   const [countryOpen, setCountryOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
+
 
   const navigate = useNavigate();
 
