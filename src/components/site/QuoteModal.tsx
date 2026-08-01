@@ -44,7 +44,8 @@ const ORG_FIELD: Record<string, { label: string; placeholder: string }> = {
   Hospital: { label: "Hospital Name", placeholder: "Hospital name" },
   Distributor: { label: "Company Name", placeholder: "Company name" },
   Doctor: { label: "Clinic / Hospital", placeholder: "Clinic or hospital name" },
-  Government: { label: "Organization", placeholder: "Organization name" },
+  Government: { label: "Organization Name", placeholder: "Organization name" },
+  Other: { label: "Organization", placeholder: "Organization name" },
 };
 
 type Contact = "whatsapp" | "email";
