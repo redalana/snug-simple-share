@@ -1,24 +1,20 @@
 import { Link } from "@tanstack/react-router";
 import { Eyebrow } from "../Eyebrow";
+import {
+  HERO_SECTION,
+  HERO_GRID,
+  HERO_MEDIA_FRAME,
+  HERO_MEDIA_IMG,
+  HeroBackdrop,
+} from "../hero/heroShell";
 import { HERO_KPIS, heroImg, engImg } from "./data";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
-      <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="AbuFarha engineer inspecting an imaging system"
-          className="h-full w-full object-cover opacity-80"
-          width={1600}
-          height={1100}
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/10" />
-      </div>
-      <div className="relative mx-auto grid max-w-[100rem] items-center gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(420*var(--desktop-px-unit))] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 lg:px-10 lg:pt-16 lg:pb-14">
+    <section className={HERO_SECTION}>
+      <HeroBackdrop src={heroImg} priority />
+      <div className={`${HERO_GRID} items-center lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]`}>
+
         <div className="min-w-0 max-w-full lg:max-w-[600px]">
           <Eyebrow tone="light" index="01">
             About Us
