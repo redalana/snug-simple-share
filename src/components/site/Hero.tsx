@@ -183,9 +183,11 @@ export function Hero() {
               <span className="block text-primary-on-dark">{slide.accent}</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75">
+            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75 lg:min-h-[5.5rem]">
               {slide.body}
             </p>
+
+
 
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
