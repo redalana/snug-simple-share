@@ -3,9 +3,9 @@ import { FileText } from "lucide-react";
 import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
 
 /**
- * Sits 20px above the floating WhatsApp button (which uses --af-wa-base
- * of 90px mobile / 120px desktop). Total offset = base + 60px (WA button)
- * + 20px gap.
+ * Sits directly above the floating WhatsApp button (which uses --af-wa-base
+ * of 16px mobile / 24px desktop plus the safe-area inset). Total offset =
+ * WA base + WA button height + a 12px gap.
  */
 export function FloatingQuoteButton() {
   const [footerLift, setFooterLift] = useState(0);
