@@ -177,6 +177,9 @@ export function QuoteModal() {
     setOpen(o);
     if (!o) {
       setInterest("");
+      setProfile("");
+      setCity("");
+
       setPhone("");
       setContact("email");
       setTouched({});
