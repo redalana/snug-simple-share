@@ -557,7 +557,7 @@ function ServiceCard({ item }: { item: (typeof CORE)[number] }) {
 
 function CoreServices() {
   return (
-    <section className="bg-white pb-20">
+    <section className="bg-white pb-12 sm:pb-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="text-center">
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
@@ -565,7 +565,7 @@ function CoreServices() {
           </h2>
           <div className="mx-auto mt-3 h-[calc(3*var(--desktop-px-unit))] w-14 rounded-full bg-primary" />
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
           {CORE.map((c) => (
             <ServiceCard key={c.title} item={c} />
           ))}
