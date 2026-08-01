@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 
 import { Eyebrow } from "./Eyebrow";
+import { HERO_SECTION, HERO_GRID } from "./hero/heroShell";
+
 import { PhoneField } from "./PhoneField";
 import { COUNTRIES as AFRICA_COUNTRIES, MAP_W, MAP_H } from "./africaMapData";
 import { cn } from "@/lib/utils";
