@@ -28,8 +28,8 @@ export function Logo({
       <img
         src={logoAsset}
         alt="AbuFarha Medical Supplies"
-        width={2280}
-        height={1310}
+        width={1421}
+        height={814}
         decoding="async"
         className={
           isHeader
