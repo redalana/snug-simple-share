@@ -1,6 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Headphones } from "lucide-react";
-import { HERO_SECTION, HERO_GRID, HeroBackdrop } from "../hero/heroShell";
+import {
+  HERO_SECTION,
+  HERO_GRID,
+  HERO_COLS,
+  HERO_COPY_COL,
+  HERO_TITLE,
+  HERO_LEAD,
+  HERO_CTA_ROW,
+  HERO_BTN_PRIMARY,
+  HERO_BTN_GHOST,
+  HERO_SIDE_COL,
+  HeroBackdrop,
+} from "../hero/heroShell";
 import { heroImg } from "./data";
 
 export function Hero() {
@@ -13,35 +25,34 @@ export function Hero() {
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       </div>
 
-      <div className={`${HERO_GRID} items-center lg:grid-cols-[1.05fr_0.95fr]`}>
-
-        <div>
+      <div className={`${HERO_GRID} ${HERO_COLS}`}>
+        <div className={HERO_COPY_COL}>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             After Sales Support
           </div>
-          <h1 className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-tight sm:text-[3.25rem] lg:text-[calc(56*var(--desktop-px-unit))]">
+          <h1 className={HERO_TITLE}>
             Reliable Support.
             <br />
             <span className="text-primary">Maximum</span>
             <br />
             <span className="text-white/95">Performance.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className={HERO_LEAD}>
             We keep your medical equipment running at peak performance with expert care, genuine
             parts and fast response — every time.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className={HERO_CTA_ROW}>
             <a
               href="#request"
-              className="group inline-flex min-h-[48px] items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5 sm:px-7 sm:py-4"
+              className={`group ${HERO_BTN_PRIMARY}`}
             >
               Request Service
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="tel:+96264026063"
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white/10 sm:px-7 sm:py-4"
+              className={HERO_BTN_GHOST}
             >
               <Headphones className="h-4 w-4" />
               Emergency Support
@@ -54,7 +65,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
+          className={HERO_SIDE_COL}
         >
           <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-br from-primary/30 via-primary/5 to-transparent blur-3xl" />
           <motion.div

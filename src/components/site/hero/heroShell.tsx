@@ -11,9 +11,49 @@ import { cn } from "@/lib/utils";
 export const HERO_SECTION =
   "relative isolate overflow-hidden bg-[#0d0f12] text-white";
 
-/** Inner grid: identical container width, horizontal padding, vertical rhythm and min height. */
+/**
+ * Inner grid: identical container width, horizontal padding, vertical rhythm
+ * and min height. The `lg:min-h` is the single value that pins every hero to
+ * the exact same rendered height as the Services reference (80 top + 530
+ * content + 64 bottom padding).
+ */
 export const HERO_GRID =
-  "relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16";
+  "relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(531*var(--desktop-px-unit))] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16";
+
+/** Column split: copy left, media/panel right — identical on every hero. */
+export const HERO_COLS = "lg:grid-cols-[1.35fr_0.65fr]";
+
+/** Left copy column (reserves the reference content height). */
+export const HERO_COPY_COL = "relative min-w-0 lg:min-h-[calc(531*var(--desktop-px-unit))]";
+
+/** Headline — identical size, leading, tracking and max width everywhere. */
+export const HERO_TITLE =
+  "mt-6 max-w-2xl font-display text-[2.375rem] font-extrabold leading-[1.05] tracking-tight text-balance [overflow-wrap:break-word] sm:text-5xl lg:text-[calc(46*var(--desktop-px-unit))]";
+
+/** Lead paragraph — identical width, size and leading everywhere. */
+export const HERO_LEAD =
+  "mt-6 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-[1.75] text-white/70 [overflow-wrap:break-word]";
+
+/** CTA row spacing. */
+export const HERO_CTA_ROW = "mt-8 flex flex-wrap items-center gap-4";
+
+/** Primary CTA — identical padding, radius and rendered height on every hero. */
+export const HERO_BTN_PRIMARY =
+  "inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90";
+
+/**
+ * Secondary CTA — 1px less vertical padding than the primary so the 1px border
+ * does not make the CTA row 2px taller.
+ */
+export const HERO_BTN_GHOST =
+  "inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/5 px-[calc(1.5rem-1px)] py-[calc(0.75rem-1px)] text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10";
+
+/** Optional stat/highlight card grid under the CTAs. */
+export const HERO_CARD_GRID = "mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4";
+
+/** A single card inside HERO_CARD_GRID — fixed height so every hero matches. */
+export const HERO_CARD =
+  "flex min-w-0 flex-col rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07] lg:h-[calc(102*var(--desktop-px-unit))]";
 
 /** Inset hero media card (used when a hero shows a framed photograph). */
 export const HERO_MEDIA_FRAME =
@@ -21,6 +61,10 @@ export const HERO_MEDIA_FRAME =
 
 /** Image inside the inset media card. */
 export const HERO_MEDIA_IMG = "absolute inset-0 h-full w-full object-cover object-center";
+
+/** Right-hand column wrapper (media card or stat panel). */
+export const HERO_SIDE_COL = "relative min-w-0 lg:justify-self-end lg:self-center lg:w-full";
+
 
 export type HeroBackdropProps = {
   src: string;
