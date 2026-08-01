@@ -14,6 +14,7 @@ import {
   Truck,
   PlugZap,
   Activity,
+  Check,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -61,6 +62,17 @@ function StatBlock({ stat }: { stat: Stat }) {
     </div>
   );
 }
+
+/* -------------------------- Trust / capability list ----------------------- */
+
+const TRUST: string[] = [
+  "OEM Certified Equipment",
+  "Factory-trained Engineers",
+  "Installation & Commissioning",
+  "Clinical Applications Training",
+  "OEM Spare Parts Supply",
+  "Long-term Technical Support",
+];
 
 /* ------------------------------- Process --------------------------------- */
 
@@ -147,7 +159,7 @@ export function WhyAbuFarha() {
               commission advanced medical systems — then train their teams and support the
               technology for its entire lifecycle.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button asChild size="lg" className="h-14 min-w-0 rounded-full px-8 text-base">
                 <Link to="/contact">
                   <Wrench aria-hidden="true" />
@@ -169,6 +181,20 @@ export function WhyAbuFarha() {
                 </Link>
               </Button>
             </div>
+
+            <ul className="mt-9 grid max-w-xl gap-x-8 gap-y-3 border-t border-border/70 pt-8 sm:grid-cols-2">
+              {TRUST.map((t) => (
+                <li key={t} className="flex min-w-0 items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 text-[calc(15*var(--desktop-px-unit))] font-semibold leading-snug text-ink">
+                    {t}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
           </motion.div>
 
           <motion.div

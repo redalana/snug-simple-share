@@ -77,8 +77,8 @@ function LogoItem({ brand }: { brand: Brand }) {
 export function BrandsMarquee() {
   const loop = [...BRANDS, ...BRANDS];
   return (
-    <section id="brands" className="border-y border-border bg-white py-20">
-      <div className="mx-auto max-w-[90rem] px-6 lg:px-10">
+    <section id="brands" className="border-y border-border bg-white py-14">
+      <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
         <div className="text-center">
           <div className="flex justify-center">
             <Eyebrow align="center">Trusted by World-Leading Medical Manufacturers</Eyebrow>
@@ -90,7 +90,7 @@ export function BrandsMarquee() {
       </div>
 
       <div
-        className="marquee-mask group relative mt-10 overflow-hidden"
+        className="marquee-mask group relative mt-8 overflow-hidden"
         aria-label="Trusted medical technology brands"
       >
         <ul
@@ -105,7 +105,7 @@ export function BrandsMarquee() {
         </ul>
       </div>
 
-      <div className="mx-auto mt-10 max-w-[90rem] px-6 text-center lg:px-10">
+      <div className="mx-auto mt-8 max-w-[100rem] px-6 text-center lg:px-10">
         <Link
           to="/brands"
           className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 text-sm font-semibold text-primary transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"

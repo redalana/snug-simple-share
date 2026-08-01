@@ -124,27 +124,35 @@ export function ExperienceAbuFarha() {
           <div className="order-2 min-w-0 self-start md:order-1">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={active.id} {...anim} transition={{ duration: 0.35, ease: EASE }}>
-                <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink [overflow-wrap:anywhere]">
+                <h3
+                  className={`font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] [overflow-wrap:anywhere] ${
+                    active.accentTitle ? "text-primary" : "text-ink"
+                  }`}
+                >
                   {active.title}
                 </h3>
                 <p className="mt-4 max-w-2xl text-[calc(16.5*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
                   {active.description}
                 </p>
 
-                <ul className="mt-7 grid gap-3.5 sm:grid-cols-2">
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {active.highlights.map((h) => (
                     <li key={h} className="flex min-w-0 items-start gap-3">
                       <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/25 bg-white text-primary">
                         <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden="true" />
                       </span>
-                      <span className="min-w-0 text-[calc(16.5*var(--desktop-px-unit))] font-semibold leading-[1.5] text-ink [overflow-wrap:anywhere]">
+                      <span className="min-w-0 text-[calc(16*var(--desktop-px-unit))] font-semibold leading-[1.5] text-ink [overflow-wrap:anywhere]">
                         {h}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-9">
+                <p className="mt-6 max-w-2xl border-l-2 border-primary/25 pl-4 text-[calc(15*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+                  {active.note}
+                </p>
+
+                <div className="mt-7">
                   <Link
                     to={active.cta.to}
                     className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[calc(15*var(--desktop-px-unit))] font-bold text-primary-foreground shadow-[0_18px_38px_-16px_var(--primary)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_24px_48px_-18px_var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
@@ -159,6 +167,7 @@ export function ExperienceAbuFarha() {
               </motion.div>
             </AnimatePresence>
           </div>
+
 
           {/* Image — fixed 4:3 frame, identical for every tab */}
           <div className="order-1 min-w-0 md:order-2">

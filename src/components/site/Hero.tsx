@@ -18,8 +18,6 @@ type Slide = {
   title: string[];
   accent: string;
   body: string;
-  notes?: string[];
-  proof?: { value: string; label: string }[];
   primary: { label: string; href: string };
   image: string;
   alt: string;
@@ -39,11 +37,6 @@ const SLIDES: Slide[] = [
     title: ["We Engineer Complete", "Imaging Departments."],
     accent: "From Planning to Clinical Readiness.",
     body: "Equipment supply, site planning, installation, commissioning, clinical training and long-term technical support — delivered by one accountable partner across Africa and the Middle East.",
-    proof: [
-      { value: "1999", label: "Delivering Since" },
-      { value: "10+", label: "Countries" },
-      { value: "30+", label: "Major Projects" },
-    ],
     primary: { label: "Explore Products", href: "/products" },
     image: heroEnterprise,
     alt: "Modern hospital imaging department with MRI and CT rooms visible from the reading and control area",
@@ -68,7 +61,6 @@ const SLIDES: Slide[] = [
     title: ["Every CT Scan Starts", "With Correct Installation."],
     accent: "We Own That Step.",
     body: "Site planning, power and cooling, gantry installation, dose calibration and radiographer training — CT rooms that hold their image quality years after handover.",
-    notes: ["Install", "Calibrate", "Train"],
     primary: { label: "Explore CT Scanners", href: "/products/ct-scanners" },
     image: heroCt,
     alt: "Complete hospital CT suite showing the full gantry, patient table and control window with a biomedical engineer at the system",
@@ -87,6 +79,13 @@ const SLIDES: Slide[] = [
     imageClass: "object-[54%_50%]",
   },
 ];
+
+/** Company proof figures — identical on every slide so no slide is taller. */
+const PROOF = [
+  { value: "1999", label: "Delivering Since" },
+  { value: "10+", label: "Countries" },
+  { value: "30+", label: "Major Projects" },
+] as const;
 
 const CONTENT_COL = "lg:col-start-1 lg:col-end-7";
 const TITLE_SIZE = "text-[2rem] sm:text-[2.75rem] lg:text-[3.125rem]";
@@ -174,8 +173,9 @@ export function Hero() {
             </p>
 
             <h1
-              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance ${TITLE_SIZE}`}
+              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance sm:min-h-[11.7rem] lg:min-h-[13.3rem] ${TITLE_SIZE}`}
             >
+
               {slide.title.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -184,20 +184,12 @@ export function Hero() {
               <span className="block text-primary-on-dark">{slide.accent}</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75">
+            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75 lg:min-h-[5.5rem]">
               {slide.body}
             </p>
 
-            {slide.notes && (
-              <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-[calc(12*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-white/70">
-                {slide.notes.map((n, i) => (
-                  <span key={n} className="inline-flex items-center gap-4">
-                    {i > 0 && <span aria-hidden className="h-1 w-1 rounded-full bg-primary-on-dark" />}
-                    {n}
-                  </span>
-                ))}
-              </p>
-            )}
+
+
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
@@ -215,26 +207,26 @@ export function Hero() {
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
-
-            {slide.proof && (
-              <dl className="mt-10 grid max-w-lg grid-cols-3 gap-x-6 border-t border-white/12 pt-6">
-                {slide.proof.map((p) => (
-                  <div key={p.label} className="min-w-0">
-                    <dt className="sr-only">{p.label}</dt>
-                    <dd>
-                      <span className="block font-display text-2xl font-extrabold leading-none text-white">
-                        {p.value}
-                      </span>
-                      <span className="mt-2 block text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider text-white/55">
-                        {p.label}
-                      </span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            )}
           </motion.div>
         </AnimatePresence>
+
+        {/* ── Shared proof row — identical on every slide (no height shift) ── */}
+        <dl className={`grid max-w-lg grid-cols-3 gap-x-6 border-t border-white/12 pt-6 ${CONTENT_COL}`}>
+          {PROOF.map((p) => (
+            <div key={p.label} className="min-w-0">
+              <dt className="sr-only">{p.label}</dt>
+              <dd>
+                <span className="block font-display text-2xl font-extrabold leading-none text-white">
+                  {p.value}
+                </span>
+                <span className="mt-2 block text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider text-white/55">
+                  {p.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+
 
         {/* ── Named navigation ── */}
         <div className="col-span-full lg:col-span-full">
