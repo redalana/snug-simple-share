@@ -75,17 +75,10 @@ export function Header() {
             aria-label="AbuFarha Medical Supplies — home"
             className="flex w-[calc(148*var(--desktop-px-unit))] shrink-0 items-center justify-center self-stretch px-2 md:w-[calc(190*var(--desktop-px-unit))] md:px-3 xl:w-[calc(232*var(--desktop-px-unit))] xl:px-4"
           >
-            {/* At the top of the page the logo sits directly on the page — no card.
-                Once the header is sticky it gains an adaptive glass plate that
-                inherits the header surface (never a solid white box). Dimensions
-                are identical in both states, so there is no CLS. */}
-            <span
-              className={`flex h-full w-full items-center justify-center rounded-xl transition-all duration-[250ms] ease-out ${
-                scrolled
-                  ? "border border-border/50 bg-background/55 shadow-[0_4px_16px_-10px_rgba(15,23,42,0.22)] backdrop-blur-[10px]"
-                  : "border border-transparent bg-transparent shadow-none"
-              }`}
-            >
+            {/* The logo always sits directly on the navigation surface — no card,
+                no border, no white plate — so the header background shows through
+                its transparent areas in both scroll states. */}
+            <span className="flex h-full w-full items-center justify-center">
               <Logo size="header" />
             </span>
           </Link>
