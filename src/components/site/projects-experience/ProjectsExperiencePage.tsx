@@ -124,18 +124,9 @@ function Hero() {
 /* ============================================================
  * 2. REGIONAL PRESENCE  — compact map + country list
  * ==========================================================*/
-const COUNTRY_SUMMARY: Record<string, string> = {
-  Jordan: "Heart Center",
-  Iraq: "Cath Lab • MRI • Ultrasound",
-  Syria: "Cath Lab • MRI • IVF",
-  Yemen: "Cath Lab • MRI • CT",
-  Libya: "Cath Lab • IVF • Digital X-Ray",
-  Somalia: "Cardiology Consumables",
-  Somaliland: "Cath Lab Projects",
-  Egypt: "Cardiology Consumables",
-  Uzbekistan: "Heart Center",
-  Bangladesh: "Bone Density",
-};
+/* Country cards intentionally show the country name only — the map already
+   communicates regional coverage, so modality lists were removed. */
+
 
 // ISO-2 codes for flagcdn.com (official SVG country flags).
 // Somaliland is not internationally recognized as an independent country
