@@ -86,12 +86,12 @@ export function WhatsAppFloat() {
         className={`af-wa-wrap fixed right-4 z-[90] flex flex-row-reverse items-center gap-3 transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
         aria-hidden={modalOpen}
         style={{
-          bottom: `calc(var(--af-wa-base, 90px) + var(--af-cookie-bar, 0px) + ${footerLift}px)`,
+          bottom: `calc(var(--af-wa-base, 16px) + env(safe-area-inset-bottom, 0px) + var(--af-cookie-bar, 0px) + ${footerLift}px)`,
         }}
       >
         <style>{`
           @media (min-width: 1024px) {
-            .af-wa-wrap { --af-wa-base: 120px; }
+            .af-wa-wrap { --af-wa-base: 24px; }
           }
         `}</style>
         <a
