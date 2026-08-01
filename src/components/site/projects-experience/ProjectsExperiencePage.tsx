@@ -330,11 +330,6 @@ function RegionalPresence() {
                   <CountryFlag name={r.name} className="mt-0.5 h-4 w-6" />
                   <div className="min-w-0">
                     <div className="text-sm font-semibold text-ink">{r.name}</div>
-                    {COUNTRY_SUMMARY[r.name] && (
-                      <div className="mt-0.5 text-[calc(12*var(--desktop-px-unit))] leading-snug text-muted-foreground">
-                        {COUNTRY_SUMMARY[r.name]}
-                      </div>
-                    )}
                   </div>
                 </li>
               );
