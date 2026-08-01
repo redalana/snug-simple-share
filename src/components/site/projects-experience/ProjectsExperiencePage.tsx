@@ -728,14 +728,6 @@ function ExperienceGrid() {
               Trusted Across Africa &amp; The Middle East
             </h2>
           </div>
-          <Link
-            to="/projects"
-            hash="projects-list"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-primary"
-          >
-            View All Projects
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
