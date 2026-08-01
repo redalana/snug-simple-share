@@ -173,7 +173,7 @@ function buildIncluded(p: Product): string[] {
 /* ------------------------------------------------------------ draw helpers */
 
 /* Official AbuFarha logo, fetched once and reused across every generated page. */
-const LOGO_ASPECT = 2280 / 1310;
+const LOGO_ASPECT = 1421 / 814;
 let logoCache: string | null | undefined;
 
 async function loadLogo(): Promise<string | null> {
