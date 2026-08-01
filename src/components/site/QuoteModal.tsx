@@ -37,7 +37,18 @@ const INTERESTS = [
   "Other",
 ];
 
+const PROFILES = ["Hospital", "Distributor", "Doctor", "Government", "Other"] as const;
+
+/** The organization field adapts its label/placeholder to the selected profile. */
+const ORG_FIELD: Record<string, { label: string; placeholder: string }> = {
+  Hospital: { label: "Hospital Name", placeholder: "Hospital name" },
+  Distributor: { label: "Company Name", placeholder: "Company name" },
+  Doctor: { label: "Clinic / Hospital", placeholder: "Clinic or hospital name" },
+  Government: { label: "Organization", placeholder: "Organization name" },
+};
+
 type Contact = "whatsapp" | "email";
+
 
 // Maps the "I'm Interested In" category to product category names in PRODUCTS.
 const INTEREST_TO_CATEGORY: Record<string, string[]> = {
@@ -60,8 +71,10 @@ export function QuoteModal() {
 
   // form state
   const [name, setName] = useState("");
+  const [profile, setProfile] = useState<string>("");
   const [org, setOrg] = useState("");
   const [country, setCountry] = useState("eg");
+  const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState<string>("");
@@ -76,8 +89,10 @@ export function QuoteModal() {
   // popovers
   const [countryQuery, setCountryQuery] = useState("");
   const [countryOpen, setCountryOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -128,13 +143,21 @@ export function QuoteModal() {
 
   const emailValid = EMAIL_RE.test(email.trim());
   const phoneValid = phone.replace(/\D/g, "").length >= 7;
+  const orgField = ORG_FIELD[profile] ?? {
+    label: "Hospital / Company",
+    placeholder: "Hospital or Company Name",
+  };
+  const orgLabel = orgField.label;
+  const orgPlaceholder = orgField.placeholder;
   const isValid =
     name.trim().length >= 2 &&
+    !!profile &&
     org.trim().length >= 2 &&
     !!country &&
     phoneValid &&
     emailValid &&
     !!interest;
+
 
   const showError = (k: string, cond: boolean) => touched[k] && cond;
 
@@ -154,6 +177,9 @@ export function QuoteModal() {
     setOpen(o);
     if (!o) {
       setInterest("");
+      setProfile("");
+      setCity("");
+
       setPhone("");
       setContact("email");
       setTouched({});
@@ -196,6 +222,7 @@ export function QuoteModal() {
           <fieldset disabled={submitting || success} className="contents">
             <div className="grid grid-cols-1 gap-x-7 gap-y-4 md:grid-cols-2 [@media(max-height:800px)]:gap-y-3">
               {/* LEFT COLUMN */}
+              {/* LEFT COLUMN */}
               <div className="space-y-4 [@media(max-height:800px)]:space-y-3">
                 <div>
                   <label htmlFor="qm-name" className={fieldLabel}>
@@ -218,131 +245,52 @@ export function QuoteModal() {
                 </div>
 
                 <div>
-                  <label htmlFor="qm-org" className={fieldLabel}>
-                    Hospital / Company *
-                  </label>
-                  <input
-                    id="qm-org"
-                    name="organization"
-                    autoComplete="organization"
-                    value={org}
-                    onChange={(e) => setOrg(e.target.value)}
-                    onBlur={() => markTouched("org")}
-                    aria-invalid={showError("org", org.trim().length < 2)}
-                    className={fieldInput(showError("org", org.trim().length < 2))}
-                    placeholder="Hospital or Company Name"
-                  />
-                  {showError("org", org.trim().length < 2) && (
-                    <p className={errText}>Please enter your organization.</p>
-                  )}
-                </div>
-
-                <div>
-                  <span className={fieldLabel}>Country *</span>
-                  <Popover open={countryOpen} onOpenChange={setCountryOpen}>
+                  <span className={fieldLabel}>Profile *</span>
+                  <Popover open={profileOpen} onOpenChange={setProfileOpen}>
                     <PopoverTrigger asChild>
                       <button
                         type="button"
-                        className={`${fieldInput(false)} flex items-center justify-between text-left`}
+                        onClick={() => markTouched("profile")}
+                        className={`${fieldInput(showError("profile", !profile))} flex items-center justify-between text-left`}
                         aria-haspopup="listbox"
-                        aria-label="Select country"
+                        aria-label="Your profile"
                       >
-                        <span className="flex items-center gap-3">
-                          <FlagImage iso2={activeCountry.iso2} style={{ width: 22, height: 22 }} />
-                          <span className="text-sm font-medium">{activeCountry.name}</span>
-                          <span className="text-xs text-muted-foreground">
-                            +{activeCountry.dialCode}
-                          </span>
+                        <span className={profile ? "text-foreground" : "text-muted-foreground/60"}>
+                          {profile || "Select your profile"}
                         </span>
                         <ChevronDown className="h-4 w-4 text-muted-foreground" />
                       </button>
                     </PopoverTrigger>
                     <PopoverContent
                       align="start"
-                      className="w-[--radix-popover-trigger-width] p-0 animate-in fade-in-0 zoom-in-95"
+                      className="w-[--radix-popover-trigger-width] p-1 animate-in fade-in-0 zoom-in-95"
                     >
-                      <div className="flex items-center gap-2 border-b border-border px-3 py-2.5">
-                        <Search className="h-4 w-4 text-muted-foreground" />
-                        <input
-                          autoFocus
-                          value={countryQuery}
-                          onChange={(e) => setCountryQuery(e.target.value)}
-                          placeholder="Search country"
-                          aria-label="Search country"
-                          className="h-8 flex-1 bg-transparent text-sm outline-none"
-                        />
-                      </div>
-                      <ul role="listbox" className="max-h-64 overflow-y-auto py-1">
-                        {filteredCountries.map((c) => (
-                          <li key={c.iso2}>
+                      <ul role="listbox" className="max-h-72 overflow-y-auto">
+                        {PROFILES.map((p) => (
+                          <li key={p}>
                             <button
                               type="button"
                               onClick={() => {
-                                setCountry(c.iso2);
-                                setCountryOpen(false);
-                                setCountryQuery("");
+                                setProfile(p);
+                                setProfileOpen(false);
                               }}
-                              className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors hover:bg-secondary"
+                              className="flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors hover:bg-secondary"
                             >
-                              <FlagImage iso2={c.iso2} style={{ width: 20, height: 20 }} />
-                              <span className="flex-1">{c.name}</span>
-                              <span className="text-xs text-muted-foreground">+{c.dialCode}</span>
-                              {c.iso2 === country && <Check className="h-4 w-4 text-primary" />}
+                              {p}
+                              {p === profile && <Check className="h-4 w-4 text-primary" />}
                             </button>
                           </li>
                         ))}
-                        {filteredCountries.length === 0 && (
-                          <li className="px-3 py-4 text-center text-xs text-muted-foreground">
-                            No matches
-                          </li>
-                        )}
                       </ul>
                     </PopoverContent>
                   </Popover>
-                </div>
-
-                <div>
-                  <span className={fieldLabel}>Phone Number *</span>
-                  <PhoneField
-                    value={phone}
-                    onChange={(v) => {
-                      setPhone(v);
-                      if (!touched.phone) markTouched("phone");
-                    }}
-                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
-                  />
-                  {showError("phone", !phoneValid) && (
-                    <p className={errText}>Enter a valid phone number.</p>
+                  {showError("profile", !profile) && (
+                    <p className={errText}>Please select your profile.</p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="qm-email" className={fieldLabel}>
-                    Email *
-                  </label>
-                  <input
-                    id="qm-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    inputMode="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onBlur={() => markTouched("email")}
-                    aria-invalid={showError("email", !emailValid)}
-                    className={fieldInput(showError("email", !emailValid))}
-                    placeholder="yourname@hospital.com"
-                  />
-                  {showError("email", !emailValid) && (
-                    <p className={errText}>Enter a valid email address.</p>
-                  )}
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN */}
-              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
-                <div>
-                  <span className={fieldLabel}>I'm Interested In *</span>
+                  <span className={fieldLabel}>I&apos;m Interested In *</span>
                   <Popover open={interestOpen} onOpenChange={setInterestOpen}>
                     <PopoverTrigger asChild>
                       <button
@@ -448,6 +396,149 @@ export function QuoteModal() {
                   </Popover>
                 </div>
 
+                <div>
+                  <label htmlFor="qm-org" className={fieldLabel}>
+                    {orgLabel} *
+                  </label>
+                  <input
+                    id="qm-org"
+                    name="organization"
+                    autoComplete="organization"
+                    value={org}
+                    onChange={(e) => setOrg(e.target.value)}
+                    onBlur={() => markTouched("org")}
+                    aria-invalid={showError("org", org.trim().length < 2)}
+                    className={fieldInput(showError("org", org.trim().length < 2))}
+                    placeholder={orgPlaceholder}
+                  />
+                  {showError("org", org.trim().length < 2) && (
+                    <p className={errText}>Please enter your organization.</p>
+                  )}
+                </div>
+              </div>
+
+              {/* RIGHT COLUMN */}
+              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
+                <div>
+                  <label htmlFor="qm-email" className={fieldLabel}>
+                    Email *
+                  </label>
+                  <input
+                    id="qm-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() => markTouched("email")}
+                    aria-invalid={showError("email", !emailValid)}
+                    className={fieldInput(showError("email", !emailValid))}
+                    placeholder="yourname@hospital.com"
+                  />
+                  {showError("email", !emailValid) && (
+                    <p className={errText}>Enter a valid email address.</p>
+                  )}
+                </div>
+
+                <div>
+                  <span className={fieldLabel}>Phone / WhatsApp *</span>
+                  <PhoneField
+                    value={phone}
+                    onChange={(v) => {
+                      setPhone(v);
+                      if (!touched.phone) markTouched("phone");
+                    }}
+                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
+                  />
+                  {showError("phone", !phoneValid) && (
+                    <p className={errText}>Enter a valid phone number.</p>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 [@media(max-height:800px)]:gap-3">
+                  <div className="min-w-0">
+                    <span className={fieldLabel}>Country *</span>
+                    <Popover open={countryOpen} onOpenChange={setCountryOpen}>
+                      <PopoverTrigger asChild>
+                        <button
+                          type="button"
+                          className={`${fieldInput(false)} flex items-center justify-between gap-2 text-left`}
+                          aria-haspopup="listbox"
+                          aria-label="Select country"
+                        >
+                          <span className="flex min-w-0 items-center gap-2">
+                            <FlagImage
+                              iso2={activeCountry.iso2}
+                              style={{ width: 22, height: 22 }}
+                            />
+                            <span className="truncate text-sm font-medium">
+                              {activeCountry.name}
+                            </span>
+                          </span>
+                          <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        </button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        align="start"
+                        className="w-[--radix-popover-trigger-width] p-0 animate-in fade-in-0 zoom-in-95"
+                      >
+                        <div className="flex items-center gap-2 border-b border-border px-3 py-2.5">
+                          <Search className="h-4 w-4 text-muted-foreground" />
+                          <input
+                            autoFocus
+                            value={countryQuery}
+                            onChange={(e) => setCountryQuery(e.target.value)}
+                            placeholder="Search country"
+                            aria-label="Search country"
+                            className="h-8 flex-1 bg-transparent text-sm outline-none"
+                          />
+                        </div>
+                        <ul role="listbox" className="max-h-64 overflow-y-auto py-1">
+                          {filteredCountries.map((c) => (
+                            <li key={c.iso2}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setCountry(c.iso2);
+                                  setCountryOpen(false);
+                                  setCountryQuery("");
+                                }}
+                                className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors hover:bg-secondary"
+                              >
+                                <FlagImage iso2={c.iso2} style={{ width: 20, height: 20 }} />
+                                <span className="flex-1">{c.name}</span>
+                                <span className="text-xs text-muted-foreground">+{c.dialCode}</span>
+                                {c.iso2 === country && <Check className="h-4 w-4 text-primary" />}
+                              </button>
+                            </li>
+                          ))}
+                          {filteredCountries.length === 0 && (
+                            <li className="px-3 py-4 text-center text-xs text-muted-foreground">
+                              No matches
+                            </li>
+                          )}
+                        </ul>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  <div className="min-w-0">
+                    <label htmlFor="qm-city" className={fieldLabel}>
+                      City
+                    </label>
+                    <input
+                      id="qm-city"
+                      name="city"
+                      autoComplete="address-level2"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      className={fieldInput(false)}
+                      placeholder="City"
+                    />
+                  </div>
+                </div>
+
                 <div className="flex min-h-0 flex-1 flex-col">
                   <label htmlFor="qm-message" className={fieldLabel}>
                     Message
@@ -500,6 +591,7 @@ export function QuoteModal() {
                   </div>
                 </div>
               </div>
+
             </div>
 
             {/* TRUST STRIP */}

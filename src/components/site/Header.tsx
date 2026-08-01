@@ -75,8 +75,19 @@ export function Header() {
             aria-label="AbuFarha Medical Supplies — home"
             className="flex w-[calc(148*var(--desktop-px-unit))] shrink-0 items-center justify-center self-stretch bg-white px-2 md:w-[calc(190*var(--desktop-px-unit))] md:px-3 xl:w-[calc(232*var(--desktop-px-unit))] xl:px-4"
           >
-            <Logo size="header" />
+            {/* Once scrolled, the logo sits on a soft white card. Dimensions and
+                position are untouched (no border, shadow only) so there is no CLS. */}
+            <span
+              className={`flex h-full w-full items-center justify-center transition-all duration-[250ms] ease-out ${
+                scrolled
+                  ? "rounded-lg bg-white shadow-[0_6px_18px_-8px_rgba(15,23,42,0.28)]"
+                  : "rounded-lg bg-transparent shadow-none"
+              }`}
+            >
+              <Logo size="header" />
+            </span>
           </Link>
+
 
           {/* Right column — everything begins immediately after the panel */}
           <div className="flex min-w-0 flex-1 flex-col">
