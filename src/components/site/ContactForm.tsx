@@ -62,7 +62,6 @@ const DYNAMIC_FIELDS: Record<string, DynField[]> = {
     { name: "country", label: "Country", placeholder: "e.g. Saudi Arabia" },
   ],
   Doctor: [
-    { name: "fullName", label: "Full Name", placeholder: "Dr. Full Name" },
     { name: "specialty", label: "Specialty", placeholder: "e.g. Interventional Cardiology" },
     { name: "facility", label: "Hospital or Clinic", placeholder: "Where you practice" },
   ],
@@ -94,6 +93,7 @@ const DYNAMIC_FIELDS: Record<string, DynField[]> = {
 };
 
 const schema = z.object({
+  fullName: z.string().trim().min(1, "Please enter your full name").max(120),
   customerType: z.string().min(1, "Please select who you are"),
   interest: z.string().min(1, "Please select an area of interest"),
   email: z.string().trim().email("Enter a valid email address").max(255),
@@ -162,6 +162,7 @@ export function ContactForm() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
+      fullName: values.fullName ?? "",
       customerType,
       interest,
       email: values.email ?? "",
@@ -283,8 +284,38 @@ export function ContactForm() {
             noValidate
             className="relative rounded-3xl border border-white/70 bg-white/85 p-6 shadow-[0_50px_120px_-50px_rgba(15,23,42,0.4),0_16px_40px_-24px_rgba(15,23,42,0.18),0_2px_6px_-2px_rgba(15,23,42,0.05)] ring-1 ring-black/5 backdrop-blur-xl sm:p-9"
           >
-            {/* I am a... */}
+            {/* Full Name — always first, never conditional */}
             <div className="space-y-2">
+              <Label
+                htmlFor="fullName"
+                className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"
+              >
+                Full Name <span className="text-primary">*</span>
+              </Label>
+              <Input
+                id="fullName"
+                name="fullName"
+                autoComplete="name"
+                aria-invalid={!!errors.fullName}
+                aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                className={inputCls}
+                placeholder="e.g. Dr. Omar AbuFarha"
+                value={values.fullName ?? ""}
+                onChange={(e) => setField("fullName", e.target.value)}
+              />
+              {errors.fullName && (
+                <p
+                  id="fullName-error"
+                  role="alert"
+                  className="text-xs font-medium text-destructive"
+                >
+                  {errors.fullName}
+                </p>
+              )}
+            </div>
+
+            {/* I am a... */}
+            <div className="mt-5 space-y-2">
               <Label
                 htmlFor="customerType"
                 className="text-[calc(13*var(--desktop-px-unit))] font-semibold text-ink"

@@ -541,7 +541,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
               </button>
 
               {/* SHARE */}
-              <div className="mt-7">
+              <div className="mt-5">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   Share this product
                 </p>
