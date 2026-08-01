@@ -3,107 +3,152 @@ import { Link } from "@tanstack/react-router";
 
 import { Eyebrow } from "./Eyebrow";
 import { SECTION_CONTAINER } from "./section-grid";
-import teamPhoto from "@/assets/abufarha-team.jpg.asset.json";
+import portrait1 from "@/assets/team-portrait-1.jpg.asset.json";
+import portrait2 from "@/assets/team-portrait-2.jpg.asset.json";
+import panelInstallation from "@/assets/env-installation-site.jpg";
+import panelWorkshop from "@/assets/env-service-workshop.jpg";
+import panelEngineer from "@/assets/aftersales-remote-engineer.jpg";
 
 /**
- * Trust section — one photograph with invisible per-person hotspots.
+ * One panoramic, panel-based team composition.
  *
- * The interaction is pure CSS (hover / active on the hotspot, `group-has-*`
- * for the dim layer) so it works instantly, with no JS state and no risk of
- * layout shift. Hotspot coordinates are percentages of the rendered frame, so
- * they stay correct at every breakpoint. Add one entry per visible person.
+ * The row is a flexbox where every panel is `flex-1 basis-0`; the hovered panel
+ * grows and its neighbours narrow automatically, so the full width is always
+ * filled — no cards, no gaps, no empty grey. Interaction is CSS-only (no state,
+ * no layout shift). Add a member to `TEAM` and the panel appears; nothing else
+ * needs to change.
  */
-type Hotspot = {
+type Member = {
   id: string;
   name: string;
-  role: string;
-  /** Centre of the person, in % of the frame. */
-  x: number;
-  y: number;
-  /** Hotspot size in % of the frame. */
-  w: number;
-  h: number;
-  /** Hidden below `lg` where hotspot density must be reduced. */
-  secondary?: boolean;
+  position: string;
+  image: string;
+  /** Vertical focal point so faces are never cropped aggressively. */
+  focus?: string;
+  /** Panels beyond the third are hidden on tablet (3-panel layout). */
+  tier?: 1 | 2;
 };
 
-const HOTSPOTS: Hotspot[] = [
-  { id: "founder", name: "Dr. Walid AbuFarha", role: "Founder & CEO", x: 50, y: 50, w: 17, h: 90 },
+const TEAM: Member[] = [
+  {
+    id: "founder",
+    name: "Dr. Walid AbuFarha",
+    position: "Founder & Chief Executive Officer",
+    image: portrait1.url,
+    focus: "50% 22%",
+  },
+  {
+    id: "operations",
+    name: "Eng. Mohammad AbuFarha",
+    position: "Head of Technical Operations",
+    image: portrait2.url,
+    focus: "50% 30%",
+  },
+  {
+    id: "biomedical",
+    name: "Biomedical Engineering",
+    position: "Installation & Commissioning",
+    image: panelInstallation,
+    focus: "50% 40%",
+  },
+  {
+    id: "service",
+    name: "Service Engineering",
+    position: "Preventive & Corrective Maintenance",
+    image: panelWorkshop,
+    focus: "50% 45%",
+    tier: 2,
+  },
+  {
+    id: "support",
+    name: "Technical Support",
+    position: "Remote Diagnostics & Clinical Training",
+    image: panelEngineer,
+    focus: "50% 35%",
+    tier: 2,
+  },
 ];
 
 export function OurPeople() {
   return (
     <section id="our-people" aria-labelledby="our-people-title" className="bg-white py-16 lg:py-20">
       <div className={SECTION_CONTAINER}>
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-10 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 lg:mb-12">
           <div className="min-w-0">
             <Eyebrow index="06">Our People</Eyebrow>
             <h2
               id="our-people-title"
-              className="mt-4 max-w-2xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]"
+              className="mt-4 max-w-3xl font-display text-[2rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.55rem]"
             >
               Meet the Team Behind Every Successful Healthcare Project
             </h2>
             <p className="mt-4 max-w-2xl text-[calc(15*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-              Our biomedical engineers, project managers and technical specialists work together to
-              deliver healthcare technology safely, efficiently and with long-term commitment across
-              Africa and the Middle East.
+              Our biomedical engineers, project managers and healthcare specialists work together to
+              deliver advanced medical technology projects across Africa and the Middle East.
             </p>
           </div>
           <Link
             to="/about"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-primary"
+            className="group inline-flex shrink-0 items-center gap-2 self-end whitespace-nowrap text-sm font-bold text-primary"
           >
             Meet Our Team
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* One photograph, one link — no cards, no collage, no split layout. */}
-        <Link
-          to="/about"
-          aria-label="Meet the AbuFarha Medical Supplies team"
-          className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-white shadow-(--shadow-editorial-lg) ring-1 ring-black/5 sm:aspect-[16/9] lg:aspect-[21/9]"
-        >
-          <img
-            src={teamPhoto.url}
-            alt="The AbuFarha Medical Supplies engineering team"
-            width={871}
-            height={1250}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          />
-
-          {/* Rest of the photograph darkens while one person is focused. */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-ink/25 opacity-0 transition-opacity duration-[220ms] ease-out group-has-[.af-person:hover]:opacity-100 group-has-[.af-person:active]:opacity-100"
-          />
-
-          {HOTSPOTS.map((h) => (
-            <span
-              key={h.id}
-              className={`af-person group/person absolute -translate-x-1/2 -translate-y-1/2 rounded-[999px] ring-0 ring-white/60 transition-all duration-[220ms] ease-out hover:bg-white/[0.10] hover:ring-1 hover:shadow-[0_0_36px_rgba(255,255,255,0.20)] active:bg-white/[0.10] active:ring-1 ${
-                h.secondary ? "hidden lg:block" : ""
-              }`}
-              style={{ left: `${h.x}%`, top: `${h.y}%`, width: `${h.w}%`, height: `${h.h}%` }}
-            >
-              {/* Floating name card — beside the person, below it on mobile. */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute left-1/2 top-full z-10 mt-3 block w-max max-w-[70vw] -translate-x-1/2 translate-y-2 rounded-xl border border-white/15 bg-ink/85 px-4 py-3 opacity-0 backdrop-blur transition-all duration-[220ms] ease-out group-hover/person:translate-y-0 group-hover/person:opacity-100 group-active/person:translate-y-0 group-active/person:opacity-100 sm:left-full sm:top-1/2 sm:mt-0 sm:ml-4 sm:-translate-x-0 sm:-translate-y-[calc(50%-8px)] sm:group-hover/person:-translate-y-1/2 sm:group-active/person:-translate-y-1/2"
+        {/* One continuous composition: scroll-snap strip on mobile, flex panels above. */}
+        <div className="overflow-hidden rounded-2xl shadow-(--shadow-editorial-lg) ring-1 ring-black/5">
+          <div className="flex h-[26rem] snap-x snap-mandatory overflow-x-auto sm:h-[30rem] md:overflow-x-hidden lg:h-[34rem]">
+            {TEAM.map((m) => (
+              <Link
+                key={m.id}
+                to="/about"
+                aria-label={`${m.name} — ${m.position}. Meet our team`}
+                className={`group relative block h-full min-w-[72%] shrink-0 snap-start overflow-hidden bg-ink transition-[flex-grow] duration-[350ms] ease-out focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-white md:min-w-0 md:flex-1 md:basis-0 md:hover:grow-[2.2] md:focus-visible:grow-[2.2] ${
+                  m.tier === 2 ? "md:hidden lg:block" : ""
+                }`}
               >
-                <span className="block font-display text-base font-extrabold leading-tight text-white">
-                  {h.name}
-                </span>
-                <span className="mt-1 block text-xs font-semibold uppercase tracking-wider text-white/70">
-                  {h.role}
-                </span>
-              </span>
-            </span>
-          ))}
-        </Link>
+                <img
+                  src={m.image}
+                  alt={`${m.name}, ${m.position} at AbuFarha Medical Supplies`}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover contrast-[1.03] saturate-[0.92] transition-transform duration-[350ms] ease-out group-hover:scale-[1.05]"
+                  style={{ objectPosition: m.focus ?? "50% 30%" }}
+                />
+
+                {/* Seam between panels keeps the strip continuous, not card-like. */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 left-0 z-10 w-px bg-white/12"
+                />
+
+                {/* Base grade unifies the portraits; overlay deepens on hover. */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/15 to-ink/10"
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-ink/[0.55] opacity-0 transition-opacity duration-[350ms] ease-out group-hover:opacity-100"
+                />
+
+                <div className="absolute inset-x-0 bottom-0 z-10 p-5 lg:p-6">
+                  <p className="font-display text-[1.0625rem] font-extrabold leading-tight text-white opacity-100 transition-all duration-[350ms] ease-out md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-visible:translate-y-0 md:group-focus-visible:opacity-100">
+                    {m.name}
+                  </p>
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/75 transition-all delay-[40ms] duration-[350ms] ease-out md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-visible:translate-y-0 md:group-focus-visible:opacity-100">
+                    {m.position}
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-white transition-all delay-[80ms] duration-[350ms] ease-out md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-visible:translate-y-0 md:group-focus-visible:opacity-100">
+                    View Profile
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
