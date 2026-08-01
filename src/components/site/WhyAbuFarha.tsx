@@ -14,6 +14,7 @@ import {
   Truck,
   PlugZap,
   Activity,
+  Check,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -61,6 +62,17 @@ function StatBlock({ stat }: { stat: Stat }) {
     </div>
   );
 }
+
+/* -------------------------- Trust / capability list ----------------------- */
+
+const TRUST: string[] = [
+  "OEM Certified Equipment",
+  "Factory-trained Engineers",
+  "Installation & Commissioning",
+  "Clinical Applications Training",
+  "OEM Spare Parts Supply",
+  "Long-term Technical Support",
+];
 
 /* ------------------------------- Process --------------------------------- */
 
