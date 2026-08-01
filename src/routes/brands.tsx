@@ -508,7 +508,7 @@ function BrandsPage() {
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <m.icon className="h-5 w-5" strokeWidth={2} />
                   </div>
-                  <div className="leading-tight">
+                  <div className="min-w-0 break-words leading-tight">
                     <div className="font-display text-2xl font-extrabold tracking-tight text-foreground lg:text-3xl">
                       {m.value}
                     </div>
@@ -538,7 +538,7 @@ function BrandsPage() {
                 className="w-full rounded-full border border-border bg-white py-3 pl-11 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
-            <div className="flex flex-1 overflow-x-auto lg:justify-end">
+            <div className="flex min-w-0 flex-1 overflow-x-auto lg:justify-end">
               <div className="inline-flex items-center gap-1">
                 {FILTERS.map((f) => {
                   const active = filter === f;
@@ -894,7 +894,7 @@ function BrandEcosystem() {
   const activeBrand = BRANDS.find((b) => b.name === active) ?? BRANDS[0];
 
   return (
-    <div className="relative mx-auto aspect-[6/5] w-full max-w-[calc(640*var(--desktop-px-unit))]">
+    <div className="relative mx-auto aspect-[6/5] w-full max-w-[calc(640*var(--desktop-px-unit))] overflow-x-clip">
       {/* World map dot-grid background */}
       <WorldDotMap />
 

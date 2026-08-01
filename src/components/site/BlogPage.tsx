@@ -253,13 +253,14 @@ function FacetFilters({
     <section className="bg-white pt-4 lg:pt-5">
       <div className="mx-auto flex max-w-[87.5rem] flex-wrap items-center gap-3 px-6 lg:px-10">
         {groups.map((group) => (
-          <label key={group.key} className="inline-flex items-center gap-2 text-sm">
-            <span className="font-medium text-muted-foreground">{group.label}:</span>
+          <label key={group.key} className="inline-flex min-w-0 max-w-full items-center gap-2 text-sm">
+            <span className="shrink-0 font-medium text-muted-foreground">{group.label}:</span>
             <select
               value={filters[group.key] ?? ""}
               onChange={(e) => onChange({ [group.key]: e.target.value || undefined })}
-              className="h-10 rounded-full border border-border bg-white px-3 text-sm font-semibold text-ink outline-none transition hover:border-primary/40 focus:border-primary focus:ring-4 focus:ring-primary/10"
+              className="h-10 min-w-0 max-w-full rounded-full border border-border bg-white px-3 text-sm font-semibold text-ink outline-none transition hover:border-primary/40 focus:border-primary focus:ring-4 focus:ring-primary/10"
             >
+
               <option value="">All</option>
               {group.options.map((option) => (
                 <option key={option.id} value={option.id}>
