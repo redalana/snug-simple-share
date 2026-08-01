@@ -88,8 +88,7 @@ const PROOF = [
 ] as const;
 
 const CONTENT_COL = "lg:col-start-1 lg:col-end-7";
-const TITLE_SIZE = "text-[2rem] sm:text-[2.75rem] lg:text-[3.125rem]";
-
+const TITLE_SIZE = "text-[1.75rem] min-[400px]:text-[2rem] sm:text-[2.75rem] lg:text-[3.125rem]";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -97,7 +96,10 @@ export function Hero() {
   const [paused, setPaused] = useState(false);
   const touchX = useRef<number | null>(null);
 
-  const go = useCallback((next: number) => setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length), []);
+  const go = useCallback(
+    (next: number) => setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length),
+    [],
+  );
 
   useEffect(() => {
     if (paused || reduce) return;
@@ -139,6 +141,9 @@ export function Hero() {
             className="absolute inset-0 transition-opacity duration-[900ms] ease-out"
             style={{ opacity: i === index ? 1 : 0 }}
           >
+            {/* Art-directed per breakpoint: mobile shows the photograph at its
+                natural 16:10 ratio anchored to the bottom, so the equipment is
+                never cropped. Desktop keeps the full-bleed cover framing. */}
             <img
               src={s.image}
               alt=""
@@ -147,16 +152,18 @@ export function Hero() {
               loading={i === 0 ? "eager" : "lazy"}
               fetchPriority={i === 0 ? "high" : "low"}
               decoding="async"
-              className={`h-full w-full object-cover ${s.imageClass}`}
+              className={`absolute inset-x-0 bottom-0 w-full lg:inset-0 lg:h-full lg:object-cover ${s.imageClass}`}
             />
-            <div className={`absolute inset-0 ${SCRIM}`} />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
+            {/* Mobile: ink field above the photo band, softly merging into it */}
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,#03070c_0%,#03070c_58%,rgba(3,7,12,0.86)_76%,rgba(3,7,12,0.30)_92%,rgba(3,7,12,0.12)_100%)] lg:hidden" />
+            <div className={`absolute inset-0 hidden lg:block ${SCRIM}`} />
+            <div className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-ink to-transparent lg:block" />
           </div>
         ))}
       </div>
 
       <div
-        className={`${SECTION_CONTAINER} relative grid min-h-[34rem] grid-cols-1 content-center items-center gap-y-10 pt-[calc(201*var(--desktop-px-unit))] pb-14 lg:min-h-[52rem] lg:grid-cols-12 lg:pt-[calc(229*var(--desktop-px-unit))] lg:pb-20`}
+        className={`${SECTION_CONTAINER} relative grid min-h-[34rem] grid-cols-1 content-center items-center gap-y-10 pt-[calc(201*var(--desktop-px-unit))] pb-[17rem] sm:pb-[22rem] lg:min-h-[52rem] lg:grid-cols-12 lg:pt-[calc(229*var(--desktop-px-unit))] lg:pb-20`}
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
@@ -167,15 +174,16 @@ export function Hero() {
             transition={{ duration: 0.7, ease: EASE }}
             className={`min-w-0 ${CONTENT_COL}`}
           >
-            <p className="flex items-center gap-3 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary-on-dark">
+            <p className="flex min-h-[2.5rem] items-center gap-3 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.24em] text-primary-on-dark sm:min-h-0">
               <span aria-hidden className="h-px w-8 bg-primary-on-dark/70" />
               {slide.eyebrow}
             </p>
 
+            {/* Reserved height at every breakpoint so the longest headline
+                (Enterprise) never makes its slide taller than the others. */}
             <h1
-              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance sm:min-h-[11.7rem] lg:min-h-[13.3rem] ${TITLE_SIZE}`}
+              className={`mt-6 min-h-[11.2rem] font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance sm:min-h-[11.7rem] lg:min-h-[13.3rem] ${TITLE_SIZE}`}
             >
-
               {slide.title.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -184,12 +192,9 @@ export function Hero() {
               <span className="block text-primary-on-dark">{slide.accent}</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75 lg:min-h-[5.5rem]">
+            <p className="mt-6 min-h-[8.75rem] max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-white/75 sm:min-h-[6.5rem] lg:min-h-[5.5rem]">
               {slide.body}
             </p>
-
-
-
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
@@ -211,7 +216,9 @@ export function Hero() {
         </AnimatePresence>
 
         {/* ── Shared proof row — identical on every slide (no height shift) ── */}
-        <dl className={`grid max-w-lg grid-cols-3 gap-x-6 border-t border-white/12 pt-6 ${CONTENT_COL}`}>
+        <dl
+          className={`grid max-w-lg grid-cols-3 gap-x-6 border-t border-white/12 pt-6 ${CONTENT_COL}`}
+        >
           {PROOF.map((p) => (
             <div key={p.label} className="min-w-0">
               <dt className="sr-only">{p.label}</dt>
@@ -227,7 +234,6 @@ export function Hero() {
           ))}
         </dl>
 
-
         {/* ── Named navigation ── */}
         <div className="col-span-full lg:col-span-full">
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/12 pt-5 lg:mt-6">
@@ -240,13 +246,19 @@ export function Hero() {
                   aria-label={`Show ${s.nav} slide`}
                   className="group relative pb-2 text-[calc(13*var(--desktop-px-unit))] font-bold uppercase tracking-[0.16em] transition-colors"
                 >
-                  <span className={i === index ? "text-white" : "text-white/50 group-hover:text-white/80"}>
+                  <span
+                    className={
+                      i === index ? "text-white" : "text-white/50 group-hover:text-white/80"
+                    }
+                  >
                     {s.nav}
                   </span>
                   <span
                     aria-hidden
                     className={`absolute inset-x-0 bottom-0 h-[2px] origin-left transition-transform duration-300 ${
-                      i === index ? "scale-x-100 bg-primary-on-dark" : "scale-x-0 bg-white/40 group-hover:scale-x-100"
+                      i === index
+                        ? "scale-x-100 bg-primary-on-dark"
+                        : "scale-x-0 bg-white/40 group-hover:scale-x-100"
                     }`}
                   />
                 </button>

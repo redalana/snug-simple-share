@@ -3,7 +3,7 @@ import { useRouterState } from "@tanstack/react-router";
 
 import { Hero } from "./contact/Hero";
 import { ContactBar } from "./contact/ContactBar";
-import { FormBlock } from "./contact/FormBlock";
+import { ContactForm } from "./ContactForm";
 import { OfficeMap } from "./contact/OfficeMap";
 import { StatsStrip } from "./contact/StatsStrip";
 import { FaqSection } from "./contact/FaqSection";
@@ -28,7 +28,8 @@ export function ContactPage() {
       <Hero />
       <VisitAbuFarha />
       <ContactBar />
-      <FormBlock />
+      {/* Same component as the Homepage quote section — one shared form. */}
+      <ContactForm />
       <OfficeMap />
       <StatsStrip />
       <FaqSection />

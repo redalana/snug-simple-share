@@ -190,6 +190,9 @@ export function ContactForm() {
 
   return (
     <section id="contact" className="relative overflow-hidden bg-white py-16 lg:py-20">
+      {/* Secondary anchor so /contact#contact-form keeps working while the
+          Homepage and Contact page share this exact same component. */}
+      <span id="contact-form" aria-hidden className="block scroll-mt-32" />
       {/* subtle healthcare identity — ECG line, <4% opacity, slow breathing */}
       <motion.svg
         aria-hidden
