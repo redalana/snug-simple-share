@@ -37,7 +37,18 @@ const INTERESTS = [
   "Other",
 ];
 
+const PROFILES = ["Hospital", "Distributor", "Doctor", "Government", "Other"] as const;
+
+/** The organization field adapts its label/placeholder to the selected profile. */
+const ORG_FIELD: Record<string, { label: string; placeholder: string }> = {
+  Hospital: { label: "Hospital Name", placeholder: "Hospital name" },
+  Distributor: { label: "Company Name", placeholder: "Company name" },
+  Doctor: { label: "Clinic / Hospital", placeholder: "Clinic or hospital name" },
+  Government: { label: "Organization", placeholder: "Organization name" },
+};
+
 type Contact = "whatsapp" | "email";
+
 
 // Maps the "I'm Interested In" category to product category names in PRODUCTS.
 const INTEREST_TO_CATEGORY: Record<string, string[]> = {
