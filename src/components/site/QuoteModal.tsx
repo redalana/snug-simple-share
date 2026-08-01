@@ -76,6 +76,7 @@ export function QuoteModal() {
   const [org, setOrg] = useState("");
   const [country, setCountry] = useState("eg");
   const [city, setCity] = useState("");
+  const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState<string>("");
@@ -312,45 +313,19 @@ export function QuoteModal() {
                 </div>
 
                 <div>
-                  <label htmlFor="qm-email" className={fieldLabel}>
-                    Email *
+                  <label htmlFor="qm-department" className={fieldLabel}>
+                    Department
                   </label>
                   <input
-                    id="qm-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    inputMode="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onBlur={() => markTouched("email")}
-                    aria-invalid={showError("email", !emailValid)}
-                    className={fieldInput(showError("email", !emailValid))}
-                    placeholder="yourname@hospital.com"
+                    id="qm-department"
+                    name="department"
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    className={fieldInput(false)}
+                    placeholder="Radiology, Cardiology, Biomedical…"
                   />
-                  {showError("email", !emailValid) && (
-                    <p className={errText}>Enter a valid email address.</p>
-                  )}
                 </div>
 
-                <div>
-                  <span className={fieldLabel}>Phone / WhatsApp *</span>
-                  <PhoneField
-                    value={phone}
-                    onChange={(v) => {
-                      setPhone(v);
-                      if (!touched.phone) markTouched("phone");
-                    }}
-                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
-                  />
-                  {showError("phone", !phoneValid) && (
-                    <p className={errText}>Enter a valid phone number.</p>
-                  )}
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN — location, interest & message */}
-              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 [@media(max-height:800px)]:gap-3">
                   <div className="min-w-0">
                     <span className={fieldLabel}>Country *</span>
@@ -433,6 +408,10 @@ export function QuoteModal() {
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* RIGHT COLUMN — location, interest & message */}
+              <div className="flex flex-col gap-4 [@media(max-height:800px)]:gap-3">
 
                 <div>
                   <span className={fieldLabel}>Interested In *</span>
@@ -540,6 +519,44 @@ export function QuoteModal() {
                     </PopoverContent>
                   </Popover>
                 </div>
+
+                <div>
+                  <label htmlFor="qm-email" className={fieldLabel}>
+                    Email *
+                  </label>
+                  <input
+                    id="qm-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() => markTouched("email")}
+                    aria-invalid={showError("email", !emailValid)}
+                    className={fieldInput(showError("email", !emailValid))}
+                    placeholder="yourname@hospital.com"
+                  />
+                  {showError("email", !emailValid) && (
+                    <p className={errText}>Enter a valid email address.</p>
+                  )}
+                </div>
+
+                <div>
+                  <span className={fieldLabel}>Phone / WhatsApp *</span>
+                  <PhoneField
+                    value={phone}
+                    onChange={(v) => {
+                      setPhone(v);
+                      if (!touched.phone) markTouched("phone");
+                    }}
+                    className="[&_input]:h-12 [&_input]:rounded-xl [&_input]:text-sm"
+                  />
+                  {showError("phone", !phoneValid) && (
+                    <p className={errText}>Enter a valid phone number.</p>
+                  )}
+                </div>
+
 
                 <div className="flex min-h-0 flex-1 flex-col">
                   <label htmlFor="qm-message" className={fieldLabel}>
