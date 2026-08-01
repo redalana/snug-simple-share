@@ -194,16 +194,16 @@ export function Hero() {
               decoding="async"
               animate={reduce ? undefined : { x: tilt.x * -18, y: tilt.y * -12, scale: 1.06 }}
               transition={{ type: "spring", stiffness: 40, damping: 22, mass: 1.2 }}
-              className="h-full w-full object-cover object-center will-change-transform"
+              className="h-full w-full object-cover object-[58%_center] will-change-transform"
             />
-            {/* Controlled cinematic vignette — no heavy overlay */}
+            {/* Controlled cinematic vignette — keeps the imaging system fully legible */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-[radial-gradient(120%_100%_at_70%_30%,transparent_35%,rgba(3,7,12,0.55)_100%)]"
+              className="absolute inset-0 bg-[radial-gradient(120%_100%_at_65%_35%,transparent_45%,rgba(3,7,12,0.45)_100%)]"
             />
             <div
               aria-hidden
-              className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-ink/70 to-transparent lg:from-ink/55"
+              className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-ink/55 to-transparent lg:from-ink/45"
             />
 
             {/* Floating capability badges */}
