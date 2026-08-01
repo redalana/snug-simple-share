@@ -143,13 +143,21 @@ export function QuoteModal() {
 
   const emailValid = EMAIL_RE.test(email.trim());
   const phoneValid = phone.replace(/\D/g, "").length >= 7;
+  const orgField = ORG_FIELD[profile] ?? {
+    label: "Hospital / Company",
+    placeholder: "Hospital or Company Name",
+  };
+  const orgLabel = orgField.label;
+  const orgPlaceholder = orgField.placeholder;
   const isValid =
     name.trim().length >= 2 &&
+    !!profile &&
     org.trim().length >= 2 &&
     !!country &&
     phoneValid &&
     emailValid &&
     !!interest;
+
 
   const showError = (k: string, cond: boolean) => touched[k] && cond;
 
