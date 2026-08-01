@@ -179,7 +179,7 @@ export function Hero() {
       </div>
 
       <div
-        className={`${SECTION_CONTAINER} relative grid grid-cols-1 items-center gap-y-10 pt-[calc(201*var(--desktop-px-unit))] pb-14 lg:grid-cols-12 lg:pt-[calc(229*var(--desktop-px-unit))] lg:pb-20`}
+        className={`${SECTION_CONTAINER} relative grid min-h-[34rem] grid-cols-1 content-center items-center gap-y-10 pt-[calc(201*var(--desktop-px-unit))] pb-14 lg:min-h-[52rem] lg:grid-cols-12 lg:pt-[calc(229*var(--desktop-px-unit))] lg:pb-20`}
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
