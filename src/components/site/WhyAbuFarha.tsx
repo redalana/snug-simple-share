@@ -132,17 +132,17 @@ export function WhyAbuFarha() {
     >
       <div className={`relative ${SECTION_CONTAINER}`}>
         {/* --------------------------- BLOCK 1 — Hero -------------------------- */}
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-14">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-14">
           <motion.div {...fade} transition={{ duration: 0.65, ease: EASE }} className="min-w-0">
             <Eyebrow index="03">Why AbuFarha</Eyebrow>
             <h2
               id="why-heading"
-              className="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[3.1rem]"
+              className="mt-5 font-display text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[3.1rem]"
             >
               Engineering Confidence.
               <span className="block text-primary">Clinical Excellence.</span>
             </h2>
-            <p className="mt-6 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
+            <p className="mt-8 max-w-xl text-[calc(17*var(--desktop-px-unit))] leading-[1.7] text-muted-foreground">
               Hospitals across Africa and the Middle East rely on us to supply, install and
               commission advanced medical systems — then train their teams and support the
               technology for its entire lifecycle.
@@ -174,7 +174,7 @@ export function WhyAbuFarha() {
           <motion.div
             {...fade}
             transition={{ duration: 0.65, delay: 0.08, ease: EASE }}
-            className="min-w-0"
+            className="min-w-0 lg:mt-[2.25rem]"
           >
             <div className="overflow-hidden rounded-3xl border border-border/70 bg-white shadow-(--shadow-panel)">
               <img
