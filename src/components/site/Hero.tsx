@@ -206,9 +206,26 @@ export function Hero() {
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
-
           </motion.div>
         </AnimatePresence>
+
+        {/* ── Shared proof row — identical on every slide (no height shift) ── */}
+        <dl className={`grid max-w-lg grid-cols-3 gap-x-6 border-t border-white/12 pt-6 ${CONTENT_COL}`}>
+          {PROOF.map((p) => (
+            <div key={p.label} className="min-w-0">
+              <dt className="sr-only">{p.label}</dt>
+              <dd>
+                <span className="block font-display text-2xl font-extrabold leading-none text-white">
+                  {p.value}
+                </span>
+                <span className="mt-2 block text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider text-white/55">
+                  {p.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+
 
         {/* ── Named navigation ── */}
         <div className="col-span-full lg:col-span-full">
