@@ -343,7 +343,7 @@ function HeroPortrait({ leader }: { leader: Leader }) {
               className="h-full w-full object-cover object-[50%_20%]"
             />
           ) : (
-            // TODO: replace with real portrait for {leader.name}
+            // Graceful monogram fallback when no portrait is published.
             <div className="grid h-full w-full place-items-center bg-gradient-to-b from-[#1f242c] to-[#0f1318] p-10">
               <div
                 className="grid aspect-square w-[62%] max-w-[220px] place-items-center rounded-full bg-gradient-to-b from-[#242a33] to-[#141820] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.04)] ring-1 ring-primary/30"
