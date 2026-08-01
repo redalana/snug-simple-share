@@ -25,7 +25,17 @@ import {
 } from "lucide-react";
 
 import { Eyebrow } from "./Eyebrow";
-import { HERO_SECTION, HERO_GRID } from "./hero/heroShell";
+import {
+  HERO_SECTION,
+  HERO_GRID,
+  HERO_COLS,
+  HERO_COPY_COL,
+  HERO_TITLE,
+  HERO_LEAD,
+  HERO_CTA_ROW,
+  HERO_CARD_GRID,
+  HERO_SIDE_COL,
+} from "./hero/heroShell";
 
 import { PhoneField } from "./PhoneField";
 import { COUNTRIES as AFRICA_COUNTRIES, MAP_W, MAP_H } from "./africaMapData";
@@ -211,10 +221,10 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f12]/70 via-transparent to-transparent" />
       </div>
 
-      <div className={`${HERO_GRID} lg:grid-cols-[1.35fr_0.65fr]`}>
+      <div className={`${HERO_GRID} ${HERO_COLS}`}>
 
         {/* LEFT — animated content */}
-        <div className="relative lg:min-h-[calc(460*var(--desktop-px-unit))]">
+        <div className={HERO_COPY_COL}>
           {HERO_SLIDES.map((s, i) => (
             <div
               key={s.eyebrow}
@@ -231,20 +241,20 @@ function Hero() {
             >
               <Eyebrow tone="light">{s.eyebrow}</Eyebrow>
               {i === index ? (
-                <h1 className="mt-6 max-w-2xl font-display text-[2.375rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[calc(46*var(--desktop-px-unit))]">
+                <h1 className={HERO_TITLE}>
                   {s.title}
                 </h1>
               ) : (
-                <div className="mt-6 max-w-2xl font-display text-[2.375rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-[calc(46*var(--desktop-px-unit))]">
+                <div className={HERO_TITLE}>
                   {s.title}
                 </div>
               )}
 
-              <p className="mt-6 max-w-xl text-[calc(15*var(--desktop-px-unit))] leading-[1.75] text-white/70">
+              <p className={HERO_LEAD}>
                 {s.desc}
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className={HERO_CTA_ROW}>
                 <a
                   href={s.cta.href}
                   className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
@@ -254,7 +264,7 @@ function Hero() {
                 </a>
               </div>
 
-              <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+              <div className={HERO_CARD_GRID}>
                 {s.highlights.map(({ icon: Icon, label }) => (
                   <div
                     key={label}
@@ -272,7 +282,7 @@ function Hero() {
         </div>
 
         {/* RIGHT — KPI PANEL (persistent across slides) */}
-        <div className="lg:justify-self-end">
+        <div className={HERO_SIDE_COL}>
           <div className="rounded-2xl border border-white/12 bg-[#111418]/85 p-6 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md lg:min-w-[calc(320*var(--desktop-px-unit))]">
             <div className="flex flex-col divide-y divide-white/10">
               {HERO_KPIS.map(({ icon: Icon, value, label }) => (
