@@ -92,9 +92,9 @@ export function Hero() {
             <img
               src={engImg}
               alt="Engineer working on a Cath Lab system"
-              className="h-[calc(560*var(--desktop-px-unit))] w-full object-cover"
+              className="h-[calc(484*var(--desktop-px-unit))] w-full object-cover"
               width={900}
-              height={560}
+              height={484}
               loading="lazy"
               decoding="async"
             />
