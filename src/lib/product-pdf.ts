@@ -94,6 +94,33 @@ async function qrDataUrl(text: string): Promise<string | null> {
   }
 }
 
+/* Absolute, clickable targets for the interactive PDF links. */
+const LINKS = {
+  website: "https://www.abufarhamedical.com",
+  email: `mailto:${CONTACT.email}`,
+  whatsapp: `https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`,
+};
+
+/**
+ * Draws text and registers a real PDF hyperlink over its bounding box, so the
+ * website, email and WhatsApp number stay clickable in the exported document.
+ */
+function linkText(
+  doc: Doc,
+  text: string,
+  x: number,
+  y: number,
+  url: string,
+  opts: { align?: "left" | "center" | "right" } = {},
+) {
+  const align = opts.align ?? "left";
+  doc.text(text, x, y, align === "left" ? undefined : { align });
+  const w = doc.getTextWidth(text);
+  const h = doc.getFontSize();
+  const lx = align === "right" ? x - w : align === "center" ? x - w / 2 : x;
+  doc.link(lx, y - h + 1, w, h + 2, { url });
+}
+
 function titleCase(s: string) {
   return s.replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -238,7 +265,7 @@ export function brandHeader(doc: Doc, right: string, logo: string | null) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.6);
   doc.setTextColor(88, 94, 105);
-  doc.text(CONTACT.website, PAGE_W - M, centerY + 11, { align: "right" });
+  linkText(doc, CONTACT.website, PAGE_W - M, centerY + 11, LINKS.website, { align: "right" });
 
   /* Subtle light grey divider below the header */
   doc.setDrawColor(...LINE);
@@ -330,7 +357,12 @@ function pageFooter(doc: Doc, page: number, product: Product) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(6.8);
   doc.setTextColor(...SLATE);
-  doc.text(`${CONTACT.company} · ${CONTACT.website} · ${CONTACT.email}`, M, PAGE_H - 28);
+  doc.text(`${CONTACT.company} · `, M, PAGE_H - 28);
+  const fx = M + doc.getTextWidth(`${CONTACT.company} · `);
+  linkText(doc, CONTACT.website, fx, PAGE_H - 28, LINKS.website);
+  const fx2 = fx + doc.getTextWidth(`${CONTACT.website}`);
+  doc.text(" · ", fx2, PAGE_H - 28);
+  linkText(doc, CONTACT.email, fx2 + doc.getTextWidth(" · "), PAGE_H - 28, LINKS.email);
   doc.text(
     `${product.name} — Page ${page} of 2`,
     PAGE_W - M,
@@ -490,8 +522,13 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null, logo: strin
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.4);
   doc.setTextColor(198, 204, 214);
-  doc.text(`Tel ${CONTACT.landline}   ·   WhatsApp ${CONTACT.whatsapp}`, M + 16, cy + 38);
-  doc.text(`${CONTACT.email}   ·   ${CONTACT.website}`, M + 16, cy + 51);
+  const telLabel = `Tel ${CONTACT.landline}   ·   WhatsApp `;
+  doc.text(telLabel, M + 16, cy + 38);
+  linkText(doc, CONTACT.whatsapp, M + 16 + doc.getTextWidth(telLabel), cy + 38, LINKS.whatsapp);
+  linkText(doc, CONTACT.email, M + 16, cy + 51, LINKS.email);
+  const sepX = M + 16 + doc.getTextWidth(CONTACT.email);
+  doc.text("   ·   ", sepX, cy + 51);
+  linkText(doc, CONTACT.website, sepX + doc.getTextWidth("   ·   "), cy + 51, LINKS.website);
   doc.text(doc.splitTextToSize(CONTACT.address, CW - 160)[0], M + 16, cy + 64);
 
   /* QR block inside the strip */
@@ -624,9 +661,16 @@ function drawTechnical(doc: Doc, p: Product, logo: string | null) {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(6.4);
     doc.setTextColor(i === 0 ? 255 : 175, i === 0 ? 220 : 181, i === 0 ? 220 : 192);
-    doc.text(doc.splitTextToSize(value.replace(/^https?:\/\//, ""), bw - 10)[0], bx + bw / 2, by + 20, {
-      align: "center",
-    });
+    const shown = doc.splitTextToSize(value.replace(/^https?:\/\//, ""), bw - 10)[0];
+    const url =
+      label === "WhatsApp"
+        ? LINKS.whatsapp
+        : label === "Email"
+          ? LINKS.email
+          : label === "Request a Quote"
+            ? `${LINKS.website}/contact`
+            : LINKS.website;
+    linkText(doc, shown, bx + bw / 2, by + 20, url, { align: "center" });
   });
 
   pageFooter(doc, 2, p);
