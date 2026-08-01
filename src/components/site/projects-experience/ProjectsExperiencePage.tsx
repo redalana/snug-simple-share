@@ -180,7 +180,7 @@ function RegionalPresence() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative w-full"
+            className="relative w-full overflow-x-clip"
             style={{ aspectRatio: `${MAP_W} / ${MAP_H}` }}
           >
             <svg
@@ -551,12 +551,12 @@ function Specialties() {
                 return (
                   <div
                     key={f.label}
-                    className="flex items-center gap-3 rounded-xl border border-border bg-white px-4 py-3"
+                    className="flex min-w-0 items-center gap-3 rounded-xl border border-border bg-white px-4 py-3"
                   >
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
                       <Icon className="h-4 w-4" strokeWidth={1.8} />
                     </span>
-                    <span className="text-sm font-semibold text-ink">{f.label}</span>
+                    <span className="min-w-0 break-words text-sm font-semibold text-ink">{f.label}</span>
                   </div>
                 );
               })}

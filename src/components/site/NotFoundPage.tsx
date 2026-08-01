@@ -1,32 +1,15 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowRight, Home, Mail, Search, ShoppingBag } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
+// 404 metadata (unique title/description + robots noindex) is server-rendered
+// by the catch-all route in src/routes/$.tsx — see that file.
 export function NotFoundPage() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
 
-  // The router renders this component for unmatched URLs, which have no
-  // route-level head(). Ensure crawlers never index a soft-404 by writing the
-  // robots directive and a unique title once the component mounts.
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Page Not Found (404) | AbuFarha Medical";
-    let tag = document.querySelector<HTMLMetaElement>('meta[name="robots"][data-404="true"]');
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute("name", "robots");
-      tag.setAttribute("data-404", "true");
-      document.head.appendChild(tag);
-    }
-    tag.setAttribute("content", "noindex, follow");
-    return () => {
-      document.title = previousTitle;
-      tag?.remove();
-    };
-  }, []);
 
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
