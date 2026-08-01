@@ -72,6 +72,9 @@ function Index() {
         <GlobalPresence />
         {/* How do we work? */}
         <Process />
+        {/* Who delivers the work? */}
+        <OurPeople />
+
         {/* Is your hospital ready for advanced medical technology? */}
         <ReadinessTeaser />
         {/* How can customers start working with us? */}
