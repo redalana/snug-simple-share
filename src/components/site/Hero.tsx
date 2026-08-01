@@ -173,8 +173,9 @@ export function Hero() {
             </p>
 
             <h1
-              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance ${TITLE_SIZE}`}
+              className={`mt-6 font-display font-extrabold leading-[1.06] tracking-[-0.025em] text-balance sm:min-h-[11.7rem] lg:min-h-[13.3rem] ${TITLE_SIZE}`}
             >
+
               {slide.title.map((line) => (
                 <span key={line} className="block">
                   {line}
