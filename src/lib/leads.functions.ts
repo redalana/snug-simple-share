@@ -34,7 +34,7 @@ const leadSchema = z.object({
 export type LeadInput = z.input<typeof leadSchema>;
 
 export const submitLead = createServerFn({ method: "POST" })
-  .inputValidator((data: LeadInput) => leadSchema.parse(data))
+  .validator((data: LeadInput) => leadSchema.parse(data))
   .handler(async ({ data }) => {
     // Honeypot filled → silently accept without storing anything.
     if (data.botField && data.botField.trim() !== "") {
