@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Eyebrow } from "./Eyebrow";
 import { CLINICAL_SOLUTIONS } from "@/lib/clinical-solutions";
+import { SECTION_CONTAINER } from "./section-grid";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -53,7 +54,7 @@ export function ExperienceAbuFarha() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[100rem] min-w-0 px-6 lg:px-10">
+      <div className={`relative ${SECTION_CONTAINER}`}>
         {/* ------------------------------- Header ------------------------------ */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}

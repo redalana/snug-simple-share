@@ -18,6 +18,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { Eyebrow } from "./Eyebrow";
+import { SECTION_CONTAINER } from "./section-grid";
 import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/use-count-up";
 
@@ -129,7 +130,7 @@ export function WhyAbuFarha() {
       aria-labelledby="why-heading"
       className="relative bg-secondary/40 py-20 lg:py-28"
     >
-      <div className="relative mx-auto max-w-[92rem] px-6 lg:px-10">
+      <div className={`relative ${SECTION_CONTAINER}`}>
         {/* --------------------------- BLOCK 1 — Hero -------------------------- */}
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-14">
           <motion.div {...fade} transition={{ duration: 0.65, ease: EASE }} className="min-w-0">

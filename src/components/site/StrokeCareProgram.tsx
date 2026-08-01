@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
+import { SECTION_CONTAINER } from "./section-grid";
 import brainHero from "@/assets/stroke-brain-hero.jpg";
 import hqImage from "@/assets/abufarha-hq.jpg";
 
@@ -228,7 +229,7 @@ export function StrokeCareProgram() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[94rem] px-6 lg:px-10">
+      <div className={`relative ${SECTION_CONTAINER}`}>
         {/* Intro */}
         <motion.div
           initial={{ opacity: 0, y: 26 }}
