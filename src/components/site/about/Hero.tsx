@@ -84,17 +84,18 @@ export function Hero() {
 
         <div className="relative hidden lg:block">
           <div className="absolute -inset-6 rounded-[calc(36*var(--desktop-px-unit))] bg-primary/20 blur-3xl" />
-          <div className="relative overflow-hidden rounded-[calc(28*var(--desktop-px-unit))] border border-white/15 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)]">
+          <div className={HERO_MEDIA_FRAME}>
             <img
               src={engImg}
               alt="Engineer working on a Cath Lab system"
-              className="h-[calc(484*var(--desktop-px-unit))] w-full object-cover"
+              className={HERO_MEDIA_IMG}
               width={900}
-              height={484}
+              height={563}
               loading="lazy"
               decoding="async"
             />
           </div>
+
         </div>
       </div>
     </section>
