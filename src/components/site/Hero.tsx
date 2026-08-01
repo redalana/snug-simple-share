@@ -94,7 +94,7 @@ export function Hero() {
             initial={reduce ? undefined : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-            className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-[-0.025em] text-balance sm:text-[3rem] lg:text-[3.5rem]"
+            className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.025em] text-balance sm:text-[2.875rem] lg:text-[3.125rem]"
           >
             Enterprise Medical
             <br />
