@@ -72,7 +72,7 @@ const SLIDES: Slide[] = [
     primary: { label: "Explore CT Scanners", href: "/products/ct-scanners" },
     image: heroCt,
     alt: "Complete hospital CT suite showing the full gantry, patient table and control window with a biomedical engineer at the system",
-    imageClass: "object-[70%_58%]",
+    imageClass: "object-[52%_50%]",
   },
   {
     key: "cathlab",
@@ -84,7 +84,7 @@ const SLIDES: Slide[] = [
     primary: { label: "Explore Cath Lab Systems", href: "/products/cath-lab" },
     image: heroCathLab,
     alt: "Complete hospital angiography suite with C-arm, patient table and ceiling-suspended monitor wall being commissioned by a biomedical engineer",
-    imageClass: "object-[66%_54%]",
+    imageClass: "object-[54%_50%]",
   },
 ];
 
