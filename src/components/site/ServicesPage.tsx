@@ -33,6 +33,7 @@ import {
   HERO_TITLE,
   HERO_LEAD,
   HERO_CTA_ROW,
+  HERO_BTN_PRIMARY,
   HERO_CARD_GRID,
   HERO_CARD,
   HERO_SIDE_COL,
@@ -258,7 +259,7 @@ function Hero() {
               <div className={HERO_CTA_ROW}>
                 <a
                   href={s.cta.href}
-                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+                  className={HERO_BTN_PRIMARY}
                 >
                   {s.cta.label}
                   <ArrowRight className="h-4 w-4" />

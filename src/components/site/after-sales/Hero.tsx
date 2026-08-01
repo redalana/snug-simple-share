@@ -8,6 +8,8 @@ import {
   HERO_TITLE,
   HERO_LEAD,
   HERO_CTA_ROW,
+  HERO_BTN_PRIMARY,
+  HERO_BTN_GHOST,
   HERO_SIDE_COL,
   HeroBackdrop,
 } from "../hero/heroShell";
@@ -43,14 +45,14 @@ export function Hero() {
           <div className={HERO_CTA_ROW}>
             <a
               href="#request"
-              className="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+              className={`group ${HERO_BTN_PRIMARY}`}
             >
               Request Service
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="tel:+96264026063"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              className={HERO_BTN_GHOST}
             >
               <Headphones className="h-4 w-4" />
               Emergency Support

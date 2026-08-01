@@ -8,6 +8,8 @@ import {
   HERO_TITLE,
   HERO_LEAD,
   HERO_CTA_ROW,
+  HERO_BTN_PRIMARY,
+  HERO_BTN_GHOST,
   HERO_CARD_GRID,
   HERO_CARD,
   HERO_SIDE_COL,
@@ -43,13 +45,13 @@ export function Hero() {
           <div className={HERO_CTA_ROW}>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+              className={HERO_BTN_PRIMARY}
             >
               Talk to an Engineer
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
+              className={HERO_BTN_GHOST}
             >
               Request Consultation
             </Link>

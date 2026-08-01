@@ -37,6 +37,17 @@ export const HERO_LEAD =
 /** CTA row spacing. */
 export const HERO_CTA_ROW = "mt-8 flex flex-wrap items-center gap-4";
 
+/** Primary CTA — identical padding, radius and rendered height on every hero. */
+export const HERO_BTN_PRIMARY =
+  "inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90";
+
+/**
+ * Secondary CTA — 1px less vertical padding than the primary so the 1px border
+ * does not make the CTA row 2px taller.
+ */
+export const HERO_BTN_GHOST =
+  "inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/5 px-[calc(1.5rem-1px)] py-[calc(0.75rem-1px)] text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10";
+
 /** Optional stat/highlight card grid under the CTAs. */
 export const HERO_CARD_GRID = "mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4";
 
