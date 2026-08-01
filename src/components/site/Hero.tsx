@@ -5,13 +5,11 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import heroEnterprise from "@/assets/hero-slide-enterprise.jpg";
 import heroMri from "@/assets/hero-slide-mri.jpg";
 import heroCt from "@/assets/hero-slide-ct.jpg";
-import heroPetCt from "@/assets/hero-slide-petct.jpg";
+import heroCathLab from "@/assets/hero-slide-cathlab.jpg";
 import { SECTION_CONTAINER } from "./section-grid";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const INTERVAL = 9000;
-
-type Layout = "full" | "right" | "left" | "tight";
 
 type Slide = {
   key: string;
@@ -25,11 +23,13 @@ type Slide = {
   primary: { label: string; href: string };
   image: string;
   alt: string;
-  layout: Layout;
-  /** Per-slide focal point + atmosphere so no two scenes feel alike. */
+  /** Focal point only — never a zoom crop, the equipment must stay whole. */
   imageClass: string;
-  scrimClass: string;
 };
+
+/** Shared scrim: content always left, photography always right. */
+const SCRIM =
+  "bg-[linear-gradient(90deg,rgba(3,7,12,0.94)_0%,rgba(3,7,12,0.78)_38%,rgba(3,7,12,0.34)_68%,rgba(3,7,12,0.18)_100%)]";
 
 const SLIDES: Slide[] = [
   {
@@ -47,10 +47,7 @@ const SLIDES: Slide[] = [
     primary: { label: "Explore Products", href: "/products" },
     image: heroEnterprise,
     alt: "Modern hospital imaging department with MRI and CT rooms visible from the reading and control area",
-    layout: "full",
-    imageClass: "object-[50%_45%] scale-[1.03]",
-    scrimClass:
-      "bg-[linear-gradient(90deg,rgba(3,7,12,0.92)_0%,rgba(3,7,12,0.78)_38%,rgba(3,7,12,0.35)_70%,rgba(3,7,12,0.55)_100%)]",
+    imageClass: "object-[62%_48%]",
   },
   {
     key: "mri",
@@ -62,10 +59,7 @@ const SLIDES: Slide[] = [
     primary: { label: "Explore MRI Systems", href: "/products/mri-scanners" },
     image: heroMri,
     alt: "Biomedical engineer at the operator window of a hospital MRI suite during acceptance testing",
-    layout: "right",
-    imageClass: "object-[62%_50%]",
-    scrimClass:
-      "bg-[linear-gradient(90deg,rgba(3,7,12,0.94)_0%,rgba(3,7,12,0.72)_42%,rgba(3,7,12,0.12)_78%,transparent_100%)]",
+    imageClass: "object-[68%_50%]",
   },
   {
     key: "ct",
@@ -77,42 +71,26 @@ const SLIDES: Slide[] = [
     notes: ["Install", "Calibrate", "Train"],
     primary: { label: "Explore CT Scanners", href: "/products/ct-scanners" },
     image: heroCt,
-    alt: "Biomedical engineer positioning a calibration phantom at a hospital CT scanner gantry",
-    layout: "left",
-    imageClass: "object-[38%_52%]",
-    scrimClass:
-      "bg-[linear-gradient(270deg,rgba(3,7,12,0.94)_0%,rgba(3,7,12,0.74)_40%,rgba(3,7,12,0.14)_76%,transparent_100%)]",
+    alt: "Complete hospital CT suite showing the full gantry, patient table and control window with a biomedical engineer at the system",
+    imageClass: "object-[70%_58%]",
   },
   {
-    key: "petct",
-    nav: "PET/CT",
-    eyebrow: "Molecular Imaging",
-    title: ["Molecular Imaging,", "Delivered as a Department."],
-    accent: "Not a Device.",
-    body: "PET/CT requires radiation planning, hot-lab coordination, acceptance QC and trained nuclear medicine staff. We deliver and support the entire department end to end.",
-    primary: { label: "Explore PET/CT Systems", href: "/products/pet-ct-scanners" },
-    image: heroPetCt,
-    alt: "Biomedical engineer running quality control at the console of a hospital PET/CT scanner",
-    layout: "tight",
-    imageClass: "object-[70%_50%] scale-[1.06]",
-    scrimClass:
-      "bg-[linear-gradient(90deg,rgba(3,7,12,0.96)_0%,rgba(3,7,12,0.85)_34%,rgba(3,7,12,0.45)_66%,rgba(3,7,12,0.7)_100%)]",
+    key: "cathlab",
+    nav: "Cath Lab",
+    eyebrow: "Interventional Cardiology",
+    title: ["Cath Labs Built for", "the Decisive Minute."],
+    accent: "Commissioned, Not Just Delivered.",
+    body: "Angiography systems, monitor walls, hemodynamic integration, radiation protection and full commissioning — interventional suites ready for the first case on day one.",
+    primary: { label: "Explore Cath Lab Systems", href: "/products/cath-lab" },
+    image: heroCathLab,
+    alt: "Complete hospital angiography suite with C-arm, patient table and ceiling-suspended monitor wall being commissioned by a biomedical engineer",
+    imageClass: "object-[66%_54%]",
   },
 ];
 
-const CONTENT_COL: Record<Layout, string> = {
-  full: "lg:col-start-1 lg:col-end-8",
-  right: "lg:col-start-1 lg:col-end-7",
-  left: "lg:col-start-7 lg:col-end-13",
-  tight: "lg:col-start-1 lg:col-end-7",
-};
+const CONTENT_COL = "lg:col-start-1 lg:col-end-7";
+const TITLE_SIZE = "text-[2rem] sm:text-[2.75rem] lg:text-[3.125rem]";
 
-const TITLE_SIZE: Record<Layout, string> = {
-  full: "text-[2rem] sm:text-[2.875rem] lg:text-[3.25rem]",
-  right: "text-[2rem] sm:text-[2.75rem] lg:text-[3rem]",
-  left: "text-[1.9rem] sm:text-[2.625rem] lg:text-[2.875rem]",
-  tight: "text-[2.1rem] sm:text-[3rem] lg:text-[3.5rem]",
-};
 
 export function Hero() {
   const reduce = useReducedMotion();
