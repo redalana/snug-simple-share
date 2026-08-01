@@ -50,7 +50,6 @@ export function Header() {
   // at the same right padding as the utility row (language + social icons),
   // so no fixed width is used anywhere.
 
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -82,8 +81,6 @@ export function Header() {
               <Logo size="header" />
             </span>
           </Link>
-
-
 
           {/* Right column — everything begins immediately after the panel */}
           <div className="flex min-w-0 flex-1 flex-col">
@@ -133,9 +130,7 @@ export function Header() {
 
             {/* Row 2 — navigation, aligned to the panel edge */}
             <nav className="hidden xl:block">
-              <div
-                className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8"
-              >
+              <div className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8">
                 {NAV.map((item) => {
                   const active = isActive(item.href);
                   const isContact = item.label === "Contact Us";
@@ -212,7 +207,6 @@ export function Header() {
           </div>
         )}
       </div>
-
 
       {/* Mobile search drawer */}
       <AnimatePresence>

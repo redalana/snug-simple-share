@@ -127,7 +127,6 @@ function Hero() {
 /* Country cards intentionally show the country name only — the map already
    communicates regional coverage, so modality lists were removed. */
 
-
 // ISO-2 codes for flagcdn.com (official SVG country flags).
 // Somaliland is not internationally recognized as an independent country
 // and has no ISO-2 code; it is represented under the Somalia flag.

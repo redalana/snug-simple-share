@@ -161,8 +161,12 @@ function buildHighlights(p: Product): string[] {
     `${p.brand} OEM platform — ${p.category}`,
     `${p.status} · Year of manufacture ${p.year}`,
     `${p.systemType} installation, ${p.country} origin`,
-    p.installation ? "Turnkey installation & commissioning included" : "Installation supervision available",
-    p.training ? "On-site clinical application training" : "Clinical application training available",
+    p.installation
+      ? "Turnkey installation & commissioning included"
+      : "Installation supervision available",
+    p.training
+      ? "On-site clinical application training"
+      : "Clinical application training available",
     p.specialty.length ? `Clinical use: ${p.specialty.join(", ")}` : "Multi-specialty clinical use",
     "Biomedical engineering support & spare parts programme",
   ];
@@ -363,12 +367,7 @@ function pageFooter(doc: Doc, page: number, product: Product) {
   const fx2 = fx + doc.getTextWidth(`${CONTACT.website}`);
   doc.text(" · ", fx2, PAGE_H - 28);
   linkText(doc, CONTACT.email, fx2 + doc.getTextWidth(" · "), PAGE_H - 28, LINKS.email);
-  doc.text(
-    `${product.name} — Page ${page} of 2`,
-    PAGE_W - M,
-    PAGE_H - 28,
-    { align: "right" },
-  );
+  doc.text(`${product.name} — Page ${page} of 2`, PAGE_W - M, PAGE_H - 28, { align: "right" });
 }
 
 /* ------------------------------------------------------------------ page 1 */
@@ -441,7 +440,9 @@ async function drawOverview(doc: Doc, p: Product, qr: string | null, logo: strin
   doc.setTextColor(60, 66, 76);
   const descAll: string[] = doc.splitTextToSize(buildDescription(p), CW);
   const desc =
-    descAll.length > 6 ? [...descAll.slice(0, 5), `${descAll[5].replace(/\s+\S*$/, "")} …`] : descAll;
+    descAll.length > 6
+      ? [...descAll.slice(0, 5), `${descAll[5].replace(/\s+\S*$/, "")} …`]
+      : descAll;
   doc.text(desc, M, y, { lineHeightFactor: 1.4 });
   y += desc.length * 11.2 + 12;
 
