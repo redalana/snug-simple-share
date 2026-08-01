@@ -46,27 +46,10 @@ export function Header() {
     return pathname === href || pathname.startsWith(href + "/");
   };
 
-  // Measure the navigation content width so the search bar ends exactly
-  // beneath the last nav item ("Contact Us") — no fixed widths.
-  const navRowRef = useRef<HTMLDivElement | null>(null);
-  const [navWidth, setNavWidth] = useState<number | null>(null);
+  // The search bar is fluid: it starts at the navigation's left edge and ends
+  // at the same right padding as the utility row (language + social icons),
+  // so no fixed width is used anywhere.
 
-  useLayoutEffect(() => {
-    const row = navRowRef.current;
-    if (!row || typeof ResizeObserver === "undefined") return;
-    const measure = () => {
-      const items = Array.from(row.children) as HTMLElement[];
-      if (!items.length) return;
-      const first = items[0].getBoundingClientRect();
-      const last = items[items.length - 1].getBoundingClientRect();
-      setNavWidth(Math.round(last.right - first.left));
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(row);
-    for (const child of Array.from(row.children)) ro.observe(child);
-    return () => ro.disconnect();
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
