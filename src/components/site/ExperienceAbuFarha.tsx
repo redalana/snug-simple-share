@@ -118,10 +118,10 @@ export function ExperienceAbuFarha() {
           id={`clinical-panel-${active.id}`}
           role="tabpanel"
           aria-labelledby={`clinical-tab-${active.id}`}
-          className="mt-10 grid min-w-0 items-center gap-10 lg:grid-cols-2 lg:gap-14"
+          className="mt-7 grid min-w-0 items-center gap-10 lg:grid-cols-2 lg:gap-14"
         >
           {/* Content — second on mobile, first on tablet/desktop */}
-          <div className="order-2 min-w-0 md:order-1">
+          <div className="order-2 min-w-0 self-start md:order-1">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={active.id} {...anim} transition={{ duration: 0.35, ease: EASE }}>
                 <h3 className="font-display text-[1.42rem] font-extrabold leading-tight tracking-[-0.01em] text-ink [overflow-wrap:anywhere]">
