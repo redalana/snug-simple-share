@@ -91,6 +91,13 @@ const CONTACTS = [
   },
 ];
 
+const LEGAL: FooterLink[] = [
+  { label: "Privacy Policy", to: "/privacy-policy" },
+  { label: "Terms & Conditions", to: "/terms" },
+  { label: "FAQs", to: "/faqs" },
+  { label: "Sitemap", to: "/sitemap" },
+];
+
 export function Footer() {
   const vesselsRef = useRef<HTMLDivElement>(null);
 
