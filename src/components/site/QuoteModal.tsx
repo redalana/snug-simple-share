@@ -194,6 +194,7 @@ export function QuoteModal() {
       });
     } catch {
       setSubmitting(false);
+      toast.error("Something went wrong sending your request. Please try again.");
       return;
     }
     setSubmitting(false);
