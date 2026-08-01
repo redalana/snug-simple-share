@@ -1,29 +1,20 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Headphones } from "lucide-react";
+import { HERO_SECTION, HERO_GRID, HeroBackdrop } from "../hero/heroShell";
 import { heroImg } from "./data";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
-      <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="AbuFarha biomedical engineer servicing medical equipment"
-          className="h-full w-full object-cover object-center"
-          width={1600}
-          height={1100}
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/20 to-ink/50" />
+    <section className={HERO_SECTION}>
+      <HeroBackdrop src={heroImg} priority />
+      <div className="pointer-events-none absolute inset-0">
         {/* soft red glow */}
         <div className="pointer-events-none absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-primary/25 blur-[calc(140*var(--desktop-px-unit))]" />
         <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[calc(120*var(--desktop-px-unit))]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-[100rem] items-center gap-16 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pt-20 lg:pb-16">
+      <div className={`${HERO_GRID} items-center lg:grid-cols-[1.05fr_0.95fr]`}>
+
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />

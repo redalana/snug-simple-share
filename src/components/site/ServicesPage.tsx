@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 
 import { Eyebrow } from "./Eyebrow";
+import { HERO_SECTION, HERO_GRID } from "./hero/heroShell";
+
 import { PhoneField } from "./PhoneField";
 import { COUNTRIES as AFRICA_COUNTRIES, MAP_W, MAP_H } from "./africaMapData";
 import { cn } from "@/lib/utils";
@@ -183,7 +185,7 @@ function Hero() {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#0d0f12] text-white"
+      className={HERO_SECTION}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
@@ -209,7 +211,8 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f12]/70 via-transparent to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(460*var(--desktop-px-unit))] lg:grid-cols-[1.35fr_0.65fr] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16">
+      <div className={`${HERO_GRID} lg:grid-cols-[1.35fr_0.65fr]`}>
+
         {/* LEFT — animated content */}
         <div className="relative lg:min-h-[calc(460*var(--desktop-px-unit))]">
           {HERO_SLIDES.map((s, i) => (
