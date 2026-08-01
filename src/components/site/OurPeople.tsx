@@ -33,8 +33,8 @@ const HOTSPOTS: Hotspot[] = [
     role: "Founder & CEO",
     x: 50,
     y: 50,
-    w: 34,
-    h: 76,
+    w: 16,
+    h: 88,
   },
 ];
 
@@ -74,7 +74,7 @@ export function OurPeople() {
           to="/about"
           aria-label="Meet the AbuFarha Medical Supplies team"
           onMouseLeave={() => setActive(null)}
-          className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-ink shadow-(--shadow-editorial-lg) ring-1 ring-black/5 sm:aspect-[16/9] lg:aspect-[21/9]"
+          className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-white shadow-(--shadow-editorial-lg) ring-1 ring-black/5 sm:aspect-[16/9] lg:aspect-[21/9]"
         >
           <img
             src={teamPhoto.url}
@@ -83,13 +83,13 @@ export function OurPeople() {
             height={1250}
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
 
           {/* Dim the rest of the photograph while a person is focused. */}
           <div
             aria-hidden
-            className={`absolute inset-0 bg-ink/45 transition-opacity duration-[220ms] ease-out ${
+            className={`absolute inset-0 bg-ink/25 transition-opacity duration-[220ms] ease-out ${
               activePerson ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -134,7 +134,7 @@ export function OurPeople() {
                 : undefined
             }
           >
-            <div className="sm:absolute sm:left-[var(--card-left)] sm:top-[var(--card-top)] sm:ml-[10%] sm:w-max sm:-translate-y-1/2">
+            <div className="sm:absolute sm:left-[var(--card-left)] sm:top-[var(--card-top)] sm:ml-[9%] sm:w-max sm:-translate-y-1/2">
               <div className="rounded-xl border border-white/15 bg-ink/85 px-4 py-3 backdrop-blur">
                 <p className="font-display text-base font-extrabold leading-tight text-white">
                   {activePerson?.name ?? ""}
