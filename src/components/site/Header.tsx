@@ -127,7 +127,6 @@ export function Header() {
             {/* Row 2 — navigation, aligned to the panel edge */}
             <nav className="hidden xl:block">
               <div
-                ref={navRowRef}
                 className="flex h-[calc(58*var(--desktop-px-unit))] items-center gap-[calc(4*var(--desktop-px-unit))] pl-[calc(18*var(--desktop-px-unit))] pr-8"
               >
                 {NAV.map((item) => {
