@@ -846,9 +846,9 @@ function Coverage() {
                 </div>
               </div>
               <div>
-                <div className="font-display text-3xl font-extrabold text-foreground">60+</div>
+                <div className="font-display text-3xl font-extrabold text-foreground">30+</div>
                 <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
-                  Cities
+                  Projects
                 </div>
               </div>
               <div>

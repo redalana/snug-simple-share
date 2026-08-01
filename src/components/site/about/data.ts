@@ -295,16 +295,19 @@ export const INDUSTRIES = [
   },
 ];
 
+// Every entry links to the Brands page, which is the only route that exists for
+// manufacturer coverage. Per-brand routes (/brands/<slug>) are not implemented,
+// so pointing at them produced 404s.
 export const PARTNERS = [
-  { name: "Philips", color: "#0B5ED7", href: "/brands/philips" },
-  { name: "Siemens Healthineers", color: "#EC6602", href: "/brands/siemens" },
-  { name: "GE HealthCare", color: "#005EB8", href: "/brands/ge-healthcare" },
-  { name: "Mindray", color: "#005BAC", href: "/brands/mindray" },
-  { name: "Shimadzu", color: "#C8161D", href: "/brands/shimadzu" },
-  { name: "Hitachi", color: "#E60027", href: "/brands/hitachi" },
-  { name: "Richard Wolf", color: "#C8102E", href: "/brands/richard-wolf" },
-  { name: "Abbott", color: "#008FC7", href: "/brands/abbott" },
-  { name: "Boston Scientific", color: "#0072CE", href: "/brands/boston-scientific" },
+  { name: "Philips", color: "#0B5ED7", href: "/brands" },
+  { name: "Siemens Healthineers", color: "#EC6602", href: "/brands" },
+  { name: "GE HealthCare", color: "#005EB8", href: "/brands" },
+  { name: "Mindray", color: "#005BAC", href: "/brands" },
+  { name: "Shimadzu", color: "#C8161D", href: "/brands" },
+  { name: "Hitachi", color: "#E60027", href: "/brands" },
+  { name: "Richard Wolf", color: "#C8102E", href: "/brands" },
+  { name: "Abbott", color: "#008FC7", href: "/brands" },
+  { name: "Boston Scientific", color: "#0072CE", href: "/brands" },
 ];
 
 export const TEAM_ROLES = [

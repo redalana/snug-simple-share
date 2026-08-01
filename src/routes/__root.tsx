@@ -114,18 +114,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify(WEBSITE_JSONLD),
       },
-      // Google Analytics 4 — loaded only when VITE_GA_MEASUREMENT_ID is set.
+      // Google Analytics 4 — loaded only when VITE_GA_MEASUREMENT_ID is set,
+      // and only ever measuring once the visitor has granted analytics cookies
+      // (GDPR). Consent Mode v2 starts fully denied and is updated by the
+      // cookie banner via gtag('consent','update', …).
       ...(GA_ID
         ? [
+            {
+              children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});try{var p=JSON.parse(localStorage.getItem('af_cookie_consent_v1')||'null');if(p&&p.analytics){gtag('consent','update',{analytics_storage:'granted',ad_storage:p.marketing?'granted':'denied',ad_user_data:p.marketing?'granted':'denied',ad_personalization:p.marketing?'granted':'denied'});}}catch(e){}gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`,
+            },
             {
               src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`,
               async: true,
             },
-            {
-              children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`,
-            },
           ]
         : []),
+
     ],
   }),
 

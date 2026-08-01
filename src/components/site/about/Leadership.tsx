@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Award, Wrench, Handshake, Globe2, User } from "lucide-react";
 import { Eyebrow } from "../Eyebrow";
 import { Reveal, EASE } from "./Reveal";
+import { STATS } from "@/config/companyFacts";
 import cathlabImg from "@/assets/leadership-cathlab.jpg";
 import envMri from "@/assets/env-mri-suite.jpg";
 import envWarehouse from "@/assets/env-warehouse.jpg";
@@ -544,13 +545,14 @@ function ExecutiveConsole({
                   {leader.bio}
                 </p>
 
-                {/* Statistics */}
+                {/* Company statistics — verified facts from companyFacts.ts.
+                    These are company-wide, never per-person figures. */}
                 <div className="leadership-stats-shell mt-6">
                   <div className="leadership-stats-grid grid gap-1.5">
                     {[
-                      { v: leader.years, l: "Years" },
-                      { v: leader.countries, l: "Countries" },
-                      { v: leader.projects, l: "Projects" },
+                      { v: `${STATS.yearsExperience.value()}+`, l: "Years" },
+                      { v: `${STATS.countries.value}${STATS.countries.suffix}`, l: "Countries" },
+                      { v: `${STATS.projects.value}${STATS.projects.suffix}`, l: "Projects" },
                     ].map((s) => (
                       <div
                         key={s.l}
