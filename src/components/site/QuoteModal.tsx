@@ -180,7 +180,7 @@ export function QuoteModal() {
     if (!o) {
       setInterest("");
       setProfile("");
-      setCity("");
+      setDepartment("");
 
       setPhone("");
       setContact("email");
