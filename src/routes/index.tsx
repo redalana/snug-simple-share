@@ -9,6 +9,8 @@ import { Projects } from "@/components/site/Projects";
 import { ExperienceAbuFarha } from "@/components/site/ExperienceAbuFarha";
 import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
+import { OurPeople } from "@/components/site/OurPeople";
+
 import { ReadinessTeaser } from "@/components/site/ReadinessTeaser";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { ContactForm } from "@/components/site/ContactForm";
