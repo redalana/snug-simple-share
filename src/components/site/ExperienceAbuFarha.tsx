@@ -65,7 +65,7 @@ export function ExperienceAbuFarha() {
           <Eyebrow index="04">Clinical Solutions</Eyebrow>
           <h2
             id="clinical-solutions-heading"
-            className="mt-7 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]"
+            className="mt-6 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]"
           >
             Complete Care
             <span className="mt-1 block text-primary">Pathways.</span>
@@ -76,7 +76,8 @@ export function ExperienceAbuFarha() {
         <div
           role="tablist"
           aria-label="Clinical solution areas"
-          className="mt-9 flex min-w-0 flex-wrap gap-2.5"
+          className="mt-8 flex min-w-0 flex-wrap gap-2.5"
+
           onKeyDown={(e) => {
             if (e.key === "ArrowRight") {
               e.preventDefault();
