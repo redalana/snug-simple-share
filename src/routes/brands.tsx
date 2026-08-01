@@ -499,7 +499,7 @@ function BrandsPage() {
               {METRICS.map((m, i) => (
                 <div
                   key={m.label}
-                  className={`flex items-center gap-4 px-6 py-8 ${
+                  className={`flex min-w-0 items-center gap-4 px-6 py-8 ${
                     i > 0 ? "lg:border-l lg:border-border" : ""
                   } ${i >= 2 ? "border-t border-border lg:border-t-0" : ""} ${
                     i === 1 ? "border-l border-border" : ""
