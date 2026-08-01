@@ -1,451 +1,230 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
-  ChevronLeft,
-  ChevronRight,
-  ClipboardList,
-  Factory,
   GraduationCap,
+  HeartPulse,
   LifeBuoy,
-  Package,
-  Play,
-  ShieldCheck,
-  Wrench,
-  Zap,
-  type LucideIcon,
+  Building2,
+  Users,
+  ArrowUpRight,
 } from "lucide-react";
 
-import heroCath from "@/assets/hero-cathlab.jpg";
-import turnkeyInstall from "@/assets/turnkey-hero.jpg";
-import engineerService from "@/assets/aftersales-engineering.jpg";
+import heroCinematic from "@/assets/hero-cinematic.jpg";
+import { SECTION_CONTAINER } from "./section-grid";
 
-type TrustItem = { icon: LucideIcon; label: string };
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-type Slide = {
-  theme: string;
-  eyebrow: string;
-  headline: React.ReactNode;
-  subtitle: string;
-  image: string;
-  imageAlt: string;
-  card: { title: string; body: string };
-  trust: TrustItem[];
-  primary: { label: string; href: string };
-  secondary: { label: string; href: string; icon?: boolean };
-};
-
-const SLIDES: Slide[] = [
-  {
-    theme: "Medical Equipment",
-    eyebrow: "Advanced Medical Imaging & Intervention",
-    headline: (
-      <>
-        Advanced Medical Technology
-        <br />
-        <span className="text-primary">for Better Patient Outcomes.</span>
-      </>
-    ),
-    subtitle:
-      "AbuFarha supplies certified imaging and interventional systems — Cath Lab, MRI, CT, PET/CT, C-Arm and more — from the world's leading OEMs to hospitals across Africa and the Middle East.",
-    image: heroCath,
-    imageAlt: "Modern cath lab suite with advanced interventional imaging system",
-    card: {
-      title: "Certified Medical Systems",
-      body: "Imaging and interventional technology, delivered.",
-    },
-    trust: [
-      { icon: BadgeCheck, label: "Certified Systems" },
-      { icon: Factory, label: "OEM Brands" },
-      { icon: ShieldCheck, label: "Factory Refurbished Available" },
-    ],
-    primary: { label: "Explore Products", href: "/products" },
-    secondary: { label: "Request a Quote", href: "/contact" },
-  },
-  {
-    theme: "Turnkey Projects",
-    eyebrow: "Design · Supply · Install · Commission",
-    headline: (
-      <>
-        Complete Turnkey Healthcare Projects.
-        <br />
-        <span className="text-primary">From Design to Commissioning.</span>
-      </>
-    ),
-    subtitle:
-      "A single partner across the full project lifecycle — site planning and shielding, equipment supply, installation, commissioning and clinical training — so departments open on schedule, fully compliant, and ready to treat patients.",
-    image: turnkeyInstall,
-    imageAlt: "Biomedical engineers installing and commissioning medical imaging equipment",
-    card: { title: "Turnkey Delivery", body: "One partner, from blueprint to first patient." },
-    trust: [
-      { icon: ClipboardList, label: "Planning" },
-      { icon: Wrench, label: "Installation" },
-      { icon: BadgeCheck, label: "Commissioning" },
-      { icon: GraduationCap, label: "Clinical Training" },
-    ],
-    primary: { label: "Explore Turnkey Projects", href: "/turnkey" },
-    secondary: { label: "Talk to an Engineer", href: "/contact" },
-  },
-  {
-    theme: "After-Sales",
-    eyebrow: "Lifecycle Biomedical Engineering Support",
-    headline: (
-      <>
-        Reliable After-Sales Support
-        <br />
-        <span className="text-primary">That Keeps Hospitals Running.</span>
-      </>
-    ),
-    subtitle:
-      "Preventive and corrective maintenance, genuine OEM spare parts, software updates, warranty coverage and 24/7 technical support — delivered by certified biomedical engineers on the ground.",
-    image: engineerService,
-    imageAlt: "Certified biomedical engineer servicing advanced medical imaging equipment",
-    card: { title: "Always-On Support", body: "Certified engineers, genuine parts, 24/7." },
-    trust: [
-      { icon: LifeBuoy, label: "24/7 Support" },
-      { icon: Zap, label: "Fast Response" },
-      { icon: Package, label: "OEM Spare Parts" },
-    ],
-    primary: { label: "Explore Services", href: "/after-sales" },
-    secondary: { label: "Contact Support", href: "/contact" },
-  },
+const TRUST = [
+  { icon: BadgeCheck, label: "OEM Certified" },
+  { icon: Building2, label: "Hospital Projects" },
+  { icon: GraduationCap, label: "Installation & Training" },
+  { icon: LifeBuoy, label: "After-Sales Support" },
+  { icon: Users, label: "Biomedical Engineers" },
 ];
 
-const AUTOPLAY_MS = 7500;
-const EASE = [0.22, 1, 0.36, 1] as const;
+const KPIS = [
+  { value: "1999", label: "Delivering Since" },
+  { value: "10+", label: "Countries" },
+  { value: "30+", label: "Major Projects" },
+  { value: "24/7", label: "Technical Support" },
+];
+
+/** Elegant floating capability badges over the cinematic scene. */
+const BADGES: { label: string; className: string; delay: number }[] = [
+  { label: "MRI", className: "left-[6%] top-[14%]", delay: 0.5 },
+  { label: "PET/CT", className: "right-[8%] top-[26%]", delay: 0.62 },
+  { label: "Cath Lab", className: "left-[10%] bottom-[26%]", delay: 0.74 },
+  { label: "Turnkey", className: "right-[12%] bottom-[14%]", delay: 0.86 },
+];
 
 export function Hero() {
   const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const rootRef = useRef<HTMLElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  const goTo = useCallback((i: number) => {
-    setIndex(((i % SLIDES.length) + SLIDES.length) % SLIDES.length);
-  }, []);
-  const next = useCallback(() => goTo(index + 1), [index, goTo]);
-  const prev = useCallback(() => goTo(index - 1), [index, goTo]);
-
-  // Autoplay
+  // Slow, subtle pointer parallax — desktop only, disabled for reduced motion.
   useEffect(() => {
-    if (paused || reduce) return;
-    const t = window.setTimeout(() => goTo(index + 1), AUTOPLAY_MS);
-    return () => window.clearTimeout(t);
-  }, [index, paused, reduce, goTo]);
-
-  // Preload upcoming
-  useEffect(() => {
-    SLIDES.forEach((s, i) => {
-      if (i === 0) return;
-      const img = new Image();
-      img.src = s.image;
-    });
-  }, []);
-
-  // Keyboard
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
+    if (reduce) return;
+    const el = sceneRef.current;
+    if (!el || !window.matchMedia("(min-width: 1024px)").matches) return;
+    const onMove = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width / 2)) / r.width;
+      const y = (e.clientY - (r.top + r.height / 2)) / r.height;
+      setTilt({ x, y });
     };
-    el.addEventListener("keydown", onKey);
-    return () => el.removeEventListener("keydown", onKey);
-  }, [next, prev]);
-
-  const onDragEnd = (_: unknown, info: PanInfo) => {
-    if (info.offset.x < -60) next();
-    else if (info.offset.x > 60) prev();
-  };
-
-  const slide = SLIDES[index];
+    const onLeave = () => setTilt({ x: 0, y: 0 });
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerleave", onLeave);
+    };
+  }, [reduce]);
 
   return (
     <section
-      ref={rootRef}
-      tabIndex={0}
-      aria-roledescription="carousel"
-      aria-label="AbuFarha Medical Equipment featured solutions"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      className="relative overflow-hidden bg-gradient-to-b from-secondary to-background pt-[calc(201*var(--desktop-px-unit))] outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:pt-[calc(209*var(--desktop-px-unit))] xl:pt-[calc(253*var(--desktop-px-unit))]"
+      aria-label="AbuFarha Medical Supplies — advanced medical technology"
+      className="relative overflow-hidden bg-ink text-white"
     >
-      {/* ── Background scene (crossfade) ─────────────────────────────── */}
-      <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <div className="mx-auto h-full max-w-[100rem] px-6 lg:px-10">
-          <div className="relative h-full">
-            <AnimatePresence mode="sync">
-              <motion.div
-                key={`bg-${index}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.9, ease: EASE }}
-                className="absolute inset-0 overflow-hidden rounded-[1.25rem]"
-              >
-                <motion.img
-                  src={slide.image}
-                  alt={slide.imageAlt}
-                  width={1536}
-                  height={1024}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  initial={{ scale: 1.08 }}
-                  animate={reduce ? { scale: 1.08 } : { scale: 1.16 }}
-                  transition={{ duration: 8, ease: "linear" }}
-                  className="absolute right-0 top-0 h-full w-[66%] object-cover object-[70%_center] will-change-transform"
-                />
-                <div className="absolute inset-y-0 right-[34%] w-[34%] bg-gradient-to-r from-background via-background/85 to-transparent" />
-                <div className="absolute inset-y-0 left-0 w-[34%] bg-background" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/50 to-transparent" />
-              </motion.div>
-            </AnimatePresence>
+      {/* Ambient depth — controlled, no clutter */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 top-0 h-[38rem] w-[38rem] rounded-full bg-primary/10 blur-[120px]"
+      />
 
-            {/* Floating info card */}
-            <div className="pointer-events-none absolute bottom-16 right-4 z-20 hidden xl:block">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`card-${index}`}
-                  initial={{ opacity: 0, y: 20, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                  transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
-                  className="pointer-events-auto"
-                >
-                  <motion.div
-                    animate={reduce ? undefined : { y: [0, -8, 0] }}
-                    transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-                    className="w-[calc(280*var(--desktop-px-unit))] rounded-2xl border border-white/60 bg-white/85 p-5 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)] backdrop-blur-xl"
-                  >
-                    <div className="mb-1 text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
-                      {slide.theme}
-                    </div>
-                    <div className="font-display text-lg font-extrabold text-ink">
-                      {slide.card.title}
-                    </div>
-                    <div className="mt-1 text-sm leading-snug text-muted-foreground">
-                      {slide.card.body}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div
+        className={`${SECTION_CONTAINER} relative grid items-center gap-10 pt-[calc(201*var(--desktop-px-unit))] pb-14 lg:grid-cols-[minmax(0,40fr)_minmax(0,60fr)] lg:gap-14 lg:pt-[calc(229*var(--desktop-px-unit))] lg:pb-20`}
+      >
+        {/* ── LEFT 40% ─────────────────────────────────────────────── */}
+        <div className="min-w-0">
+          <motion.span
+            initial={reduce ? undefined : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-white/80 backdrop-blur"
+          >
+            <HeartPulse className="h-3.5 w-3.5 text-primary-on-dark" />
+            Advanced Medical Technology
+          </motion.span>
 
-      <div className="pointer-events-none absolute -left-40 top-24 h-[calc(520*var(--desktop-px-unit))] w-[calc(520*var(--desktop-px-unit))] rounded-full bg-primary/5 blur-3xl lg:hidden" />
+          <motion.h1
+            initial={reduce ? undefined : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
+            className="mt-6 font-display text-[2.375rem] font-extrabold leading-[1.02] tracking-[-0.025em] text-balance sm:text-[3rem] lg:text-[3.5rem]"
+          >
+            Enterprise Medical
+            <br />
+            Technology,
+            <br />
+            <span className="text-primary-on-dark">Delivered End to End.</span>
+          </motion.h1>
 
-      {/* ── Content ─────────────────────────────────────────────────── */}
-      <div className="relative mx-auto max-w-[100rem] px-6 py-7 lg:px-10 lg:py-11">
-        <motion.div
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.15}
-          onDragEnd={onDragEnd}
-          className="pl-0 lg:max-w-[46%] lg:pl-12"
-          style={{
-            minHeight:
-              "clamp(calc(560*var(--desktop-px-unit)), 62vh, calc(680*var(--desktop-px-unit)))",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`copy-${index}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.55, ease: EASE }}
-              className="relative z-10"
+          <motion.p
+            initial={reduce ? undefined : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
+            className="mt-6 max-w-md text-[calc(17*var(--desktop-px-unit))] leading-[1.6] text-white/70"
+          >
+            Imaging and interventional systems from the world&apos;s leading OEMs — supplied,
+            installed, commissioned and supported across Africa and the Middle East.
+          </motion.p>
+
+          <motion.div
+            initial={reduce ? undefined : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.28 }}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <a
+              href="/products"
+              className="group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-bold text-primary-foreground transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-primary-dark"
             >
-              <motion.span
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: EASE, delay: 0.05 }}
-                className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] text-primary"
-              >
-                {slide.eyebrow}
-              </motion.span>
-              <motion.h1
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-                className="mt-5 font-display text-[2.5rem] font-extrabold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3rem] lg:text-[3.25rem]"
-              >
-                {slide.headline}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.22 }}
-                className="mt-5 max-w-md text-[calc(17*var(--desktop-px-unit))] leading-[1.65] text-muted-foreground"
-              >
-                {slide.subtitle}
-              </motion.p>
+              Explore Products
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            <a
+              href="/contact"
+              className="group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-white/25 bg-white/[0.06] px-7 text-sm font-bold text-white backdrop-blur transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/[0.12]"
+            >
+              Talk to an Expert
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </motion.div>
 
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <motion.a
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, ease: EASE, delay: 0.32 }}
-                  href={slide.primary.href}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-[0_16px_36px_-14px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
-                >
-                  {slide.primary.label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </motion.a>
-                <motion.a
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, ease: EASE, delay: 0.4 }}
-                  href={slide.secondary.href}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-7 py-3.5 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-                >
-                  {slide.secondary.icon ? (
-                    <Play className="h-4 w-4 text-primary transition-transform group-hover:scale-110" />
-                  ) : null}
-                  {slide.secondary.label}
-                </motion.a>
+          {/* Trust indicators */}
+          <motion.ul
+            initial={reduce ? undefined : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.36 }}
+            className="mt-8 flex flex-wrap items-center gap-2"
+          >
+            {TRUST.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-white/85 transition-colors hover:border-white/30 hover:text-white"
+              >
+                <Icon className="h-3.5 w-3.5 text-primary-on-dark" strokeWidth={2.2} />
+                {label}
+              </li>
+            ))}
+          </motion.ul>
+
+          {/* KPI row */}
+          <motion.dl
+            initial={reduce ? undefined : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.46 }}
+            className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:grid-cols-4"
+          >
+            {KPIS.map((k) => (
+              <div key={k.label} className="min-w-0">
+                <dt className="sr-only">{k.label}</dt>
+                <dd>
+                  <span className="block font-display text-2xl font-extrabold leading-none text-white">
+                    {k.value}
+                  </span>
+                  <span className="mt-2 block text-[calc(11*var(--desktop-px-unit))] font-semibold uppercase leading-tight tracking-wider text-white/50">
+                    {k.label}
+                  </span>
+                </dd>
               </div>
+            ))}
+          </motion.dl>
+        </div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, ease: EASE, delay: 0.48 }}
-                className="mt-4 flex items-center gap-2 text-[calc(13*var(--desktop-px-unit))] font-medium text-muted-foreground"
-              >
-                <ShieldCheck className="h-4 w-4 text-primary" />
-                Backed by a 1-year free warranty on every installation.
-              </motion.div>
-
-              <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-border pt-6">
-                {slide.trust.map((t, i) => {
-                  const Icon = t.icon;
-                  return (
-                    <motion.span
-                      key={`${index}-${t.label}`}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, ease: EASE, delay: 0.5 + i * 0.07 }}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/70 px-3 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-semibold text-ink shadow-sm backdrop-blur"
-                    >
-                      <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={2.4} />
-                      {t.label}
-                    </motion.span>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Mobile scene */}
-        <div className="relative mt-12 overflow-hidden rounded-[1.25rem] shadow-[0_30px_70px_-34px_rgba(15,23,42,0.35)] ring-1 ring-black/5 lg:hidden">
-          <AnimatePresence mode="sync">
+        {/* ── RIGHT 60% — cinematic scene ──────────────────────────── */}
+        <div ref={sceneRef} className="relative min-w-0">
+          <motion.div
+            initial={reduce ? undefined : { opacity: 0, scale: 1.02 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: EASE }}
+            className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] ring-1 ring-white/10 shadow-[0_60px_120px_-50px_rgba(0,0,0,0.85)] sm:aspect-[16/10]"
+          >
             <motion.img
-              key={`m-${index}`}
-              src={slide.image}
-              alt={slide.imageAlt}
-              width={1024}
-              height={1280}
-              initial={{ opacity: 0, scale: 1.06 }}
-              animate={{ opacity: 1, scale: 1.1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                opacity: { duration: 0.9, ease: EASE },
-                scale: { duration: 8, ease: "linear" },
-              }}
-              className="absolute inset-0 h-full w-full object-cover"
+              src={heroCinematic}
+              alt="Cinematic view of an advanced interventional cath lab suite with live angiography displays"
+              width={1264}
+              height={843}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              animate={reduce ? undefined : { x: tilt.x * -18, y: tilt.y * -12, scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 40, damping: 22, mass: 1.2 }}
+              className="h-full w-full object-cover object-center will-change-transform"
             />
-          </AnimatePresence>
-          <div className="relative h-[calc(440*var(--desktop-px-unit))] w-full" />
-          <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/60 bg-white/90 p-4 backdrop-blur-xl">
-            <div className="text-[calc(10*var(--desktop-px-unit))] font-bold uppercase tracking-[0.22em] text-primary">
-              {slide.theme}
-            </div>
-            <div className="mt-0.5 font-display text-base font-extrabold text-ink">
-              {slide.card.title}
-            </div>
-          </div>
-        </div>
+            {/* Controlled cinematic vignette — no heavy overlay */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[radial-gradient(120%_100%_at_70%_30%,transparent_35%,rgba(3,7,12,0.55)_100%)]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-ink/70 to-transparent lg:from-ink/55"
+            />
 
-        {/* ── Controls ────────────────────────────────────────────── */}
-        <div className="relative z-30 mt-10 flex items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center gap-2">
-            {SLIDES.map((s, i) => {
-              const active = i === index;
-              return (
-                <button
-                  key={s.theme}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to slide ${i + 1}: ${s.theme}`}
-                  aria-current={active}
-                  className={`group flex min-w-[9rem] flex-col gap-2 rounded-lg px-3 py-2 text-left transition-colors sm:min-w-[11rem] ${
-                    active ? "bg-primary/[0.04]" : "hover:bg-secondary/60"
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    <span
-                      className={`font-display text-[calc(11*var(--desktop-px-unit))] font-extrabold tabular-nums transition-colors ${
-                        active ? "text-primary" : "text-muted-foreground/70"
-                      }`}
-                    >
-                      0{i + 1}
-                    </span>
-                    <span
-                      className={`text-[calc(11*var(--desktop-px-unit))] font-bold uppercase tracking-[0.18em] transition-colors ${
-                        active ? "text-ink" : "text-muted-foreground group-hover:text-ink"
-                      }`}
-                    >
-                      {s.theme}
-                    </span>
-                  </span>
-                  <span
-                    className={`relative block h-[calc(3*var(--desktop-px-unit))] overflow-hidden rounded-full transition-colors ${
-                      active ? "bg-primary/20" : "bg-border"
-                    }`}
-                  >
-                    {active && !reduce && !paused ? (
-                      <motion.span
-                        key={`prog-${index}`}
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
-                        style={{ transformOrigin: "left" }}
-                        className="absolute inset-0 bg-primary"
-                      />
-                    ) : active ? (
-                      <span className="absolute inset-0 bg-primary" />
-                    ) : null}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={prev}
-              aria-label="Previous slide"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next slide"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-ink transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
+            {/* Floating capability badges */}
+            {BADGES.map((b) => (
+              <motion.span
+                key={b.label}
+                initial={reduce ? undefined : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: EASE, delay: b.delay }}
+                style={{
+                  transform: reduce
+                    ? undefined
+                    : `translate3d(${tilt.x * 10}px, ${tilt.y * 8}px, 0)`,
+                }}
+                className={`absolute ${b.className} inline-flex items-center gap-2 rounded-full border border-white/25 bg-ink/55 px-3.5 py-1.5 text-[calc(12*var(--desktop-px-unit))] font-bold tracking-wide text-white backdrop-blur-md transition-colors hover:border-primary/70`}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-primary-on-dark" />
+                {b.label}
+              </motion.span>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
