@@ -5,8 +5,8 @@ import { Eyebrow } from "./Eyebrow";
 import { SECTION_CONTAINER } from "./section-grid";
 import portrait1 from "@/assets/team-portrait-1.jpg.asset.json";
 import portrait2 from "@/assets/team-portrait-2.jpg.asset.json";
-import panelInstallation from "@/assets/env-installation-site.jpg";
-import panelWorkshop from "@/assets/env-service-workshop.jpg";
+import panelEngineering from "@/assets/aftersales-engineering.jpg";
+import panelTeam from "@/assets/about-team.jpg";
 import panelEngineer from "@/assets/aftersales-remote-engineer.jpg";
 
 /**
@@ -25,6 +25,8 @@ type Member = {
   image: string;
   /** Vertical focal point so faces are never cropped aggressively. */
   focus?: string;
+  /** Optional per-image grade so all portraits read as one composition. */
+  grade?: string;
   /** Panels beyond the third are hidden on tablet (3-panel layout). */
   tier?: 1 | 2;
 };
@@ -42,20 +44,21 @@ const TEAM: Member[] = [
     name: "Eng. Mohammad AbuFarha",
     position: "Head of Technical Operations",
     image: portrait2.url,
-    focus: "50% 30%",
+    focus: "50% 26%",
+    grade: "saturate-[0.7] brightness-[1.04] contrast-[1.06]",
   },
   {
     id: "biomedical",
     name: "Biomedical Engineering",
     position: "Installation & Commissioning",
-    image: panelInstallation,
+    image: panelEngineering,
     focus: "50% 40%",
   },
   {
     id: "service",
     name: "Service Engineering",
     position: "Preventive & Corrective Maintenance",
-    image: panelWorkshop,
+    image: panelTeam,
     focus: "50% 45%",
     tier: 2,
   },
@@ -113,7 +116,7 @@ export function OurPeople() {
                   alt={`${m.name}, ${m.position} at AbuFarha Medical Supplies`}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover contrast-[1.03] saturate-[0.92] transition-transform duration-[350ms] ease-out group-hover:scale-[1.05]"
+                  className={`absolute inset-0 h-full w-full object-cover contrast-[1.03] saturate-[0.92] ${m.grade ?? ""} transition-transform duration-[350ms] ease-out group-hover:scale-[1.05]`}
                   style={{ objectPosition: m.focus ?? "50% 30%" }}
                 />
 
