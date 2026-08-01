@@ -9,6 +9,7 @@ import {
   HERO_LEAD,
   HERO_CTA_ROW,
   HERO_CARD_GRID,
+  HERO_CARD,
   HERO_SIDE_COL,
   HERO_MEDIA_FRAME,
   HERO_MEDIA_IMG,
@@ -35,9 +36,8 @@ export function Hero() {
             </span>
           </h1>
           <p className={HERO_LEAD}>
-            AbuFarha Medical Supplies has been supplying, installing, commissioning and supporting
-            medical equipment for hospitals across Africa and the Middle East since 1999 — combining
-            biomedical engineering expertise with long-term healthcare partnership.
+            Supplying, installing, commissioning and supporting hospital medical equipment across
+            Africa and the Middle East since 1999.
           </p>
 
           <div className={HERO_CTA_ROW}>
@@ -60,7 +60,7 @@ export function Hero() {
             {HERO_KPIS.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
-                className="min-w-0 rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
+                className={HERO_CARD}
               >
                 <Icon className="h-6 w-6 shrink-0 text-primary" strokeWidth={1.6} />
                 <div className="mt-3 min-w-0 font-display text-[calc(17*var(--desktop-px-unit))] font-extrabold leading-[1.15] break-words text-white">

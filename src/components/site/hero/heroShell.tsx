@@ -18,13 +18,13 @@ export const HERO_SECTION =
  * content + 64 bottom padding).
  */
 export const HERO_GRID =
-  "relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(530*var(--desktop-px-unit))] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16";
+  "relative mx-auto grid max-w-[100rem] gap-10 px-6 pt-16 pb-14 sm:pt-20 sm:pb-16 lg:min-h-[calc(531*var(--desktop-px-unit))] lg:gap-16 lg:px-10 lg:pt-20 lg:pb-16";
 
 /** Column split: copy left, media/panel right — identical on every hero. */
 export const HERO_COLS = "lg:grid-cols-[1.35fr_0.65fr]";
 
 /** Left copy column (reserves the reference content height). */
-export const HERO_COPY_COL = "relative min-w-0 lg:min-h-[calc(530*var(--desktop-px-unit))]";
+export const HERO_COPY_COL = "relative min-w-0 lg:min-h-[calc(531*var(--desktop-px-unit))]";
 
 /** Headline — identical size, leading, tracking and max width everywhere. */
 export const HERO_TITLE =
@@ -39,6 +39,10 @@ export const HERO_CTA_ROW = "mt-8 flex flex-wrap items-center gap-4";
 
 /** Optional stat/highlight card grid under the CTAs. */
 export const HERO_CARD_GRID = "mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4";
+
+/** A single card inside HERO_CARD_GRID — fixed height so every hero matches. */
+export const HERO_CARD =
+  "flex min-w-0 flex-col rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07] lg:h-[calc(102*var(--desktop-px-unit))]";
 
 /** Inset hero media card (used when a hero shows a framed photograph). */
 export const HERO_MEDIA_FRAME =

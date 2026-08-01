@@ -34,6 +34,7 @@ import {
   HERO_LEAD,
   HERO_CTA_ROW,
   HERO_CARD_GRID,
+  HERO_CARD,
   HERO_SIDE_COL,
 } from "./hero/heroShell";
 
@@ -268,7 +269,7 @@ function Hero() {
                 {s.highlights.map(({ icon: Icon, label }) => (
                   <div
                     key={label}
-                    className="rounded-xl border border-white/12 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-primary/60 hover:bg-white/[0.07]"
+                    className={HERO_CARD}
                   >
                     <Icon className="h-6 w-6 text-primary" strokeWidth={1.6} />
                     <div className="mt-3 text-[calc(12.5*var(--desktop-px-unit))] font-semibold leading-snug text-white">
