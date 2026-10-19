@@ -39,6 +39,8 @@ export type ClinicalProgram = {
   /** Matches `ClinicalSolution.id`. */
   solutionId: string;
   path: string;
+  /** Short program name used on the /programs directory. */
+  name: string;
   eyebrow: string;
   headline: string;
   headlineAccent: string;
@@ -81,6 +83,7 @@ export const CLINICAL_PROGRAMS: ClinicalProgram[] = [
   {
     solutionId: "stroke-programs",
     path: "/programs/stroke-care",
+    name: "Stroke Care",
     eyebrow: "The Stroke Care Ecosystem",
     headline: "A Stroke Program Is an Ecosystem —",
     headlineAccent: "Not a Single Device.",
@@ -154,6 +157,7 @@ export const CLINICAL_PROGRAMS: ClinicalProgram[] = [
   {
     solutionId: "neuro-imaging",
     path: "/programs/neuro-imaging",
+    name: "Neuro Imaging",
     eyebrow: "The Neuro Imaging Program",
     headline: "Neuro Imaging Is a Workflow —",
     headlineAccent: "Not a Single Scanner.",
@@ -227,6 +231,7 @@ export const CLINICAL_PROGRAMS: ClinicalProgram[] = [
   {
     solutionId: "interventional-neurology",
     path: "/programs/interventional-neurology",
+    name: "Interventional Neurology",
     eyebrow: "The Interventional Neurology Program",
     headline: "Neurointervention Is a Suite —",
     headlineAccent: "Not a Single System.",
@@ -300,6 +305,7 @@ export const CLINICAL_PROGRAMS: ClinicalProgram[] = [
   {
     solutionId: "neuro-icu",
     path: "/programs/neuro-icu",
+    name: "Neuro ICU",
     eyebrow: "The Neuro ICU Program",
     headline: "Neurocritical Care Is Connected —",
     headlineAccent: "Not a Single Bedside.",
@@ -373,6 +379,7 @@ export const CLINICAL_PROGRAMS: ClinicalProgram[] = [
   {
     solutionId: "rehabilitation",
     path: "/programs/rehabilitation",
+    name: "Rehabilitation",
     eyebrow: "The Rehabilitation Program",
     headline: "Recovery Is a Pathway —",
     headlineAccent: "Not a Single Session.",

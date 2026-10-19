@@ -64,7 +64,7 @@ function ProgramsDirectory() {
     ({ program, solution }) =>
       (filter === "all" || program.path === filter) &&
       (!q ||
-        [solution.tab, solution.title, program.intro, ...solution.highlights]
+        [program.name, solution.title, program.intro, ...solution.highlights]
           .join(" ")
           .toLowerCase()
           .includes(q)),
@@ -146,7 +146,7 @@ function ProgramsDirectory() {
                   onClick={() => setFilter(program.path)}
                   className={pill(filter === program.path)}
                 >
-                  {solution.tab}
+                  {program.name}
                 </button>
               ))}
             </div>
@@ -168,7 +168,7 @@ function ProgramsDirectory() {
               <li key={program.path} className="min-w-0">
                 <Link
                   to={program.path}
-                  aria-label={`${solution.tab} program`}
+                  aria-label={`${program.name} program`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
@@ -181,7 +181,7 @@ function ProgramsDirectory() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-display text-lg font-extrabold text-ink">{solution.tab}</h3>
+                    <h3 className="font-display text-lg font-extrabold text-ink">{program.name}</h3>
                     <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-muted-foreground">
                       {program.intro}
                     </p>
@@ -194,7 +194,7 @@ function ProgramsDirectory() {
                       ))}
                     </ul>
                     <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-primary">
-                      Explore {solution.tab}
+                      Explore {program.name}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                     </span>
                   </div>
