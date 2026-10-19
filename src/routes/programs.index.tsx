@@ -141,7 +141,7 @@ function ProgramsDirectory() {
             </div>
           </div>
 
-          <ul className="mt-6 grid gap-5 sm:grid-cols-2 min-[1024px]:grid-cols-3">
+          <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map(({ program, solution }) => (
               <li key={program.path} className="min-w-0">
                 <Link
