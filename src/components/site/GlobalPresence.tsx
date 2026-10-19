@@ -1,31 +1,27 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Globe } from "lucide-react";
-import { COUNTRIES, PINS, type Pin } from "./africaMapData";
+import { ArrowRight } from "lucide-react";
+import {
+  WORLD_COUNTRY_PATHS,
+  WORLD_MAP_W,
+  WORLD_MAP_H,
+  SPHERE_D,
+} from "./projects-experience/worldMapFull";
 
 const STATS = [
   { value: "10", label: "Countries — Verified Project History" },
   { value: "110+", label: "Systems & Programs Delivered" },
 ];
 
-// Cropped viewBox focused on AbuFarha's real footprint
-// (Middle East, North-East Africa, Central & South Asia).
-const VB_X = 280;
-const VB_Y = -80;
-const VB_W = 780;
-const VB_H = 571;
-
-// Pins that fall within the cropped region.
-const VISIBLE_PINS = PINS.filter(
-  (p) => p.x >= VB_X && p.x <= VB_X + VB_W && p.y >= VB_Y && p.y <= VB_Y + VB_H,
-);
-
-// Country names that show a static map label — all 10 verified countries.
-const LABELLED = new Set(PINS.map((p) => p.name));
+/**
+ * Per-country map configuration, keyed by Natural Earth country name
+ * (e.g. "Jordan"). Intentionally empty: add verified entries here later to
+ * highlight a country. Marker/tooltip fields can be rendered from this same
+ * record when verified data exists.
+ */
+type CountryMapData = { highlighted?: boolean; marker?: boolean; details?: string[] };
+const COUNTRY_DATA: Record<string, CountryMapData> = {};
 
 export function GlobalPresence() {
-  const [active, setActive] = useState<Pin | null>(null);
-
   return (
     <section id="coverage" className="bg-secondary/50 py-16 lg:py-20">
       <div className="mx-auto max-w-[100rem] px-6 lg:px-10">
@@ -68,132 +64,32 @@ export function GlobalPresence() {
                   backgroundSize: "calc(22*var(--desktop-px-unit)) calc(22*var(--desktop-px-unit))",
                 }}
               />
-              {/* red ambient lighting behind active regions */}
-              <div className="pointer-events-none absolute left-[55%] top-[48%] h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_var(--primary),transparent_65%)] opacity-30 blur-2xl" />
-
               <svg
-                viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
-                className="absolute inset-0 h-full w-full"
+                viewBox={`0 0 ${WORLD_MAP_W} ${WORLD_MAP_H}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="absolute inset-0 h-full w-full p-3 sm:p-5"
                 role="img"
-                aria-label="Map of AbuFarha verified projects across the Middle East, Africa and Asia"
+                aria-label="World map"
               >
-                {/* inactive countries — legible real geography */}
-                {COUNTRIES.filter((c) => !c.sup).map((c) => (
-                  <path
-                    key={c.name}
-                    d={c.d}
-                    fill="oklch(1 0 0 / 7%)"
-                    stroke="oklch(1 0 0 / 20%)"
-                    strokeWidth={0.9}
-                    strokeLinejoin="round"
-                  />
-                ))}
-
-                {/* supported countries — glowing red */}
-                {COUNTRIES.filter((c) => c.sup).map((c) => {
-                  const isActive = active?.name === c.name;
+                <path d={SPHERE_D} fill="oklch(1 0 0 / 3%)" stroke="oklch(1 0 0 / 12%)" strokeWidth={0.8} />
+                {WORLD_COUNTRY_PATHS.map((c, i) => {
+                  const data = COUNTRY_DATA[c.name];
                   return (
                     <path
-                      key={c.name}
+                      key={`${c.name}-${i}`}
                       d={c.d}
                       fill={
-                        isActive
-                          ? "color-mix(in oklab, var(--primary) 70%, transparent)"
-                          : "color-mix(in oklab, var(--primary) 34%, transparent)"
+                        data?.highlighted
+                          ? "color-mix(in oklab, var(--primary) 34%, transparent)"
+                          : "oklch(1 0 0 / 7%)"
                       }
-                      stroke="var(--primary)"
-                      strokeOpacity={0.85}
-                      strokeWidth={0.9}
+                      stroke={data?.highlighted ? "var(--primary)" : "oklch(1 0 0 / 20%)"}
+                      strokeWidth={0.6}
                       strokeLinejoin="round"
-                      style={{
-                        filter: isActive
-                          ? "drop-shadow(0 0 calc(6*var(--desktop-px-unit)) var(--primary))"
-                          : undefined,
-                        transition: "fill 0.25s ease",
-                      }}
                     />
                   );
                 })}
               </svg>
-
-              {/* glowing pins, labels + tooltips */}
-              {VISIBLE_PINS.map((p) => {
-                const left = ((p.x - VB_X) / VB_W) * 100;
-                const top = ((p.y - VB_Y) / VB_H) * 100;
-                const isActive = active?.name === p.name;
-                const flip = top < 30;
-                return (
-                  <div
-                    key={p.name}
-                    className="absolute z-10"
-                    style={{ left: `${left}%`, top: `${top}%`, transform: "translate(-50%, -50%)" }}
-                    onMouseEnter={() => setActive(p)}
-                    onMouseLeave={() => setActive(null)}
-                  >
-                    <span
-                      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
-                        p.hq ? "h-4 w-4" : "h-3 w-3"
-                      }`}
-                      style={{ animationDelay: `${(p.x % 7) * 0.2}s` }}
-                    />
-                    <button
-                      type="button"
-                      aria-label={p.name}
-                      className={`relative block cursor-pointer rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
-                        p.hq
-                          ? "h-3.5 w-3.5 ring-2 ring-white/70"
-                          : "h-2.5 w-2.5 ring-1 ring-white/50"
-                      }`}
-                    />
-
-                    {/* static spec label */}
-                    {LABELLED.has(p.name) && (
-                      <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/70 px-1.5 py-0.5 text-[calc(9*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-white/90 backdrop-blur-sm">
-                        {p.name}
-                      </span>
-                    )}
-
-                    {/* hover tooltip */}
-                    <div
-                      className={`pointer-events-none absolute left-1/2 z-20 w-60 -translate-x-1/2 rounded-xl border border-white/15 bg-ink/80 p-3.5 text-left shadow-[0_20px_40px_-16px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-200 ${
-                        flip ? "top-full mt-3" : "bottom-full mb-3"
-                      } ${isActive ? "opacity-100" : "translate-y-1 opacity-0"}`}
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-display text-sm font-bold text-white">{p.name}</span>
-                        {p.hq && (
-                          <span className="rounded-full bg-primary px-2 py-0.5 text-[calc(9*var(--desktop-px-unit))] font-bold uppercase tracking-wider text-primary-foreground">
-                            HQ
-                          </span>
-                        )}
-                      </div>
-                      <div className="mt-1 text-[calc(10*var(--desktop-px-unit))] font-semibold uppercase tracking-wider text-primary">
-                        Verified deliveries
-                      </div>
-                      <ul className="mt-2 space-y-1 text-[calc(11*var(--desktop-px-unit))] leading-snug">
-                        {p.items.map((item) => (
-                          <li key={item} className="flex items-start gap-1.5 text-white/75">
-                            <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      {flip ? (
-                        <span className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[calc(6*var(--desktop-px-unit))] border-b-[calc(6*var(--desktop-px-unit))] border-x-transparent border-b-ink/80" />
-                      ) : (
-                        <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[calc(6*var(--desktop-px-unit))] border-t-[calc(6*var(--desktop-px-unit))] border-x-transparent border-t-ink/80" />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* countries-served pill */}
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-medium text-white/75 shadow-sm backdrop-blur-md">
-                <Globe className="h-3.5 w-3.5" />
-                10 countries · verified project history
-              </div>
             </div>
 
             {/* Right: live footprint content */}
@@ -207,8 +103,7 @@ export function GlobalPresence() {
                 </h3>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60">
                   A real, documented delivery record — heart centers, imaging, IVF and LASIK systems
-                  installed and supported across 10 countries. Hover any pin for the actual
-                  equipment delivered.
+                  installed and supported across 10 countries.
                 </p>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
