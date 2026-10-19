@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Globe } from "lucide-react";
+import { ArrowRight, Globe, Minimize2 } from "lucide-react";
 import { COUNTRIES, PINS, type Pin } from "./africaMapData";
 import {
   WORLD_COUNTRY_PATHS,
@@ -21,6 +21,9 @@ const VB_Y = 0;
 const VB_W = WORLD_MAP_W;
 const VB_H = WORLD_MAP_H;
 
+// Hover zoom factor, anchored at the marker so it stays under the pointer.
+const ZOOM = 2.4;
+
 const SUPPORTED = new Set(COUNTRIES.filter((c) => c.sup).map((c) => c.name));
 
 const VISIBLE_PINS: Pin[] = PINS.flatMap((p) => {
@@ -33,6 +36,25 @@ const LABELLED = new Set(PINS.map((p) => p.name));
 
 export function GlobalPresence() {
   const [active, setActive] = useState<Pin | null>(null);
+  // Last zoom anchor is kept after reset so the zoom-out eases back from it.
+  const [anchor, setAnchor] = useState({ x: 50, y: 50 });
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+  }, []);
+
+  const focusPin = (p: Pin) => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    setAnchor({ x: ((p.x - VB_X) / VB_W) * 100, y: ((p.y - VB_Y) / VB_H) * 100 });
+    setActive(p);
+  };
+  // Short grace period avoids zoom flicker between adjacent markers.
+  const releasePin = () => {
+    if (leaveTimer.current) clearTimeout(leaveTimer.current);
+    leaveTimer.current = setTimeout(() => setActive(null), 120);
+  };
+  const zoom = active ? ZOOM : 1;
+  const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
 
   return (
     <section id="coverage" className="bg-secondary/50 py-16 lg:py-20">
@@ -66,7 +88,10 @@ export function GlobalPresence() {
 
           <div className="relative grid gap-4 lg:grid-cols-[1.55fr_1fr] lg:gap-6">
             {/* Left: interactive map panel */}
-            <div className="relative aspect-[1000/520] overflow-hidden rounded-2xl border border-white/10 bg-[oklch(0.16_0.02_264)]">
+            <div
+              className="relative aspect-[1000/520] overflow-hidden rounded-2xl border border-white/10 bg-[oklch(0.16_0.02_264)]"
+              onMouseLeave={() => setActive(null)}
+            >
               {/* dotted grid */}
               <div
                 className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -79,6 +104,14 @@ export function GlobalPresence() {
               {/* red ambient lighting behind active regions */}
               <div className="pointer-events-none absolute left-[55%] top-[48%] h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_var(--primary),transparent_65%)] opacity-30 blur-2xl" />
 
+              <div
+                className="absolute inset-0 transition-transform duration-700 motion-reduce:transition-none"
+                style={{
+                  transformOrigin: `${anchor.x}% ${anchor.y}%`,
+                  transform: `scale(${zoom})`,
+                  transitionTimingFunction: ease,
+                }}
+              >
               <svg
                 viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
                 className="absolute inset-0 h-full w-full"
@@ -124,31 +157,44 @@ export function GlobalPresence() {
                   );
                 })}
               </svg>
+              </div>
 
               {/* glowing pins, labels + tooltips */}
               {VISIBLE_PINS.map((p) => {
-                const left = ((p.x - VB_X) / VB_W) * 100;
-                const top = ((p.y - VB_Y) / VB_H) * 100;
+                const baseLeft = ((p.x - VB_X) / VB_W) * 100;
+                const baseTop = ((p.y - VB_Y) / VB_H) * 100;
+                // Same transform as the map layer, so pins stay on their countries.
+                const left = anchor.x + (baseLeft - anchor.x) * zoom;
+                const top = anchor.y + (baseTop - anchor.y) * zoom;
                 const isActive = active?.name === p.name;
                 const flip = top < 30;
                 return (
                   <div
                     key={p.name}
-                    className="absolute z-10"
-                    style={{ left: `${left}%`, top: `${top}%`, transform: "translate(-50%, -50%)" }}
-                    onMouseEnter={() => setActive(p)}
-                    onMouseLeave={() => setActive(null)}
+                    className={`absolute transition-[left,top] duration-700 motion-reduce:transition-none ${isActive ? "z-20" : "z-10"}`}
+                    style={{
+                      left: `${left}%`,
+                      top: `${top}%`,
+                      transform: "translate(-50%, -50%)",
+                      transitionTimingFunction: ease,
+                    }}
+                    onMouseEnter={() => focusPin(p)}
+                    onMouseLeave={releasePin}
                   >
                     <span
-                      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
+                      className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
                         p.hq ? "h-4 w-4" : "h-3 w-3"
                       }`}
                       style={{ animationDelay: `${(p.x % 7) * 0.2}s` }}
                     />
                     <button
                       type="button"
-                      aria-label={p.name}
-                      className={`relative block cursor-pointer rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
+                      aria-label={`${p.name} — zoom to verified deliveries`}
+                      aria-pressed={isActive}
+                      onFocus={() => focusPin(p)}
+                      onBlur={releasePin}
+                      onClick={() => (isActive ? setActive(null) : focusPin(p))}
+                      className={`relative block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink before:absolute before:-inset-1 before:content-[''] rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
                         p.hq
                           ? "h-3.5 w-3.5 ring-2 ring-white/70"
                           : "h-2.5 w-2.5 ring-1 ring-white/50"
@@ -197,6 +243,16 @@ export function GlobalPresence() {
                   </div>
                 );
               })}
+
+              {active && (
+                <button
+                  type="button"
+                  onClick={() => setActive(null)}
+                  className="absolute right-3 top-3 z-30 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-ink/70 px-3 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-semibold text-white/85 backdrop-blur-md transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  <Minimize2 className="h-3.5 w-3.5" /> World view
+                </button>
+              )}
 
               {/* countries-served pill */}
               <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/15 bg-ink/60 px-3.5 py-1.5 text-[calc(11*var(--desktop-px-unit))] font-medium text-white/75 shadow-sm backdrop-blur-md">
