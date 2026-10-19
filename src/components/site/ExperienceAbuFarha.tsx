@@ -15,7 +15,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
  * The image frame keeps a fixed 4:3 ratio across every tab so switching cannot
  * shift the layout.
  */
-export function ExperienceAbuFarha({ embedded = false }: { embedded?: boolean } = {}) {
+export function ExperienceAbuFarha() {
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(CLINICAL_SOLUTIONS[0].id);
   const activeIndex = CLINICAL_SOLUTIONS.findIndex((s) => s.id === activeId);
@@ -37,10 +37,9 @@ export function ExperienceAbuFarha({ embedded = false }: { embedded?: boolean } 
 
   return (
     <section
-      id={embedded ? "pathways" : "experience"}
-      aria-labelledby={embedded ? undefined : "clinical-solutions-heading"}
-      aria-label={embedded ? "Clinical programs" : undefined}
-      className={`relative overflow-hidden bg-white ${embedded ? "py-10 lg:py-14" : "py-16 lg:py-20"}`}
+      id="experience"
+      aria-labelledby="clinical-solutions-heading"
+      className="relative overflow-hidden bg-white py-16 lg:py-20"
     >
       {/* Very subtle engineering grid */}
       <div
@@ -57,7 +56,6 @@ export function ExperienceAbuFarha({ embedded = false }: { embedded?: boolean } 
 
       <div className={`relative ${SECTION_CONTAINER}`}>
         {/* ------------------------------- Header ------------------------------ */}
-        {embedded ? null : (
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,13 +68,10 @@ export function ExperienceAbuFarha({ embedded = false }: { embedded?: boolean } 
             id="clinical-solutions-heading"
             className="mt-6 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]"
           >
-            <Link to="/programs" className="transition-colors hover:text-primary/90">
-              Complete Care
-              <span className="mt-1 block text-primary">Pathways.</span>
-            </Link>
+            Complete Care
+            <span className="mt-1 block text-primary">Pathways.</span>
           </h2>
         </motion.div>
-        )}
 
 
         {/* -------------------------------- Tabs ------------------------------- */}
