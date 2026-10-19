@@ -48,6 +48,7 @@ import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-s
 import { Route as ProductsOthersRouteImport } from './routes/products.others'
 import { Route as ProductsPetCtScannersRouteImport } from './routes/products.pet-ct-scanners'
 import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
+import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
 import { Route as ProgramsInterventionalNeurologyRouteImport } from './routes/programs.interventional-neurology'
 import { Route as ProgramsNeuroIcuRouteImport } from './routes/programs.neuro-icu'
 import { Route as ProgramsNeuroImagingRouteImport } from './routes/programs.neuro-imaging'
@@ -264,6 +265,11 @@ const ProductsXRaySystemsRoute = ProductsXRaySystemsRouteImport.update({
   path: '/x-ray-systems',
   getParentRoute: () => ProductsRoute,
 } as any)
+const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
+  id: '/programs/',
+  path: '/programs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramsInterventionalNeurologyRoute =
   ProgramsInterventionalNeurologyRouteImport.update({
     id: '/programs/interventional-neurology',
@@ -386,6 +392,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
   '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
@@ -439,6 +446,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/knowledge': typeof KnowledgeIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/programs': typeof ProgramsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
   '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
@@ -495,6 +503,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/knowledge/manufacturers/$slug': typeof KnowledgeManufacturersSlugRoute
   '/knowledge/products/$slug': typeof KnowledgeProductsSlugRoute
@@ -552,6 +561,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/knowledge/'
     | '/products/'
+    | '/programs/'
     | '/.mcp/invoke-tool/$tool'
     | '/knowledge/manufacturers/$slug'
     | '/knowledge/products/$slug'
@@ -605,6 +615,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/knowledge'
     | '/products'
+    | '/programs'
     | '/.mcp/invoke-tool/$tool'
     | '/knowledge/manufacturers/$slug'
     | '/knowledge/products/$slug'
@@ -660,6 +671,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/knowledge/'
     | '/products/'
+    | '/programs/'
     | '/.mcp/invoke-tool/$tool'
     | '/knowledge/manufacturers/$slug'
     | '/knowledge/products/$slug'
@@ -701,6 +713,7 @@ export interface RootRouteChildren {
   ProgramsRehabilitationRoute: typeof ProgramsRehabilitationRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
   KnowledgeIndexRoute: typeof KnowledgeIndexRoute
+  ProgramsIndexRoute: typeof ProgramsIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   KnowledgeManufacturersSlugRoute: typeof KnowledgeManufacturersSlugRoute
   KnowledgeProductsSlugRoute: typeof KnowledgeProductsSlugRoute
@@ -987,6 +1000,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsXRaySystemsRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/programs/': {
+      id: '/programs/'
+      path: '/programs'
+      fullPath: '/programs/'
+      preLoaderRoute: typeof ProgramsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programs/interventional-neurology': {
       id: '/programs/interventional-neurology'
       path: '/programs/interventional-neurology'
@@ -1167,6 +1187,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgramsRehabilitationRoute: ProgramsRehabilitationRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
   KnowledgeIndexRoute: KnowledgeIndexRoute,
+  ProgramsIndexRoute: ProgramsIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   KnowledgeManufacturersSlugRoute: KnowledgeManufacturersSlugRoute,
   KnowledgeProductsSlugRoute: KnowledgeProductsSlugRoute,
