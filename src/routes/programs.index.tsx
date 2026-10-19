@@ -8,7 +8,6 @@ import {
   Headphones,
   Home as HomeIcon,
   LayoutGrid,
-  Search,
   Settings,
   Users,
   Wrench,
@@ -58,17 +57,7 @@ function ProgramsDirectory() {
     [],
   );
   const [filter, setFilter] = useState<string>("all");
-  const [query, setQuery] = useState("");
-  const q = query.trim().toLowerCase();
-  const visible = programs.filter(
-    ({ program, solution }) =>
-      (filter === "all" || program.path === filter) &&
-      (!q ||
-        [program.name, solution.title, program.intro, ...solution.highlights]
-          .join(" ")
-          .toLowerCase()
-          .includes(q)),
-  );
+  const visible = programs.filter(({ program }) => filter === "all" || program.path === filter);
 
   const pill = (active: boolean) =>
     `inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 ${
@@ -133,7 +122,7 @@ function ProgramsDirectory() {
           <h2 id="programs-dir" className="sr-only">
             All clinical programs
           </h2>
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
             <div className="flex flex-wrap gap-2" role="group" aria-label="Filter programs">
               <button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")} className={pill(filter === "all")}>
                 <LayoutGrid className="h-4 w-4" aria-hidden /> All Programs
@@ -150,20 +139,9 @@ function ProgramsDirectory() {
                 </button>
               ))}
             </div>
-            <label className="relative block w-full lg:w-72">
-              <span className="sr-only">Search clinical programs</span>
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search clinical programs..."
-                className="min-h-11 w-full rounded-full border border-border bg-background pl-10 pr-4 text-sm text-ink placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </label>
           </div>
 
-          <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map(({ program, solution }) => (
               <li key={program.path} className="min-w-0">
                 <Link
@@ -202,9 +180,6 @@ function ProgramsDirectory() {
               </li>
             ))}
           </ul>
-          {visible.length === 0 ? (
-            <p className="mt-6 text-sm text-muted-foreground">No programs match your search.</p>
-          ) : null}
         </section>
 
         {/* Approach + CTA */}
