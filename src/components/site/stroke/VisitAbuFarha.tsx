@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Eyebrow } from "@/components/site/Eyebrow";
+import { getClinicalProgram, type ClinicalProgram } from "@/lib/clinical-programs";
 
 type Item = {
   Icon: LucideIcon;
@@ -19,8 +20,8 @@ type Item = {
   highlight: string;
 };
 
-const ITEMS: Item[] = [
-  { Icon: Stethoscope, label: "Meet our Stroke Physicians", highlight: "Stroke Physicians" },
+const buildItems = (v: ClinicalProgram["visit"]): Item[] => [
+  { Icon: Stethoscope, label: v.specialistsLabel, highlight: v.specialistsHighlight },
   {
     Icon: Wrench,
     label: "Meet our Biomedical Engineering Team",
@@ -39,8 +40,8 @@ const ITEMS: Item[] = [
   },
   {
     Icon: Brain,
-    label: "Observe Comprehensive Stroke Workflows",
-    highlight: "Comprehensive Stroke Workflows",
+    label: v.workflowLabel,
+    highlight: v.workflowHighlight,
   },
   {
     Icon: Hospital,
@@ -69,7 +70,13 @@ function renderLabel(label: string, highlight: string) {
   );
 }
 
-export function VisitAbuFarha() {
+export function VisitAbuFarha({
+  program = getClinicalProgram("/programs/stroke-care"),
+}: {
+  program?: ClinicalProgram;
+}) {
+  const v = program.visit;
+  const ITEMS = buildItems(v);
   return (
     <>
       <section
@@ -82,12 +89,12 @@ export function VisitAbuFarha() {
             <div className="lg:pr-6">
               <Eyebrow index="01">Visit AbuFarha</Eyebrow>
               <h2 className="mt-10 font-display text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:text-[3rem]">
-                Experience Comprehensive Stroke Programs
+                {v.headline}
                 <span className="mt-2 block text-primary">Before You Invest.</span>
               </h2>
               <p className="mt-10 max-w-xl text-base leading-[1.8] text-muted-foreground sm:text-[1.05rem]">
                 We invite healthcare leaders, physicians, and biomedical engineers to experience
-                firsthand how comprehensive stroke programs are planned, engineered, implemented,
+                firsthand how {v.lead} are planned, engineered, implemented,
                 and supported — before making one of their hospital&apos;s most important technology
                 investments.
               </p>
@@ -96,7 +103,7 @@ export function VisitAbuFarha() {
                 className="mt-14 max-w-xl border-l-[3px] pl-7 font-display text-[1.5rem] font-extrabold leading-[1.3] tracking-[-0.015em] text-ink sm:text-[1.7rem] lg:text-[1.85rem]"
                 style={{ borderColor: ACCENT }}
               >
-                Helping hospitals build comprehensive stroke programs across{" "}
+                {v.bannerLead}{" "}
                 <span className="text-primary">Africa and the Middle East</span> since 1999.
               </p>
             </div>
@@ -138,13 +145,12 @@ export function VisitAbuFarha() {
         />
         <div className="relative mx-auto max-w-[80rem] px-6 text-center lg:px-10">
           <h2 className="mx-auto max-w-4xl font-display text-[1.9rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-white sm:text-[2.4rem] lg:text-[2.7rem]">
-            Helping hospitals build comprehensive stroke programs across
+            {v.bannerLead}
             <span className="text-primary"> Africa and the Middle East </span>
             since 1999.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-[1.75] text-white/70">
-            From planning and procurement to installation, training, and long-term support, AbuFarha
-            partners with hospitals to deliver sustainable stroke care solutions.
+            {v.bannerBody}
           </p>
           <div className="mt-9 flex justify-center">
             <Link

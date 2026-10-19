@@ -19,6 +19,9 @@ import solDexa from "@/assets/sol-dexa.jpg";
 import solEswl from "@/assets/sol-eswl.jpg";
 import solDes from "@/assets/sol-des.jpg";
 import solOr from "@/assets/sol-or.jpg";
+import whyCathlab from "@/assets/why-cathlab.jpg";
+import clinicalNeuroIcu from "@/assets/clinical-neuro-icu.jpg";
+import clinicalRehab from "@/assets/clinical-rehabilitation.jpg";
 
 /**
  * Production site URL. Overridable at build time via VITE_SITE_URL so
@@ -56,6 +59,10 @@ export const OG_IMAGES = {
   contact: absUrl(abufarhaHq),
   hospitalReadiness: absUrl(turnkeyHero),
   strokeCare: absUrl(strokeBrainHero),
+  neuroImaging: absUrl(solMri),
+  interventionalNeurology: absUrl(whyCathlab),
+  neuroIcu: absUrl(clinicalNeuroIcu),
+  rehabilitation: absUrl(clinicalRehab),
   blog: absUrl(heroCathlab),
   productsIndex: absUrl(solMri),
   productCategory: {
