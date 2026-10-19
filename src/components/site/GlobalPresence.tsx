@@ -182,7 +182,7 @@ export function GlobalPresence() {
                     onMouseLeave={releasePin}
                   >
                     <span
-                      className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
+                      className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50 ${
                         p.hq ? "h-4 w-4" : "h-3 w-3"
                       }`}
                       style={{ animationDelay: `${(p.x % 7) * 0.2}s` }}
