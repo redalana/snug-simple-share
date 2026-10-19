@@ -120,7 +120,7 @@ export const Route = createFileRoute("/products/$slug")({
   errorComponent: ({ error }) => (
     <SimpleShell>
       <p className="text-sm text-muted-foreground" role="alert">
-        {error.message}
+        {error instanceof Error ? error.message : String(error)}
       </p>
     </SimpleShell>
   ),
