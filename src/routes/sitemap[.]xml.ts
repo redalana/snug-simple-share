@@ -28,7 +28,6 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/projects", changefreq: "monthly", priority: "0.7" },
   { path: "/contact", changefreq: "monthly", priority: "0.6" },
   { path: "/hospital-readiness-assessment", changefreq: "monthly", priority: "0.6" },
-  { path: "/programs", changefreq: "monthly", priority: "0.7" },
   { path: "/programs/stroke-care", changefreq: "monthly", priority: "0.6" },
   { path: "/programs/neuro-imaging", changefreq: "monthly", priority: "0.6" },
   { path: "/programs/interventional-neurology", changefreq: "monthly", priority: "0.6" },
