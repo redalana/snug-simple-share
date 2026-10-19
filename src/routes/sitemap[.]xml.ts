@@ -29,6 +29,10 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/contact", changefreq: "monthly", priority: "0.6" },
   { path: "/hospital-readiness-assessment", changefreq: "monthly", priority: "0.6" },
   { path: "/programs/stroke-care", changefreq: "monthly", priority: "0.6" },
+  { path: "/programs/neuro-imaging", changefreq: "monthly", priority: "0.6" },
+  { path: "/programs/interventional-neurology", changefreq: "monthly", priority: "0.6" },
+  { path: "/programs/neuro-icu", changefreq: "monthly", priority: "0.6" },
+  { path: "/programs/rehabilitation", changefreq: "monthly", priority: "0.6" },
   { path: "/blog", changefreq: "weekly", priority: "0.8" },
   // Knowledge hub directories
   { path: "/knowledge", changefreq: "weekly", priority: "0.8" },

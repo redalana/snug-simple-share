@@ -1,19 +1,11 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import {
-  ArrowRight,
-  Gauge,
-  TrendingUp,
-  Brain,
-  ScanLine,
-  Timer,
-  ShieldCheck,
-  MapPin,
-} from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Eyebrow } from "./Eyebrow";
 import { SECTION_CONTAINER } from "./section-grid";
 import brainHero from "@/assets/stroke-brain-hero.jpg";
+import { getClinicalProgram, getProgramSolution, type ClinicalProgram } from "@/lib/clinical-programs";
 import hqImage from "@/assets/abufarha-hq.jpg";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -34,97 +26,19 @@ type Node = {
   region: { x: number; y: number };
 };
 
-const NODES: Node[] = [
-  {
-    id: "tissue",
-    num: "01",
-    icon: Gauge,
-    category: "Patient Impact",
-    title: "Save Brain Tissue Faster",
-    copy: "Early diagnosis and rapid intervention help preserve healthy brain tissue and reduce permanent neurological damage.",
-    side: "left",
-    level: "primary",
-    // frontal cortex
-    path: "M 20 24 C 34 25, 44 30, 50 34",
-    region: { x: 50, y: 34 },
-  },
-  {
-    id: "delays",
-    num: "02",
-    icon: Timer,
-    category: "Clinical Workflow",
-    title: "Reduce Treatment Delays",
-    copy: "Efficient clinical workflows shorten the time between diagnosis and intervention, improving the chances of successful recovery.",
-    side: "left",
-    level: "secondary",
-    // vascular network
-    path: "M 20 51 C 34 51, 44 49, 49 48",
-    region: { x: 49, y: 48 },
-  },
-  {
-    id: "recovery",
-    num: "03",
-    icon: Brain,
-    category: "Patient Outcome",
-    title: "Improve Functional Recovery",
-    copy: "Integrated stroke pathways increase the likelihood of better neurological recovery and a faster return to independent living.",
-    side: "left",
-    level: "secondary",
-    // cerebral hemisphere
-    path: "M 20 78 C 34 74, 44 64, 49 58",
-    region: { x: 49, y: 58 },
-  },
-  {
-    id: "imaging",
-    num: "04",
-    icon: ScanLine,
-    category: "Technology",
-    title: "Precision Neurovascular Imaging",
-    copy: "High-resolution imaging helps physicians identify blocked vessels quickly and perform safer, more accurate interventions.",
-    side: "right",
-    level: "primary",
-    // cerebral vessels / blocked artery
-    path: "M 80 24 C 66 26, 58 36, 55 44",
-    region: { x: 55, y: 44 },
-  },
-  {
-    id: "performance",
-    num: "05",
-    icon: TrendingUp,
-    category: "Hospital Value",
-    title: "Increase Stroke Center Performance",
-    copy: "Reliable technology, optimized workflows and trained clinical teams improve operational efficiency and strengthen hospital performance.",
-    side: "right",
-    level: "secondary",
-    // vascular network
-    path: "M 80 51 C 66 51, 58 49, 53 47",
-    region: { x: 53, y: 47 },
-  },
-  {
-    id: "sustainability",
-    num: "06",
-    icon: ShieldCheck,
-    category: "Long-Term Success",
-    title: "Build Sustainable Stroke Services",
-    copy: "Continuous biomedical engineering, preventive maintenance and clinical education help hospitals deliver reliable stroke care for years.",
-    side: "right",
-    level: "secondary",
-    // carotid circulation
-    path: "M 80 78 C 66 74, 58 66, 52 60",
-    region: { x: 52, y: 60 },
-  },
+/** Connector geometry per node slot; content comes from the program data. */
+const GEOMETRY: Pick<Node, "id" | "num" | "side" | "level" | "path" | "region">[] = [
+  { id: "n1", num: "01", side: "left", level: "primary", path: "M 20 24 C 34 25, 44 30, 50 34", region: { x: 50, y: 34 } },
+  { id: "n2", num: "02", side: "left", level: "secondary", path: "M 20 51 C 34 51, 44 49, 49 48", region: { x: 49, y: 48 } },
+  { id: "n3", num: "03", side: "left", level: "secondary", path: "M 20 78 C 34 74, 44 64, 49 58", region: { x: 49, y: 58 } },
+  { id: "n4", num: "04", side: "right", level: "primary", path: "M 80 24 C 66 26, 58 36, 55 44", region: { x: 55, y: 44 } },
+  { id: "n5", num: "05", side: "right", level: "secondary", path: "M 80 51 C 66 51, 58 49, 53 47", region: { x: 53, y: 47 } },
+  { id: "n6", num: "06", side: "right", level: "secondary", path: "M 80 78 C 66 74, 58 66, 52 60", region: { x: 52, y: 60 } },
 ];
 
-const VISIT_POINTS = [
-  "Meet our stroke physicians",
-  "Meet our biomedical engineering team",
-  "Tour AbuFarha headquarters",
-  "Explore our engineering laboratories",
-  "Visit our medical equipment warehouse",
-  "Observe comprehensive stroke workflows",
-  "Visit hospitals using our technologies",
-  "Exchange knowledge with our leadership team",
-];
+function buildNodes(program: ClinicalProgram): Node[] {
+  return GEOMETRY.map((g, i) => ({ ...g, ...program.nodes[i] }));
+}
 
 function NodePanel({
   node,
@@ -210,7 +124,15 @@ function NodePanel({
   );
 }
 
-export function StrokeCareProgram() {
+export function StrokeCareProgram({
+  program = getClinicalProgram("/programs/stroke-care"),
+}: {
+  program?: ClinicalProgram;
+}) {
+  const NODES = buildNodes(program);
+  const VISIT_POINTS = program.visitPoints;
+  const anatomical = program.anatomical;
+  const solution = getProgramSolution(program);
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -240,19 +162,15 @@ export function StrokeCareProgram() {
         >
           <div className="flex justify-center">
             <Eyebrow index="04" align="center">
-              The Stroke Care Ecosystem
+              {program.eyebrow}
             </Eyebrow>
           </div>
           <h1 className="mt-8 font-display text-[3.1rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[4rem] lg:text-[4rem]">
-            A Stroke Program Is an Ecosystem —
-            <span className="mt-2 block text-primary">Not a Single Device.</span>
+            {program.headline}
+            <span className="mt-2 block text-primary">{program.headlineAccent}</span>
           </h1>
           <p className="mx-auto mt-9 max-w-2xl text-[calc(21*var(--desktop-px-unit))] leading-[1.8] text-muted-foreground">
-            When a cerebral artery is blocked, brain tissue is lost every minute until blood flow is
-            restored. Restoring it in time depends on precision imaging, rapid clinical decisions,
-            biomedical engineering, efficient workflows and reliable technical support acting as one
-            system. Each element below explains how it protects the patient's brain — and how
-            AbuFarha helps hospitals bring them together.
+            {program.intro}
           </p>
         </motion.div>
 
@@ -287,15 +205,15 @@ export function StrokeCareProgram() {
                     style={{ transition: "stroke-width 0.3s ease" }}
                   />
                   {/* vascular region node */}
-                  <circle
+                  {anatomical && (<circle
                     cx={node.region.x}
                     cy={node.region.y}
                     r={isActive ? 0.9 : 0.55}
                     fill="var(--color-primary)"
                     fillOpacity={isActive ? 0.9 : 0.35}
                     style={{ transition: "r 0.3s ease, fill-opacity 0.3s ease" }}
-                  />
-                  {isActive && !reduce && (
+                  />)}
+                  {anatomical && isActive && !reduce && (
                     <circle
                       cx={node.region.x}
                       cy={node.region.y}
@@ -345,7 +263,7 @@ export function StrokeCareProgram() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 1.1, ease: EASE }}
-              className="relative mx-auto max-w-2xl lg:-mx-16 lg:max-w-none lg:scale-[1.2]"
+              className={`relative mx-auto max-w-2xl ${anatomical ? "lg:-mx-16 lg:max-w-none lg:scale-[1.2]" : "lg:mx-4 lg:max-w-none"}`}
             >
               <div
                 aria-hidden
@@ -355,7 +273,17 @@ export function StrokeCareProgram() {
                     "radial-gradient(circle at 52% 42%, color-mix(in oklab, var(--primary) 15%, transparent), transparent 62%)",
                 }}
               />
-              <motion.img
+              {!anatomical && (
+                <img
+                  src={solution.image.src}
+                  alt={solution.image.alt}
+                  width={1600}
+                  height={1200}
+                  draggable={false}
+                  className="aspect-[4/5] w-full select-none rounded-3xl border border-border/70 object-cover shadow-[0_28px_60px_-34px_rgba(15,23,42,0.45)]"
+                />
+              )}
+              {anatomical && (<motion.img
                 src={brainHero}
                 alt="Semi-transparent human head in side profile revealing an anatomically accurate brain with detailed cerebral arteries and one artery blocked by a clot highlighted in soft red"
                 width={1024}
@@ -372,9 +300,9 @@ export function StrokeCareProgram() {
                   reduce ? undefined : { duration: 6.5, repeat: Infinity, ease: "easeInOut" }
                 }
                 draggable={false}
-              />
+              />)}
               {/* Heartbeat pulse over the blocked artery */}
-              {!reduce && (
+              {anatomical && !reduce && (
                 <span
                   aria-hidden
                   className="pointer-events-none absolute"
@@ -443,10 +371,7 @@ export function StrokeCareProgram() {
                 Visit Before You Invest.
               </h3>
               <p className="mt-6 max-w-xl text-[calc(18*var(--desktop-px-unit))] leading-[1.75] text-muted-foreground">
-                We invite healthcare leaders, physicians and biomedical engineers to experience
-                firsthand how comprehensive stroke programs are planned, engineered, implemented and
-                supported before making one of their hospital's most important technology
-                investments.
+                {program.invitation}
               </p>
 
               <p className="mt-10 text-[calc(12*var(--desktop-px-unit))] font-bold uppercase tracking-[0.3em] text-ink/50">
@@ -468,8 +393,7 @@ export function StrokeCareProgram() {
               </ul>
 
               <p className="mt-11 max-w-xl text-[calc(13.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground/70">
-                Helping hospitals build comprehensive stroke programs across Africa and the Middle
-                East since 1999.
+                {program.footnote}
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -484,7 +408,7 @@ export function StrokeCareProgram() {
                   href="/contact"
                   className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-[calc(15*var(--desktop-px-unit))] font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
                 >
-                  Talk With Our Stroke Program Team
+                  {program.secondaryCta}
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </div>

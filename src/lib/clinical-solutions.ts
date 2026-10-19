@@ -69,7 +69,7 @@ export const CLINICAL_SOLUTIONS: ClinicalSolution[] = [
       "Radiographer training",
     ],
     note: "Application specialists remain involved after handover, refining sequences and dose protocols alongside your radiology team.",
-    cta: { label: "Explore Neuro Imaging", to: "/products/mri-scanners" },
+    cta: { label: "Explore Neuro Imaging", to: "/programs/neuro-imaging" },
     image: {
       src: neuroImaging,
       alt: "MRI scanner installed in a hospital imaging suite used for neurological examinations",
@@ -91,7 +91,7 @@ export const CLINICAL_SOLUTIONS: ClinicalSolution[] = [
       "Consumables & device supply",
     ],
     note: "Commissioning includes dose verification, workflow rehearsal with the interventional team and documented handover for procurement and accreditation files.",
-    cta: { label: "Explore Neuro Intervention", to: "/products/cath-lab" },
+    cta: { label: "Explore Neuro Intervention", to: "/programs/interventional-neurology" },
     image: {
       src: interventional,
       alt: "Interventional cath lab with angiography system prepared for a neurovascular procedure",
@@ -113,7 +113,7 @@ export const CLINICAL_SOLUTIONS: ClinicalSolution[] = [
       "Nursing team training",
     ],
     note: "Preventive maintenance programmes and OEM spare-part supply keep critical-care equipment available around the clock.",
-    cta: { label: "Explore Critical Care", to: "/products/others" },
+    cta: { label: "Explore Critical Care", to: "/programs/neuro-icu" },
     image: {
       src: neuroIcu,
       alt: "Clinician reviewing vital signs on a patient monitor beside a ventilated patient in a neuro intensive care unit",
@@ -135,7 +135,7 @@ export const CLINICAL_SOLUTIONS: ClinicalSolution[] = [
       "Therapist training",
     ],
     note: "Our engineers service rehabilitation equipment on the same maintenance agreements as imaging and interventional systems — one partner across the pathway.",
-    cta: { label: "Explore Rehabilitation", to: "/products/others" },
+    cta: { label: "Explore Rehabilitation", to: "/programs/rehabilitation" },
     image: {
       src: rehabilitation,
       alt: "Physiotherapist assisting a patient with gait training between parallel bars in a stroke rehabilitation room",
