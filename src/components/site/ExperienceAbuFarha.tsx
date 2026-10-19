@@ -68,8 +68,22 @@ export function ExperienceAbuFarha() {
             id="clinical-solutions-heading"
             className="mt-6 font-display text-[3.1rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.8rem]"
           >
-            Complete Care
-            <span className="mt-1 block text-primary">Pathways.</span>
+            <Link
+              to="/programs"
+              aria-label="Complete Care Pathways — view all clinical programs"
+              className="group inline-block rounded-lg transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-4"
+            >
+              Complete Care
+              <span className="mt-1 flex items-center gap-3 text-primary">
+                <span className="decoration-primary/40 decoration-2 underline-offset-8 group-hover:underline">
+                  Pathways.
+                </span>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-8 w-8 transition-transform duration-300 group-hover:translate-x-1.5 sm:h-10 sm:w-10"
+                />
+              </span>
+            </Link>
           </h2>
         </motion.div>
 
