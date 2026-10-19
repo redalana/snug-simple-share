@@ -48,6 +48,10 @@ import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-s
 import { Route as ProductsOthersRouteImport } from './routes/products.others'
 import { Route as ProductsPetCtScannersRouteImport } from './routes/products.pet-ct-scanners'
 import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
+import { Route as ProgramsInterventionalNeurologyRouteImport } from './routes/programs.interventional-neurology'
+import { Route as ProgramsNeuroIcuRouteImport } from './routes/programs.neuro-icu'
+import { Route as ProgramsNeuroImagingRouteImport } from './routes/programs.neuro-imaging'
+import { Route as ProgramsRehabilitationRouteImport } from './routes/programs.rehabilitation'
 import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as KnowledgeManufacturersIndexRouteImport } from './routes/knowledge.manufacturers.index'
@@ -260,6 +264,27 @@ const ProductsXRaySystemsRoute = ProductsXRaySystemsRouteImport.update({
   path: '/x-ray-systems',
   getParentRoute: () => ProductsRoute,
 } as any)
+const ProgramsInterventionalNeurologyRoute =
+  ProgramsInterventionalNeurologyRouteImport.update({
+    id: '/programs/interventional-neurology',
+    path: '/programs/interventional-neurology',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProgramsNeuroIcuRoute = ProgramsNeuroIcuRouteImport.update({
+  id: '/programs/neuro-icu',
+  path: '/programs/neuro-icu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsNeuroImagingRoute = ProgramsNeuroImagingRouteImport.update({
+  id: '/programs/neuro-imaging',
+  path: '/programs/neuro-imaging',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsRehabilitationRoute = ProgramsRehabilitationRouteImport.update({
+  id: '/programs/rehabilitation',
+  path: '/programs/rehabilitation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
   id: '/programs/stroke-care',
   path: '/programs/stroke-care',
@@ -353,6 +378,10 @@ export interface FileRoutesByFullPath {
   '/products/others': typeof ProductsOthersRoute
   '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
+  '/programs/interventional-neurology': typeof ProgramsInterventionalNeurologyRoute
+  '/programs/neuro-icu': typeof ProgramsNeuroIcuRoute
+  '/programs/neuro-imaging': typeof ProgramsNeuroImagingRoute
+  '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
@@ -402,6 +431,10 @@ export interface FileRoutesByTo {
   '/products/others': typeof ProductsOthersRoute
   '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
+  '/programs/interventional-neurology': typeof ProgramsInterventionalNeurologyRoute
+  '/programs/neuro-icu': typeof ProgramsNeuroIcuRoute
+  '/programs/neuro-imaging': typeof ProgramsNeuroImagingRoute
+  '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog': typeof BlogIndexRoute
   '/knowledge': typeof KnowledgeIndexRoute
@@ -454,6 +487,10 @@ export interface FileRoutesById {
   '/products/others': typeof ProductsOthersRoute
   '/products/pet-ct-scanners': typeof ProductsPetCtScannersRoute
   '/products/x-ray-systems': typeof ProductsXRaySystemsRoute
+  '/programs/interventional-neurology': typeof ProgramsInterventionalNeurologyRoute
+  '/programs/neuro-icu': typeof ProgramsNeuroIcuRoute
+  '/programs/neuro-imaging': typeof ProgramsNeuroImagingRoute
+  '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
@@ -507,6 +544,10 @@ export interface FileRouteTypes {
     | '/products/others'
     | '/products/pet-ct-scanners'
     | '/products/x-ray-systems'
+    | '/programs/interventional-neurology'
+    | '/programs/neuro-icu'
+    | '/programs/neuro-imaging'
+    | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog/'
     | '/knowledge/'
@@ -556,6 +597,10 @@ export interface FileRouteTypes {
     | '/products/others'
     | '/products/pet-ct-scanners'
     | '/products/x-ray-systems'
+    | '/programs/interventional-neurology'
+    | '/programs/neuro-icu'
+    | '/programs/neuro-imaging'
+    | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog'
     | '/knowledge'
@@ -607,6 +652,10 @@ export interface FileRouteTypes {
     | '/products/others'
     | '/products/pet-ct-scanners'
     | '/products/x-ray-systems'
+    | '/programs/interventional-neurology'
+    | '/programs/neuro-icu'
+    | '/programs/neuro-imaging'
+    | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog/'
     | '/knowledge/'
@@ -646,6 +695,10 @@ export interface RootRouteChildren {
   TurnkeyRoute: typeof TurnkeyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  ProgramsInterventionalNeurologyRoute: typeof ProgramsInterventionalNeurologyRoute
+  ProgramsNeuroIcuRoute: typeof ProgramsNeuroIcuRoute
+  ProgramsNeuroImagingRoute: typeof ProgramsNeuroImagingRoute
+  ProgramsRehabilitationRoute: typeof ProgramsRehabilitationRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
   KnowledgeIndexRoute: typeof KnowledgeIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -934,6 +987,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsXRaySystemsRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/programs/interventional-neurology': {
+      id: '/programs/interventional-neurology'
+      path: '/programs/interventional-neurology'
+      fullPath: '/programs/interventional-neurology'
+      preLoaderRoute: typeof ProgramsInterventionalNeurologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/neuro-icu': {
+      id: '/programs/neuro-icu'
+      path: '/programs/neuro-icu'
+      fullPath: '/programs/neuro-icu'
+      preLoaderRoute: typeof ProgramsNeuroIcuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/neuro-imaging': {
+      id: '/programs/neuro-imaging'
+      path: '/programs/neuro-imaging'
+      fullPath: '/programs/neuro-imaging'
+      preLoaderRoute: typeof ProgramsNeuroImagingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/rehabilitation': {
+      id: '/programs/rehabilitation'
+      path: '/programs/rehabilitation'
+      fullPath: '/programs/rehabilitation'
+      preLoaderRoute: typeof ProgramsRehabilitationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programs/stroke-care': {
       id: '/programs/stroke-care'
       path: '/programs/stroke-care'
@@ -1080,6 +1161,10 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  ProgramsInterventionalNeurologyRoute: ProgramsInterventionalNeurologyRoute,
+  ProgramsNeuroIcuRoute: ProgramsNeuroIcuRoute,
+  ProgramsNeuroImagingRoute: ProgramsNeuroImagingRoute,
+  ProgramsRehabilitationRoute: ProgramsRehabilitationRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
   KnowledgeIndexRoute: KnowledgeIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
