@@ -1,7 +1,7 @@
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 import type { ClinicalProgram } from "@/lib/clinical-programs";
 
-export function programHead(program: ClinicalProgram, ogKey: keyof typeof OG_IMAGES) {
+export function programHead(program: ClinicalProgram, ogKey: "strokeCare" | "neuroImaging" | "interventionalNeurology" | "neuroIcu" | "rehabilitation") {
   const url = SITE_URL + program.path;
   const img = OG_IMAGES[ogKey];
   return {
