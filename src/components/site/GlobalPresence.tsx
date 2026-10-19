@@ -194,7 +194,7 @@ export function GlobalPresence() {
                       onFocus={() => focusPin(p)}
                       onBlur={releasePin}
                       onClick={() => (isActive ? setActive(null) : focusPin(p))}
-                      className={`relative block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink before:absolute before:-inset-2.5 before:content-[''] rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
+                      className={`relative block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink before:absolute before:-inset-1 before:content-[''] rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)] transition-transform hover:scale-125 ${
                         p.hq
                           ? "h-3.5 w-3.5 ring-2 ring-white/70"
                           : "h-2.5 w-2.5 ring-1 ring-white/50"
