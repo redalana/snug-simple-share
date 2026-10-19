@@ -9,104 +9,104 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TurnkeyRouteImport } from './routes/turnkey'
-import { Route as ThankYouRouteImport } from './routes/thank-you'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SitemapRouteImport } from './routes/sitemap'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as ProductsRouteImport } from './routes/products'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as McpRouteImport } from './routes/mcp'
-import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
-import { Route as FaqsRouteImport } from './routes/faqs'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CompareRouteImport } from './routes/compare'
-import { Route as CategoriesRouteImport } from './routes/categories'
-import { Route as BrandsRouteImport } from './routes/brands'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AfterSalesRouteImport } from './routes/after-sales'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProductsIndexRouteImport } from './routes/products.index'
-import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
-import { Route as BlogIndexRouteImport } from './routes/blog.index'
-import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
-import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
-import { Route as ProductsPetCtScannersRouteImport } from './routes/products.pet-ct-scanners'
-import { Route as ProductsOthersRouteImport } from './routes/products.others'
-import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-scanners'
-import { Route as ProductsMammographySystemsRouteImport } from './routes/products.mammography-systems'
-import { Route as ProductsLithotripsyEswlRouteImport } from './routes/products.lithotripsy-eswl'
-import { Route as ProductsDrugElutingStentsRouteImport } from './routes/products.drug-eluting-stents'
-import { Route as ProductsCtScannersRouteImport } from './routes/products.ct-scanners'
-import { Route as ProductsCathLabRouteImport } from './routes/products.cath-lab'
-import { Route as ProductsCArmSystemsRouteImport } from './routes/products.c-arm-systems'
-import { Route as ProductsBoneDensitometersRouteImport } from './routes/products.bone-densitometers'
-import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AfterSalesRouteImport } from './routes/after-sales'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BrandsRouteImport } from './routes/brands'
+import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as HospitalReadinessAssessmentRouteImport } from './routes/hospital-readiness-assessment'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SitemapRouteImport } from './routes/sitemap'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as TurnkeyRouteImport } from './routes/turnkey'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as KnowledgeTechnologiesIndexRouteImport } from './routes/knowledge.technologies.index'
-import { Route as KnowledgeServicesIndexRouteImport } from './routes/knowledge.services.index'
-import { Route as KnowledgeProductsIndexRouteImport } from './routes/knowledge.products.index'
-import { Route as KnowledgeManufacturersIndexRouteImport } from './routes/knowledge.manufacturers.index'
-import { Route as KnowledgeTechnologiesSlugRouteImport } from './routes/knowledge.technologies.$slug'
-import { Route as KnowledgeServicesSlugRouteImport } from './routes/knowledge.services.$slug'
-import { Route as KnowledgeProductsSlugRouteImport } from './routes/knowledge.products.$slug'
-import { Route as KnowledgeManufacturersSlugRouteImport } from './routes/knowledge.manufacturers.$slug'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as ProductsBoneDensitometersRouteImport } from './routes/products.bone-densitometers'
+import { Route as ProductsCArmSystemsRouteImport } from './routes/products.c-arm-systems'
+import { Route as ProductsCathLabRouteImport } from './routes/products.cath-lab'
+import { Route as ProductsCtScannersRouteImport } from './routes/products.ct-scanners'
+import { Route as ProductsDrugElutingStentsRouteImport } from './routes/products.drug-eluting-stents'
+import { Route as ProductsLithotripsyEswlRouteImport } from './routes/products.lithotripsy-eswl'
+import { Route as ProductsMammographySystemsRouteImport } from './routes/products.mammography-systems'
+import { Route as ProductsMriScannersRouteImport } from './routes/products.mri-scanners'
+import { Route as ProductsOthersRouteImport } from './routes/products.others'
+import { Route as ProductsPetCtScannersRouteImport } from './routes/products.pet-ct-scanners'
+import { Route as ProductsXRaySystemsRouteImport } from './routes/products.x-ray-systems'
+import { Route as ProgramsStrokeCareRouteImport } from './routes/programs.stroke-care'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as KnowledgeManufacturersIndexRouteImport } from './routes/knowledge.manufacturers.index'
+import { Route as KnowledgeManufacturersSlugRouteImport } from './routes/knowledge.manufacturers.$slug'
+import { Route as KnowledgeProductsIndexRouteImport } from './routes/knowledge.products.index'
+import { Route as KnowledgeProductsSlugRouteImport } from './routes/knowledge.products.$slug'
+import { Route as KnowledgeServicesIndexRouteImport } from './routes/knowledge.services.index'
+import { Route as KnowledgeServicesSlugRouteImport } from './routes/knowledge.services.$slug'
+import { Route as KnowledgeTechnologiesIndexRouteImport } from './routes/knowledge.technologies.index'
+import { Route as KnowledgeTechnologiesSlugRouteImport } from './routes/knowledge.technologies.$slug'
 
-const TurnkeyRoute = TurnkeyRouteImport.update({
-  id: '/turnkey',
-  path: '/turnkey',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ThankYouRoute = ThankYouRouteImport.update({
-  id: '/thank-you',
-  path: '/thank-you',
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const AfterSalesRoute = AfterSalesRouteImport.update({
+  id: '/after-sales',
+  path: '/after-sales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapRoute = SitemapRouteImport.update({
-  id: '/sitemap',
-  path: '/sitemap',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HospitalReadinessAssessmentRoute =
@@ -115,54 +115,81 @@ const HospitalReadinessAssessmentRoute =
     path: '/hospital-readiness-assessment',
     getParentRoute: () => rootRouteImport,
   } as any)
-const FaqsRoute = FaqsRouteImport.update({
-  id: '/faqs',
-  path: '/faqs',
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompareRoute = CompareRouteImport.update({
-  id: '/compare',
-  path: '/compare',
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategoriesRoute = CategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BrandsRoute = BrandsRouteImport.update({
-  id: '/brands',
-  path: '/brands',
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AfterSalesRoute = AfterSalesRouteImport.update({
-  id: '/after-sales',
-  path: '/after-sales',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SplatRoute = SplatRouteImport.update({
-  id: '/$',
-  path: '/$',
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const TurnkeyRoute = TurnkeyRouteImport.update({
+  id: '/turnkey',
+  path: '/turnkey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
+  id: '/knowledge/',
+  path: '/knowledge/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -170,71 +197,9 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProductsRoute,
 } as any)
-const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
-  id: '/knowledge/',
-  path: '/knowledge/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => BlogRoute,
-} as any)
-const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
-  id: '/programs/stroke-care',
-  path: '/programs/stroke-care',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductsXRaySystemsRoute = ProductsXRaySystemsRouteImport.update({
-  id: '/x-ray-systems',
-  path: '/x-ray-systems',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsPetCtScannersRoute = ProductsPetCtScannersRouteImport.update({
-  id: '/pet-ct-scanners',
-  path: '/pet-ct-scanners',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsOthersRoute = ProductsOthersRouteImport.update({
-  id: '/others',
-  path: '/others',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsMriScannersRoute = ProductsMriScannersRouteImport.update({
-  id: '/mri-scanners',
-  path: '/mri-scanners',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsMammographySystemsRoute =
-  ProductsMammographySystemsRouteImport.update({
-    id: '/mammography-systems',
-    path: '/mammography-systems',
-    getParentRoute: () => ProductsRoute,
-  } as any)
-const ProductsLithotripsyEswlRoute = ProductsLithotripsyEswlRouteImport.update({
-  id: '/lithotripsy-eswl',
-  path: '/lithotripsy-eswl',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsDrugElutingStentsRoute =
-  ProductsDrugElutingStentsRouteImport.update({
-    id: '/drug-eluting-stents',
-    path: '/drug-eluting-stents',
-    getParentRoute: () => ProductsRoute,
-  } as any)
-const ProductsCtScannersRoute = ProductsCtScannersRouteImport.update({
-  id: '/ct-scanners',
-  path: '/ct-scanners',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsCathLabRoute = ProductsCathLabRouteImport.update({
-  id: '/cath-lab',
-  path: '/cath-lab',
-  getParentRoute: () => ProductsRoute,
-} as any)
-const ProductsCArmSystemsRoute = ProductsCArmSystemsRouteImport.update({
-  id: '/c-arm-systems',
-  path: '/c-arm-systems',
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => ProductsRoute,
 } as any)
 const ProductsBoneDensitometersRoute =
@@ -243,59 +208,84 @@ const ProductsBoneDensitometersRoute =
     path: '/bone-densitometers',
     getParentRoute: () => ProductsRoute,
   } as any)
-const ProductsSlugRoute = ProductsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
+const ProductsCArmSystemsRoute = ProductsCArmSystemsRouteImport.update({
+  id: '/c-arm-systems',
+  path: '/c-arm-systems',
   getParentRoute: () => ProductsRoute,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+const ProductsCathLabRoute = ProductsCathLabRouteImport.update({
+  id: '/cath-lab',
+  path: '/cath-lab',
+  getParentRoute: () => ProductsRoute,
 } as any)
-const Char91DotwellKnownChar93OauthProtectedResourceRoute =
-  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
-    id: '/.well-known/oauth-protected-resource',
-    path: '/.well-known/oauth-protected-resource',
-    getParentRoute: () => rootRouteImport,
+const ProductsCtScannersRoute = ProductsCtScannersRouteImport.update({
+  id: '/ct-scanners',
+  path: '/ct-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsDrugElutingStentsRoute =
+  ProductsDrugElutingStentsRouteImport.update({
+    id: '/drug-eluting-stents',
+    path: '/drug-eluting-stents',
+    getParentRoute: () => ProductsRoute,
   } as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
-    getParentRoute: () => rootRouteImport,
+const ProductsLithotripsyEswlRoute = ProductsLithotripsyEswlRouteImport.update({
+  id: '/lithotripsy-eswl',
+  path: '/lithotripsy-eswl',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsMammographySystemsRoute =
+  ProductsMammographySystemsRouteImport.update({
+    id: '/mammography-systems',
+    path: '/mammography-systems',
+    getParentRoute: () => ProductsRoute,
   } as any)
-const KnowledgeTechnologiesIndexRoute =
-  KnowledgeTechnologiesIndexRouteImport.update({
-    id: '/knowledge/technologies/',
-    path: '/knowledge/technologies/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const KnowledgeServicesIndexRoute = KnowledgeServicesIndexRouteImport.update({
-  id: '/knowledge/services/',
-  path: '/knowledge/services/',
+const ProductsMriScannersRoute = ProductsMriScannersRouteImport.update({
+  id: '/mri-scanners',
+  path: '/mri-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsOthersRoute = ProductsOthersRouteImport.update({
+  id: '/others',
+  path: '/others',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsPetCtScannersRoute = ProductsPetCtScannersRouteImport.update({
+  id: '/pet-ct-scanners',
+  path: '/pet-ct-scanners',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsXRaySystemsRoute = ProductsXRaySystemsRouteImport.update({
+  id: '/x-ray-systems',
+  path: '/x-ray-systems',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProgramsStrokeCareRoute = ProgramsStrokeCareRouteImport.update({
+  id: '/programs/stroke-care',
+  path: '/programs/stroke-care',
   getParentRoute: () => rootRouteImport,
 } as any)
-const KnowledgeProductsIndexRoute = KnowledgeProductsIndexRouteImport.update({
-  id: '/knowledge/products/',
-  path: '/knowledge/products/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const KnowledgeManufacturersIndexRoute =
   KnowledgeManufacturersIndexRouteImport.update({
     id: '/knowledge/manufacturers/',
     path: '/knowledge/manufacturers/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const KnowledgeTechnologiesSlugRoute =
-  KnowledgeTechnologiesSlugRouteImport.update({
-    id: '/knowledge/technologies/$slug',
-    path: '/knowledge/technologies/$slug',
+const KnowledgeManufacturersSlugRoute =
+  KnowledgeManufacturersSlugRouteImport.update({
+    id: '/knowledge/manufacturers/$slug',
+    path: '/knowledge/manufacturers/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
-const KnowledgeServicesSlugRoute = KnowledgeServicesSlugRouteImport.update({
-  id: '/knowledge/services/$slug',
-  path: '/knowledge/services/$slug',
+const KnowledgeProductsIndexRoute = KnowledgeProductsIndexRouteImport.update({
+  id: '/knowledge/products/',
+  path: '/knowledge/products/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KnowledgeProductsSlugRoute = KnowledgeProductsSlugRouteImport.update({
@@ -303,16 +293,26 @@ const KnowledgeProductsSlugRoute = KnowledgeProductsSlugRouteImport.update({
   path: '/knowledge/products/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const KnowledgeManufacturersSlugRoute =
-  KnowledgeManufacturersSlugRouteImport.update({
-    id: '/knowledge/manufacturers/$slug',
-    path: '/knowledge/manufacturers/$slug',
+const KnowledgeServicesIndexRoute = KnowledgeServicesIndexRouteImport.update({
+  id: '/knowledge/services/',
+  path: '/knowledge/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeServicesSlugRoute = KnowledgeServicesSlugRouteImport.update({
+  id: '/knowledge/services/$slug',
+  path: '/knowledge/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeTechnologiesIndexRoute =
+  KnowledgeTechnologiesIndexRouteImport.update({
+    id: '/knowledge/technologies/',
+    path: '/knowledge/technologies/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const Char91DotmcpChar93InvokeToolToolRoute =
-  Char91DotmcpChar93InvokeToolToolRouteImport.update({
-    id: '/.mcp/invoke-tool/$tool',
-    path: '/.mcp/invoke-tool/$tool',
+const KnowledgeTechnologiesSlugRoute =
+  KnowledgeTechnologiesSlugRouteImport.update({
+    id: '/knowledge/technologies/$slug',
+    path: '/knowledge/technologies/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -661,137 +661,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/turnkey': {
-      id: '/turnkey'
-      path: '/turnkey'
-      fullPath: '/turnkey'
-      preLoaderRoute: typeof TurnkeyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/thank-you': {
-      id: '/thank-you'
-      path: '/thank-you'
-      fullPath: '/thank-you'
-      preLoaderRoute: typeof ThankYouRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap': {
-      id: '/sitemap'
-      path: '/sitemap'
-      fullPath: '/sitemap'
-      preLoaderRoute: typeof SitemapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hospital-readiness-assessment': {
-      id: '/hospital-readiness-assessment'
-      path: '/hospital-readiness-assessment'
-      fullPath: '/hospital-readiness-assessment'
-      preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faqs': {
-      id: '/faqs'
-      path: '/faqs'
-      fullPath: '/faqs'
-      preLoaderRoute: typeof FaqsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/compare': {
-      id: '/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof CompareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/categories': {
-      id: '/categories'
-      path: '/categories'
-      fullPath: '/categories'
-      preLoaderRoute: typeof CategoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brands': {
-      id: '/brands'
-      path: '/brands'
-      fullPath: '/brands'
-      preLoaderRoute: typeof BrandsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/after-sales': {
-      id: '/after-sales'
-      path: '/after-sales'
-      fullPath: '/after-sales'
-      preLoaderRoute: typeof AfterSalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -801,137 +675,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
-      path: '/'
-      fullPath: '/products/'
-      preLoaderRoute: typeof ProductsIndexRouteImport
-      parentRoute: typeof ProductsRoute
-    }
-    '/knowledge/': {
-      id: '/knowledge/'
-      path: '/knowledge'
-      fullPath: '/knowledge/'
-      preLoaderRoute: typeof KnowledgeIndexRouteImport
+    '/after-sales': {
+      id: '/after-sales'
+      path: '/after-sales'
+      fullPath: '/after-sales'
+      preLoaderRoute: typeof AfterSalesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
-      path: '/'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof BlogRoute
-    }
-    '/programs/stroke-care': {
-      id: '/programs/stroke-care'
-      path: '/programs/stroke-care'
-      fullPath: '/programs/stroke-care'
-      preLoaderRoute: typeof ProgramsStrokeCareRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/x-ray-systems': {
-      id: '/products/x-ray-systems'
-      path: '/x-ray-systems'
-      fullPath: '/products/x-ray-systems'
-      preLoaderRoute: typeof ProductsXRaySystemsRouteImport
-      parentRoute: typeof ProductsRoute
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/pet-ct-scanners': {
-      id: '/products/pet-ct-scanners'
-      path: '/pet-ct-scanners'
-      fullPath: '/products/pet-ct-scanners'
-      preLoaderRoute: typeof ProductsPetCtScannersRouteImport
-      parentRoute: typeof ProductsRoute
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/others': {
-      id: '/products/others'
-      path: '/others'
-      fullPath: '/products/others'
-      preLoaderRoute: typeof ProductsOthersRouteImport
-      parentRoute: typeof ProductsRoute
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/mri-scanners': {
-      id: '/products/mri-scanners'
-      path: '/mri-scanners'
-      fullPath: '/products/mri-scanners'
-      preLoaderRoute: typeof ProductsMriScannersRouteImport
-      parentRoute: typeof ProductsRoute
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/mammography-systems': {
-      id: '/products/mammography-systems'
-      path: '/mammography-systems'
-      fullPath: '/products/mammography-systems'
-      preLoaderRoute: typeof ProductsMammographySystemsRouteImport
-      parentRoute: typeof ProductsRoute
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/lithotripsy-eswl': {
-      id: '/products/lithotripsy-eswl'
-      path: '/lithotripsy-eswl'
-      fullPath: '/products/lithotripsy-eswl'
-      preLoaderRoute: typeof ProductsLithotripsyEswlRouteImport
-      parentRoute: typeof ProductsRoute
+    '/hospital-readiness-assessment': {
+      id: '/hospital-readiness-assessment'
+      path: '/hospital-readiness-assessment'
+      fullPath: '/hospital-readiness-assessment'
+      preLoaderRoute: typeof HospitalReadinessAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/drug-eluting-stents': {
-      id: '/products/drug-eluting-stents'
-      path: '/drug-eluting-stents'
-      fullPath: '/products/drug-eluting-stents'
-      preLoaderRoute: typeof ProductsDrugElutingStentsRouteImport
-      parentRoute: typeof ProductsRoute
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/ct-scanners': {
-      id: '/products/ct-scanners'
-      path: '/ct-scanners'
-      fullPath: '/products/ct-scanners'
-      preLoaderRoute: typeof ProductsCtScannersRouteImport
-      parentRoute: typeof ProductsRoute
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/cath-lab': {
-      id: '/products/cath-lab'
-      path: '/cath-lab'
-      fullPath: '/products/cath-lab'
-      preLoaderRoute: typeof ProductsCathLabRouteImport
-      parentRoute: typeof ProductsRoute
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/c-arm-systems': {
-      id: '/products/c-arm-systems'
-      path: '/c-arm-systems'
-      fullPath: '/products/c-arm-systems'
-      preLoaderRoute: typeof ProductsCArmSystemsRouteImport
-      parentRoute: typeof ProductsRoute
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/bone-densitometers': {
-      id: '/products/bone-densitometers'
-      path: '/bone-densitometers'
-      fullPath: '/products/bone-densitometers'
-      preLoaderRoute: typeof ProductsBoneDensitometersRouteImport
-      parentRoute: typeof ProductsRoute
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/products/$slug': {
-      id: '/products/$slug'
-      path: '/$slug'
-      fullPath: '/products/$slug'
-      preLoaderRoute: typeof ProductsSlugRouteImport
-      parentRoute: typeof ProductsRoute
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/turnkey': {
+      id: '/turnkey'
+      path: '/turnkey'
+      fullPath: '/turnkey'
+      preLoaderRoute: typeof TurnkeyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -941,25 +815,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/technologies/': {
-      id: '/knowledge/technologies/'
-      path: '/knowledge/technologies'
-      fullPath: '/knowledge/technologies/'
-      preLoaderRoute: typeof KnowledgeTechnologiesIndexRouteImport
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/services/': {
-      id: '/knowledge/services/'
-      path: '/knowledge/services'
-      fullPath: '/knowledge/services/'
-      preLoaderRoute: typeof KnowledgeServicesIndexRouteImport
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/knowledge/': {
+      id: '/knowledge/'
+      path: '/knowledge'
+      fullPath: '/knowledge/'
+      preLoaderRoute: typeof KnowledgeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/products/': {
-      id: '/knowledge/products/'
-      path: '/knowledge/products'
-      fullPath: '/knowledge/products/'
-      preLoaderRoute: typeof KnowledgeProductsIndexRouteImport
+    '/products/': {
+      id: '/products/'
+      path: '/'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/bone-densitometers': {
+      id: '/products/bone-densitometers'
+      path: '/bone-densitometers'
+      fullPath: '/products/bone-densitometers'
+      preLoaderRoute: typeof ProductsBoneDensitometersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/c-arm-systems': {
+      id: '/products/c-arm-systems'
+      path: '/c-arm-systems'
+      fullPath: '/products/c-arm-systems'
+      preLoaderRoute: typeof ProductsCArmSystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/cath-lab': {
+      id: '/products/cath-lab'
+      path: '/cath-lab'
+      fullPath: '/products/cath-lab'
+      preLoaderRoute: typeof ProductsCathLabRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/ct-scanners': {
+      id: '/products/ct-scanners'
+      path: '/ct-scanners'
+      fullPath: '/products/ct-scanners'
+      preLoaderRoute: typeof ProductsCtScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/drug-eluting-stents': {
+      id: '/products/drug-eluting-stents'
+      path: '/drug-eluting-stents'
+      fullPath: '/products/drug-eluting-stents'
+      preLoaderRoute: typeof ProductsDrugElutingStentsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/lithotripsy-eswl': {
+      id: '/products/lithotripsy-eswl'
+      path: '/lithotripsy-eswl'
+      fullPath: '/products/lithotripsy-eswl'
+      preLoaderRoute: typeof ProductsLithotripsyEswlRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/mammography-systems': {
+      id: '/products/mammography-systems'
+      path: '/mammography-systems'
+      fullPath: '/products/mammography-systems'
+      preLoaderRoute: typeof ProductsMammographySystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/mri-scanners': {
+      id: '/products/mri-scanners'
+      path: '/mri-scanners'
+      fullPath: '/products/mri-scanners'
+      preLoaderRoute: typeof ProductsMriScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/others': {
+      id: '/products/others'
+      path: '/others'
+      fullPath: '/products/others'
+      preLoaderRoute: typeof ProductsOthersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/pet-ct-scanners': {
+      id: '/products/pet-ct-scanners'
+      path: '/pet-ct-scanners'
+      fullPath: '/products/pet-ct-scanners'
+      preLoaderRoute: typeof ProductsPetCtScannersRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/x-ray-systems': {
+      id: '/products/x-ray-systems'
+      path: '/x-ray-systems'
+      fullPath: '/products/x-ray-systems'
+      preLoaderRoute: typeof ProductsXRaySystemsRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/programs/stroke-care': {
+      id: '/programs/stroke-care'
+      path: '/programs/stroke-care'
+      fullPath: '/programs/stroke-care'
+      preLoaderRoute: typeof ProgramsStrokeCareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/knowledge/manufacturers/': {
@@ -969,18 +955,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgeManufacturersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/technologies/$slug': {
-      id: '/knowledge/technologies/$slug'
-      path: '/knowledge/technologies/$slug'
-      fullPath: '/knowledge/technologies/$slug'
-      preLoaderRoute: typeof KnowledgeTechnologiesSlugRouteImport
+    '/knowledge/manufacturers/$slug': {
+      id: '/knowledge/manufacturers/$slug'
+      path: '/knowledge/manufacturers/$slug'
+      fullPath: '/knowledge/manufacturers/$slug'
+      preLoaderRoute: typeof KnowledgeManufacturersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/services/$slug': {
-      id: '/knowledge/services/$slug'
-      path: '/knowledge/services/$slug'
-      fullPath: '/knowledge/services/$slug'
-      preLoaderRoute: typeof KnowledgeServicesSlugRouteImport
+    '/knowledge/products/': {
+      id: '/knowledge/products/'
+      path: '/knowledge/products'
+      fullPath: '/knowledge/products/'
+      preLoaderRoute: typeof KnowledgeProductsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/knowledge/products/$slug': {
@@ -990,18 +976,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgeProductsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/knowledge/manufacturers/$slug': {
-      id: '/knowledge/manufacturers/$slug'
-      path: '/knowledge/manufacturers/$slug'
-      fullPath: '/knowledge/manufacturers/$slug'
-      preLoaderRoute: typeof KnowledgeManufacturersSlugRouteImport
+    '/knowledge/services/': {
+      id: '/knowledge/services/'
+      path: '/knowledge/services'
+      fullPath: '/knowledge/services/'
+      preLoaderRoute: typeof KnowledgeServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.mcp/invoke-tool/$tool': {
-      id: '/.mcp/invoke-tool/$tool'
-      path: '/.mcp/invoke-tool/$tool'
-      fullPath: '/.mcp/invoke-tool/$tool'
-      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+    '/knowledge/services/$slug': {
+      id: '/knowledge/services/$slug'
+      path: '/knowledge/services/$slug'
+      fullPath: '/knowledge/services/$slug'
+      preLoaderRoute: typeof KnowledgeServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/technologies/': {
+      id: '/knowledge/technologies/'
+      path: '/knowledge/technologies'
+      fullPath: '/knowledge/technologies/'
+      preLoaderRoute: typeof KnowledgeTechnologiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/technologies/$slug': {
+      id: '/knowledge/technologies/$slug'
+      path: '/knowledge/technologies/$slug'
+      fullPath: '/knowledge/technologies/$slug'
+      preLoaderRoute: typeof KnowledgeTechnologiesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
