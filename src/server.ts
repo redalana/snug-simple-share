@@ -68,7 +68,7 @@ const CSP = [
   "media-src 'self' https:",
   // www.abufarhamedical.com hosts the product catalogue imagery; the brochure
   // generator fetches those images so it can embed them in the PDF.
-  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://www.abufarhamedical.com",
+  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://www.abufarhamedical.com https://api.country.is",
   "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
   "worker-src 'self' blob:",
   "manifest-src 'self'",

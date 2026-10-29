@@ -45,8 +45,8 @@ interface PhoneFieldProps {
   hasError?: boolean;
   /** Starting country (ISO2). */
   defaultCountry?: string;
-  /** Guess the country from browser language on mount. */
-  detect?: boolean;
+  /** true = guess from browser language; "ip" = look up via api.country.is (only the request IP is sent). */
+  detect?: boolean | "ip";
 }
 
 export function PhoneField({ id, value, onChange, className, hasError, defaultCountry = "eg", detect = true }: PhoneFieldProps) {
@@ -57,6 +57,7 @@ export function PhoneField({ id, value, onChange, className, hasError, defaultCo
   const searchRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const detected = useRef(false);
+  const userPicked = useRef(false);
 
   const { inputValue, country, setCountry, handlePhoneValueChange, inputRef } = usePhoneInput({
     defaultCountry,
@@ -70,6 +71,30 @@ export function PhoneField({ id, value, onChange, className, hasError, defaultCo
   useEffect(() => {
     if (detected.current || !detect) return;
     detected.current = true;
+    if (detect === "ip") {
+      const apply = (iso: string) => {
+        if (userPicked.current || !COUNTRIES.some((c) => c.iso2 === iso)) return;
+        setCountry(iso);
+      };
+      const cached = sessionStorage.getItem("af-ip-country");
+      if (cached) return apply(cached);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 4000);
+      // No form data is sent — a bare GET; the provider sees only the IP.
+      fetch("https://api.country.is/", { signal: ctrl.signal, credentials: "omit" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d: { country?: string } | null) => {
+          const iso = d?.country?.toLowerCase();
+          if (!iso) return;
+          sessionStorage.setItem("af-ip-country", iso);
+          apply(iso);
+        })
+        .catch(() => {
+          /* keep default; manual selection still works */
+        })
+        .finally(() => clearTimeout(t));
+      return;
+    }
     if (!value) {
       const iso = detectCountry();
       if (iso !== country.iso2) setCountry(iso);
@@ -117,6 +142,7 @@ export function PhoneField({ id, value, onChange, className, hasError, defaultCo
   }, [open]);
 
   const selectCountry = (iso: string) => {
+    userPicked.current = true;
     setCountry(iso);
     setOpen(false);
     setTimeout(() => inputRef.current?.focus(), 40);
