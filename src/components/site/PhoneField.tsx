@@ -43,9 +43,13 @@ interface PhoneFieldProps {
   onChange: (value: string) => void;
   className?: string;
   hasError?: boolean;
+  /** Starting country (ISO2). */
+  defaultCountry?: string;
+  /** Guess the country from browser language on mount. */
+  detect?: boolean;
 }
 
-export function PhoneField({ id, value, onChange, className, hasError }: PhoneFieldProps) {
+export function PhoneField({ id, value, onChange, className, hasError, defaultCountry = "eg", detect = true }: PhoneFieldProps) {
   const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -55,7 +59,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
   const detected = useRef(false);
 
   const { inputValue, country, setCountry, handlePhoneValueChange, inputRef } = usePhoneInput({
-    defaultCountry: "eg",
+    defaultCountry,
     value,
     countries: defaultCountries,
     disableDialCodeAndPrefix: true,
@@ -64,7 +68,7 @@ export function PhoneField({ id, value, onChange, className, hasError }: PhoneFi
 
   // Auto-detect visitor country on first mount (only if no value yet)
   useEffect(() => {
-    if (detected.current) return;
+    if (detected.current || !detect) return;
     detected.current = true;
     if (!value) {
       const iso = detectCountry();

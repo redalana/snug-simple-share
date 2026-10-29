@@ -4,6 +4,7 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 import { Loader2, Mail, User, Phone, Send, Lock, Newspaper, Settings, BarChart3, Users } from "lucide-react";
 import mriImg from "@/assets/env-mri-suite.jpg";
 import { Input } from "@/components/ui/input";
+import { PhoneField } from "./PhoneField";
 import { SECTION_CONTAINER } from "./section-grid";
 
 /**
@@ -18,7 +19,7 @@ const schema = z.object({
     .string()
     .trim()
     .min(1, "Enter your phone number")
-    .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number with country code, e.g. +962 7 9974 1318"),
+    .refine((v) => isValidPhoneNumber(v), "Enter a valid phone number for the selected country"),
 });
 type Values = z.infer<typeof schema>;
 type Errors = Partial<Record<keyof Values, string>>;
@@ -115,7 +116,24 @@ export function NewsletterSignup() {
             <form noValidate onSubmit={onSubmit} className="mt-6 space-y-4">
               {field("fullName", "Full Name", "text", "name", "Your full name *", User)}
               {field("email", "Email Address", "email", "email", "Your email address *", Mail)}
-              {field("phone", "Phone Number", "tel", "tel", "Your phone number * (e.g. +962 7 …)", Phone)}
+              <div>
+                <label htmlFor="nl-phone" className="sr-only">Phone Number</label>
+                <div className="relative">
+                  <Phone aria-hidden className="pointer-events-none absolute left-4 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                  <PhoneField
+                    id="nl-phone"
+                    value={values.phone}
+                    onChange={(phone) => setValues((v) => ({ ...v, phone }))}
+                    hasError={!!errors.phone}
+                    defaultCountry="jo"
+                    detect={false}
+                    className="h-14 rounded-2xl bg-background pl-10"
+                  />
+                </div>
+                {errors.phone && (
+                  <p id="nl-phone-error" className="mt-1.5 text-xs font-medium text-destructive">{errors.phone}</p>
+                )}
+              </div>
               <button
                 type="submit"
                 disabled={busy}

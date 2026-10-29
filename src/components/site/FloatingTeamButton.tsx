@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import { Users } from "lucide-react";
+import { Users, Mail, type LucideIcon } from "lucide-react";
 import { onQuoteModalState } from "@/lib/quote-modal";
 
 /**
  * Homepage-only floating pill stacked above the floating Quote button
  * (quote base 84/100px + quote height + 12px gap). Scrolls to #our-people.
  */
-export function FloatingTeamButton() {
+export function FloatingTeamButton({
+  targetId = "our-people",
+  label = "Meet Our Team",
+  shortLabel = "Team",
+  Icon = Users,
+  extraOffset = 0,
+}: { targetId?: string; label?: string; shortLabel?: string; Icon?: LucideIcon; extraOffset?: number } = {}) {
   const [footerLift, setFooterLift] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,7 +35,7 @@ export function FloatingTeamButton() {
   }, []);
 
   const goToTeam = () => {
-    const el = document.getElementById("our-people");
+    const el = document.getElementById(targetId);
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Offset by the sticky header so the section title isn't hidden under it.
@@ -55,24 +61,29 @@ export function FloatingTeamButton() {
         @media (min-width: 1024px) { .af-team-wrap { --af-team-base: 164px; } }
       `}</style>
       <aside
-        aria-label="Meet our team"
+        aria-label={label}
         aria-hidden={modalOpen}
         className={`af-team-wrap fixed right-4 z-[90] transition-all duration-300 ease-out sm:right-6 ${modalOpen ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100"}`}
         style={{
-          bottom: `calc(var(--af-team-base) + env(safe-area-inset-bottom, 0px) + var(--af-cookie-bar, 0px) + ${footerLift}px)`,
+          bottom: `calc(var(--af-team-base) + env(safe-area-inset-bottom, 0px) + var(--af-cookie-bar, 0px) + ${footerLift + extraOffset}px)`,
         }}
       >
         <button
           type="button"
           onClick={goToTeam}
-          aria-label="Meet our team"
+          aria-label={label}
           className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-3 text-sm font-semibold text-primary shadow-[0_8px_20px_-8px_rgba(15,23,42,0.35)] transition-all duration-[220ms] ease-out hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 sm:px-5 sm:py-3.5"
         >
-          <Users className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-          <span className="hidden sm:inline">Meet Our Team</span>
-          <span className="sm:hidden">Team</span>
+          <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+          <span className="hidden sm:inline">{label}</span>
+          <span className="sm:hidden">{shortLabel}</span>
         </button>
       </aside>
     </>
   );
+}
+
+/** Homepage floating pill stacked above the team pill; scrolls to #newsletter. */
+export function FloatingNewsletterButton() {
+  return <FloatingTeamButton targetId="newsletter" label="Newsletter" shortLabel="News" Icon={Mail} extraOffset={60} />;
 }

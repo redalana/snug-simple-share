@@ -11,7 +11,7 @@ import { GlobalPresence } from "@/components/site/GlobalPresence";
 import { Process } from "@/components/site/Process";
 import { OurPeople } from "@/components/site/OurPeople";
 import { NewsletterSignup } from "@/components/site/NewsletterSignup";
-import { FloatingTeamButton } from "@/components/site/FloatingTeamButton";
+import { FloatingTeamButton, FloatingNewsletterButton } from "@/components/site/FloatingTeamButton";
 
 import { ReadinessTeaser } from "@/components/site/ReadinessTeaser";
 import { FinalCTA } from "@/components/site/FinalCTA";
@@ -88,6 +88,7 @@ function Index() {
       </main>
       <Footer />
       <FloatingTeamButton />
+      <FloatingNewsletterButton />
     </div>
   );
 }
