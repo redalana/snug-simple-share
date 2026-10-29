@@ -97,7 +97,7 @@ export function NewsletterSignup() {
                 type="submit"
                 disabled={busy}
                 aria-busy={busy}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-70"
+                className="inline-flex h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary px-7 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-70"
               >
                 {busy && <Loader2 className="h-4 w-4 animate-spin" />}
                 Subscribe to Newsletter
