@@ -33,10 +33,18 @@ export function FloatingTeamButton() {
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Offset by the sticky header so the section title isn't hidden under it.
-    const header = document.querySelector("header");
-    const offset = header ? header.getBoundingClientRect().height : 0;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+    const target = () => {
+      const header = document.querySelector("header");
+      const offset = header ? header.getBoundingClientRect().height : 0;
+      return el.getBoundingClientRect().top + window.scrollY - offset;
+    };
+    window.scrollTo({ top: target(), behavior: reduce ? "auto" : "smooth" });
+    // Images above may load mid-scroll and shift the page; settle on the
+    // section once the smooth scroll finishes.
+    window.setTimeout(() => {
+      const t = target();
+      if (Math.abs(t - window.scrollY) > 4) window.scrollTo({ top: t, behavior: "smooth" });
+    }, 900);
   };
 
   return (
