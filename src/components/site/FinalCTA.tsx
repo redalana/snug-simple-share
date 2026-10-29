@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
+import { openQuoteModal } from "@/lib/quote-modal";
 import { PhoneCall, FileText, ArrowRight, ShieldCheck } from "lucide-react";
 
 export function FinalCTA() {
@@ -49,19 +51,20 @@ export function FinalCTA() {
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={() => openQuoteModal({ source: "final-cta" })}
             className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-primary shadow-[0_18px_40px_-16px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_50px_-16px_rgba(0,0,0,0.6)]"
           >
             Request a Quote
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
-          <a
-            href="#"
+          </button>
+          <Link
+            to="/contact"
             className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
           >
             <PhoneCall className="h-4 w-4" /> Talk to an Expert
-          </a>
+          </Link>
           <a
             href="#"
             className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
