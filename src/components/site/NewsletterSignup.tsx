@@ -4,7 +4,7 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SECTION_CONTAINER } from "@/lib/layout";
+import { SECTION_CONTAINER } from "./section-grid";
 
 /**
  * Newsletter form — FRONTEND ONLY. No subscription destination exists yet,
