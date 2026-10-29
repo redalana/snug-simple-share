@@ -126,7 +126,7 @@ export function NewsletterSignup() {
                     onChange={(phone) => setValues((v) => ({ ...v, phone }))}
                     hasError={!!errors.phone}
                     defaultCountry="jo"
-                    detect={false}
+                    detect="ip"
                     className="h-14 rounded-2xl bg-background pl-10"
                   />
                 </div>
