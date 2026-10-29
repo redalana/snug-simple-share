@@ -32,7 +32,11 @@ export function FloatingTeamButton() {
     const el = document.getElementById("our-people");
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    // Offset by the sticky header so the section title isn't hidden under it.
+    const header = document.querySelector("header");
+    const offset = header ? header.getBoundingClientRect().height : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
