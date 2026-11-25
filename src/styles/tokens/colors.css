@@ -73,6 +73,8 @@
   --danger: var(--destructive);
   --danger-foreground: var(--destructive-foreground);
   --info: oklch(0.62 0.14 240);
+  --nav-catalog: oklch(0.5 0.15 250);
+  --nav-catalog-hover: oklch(0.4 0.15 252);
   --info-foreground: oklch(0.99 0.003 247.858);
 }
 

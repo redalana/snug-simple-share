@@ -134,8 +134,11 @@ export function Header() {
                 {NAV.map((item) => {
                   const active = isActive(item.href);
                   const isContact = item.label === "Contact Us";
+                  const isCatalog = item.label === "Catalog Library";
                   const baseColor = isContact
                     ? "text-primary hover:text-primary-dark"
+                    : isCatalog
+                      ? "text-nav-catalog hover:text-nav-catalog-hover"
                     : active
                       ? "text-primary"
                       : "text-foreground/80 hover:text-primary";
@@ -254,7 +257,9 @@ export function Header() {
                     className={`block border-b border-border/60 py-2.5 text-[calc(16*var(--desktop-px-unit))] transition-colors last:border-0 ${
                       item.label === "Contact Us"
                         ? "font-bold text-primary hover:text-primary-dark"
-                        : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
+                        : item.label === "Catalog Library"
+                          ? "font-medium text-nav-catalog hover:text-nav-catalog-hover"
+                          : `font-medium ${active ? "text-primary" : "text-foreground/80 hover:text-primary"}`
                     }`}
                   >
                     {item.label}
