@@ -13,6 +13,7 @@
  * with a verifiable source URL. Leave optional fields out when unknown.
  */
 import { normaliseManufacturer } from "@/lib/content/taxonomy";
+import { PRODUCTS, type Product } from "@/lib/products";
 
 export const CATALOG_CATEGORIES = [
   { id: "mri", label: "MRI Systems", productPath: "/products/mri-scanners" },
@@ -65,8 +66,60 @@ export type CatalogEntry = {
   dateAdded: string;
 };
 
-/** Real entries only. Empty until verified documents are supplied. */
-export const CATALOGS: CatalogEntry[] = [];
+/** Hand-added entries (independent of the product catalogue). Real documents only. */
+export const MANUAL_CATALOGS: CatalogEntry[] = [];
+
+/** Product catalogue category label → library category. Unmapped → "other". */
+const PRODUCT_CATEGORY_MAP: Record<string, CatalogCategoryId> = {
+  "Cath Lab Systems": "cath-lab",
+  "CT Scanners": "ct",
+  "MRI Scanners": "mri",
+  "PET/CT Scanners": "pet-ct",
+  "C-Arm Systems": "c-arm",
+  "X-Ray Systems": "x-ray",
+};
+
+const LIBRARY_ADDED = "2026-11-25";
+
+/**
+ * Reuses brochures already attached to products (no file is copied).
+ * Several listings share one PDF, so entries are de-duplicated by URL.
+ */
+export function productBrochureCatalogs(products: Product[] = PRODUCTS): CatalogEntry[] {
+  const byUrl = new Map<string, CatalogEntry>();
+  for (const p of products) {
+    for (const b of p.brochures ?? []) {
+      if (byUrl.has(b.url)) continue;
+      const raw = b.filename.replace(/\.pdf$/i, "").trim();
+      const fd = /FD\d+(?:-\d+)?/i.exec(raw)?.[0]?.toUpperCase().replace("-", "/");
+      const family = /Allura Xper/i.test(raw) ? "Allura Xper" : undefined;
+      const modelName = family && fd ? `${family} ${fd}` : undefined;
+      const model = modelName ? `${p.brand} ${modelName}` : undefined;
+      const title = model ? `${model} Cath Lab Brochure` : raw;
+      byUrl.set(b.url, {
+        slug: slugifyCatalog(title),
+        title,
+        manufacturer: p.brand,
+        category: PRODUCT_CATEGORY_MAP[p.category] ?? "other",
+        equipmentType: "Brochure",
+        ...(model ? { model } : {}),
+        description: `Manufacturer brochure for the ${model ?? raw}, as published with the matching equipment listings on this site.`,
+        document: { kind: "external", url: b.url },
+        sourceUrl: b.url,
+        allowDownload: true,
+        status: "published",
+        dateAdded: LIBRARY_ADDED,
+      });
+    }
+  }
+  return [...byUrl.values()];
+}
+
+function slugifyCatalog(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+export const CATALOGS: CatalogEntry[] = [...MANUAL_CATALOGS, ...productBrochureCatalogs()];
 
 export const MAX_CATALOG_FILE_BYTES = 25 * 1024 * 1024;
 

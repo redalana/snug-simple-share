@@ -1,6 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import {
   CATALOGS,
+  MANUAL_CATALOGS,
+  productBrochureCatalogs,
   EMPTY_FILTERS,
   catalogFacets,
   filterCatalogs,
@@ -24,8 +26,15 @@ const BAD: CatalogEntry = { ...base, slug: "bad", title: "Bad url", manufacturer
 const all = [A, B, D, BAD];
 
 describe("catalog library", () => {
-  test("ships with no fabricated catalogs", () => {
-    expect(CATALOGS.length).toBe(0);
+  test("ships with no hand-added catalogs", () => {
+    expect(MANUAL_CATALOGS.length).toBe(0);
+  });
+  test("reuses the 3 unique product brochures, no duplicates", () => {
+    const derived = productBrochureCatalogs();
+    expect(derived.length).toBe(3);
+    expect(new Set(CATALOGS.map((e) => e.slug)).size).toBe(CATALOGS.length);
+    expect(publishedCatalogs().length).toBe(3);
+    expect(derived.every((e) => e.category === "cath-lab")).toBe(true);
   });
   test("drafts and invalid entries are never public", () => {
     expect(publishedCatalogs(all).map((e) => e.slug).sort()).toEqual(["a-mri", "b-ct"]);
