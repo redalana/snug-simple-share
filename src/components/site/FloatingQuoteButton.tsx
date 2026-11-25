@@ -28,7 +28,7 @@ export function FloatingQuoteButton() {
       const rect = current.getBoundingClientRect();
       const vh = window.innerHeight;
       const overlap = vh - rect.top;
-      setFooterLift(Math.max(0, overlap + 40));
+      setFooterLift(Math.min(Math.max(0, overlap + 40), Math.max(0, window.innerHeight - 440)));
     };
     observer.current = new IntersectionObserver(() => compute(), {
       threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],

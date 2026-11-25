@@ -28,7 +28,7 @@ export function FloatingTeamButton({
       const footer = document.querySelector("footer");
       if (!footer) return;
       const overlap = window.innerHeight - footer.getBoundingClientRect().top;
-      setFooterLift(Math.max(0, overlap + 40));
+      setFooterLift(Math.min(Math.max(0, overlap + 40), Math.max(0, window.innerHeight - 440)));
     };
     window.addEventListener("scroll", compute, { passive: true });
     window.addEventListener("resize", compute);

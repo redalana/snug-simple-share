@@ -48,7 +48,8 @@ export function WhatsAppFloat() {
       const vh = window.innerHeight;
       // How much the footer overlaps the base button zone (bottom of viewport).
       const overlap = vh - rect.top;
-      const lift = Math.max(0, overlap + 40);
+      // Cap so the whole floating stack stays on screen over tall footers.
+      const lift = Math.min(Math.max(0, overlap + 40), Math.max(0, vh - 440));
       setFooterLift(lift);
     };
 

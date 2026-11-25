@@ -4,6 +4,7 @@ import { PRODUCTS, productSlug } from "@/lib/products";
 import { ARTICLES } from "@/lib/blog";
 import { ALL_HUBS, HUB_BASE_PATH, HUB_KINDS } from "@/lib/content";
 import { SITE_URL } from "@/lib/seo";
+import { publishedCatalogs } from "@/lib/catalog-library";
 
 const BASE_URL = SITE_URL;
 
@@ -72,6 +73,18 @@ export const Route = createFileRoute("/sitemap.xml")({
         };
         const entries: (SitemapEntry & { lastmod?: string })[] = [
           ...STATIC_ROUTES,
+          // Catalog Library: only listed once real published catalogs exist.
+          ...(publishedCatalogs().length
+            ? [
+                { path: "/catalog-library", changefreq: "weekly" as const, priority: "0.6" },
+                ...publishedCatalogs().map((c) => ({
+                  path: `/catalog-library/${c.slug}`,
+                  changefreq: "monthly" as const,
+                  priority: "0.5",
+                  lastmod: c.dateAdded,
+                })),
+              ]
+            : []),
           ...PRODUCTS.map((p) => ({
             path: `/products/${productSlug(p)}`,
             changefreq: "monthly" as const,

@@ -34,6 +34,8 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as CatalogLibraryIndexRouteImport } from './routes/catalog-library.index'
+import { Route as CatalogLibrarySlugRouteImport } from './routes/catalog-library.$slug'
 import { Route as KnowledgeIndexRouteImport } from './routes/knowledge.index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
@@ -191,6 +193,16 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const CatalogLibraryIndexRoute = CatalogLibraryIndexRouteImport.update({
+  id: '/catalog-library/',
+  path: '/catalog-library/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogLibrarySlugRoute = CatalogLibrarySlugRouteImport.update({
+  id: '/catalog-library/$slug',
+  path: '/catalog-library/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const KnowledgeIndexRoute = KnowledgeIndexRouteImport.update({
   id: '/knowledge/',
@@ -372,6 +384,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/catalog-library/$slug': typeof CatalogLibrarySlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
@@ -390,6 +403,7 @@ export interface FileRoutesByFullPath {
   '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
+  '/catalog-library/': typeof CatalogLibraryIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
@@ -426,6 +440,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/catalog-library/$slug': typeof CatalogLibrarySlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
@@ -444,6 +459,7 @@ export interface FileRoutesByTo {
   '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog': typeof BlogIndexRoute
+  '/catalog-library': typeof CatalogLibraryIndexRoute
   '/knowledge': typeof KnowledgeIndexRoute
   '/products': typeof ProductsIndexRoute
   '/programs': typeof ProgramsIndexRoute
@@ -483,6 +499,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/catalog-library/$slug': typeof CatalogLibrarySlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/products/bone-densitometers': typeof ProductsBoneDensitometersRoute
   '/products/c-arm-systems': typeof ProductsCArmSystemsRoute
@@ -501,6 +518,7 @@ export interface FileRoutesById {
   '/programs/rehabilitation': typeof ProgramsRehabilitationRoute
   '/programs/stroke-care': typeof ProgramsStrokeCareRoute
   '/blog/': typeof BlogIndexRoute
+  '/catalog-library/': typeof CatalogLibraryIndexRoute
   '/knowledge/': typeof KnowledgeIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
@@ -541,6 +559,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
+    | '/catalog-library/$slug'
     | '/products/$slug'
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
@@ -559,6 +578,7 @@ export interface FileRouteTypes {
     | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog/'
+    | '/catalog-library/'
     | '/knowledge/'
     | '/products/'
     | '/programs/'
@@ -595,6 +615,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
+    | '/catalog-library/$slug'
     | '/products/$slug'
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
@@ -613,6 +634,7 @@ export interface FileRouteTypes {
     | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog'
+    | '/catalog-library'
     | '/knowledge'
     | '/products'
     | '/programs'
@@ -651,6 +673,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
+    | '/catalog-library/$slug'
     | '/products/$slug'
     | '/products/bone-densitometers'
     | '/products/c-arm-systems'
@@ -669,6 +692,7 @@ export interface FileRouteTypes {
     | '/programs/rehabilitation'
     | '/programs/stroke-care'
     | '/blog/'
+    | '/catalog-library/'
     | '/knowledge/'
     | '/products/'
     | '/programs/'
@@ -707,11 +731,13 @@ export interface RootRouteChildren {
   TurnkeyRoute: typeof TurnkeyRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  CatalogLibrarySlugRoute: typeof CatalogLibrarySlugRoute
   ProgramsInterventionalNeurologyRoute: typeof ProgramsInterventionalNeurologyRoute
   ProgramsNeuroIcuRoute: typeof ProgramsNeuroIcuRoute
   ProgramsNeuroImagingRoute: typeof ProgramsNeuroImagingRoute
   ProgramsRehabilitationRoute: typeof ProgramsRehabilitationRoute
   ProgramsStrokeCareRoute: typeof ProgramsStrokeCareRoute
+  CatalogLibraryIndexRoute: typeof CatalogLibraryIndexRoute
   KnowledgeIndexRoute: typeof KnowledgeIndexRoute
   ProgramsIndexRoute: typeof ProgramsIndexRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -901,6 +927,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/catalog-library/': {
+      id: '/catalog-library/'
+      path: '/catalog-library'
+      fullPath: '/catalog-library/'
+      preLoaderRoute: typeof CatalogLibraryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalog-library/$slug': {
+      id: '/catalog-library/$slug'
+      path: '/catalog-library/$slug'
+      fullPath: '/catalog-library/$slug'
+      preLoaderRoute: typeof CatalogLibrarySlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/knowledge/': {
       id: '/knowledge/'
@@ -1181,11 +1221,13 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  CatalogLibrarySlugRoute: CatalogLibrarySlugRoute,
   ProgramsInterventionalNeurologyRoute: ProgramsInterventionalNeurologyRoute,
   ProgramsNeuroIcuRoute: ProgramsNeuroIcuRoute,
   ProgramsNeuroImagingRoute: ProgramsNeuroImagingRoute,
   ProgramsRehabilitationRoute: ProgramsRehabilitationRoute,
   ProgramsStrokeCareRoute: ProgramsStrokeCareRoute,
+  CatalogLibraryIndexRoute: CatalogLibraryIndexRoute,
   KnowledgeIndexRoute: KnowledgeIndexRoute,
   ProgramsIndexRoute: ProgramsIndexRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
