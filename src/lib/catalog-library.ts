@@ -24,6 +24,9 @@ export const CATALOG_CATEGORIES = [
   { id: "c-arm", label: "C-Arms", productPath: "/products/c-arm-systems" },
   { id: "angiography", label: "Angiography Systems" },
   { id: "cath-lab", label: "Cath Lab", productPath: "/products/cath-lab" },
+  { id: "mammography", label: "Mammography", productPath: "/products/mammography-systems" },
+  { id: "bone-densitometry", label: "Bone Densitometry (DEXA)", productPath: "/products/bone-densitometers" },
+  { id: "lithotripsy", label: "Lithotripsy (ESWL)", productPath: "/products/lithotripsy-eswl" },
   { id: "ultrasound", label: "Ultrasound" },
   { id: "laboratory", label: "Laboratory Equipment" },
   { id: "patient-monitoring", label: "Patient Monitoring" },
@@ -64,6 +67,14 @@ export type CatalogEntry = {
   status: "published" | "draft";
   /** ISO date, YYYY-MM-DD */
   dateAdded: string;
+  /**
+   * Where the entry comes from. "product" entries are derived automatically
+   * from brochures attached in products.ts; "independent" entries are
+   * hand-added in MANUAL_CATALOGS and never touched by product changes.
+   */
+  origin?: "product" | "independent";
+  /** Product listings that attach this exact document (product origin only). */
+  linkedProducts?: { name: string; slug: string }[];
 };
 
 /** Hand-added entries (independent of the product catalogue). Real documents only. */
@@ -77,38 +88,63 @@ const PRODUCT_CATEGORY_MAP: Record<string, CatalogCategoryId> = {
   "PET/CT Scanners": "pet-ct",
   "C-Arm Systems": "c-arm",
   "X-Ray Systems": "x-ray",
+  Mammography: "mammography",
+  "Mammography Systems": "mammography",
+  "Bone Densitometers (DEXA)": "bone-densitometry",
+  "Lithotripsy Systems": "lithotripsy",
 };
 
 const LIBRARY_ADDED = "2026-11-25";
 
 /**
- * Reuses brochures already attached to products (no file is copied).
- * Several listings share one PDF, so entries are de-duplicated by URL.
+ * Automatic sync with the product catalogue: every PDF attached to a product
+ * in products.ts becomes a library entry at build time — new products, new
+ * PDFs and replaced PDFs appear with no library edits. Identity is the
+ * document URL (never the title), so a PDF shared by several listings is one
+ * entry linked to all of them, and two different PDFs never merge. Products
+ * without a PDF create nothing.
  */
 export function productBrochureCatalogs(products: Product[] = PRODUCTS): CatalogEntry[] {
   const byUrl = new Map<string, CatalogEntry>();
+  const usedSlugs = new Set(MANUAL_CATALOGS.map((e) => e.slug));
   for (const p of products) {
     for (const b of p.brochures ?? []) {
-      if (byUrl.has(b.url)) continue;
+      const url = b.url?.trim();
+      if (!url || !isValidHttpsUrl(url) || !/\.pdf($|[?#])/i.test(url)) continue;
+      const existing = byUrl.get(url);
+      if (existing) {
+        if (!existing.linkedProducts?.some((lp) => lp.slug === p.slug)) {
+          existing.linkedProducts?.push({ name: p.name, slug: p.slug });
+        }
+        continue;
+      }
+      const category = PRODUCT_CATEGORY_MAP[p.category] ?? "other";
       const raw = b.filename.replace(/\.pdf$/i, "").trim();
       const fd = /FD\d+(?:-\d+)?/i.exec(raw)?.[0]?.toUpperCase().replace("-", "/");
       const family = /Allura Xper/i.test(raw) ? "Allura Xper" : undefined;
       const modelName = family && fd ? `${family} ${fd}` : undefined;
       const model = modelName ? `${p.brand} ${modelName}` : undefined;
-      const title = model ? `${model} Cath Lab Brochure` : raw;
-      byUrl.set(b.url, {
-        slug: slugifyCatalog(title),
+      const title = model ? `${model} ${categoryLabel(category)} Brochure` : raw;
+      let slug = slugifyCatalog(title) || "catalog";
+      for (let n = 2; usedSlugs.has(slug); n++) slug = `${slugifyCatalog(title)}-${n}`;
+      usedSlugs.add(slug);
+      byUrl.set(url, {
+        slug,
         title,
         manufacturer: p.brand,
-        category: PRODUCT_CATEGORY_MAP[p.category] ?? "other",
+        category,
         equipmentType: "Brochure",
         ...(model ? { model } : {}),
         description: `Manufacturer brochure for the ${model ?? raw}, as published with the matching equipment listings on this site.`,
-        document: { kind: "external", url: b.url },
-        sourceUrl: b.url,
+        document: { kind: "external", url },
+        // Real photo of the first listing that carries this PDF.
+        ...(p.image ? { coverImage: { src: p.image, alt: p.imageAlt ?? p.name } } : {}),
+        sourceUrl: url,
         allowDownload: true,
         status: "published",
         dateAdded: LIBRARY_ADDED,
+        origin: "product",
+        linkedProducts: [{ name: p.name, slug: p.slug }],
       });
     }
   }
@@ -119,7 +155,20 @@ function slugifyCatalog(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
-export const CATALOGS: CatalogEntry[] = [...MANUAL_CATALOGS, ...productBrochureCatalogs()];
+/** Independent entries win when the same document URL is also attached to a product. */
+function mergeSources(manual: CatalogEntry[], derived: CatalogEntry[]): CatalogEntry[] {
+  const manualUrls = new Set(manual.map((e) => documentKey(e)));
+  return [
+    ...manual.map((e) => ({ ...e, origin: "independent" as const })),
+    ...derived.filter((e) => !manualUrls.has(documentKey(e))),
+  ];
+}
+
+function documentKey(e: CatalogEntry): string {
+  return e.document.kind === "external" ? e.document.url : e.document.path;
+}
+
+export const CATALOGS: CatalogEntry[] = mergeSources(MANUAL_CATALOGS, productBrochureCatalogs());
 
 export const MAX_CATALOG_FILE_BYTES = 25 * 1024 * 1024;
 

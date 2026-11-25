@@ -5,7 +5,7 @@ import {
   type HubDef,
   type HubKind,
 } from "@/lib/content";
-import { SITE_URL, OG_IMAGES, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 
 /** Head payload shared by every hub detail route. */
 export function hubHead(def: HubDef, itemCount: number) {
@@ -26,7 +26,7 @@ export function hubHead(def: HubDef, itemCount: number) {
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
+        children: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: def.heading,
@@ -39,7 +39,7 @@ export function hubHead(def: HubDef, itemCount: number) {
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Knowledge Center", path: "/blog" },
@@ -73,7 +73,7 @@ export function hubDirectoryHead(kind: HubKind, title: string, description: stri
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
+        children: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: title,
@@ -94,7 +94,7 @@ export function hubDirectoryHead(kind: HubKind, title: string, description: stri
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Knowledge Center", path: "/blog" },

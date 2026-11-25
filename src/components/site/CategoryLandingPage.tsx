@@ -16,7 +16,7 @@ import { Footer } from "@/components/site/Footer";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { PRODUCTS, productSlug, type Product } from "@/lib/products";
 import { faqPageJsonLd, itemListJsonLd, COMPANY } from "@/config/companyFacts";
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, safeJsonLd } from "@/lib/seo";
 import { openQuoteModal } from "@/lib/quote-modal";
 import { CATEGORY_CONTENT, CATEGORY_LABELS } from "@/lib/category-content";
 import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
@@ -90,13 +90,13 @@ export function CategoryLandingPage({
       <Header />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionSchema) }}
       />
 
       {faqSchema && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
         />
       )}
       <main id="main-content" className="pt-[calc(110*var(--desktop-px-unit))]">

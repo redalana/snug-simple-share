@@ -10,10 +10,10 @@ import {
   SPHERE_D,
 } from "./projects-experience/worldMapFull";
 
-const STATS = [
-  { value: "10", label: "Countries — Verified Project History" },
-  { value: "110+", label: "Systems & Programs Delivered" },
-];
+// Only the verified, documented country count is shown. The former
+// "110+ Systems & Programs Delivered" figure is not in companyFacts.ts or the
+// Corporate Profile, so it was removed (Zero Fabrication).
+const STATS = [{ value: "10", label: "Countries — Verified Project History" }];
 
 // Full-world geometry; existing pin/highlight data is re-projected onto it.
 const VB_X = 0;
@@ -276,7 +276,7 @@ export function GlobalPresence() {
                   equipment delivered.
                 </p>
 
-                <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="mt-6 grid max-w-xs grid-cols-1 gap-3">
                   {STATS.map((s) => (
                     <div
                       key={s.label}

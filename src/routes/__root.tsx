@@ -1,3 +1,4 @@
+import { safeJsonLd } from "@/lib/seo";
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
@@ -74,13 +75,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#E53935" },
-      { title: "AbuFarha Medical Equipment | Advanced Medical Technology Solutions" },
+      { title: "AbuFarha Medical Supplies | Advanced Medical Technology Solutions" },
       {
         name: "description",
         content: COPY.metaDescription,
       },
       { name: "author", content: COMPANY.legalName },
-      { property: "og:title", content: "AbuFarha Medical Equipment | Advanced Medical Technology" },
+      { property: "og:title", content: "AbuFarha Medical Supplies | Advanced Medical Technology" },
       {
         property: "og:description",
         content: COPY.ogDescription,
@@ -110,11 +111,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(ORGANIZATION_JSONLD),
+        children: safeJsonLd(ORGANIZATION_JSONLD),
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(WEBSITE_JSONLD),
+        children: safeJsonLd(WEBSITE_JSONLD),
       },
       // Google Analytics 4 — loaded only when VITE_GA_MEASUREMENT_ID is set,
       // and only ever measuring once the visitor has granted analytics cookies

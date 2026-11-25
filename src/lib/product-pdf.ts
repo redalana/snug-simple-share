@@ -1,3 +1,4 @@
+import { COMPANY } from "@/config/companyFacts";
 import type { Product } from "@/lib/products";
 import { SITE_URL } from "@/lib/seo";
 import logoAsset from "@/assets/abufarha-logo.png";
@@ -11,13 +12,13 @@ import logoAsset from "@/assets/abufarha-logo.png";
    ========================================================================== */
 
 const CONTACT = {
-  company: "AbuFarha Medical Equipment",
+  company: COMPANY.legalName,
   tagline: "Medical Imaging Systems · Engineering · Installation · Support",
-  landline: "+962 6 4026063",
-  whatsapp: "+962 79 9741318",
-  email: "info@abufarhamedical.com",
-  website: "www.abufarhamedical.com",
-  address: "4th Floor, Complex 396, Queen Rania Street, Amman, Jordan",
+  landline: COMPANY.phone,
+  whatsapp: COMPANY.mobile,
+  email: COMPANY.email,
+  website: COMPANY.websiteDisplay,
+  address: COMPANY.headquarters.address,
 };
 
 /* --- Brand palette (matches the site tokens, converted to print RGB) ------ */
@@ -96,7 +97,7 @@ async function qrDataUrl(text: string): Promise<string | null> {
 
 /* Absolute, clickable targets for the interactive PDF links. */
 const LINKS = {
-  website: "https://www.abufarhamedical.com",
+  website: COMPANY.website,
   email: `mailto:${CONTACT.email}`,
   whatsapp: `https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`,
 };
@@ -135,7 +136,7 @@ function buildDescription(p: Product): string {
   const opening =
     `The ${p.name} is a ${p.status.toLowerCase()} ${p.category.toLowerCase()} platform ` +
     `manufactured by ${p.brand} in ${p.country} (year of manufacture ${p.year}). ` +
-    `Supplied by AbuFarha Medical Equipment as a ${p.systemType.toLowerCase()} installation, ` +
+    `Supplied by ${COMPANY.legalName} as a ${p.systemType.toLowerCase()} installation, ` +
     `the system is offered complete with technical evaluation, delivery, installation ` +
     `supervision, application training and long-term biomedical engineering support.`;
 

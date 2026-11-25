@@ -18,8 +18,8 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageHero } from "@/components/site/PageHero";
-import { SITE_URL, OG_IMAGES } from "@/lib/seo";
-import { faqPageJsonLd } from "@/config/companyFacts";
+import { SITE_URL, OG_IMAGES, safeJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, COMPANY, telHref } from "@/config/companyFacts";
 import heroImg from "@/assets/sol-mri.jpg";
 import { cn } from "@/lib/utils";
 import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRelatedKnowledge";
@@ -91,7 +91,7 @@ export const Route = createFileRoute("/faqs")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(faqPageJsonLd(FAQ_SCHEMA_ITEMS)),
+        children: safeJsonLd(faqPageJsonLd(FAQ_SCHEMA_ITEMS)),
       },
     ],
   }),
@@ -325,7 +325,7 @@ function FaqsRoute() {
                     Contact Us
                   </Link>
                   <a
-                    href="tel:+96264026063"
+                    href={telHref(COMPANY.phone)}
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
                   >
                     <Phone className="h-4 w-4" aria-hidden />

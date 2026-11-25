@@ -4,7 +4,7 @@ import { Footer } from "@/components/site/Footer";
 import { AfterSalesPage } from "@/components/site/AfterSalesPage";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
-const TITLE = "After Sales Support | AbuFarha Medical Equipment";
+const TITLE = "After Sales Support | AbuFarha Medical Supplies";
 const DESC =
   "24/7 after sales support from AbuFarha — preventive maintenance, emergency response, genuine spare parts, calibration, biomedical engineering and clinical training across the Middle East, Africa and Central Asia.";
 

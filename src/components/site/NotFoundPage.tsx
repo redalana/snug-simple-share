@@ -43,7 +43,7 @@ export function NotFoundPage() {
             onSubmit={onSearch}
             className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card p-1.5 shadow-sm focus-within:border-primary"
           >
-            <div className="grid h-10 w-10 place-items-center text-muted-foreground">
+            <div className="grid h-10 w-10 shrink-0 place-items-center text-muted-foreground">
               <Search className="h-4 w-4" />
             </div>
             <input
@@ -51,11 +51,11 @@ export function NotFoundPage() {
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search medical equipment…"
               aria-label="Search medical equipment"
-              className="h-10 flex-1 bg-transparent text-sm outline-none"
+              className="h-10 min-w-0 flex-1 bg-transparent text-sm outline-none"
             />
             <button
               type="submit"
-              className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-dark"
+              className="shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-dark"
             >
               Search
             </button>

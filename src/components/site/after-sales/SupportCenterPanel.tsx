@@ -1,3 +1,4 @@
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 import { ArrowUpRight, Clock, Zap, CheckCircle2, Phone, MessageSquare } from "lucide-react";
 import { CONTACT_CHANNELS, REASONS } from "./data";
 
@@ -56,12 +57,14 @@ export function SupportCenterPanel() {
           </div>
           <div className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
             <div className="flex items-center gap-1.5 text-[calc(10.5*var(--desktop-px-unit))] font-semibold uppercase tracking-[0.2em] text-white/50">
-              <Zap className="h-3 w-3" /> Avg Response
+              <Zap className="h-3 w-3" /> Office Hours
             </div>
             <div className="mt-1.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white">
-              &lt; 4 hrs
+              {COMPANY.hours.split(", ")[1] ?? COMPANY.hours}
             </div>
-            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">Regional SLA</div>
+            <div className="text-[calc(11*var(--desktop-px-unit))] text-white/50">
+              {COMPANY.hours.split(", ")[0]}
+            </div>
           </div>
         </div>
 
@@ -104,13 +107,13 @@ export function SupportCenterPanel() {
             </div>
             <div className="mt-5 space-y-2.5">
               <a
-                href="tel:+962799741318"
+                href={telHref(COMPANY.mobile)}
                 className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-[calc(14*var(--desktop-px-unit))] font-bold text-white shadow-[0_18px_40px_-16px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
               >
                 <Phone className="h-4 w-4" /> Call +962 79 974 1318
               </a>
               <a
-                href="https://wa.me/962799741318"
+                href={whatsappUrl()}
                 className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-3 text-[calc(13.5*var(--desktop-px-unit))] font-bold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
               >
                 <MessageSquare className="h-4 w-4" /> WhatsApp Engineer

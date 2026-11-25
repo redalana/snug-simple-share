@@ -4,7 +4,7 @@ import { ArrowRight, FileText, Search, X } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageHero } from "@/components/site/PageHero";
-import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 import heroImg from "@/assets/env-imaging-dept.jpg";
 import {
   CATALOG_CATEGORIES,
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/catalog-library/")({
       scripts: [
         {
           type: "application/ld+json",
-          children: JSON.stringify(
+          children: safeJsonLd(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Catalog Library", path: "/catalog-library" },

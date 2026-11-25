@@ -1,3 +1,4 @@
+import { COMPANY } from "@/config/companyFacts";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ShieldCheck,
@@ -198,17 +199,17 @@ const CONTACTS: ContactCard[] = [
   {
     Icon: MapPin,
     title: "Address",
-    lines: ["AbuFarha Medical Supplies", "Queen Rania St.", "Amman, Jordan"],
+    lines: [COMPANY.legalName, "Queen Rania St.", `${COMPANY.headquarters.city}, ${COMPANY.headquarters.country}`],
   },
   {
     Icon: Phone,
     title: "Phone",
     lines: [
       <span key="p1" className="whitespace-nowrap">
-        +962 6 4026063
+        {COMPANY.phone}
       </span>,
       <span key="p2" className="whitespace-nowrap">
-        +962 79 9741318
+        {COMPANY.mobile}
       </span>,
     ],
   },
@@ -218,10 +219,10 @@ const CONTACTS: ContactCard[] = [
     lines: [
       <a
         key="e"
-        href="mailto:info@abufarhamedical.com"
+        href={`mailto:${COMPANY.email}`}
         className="whitespace-nowrap hover:text-primary"
       >
-        info@abufarhamedical.com
+        {COMPANY.email}
       </a>,
     ],
   },
@@ -230,7 +231,7 @@ const CONTACTS: ContactCard[] = [
     title: "Website",
     lines: [
       <span key="w" className="whitespace-nowrap">
-        www.abufarhamedical.com
+        {COMPANY.websiteDisplay}
       </span>,
     ],
   },

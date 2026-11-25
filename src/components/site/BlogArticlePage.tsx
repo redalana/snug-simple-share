@@ -1,3 +1,6 @@
+import { whatsappUrl } from "@/config/companyFacts";
+import { useNewsletterSignup } from "@/hooks/use-newsletter-signup";
+import { Honeypot } from "./Honeypot";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -1217,7 +1220,7 @@ function RelatedArticles({ items }: { items: Article[] }) {
 }
 
 function SidebarNewsletter() {
-  const form = useNewsletterForm();
+  const form = useNewsletterSignup();
   return (
     <div className="overflow-hidden rounded-2xl bg-[linear-gradient(180deg,#fff5f5_0%,#fff_100%)] p-5 ring-1 ring-primary/15">
       <p className="font-display text-base font-extrabold leading-snug text-ink">
@@ -1226,12 +1229,15 @@ function SidebarNewsletter() {
       <p className="mt-2 text-sm text-muted-foreground">
         Subscribe to our newsletter and never miss an important update.
       </p>
-      <form onSubmit={form.submit} className="mt-4 space-y-2.5">
+      <form onSubmit={form.submit} className="relative mt-4 space-y-2.5">
+        <Honeypot value={form.botField} onChange={form.setBotField} />
         <input
           type="email"
           required
           value={form.email}
           onChange={(e) => form.setEmail(e.target.value)}
+          aria-label="Email address for newsletter"
+          autoComplete="email"
           placeholder="Your email address"
           className="h-11 w-full rounded-full border border-border bg-white px-4 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10"
         />
@@ -1247,6 +1253,7 @@ function SidebarNewsletter() {
       {form.message && (
         <p
           role="status"
+          aria-live="polite"
           className={`mt-3 text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}
         >
           {form.message}
@@ -1295,7 +1302,7 @@ function ExpertCTA() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
-                href={`https://wa.me/962799741318?text=${encodeURIComponent("I've just read your article and I'd like to discuss this system.")}`}
+                href={whatsappUrl("I've just read your article and I'd like to discuss this system.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"
@@ -1321,7 +1328,7 @@ function ExpertCTA() {
 }
 
 function NewsletterBand() {
-  const form = useNewsletterForm();
+  const form = useNewsletterSignup();
   return (
     <section className="bg-white pb-16 lg:pb-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
@@ -1343,11 +1350,14 @@ function NewsletterBand() {
               className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto"
               onSubmit={form.submit}
             >
+              <Honeypot value={form.botField} onChange={form.setBotField} />
               <input
                 type="email"
                 required
                 value={form.email}
                 onChange={(e) => form.setEmail(e.target.value)}
+                aria-label="Email address for newsletter"
+                autoComplete="email"
                 placeholder="Your email address"
                 className="h-12 w-full min-w-[calc(240*var(--desktop-px-unit))] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[calc(260*var(--desktop-px-unit))]"
               />
@@ -1363,6 +1373,7 @@ function NewsletterBand() {
             {form.message && (
               <p
                 role="status"
+                aria-live="polite"
                 className={`text-sm font-medium ${form.success ? "text-emerald-600" : "text-destructive"}`}
               >
                 {form.message}
@@ -1382,32 +1393,6 @@ function NewsletterBand() {
       </div>
     </section>
   );
-}
-
-function useNewsletterForm() {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
-
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-    if (!valid) {
-      setSuccess(false);
-      setMessage("Please enter a valid email address.");
-      return;
-    }
-    setLoading(true);
-    setMessage("");
-    await new Promise((resolve) => window.setTimeout(resolve, 650));
-    setLoading(false);
-    setSuccess(true);
-    setMessage("Thank you — you're subscribed to AbuFarha Medical insights.");
-    setEmail("");
-  };
-
-  return { email, setEmail, loading, message, success, submit };
 }
 
 function ReadingProgress() {

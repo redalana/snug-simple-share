@@ -4,9 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Menu, X, Star, ChevronRight } from "lucide-react";
 
 import { Logo } from "./Logo";
+import { whatsappUrl } from "@/config/companyFacts";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import { LinkedInIcon } from "./icons/LinkedInIcon";
-import { FacebookIcon } from "./icons/FacebookIcon";
 import { NAV, LANGUAGES } from "./header/nav-data";
 import { BRANDS_LIST } from "@/lib/brands-data";
 import { LanguageSelector } from "./header/LanguageSelector";
@@ -15,20 +14,11 @@ import { ProductsMegaDropdown } from "./header/ProductsMegaDropdown";
 import { MobileProductsAccordion } from "./header/MobileProductsAccordion";
 import { SearchField } from "./header/SearchField";
 
+// Same rule as the footer: only WhatsApp has a verified official destination.
+// LinkedIn / Facebook pointed at the generic network homepages, so they are
+// hidden until the official company profile URLs are supplied.
 const HEADER_SOCIALS = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/",
-    Icon: LinkedInIcon,
-    hoverColor: "#0A66C2",
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/",
-    Icon: FacebookIcon,
-    hoverColor: "#1877F2",
-  },
-  { label: "WhatsApp", href: "#", Icon: WhatsAppIcon, hoverColor: "#25D366" },
+  { label: "WhatsApp", href: whatsappUrl(), Icon: WhatsAppIcon, hoverColor: "#25D366" },
 ] as const;
 
 export function Header() {

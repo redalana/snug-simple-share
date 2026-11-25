@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
+  Loader2,
   Mail,
   MessageCircle,
   Search,
@@ -16,6 +17,9 @@ import {
 import solDes from "@/assets/sol-des.jpg";
 import whyCathlab from "@/assets/why-cathlab.jpg";
 import { FEATURED_ARTICLES } from "@/lib/blog";
+import { useNewsletterSignup } from "@/hooks/use-newsletter-signup";
+import { whatsappUrl } from "@/config/companyFacts";
+import { Honeypot } from "./Honeypot";
 import {
   ALL_CATEGORY_ID,
   KNOWLEDGE_SORTS,
@@ -683,7 +687,9 @@ function CTABand() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <a
-                href="#"
+                href={whatsappUrl("Hello AbuFarha Medical Supplies, I need help choosing medical equipment.")}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-[#25D366]/40 hover:text-[#128C7E]"
               >
                 <WhatsAppIcon className="h-4 w-4" />
@@ -781,7 +787,7 @@ function Pagination({
 /* ---------------- Newsletter ---------------- */
 
 function Newsletter() {
-  const [email, setEmail] = useState("");
+  const form = useNewsletterSignup();
   return (
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-10">
@@ -799,26 +805,38 @@ function Newsletter() {
               </p>
             </div>
             <form
-              className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
+              className="relative flex w-full flex-col gap-3 sm:flex-row lg:w-auto"
+              onSubmit={form.submit}
             >
+              <Honeypot value={form.botField} onChange={form.setBotField} />
               <input
                 type="email"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={form.email}
+                onChange={(e) => form.setEmail(e.target.value)}
+                aria-label="Email address for newsletter"
+                autoComplete="email"
                 placeholder="Your email address"
                 className="h-12 w-full min-w-[calc(240*var(--desktop-px-unit))] rounded-full border border-border bg-white px-5 text-sm text-ink outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-4 focus:ring-primary/10 sm:w-[calc(260*var(--desktop-px-unit))]"
               />
               <button
                 type="submit"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+                disabled={form.loading}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-(--shadow-brand-md) transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-70"
               >
-                Subscribe
+                {form.loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                {form.loading ? "Subscribing…" : "Subscribe"}
               </button>
             </form>
+            {form.message && (
+              <p
+                role="status"
+                aria-live="polite"
+                className={`text-sm font-medium lg:col-span-4 ${form.success ? "text-emerald-600" : "text-destructive"}`}
+              >
+                {form.message}
+              </p>
+            )}
             <div className="hidden h-32 w-56 shrink-0 overflow-hidden rounded-2xl lg:block">
               <img
                 src={solDes}

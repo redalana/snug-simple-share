@@ -1,3 +1,4 @@
+import { COMPANY, telHref } from "@/config/companyFacts";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -106,7 +107,7 @@ export function ArticleCta({
               </p>
             </div>
             <a
-              href="tel:+962799741318"
+              href={telHref(COMPANY.mobile)}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               <Phone className="h-4 w-4" aria-hidden="true" /> +962 7 9974 1318

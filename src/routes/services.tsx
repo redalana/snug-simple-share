@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ServicesPage } from "@/components/site/ServicesPage";
-import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES, safeJsonLd } from "@/lib/seo";
 import { serviceJsonLd, itemListJsonLd } from "@/config/companyFacts";
 
 const SERVICES = [
@@ -37,7 +37,7 @@ const SERVICES = [
   },
 ];
 
-const TITLE = "Medical Equipment Services | AbuFarha Medical Equipment";
+const TITLE = "Medical Equipment Services | AbuFarha Medical Supplies";
 const DESC =
   "OEM-certified installation, preventive & corrective maintenance, calibration, upgrades and 24/7 support for imaging, cath lab, ultrasound and patient monitoring systems across the Middle East, Africa and Central Asia.";
 
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/services")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           itemListJsonLd(
             SERVICES.map((s) => ({ name: s.name, url: SITE_URL + "/services" })),
             "AbuFarha Medical Services",
@@ -69,7 +69,7 @@ export const Route = createFileRoute("/services")({
       },
       ...SERVICES.map((s) => ({
         type: "application/ld+json",
-        children: JSON.stringify(serviceJsonLd({ ...s, url: SITE_URL + "/services" })),
+        children: safeJsonLd(serviceJsonLd({ ...s, url: SITE_URL + "/services" })),
       })),
     ],
   }),

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PortfolioBrowser } from "@/components/site/PortfolioBrowser";
-import { SITE_URL, OG_IMAGES, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 import { itemListJsonLd } from "@/config/companyFacts";
 
 /** Category landing pages that exist as real routes — used for the ItemList. */
@@ -45,13 +45,13 @@ export const Route = createFileRoute("/products/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           itemListJsonLd(CATEGORY_ROUTES, "AbuFarha Medical — Equipment Categories"),
         ),
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Products", path: "/products" },

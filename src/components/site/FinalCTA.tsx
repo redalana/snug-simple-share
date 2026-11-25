@@ -1,3 +1,4 @@
+import { COMPANY_PROFILE_URL } from "@/config/companyFacts";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { openQuoteModal } from "@/lib/quote-modal";
@@ -65,12 +66,17 @@ export function FinalCTA() {
           >
             <PhoneCall className="h-4 w-4" /> Talk to an Expert
           </Link>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
-          >
-            <FileText className="h-4 w-4" /> Company Profile
-          </a>
+          {COMPANY_PROFILE_URL && (
+            <a
+              href={COMPANY_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
+            >
+              <FileText className="h-4 w-4" /> Company Profile
+            </a>
+          )}
           <p className="mt-1 flex w-full items-center justify-center gap-2 text-[calc(13*var(--desktop-px-unit))] font-medium text-white/80 lg:justify-start">
             <ShieldCheck className="h-4 w-4" />
             Backed by a 1-year free warranty on every installation.

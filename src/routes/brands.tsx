@@ -535,6 +535,7 @@ function BrandsPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search brands, countries or equipment categories…"
+                aria-label="Search brands, countries or equipment categories"
                 className="w-full rounded-full border border-border bg-white py-3 pl-11 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>

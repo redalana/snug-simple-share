@@ -1,3 +1,4 @@
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 import {
   Phone,
   MessageSquare,
@@ -133,21 +134,21 @@ export const CONTACT_CHANNELS = [
     icon: Phone,
     label: "Emergency Hotline",
     value: "+962 79 974 1318",
-    href: "tel:+962799741318",
+    href: telHref(COMPANY.mobile),
     accent: "text-primary",
   },
   {
     icon: MessageSquare,
     label: "WhatsApp Support",
     value: "+962 79 974 1318",
-    href: "https://wa.me/962799741318",
+    href: whatsappUrl(),
     accent: "text-emerald-400",
   },
   {
     icon: Mail,
     label: "Email Support",
-    value: "support@abufarhamedical.com",
-    href: "mailto:support@abufarhamedical.com",
+    value: COMPANY.email,
+    href: `mailto:${COMPANY.email}`,
     accent: "text-sky-400",
   },
 ];
@@ -167,7 +168,7 @@ export type FaqCat = (typeof FAQ_CATS)[number];
 export const FAQS: { q: string; a: string; cat: Exclude<FaqCat, "All"> }[] = [
   {
     q: "How can I request a service?",
-    a: "Submit the form above, call our 24/7 emergency line or email support@abufarhamedical.com. A case is opened immediately and a certified engineer is assigned within minutes.",
+    a: "Submit the form above, call us, or email info@abufarhamedical.com. Our support team will review your request and contact you.",
     cat: "Service",
   },
   {

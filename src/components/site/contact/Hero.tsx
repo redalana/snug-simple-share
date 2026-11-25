@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/config/companyFacts";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
@@ -65,7 +66,7 @@ export function Hero() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="https://wa.me/962799741318"
+                  href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-white px-6 text-sm font-semibold text-foreground transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[#25D366]/50 hover:text-[#128C7E] hover:shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]"

@@ -4,7 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { HUB_BASE_PATH, HUB_KINDS, listHubs, type HubKind } from "@/lib/content";
-import { SITE_URL, OG_IMAGES, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 
 const TITLE = "Knowledge Hubs — Technology, Manufacturer, Product & Service | AbuFarha Medical";
 const DESCRIPTION =
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/knowledge/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
+        children: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: TITLE,
@@ -69,7 +69,7 @@ export const Route = createFileRoute("/knowledge/")({
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(
+        children: safeJsonLd(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
             { name: "Knowledge Center", path: "/blog" },

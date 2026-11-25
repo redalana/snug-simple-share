@@ -1,5 +1,4 @@
 import { Hero } from "./after-sales/Hero";
-import { OperationsDashboard } from "./after-sales/OperationsDashboard";
 import { RemoteDiagnostics } from "./after-sales/RemoteDiagnostics";
 import { SupportJourney } from "./after-sales/SupportJourney";
 import { EquipmentGallery } from "./after-sales/EquipmentGallery";
@@ -13,7 +12,9 @@ export function AfterSalesPage() {
   return (
     <>
       <Hero />
-      <OperationsDashboard />
+      {/* OperationsDashboard hidden: its figures (46 engineers, 128 tickets,
+          2.4 h response, 2,350+ parts, 98%) are not verified and contradict
+          companyFacts.ts. Re-enable only with real, approved data. */}
       <RemoteDiagnostics />
       <SupportJourney />
       <EquipmentGallery />

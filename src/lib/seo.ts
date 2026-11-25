@@ -4,6 +4,7 @@
  * Used by route `head()` functions to keep canonical / og:url / og:image
  * consistent and maintainable.
  */
+import { COMPANY } from "@/config/companyFacts";
 import heroCathlab from "@/assets/hero-cathlab.jpg";
 import aboutHero from "@/assets/about-hero.jpg";
 import abufarhaHq from "@/assets/abufarha-hq.jpg";
@@ -26,12 +27,11 @@ import clinicalRehab from "@/assets/clinical-rehabilitation.jpg";
 /**
  * Production site URL. Overridable at build time via VITE_SITE_URL so
  * canonical / og:url / sitemap / JSON-LD all point at the real production
- * domain once a custom domain is connected. Fallback is the current Lovable
- * subdomain used during preview.
+ * domain. Fallback is COMPANY.website (companyFacts.ts) so canonicals,
+ * sitemap, robots and JSON-LD share one source.
  */
 export const SITE_URL: string =
-  (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "https://snug-simple-share.lovable.app";
+  (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, "") || COMPANY.website;
 
 /** Absolute URL helper — pass a relative path or a full URL. */
 export function absUrl(pathOrUrl: string): string {
@@ -103,4 +103,18 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       item: absUrl(it.path),
     })),
   };
+}
+
+/**
+ * Serialise JSON-LD for a <script type="application/ld+json"> body.
+ * Escapes <, >, & and line separators so text taken from URLs or data can
+ * never close the script tag or inject markup.
+ */
+export function safeJsonLd(value: unknown): string {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }

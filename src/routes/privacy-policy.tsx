@@ -1,3 +1,4 @@
+import { COMPANY } from "@/config/companyFacts";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ShieldCheck,
@@ -265,12 +266,12 @@ const SECTIONS: Section[] = [
         <p>
           For questions regarding this Privacy Policy, please contact us at{" "}
           <a
-            href="mailto:info@abufarhamedical.com"
+            href={`mailto:${COMPANY.email}`}
             className="font-semibold text-primary hover:underline"
           >
-            info@abufarhamedical.com
+            {COMPANY.email}
           </a>{" "}
-          or +962 6 4026063.
+          or {COMPANY.phone}.
         </p>
       </>
     ),

@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { TurnkeyPage } from "@/components/site/TurnkeyPage";
-import { SITE_URL, OG_IMAGES } from "@/lib/seo";
+import { SITE_URL, OG_IMAGES, safeJsonLd } from "@/lib/seo";
 
-const TITLE = "Turnkey Healthcare Solutions | AbuFarha Medical Equipment";
+const TITLE = "Turnkey Healthcare Solutions | AbuFarha Medical Supplies";
 const DESC =
   "AbuFarha delivers complete turnkey hospital projects — planning, equipment supply, installation, commissioning, clinical training and long-term support across the Middle East, Africa and Central Asia.";
 
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/turnkey")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
+        children: safeJsonLd({
           "@context": "https://schema.org",
           "@graph": [
             {
@@ -50,7 +50,7 @@ export const Route = createFileRoute("/turnkey")({
             },
             {
               "@type": "Organization",
-              name: "AbuFarha Medical Equipment",
+              name: "AbuFarha Medical Supplies",
               url: SITE_URL + "/",
               areaServed: [
                 "Jordan",

@@ -189,7 +189,7 @@ export function ContactForm() {
     setErrors({});
     setSubmitting(true);
     try {
-      await submitLead({
+      const result = await submitLead({
         data: {
           source: "contact",
           fullName: payload.fullName,
@@ -207,6 +207,11 @@ export function ContactForm() {
           botField,
         },
       });
+      if (!result.ok) {
+        toast.error(result.message);
+        setSubmitting(false);
+        return;
+      }
       toast.success("Thank you — our team will reach out shortly.");
       setValues({});
       setCustomerType("");

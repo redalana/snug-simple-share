@@ -4,7 +4,7 @@ import { Footer } from "@/components/site/Footer";
 import { ProjectsExperiencePage } from "@/components/site/projects-experience/ProjectsExperiencePage";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 
-const TITLE = "Projects & Experience | AbuFarha Medical Equipment";
+const TITLE = "Projects & Experience | AbuFarha Medical Supplies";
 const DESC =
   "Regional healthcare infrastructure projects across Africa and the Middle East — cath labs, imaging systems, women's healthcare, turnkey departments, installation, training and long-term support delivered by AbuFarha Medical.";
 

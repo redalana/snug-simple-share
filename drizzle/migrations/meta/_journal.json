@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795628974266,
+      "tag": "0000_leads_newsletter_and_rate_limit",
+      "breakpoints": true
+    }
+  ]
+}

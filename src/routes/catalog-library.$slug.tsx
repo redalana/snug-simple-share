@@ -1,10 +1,11 @@
+import libraryHero from "@/assets/env-imaging-dept.jpg";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Download, ExternalLink, FileText } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PageHero } from "@/components/site/PageHero";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
-import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 import {
   canonicalManufacturer,
   categoryLabel,
@@ -39,7 +40,7 @@ export const Route = createFileRoute("/catalog-library/$slug")({
       scripts: [
         {
           type: "application/ld+json",
-          children: JSON.stringify(
+          children: safeJsonLd(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Catalog Library", path: "/catalog-library" },
@@ -73,7 +74,7 @@ function CatalogDetail() {
     <div className="min-h-screen bg-background">
       <Header />
       <main id="main-content" className="pt-[var(--header-h)]">
-        <PageHero eyebrow={categoryLabel(e.category)} breadcrumb="Catalog Library" title={e.title} description={e.description} />
+        <PageHero eyebrow={categoryLabel(e.category)} breadcrumb="Catalog Library" title={e.title} description={e.description} backgroundImage={e.coverImage?.src ?? libraryHero} />
         <section className="mx-auto grid max-w-[87.5rem] gap-8 px-6 pb-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:px-10">
           <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-sm">
             <dl className="grid gap-4 sm:grid-cols-2">
@@ -97,6 +98,26 @@ function CatalogDetail() {
                 <ExternalLink className="h-4 w-4" aria-hidden /> Original source
               </a>
             </div>
+            {e.linkedProducts?.length ? (
+              <div className="mt-6">
+                <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Attached to {e.linkedProducts.length === 1 ? "this listing" : `${e.linkedProducts.length} listings`}
+                </h2>
+                <ul className="mt-2 flex flex-wrap gap-2">
+                  {e.linkedProducts.map((lp) => (
+                    <li key={lp.slug}>
+                      <Link
+                        to="/products/$slug"
+                        params={{ slug: lp.slug }}
+                        className="inline-flex min-h-9 items-center rounded-full border border-border px-3.5 py-1.5 text-xs font-semibold text-ink hover:border-primary/40 hover:text-primary"
+                      >
+                        {lp.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <p className="mt-6 text-xs text-muted-foreground">
               This document belongs to its manufacturer and is listed for information only. Listing does not mean AbuFarha sells, distributes or represents this product.
             </p>

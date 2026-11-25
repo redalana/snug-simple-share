@@ -19,7 +19,7 @@ import { Footer } from "@/components/site/Footer";
 import { SITE_URL, OG_IMAGES } from "@/lib/seo";
 import { COPY } from "@/config/companyFacts";
 
-const HOME_TITLE = "AbuFarha Medical Equipment | Advanced Medical Technology Solutions";
+const HOME_TITLE = "AbuFarha Medical Supplies | Advanced Medical Technology Solutions";
 const HOME_DESC = COPY.metaDescription;
 
 export const Route = createFileRoute("/")({

@@ -269,7 +269,7 @@ const MANUFACTURER_ALIASES: Record<string, Manufacturer> = {
   toshiba: "Canon Medical",
   "toshiba medical": "Canon Medical",
   canon: "Canon Medical",
-  esaote: "eSaote",
+  esaote: "Esaote",
   "philips healthcare": "Philips",
   "boston scientific corporation": "Boston Scientific",
 };

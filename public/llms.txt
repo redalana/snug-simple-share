@@ -15,7 +15,7 @@
 - Biomedical engineers on staff: 5
 - OEM-certified partner network
 - Technical support: 24/7
-- Website: https://snug-simple-share.lovable.app
+- Website: https://abufarhamedical.com
 - Contact: info@abufarhamedical.com  |  +962 6 4026063
 
 ## What we do
@@ -34,19 +34,19 @@ more of:
 
 ## Key pages
 
-- Homepage: https://snug-simple-share.lovable.app/
-- About: https://snug-simple-share.lovable.app/about
-- Services: https://snug-simple-share.lovable.app/services
-- After-sales support: https://snug-simple-share.lovable.app/after-sales
-- Turnkey solutions: https://snug-simple-share.lovable.app/turnkey
-- Projects & experience: https://snug-simple-share.lovable.app/projects
-- Product catalog: https://snug-simple-share.lovable.app/products
-- Brands & manufacturers: https://snug-simple-share.lovable.app/brands
-- Stroke care program: https://snug-simple-share.lovable.app/programs/stroke-care
-- Knowledge Center (clinical articles): https://snug-simple-share.lovable.app/blog
-- FAQs: https://snug-simple-share.lovable.app/faqs
-- Contact: https://snug-simple-share.lovable.app/contact
-- Sitemap (XML): https://snug-simple-share.lovable.app/sitemap.xml
+- Homepage: https://abufarhamedical.com/
+- About: https://abufarhamedical.com/about
+- Services: https://abufarhamedical.com/services
+- After-sales support: https://abufarhamedical.com/after-sales
+- Turnkey solutions: https://abufarhamedical.com/turnkey
+- Projects & experience: https://abufarhamedical.com/projects
+- Product catalog: https://abufarhamedical.com/products
+- Brands & manufacturers: https://abufarhamedical.com/brands
+- Stroke care program: https://abufarhamedical.com/programs/stroke-care
+- Knowledge Center (clinical articles): https://abufarhamedical.com/blog
+- FAQs: https://abufarhamedical.com/faqs
+- Contact: https://abufarhamedical.com/contact
+- Sitemap (XML): https://abufarhamedical.com/sitemap.xml
 
 ## Equipment categories
 

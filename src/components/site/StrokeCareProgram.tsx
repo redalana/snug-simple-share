@@ -349,7 +349,7 @@ export function StrokeCareProgram({
             <div className="relative min-h-[22rem] overflow-hidden lg:min-h-full">
               <img
                 src={hqImage}
-                alt="AbuFarha Medical Equipment headquarters building in Amman, Jordan with a Jordanian flag"
+                alt="AbuFarha Medical Supplies headquarters building in Amman, Jordan with a Jordanian flag"
                 width={1200}
                 height={1200}
                 loading="lazy"

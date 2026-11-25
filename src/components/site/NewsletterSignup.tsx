@@ -5,12 +5,13 @@ import { Loader2, Mail, User, Phone, Send, Lock, Newspaper, Settings, BarChart3,
 import mriImg from "@/assets/env-mri-suite.jpg";
 import { Input } from "@/components/ui/input";
 import { PhoneField } from "./PhoneField";
+import { submitLead } from "@/lib/leads.functions";
+import { Honeypot } from "./Honeypot";
 import { SECTION_CONTAINER } from "./section-grid";
 
 /**
- * Newsletter form — FRONTEND ONLY. No subscription destination exists yet,
- * so submission validates and then tells the visitor plainly that nothing
- * was saved. Wire `submitNewsletter` to a real service when authorised.
+ * Homepage newsletter form. Saves through submitLead (source "newsletter")
+ * and only shows success after the server confirms the sign-up was stored.
  */
 const schema = z.object({
   fullName: z.string().trim().min(1, "Enter your full name").max(100, "Keep it under 100 characters"),
@@ -32,6 +33,8 @@ export function NewsletterSignup() {
   const [errors, setErrors] = useState<Errors>({});
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+  const [botField, setBotField] = useState("");
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -46,11 +49,36 @@ export function NewsletterSignup() {
     }
     setErrors({});
     setBusy(true);
-    await new Promise((res) => setTimeout(res, 600));
-    setBusy(false);
-    setNotice(
-      "Your details look good, but newsletter sign-up isn't connected yet, so nothing was saved. Please check back soon.",
-    );
+    try {
+      const res = await submitLead({
+        data: {
+          source: "newsletter",
+          fullName: r.data.fullName,
+          email: r.data.email,
+          phone: r.data.phone,
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
+      });
+      if (!res.ok) {
+        setOk(false);
+        setNotice(res.message);
+        return;
+      }
+      setOk(true);
+      setNotice(
+        res.duplicate
+          ? "This email is already on our newsletter list."
+          : "Thank you — you're on our newsletter list.",
+      );
+      setValues({ fullName: "", email: "", phone: "" });
+    } catch {
+      setOk(false);
+      setNotice("We couldn't save your sign-up. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   const field = (name: keyof Values, label: string, type: string, auto: string, placeholder: string, Icon: typeof User) => (
@@ -134,6 +162,7 @@ export function NewsletterSignup() {
                   <p id="nl-phone-error" className="mt-1.5 text-xs font-medium text-destructive">{errors.phone}</p>
                 )}
               </div>
+              <Honeypot value={botField} onChange={setBotField} />
               <button
                 type="submit"
                 disabled={busy}
@@ -143,7 +172,7 @@ export function NewsletterSignup() {
                 {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" aria-hidden />}
                 Subscribe to Newsletter
               </button>
-              <p role="status" aria-live="polite" className="text-sm font-medium text-ink empty:hidden">{notice}</p>
+              <p role="status" aria-live="polite" className={`text-sm font-medium empty:hidden ${ok ? "text-ink" : "text-destructive"}`}>{notice}</p>
               <p className="flex gap-3 text-sm text-muted-foreground">
                 <Lock className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
                 We respect your privacy. Your information will only be used to send relevant updates from our team.

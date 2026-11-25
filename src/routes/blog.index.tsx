@@ -38,7 +38,7 @@ export const Route = createFileRoute("/blog/")({
   },
   head: () => ({
     meta: [
-      { title: "Healthcare Knowledge Center — AbuFarha Medical Equipment" },
+      { title: "Healthcare Knowledge Center — AbuFarha Medical Supplies" },
       {
         name: "description",
         content:

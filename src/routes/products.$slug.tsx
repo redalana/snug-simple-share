@@ -3,7 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ProductDetail } from "@/components/site/ProductDetail";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products";
-import { SITE_URL, absUrl, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, absUrl, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/products/$slug")({
     const title = product.seoTitle ?? `${product.name} | AbuFarha Medical`;
     const desc =
       product.seoDescription ??
-      `${product.name} — ${product.subtitle}. ${product.status}, ${product.warranty}. Request a quote from AbuFarha Medical Equipment.`;
+      `${product.name} — ${product.subtitle}. ${product.status}, ${product.warranty}. Request a quote from AbuFarha Medical Supplies.`;
     const url = `${SITE_URL}/products/${params.slug}`;
     const image = absUrl(product.image);
     const gallery = (product.gallery ?? [product.image]).map((src) => absUrl(src));
@@ -101,10 +101,10 @@ export const Route = createFileRoute("/products/$slug")({
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
-        { type: "application/ld+json", children: JSON.stringify(productSchema) },
+        { type: "application/ld+json", children: safeJsonLd(productSchema) },
         {
           type: "application/ld+json",
-          children: JSON.stringify(
+          children: safeJsonLd(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Products", path: "/products" },

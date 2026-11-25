@@ -4,8 +4,10 @@ import { toast } from "sonner";
 import { ArrowRight, Phone, CheckCircle2, Loader2 } from "lucide-react";
 import { PhoneField } from "@/components/site/PhoneField";
 import { SupportCenterPanel } from "./SupportCenterPanel";
-import { ImageUpload, type UploadItem } from "./ImageUpload";
 import { EQUIPMENT } from "./data";
+import { submitLead } from "@/lib/leads.functions";
+import { Honeypot } from "@/components/site/Honeypot";
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 
 const requestSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name.").max(100),
@@ -32,7 +34,10 @@ export function RequestService() {
     description: "",
   });
   const [errors, setErrors] = useState<Errors>({});
-  const [images, setImages] = useState<UploadItem[]>([]);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const [botField, setBotField] = useState("");
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const fieldRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -44,6 +49,8 @@ export function RequestService() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitError(null);
     const result = requestSchema.safeParse(values);
     if (!result.success) {
       const errs: Errors = {};
@@ -70,11 +77,45 @@ export function RequestService() {
       }
       return;
     }
+    if (!consent) {
+      setConsentError(true);
+      toast.error("Please agree to the Privacy Policy so we can contact you.");
+      return;
+    }
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitting(false);
-    setSubmitted(true);
-    toast.success("Request submitted — our team will reach out within 1 business hour.");
+    try {
+      const d = result.data;
+      const res = await submitLead({
+        data: {
+          source: "service",
+          fullName: d.name,
+          email: d.email,
+          phone: d.phone,
+          organization: d.facility,
+          interest: "After-sales service request",
+          product: d.equipment,
+          message: [d.serial ? `Serial number: ${d.serial}` : "", d.description]
+            .filter(Boolean)
+            .join("\n\n"),
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
+      });
+      if (!res.ok) {
+        setSubmitError(res.message);
+        toast.error(res.message);
+        return;
+      }
+      setSubmitted(true);
+      toast.success("Service request received.");
+    } catch {
+      const msg = "We couldn't send your request. Please try again, or call us directly.";
+      setSubmitError(msg);
+      toast.error(msg);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const reset = () => {
@@ -88,8 +129,8 @@ export function RequestService() {
       description: "",
     });
     setErrors({});
-    images.forEach((i) => URL.revokeObjectURL(i.preview));
-    setImages([]);
+    setConsent(false);
+    setSubmitError(null);
     setSubmitted(false);
   };
 
@@ -112,8 +153,8 @@ export function RequestService() {
             We&apos;ll take care of the rest.
           </h2>
           <p className="mt-5 text-[calc(15*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-            Submit a request and our support team will respond within one business hour — 24/7 for
-            critical cases.
+            Submit a request and our support team will contact you about your equipment. For
+            critical downtime, please also call us directly.
           </p>
         </div>
 
@@ -130,12 +171,13 @@ export function RequestService() {
                   Request received.
                 </div>
                 <p className="mt-3 max-w-md text-[calc(14.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
-                  A service coordinator has been notified and will contact you within one business
-                  hour. For critical downtime, please also call our 24/7 emergency line.
+                  Your service request has been saved and our support team will contact you. To
+                  share photos of the issue, send them to us on WhatsApp. For critical downtime,
+                  please also call us directly.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <a
-                    href="tel:+962799741318"
+                    href={telHref(COMPANY.mobile)}
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_16px_40px_-16px_rgba(220,38,38,0.8)]"
                   >
                     <Phone className="h-4 w-4" /> Call Emergency Line
@@ -150,7 +192,7 @@ export function RequestService() {
                 </div>
               </div>
             ) : (
-              <form className="grid gap-6 sm:grid-cols-2" onSubmit={onSubmit} noValidate>
+              <form className="relative grid gap-6 sm:grid-cols-2" onSubmit={onSubmit} noValidate>
                 <label className="block">
                   <span className={labelCls}>
                     Full Name <span className="text-primary">*</span>
@@ -292,11 +334,47 @@ export function RequestService() {
                   )}
                 </label>
 
-                <div className="block sm:col-span-2">
-                  <span className={labelCls}>Upload Images (Optional)</span>
-                  <div className="mt-2">
-                    <ImageUpload items={images} setItems={setImages} />
-                  </div>
+                <p className="text-[calc(13*var(--desktop-px-unit))] text-muted-foreground sm:col-span-2">
+                  Have photos of the issue? Online photo upload isn't available yet — please{" "}
+                  <a
+                    href={whatsappUrl("Hello AbuFarha Medical Supplies, I'm sending photos for my service request.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    send them on WhatsApp
+                  </a>{" "}
+                  after submitting.
+                </p>
+
+                <div className="sm:col-span-2">
+                  <label className="flex cursor-pointer items-start gap-2.5 text-[calc(13*var(--desktop-px-unit))] leading-relaxed text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--primary)]"
+                      checked={consent}
+                      aria-invalid={consentError}
+                      aria-describedby={consentError ? "rs-consent-error" : undefined}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        setConsentError(false);
+                      }}
+                    />
+                    <span>
+                      I agree that AbuFarha Medical may store my details and contact me about this
+                      request, as described in the{" "}
+                      <a href="/privacy-policy" className="font-semibold text-primary hover:underline">
+                        Privacy Policy
+                      </a>
+                      .
+                    </span>
+                  </label>
+                  {consentError && (
+                    <p id="rs-consent-error" role="alert" className="mt-1.5 text-[calc(12*var(--desktop-px-unit))] font-medium text-destructive">
+                      Please agree so we can contact you.
+                    </p>
+                  )}
+                  <Honeypot value={botField} onChange={setBotField} />
                 </div>
 
                 <div className="sm:col-span-2">
@@ -317,6 +395,11 @@ export function RequestService() {
                       </>
                     )}
                   </button>
+                  {submitError && (
+                    <p role="alert" className="mt-3 text-sm font-medium text-destructive">
+                      {submitError}
+                    </p>
+                  )}
                 </div>
               </form>
             )}

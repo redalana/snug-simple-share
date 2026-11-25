@@ -25,14 +25,38 @@ export const COMPANY = {
     city: "Amman",
     country: "Jordan",
     address: "4th Floor, Complex 396, Queen Rania Street, Amman, Jordan",
+    addressLines: ["4th Floor, Complex 396", "Queen Rania Street", "Amman, Jordan"],
     coords: { lat: 32.0239137, lng: 35.8507975 },
   },
-  website: "https://snug-simple-share.lovable.app",
+  /** Production domain (user-confirmed). Canonicals, sitemap and schema use it. */
+  website: "https://abufarhamedical.com",
+  /** Display form of the website as printed in the Corporate Profile. */
+  websiteDisplay: "www.abufarhamedical.com",
   phone: "+962 6 4026063",
+  /** Mobile / WhatsApp line — Corporate Profile: +962 79 9741318. */
+  mobile: "+962 79 9741318",
+  whatsappNumber: "962799741318",
   email: "info@abufarhamedical.com",
   hours: "Saturday to Thursday, 9:00 AM – 5:00 PM",
   region: "Africa and the Middle East",
 } as const;
+
+/**
+ * Downloadable Company Profile PDF. `null` hides every "Company Profile"
+ * button — set to the approved file URL once the user confirms which PDF.
+ */
+export const COMPANY_PROFILE_URL: string | null = null;
+
+/** Dial-able tel: href for a display phone string. */
+export function telHref(phone: string): string {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}
+
+/** wa.me link to the company WhatsApp line, with an optional prefilled message. */
+export function whatsappUrl(text?: string): string {
+  const base = `https://wa.me/${COMPANY.whatsappNumber}`;
+  return text ? `${base}?text=${encodeURIComponent(text)}` : base;
+}
 
 /* ------------------------------------------------------------------ */
 /*  STATS — verified facts only                                        */

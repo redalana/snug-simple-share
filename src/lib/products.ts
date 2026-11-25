@@ -35,7 +35,7 @@ export const ALL_MANUFACTURERS = [
   "Canon Medical",
   "Siemens",
   "Mindray",
-  "eSaote",
+  "Esaote",
   "Richard Wolf",
   "Hitachi",
   "GE",

@@ -18,13 +18,15 @@ import {
   Radar,
   Settings2,
   ShieldCheck,
-  Upload,
   Users,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
 
 import { Eyebrow } from "./Eyebrow";
+import { Honeypot } from "./Honeypot";
+import { submitLead } from "@/lib/leads.functions";
+import { STATS, statText, whatsappUrl, COMPANY, telHref } from "@/config/companyFacts";
 import {
   HERO_SECTION,
   HERO_GRID,
@@ -150,7 +152,7 @@ const HERO_SLIDES: HeroSlide[] = [
       </>
     ),
     desc: "A dedicated service desk, priority on-site response and full warranty administration — minimizing downtime for every critical system in your department.",
-    cta: { label: "Talk to Support Now", href: "tel:+96264026063" },
+    cta: { label: "Talk to Support Now", href: telHref(COMPANY.phone) },
     highlights: [
       { icon: Headphones, label: "24/7 Service Desk" },
       { icon: Radar, label: "Remote Diagnostics" },
@@ -820,11 +822,55 @@ function AfricaMap() {
 
 function Coverage() {
   const [submitted, setSubmitted] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [botField, setBotField] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    if (submitting) return;
+    setError(null);
+    const fd = new FormData(e.currentTarget);
+    const get = (k: string) => String(fd.get(k) ?? "").trim();
+    if (phone.replace(/\D/g, "").length < 6) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await submitLead({
+        data: {
+          source: "service",
+          fullName: get("fullName"),
+          email: get("email"),
+          phone,
+          organization: get("facility"),
+          country: get("country"),
+          interest: get("serviceType"),
+          product: get("equipmentType"),
+          message: [
+            get("serial") ? `Serial number: ${get("serial")}` : "",
+            get("visitDate") ? `Preferred visit date: ${get("visitDate")}` : "",
+            get("description"),
+          ]
+            .filter(Boolean)
+            .join("\n\n"),
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
+      });
+      if (!res.ok) {
+        setError(res.message);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("We couldn't send your request. Please try again, or contact us by phone or WhatsApp.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -840,19 +886,19 @@ function Coverage() {
           <div className="mt-6 flex items-start gap-6">
             <div className="grid grid-cols-3 gap-6">
               <div>
-                <div className="font-display text-3xl font-extrabold text-foreground">10+</div>
+                <div className="font-display text-3xl font-extrabold text-foreground">{statText(STATS.countries)}</div>
                 <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
                   Countries
                 </div>
               </div>
               <div>
-                <div className="font-display text-3xl font-extrabold text-foreground">30+</div>
+                <div className="font-display text-3xl font-extrabold text-foreground">{statText(STATS.projects)}</div>
                 <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
                   Projects
                 </div>
               </div>
               <div>
-                <div className="font-display text-3xl font-extrabold text-foreground">24/7</div>
+                <div className="font-display text-3xl font-extrabold text-foreground">{statText(STATS.support)}</div>
                 <div className="mt-1 text-[calc(11.5*var(--desktop-px-unit))] uppercase tracking-wider text-muted-foreground">
                   Support
                 </div>
@@ -890,25 +936,26 @@ function Coverage() {
                 Request received
               </div>
               <p className="mt-1 text-[calc(13*var(--desktop-px-unit))] text-muted-foreground">
-                Our service desk will reach out shortly.
+                Your request has been saved and our service team will contact you.
               </p>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="mt-6 grid gap-4 sm:grid-cols-2">
+            <form onSubmit={onSubmit} className="relative mt-6 grid gap-4 sm:grid-cols-2">
+              <Honeypot value={botField} onChange={setBotField} />
               <Field label="Full Name" required>
-                <input required className={inputCls} />
+                <input name="fullName" autoComplete="name" required maxLength={120} className={inputCls} />
               </Field>
               <Field label="Hospital / Facility" required>
-                <input required className={inputCls} />
+                <input name="facility" autoComplete="organization" required maxLength={160} className={inputCls} />
               </Field>
               <Field label="Email Address" required>
-                <input type="email" required className={inputCls} />
+                <input name="email" type="email" autoComplete="email" required maxLength={255} className={inputCls} />
               </Field>
               <Field label="Phone Number" required>
-                <PhoneFieldWrapper />
+                <PhoneField value={phone} onChange={setPhone} />
               </Field>
               <Field label="Country" required>
-                <select required className={inputCls} defaultValue="">
+                <select name="country" required className={inputCls} defaultValue="">
                   <option value="" disabled>
                     Select Country
                   </option>
@@ -929,7 +976,7 @@ function Coverage() {
                 </select>
               </Field>
               <Field label="Service Type" required>
-                <select required className={inputCls} defaultValue="">
+                <select name="serviceType" required className={inputCls} defaultValue="">
                   <option value="" disabled>
                     Select Service
                   </option>
@@ -939,7 +986,7 @@ function Coverage() {
                 </select>
               </Field>
               <Field label="Equipment Type">
-                <select className={inputCls} defaultValue="">
+                <select name="equipmentType" className={inputCls} defaultValue="">
                   <option value="" disabled>
                     Select Equipment
                   </option>
@@ -949,47 +996,65 @@ function Coverage() {
                 </select>
               </Field>
               <Field label="Equipment Serial Number">
-                <input className={inputCls} />
+                <input name="serial" maxLength={80} className={inputCls} />
               </Field>
               <Field label="Preferred Visit Date">
-                <input type="date" className={inputCls} />
+                <input name="visitDate" type="date" className={inputCls} />
               </Field>
               <Field label="Problem Description" required>
                 <textarea
+                  name="description"
                   required
+                  maxLength={1500}
                   rows={1}
                   placeholder="Please describe the issue or service you need..."
                   className={cn(inputCls, "resize-none")}
                 />
               </Field>
 
-              <div className="sm:col-span-2">
-                <label className="text-[calc(12*var(--desktop-px-unit))] font-semibold text-foreground/80">
-                  Upload Images (Optional)
-                </label>
-                <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-[#FAFAFB] px-6 py-8 text-center transition hover:border-primary/60">
-                  <Upload className="h-5 w-5 text-muted-foreground" />
-                  <div className="mt-2 text-[calc(13*var(--desktop-px-unit))] text-foreground/80">
-                    {fileName ?? "Drag & drop files here"}
-                  </div>
-                  <div className="text-[calc(11.5*var(--desktop-px-unit))] text-muted-foreground">
-                    or click to browse (JPG, PNG, PDF up to 10MB)
-                  </div>
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept=".jpg,.jpeg,.png,.pdf"
-                    onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
-                  />
-                </label>
-              </div>
+              <p className="text-[calc(12.5*var(--desktop-px-unit))] text-muted-foreground sm:col-span-2">
+                Have photos of the issue? Online photo upload isn't available yet — please{" "}
+                <a
+                  href={whatsappUrl("Hello AbuFarha Medical Supplies, I'm sending photos for my service request.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  send them on WhatsApp
+                </a>{" "}
+                after submitting.
+              </p>
+
+              <label className="flex cursor-pointer items-start gap-2.5 text-[calc(12.5*var(--desktop-px-unit))] leading-relaxed text-muted-foreground sm:col-span-2">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  required
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--primary)]"
+                />
+                <span>
+                  I agree that AbuFarha Medical may store my details and contact me about this
+                  request, as described in the{" "}
+                  <Link to="/privacy-policy" className="font-semibold text-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </span>
+              </label>
 
               <button
                 type="submit"
-                className="sm:col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+                disabled={submitting}
+                aria-busy={submitting}
+                className="sm:col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-70"
               >
-                Submit Request <ArrowRight className="h-4 w-4" />
+                {submitting ? "Submitting…" : "Submit Request"} <ArrowRight className="h-4 w-4" />
               </button>
+              {error && (
+                <p role="alert" className="text-sm font-medium text-destructive sm:col-span-2">
+                  {error}
+                </p>
+              )}
             </form>
           )}
         </div>
@@ -1000,11 +1065,6 @@ function Coverage() {
 
 const inputCls =
   "w-full rounded-lg border border-border bg-white px-3 py-2.5 text-[calc(13.5*var(--desktop-px-unit))] text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
-
-function PhoneFieldWrapper() {
-  const [value, setValue] = useState("");
-  return <PhoneField value={value} onChange={setValue} />;
-}
 
 function Field({
   label,
@@ -1054,7 +1114,7 @@ function EmergencyCTA() {
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <a
-              href="tel:+96264026063"
+              href={telHref(COMPANY.phone)}
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
               <Phone className="h-5 w-5 shrink-0 text-primary" />
@@ -1068,7 +1128,7 @@ function EmergencyCTA() {
               </div>
             </a>
             <a
-              href="https://wa.me/962799741318"
+              href={whatsappUrl()}
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
               <MessageCircle className="h-5 w-5 shrink-0 text-primary" />
@@ -1082,7 +1142,7 @@ function EmergencyCTA() {
               </div>
             </a>
             <a
-              href="mailto:support@abufarhamedical.com"
+              href={`mailto:${COMPANY.email}`}
               className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.04] p-4 transition hover:border-primary/40"
             >
               <Mail className="h-5 w-5 shrink-0 text-primary" />
@@ -1091,7 +1151,7 @@ function EmergencyCTA() {
                   Email Us
                 </div>
                 <div className="mt-1 text-[calc(13.5*var(--desktop-px-unit))] font-semibold text-white [overflow-wrap:anywhere]">
-                  support@abufarhamedical.com
+                  {COMPANY.email}
                 </div>
               </div>
             </a>

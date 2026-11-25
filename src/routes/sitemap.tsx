@@ -1,3 +1,4 @@
+import { COMPANY, telHref } from "@/config/companyFacts";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
@@ -58,7 +59,7 @@ const GROUPS: Group[] = [
     links: [
       { label: "Cath Lab Systems", to: "/products/cath-lab" },
       { label: "MRI Systems", to: "/products/mri-scanners" },
-      { label: "CT Scanners", to: "/products" },
+      { label: "CT Scanners", to: "/products/ct-scanners" },
       { label: "PET/CT Scanners", to: "/products/pet-ct-scanners" },
       { label: "X-Ray Systems", to: "/products/x-ray-systems" },
       { label: "C-Arms", to: "/products/c-arm-systems" },
@@ -337,7 +338,7 @@ function SitemapRoute() {
                     Contact Us
                   </Link>
                   <a
-                    href="tel:+96264026063"
+                    href={telHref(COMPANY.phone)}
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-6 py-3.5 text-[15px] font-semibold text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-md"
                   >
                     <Phone className="h-4 w-4" aria-hidden />

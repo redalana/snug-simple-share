@@ -173,7 +173,7 @@ export function QuoteModal() {
     if (!isValid || submitting || success) return;
     setSubmitting(true);
     try {
-      await submitLead({
+      const result = await submitLead({
         data: {
           source: "quote",
           fullName: name.trim(),
@@ -193,6 +193,11 @@ export function QuoteModal() {
           botField,
         },
       });
+      if (!result.ok) {
+        setSubmitting(false);
+        toast.error(result.message);
+        return;
+      }
     } catch {
       setSubmitting(false);
       toast.error("Something went wrong sending your request. Please try again.");

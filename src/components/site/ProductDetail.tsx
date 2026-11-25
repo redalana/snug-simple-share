@@ -45,8 +45,12 @@ import { ExploreRelatedKnowledge } from "@/components/site/knowledge/ExploreRela
 import { GitCompare } from "lucide-react";
 
 import { geoService } from "@/lib/services/geoService";
+import { submitLead } from "@/lib/leads.functions";
+import { SITE_URL, safeJsonLd } from "@/lib/seo";
+import { COMPANY, telHref } from "@/config/companyFacts";
+import { Honeypot } from "@/components/site/Honeypot";
 
-const WHATSAPP_NUMBER = "962799741318";
+const WHATSAPP_NUMBER = COMPANY.whatsappNumber;
 
 const FEATURES = [
   {
@@ -896,7 +900,7 @@ export function ProductDetail({ product, slug }: { product: Product; slug: strin
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildBreadcrumbSchema(product, slug)),
+          __html: safeJsonLd(buildBreadcrumbSchema(product, slug)),
         }}
       />
     </>
@@ -1007,6 +1011,9 @@ function CountrySelect({ value, onChange }: { value: string; onChange: (value: s
 
 function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQuote: string }) {
   const [submitting, setSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [botField, setBotField] = useState("");
+  const [status, setStatus] = useState<{ ok: boolean; text: string } | null>(null);
   const [form, setForm] = useState({
     fullName: "",
     company: "",
@@ -1036,14 +1043,39 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
     (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setStatus(null);
+    if (!consent) {
+      setStatus({ ok: false, text: "Please agree to the Privacy Policy so we can contact you." });
+      return;
+    }
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast.success("Quote request sent", {
-        description: `Thank you, ${form.fullName || "we"}. Our team will contact you shortly about the ${product.name}.`,
+    try {
+      const result = await submitLead({
+        data: {
+          source: "quote",
+          fullName: form.fullName.trim(),
+          email: form.email.trim(),
+          phone: form.phone,
+          organization: form.company.trim(),
+          country: form.country,
+          product: product.name,
+          message: form.message,
+          consent: true,
+          pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+          botField,
+        },
       });
+      if (!result.ok) {
+        setStatus({ ok: false, text: result.message });
+        toast.error(result.message);
+        return;
+      }
+      const text = `Thank you${form.fullName ? `, ${form.fullName}` : ""}. Your quotation request for the ${product.name} has been received.`;
+      setStatus({ ok: true, text });
+      toast.success("Quote request received", { description: text });
       setForm((prev) => ({
         fullName: "",
         company: "",
@@ -1052,7 +1084,14 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
         phone: "",
         message: prev.message,
       }));
-    }, 700);
+      setConsent(false);
+    } catch {
+      const text = "We couldn't send your request. Please try again, or contact us by WhatsApp.";
+      setStatus({ ok: false, text });
+      toast.error(text);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const labelClass = "mb-2 block text-sm font-semibold text-foreground";
@@ -1061,7 +1100,7 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
   const outlineBtn =
     "inline-flex items-center gap-2.5 rounded-xl border-2 border-border bg-background px-5 py-3.5 text-base font-semibold text-foreground transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary";
 
-  const emailQuote = `mailto:info@abufarhamedical.com?subject=${encodeURIComponent(
+  const emailQuote = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
     `Quotation Request — ${product.name}`,
   )}&body=${encodeURIComponent(
     `I would like to request a quotation for the ${product.name}. Please send pricing, availability and delivery information.`,
@@ -1094,7 +1133,7 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
             >
               <PhoneCall className="h-5 w-5" /> WhatsApp
             </a>
-            <a href="tel:+962799741318" className={outlineBtn}>
+            <a href={telHref(COMPANY.mobile)} className={outlineBtn}>
               <PhoneCall className="h-5 w-5" /> Call Us
             </a>
             <a href={emailQuote} className={outlineBtn}>
@@ -1106,12 +1145,14 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
         {/* RIGHT COLUMN */}
         <form
           onSubmit={handleSubmit}
-          className="rounded-3xl border border-border/70 bg-card p-7 shadow-[0_30px_70px_-40px_rgba(0,0,0,0.4)] sm:p-9 lg:p-10"
+          className="relative rounded-3xl border border-border/70 bg-card p-7 shadow-[0_30px_70px_-40px_rgba(0,0,0,0.4)] sm:p-9 lg:p-10"
         >
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <label className={labelClass}>Full Name</label>
+              <label className={labelClass} htmlFor="pd-full-name">Full Name</label>
               <input
+                id="pd-full-name"
+                autoComplete="name"
                 required
                 value={form.fullName}
                 onChange={update("fullName")}
@@ -1120,8 +1161,10 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
               />
             </div>
             <div>
-              <label className={labelClass}>Hospital / Company</label>
+              <label className={labelClass} htmlFor="pd-company">Hospital / Company</label>
               <input
+                id="pd-company"
+                autoComplete="organization"
                 value={form.company}
                 onChange={update("company")}
                 placeholder="City Medical Center"
@@ -1136,8 +1179,10 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
               />
             </div>
             <div>
-              <label className={labelClass}>Email</label>
+              <label className={labelClass} htmlFor="pd-email">Email</label>
               <input
+                id="pd-email"
+                autoComplete="email"
                 required
                 type="email"
                 value={form.email}
@@ -1178,14 +1223,42 @@ function QuoteSection({ product, whatsappQuote }: { product: Product; whatsappQu
               className="w-full resize-none rounded-xl border border-border bg-secondary/30 p-4 text-base leading-relaxed text-foreground outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10"
             />
           </div>
+          <Honeypot value={botField} onChange={setBotField} />
+          <label className="mt-6 flex cursor-pointer items-start gap-2.5 text-sm leading-relaxed text-muted-foreground">
+            <input
+              type="checkbox"
+              required
+              className="mt-1 h-4 w-4 shrink-0 accent-[color:var(--primary)]"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+            />
+            <span>
+              I agree that AbuFarha Medical may store my details and contact me about this request,
+              as described in the{" "}
+              <Link to="/privacy-policy" className="font-semibold text-primary hover:underline">
+                Privacy Policy
+              </Link>
+              .
+            </span>
+          </label>
           <button
             type="submit"
             disabled={submitting}
+            aria-busy={submitting}
             className="mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-primary px-8 py-4 text-base font-bold text-primary-foreground shadow-[0_18px_36px_-16px_var(--primary)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark disabled:opacity-60"
           >
             <FileText className="h-5 w-5" />
             {submitting ? "Sending…" : "Request Quote"}
           </button>
+          {status && (
+            <p
+              role="status"
+              aria-live="polite"
+              className={`mt-4 text-sm font-medium ${status.ok ? "text-foreground" : "text-destructive"}`}
+            >
+              {status.text}
+            </p>
+          )}
         </form>
       </div>
     </section>
@@ -1377,7 +1450,7 @@ function CategoryBreadcrumbLink({ category }: { category: string }) {
   );
 }
 
-const ABS_SITE_URL = "https://snug-simple-share.lovable.app";
+const ABS_SITE_URL = SITE_URL;
 
 function buildBreadcrumbSchema(product: Product, slug: string) {
   const categorySlug = CATEGORY_NAME_TO_SLUG[product.category];

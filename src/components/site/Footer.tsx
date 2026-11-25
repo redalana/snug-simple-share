@@ -1,3 +1,4 @@
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Phone, Smartphone, Mail, MapPin, Globe } from "lucide-react";
@@ -16,7 +17,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "Cath Lab Systems", to: "/products/cath-lab" },
       { label: "MRI Systems", to: "/products/mri-scanners" },
-      { label: "CT Scanners", to: "/products" },
+      { label: "CT Scanners", to: "/products/ct-scanners" },
       { label: "PET/CT", to: "/products/pet-ct-scanners" },
       { label: "C-Arms", to: "/products/c-arm-systems" },
       { label: "X-Ray Systems", to: "/products/x-ray-systems" },
@@ -66,29 +67,29 @@ type SocialItem = {
   href: string;
 };
 const SOCIALS: SocialItem[] = [
-  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366", href: "https://wa.me/962799741318" },
+  { label: "WhatsApp", Icon: WhatsAppIcon, color: "#25D366", href: whatsappUrl() },
 ];
 
 const CONTACTS = [
-  { Icon: Phone, label: "Landline", value: "+962 6 4026063", href: "tel:+96264026063" },
+  { Icon: Phone, label: "Landline", value: COMPANY.phone, href: telHref(COMPANY.phone) },
   {
     Icon: Smartphone,
     label: "WhatsApp & Mobile",
-    value: "+962 79 9741318",
-    href: "tel:+962799741318",
+    value: COMPANY.mobile,
+    href: telHref(COMPANY.mobile),
   },
-  { Icon: MapPin, label: "Location", value: "Amman, Jordan" },
+  { Icon: MapPin, label: "Location", value: `${COMPANY.headquarters.city}, ${COMPANY.headquarters.country}` },
   {
     Icon: Mail,
     label: "Email",
-    value: "info@abufarhamedical.com",
-    href: "mailto:info@abufarhamedical.com",
+    value: COMPANY.email,
+    href: `mailto:${COMPANY.email}`,
   },
   {
     Icon: Globe,
     label: "Website",
-    value: "www.abufarhamedical.com",
-    href: "https://www.abufarhamedical.com",
+    value: COMPANY.websiteDisplay,
+    href: COMPANY.website,
   },
 ];
 
@@ -292,7 +293,7 @@ export function Footer() {
           </nav>
           <div className="h-px w-full bg-white/10" />
           <div className="py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center text-[12.5px] leading-relaxed text-white/40">
-            © 2026 AbuFarha Medical Equipment.
+            © 2026 AbuFarha Medical Supplies.
             <br />
             All Rights Reserved.
           </div>
@@ -382,7 +383,7 @@ export function Footer() {
           <div className="h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
           <div className="flex flex-col items-center justify-between gap-3 py-4 sm:flex-row lg:py-5">
             <div className="text-[calc(12.5*var(--desktop-px-unit))] text-white/40">
-              © 2026 AbuFarha Medical Equipment. All Rights Reserved.
+              © 2026 AbuFarha Medical Supplies. All Rights Reserved.
             </div>
             <nav
               aria-label="Legal"

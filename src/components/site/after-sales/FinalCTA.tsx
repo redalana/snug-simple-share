@@ -1,3 +1,4 @@
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 import { ArrowRight, Phone, MessageSquare } from "lucide-react";
 import { ctaImg } from "./data";
 
@@ -50,7 +51,7 @@ export function FinalCTA() {
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:min-w-[calc(280*var(--desktop-px-unit))]">
           <a
-            href="tel:+96264026063"
+            href={telHref(COMPANY.phone)}
             className="group inline-flex items-center justify-between gap-4 rounded-2xl bg-primary px-6 py-5 text-left text-white shadow-[0_20px_60px_-18px_rgba(220,38,38,0.9)] transition-all hover:-translate-y-0.5"
           >
             <div>
@@ -62,7 +63,7 @@ export function FinalCTA() {
             <Phone className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-12" />
           </a>
           <a
-            href="https://wa.me/962799741318"
+            href={whatsappUrl()}
             className="group inline-flex items-center justify-between gap-4 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-6 py-4 text-left text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-emerald-500/20"
           >
             <div>

@@ -1,3 +1,4 @@
+import { COMPANY, telHref } from "@/config/companyFacts";
 import { motion } from "framer-motion";
 import { ArrowRight, Headphones } from "lucide-react";
 import {
@@ -51,7 +52,7 @@ export function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="tel:+96264026063"
+              href={telHref(COMPANY.phone)}
               className={HERO_BTN_GHOST}
             >
               <Headphones className="h-4 w-4" />
@@ -93,7 +94,7 @@ export function Hero() {
                 { k: "24/7", v: "Technical Support" },
                 { k: "Certified", v: "Biomed Engineers" },
                 { k: "100%", v: "Genuine OEM Parts" },
-                { k: "< 4 Hrs", v: "Avg Response" },
+                { k: "Since 1999", v: "Engineering Healthcare" },
               ].map(({ k, v }) => (
                 <div key={v} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="font-display text-xl font-extrabold text-white">{k}</div>

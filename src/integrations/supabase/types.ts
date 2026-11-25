@@ -23,9 +23,10 @@ export type Database = {
           customer_profile: string | null
           department: string | null
           email: string
-          full_name: string
+          full_name: string | null
           id: string
           interest: string | null
+          ip_hash: string | null
           message: string | null
           organization: string | null
           page_path: string | null
@@ -42,9 +43,10 @@ export type Database = {
           customer_profile?: string | null
           department?: string | null
           email: string
-          full_name: string
+          full_name?: string | null
           id?: string
           interest?: string | null
+          ip_hash?: string | null
           message?: string | null
           organization?: string | null
           page_path?: string | null
@@ -61,9 +63,10 @@ export type Database = {
           customer_profile?: string | null
           department?: string | null
           email?: string
-          full_name?: string
+          full_name?: string | null
           id?: string
           interest?: string | null
+          ip_hash?: string | null
           message?: string | null
           organization?: string | null
           page_path?: string | null

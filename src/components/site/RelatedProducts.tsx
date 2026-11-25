@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PRODUCTS, type Product, productSlug } from "@/lib/products";
 import { ProductCarousel } from "./ProductCarousel";
 
@@ -12,15 +12,17 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function RelatedProducts({ product }: { product: Product }) {
-  const items = useMemo(() => {
+  const sameCategory = useMemo(() => {
     const currentSlug = productSlug(product);
-    const sameCategory = PRODUCTS.filter(
-      (p) => p.category === product.category && productSlug(p) !== currentSlug,
-    );
-    return shuffle(sameCategory).slice(0, 4);
-    // Randomize on each product view.
+    return PRODUCTS.filter((p) => p.category === product.category && productSlug(p) !== currentSlug);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.slug]);
+  // Server and first client render use the same (catalogue) order so the page
+  // hydrates cleanly; the random pick happens only after mount.
+  const [items, setItems] = useState(() => sameCategory.slice(0, 4));
+  useEffect(() => {
+    setItems(shuffle(sameCategory).slice(0, 4));
+  }, [sameCategory]);
 
   if (!items.length) return null;
 

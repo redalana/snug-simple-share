@@ -21,14 +21,26 @@ export function TurnkeyJourney() {
               the highest clinical standards.
             </p>
             <a
-              href="#"
+              href="#journey-phases"
+              onClick={(e) => {
+                const el = document.getElementById("journey-phases");
+                if (!el) return;
+                e.preventDefault();
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+                el.focus({ preventScroll: true });
+              }}
               className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:border-foreground"
             >
               View All Phases <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 lg:gap-3">
+          <div
+            id="journey-phases"
+            tabIndex={-1}
+            aria-label="Turnkey phases"
+            className="grid scroll-mt-28 grid-cols-2 gap-6 outline-none sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 lg:gap-3"
+          >
             {PHASES.map((p, i) => (
               <motion.div
                 key={p.n}

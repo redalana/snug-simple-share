@@ -1,3 +1,4 @@
+import { COMPANY, telHref, whatsappUrl } from "@/config/companyFacts";
 import { Phone, Headphones } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
@@ -7,22 +8,22 @@ export function ContactBar() {
     {
       icon: Phone,
       title: "Sales",
-      lines: ["+962 6 4026063", "sales@abufarhamedical.com"],
-      href: "tel:+96264026063",
+      lines: [COMPANY.phone, COMPANY.email],
+      href: telHref(COMPANY.phone),
       color: "bg-primary",
     },
     {
       icon: Headphones,
       title: "Support",
-      lines: ["+962 79 974 1318", "support@abufarhamedical.com"],
-      href: "tel:+962799741318",
+      lines: [COMPANY.mobile, COMPANY.email],
+      href: telHref(COMPANY.mobile),
       color: "bg-primary",
     },
     {
       icon: WhatsAppIcon,
       title: "WhatsApp",
-      lines: ["+962 79 974 1318", "Chat with us on WhatsApp"],
-      href: "https://wa.me/962799741318",
+      lines: [COMPANY.mobile, "Chat with us on WhatsApp"],
+      href: whatsappUrl(),
       color: "bg-[#25D366]",
     },
   ];

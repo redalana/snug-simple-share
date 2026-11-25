@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronRight, Home } from "lucide-react";
-import { absUrl } from "@/lib/seo";
+import { absUrl, safeJsonLd } from "@/lib/seo";
 
 export type Crumb = { label: string; to?: string; className?: string };
 
@@ -110,7 +110,7 @@ export function Breadcrumbs({
         {emitJsonLd && (
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
           />
         )}
 
@@ -155,7 +155,7 @@ export function Breadcrumbs({
       {emitJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
         />
       )}
     </nav>

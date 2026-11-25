@@ -1,3 +1,4 @@
+import { COMPANY } from "@/config/companyFacts";
 import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { defaultCountries, parseCountry } from "react-international-phone";
@@ -105,11 +106,11 @@ export const FAQS = [
 ];
 
 export const OFFICE = {
-  address: "4th Floor, Complex 396\nQueen Rania Street\nAmman, Jordan",
-  phone: "+962 6 4026063",
-  email: "info@abufarhamedical.com",
-  hours: "Saturday to Thursday\n9:00 AM – 5:00 PM",
-  mapQuery: "AbuFarha Medical Supplies, Queen Rania Street, Amman, Jordan",
+  address: COMPANY.headquarters.addressLines.join("\n"),
+  phone: COMPANY.phone,
+  email: COMPANY.email,
+  hours: COMPANY.hours.replace(", ", "\n"),
+  mapQuery: `${COMPANY.legalName}, Queen Rania Street, ${COMPANY.headquarters.city}, ${COMPANY.headquarters.country}`,
 };
 
 export const OFFICE_COORDS = { lat: 32.0239137, lng: 35.8507975 };

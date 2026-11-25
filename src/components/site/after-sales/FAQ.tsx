@@ -1,3 +1,4 @@
+import { COMPANY, telHref } from "@/config/companyFacts";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Plus, Minus, Phone } from "lucide-react";
@@ -48,7 +49,7 @@ export function FAQ() {
                 question.
               </p>
               <a
-                href="tel:+96264026063"
+                href={telHref(COMPANY.phone)}
                 className="mt-4 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[calc(13*var(--desktop-px-unit))] font-bold text-white transition-all hover:-translate-y-0.5"
               >
                 <Phone className="h-4 w-4" /> Talk to an Engineer

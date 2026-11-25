@@ -1,12 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { NotFoundPage } from "@/components/site/NotFoundPage";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BlogArticlePage } from "@/components/site/BlogArticlePage";
 import { getArticle } from "@/lib/blog";
-import { SITE_URL, absUrl, isoDate, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, absUrl, isoDate, breadcrumbJsonLd, safeJsonLd } from "@/lib/seo";
 import { COMPANY } from "@/config/companyFacts";
 
 export const Route = createFileRoute("/blog/$slug")({
+  // Unknown slugs return a real 404 (was a soft 404 with status 200).
+  loader: ({ params }) => {
+    if (!getArticle(params.slug)) throw notFound();
+    return null;
+  },
+  notFoundComponent: () => <NotFoundPage />,
   head: ({ params }) => {
     const article = getArticle(params.slug);
     if (!article) {
@@ -90,7 +97,7 @@ export const Route = createFileRoute("/blog/$slug")({
       links: [{ rel: "canonical", href: `${SITE_URL}${articlePath}` }],
       scripts: schemas.map((schema) => ({
         type: "application/ld+json",
-        children: JSON.stringify(schema),
+        children: safeJsonLd(schema),
       })),
     };
   },
