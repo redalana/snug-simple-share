@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { FileText } from "lucide-react";
 import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
 
@@ -10,6 +11,8 @@ import { openQuoteModal, onQuoteModalState } from "@/lib/quote-modal";
 export function FloatingQuoteButton() {
   const [footerLift, setFooterLift] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  // Each page renders its own <footer>; re-bind the footer watcher per route.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => onQuoteModalState(setModalOpen), []);
@@ -17,18 +20,20 @@ export function FloatingQuoteButton() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const footer = document.querySelector("footer");
-    if (!footer) return;
 
     const compute = () => {
-      const rect = footer.getBoundingClientRect();
+      // Query fresh each time so a footer from a previous page is never used.
+      const current = document.querySelector("footer");
+      if (!current) return setFooterLift(0);
+      const rect = current.getBoundingClientRect();
       const vh = window.innerHeight;
       const overlap = vh - rect.top;
       setFooterLift(Math.max(0, overlap + 40));
     };
-    observer.current = new IntersectionObserver(compute, {
+    observer.current = new IntersectionObserver(() => compute(), {
       threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],
     });
-    observer.current.observe(footer);
+    if (footer) observer.current.observe(footer);
     window.addEventListener("scroll", compute, { passive: true });
     window.addEventListener("resize", compute);
     compute();
@@ -37,7 +42,7 @@ export function FloatingQuoteButton() {
       window.removeEventListener("scroll", compute);
       window.removeEventListener("resize", compute);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>

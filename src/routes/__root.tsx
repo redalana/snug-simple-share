@@ -16,6 +16,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { FloatingQuoteButton } from "@/components/site/FloatingQuoteButton";
+import { FloatingTeamButton, FloatingNewsletterButton } from "@/components/site/FloatingTeamButton";
 import { QuoteModal } from "@/components/site/QuoteModal";
 import { CookieConsent } from "@/components/site/CookieConsent";
 import { CompareBar } from "@/components/site/CompareBar";
@@ -197,6 +198,9 @@ function RootComponent() {
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
         <QuoteModal />
+        {/* Global floating actions — mounted once here so every page shows them. */}
+        <FloatingNewsletterButton />
+        <FloatingTeamButton />
         <FloatingQuoteButton />
         <WhatsAppFloat />
         <CompareBar />

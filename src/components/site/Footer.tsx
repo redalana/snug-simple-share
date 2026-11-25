@@ -42,6 +42,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Turnkey", to: "/turnkey" },
       { label: "Brands", to: "/brands" },
       { label: "Knowledge Center", to: "/blog" },
+      { label: "Catalog Library", to: "/catalog-library" },
       { label: "Contact", to: "/contact" },
     ],
   },

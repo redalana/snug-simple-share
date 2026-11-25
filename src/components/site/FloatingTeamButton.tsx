@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { Users, Mail, type LucideIcon } from "lucide-react";
 import { onQuoteModalState } from "@/lib/quote-modal";
 
 /**
- * Homepage-only floating pill stacked above the floating Quote button
- * (quote base 84/100px + quote height + 12px gap). Scrolls to #our-people.
+ * Site-wide floating pill (mounted once in __root) stacked above the floating
+ * Quote button (quote base 84/100px + quote height + 12px gap). Scrolls to a
+ * homepage section; from any other page it navigates home first, then scrolls.
  */
 export function FloatingTeamButton({
   targetId = "our-people",
@@ -15,9 +17,12 @@ export function FloatingTeamButton({
 }: { targetId?: string; label?: string; shortLabel?: string; Icon?: LucideIcon; extraOffset?: number } = {}) {
   const [footerLift, setFooterLift] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => onQuoteModalState(setModalOpen), []);
 
+  // Re-bind on every route change: each page renders its own <footer>.
   useEffect(() => {
     const compute = () => {
       const footer = document.querySelector("footer");
@@ -32,11 +37,11 @@ export function FloatingTeamButton({
       window.removeEventListener("scroll", compute);
       window.removeEventListener("resize", compute);
     };
-  }, []);
+  }, [pathname]);
 
-  const goToTeam = () => {
+  const scrollToTarget = () => {
     const el = document.getElementById(targetId);
-    if (!el) return;
+    if (!el) return false;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Offset by the sticky header so the section title isn't hidden under it.
     const target = () => {
@@ -51,6 +56,20 @@ export function FloatingTeamButton({
       const t = target();
       if (Math.abs(t - window.scrollY) > 4) window.scrollTo({ top: t, behavior: "smooth" });
     }, 900);
+    return true;
+  };
+
+  const goToTeam = () => {
+    if (scrollToTarget()) return;
+    // Section lives on the homepage: navigate there, then scroll once it mounts.
+    void navigate({ to: "/", hash: targetId }).then(() => {
+      let tries = 0;
+      const tick = () => {
+        if (scrollToTarget() || ++tries > 40) return;
+        window.setTimeout(tick, 75);
+      };
+      tick();
+    });
   };
 
   return (
@@ -83,7 +102,7 @@ export function FloatingTeamButton({
   );
 }
 
-/** Homepage floating pill stacked above the team pill; scrolls to #newsletter. */
+/** Floating pill stacked above the team pill; scrolls to #newsletter. */
 export function FloatingNewsletterButton() {
   return <FloatingTeamButton targetId="newsletter" label="Newsletter" shortLabel="News" Icon={Mail} extraOffset={60} />;
 }

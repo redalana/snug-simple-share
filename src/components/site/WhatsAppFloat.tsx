@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 import { onQuoteModalState } from "@/lib/quote-modal";
@@ -12,6 +13,8 @@ export function WhatsAppFloat() {
   const footerObserver = useRef<IntersectionObserver | null>(null);
   const [footerLift, setFooterLift] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  // Each page renders its own <footer>; re-bind the footer watcher per route.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => onQuoteModalState(setModalOpen), []);
 
@@ -36,10 +39,12 @@ export function WhatsAppFloat() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const footer = document.querySelector("footer");
-    if (!footer) return;
 
     const compute = () => {
-      const rect = footer.getBoundingClientRect();
+      // Query fresh each time so a footer from a previous page is never used.
+      const current = document.querySelector("footer");
+      if (!current) return setFooterLift(0);
+      const rect = current.getBoundingClientRect();
       const vh = window.innerHeight;
       // How much the footer overlaps the base button zone (bottom of viewport).
       const overlap = vh - rect.top;
@@ -47,10 +52,10 @@ export function WhatsAppFloat() {
       setFooterLift(lift);
     };
 
-    footerObserver.current = new IntersectionObserver(compute, {
+    footerObserver.current = new IntersectionObserver(() => compute(), {
       threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],
     });
-    footerObserver.current.observe(footer);
+    if (footer) footerObserver.current.observe(footer);
     window.addEventListener("scroll", compute, { passive: true });
     window.addEventListener("resize", compute);
     compute();
@@ -59,7 +64,7 @@ export function WhatsAppFloat() {
       window.removeEventListener("scroll", compute);
       window.removeEventListener("resize", compute);
     };
-  }, []);
+  }, [pathname]);
 
   const dismissTooltip = () => {
     setShowTooltip(false);
